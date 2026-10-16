@@ -1,0 +1,60 @@
+ASCENT · 攀登之路
+Copyright 2026 Solar-CV
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+---
+
+## 一、第三方开源组件
+
+本项目的构建与运行时依赖以下开源项目，其许可条款各自独立，不受本项目 LICENSE 影响：
+
+- Kotlin（Apache License 2.0）
+- Jetpack Compose / androidx（Apache License 2.0）
+- Android Gradle Plugin（Apache License 2.0 / GPL v2 with Classpath Exception）
+
+除上述官方工具链外，App 运行时**不引入任何第三方库**（网络、JSON 解析、图标、字体均由
+Android 平台能力或本项目自实现，图标为手写 ImageVector，字体随包分发）。
+
+---
+
+## 二、内容来源声明
+
+### 技能书与题库内容
+
+技能书文章与课程题目的知识内容，整理自以下两类资料：
+
+1. **SEVEN SUMMIT TREKS 向导资料**（3 份）——技能书中标注为来源的文章
+2. **中文登山书籍**（《登山手册》《高山探险》《户外领导力》《登山户外安全手册》
+   《行走在高海拔》等）
+
+整理原则：**只取书中的知识与技术事实，用本项目自己的表述重写**，并标注出处。
+事实与技术方法本身不受版权保护；逐字摘抄原文则存在版权风险。
+
+> **重要**：上述纸质书的扫描校对全文**不包含在本仓库中**（已从版本库排除）。
+> 本仓库只含整理后的主题笔记，不含任何书籍原文。
+
+### 图像资源
+
+- **35 枚成就徽章**：AI 渲染生成，经去水印处理后随包分发
+  （位于 `app/src/main/res/drawable-nodpi/badge_*.webp`）
+- **题目配图**：地形图与天气图（`app/src/main/assets/bank/img/`）
+- **应用图标与插画**：本项目自绘
+
+---
+
+## 三、免责声明
+
+本 App 只覆盖**理论与认知准备**。冰雪、绳索、攀冰、救援等实践技能必须由持证教练
+现场指导与评估。
+
+内容**不构成医疗建议**。技能书中涉及药物与急救的部分（尤其《探险医疗与急救包》
+中的药物清单）来自 SEVEN SUMMIT TREKS 高海拔攀登队随队医生的备药口径，
+**药物品项与剂量均为参考值**，具体情况必须由医生当面评估后现场确认；
+处方类药物在无医生指导的情况下不得自行服用。
+
+不承诺登顶，也不保证高海拔适应结果。
