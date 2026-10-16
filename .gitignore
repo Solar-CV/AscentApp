@@ -25,7 +25,7 @@ knowledge/docs/
 /bank/
 
 # ---------- 内部文档（仅本地保留，不进仓库）----------
-# 这些是开发交接 / 内容规划类文档，按作者要求只留本地。
+# 这些是开发交接
 /HANDOFF.md
 /ACHIEVEMENTS-ART.md
 /ACHIEVEMENTS.md
