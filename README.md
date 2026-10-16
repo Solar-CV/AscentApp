@@ -11,6 +11,11 @@
 
 ## 一、安装
 
+最快：直接从 [Releases](https://github.com/Solar-CV/AscentApp/releases) 下载预构建的
+`ascent-v0.15.0-debug.apk`（每次推送 `v*` 标签由 GitHub Actions 自动构建发布）。
+
+或自行构建后再安装：
+
 1. 把 `ascent-v0.15.0-debug.apk` 传到 Android 手机
 2. 手机上打开「允许安装未知来源应用」
 3. 点击 APK 安装，打开即可
@@ -175,7 +180,25 @@ cd ~/AscentApp
 "$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
 ```
 
+也可直接使用仓库内的 Gradle Wrapper（8.9），无需本机预装 Gradle：
+
+```bash
+cd ~/AscentApp
+./gradlew assembleDebug
+```
+
 产物：`app/build/outputs/apk/debug/app-debug.apk`
+
+### 自动构建与发布（GitHub Actions）
+
+`.github/workflows/release.yml`：推送 `v*` 标签时自动 assembleDebug，
+创建 Release 并附上 APK。使用 Actions 内置的 `GITHUB_TOKEN`，
+**不需要任何 Personal Access Token**。发布：
+
+```bash
+git tag -a v0.15.0 -m "说明"
+git push origin v0.15.0
+```
 
 依赖镜像已在 `settings.gradle.kts` 配置阿里云优先。
 技术栈：Kotlin + Jetpack Compose（Material 3）· AGP 8.5.2 / Kotlin 2.0.21 / Gradle 8.9。

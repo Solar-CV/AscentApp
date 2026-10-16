@@ -892,6 +892,19 @@ onDismiss = {
 47 课 / 711 题 / 复习 82 道 / 5 海拔单元（5000M 入门·5000M 进阶·6000M·7000M·8000M）/
 31 篇技能书 / 35 枚徽章 / 题库 v14 / 体积约 16.3 MB；补充 v0.11–v0.15 更新记录；修正项目结构树。
 
+### Release 与自动构建（GitHub Actions）
+
+- `.github/workflows/release.yml`：推送 `v*` 标签 → 自动 `assembleDebug` → 创建 Release → 附上 APK。
+  使用 Actions 内置 `GITHUB_TOKEN`，**无需 PAT**。
+- **踩坑**：`android-actions/setup-android@v3` 在 `ubuntu-latest` 上失败，导致后续步骤全部跳过。
+  改用 runner 镜像自带的 Android SDK（`/usr/local/lib/android/sdk`，已含 platforms;android-34 与 build-tools;34.0.0），
+  显式设置 `ANDROID_HOME` / `ANDROID_SDK_ROOT` + 接受 licenses 即可。
+- 补了 **Gradle Wrapper 8.9**（此前缺失，公开仓库 clone 后无法直接 `./gradlew` 构建）。
+- **首个 Release 已发布**：<https://github.com/Solar-CV/AscentApp/releases/tag/v0.15.0>　
+  附件 `ascent-v0.15.0-debug.apk`（15.58 MB）。
+- 用户提供的 PAT 调用 API 返回 **401 Bad credentials**（格式正确但凭证无效），
+  故未走 API 路径；已提醒用户 revoke 该 token。
+
 ### 环境备注
 
 - GitHub MCP 集成**无权创建仓库**（403 `Resource not accessible by integration`）；本机无 brew / gh CLI。
