@@ -23,6 +23,13 @@ PolyForm Noncommercial 1.0.0 **只约束本项目自身的代码与原创资源*
 - Kotlin（Apache License 2.0）
 - Jetpack Compose / androidx（Apache License 2.0）
 - Android Gradle Plugin（Apache License 2.0 / GPL v2 with Classpath Exception）
+- **Gradle Wrapper 脚本**（`gradlew` / `gradlew.bat`，Apache License 2.0，
+  版权归 Gradle 原作者）
+
+> **关于 `gradlew` / `gradlew.bat`**：这两个文件由 Gradle 生成，其文件头部的
+> Apache 2.0 声明属于该脚本自身（第三方产物），与本项目许可无关。
+> **不应修改或删除**——那会错误地宣称第三方代码的许可，且升级 Gradle 时会被覆盖。
+> 本项目许可（PolyForm Noncommercial 1.0.0）只约束本项目原创的代码与资源。
 
 除上述官方工具链外，App 运行时**不引入任何第三方库**（网络、JSON 解析、图标、字体均由
 Android 平台能力或本项目自实现，图标为手写 ImageVector，字体随包分发）。
