@@ -2,6 +2,9 @@ name: Build & Release APK
 
 # 推送 v* 标签即自动构建 debug APK 并发布 Release。
 # 使用 Actions 内置的 GITHUB_TOKEN，无需任何 Personal Access Token。
+#
+# Android SDK 使用 GitHub-hosted runner 镜像自带的（/usr/local/lib/android/sdk），
+# 不额外安装：镜像已含 platforms;android-34 与 build-tools;34.0.0。
 on:
   push:
     tags:
@@ -15,6 +18,10 @@ jobs:
     name: Build debug APK and publish release
     runs-on: ubuntu-latest
 
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,8 +32,26 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Android SDK info
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          ls "$ANDROID_HOME/platforms" 2>/dev/null || echo "(no platforms dir)"
+          ls "$ANDROID_HOME/build-tools" 2>/dev/null || echo "(no build-tools dir)"
+
+      - name: Accept Android licenses
+        run: |
+          SM=""
+          for c in "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+                   "$ANDROID_HOME/cmdline-tools/bin/sdkmanager" \
+                   "$ANDROID_HOME/tools/bin/sdkmanager"; do
+            [ -f "$c" ] && SM="$c" && break
+          done
+          if [ -n "$SM" ]; then
+            echo "sdkmanager: $SM"
+            yes 2>/dev/null | "$SM" --licenses >/dev/null 2>&1 || true
+          else
+            echo "sdkmanager not found; relying on pre-accepted licenses"
+          fi
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
