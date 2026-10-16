@@ -1,0 +1,128 @@
+{
+  "generatedAt": "2026-09-29T10:08:16.388Z",
+  "bookCount": 10,
+  "totalPages": 1356,
+  "totalParagraphs": 9288,
+  "books": [
+    {
+      "id": "01",
+      "title": "了解高原病",
+      "kind": "own",
+      "pages": null,
+      "paragraphs": 75,
+      "chars": 4018,
+      "noisyPages": 0,
+      "quality": null,
+      "note": "SEVEN SUMMIT TREKS 内部向导资料：AMS / HACE / HAPE 的识别、预防与处置",
+      "file": "docs/01-了解高原病.md"
+    },
+    {
+      "id": "02",
+      "title": "装备指南",
+      "kind": "own",
+      "pages": null,
+      "paragraphs": 137,
+      "chars": 7382,
+      "noisyPages": 0,
+      "quality": null,
+      "note": "SEVEN SUMMIT TREKS 6000/7000/8000 米装备清单（头饰、穿着、手套、鞋类、技术器材、睡眠、通讯）",
+      "file": "docs/02-装备指南.md"
+    },
+    {
+      "id": "03",
+      "title": "探险活动通用指南",
+      "kind": "own",
+      "pages": null,
+      "paragraphs": 19,
+      "chars": 1874,
+      "noisyPages": 0,
+      "quality": null,
+      "note": "SEVEN SUMMIT TREKS 行前与行程条款（保险、航班、行李、营地纪律、登顶证书）",
+      "file": "docs/03-探险活动通用指南.md"
+    },
+    {
+      "id": "04",
+      "title": "高山探险",
+      "kind": "book",
+      "pages": 313,
+      "paragraphs": 2953,
+      "chars": 206093,
+      "noisyPages": 9,
+      "quality": "双引擎一致率 82.8%；38 张表格已全部录入",
+      "note": "社会体育指导员国家职业资格培训教材，体系最完整",
+      "file": "docs/04-高山探险.md"
+    },
+    {
+      "id": "05",
+      "title": "登山手册",
+      "kind": "book",
+      "pages": 321,
+      "paragraphs": 2239,
+      "chars": 328033,
+      "noisyPages": 14,
+      "quality": "一致率 71.9%",
+      "note": "篇幅最大的技术手册",
+      "file": "docs/05-登山手册.md"
+    },
+    {
+      "id": "06",
+      "title": "登山户外安全手册",
+      "kind": "book",
+      "pages": 191,
+      "paragraphs": 857,
+      "chars": 57577,
+      "noisyPages": 15,
+      "quality": "一致率 68.2%；图多，表格与图注为残留风险区",
+      "note": "中国登山协会，急救与安全为主",
+      "file": "docs/06-登山户外安全手册.md"
+    },
+    {
+      "id": "07",
+      "title": "登山户外安全手册2",
+      "kind": "book",
+      "pages": 131,
+      "paragraphs": 783,
+      "chars": 50604,
+      "noisyPages": 9,
+      "quality": "一致率 75.6%",
+      "note": "同上系列",
+      "file": "docs/07-登山户外安全手册2.md"
+    },
+    {
+      "id": "08",
+      "title": "行走在高海拔",
+      "kind": "book",
+      "pages": 129,
+      "paragraphs": 225,
+      "chars": 28979,
+      "noisyPages": 8,
+      "quality": "一致率 68.2%；已结构化，50 张表格",
+      "note": "高原病与高海拔健康专书",
+      "file": "docs/08-行走在高海拔.md"
+    },
+    {
+      "id": "09",
+      "title": "户外领导力",
+      "kind": "book",
+      "pages": 251,
+      "paragraphs": 1464,
+      "chars": 135243,
+      "noisyPages": 3,
+      "quality": "一致率 87.6%",
+      "note": "团队、决策、风险管理",
+      "file": "docs/09-户外领导力.md"
+    },
+    {
+      "id": "10",
+      "title": "手册合集",
+      "kind": "book",
+      "pages": 20,
+      "paragraphs": 536,
+      "chars": 30895,
+      "noisyPages": 0,
+      "quality": "人工精校版",
+      "note": "中国登山协会「全国户外安全教育计划」折页汇编",
+      "file": "docs/10-手册合集.md"
+    }
+  ]
+}

@@ -1,0 +1,1286 @@
+package com.ascent.climb.ui
+
+import android.graphics.BitmapFactory
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.ascent.climb.data.Lesson
+import com.ascent.climb.data.QType
+import com.ascent.climb.data.Question
+
+private enum class Phase { Brief, Quiz, Retry, Done }
+
+/** 归一化填空答案：忽略大小写、空白与常见单位符号。 */
+private fun norm(s: String): String =
+    s.lowercase().replace(Regex("[\\s，,。.、；;：:℃°度%]"), "")
+
+/** 计算题判定：按容差比较，并容忍浮点误差。 */
+private fun calcMatches(input: String, q: Question): Boolean {
+    val v = input.trim().toDoubleOrNull() ?: return false
+    return q.answers.any { a ->
+        val t = a.toDoubleOrNull() ?: return@any false
+        kotlin.math.abs(v - t) <= q.tolerance + 1e-6
+    }
+}
+
+@Composable
+fun LessonScreen(
+    lesson: Lesson,
+    /** 首次通关可获得的海拔；重做同一课时传 0 */
+    altitudeAward: Int = 0,
+    devShowAnswers: Boolean = false,
+    onClose: () -> Unit,
+    onFinished: (stars: Int, wrongCount: Int, wrongKeys: List<String>) -> Unit
+) {
+    var phase by remember(lesson.id) { mutableStateOf(Phase.Brief) }
+    var qIndex by remember(lesson.id) { mutableStateOf(0) }
+    var graded by remember(lesson.id) { mutableStateOf(false) }
+    var lastCorrect by remember(lesson.id) { mutableStateOf(false) }
+    var correctCount by remember(lesson.id) { mutableStateOf(0) }
+    var retryPos by remember(lesson.id) { mutableStateOf(0) }
+    var retryResolved by remember(lesson.id) { mutableStateOf(0) }
+
+    // 各题型的作答状态
+    var pickIndex by remember(lesson.id) { mutableStateOf<Int?>(null) }
+    val pickSet = remember(lesson.id) { mutableStateListOf<Int>() }
+    val orderState = remember(lesson.id) { mutableStateListOf<Int>() }
+    var fillText by remember(lesson.id) { mutableStateOf("") }
+    val matchAssign = remember(lesson.id) { mutableStateListOf(-1, -1, -1, -1, -1, -1) }
+    var matchSel by remember(lesson.id) { mutableStateOf<Int?>(null) }
+    var calcText by remember(lesson.id) { mutableStateOf("") }
+    var hotspotTap by remember(lesson.id) { mutableStateOf<Offset?>(null) }
+    var hotspotHit by remember(lesson.id) { mutableStateOf(-1) }
+    // 情景题
+    var scenarioStep by remember(lesson.id) { mutableStateOf(0) }
+    var scenarioAllOk by remember(lesson.id) { mutableStateOf(true) }
+    var stepOk by remember(lesson.id) { mutableStateOf(false) }
+
+    val firstWrong = remember(lesson.id) { mutableStateListOf<Int>() }
+    val stillWrong = remember(lesson.id) { mutableStateListOf<Int>() }
+
+    val total = lesson.questions.size
+    val retryQueue = firstWrong
+    val denom = total + retryQueue.size
+    val isRetry = phase == Phase.Retry
+    val activeIndex = if (isRetry) retryQueue.getOrNull(retryPos) else qIndex
+    val question = activeIndex?.let { lesson.questions.getOrNull(it) }
+
+    fun resetAnswer(q: Question?) {
+        pickIndex = null
+        pickSet.clear()
+        orderState.clear()
+        fillText = ""
+        matchAssign.clear()
+        repeat(6) { matchAssign.add(-1) }
+        matchSel = null
+        calcText = ""
+        hotspotTap = null
+        hotspotHit = -1
+        scenarioStep = 0
+        scenarioAllOk = true
+        stepOk = false
+        graded = false
+        if (q != null && q.type == QType.Order) {
+            q.options.indices.forEach { orderState.add(it) }
+        }
+    }
+
+    /** 判断当前作答是否正确。 */
+    fun evaluate(q: Question): Boolean = when (q.type) {
+        QType.Single -> pickIndex == q.correct
+        QType.Multi -> pickSet.toSet() == q.correctSet.toSet()
+        QType.Order -> orderState.toList() == q.correctOrder
+        QType.Fill -> q.answers.any { norm(it) == norm(fillText) }
+        QType.Match -> q.pairsLeft.indices.all { matchAssign.getOrElse(it) { -1 } == it }
+        QType.Calc -> calcMatches(calcText, q)
+        QType.Hotspot -> hotspotHit >= 0 && q.hotspots.getOrNull(hotspotHit)?.correct == true
+        QType.Scenario -> false // 情景题按步判定，见 evaluateStep
+    }
+
+    /** 按题型的作答进度（用于控制“检查”按钮可用性）。 */
+    fun answered(q: Question): Boolean = when (q.type) {
+        QType.Single -> pickIndex != null
+        QType.Multi -> pickSet.isNotEmpty()
+        QType.Order -> true
+        QType.Fill -> fillText.isNotBlank()
+        QType.Match -> q.pairsLeft.indices.all { matchAssign.getOrElse(it) { -1 } >= 0 }
+        QType.Calc -> calcText.isNotBlank()
+        QType.Hotspot -> hotspotHit >= 0
+        QType.Scenario -> {
+            val s = q.steps.getOrNull(scenarioStep)
+            when (s?.type) {
+                QType.Multi -> pickSet.isNotEmpty()
+                QType.Single -> pickIndex != null
+                else -> false
+            }
+        }
+    }
+
+    /** 情景题：判定当前这一步。 */
+    fun evaluateStep(s: Question): Boolean = when (s.type) {
+        QType.Multi -> pickSet.toSet() == s.correctSet.toSet()
+        else -> pickIndex == s.correct
+    }
+
+    /** 记录整题结果（情景题在最后一步完成后调用）。 */
+    fun recordResult(ok: Boolean) {
+        val idx = activeIndex ?: 0
+        lastCorrect = ok
+        if (isRetry) {
+            if (ok) retryResolved += 1 else stillWrong.add(idx)
+        } else {
+            if (ok) correctCount += 1 else firstWrong.add(idx)
+        }
+    }
+
+    /** 推进到下一题 / 进入错题重做 / 结束。 */
+    fun advance() {
+        if (isRetry) {
+            if (retryPos + 1 >= retryQueue.size) phase = Phase.Done
+            else {
+                retryPos += 1
+                resetAnswer(lesson.questions.getOrNull(retryQueue.getOrNull(retryPos) ?: 0))
+            }
+        } else {
+            if (qIndex + 1 >= total) {
+                if (firstWrong.isEmpty()) phase = Phase.Done
+                else {
+                    phase = Phase.Retry
+                    retryPos = 0
+                    resetAnswer(lesson.questions.getOrNull(retryQueue.firstOrNull() ?: 0))
+                }
+            } else {
+                qIndex += 1
+                resetAnswer(lesson.questions.getOrNull(qIndex))
+            }
+        }
+    }
+
+    Column(modifier = Modifier.fillMaxSize().background(Ascent.Bg)) {
+
+        // ---------- 顶部进度 ----------
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 20.dp, top = 18.dp, bottom = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(38.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Ascent.Panel)
+                    .border(1.dp, Ascent.Line, RoundedCornerShape(12.dp))
+                    .clickable { onClose() },
+                contentAlignment = Alignment.Center
+            ) { Text("\u2715", color = Ascent.Mut, fontSize = 15.sp) }
+            Spacer(Modifier.width(14.dp))
+            val frac = when (phase) {
+                Phase.Brief -> 0f
+                Phase.Done -> 1f
+                Phase.Quiz -> if (denom == 0) 0f else qIndex.toFloat() / denom
+                Phase.Retry -> if (denom == 0) 1f else (total + retryPos).toFloat() / denom
+            }
+            AscentBar(
+                fraction = frac,
+                modifier = Modifier.weight(1f),
+                fill = if (isRetry) Ascent.Gold else Ascent.Ice
+            )
+            Spacer(Modifier.width(14.dp))
+            if (altitudeAward > 0) {
+                Text("+${altitudeAward}m", color = Ascent.Gold, fontSize = 12.sp, fontWeight = FontWeight.Medium)
+            } else {
+                Text("重做", color = Ascent.Mut, fontSize = 12.sp, fontWeight = FontWeight.Medium)
+            }
+        }
+
+        // ---------- 主体 ----------
+        Box(modifier = Modifier.weight(1f)) {
+            when (phase) {
+                Phase.Brief -> BriefView(lesson) {
+                    phase = Phase.Quiz
+                    resetAnswer(lesson.questions.firstOrNull())
+                }
+
+                Phase.Quiz, Phase.Retry -> question?.let { q ->
+                    QuizView(
+                        stepLabel = if (isRetry) "错题重做 ${retryPos + 1} / ${retryQueue.size}"
+                        else "第 ${qIndex + 1} / $total 题",
+                        isRetry = isRetry,
+                        q = q,
+                        graded = graded,
+                        showAnswerKey = devShowAnswers,
+                        pickIndex = pickIndex,
+                        pickSet = pickSet,
+                        orderState = orderState,
+                        fillText = fillText,
+                        calcText = calcText,
+                        hotspotTap = hotspotTap,
+                        hotspotHit = hotspotHit,
+                        scenarioStep = scenarioStep,
+                        scenarioAllOk = scenarioAllOk,
+                        stepOk = stepOk,
+                        onCalc = { if (!graded) calcText = it },
+                        onHotspotTap = { nx, ny, hit ->
+                            if (!graded) {
+                                hotspotTap = Offset(nx, ny)
+                                hotspotHit = hit
+                            }
+                        },
+                        matchAssign = matchAssign,
+                        matchSel = matchSel,
+                        onPick = { i -> if (!graded) pickIndex = i },
+                        onTogglePick = { i ->
+                            if (!graded) {
+                                if (i in pickSet) pickSet.remove(i) else pickSet.add(i)
+                            }
+                        },
+                        onMove = { from, delta ->
+                            if (!graded) {
+                                val to = from + delta
+                                if (to in orderState.indices) {
+                                    val v = orderState[from]
+                                    orderState[from] = orderState[to]
+                                    orderState[to] = v
+                                }
+                            }
+                        },
+                        onFill = { if (!graded) fillText = it },
+                        onMatchSelect = { i -> if (!graded) matchSel = i },
+                        onMatchAssign = { rightIdx ->
+                            if (!graded) {
+                                val sel = matchSel
+                                if (sel != null) {
+                                    // 已被占用的右侧项先释放
+                                    for (k in matchAssign.indices) {
+                                        if (k != sel && matchAssign[k] == rightIdx) matchAssign[k] = -1
+                                    }
+                                    if (sel < matchAssign.size) matchAssign[sel] = rightIdx
+                                    matchSel = null
+                                }
+                            }
+                        }
+                    )
+                }
+
+                Phase.Done -> DoneView(
+                    lesson = lesson,
+                    gained = altitudeAward,
+                    stars = stars(correctCount, total),
+                    correct = correctCount,
+                    total = total,
+                    retried = firstWrong.size,
+                    resolved = retryResolved,
+                    remaining = stillWrong.size,
+                    onContinue = {
+                        onFinished(
+                            stars(correctCount, total),
+                            stillWrong.size,
+                            stillWrong.map { "${lesson.id}#$it" }
+                        )
+                    }
+                )
+            }
+        }
+
+        // ---------- 底部操作 ----------
+        if ((phase == Phase.Quiz || phase == Phase.Retry) && question != null) {
+            val q = question
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Ascent.Bg)
+                    .padding(horizontal = 22.dp, vertical = 16.dp)
+            ) {
+                if (graded && q.type != QType.Scenario) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 14.dp)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(
+                                if (lastCorrect) Ascent.Green.copy(alpha = 0.10f)
+                                else Ascent.Red.copy(alpha = 0.10f)
+                            )
+                            .border(
+                                1.dp,
+                                if (lastCorrect) Ascent.Green.copy(alpha = 0.35f)
+                                else Ascent.Red.copy(alpha = 0.35f),
+                                RoundedCornerShape(14.dp)
+                            )
+                            .padding(14.dp)
+                    ) {
+                        Column {
+                            Text(
+                                text = when {
+                                    lastCorrect && isRetry -> "\u2713 订正成功"
+                                    lastCorrect -> "\u2713 正确"
+                                    q.safetyCritical -> "\u2715 安全关键题答错 — 必须掌握"
+                                    else -> "\u2715 再想想"
+                                },
+                                color = if (lastCorrect) Ascent.Green else Ascent.Red,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(Modifier.height(5.dp))
+                            Text(
+                                text = q.explanation,
+                                color = if (lastCorrect) Ascent.OkText else Ascent.ErrText,
+                                fontSize = 13.sp,
+                                lineHeight = 20.sp
+                            )
+                            if (!q.source.isNullOrBlank()) {
+                                Spacer(Modifier.height(9.dp))
+                                Text(
+                                    text = "来源 · ${q.source}",
+                                    color = Ascent.Mut,
+                                    fontSize = 10.sp,
+                                    lineHeight = 15.sp
+                                )
+                            }
+                        }
+                    }
+                }
+
+                AscentButton(
+                    text = when {
+                        !graded -> if (isRetry) "重 做 检 查" else "检 查"
+                        q.type == QType.Scenario ->
+                            if (scenarioStep + 1 >= q.steps.size) "完 成" else "下 一 步"
+                        lastCorrect -> "继 续"
+                        else -> "理 解 了 ，继 续"
+                    },
+                    enabled = answered(q),
+                    gold = q.type != QType.Scenario && graded && !lastCorrect && q.safetyCritical,
+                    onClick = {
+                        if (q.type == QType.Scenario) {
+                            if (!graded) {
+                                graded = true
+                                val s = q.steps.getOrNull(scenarioStep)
+                                val ok = s != null && evaluateStep(s)
+                                stepOk = ok
+                                if (!ok) scenarioAllOk = false
+                            } else if (scenarioStep + 1 >= q.steps.size) {
+                                graded = false
+                                recordResult(scenarioAllOk)
+                                advance()
+                            } else {
+                                scenarioStep += 1
+                                graded = false
+                                pickIndex = null
+                                pickSet.clear()
+                            }
+                        } else {
+                            if (!graded) {
+                                graded = true
+                                recordResult(evaluate(q))
+                            } else {
+                                advance()
+                            }
+                        }
+                    }
+                )
+            }
+        }
+    }
+}
+
+private fun stars(correct: Int, total: Int): Int = when {
+    total == 0 -> 3
+    correct >= total -> 3
+    correct * 10 >= total * 6 -> 2
+    else -> 1
+}
+
+@Composable
+private fun TypeBadge(q: Question) {
+    val label = when (q.type) {
+        QType.Single -> null
+        QType.Multi -> "\u2611\uFE0F 多选题 · 选出所有正确项"
+        QType.Order -> "\uD83D\uDD22 排序题 · 用箭头调整顺序"
+        QType.Match -> "\uD83D\uDD17 配对题 · 先点左侧，再点右侧"
+        QType.Fill -> "\u270F\uFE0F 填空题 · 填写关键数据"
+        QType.Calc -> "\uD83E\uDDEE 计算题 · 输入数值"
+        QType.Hotspot -> "\uD83C\uDFAF 热点题 · 在图上点出位置"
+        QType.Scenario -> "\uD83C\uDFAC 情景题 · 共 ${q.steps.size} 步连续判断"
+    } ?: return
+    Box(
+        modifier = Modifier
+            .padding(bottom = 14.dp)
+            .clip(RoundedCornerShape(8.dp))
+            .background(Ascent.Ice.copy(alpha = 0.10f))
+            .border(1.dp, Ascent.Ice.copy(alpha = 0.35f), RoundedCornerShape(8.dp))
+            .padding(horizontal = 10.dp, vertical = 5.dp)
+    ) {
+        Text(label, color = Ascent.Ice, fontSize = 10.sp, letterSpacing = 1.0.sp, fontWeight = FontWeight.Medium)
+    }
+}
+
+@Composable
+private fun QuizView(
+    stepLabel: String,
+    isRetry: Boolean,
+    q: Question,
+    graded: Boolean,
+    showAnswerKey: Boolean,
+    pickIndex: Int?,
+    pickSet: List<Int>,
+    orderState: List<Int>,
+    fillText: String,
+    calcText: String,
+    hotspotTap: Offset?,
+    hotspotHit: Int,
+    scenarioStep: Int,
+    scenarioAllOk: Boolean,
+    stepOk: Boolean,
+    matchAssign: List<Int>,
+    matchSel: Int?,
+    onPick: (Int) -> Unit,
+    onTogglePick: (Int) -> Unit,
+    onMove: (Int, Int) -> Unit,
+    onFill: (String) -> Unit,
+    onCalc: (String) -> Unit,
+    onHotspotTap: (Float, Float, Int) -> Unit,
+    onMatchSelect: (Int) -> Unit,
+    onMatchAssign: (Int) -> Unit
+) {
+    val letters = listOf("A", "B", "C", "D", "E", "F")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 22.dp)
+    ) {
+        Text(stepLabel, color = Ascent.Mut2, fontSize = 11.sp, letterSpacing = 1.6.sp)
+        Spacer(Modifier.height(12.dp))
+
+        if (isRetry) {
+            Box(
+                modifier = Modifier
+                    .padding(bottom = 14.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Ascent.Gold.copy(alpha = 0.12f))
+                    .border(1.dp, Ascent.Gold.copy(alpha = 0.4f), RoundedCornerShape(8.dp))
+                    .padding(horizontal = 10.dp, vertical = 5.dp)
+            ) {
+                Text("\uD83D\uDD01 错题重做 · 全部答对才能通过本课", color = Ascent.Gold, fontSize = 10.sp, fontWeight = FontWeight.Medium)
+            }
+        }
+
+        TypeBadge(q)
+
+        if (q.safetyCritical) {
+            Box(
+                modifier = Modifier
+                    .padding(bottom = 14.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Ascent.Orange.copy(alpha = 0.10f))
+                    .border(1.dp, Ascent.Orange.copy(alpha = 0.35f), RoundedCornerShape(8.dp))
+                    .padding(horizontal = 10.dp, vertical = 5.dp)
+            ) {
+                Text("\u26A0\uFE0F SAFETY-CRITICAL · 安全关键题", color = Ascent.Orange, fontSize = 10.sp, fontWeight = FontWeight.Medium)
+            }
+        }
+
+        Text(q.prompt, color = Ascent.Txt, fontSize = 20.sp, lineHeight = 30.sp, fontWeight = FontWeight.Bold)
+        if (!q.context.isNullOrBlank()) {
+            Spacer(Modifier.height(8.dp))
+            Text(q.context, color = Ascent.Mut, fontSize = 13.sp, lineHeight = 20.sp)
+        }
+
+        // 非热点题如果配了图，在这里展示（热点题自带可点击图）
+        if (!q.image.isNullOrBlank() && q.type != QType.Hotspot) {
+            Spacer(Modifier.height(14.dp))
+            val imgBmp = rememberAssetBitmap(q.image)
+            val imgRatio = imgBmp?.let { it.width.toFloat() / it.height.toFloat() } ?: (4f / 3f)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.88f)
+                    .aspectRatio(imgRatio)
+                    .clip(RoundedCornerShape(14.dp))
+                    .background(Ascent.Panel2)
+                    .border(1.dp, Ascent.Line, RoundedCornerShape(14.dp))
+            ) {
+                if (imgBmp != null) {
+                    Image(
+                        bitmap = imgBmp,
+                        contentDescription = null,
+                        contentScale = ContentScale.FillBounds,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                } else {
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text("题图缺失：${q.image}", color = Ascent.Mut2, fontSize = 11.sp)
+                    }
+                }
+            }
+        }
+
+        Spacer(Modifier.height(20.dp))
+
+        when (q.type) {
+            QType.Single -> q.options.forEachIndexed { i, opt ->
+                val isSel = pickIndex == i
+                OptionRow(
+                    key = letters.getOrElse(i) { "?" },
+                    text = opt,
+                    selected = isSel,
+                    correct = graded && i == q.correct,
+                    wrong = graded && isSel && i != q.correct,
+                    showKey = showAnswerKey && !graded && i == q.correct,
+                    onClick = { onPick(i) }
+                )
+            }
+
+            QType.Multi -> q.options.forEachIndexed { i, opt ->
+                val isSel = i in pickSet
+                val isRight = i in q.correctSet
+                OptionRow(
+                    key = if (isSel) "\u2713" else letters.getOrElse(i) { "?" },
+                    text = opt,
+                    selected = isSel,
+                    correct = graded && isRight,
+                    wrong = graded && isSel && !isRight,
+                    showKey = showAnswerKey && !graded && isRight,
+                    onClick = { onTogglePick(i) }
+                )
+            }
+
+            QType.Order -> orderState.forEachIndexed { pos, optIdx ->
+                val correctHere = graded && q.correctOrder.getOrNull(pos) == optIdx
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 11.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(
+                            when {
+                                graded && correctHere -> Ascent.Green.copy(alpha = 0.12f)
+                                graded -> Ascent.Red.copy(alpha = 0.10f)
+                                else -> Ascent.Panel
+                            }
+                        )
+                        .border(
+                            1.5.dp,
+                            when {
+                                graded && correctHere -> Ascent.Green
+                                graded -> Ascent.Red.copy(alpha = 0.5f)
+                                else -> Ascent.Line
+                            },
+                            RoundedCornerShape(16.dp)
+                        )
+                        .padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(28.dp)
+                            .clip(RoundedCornerShape(9.dp))
+                            .background(Ascent.Track)
+                            .border(1.dp, Ascent.Line, RoundedCornerShape(9.dp)),
+                        contentAlignment = Alignment.Center
+                    ) { Text("${pos + 1}", color = Ascent.Mut, fontSize = 12.sp) }
+                    Spacer(Modifier.width(12.dp))
+                    Text(q.options[optIdx], color = Ascent.Txt, fontSize = 14.sp, lineHeight = 21.sp, modifier = Modifier.weight(1f))
+                    if (!graded) {
+                        Column {
+                            Box(
+                                modifier = Modifier.size(30.dp).clickable { onMove(pos, -1) },
+                                contentAlignment = Alignment.Center
+                            ) { Text("\u25B2", color = Ascent.Ice, fontSize = 12.sp) }
+                            Box(
+                                modifier = Modifier.size(30.dp).clickable { onMove(pos, 1) },
+                                contentAlignment = Alignment.Center
+                            ) { Text("\u25BC", color = Ascent.Ice, fontSize = 12.sp) }
+                        }
+                    }
+                }
+            }
+
+            QType.Fill -> {
+                OutlinedTextField(
+                    value = fillText,
+                    onValueChange = onFill,
+                    enabled = !graded,
+                    singleLine = true,
+                    placeholder = { Text("在此填写答案", fontSize = 14.sp) },
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                if (graded) {
+                    Spacer(Modifier.height(12.dp))
+                    Text(
+                        text = "参考答案：${q.answers.joinToString(" / ")}",
+                        color = Ascent.Green,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
+            QType.Match -> {
+                // 右侧备选：打乱顺序，避免与左侧天然对齐
+                val rightOrder = remember(q.prompt) {
+                    val n = q.pairsRight.size
+                    (0 until n).sortedBy { (it * 7 + 3) % n }
+                }
+                q.pairsLeft.forEachIndexed { i, left ->
+                    val assigned = matchAssign.getOrElse(i) { -1 }
+                    val isRight = graded && assigned == i
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 9.dp)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(
+                                when {
+                                    graded && isRight -> Ascent.Green.copy(alpha = 0.12f)
+                                    graded -> Ascent.Red.copy(alpha = 0.10f)
+                                    matchSel == i -> Ascent.Ice.copy(alpha = 0.10f)
+                                    else -> Ascent.Panel
+                                }
+                            )
+                            .border(
+                                1.5.dp,
+                                when {
+                                    graded && isRight -> Ascent.Green
+                                    graded -> Ascent.Red.copy(alpha = 0.5f)
+                                    matchSel == i -> Ascent.Ice
+                                    else -> Ascent.Line
+                                },
+                                RoundedCornerShape(14.dp)
+                            )
+                            .clickable { onMatchSelect(i) }
+                            .padding(13.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(left, color = Ascent.Txt, fontSize = 14.sp, modifier = Modifier.weight(1f))
+                        Text(
+                            text = if (assigned >= 0) q.pairsRight.getOrElse(assigned) { "?" } else "点此选择",
+                            color = if (assigned >= 0) Ascent.Ice else Ascent.Mut2,
+                            fontSize = 13.sp,
+                            textAlign = TextAlign.End,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    if (graded && !isRight) {
+                        Text(
+                            text = "　正确答案：${q.pairsRight.getOrElse(i) { "?" }}",
+                            color = Ascent.Mut,
+                            fontSize = 11.sp,
+                            modifier = Modifier.padding(bottom = 9.dp)
+                        )
+                    }
+                }
+                Spacer(Modifier.height(4.dp))
+                Text("从下面选择（先点上方条目，再点这里）", color = Ascent.Mut2, fontSize = 10.sp)
+                Spacer(Modifier.height(8.dp))
+                rightOrder.forEach { r ->
+                    val used = matchAssign.take(q.pairsLeft.size).contains(r)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(if (used) Ascent.Track else Ascent.Panel2)
+                            .border(1.dp, if (used) Ascent.Line else Ascent.Ice.copy(alpha = 0.3f), RoundedCornerShape(12.dp))
+                            .clickable(enabled = !graded) { onMatchAssign(r) }
+                            .padding(12.dp)
+                    ) {
+                        Text(
+                            q.pairsRight.getOrElse(r) { "?" },
+                            color = if (used) Ascent.Mut2 else Ascent.Txt,
+                            fontSize = 13.sp
+                        )
+                    }
+                }
+            }
+
+            QType.Calc -> {
+                OutlinedTextField(
+                    value = calcText,
+                    onValueChange = onCalc,
+                    enabled = !graded,
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    placeholder = {
+                        Text(
+                            if (q.unit != null) "填入数值（单位 ${q.unit}）" else "填入数值",
+                            fontSize = 14.sp
+                        )
+                    },
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                if (graded) {
+                    Spacer(Modifier.height(12.dp))
+                    val head = q.answers.firstOrNull().orEmpty()
+                    val u = q.unit?.let { " $it" }.orEmpty()
+                    val tol = if (q.tolerance > 0) "（容差 ±${q.tolerance}）" else ""
+                    Text(
+                        text = "参考答案：$head$u$tol",
+                        color = Ascent.Green,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
+            QType.Hotspot -> {
+                val goldMark = Ascent.Gold
+                val greenMark = Ascent.Green
+                val bmp = rememberAssetBitmap(q.image.orEmpty())
+                val ratio = bmp?.let { it.width.toFloat() / it.height.toFloat() } ?: (4f / 3f)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(ratio)
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(Ascent.Panel2)
+                        .border(1.dp, Ascent.Line, RoundedCornerShape(14.dp))
+                        .pointerInput(graded, q.prompt) {
+                            if (!graded) {
+                                detectTapGestures { off ->
+                                    val w = size.width.toFloat()
+                                    val h = size.height.toFloat()
+                                    if (w > 0f && h > 0f) {
+                                        val nx = off.x / w
+                                        val ny = off.y / h
+                                        var hit = -1
+                                        q.hotspots.forEachIndexed { i, r ->
+                                            if (hit < 0) {
+                                                val dx = nx - r.x
+                                                val dy = (ny - r.y) * (h / w)
+                                                if (dx * dx + dy * dy <= r.r * r.r) hit = i
+                                            }
+                                        }
+                                        onHotspotTap(nx, ny, hit)
+                                    }
+                                }
+                            }
+                        }
+                ) {
+                    if (bmp != null) {
+                        Image(
+                            bitmap = bmp,
+                            contentDescription = null,
+                            contentScale = ContentScale.FillBounds,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    } else {
+                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Text(
+                                "题图缺失：${q.image}",
+                                color = Ascent.Mut2,
+                                fontSize = 11.sp
+                            )
+                        }
+                    }
+                    Canvas(modifier = Modifier.fillMaxSize()) {
+                        hotspotTap?.let { p ->
+                            val c = Offset(p.x * size.width, p.y * size.height)
+                            drawCircle(goldMark.copy(alpha = 0.22f), radius = 24f, center = c)
+                            drawCircle(goldMark, radius = 24f, center = c, style = Stroke(2.5f))
+                        }
+                        if (graded) {
+                            q.hotspots.filter { it.correct }.forEach { r ->
+                                drawCircle(
+                                    color = greenMark.copy(alpha = 0.75f),
+                                    radius = r.r * size.width,
+                                    center = Offset(r.x * size.width, r.y * size.height),
+                                    style = Stroke(3f)
+                                )
+                            }
+                        }
+                    }
+                }
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    text = if (graded) "绿色圆环为正确区域" else "点击图中你认为正确的位置",
+                    color = Ascent.Mut2,
+                    fontSize = 11.sp
+                )
+            }
+
+            QType.Scenario -> {
+                val step = q.steps.getOrNull(scenarioStep)
+                val isLast = scenarioStep + 1 >= q.steps.size
+
+                // 步骤进度点
+                Row(
+                    modifier = Modifier.padding(bottom = 14.dp),
+                    horizontalArrangement = Arrangement.spacedBy(7.dp)
+                ) {
+                    q.steps.indices.forEach { i ->
+                        Box(
+                            modifier = Modifier
+                                .size(if (i == scenarioStep) 24.dp else 20.dp)
+                                .clip(RoundedCornerShape(999.dp))
+                                .background(
+                                    when {
+                                        i < scenarioStep -> Ascent.Green
+                                        i == scenarioStep -> Ascent.Ice
+                                        else -> Ascent.NodeLock
+                                    }
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "${i + 1}",
+                                color = if (i <= scenarioStep) Ascent.OnIce else Ascent.Mut2,
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                }
+
+                if (step != null) {
+                    Text(
+                        text = "第 ${scenarioStep + 1} 步 / 共 ${q.steps.size} 步",
+                        color = Ascent.Mut2,
+                        fontSize = 11.sp,
+                        letterSpacing = 1.4.sp
+                    )
+                    Spacer(Modifier.height(10.dp))
+                    ChoiceBlock(
+                        step = step,
+                        pickIndex = pickIndex,
+                        pickSet = pickSet,
+                        graded = graded,
+                        showAnswerKey = showAnswerKey,
+                        onPick = onPick,
+                        onTogglePick = onTogglePick
+                    )
+
+                    if (graded) {
+                        Spacer(Modifier.height(6.dp))
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(14.dp))
+                                .background(
+                                    if (stepOk) Ascent.Green.copy(alpha = 0.10f)
+                                    else Ascent.Red.copy(alpha = 0.10f)
+                                )
+                                .border(
+                                    1.dp,
+                                    if (stepOk) Ascent.Green.copy(alpha = 0.35f)
+                                    else Ascent.Red.copy(alpha = 0.35f),
+                                    RoundedCornerShape(14.dp)
+                                )
+                                .padding(14.dp)
+                        ) {
+                            Column {
+                                Text(
+                                    text = if (stepOk) "\u2713 这一步正确" else "\u2715 这一步答错",
+                                    color = if (stepOk) Ascent.Green else Ascent.Red,
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Spacer(Modifier.height(5.dp))
+                                Text(
+                                    step.explanation,
+                                    color = if (stepOk) Ascent.OkText else Ascent.ErrText,
+                                    fontSize = 13.sp,
+                                    lineHeight = 20.sp
+                                )
+                            }
+                        }
+                    }
+
+                    if (isLast && graded) {
+                        Spacer(Modifier.height(12.dp))
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(14.dp))
+                                .background(Ascent.Panel)
+                                .border(1.dp, Ascent.Line, RoundedCornerShape(14.dp))
+                                .padding(14.dp)
+                        ) {
+                            Column {
+                                Text(
+                                    text = if (scenarioAllOk) "\uD83C\uDFC5 情景通过 · 全部步骤正确"
+                                    else "情景未通过 · 错题重做时会整段重来",
+                                    color = if (scenarioAllOk) Ascent.Gold else Ascent.Mut,
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Spacer(Modifier.height(6.dp))
+                                Text(
+                                    q.explanation,
+                                    color = Ascent.Body,
+                                    fontSize = 13.sp,
+                                    lineHeight = 20.sp
+                                )
+                                if (!q.source.isNullOrBlank()) {
+                                    Spacer(Modifier.height(8.dp))
+                                    Text(
+                                        text = "来源 · ${q.source}",
+                                        color = Ascent.Mut,
+                                        fontSize = 10.sp
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Spacer(Modifier.height(10.dp))
+    }
+}
+
+@Composable
+private fun ChoiceBlock(
+    step: Question,
+    pickIndex: Int?,
+    pickSet: List<Int>,
+    graded: Boolean,
+    showAnswerKey: Boolean,
+    onPick: (Int) -> Unit,
+    onTogglePick: (Int) -> Unit
+) {
+    val letters = listOf("A", "B", "C", "D", "E", "F")
+
+    // 子题也可以配图（例如先看预报图再判断）
+    if (!step.image.isNullOrBlank()) {
+        val bmp = rememberAssetBitmap(step.image)
+        val ratio = bmp?.let { it.width.toFloat() / it.height.toFloat() } ?: (4f / 3f)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.86f)
+                .aspectRatio(ratio)
+                .clip(RoundedCornerShape(14.dp))
+                .background(Ascent.Panel2)
+                .border(1.dp, Ascent.Line, RoundedCornerShape(14.dp))
+        ) {
+            if (bmp != null) {
+                Image(
+                    bitmap = bmp,
+                    contentDescription = null,
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier.fillMaxSize()
+                )
+            } else {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text("题图缺失：${step.image}", color = Ascent.Mut2, fontSize = 11.sp)
+                }
+            }
+        }
+        Spacer(Modifier.height(14.dp))
+    }
+
+    Text(
+        text = step.prompt,
+        color = Ascent.Txt,
+        fontSize = 18.sp,
+        lineHeight = 27.sp,
+        fontWeight = FontWeight.Bold
+    )
+    if (!step.context.isNullOrBlank()) {
+        Spacer(Modifier.height(8.dp))
+        Text(step.context, color = Ascent.Mut, fontSize = 13.sp, lineHeight = 20.sp)
+    }
+    Spacer(Modifier.height(16.dp))
+    if (step.type == QType.Multi) {
+        step.options.forEachIndexed { i, opt ->
+            val isSel = i in pickSet
+            val isRight = i in step.correctSet
+            OptionRow(
+                key = if (isSel) "\u2713" else letters.getOrElse(i) { "?" },
+                text = opt,
+                selected = isSel,
+                correct = graded && isRight,
+                wrong = graded && isSel && !isRight,
+                showKey = showAnswerKey && !graded && isRight,
+                onClick = { onTogglePick(i) }
+            )
+        }
+    } else {
+        step.options.forEachIndexed { i, opt ->
+            OptionRow(
+                key = letters.getOrElse(i) { "?" },
+                text = opt,
+                selected = pickIndex == i,
+                correct = graded && i == step.correct,
+                wrong = graded && pickIndex == i && i != step.correct,
+                showKey = showAnswerKey && !graded && i == step.correct,
+                onClick = { onPick(i) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun OptionRow(
+    key: String,
+    text: String,
+    selected: Boolean,
+    correct: Boolean,
+    wrong: Boolean,
+    showKey: Boolean,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 11.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .background(
+                when {
+                    correct -> Ascent.Green.copy(alpha = 0.12f)
+                    wrong -> Ascent.Red.copy(alpha = 0.12f)
+                    selected -> Ascent.Ice.copy(alpha = 0.08f)
+                    else -> Ascent.Panel
+                }
+            )
+            .border(
+                1.5.dp,
+                when {
+                    correct -> Ascent.Green
+                    wrong -> Ascent.Red
+                    selected -> Ascent.Ice
+                    else -> Ascent.Line
+                },
+                RoundedCornerShape(16.dp)
+            )
+            .clickable { onClick() }
+            .padding(16.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Box(
+                modifier = Modifier
+                    .size(30.dp)
+                    .clip(RoundedCornerShape(9.dp))
+                    .background(Ascent.Track)
+                    .border(1.dp, Ascent.Line, RoundedCornerShape(9.dp)),
+                contentAlignment = Alignment.Center
+            ) { Text(key, color = Ascent.Mut, fontSize = 12.sp, fontWeight = FontWeight.Medium) }
+            Spacer(Modifier.width(14.dp))
+            Text(text, color = Ascent.Txt, fontSize = 15.sp, lineHeight = 22.sp, modifier = Modifier.weight(1f))
+            if (showKey) {
+                Text("\u2713 KEY", color = Ascent.Green, fontSize = 10.sp, letterSpacing = 1.2.sp, fontWeight = FontWeight.Medium)
+            }
+        }
+    }
+}
+
+/** 加载 assets/bank/img/ 下的题图；null 表示缺失。 */
+@Composable
+private fun rememberAssetBitmap(name: String): ImageBitmap? {
+    val context = LocalContext.current
+    return remember(name) {
+        runCatching {
+            context.assets.open("bank/img/$name").use { BitmapFactory.decodeStream(it) }
+        }.getOrNull()?.asImageBitmap()
+    }
+}
+
+/**
+ * 从 assets/bank/img/ 加载题图。
+ * 热点题的容器按图片**真实宽高比**布局（调用方用 rememberAssetBitmap 取比例），
+ * 这样点击坐标的归一化映射才与题目里的 hotspots 完全一致。
+ */
+@Composable
+private fun AssetImage(name: String, modifier: Modifier = Modifier) {
+    val bmp = rememberAssetBitmap(name)
+    if (bmp != null) {
+        Image(
+            bitmap = bmp,
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds,
+            modifier = modifier
+        )
+    } else {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) {
+            Text("题图缺失：$name", color = Ascent.Mut2, fontSize = 11.sp)
+        }
+    }
+}
+
+@Composable
+private fun BriefView(lesson: Lesson, onStart: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 22.dp)
+    ) {
+        Text(lesson.icon, fontSize = 40.sp)
+        Spacer(Modifier.height(8.dp))
+        Text(lesson.code, color = Ascent.Ice, fontSize = 10.sp, letterSpacing = 2.4.sp, fontWeight = FontWeight.Medium)
+        Spacer(Modifier.height(6.dp))
+        Text(lesson.title, color = Ascent.Txt, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(4.dp))
+        val reviewCount = lesson.questions.count { it.review }
+        val typeCount = lesson.questions.map { it.type }.distinct().size
+        Text(
+            text = "技能要点 · 先读后测 · 共 ${lesson.questions.size} 题" +
+                (if (reviewCount > 0) "（含 $reviewCount 题复习）" else "") +
+                (if (typeCount > 1) " · $typeCount 种题型" else ""),
+            color = Ascent.Mut,
+            fontSize = 12.sp
+        )
+        Spacer(Modifier.height(18.dp))
+
+        lesson.brief.forEach { point ->
+            Row(modifier = Modifier.padding(bottom = 14.dp)) {
+                Box(
+                    modifier = Modifier
+                        .padding(top = 6.dp)
+                        .size(7.dp)
+                        .clip(RoundedCornerShape(999.dp))
+                        .background(Ascent.Ice)
+                )
+                Spacer(Modifier.width(12.dp))
+                Text(point, color = Ascent.Body, fontSize = 14.sp, lineHeight = 22.sp)
+            }
+        }
+
+        if (lesson.needsCoach) {
+            Spacer(Modifier.height(6.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(14.dp))
+                    .background(Ascent.Orange.copy(alpha = 0.10f))
+                    .border(1.dp, Ascent.Orange.copy(alpha = 0.35f), RoundedCornerShape(14.dp))
+                    .padding(14.dp)
+            ) {
+                Text(
+                    "⚠️ 实操技能：本课内容必须由持证教练现场指导与评估后，才能在真实环境中使用。",
+                    color = Ascent.WarnText,
+                    fontSize = 12.sp,
+                    lineHeight = 19.sp
+                )
+            }
+        }
+
+        Spacer(Modifier.height(26.dp))
+        AscentButton(text = "开始测验 · ${lesson.questions.size} 题", onClick = onStart)
+        Spacer(Modifier.height(28.dp))
+    }
+}
+
+@Composable
+private fun DoneView(
+    lesson: Lesson,
+    gained: Int,
+    stars: Int,
+    correct: Int,
+    total: Int,
+    retried: Int,
+    resolved: Int,
+    remaining: Int,
+    onContinue: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(Modifier.height(16.dp))
+        Text("\uD83D\uDEA9", fontSize = 54.sp)
+        Spacer(Modifier.height(8.dp))
+        Text("抵达新高度！", color = Ascent.Txt, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(6.dp))
+        Text("\u2B50".repeat(stars), fontSize = 20.sp)
+        Spacer(Modifier.height(20.dp))
+        Text("+${gained}m", color = Ascent.Gold, fontSize = 40.sp, fontWeight = FontWeight.Bold)
+        Text("海拔提升 · ALTITUDE GAINED", color = Ascent.Mut, fontSize = 10.sp, letterSpacing = 2.4.sp)
+        Spacer(Modifier.height(18.dp))
+        Text("首轮答对 $correct / $total 题", color = Ascent.Ice, fontSize = 13.sp)
+
+        if (retried > 0) {
+            Spacer(Modifier.height(18.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(14.dp))
+                    .background(Ascent.Panel)
+                    .border(1.dp, Ascent.Line, RoundedCornerShape(14.dp))
+                    .padding(16.dp)
+            ) {
+                Column {
+                    Text("\uD83D\uDD01 错题重做 $retried 题", color = Ascent.Txt, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                    Spacer(Modifier.height(6.dp))
+                    Text(
+                        text = "订正成功 $resolved 题" +
+                            if (remaining > 0) " · 仍有 $remaining 题需继续复习" else " · 全部订正完成",
+                        color = if (remaining > 0) Ascent.Gold else Ascent.Green,
+                        fontSize = 12.sp,
+                        lineHeight = 19.sp
+                    )
+                }
+            }
+        }
+
+        Spacer(Modifier.height(18.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(14.dp))
+                .background(Ascent.Panel)
+                .border(1.dp, Ascent.Line, RoundedCornerShape(14.dp))
+                .padding(16.dp)
+        ) {
+            Column {
+                Text("技能「${lesson.title}」理论部分已记录。", color = Ascent.Txt, fontSize = 13.sp, lineHeight = 20.sp)
+                if (lesson.needsCoach) {
+                    Spacer(Modifier.height(8.dp))
+                    Text("⚠️ 本课为实操技能，仍需教练现场指导与评估。", color = Ascent.Gold, fontSize = 12.sp, lineHeight = 19.sp)
+                }
+            }
+        }
+
+        Spacer(Modifier.height(24.dp))
+        AscentButton(text = "继续攀登", gold = true, onClick = onContinue)
+        Spacer(Modifier.height(30.dp))
+    }
+}

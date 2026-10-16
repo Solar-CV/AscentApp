@@ -1,0 +1,25 @@
+# ---------- 构建产物 ----------
+.gradle/
+.kotlin/
+build/
+app/build/
+*.log
+
+# ---------- 本地环境 ----------
+local.properties
+.DS_Store
+
+# ---------- IDE ----------
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# ---------- 书籍全文（版权）----------
+# knowledge/docs/ 存放 7 本纸质书的扫描校对全文，不进版本库。
+knowledge/docs/
+
+# ---------- 题库导出物 ----------
+# 根目录 bank/ 由 tools/contentcheck 生成，App 内置题库在源码 BundledBank.kt 中。
+# 注意：前导斜杠，避免误伤 app/src/main/assets/bank/（题目配图）。
+/bank/

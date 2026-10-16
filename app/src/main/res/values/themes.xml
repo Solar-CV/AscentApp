@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 日间模式（系统浅色时生效） -->
+<resources>
+    <style name="Theme.Ascent" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/ascent_bg_light</item>
+        <item name="android:statusBarColor">@color/ascent_bg_light</item>
+        <item name="android:navigationBarColor">@color/ascent_bg_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
