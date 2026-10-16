@@ -32,4 +32,5 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 完整变更记录见仓库 `README.md`「近期更新」章节。
 
-**许可**：Apache License 2.0（详见 `LICENSE` 与 `NOTICE`）。
+**许可**：PolyForm Noncommercial License 1.0.0 —— 仅限非商业用途，
+商业使用需另行书面授权（详见 `LICENSE` 与 `NOTICE`）。
