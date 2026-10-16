@@ -23,3 +23,15 @@ knowledge/docs/
 # 根目录 bank/ 由 tools/contentcheck 生成，App 内置题库在源码 BundledBank.kt 中。
 # 注意：前导斜杠，避免误伤 app/src/main/assets/bank/（题目配图）。
 /bank/
+
+# ---------- 内部文档（仅本地保留，不进仓库）----------
+# 这些是开发交接 / 内容规划类文档，按作者要求只留本地。
+/HANDOFF.md
+/ACHIEVEMENTS-ART.md
+/ACHIEVEMENTS.md
+/PLATFORM-适配规划.md
+/PORTING-01-架构与数据算法.md
+/PORTING-02-界面与交互规格.md
+/PORTING-03-内容素材与发布流程.md
+/REVIEW-711-通读校对报告.md
+/UI-DESIGN-HANDOFF.md
