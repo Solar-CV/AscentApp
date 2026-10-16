@@ -2,7 +2,7 @@
 
 > **这是本工程的单一事实来源（SSOT）。每次更新 App 后同步更新本文件。**
 >
-> 最后更新：2026-10-14　｜　App **v0.15.0**（versionCode 32）　｜　题库 **v14**　｜　课程大纲 **47/47 完成**　｜　**成就系统已落地**（35 成就 + 徽章 + 解锁弹窗 + 开发者测试区，详见 §13 与 `ACHIEVEMENTS.md`）；**2026-10-14 徽章视觉方向重建「Summit Relics」完成艺术指导 + 9 枚样稿；同日 V2 材质纠偏：几何图标 → 游戏神器材质（AI 渲染三方向对比 + 矢量验证，见 `ACHIEVEMENTS-ART.md` §0 与 HANDOFF §14/§15）**
+> 最后更新：2026-10-14　｜　App **v0.15.0**（versionCode 32）　｜　代码仓库 **github.com/Solar-CV/AscentApp**　｜　题库 **v14**　｜　课程大纲 **47/47 完成**　｜　**成就系统已落地**（35 成就 + 徽章 + 解锁弹窗 + 开发者测试区，详见 §13 与 `ACHIEVEMENTS.md`）；**2026-10-14 徽章视觉方向重建「Summit Relics」完成艺术指导 + 9 枚样稿；同日 V2 材质纠偏：几何图标 → 游戏神器材质（AI 渲染三方向对比 + 矢量验证，见 `ACHIEVEMENTS-ART.md` §0 与 HANDOFF §14/§15）**
 
 ---
 
@@ -863,3 +863,38 @@ onDismiss = {
 `ArticleDetail` 中 `sources.filter { it.contains("SEVEN SUMMIT TREKS") }`，**过滤后为空则整块不渲染**。数据层 `sources` 保留原样不删，仅展示层收敛 → SST 篇显示来源，中文书籍篇完全不显示来源区块。
 
 **未动**：成就、题库、路径/课程流程、徽章资源。版本 **v0.15.0 / versionCode 32**，`assembleDebug` 通过，contentcheck 全绿（35 成就定义有效、空进度 0、满进度 35/35、幂等 0、课程 47 解锁）。
+
+
+---
+
+## 24. 代码仓库建立（2026-10-16）
+
+**仓库**：<https://github.com/Solar-CV/AscentApp>　·　公开　·　分支 `main`　·　SSH 推送
+
+首次提交 2 个 commit、225 个文件（87 个 `.kt`、35 个徽章 webp、41 个 md 文档）。
+
+### .gitignore 排除项（重要）
+
+| 排除 | 原因 |
+|---|---|
+| `app/build/`、`build/`、`.gradle/`、`.kotlin/`、`*.log` | 构建产物（app/build 约 92 MB） |
+| `local.properties` | 含本机 SDK 绝对路径 |
+| `.idea/`、`*.iml` | IDE 配置 |
+| **`knowledge/docs/`** | **7 本纸质书的扫描校对全文**——受版权保护，不进公开仓库 |
+| **`/bank/`** | 题库导出物（由 `tools/contentcheck` 生成）。**前导斜杠**，避免误伤 `app/src/main/assets/bank/` 的 10 张题目配图 |
+
+已验证远端：无 `local.properties`、无 build 产物、无书籍全文、无 `bank/`。
+内置题库在源码 `data/BundledBank.kt` 中，排除 `bank/` 不影响编译。
+
+### 顺带修正
+
+`README.md` 此前停留在 **v0.5.0**，与实际严重不符，已同步为真实数据（数据取自 `tools/contentcheck` 实测输出）：
+47 课 / 711 题 / 复习 82 道 / 5 海拔单元（5000M 入门·5000M 进阶·6000M·7000M·8000M）/
+31 篇技能书 / 35 枚徽章 / 题库 v14 / 体积约 16.3 MB；补充 v0.11–v0.15 更新记录；修正项目结构树。
+
+### 环境备注
+
+- GitHub MCP 集成**无权创建仓库**（403 `Resource not accessible by integration`）；本机无 brew / gh CLI。
+  因此**远端仓库需人工在网页创建**（New repository，不勾选 README / .gitignore / license）。
+- `ssh -T git@github.com` 认证通过（账号 Solar-CV），推送通道正常。
+- 后续推送：`git push`（已 `git push -u origin main` 建立上游跟踪）。
