@@ -12,8 +12,8 @@ android {
         applicationId = "com.ascent.climb"
         minSdk = 26
         targetSdk = 34
-        versionCode = 32
-        versionName = "0.15.0"
+        versionCode = 33
+        versionName = "0.15.1"
         resourceConfigurations += listOf("zh", "en")
     }
 

@@ -11,7 +11,7 @@ val HANDBOOK_B = listOf(
         code = "ICE CLIMB / WI",
         icon = "\uD83E\uDDD7",
         category = "攀冰技术",
-        summary = "攀冰是把冰壁当作攀爬对象的技术体系。它比攀岩更依赖工具、冰况与当时的状态。",
+        summary = "攀冰是在冰壁上攀爬的技术。它比攀岩更吃工具、冰况和当天的身体状态。",
         sections = listOf(
             HandbookSection(
                 "挥镐",
@@ -47,7 +47,7 @@ val HANDBOOK_B = listOf(
         code = "KNOTS",
         icon = "\uD83E\uDEA2",
         category = "绳索技术",
-        summary = "只需掌握五个结，就能覆盖冰川行进与基础保护的绝大多数场景。关键是每一个都能闭眼打出并检查。",
+        summary = "五个结就够覆盖冰川行进和基础保护的大部分场景。前提是每个都能不看手打出来，并且会检查。",
         sections = listOf(
             HandbookSection(
                 "回穿 8 字结（Figure-8 follow-through）",
@@ -82,7 +82,7 @@ val HANDBOOK_B = listOf(
         code = "ANCHORS",
         icon = "\u2693",
         category = "绳索技术",
-        summary = "保护站的唯一设计目标是容错：任何单一保护点失效，系统都不应崩溃。",
+        summary = "保护站的设计目标只有一个：容错。任何一个点失效，系统都不该垮。",
         sections = listOf(
             HandbookSection(
                 "SRENE 四原则",
@@ -93,7 +93,7 @@ val HANDBOOK_B = listOf(
                 "在 SRENE 基础上补充：Efficient（高效，操作不繁琐）、Anchored（固定可靠）、Strong（强度足够）、Timely（快速建立，避免长时间暴露）。它更贴近真实场景的综合评估。"
             ),
             HandbookSection(
-                "为什么 No Extension 至关重要",
+                "为什么 No Extension 很重要",
                 "如果保护点之间留有松余，某点崩脱时其余点会承受突然的冲击载荷——冲击力远大于静载。预先均衡收紧，是为了把这个冲击从系统里消掉。"
             ),
             HandbookSection(
@@ -149,7 +149,7 @@ val HANDBOOK_B = listOf(
         code = "AVALANCHE",
         icon = "\uD83C\uDFD4\uFE0F",
         category = "风险判断",
-        summary = "雪崩风险 = 雪层稳定性 + 地形坡度 + 人的决策。前两项你无法改变，第三项可以。",
+        summary = "雪崩风险来自三样东西：雪层稳定性、地形坡度、人的决策。前两样改不了，第三样可以。",
         sections = listOf(
             HandbookSection(
                 "坡度：最强的单一因子",
@@ -180,7 +180,7 @@ val HANDBOOK_B = listOf(
         code = "GEAR SYSTEM",
         icon = "\uD83E\uDDF0",
         category = "装备知识",
-        summary = "高山装备不是清单，而是一个相互约束的系统：靴决定爪，爪决定镐，镐决定你能走什么地形。",
+        summary = "高山装备不是一张清单，是一套互相牵制的系统。靴子决定冰爪，冰爪决定冰镐，冰镐又决定你能走什么地形。",
         sections = listOf(
             HandbookSection(
                 "冰镐：B 型与 T 型",

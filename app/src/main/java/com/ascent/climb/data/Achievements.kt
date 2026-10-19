@@ -82,7 +82,7 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = lesson("l5")
     ),
     Achievement(
-        "self_arrest", "制动本能", "学会冰镐自我制动——滑坠时的救命动作。",
+        "self_arrest", "制动本能", "学会冰镐自我制动。滑坠时能靠它止住。",
         AchCategory.Progress, Rarity.Common, "target", "完成 l6（冰镐使用与自我制动）",
         progress = { if ("l6" in it.completed) 1 else 0 },
         unlocked = lesson("l6")
@@ -140,7 +140,7 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = lesson("l18")
     ),
     Achievement(
-        "retreat_wise", "撤退的智慧", "懂得何时放弃，才配得上登顶。",
+        "retreat_wise", "撤退的智慧", "该停的时候能停下来，也是一种本事。",
         AchCategory.Progress, Rarity.Rare, "compass", "完成 l19（攀登计划与撤退决策）",
         progress = { if ("l19" in it.completed) 1 else 0 },
         unlocked = lesson("l19")
@@ -270,7 +270,7 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = unitAll("m8")
     ),
     Achievement(
-        "full_route", "理论大满贯", "全部 47 门课完成。理论路线，登顶成功。",
+        "full_route", "理论大满贯", "47 门课全部完成，理论路线走到终点。",
         AchCategory.Explore, Rarity.Legendary, "award", "全部 47 课完成",
         target = 47,
         progress = { it.completed.size },

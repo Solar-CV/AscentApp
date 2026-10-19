@@ -1,122 +1,79 @@
-# ASCENT · 攀登之路 — Android 测试版
+# ASCENT · 攀登之路
 
-高海拔攀登 / 攀冰培训 App，采用多邻国式游戏化学习路径。
+一个给高海拔攀登和攀冰新手做的 Android 应用。课程按海拔组织：每过一课，海拔往上走一段。五个单元从 5000 米入门排到 8000 米，47 课学完，海拔从 3,200 m 走到 8,848 m。
 
-**核心机制：你的学习进度就是海拔。** 每通过一课向上攀升若干米，路线由 5 个海拔单元组成：
-5000M 入门 → 5000M 进阶 → 6000M → 7000M → 8000M，终点 8,000 m。
+当前源码版本 v0.15.1（versionCode 33）。这一版主要动文案：清掉应用里残留的 markdown 星号、多余的破折号和套话，登录页也不再承诺一个还没做的同步功能。README 顺手重写了一遍。
 
-当前版本：**v0.15.0**（versionCode 32）
+## 装到手机上
 
----
+最省事是从 [Releases](https://github.com/Solar-CV/AscentApp/releases) 下预构建的 debug APK。推 `v*` 标签时，GitHub Actions 会自动构建并附到 release 上。如果 Release 里最新还停在 v0.15.0，说明这次文案整理的包还没发，自己构建一下就行。
 
-## 一、安装
+自己构建也可以，命令在「自己构建」一节。
 
-最快：直接从 [Releases](https://github.com/Solar-CV/AscentApp/releases) 下载预构建的
-`ascent-v0.15.0-debug.apk`（每次推送 `v*` 标签由 GitHub Actions 自动构建发布）。
-
-或自行构建后再安装：
-
-1. 把 `ascent-v0.15.0-debug.apk` 传到 Android 手机
-2. 手机上打开「允许安装未知来源应用」
-3. 点击 APK 安装，打开即可
-
-- 包名：`com.ascent.climb` · 版本 0.15.0
+- 包名：`com.ascent.climb`
 - 最低系统：Android 8.0（API 26）
-- 体积：约 16.3 MB
-- 权限：联网（仅用于拉取题库更新）；离线时功能完全不受影响
+- 体积：约 16 MB
+- 权限：联网与网络状态，只用于检查题库更新。断网时所有功能照常，内置题库一直在。
 
----
+安装步骤没什么特别：把 APK 传到手机，在系统设置里允许安装未知来源应用，点安装。第一次打开不需要登录。
 
-## 二、功能
+## 里面有什么
 
-| 模块 | 内容 |
-|---|---|
-| 路径 | 5 海拔单元 / **47 课**，线性解锁，蜿蜒绳索路径，完成度以海拔呈现 |
-| 技能书 | **31 篇**专题文章（向导资料 + 中文登山书籍整理），每篇 4–8 节 |
-| 测验 | **711 道题**，题量随海拔递增（平均 11 → 12 → 14 → 20 → 19 题/课），含安全关键题（加权 + 强制理解后继续） |
-| 复习题 | 单元 2 起每课自动穿插前面单元的内容重答（间隔重复），共 82 道 |
-| 错题重做 | 每课答题结束后自动拉出错题再答一遍，答对 +20m；仍错的进入复习中心 |
-| 训练 | 目标峰海拔、单元阶段进度、准备度百分比 |
-| 复习 | 错题队列（安全关键题置顶）、待教练评估清单 |
-| 我的 | 档案头、海拔、能力概览、**徽章入口**、账号、声明 |
-| 个人主页 | 点头像进入：学习概览（连续 / 累计天数、完成课程、徽章数）+ 已解锁徽章 |
-| 徽章墙 | **35 枚**成就徽章，按分类分组，未解锁灰度预览，隐藏成就显示「?」 |
-| 设置 | **齿轮入口**：外观（跟随系统 / 浅色 / 深色）、题库、开发者模式、数据重置、关于 |
-| 外观 | 跟随系统 **或手动指定** 浅色 / 深色，偏好持久化（含状态栏配色） |
+### 路径
 
-游戏化元素：🔥 连续天数、🪢 安全绳余量（答错扣减，每日重置）、⭐ 课程星级（全对 3 星 / ≥60% 2 星）、海拔累积。
+主页面是一条从大本营往上走的路线，分五个海拔单元。课程线性解锁，过一课开下一课。节点上会显示星级，当前课有「开始」提示，单元最后一课用金色标出来。
 
-### 近期更新
+进度不是另外存一个数字，而是由「已完成课程」实时算出来的。这样以后调整海拔曲线，旧存档也会跟着重算，不会卡在旧值上。
 
-**v0.15.0** — 技能书补充中文书籍篇：新增 9 篇（h23–h31），总数 22 → **31 篇**，新增「户外领导力」分类
-（领导力定义与软技能 / 制定最佳决策 / 领队责任与冲突 / 山区导航定向 / 营地与 LNT 环保 /
-迷路与求救 / 脱水与体温过高 / 安全原则与风险管理 / 营养与能量策略）。
+### 测验与复习
 
-**v0.14.0** — 技能书新增 6 篇 SST 向导内容（睡眠系统 / 背包收纳 / 个人护理 / 探险医疗 /
-高原病风险人群 / 探险规定与登顶认证），16 → 22 篇。
+题库现在有 711 条展示项：629 道正式题，加上 82 道自动插入的复习副本。题量随海拔递增，5000 米入门平均每课 11 题，到 8000 米单元平均 19 题。
 
-**v0.13.1** — 次级页面（设置 / 个人主页 / 徽章墙 / 成就测试区 / 登录 / 手册长文 / 解锁弹窗）
-接入返回手势拦截，全面屏侧滑回到上一界面而非直接退出 App。
+题型有八种：
 
-**v0.13.0** — 新增设置页（外观 / 题库 / 开发者模式 / 数据 / 关于）、个人主页、全部徽章墙；
-「我的」页 35 枚徽章墙收敛为紧凑入口卡；主题偏好持久化。
+- 单选、多选
+- 排序、配对
+- 填空、计算
+- 热点题（在图上点位置）
+- 情景题（一道题干里分几步作答）
 
-**v0.12.0** — 35 枚成就徽章全部重绘为 AI 渲染收藏品质感（按成就语义分配材质与边框类型），
-作为 256px WebP 位图资源集成；`ui/BadgeArt.kt` 做 id → 资源映射。
+答完当课会立刻进入错题重做。答对的错题加分，仍然错的进复习中心。复习用间隔重复，间隔是 0、1、3、7、16、35 天。安全关键题会加权，答错后要求确认理解才能继续。
 
-**v0.11.0** — 成就系统落地：35 枚成就定义 + 解锁判定 + 弹窗 + 开发者测试区。
+### 技能书
 
----
+31 篇长文，每篇 4 到 8 节。内容分两块：SEVEN SUMMIT TREKS 的三份向导资料，以及 7 本中文登山书的整理稿。中文书的部分按产品约定不显示出处，向导资料的部分会标来源。
 
-### v0.5.0 更新
+### 训练、复习、我的
 
-- **题目溯源**：每道题新增 `source` 字段，答题后显示「来源 · 书名 页码」，为教练/医生逐条审核提供依据
-- **实体书入库流水线**：`import/*.md`（Markdown）→ 一条命令编译成题库
-- **内容溯源原则**：只取书中的知识事实、用自己的话重写题干与解析，并标注出处
+训练页给一个准备度百分比和目标峰海拔。复习页把今天到期的题和安全关键错题排在前面。「我的」页有档案头、当前海拔、能力概览、徽章入口和账号区。点右上角齿轮进设置，点头像进个人主页。
 
-### v0.4.0 更新
+个人主页只展示已经解锁的徽章。全部 35 枚在「全部徽章」页，未解锁的显示为灰度预览，隐藏成就给一个「?」。
 
-- **题库区块化**：新增 `data/bank/` 包，题库的载入/缓存/更新统一收口在 `BankRepository`
-- **在线题库**：JSON 作为在线题库，启动时自动比对版本，比本地新则下载校验后覆盖本地缓存
-- **离线兜底**：拉取失败 / 校验不通过 / 版本更旧，一律保持现状；内置题库始终可用
-- 「我的」页新增题库区：当前版本、来源、检查更新、恢复内置题库
-- 开发者模式新增「在线题库地址」输入框，可不重新编译就切换服务器
-- 内容校验工具升级为 `tools/contentcheck/run.sh`，一条命令完成校验 + 导出在线题库
+### 设置
 
-### v0.3.0 更新
+外观可以跟随系统，也可以手动锁浅色或深色，选择会持久化，状态栏配色一起变。题库区能看当前版本、检查更新、恢复内置题库。开发者模式藏在关于页的版本号后面，连点 7 次打开，能解锁全部关卡、显示答案、进成就测试区。
 
-- **课程长度随难度递增**：大本营 5 题/课 → C1 8 题 → C2 9 题 → 高营 10 题 → 顶峰 11 题（总题量 110 → 182）
-- **自动插入复习题**：营地 2 起每课额外抽 2 道前面单元的题重答，答题界面标记「复习题 · 来自前面单元」
-- **隐藏开发者模式**：在「我的」页底部连点版本号 7 次解锁，可一键解锁全部关卡、显示正确答案
-- 新增内容校验工具 `tools/contentcheck`（纯 JVM，直接跑真实数据验证）
+## 最近改了什么
 
-### 隐藏开发者模式
+v0.15.1 是一次文案清理，不碰题库结构和判分逻辑。具体改了这些：
 
-在「我的」页最底部连点版本号 **7 次**（1.6 秒内连续点击）即可解锁。解锁后「我的」页会出现开发者选项：
+- 应用内所有字面 `**` 标记都去掉了，`**` 在 Compose 的 `Text` 里不会被渲染成粗体，只会原样显示。
+- 课程要点、技能书摘要、气象与地形题的解析重写了一批。删掉「核心思路只有一句」「这就是……的全部意义」这类腔调，破折号也减了一些。
+- 登录页原来写「同步你的海拔、徽章与学习记录」，但当前实现是本地模拟，根本不会同步。现在改成如实说明。
+- 题库版本从 14 升到 15。发布到服务器后，旧版用户下次检查更新能拿到新题面。
+- README 重写。本地的交接文件里也记了这次整理。
 
-| 选项 | 作用 |
-|---|---|
-| 解锁全部关卡 | 跳过前置要求，22 门课程全部可进入（节点显示为「可挑战」） |
-| 显示正确答案 | 答题前在正确选项旁标记 `✓ KEY` |
-| 关闭开发者模式 | 关闭并清除以上开关（不会动学习进度） |
+再往前：
 
-开发者模式状态存在本机，且「重置学习进度」不会清除它。
+- v0.15.0：技能书补 9 篇中文书籍篇（h23–h31），新增「户外领导力」分类，总数 22 → 31。
+- v0.14.0：补 6 篇 SEVEN SUMMIT TREKS 向导内容（睡眠系统、背包收纳、个人护理、探险医疗、高原病风险人群、探险规定与登顶认证）。
+- v0.13.x：新增设置页、个人主页、全部徽章墙；次级页面接入返回手势，全面屏侧滑不再直接退出 App。
+- v0.12.x：35 枚成就徽章改为 AI 渲染位图，作为 256px WebP 资源打包。
+- v0.11.0：成就系统落地，35 枚成就、解锁判定、弹窗和开发者测试区。
 
-### v0.2.0 更新
+## 课程怎么排
 
-- 日间 / 夜间主题跟随系统自动切换（新增浅色配色：冰川白 + 深青 + 深金）
-- 每关结束后新增「错题重做」环节
-- 课程题量从每题 3 题扩充到 5 题（60 → 110 题），新增 2 门装备课程
-- 「我的」新增登录 / 注册界面（`AuthApi` 接口 + 本地模拟实现）
-- 整合用户知识库中的三份向导资料，新增 4 篇技能书文章
-
----
-
-## 三、课程内容体系
-
-| 营地 | 海拔 | 课程 |
-|---|---|---|
-| 单元 | 海拔 | 课程数 | 题量 | 平均每课 |
+| 单元 | 海拔 | 课程 | 题量 | 平均每课 |
 |---|---|---|---|---|
 | 5000M · 入门 | 5,000 m | 12 | 135 | 11 题 |
 | 5000M · 进阶 | 5,000 m | 9 | 112 | 12 题 |
@@ -124,254 +81,219 @@
 | 7000M | 7,000 m | 8 | 163 | 20 题 |
 | 8000M | 8,000 m | 8 | 158 | 19 题 |
 
-大纲规划 47 课、已实现 47 课、待补齐 0。详细课程清单见 `HANDOFF.md`。
+大纲规划 47 课，已经写完 47 课。目标山峰列了 30 座，从 5,211 m 的奥太娜一直到 14 座 8000 米级山峰。
 
-### 内容来源
+## 内容从哪来
 
-**公共权威资料**
+题目和技能书主要来自两类材料。
 
-| 领域 | 主要依据 |
+公共资料包括 Wilderness Medical Society 的《急性高原病临床实践指南》2024 更新版、CDC Yellow Book、American Alpine Institute 和 American Alpine Club 的技术资料、REI Expert Advice、UIAA 与 CE 的装备标准，以及 avalanche.org 的雪崩数据。
+
+SEVEN SUMMIT TREKS 的三份向导资料是另一条主线：高原病、装备指南、探险活动通用指南。这三份资料整理成了技能书中的若干篇，也贡献了一批题目。
+
+后来又把 7 本中文登山书的校对稿整理进技能书。书里的知识和案例用自己的话重写，出处标到页码。仓库里不放纸质书的扫描原文。
+
+| 材料 | 用在哪 |
 |---|---|
-| 高海拔医学 | Wilderness Medical Society《急性高原病临床实践指南》2024 更新版；CDC Yellow Book；StatPearls 流行病学数据 |
-| 冰雪技术 | American Alpine Institute（自制动 / 冰爪技术）；American Alpine Club《雪坡攀登原理》；REI Expert Advice；BMC 冬季技能 |
-| 攀冰分级 | UIAA《攀登难度分级体系》；Alpinist 分级对照表 |
-| 绳索与救援 | AMGA / NOLS 绳索系统框架；Alpine Savvy 现代冰川救援；Cascade Mountain Ascents |
-| 雪崩 | avalanche.org 雪崩百科（96% 发生在 30°–50°，多数集中在 34°–45°） |
-| 装备标准 | UIAA / CE（EN 13089 冰镐、EN 893 冰爪、UIAA 105 安全带、EN 12492 头盔） |
+| WMS / CDC / StatPearls | 高海拔医学题与技能书 |
+| AAI / AAC / REI / BMC | 冰雪技术与行进 |
+| UIAA / CE 标准 | 装备题 |
+| avalanche.org | 雪崩判断 |
+| SEVEN SUMMIT TREKS 三份资料 | 技能书 h17–h22 与相关题目 |
+| 7 本中文登山书 | 技能书 h23–h31 |
 
-**用户知识库（SEVEN SUMMIT TREKS 向导资料）**
+## 安全边界
 
-源文件位于 `~/技能书/`：
+这个 App 只覆盖理论和认知准备。冰雪、绳索、攀冰、救援这些实践技能，必须由持证教练现场指导和评估。
 
-| 文件 | 已整合为 |
-|---|---|
-| `了解高原病.docx` | 《高原病处置速查（向导版）》+ 营地 4 与营地 1 的相关题目（地塞米松 8–10mg 负荷剂量、HAPE 并发 HACE 13%–20%、4000m 以上发病率 50%–65% 等） |
-| `装备指南.docx` | 《6000–8000 米装备清单（一）穿着与鞋类》《（二）技术器材与通讯》+ 新增 2 门课程（冰镐按身高选长、12 齿钢制冰爪、可拆卸内胆登顶靴等） |
-| `探险活动通用指南.docx` | 《探险活动行前须知》（保险、航班取消、行李与挑夫、营地纪律、登顶证书） |
+内容不构成医疗建议。涉及药物和急救的决定，要问医生。
 
----
+不承诺登顶，也不保证高海拔适应结果。
 
-## 四、安全边界
+标了「需教练评估」的课程，学完理论后会明确提示还需要实操验证。
 
-- 本 App 只覆盖**理论与认知准备**，冰雪、绳索、攀冰、救援等实践技能必须由持证教练现场指导与评估
-- 内容**不构成医疗建议**，涉及药物与急救的决策须咨询专业医生
-- 不承诺登顶，也不保证高海拔适应结果
-- 标注 `需教练评估` 的课程（自我制动、攀冰）在完成理论后会明确提示实操验证要求
+## 自己构建
 
----
+工具链可以全部装在用户目录，不需要 Homebrew 或 Android Studio。本机现在用的是：
 
-## 五、重新构建
-
-工具链在本机 `~/android-toolchain/`（无需 Homebrew / Android Studio）：
-
-- `jdk/` — Temurin OpenJDK 17.0.20.1（清华 Adoptium 镜像）
-- `sdk/` — Android SDK：platforms;android-34、build-tools;34.0.0、platform-tools
-- `gradle-8.9/` — Gradle 8.9（腾讯镜像）
+- `~/android-toolchain/jdk`：Temurin OpenJDK 17
+- `~/android-toolchain/sdk`：Android SDK，platforms;android-34、build-tools;34.0.0、platform-tools
+- `~/android-toolchain/gradle-8.9`：Gradle 8.9
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
-cd ~/AscentApp
+cd AscentApp
 "$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
 ```
 
-也可直接使用仓库内的 Gradle Wrapper（8.9），无需本机预装 Gradle：
+仓库里也带了 Gradle Wrapper 8.9，本机没装 Gradle 也能直接用：
 
 ```bash
-cd ~/AscentApp
+cd AscentApp
 ./gradlew assembleDebug
 ```
 
-产物：`app/build/outputs/apk/debug/app-debug.apk`
+产物在 `app/build/outputs/apk/debug/app-debug.apk`。
 
----
-
-## 六、项目结构
+## 项目结构
 
 ```
-~/AscentApp/
+AscentApp/
 ├── import/                      题库编写（Markdown，实体书整理）
 │   └── README.md                格式说明与录入原则
-├── bank/                        在线题库产物（bank.json + manifest.json，传到服务器即可）
+├── bank/                        在线题库产物（bank.json + manifest.json）
+├── knowledge/                   纸质资料知识库
+│   ├── docs/                    规范化正文，保留页码锚点
+│   ├── topics/                  主题汇编，带页码出处
+│   └── tools/kb.mjs             build / stats / search / page
 ├── tools/
 │   ├── contentcheck/            内容校验 + 题库导出（纯 JVM）
-│   │   ├── run.sh               一条命令：同步 → 校验 → 导出
-│   │   ├── Check.kt
-│   │   └── BankExport.kt
-│   └── qbank/build.mjs          Markdown → 题库编译器
+│   ├── qbank/build.mjs          Markdown → 题库编译器
+│   └── shufflecheck/            打乱算法校验
 └── app/src/main/
     ├── AndroidManifest.xml
-    ├── res/
-    │   ├── values/            日间主题 + 颜色 + 字符串
-    │   ├── values-night/      夜间主题（系统深色时生效）
-    │   ├── drawable/          矢量启动图标（山峰 + 登顶旗）
-    │   └── mipmap-anydpi-v26/ 自适应图标
+    ├── res/                     主题、颜色、字符串、图标、字体、徽章位图
     └── java/com/ascent/climb/
-        ├── MainActivity.kt        底部导航 + 全屏课程 + 题库检查触发
+        ├── MainActivity.kt      底部导航、全屏课程、题库检查
         ├── data/
-        │   ├── Model.kt           数据模型
-        │   ├── Unit1~5.kt         主课程内容
-        │   ├── Expansion.kt       扩充包一：补充题目 + 2 门装备课程
-        │   ├── Expansion2.kt      扩充包二：进阶单元加题（难度递增）
-        │   ├── BundledBank.kt     内置题库构建（纯 Kotlin，工具也复用这个文件）
-        │   ├── BookContent.kt     ← 由 import/*.md 自动生成，勿手改
-        │   ├── Content.kt         界面统一数据入口 + 解锁规则
-        │   ├── Auth.kt            AuthApi 登录接口 + MockAuthApi 本地实现
-        │   ├── ProgressStore.kt   本地进度持久化
-        │   ├── bank/              ← 题库区块
-        │   │   ├── BankConfig.kt      配置常量（版本号、超时、体积上限）
-        │   │   ├── BankJson.kt        JSON 解码（org.json，零依赖）
-        │   │   ├── BankRemote.kt      网络层（HttpURLConnection，零依赖）
-        │   │   └── BankRepository.kt  统一入口：缓存 → 内置 + 在线更新
-        │   ├── HandbookA/B.kt     技能书（公共资料）
-        │   ├── HandbookC/D.kt     技能书（SEVEN SUMMIT TREKS 向导资料）
-        │   ├── HandbookE.kt       技能书（中文登山书籍整理，来源不展示）
-        │   └── Achievements.kt    35 枚成就定义（id / 条件 / 稀有度）
-        └── ui/
-            ├── Theme.kt           双主题配色 + LocalAscentColors
-            ├── Components.kt      等高线背景、卡片、进度条、按钮
-            ├── PathScreen.kt      攀登路径
-            ├── LessonScreen.kt    技能要点 → 测验 → 错题重做 → 结算
-            ├── HandbookScreen.kt  技能书
-            ├── TrainingScreen.kt  训练计划
-            ├── ReviewScreen.kt    复习中心
-            ├── ProfileScreen.kt   我的（档案头 / 海拔 / 能力概览 / 徽章入口 / 账号）
-            ├── SettingsScreen.kt  设置页
-            ├── ProfileHomeScreen.kt 个人主页
-            ├── BadgeWallScreen.kt 全部徽章墙
-            ├── Badges.kt          徽章渲染（位图 + 三态）
-            ├── BadgeArt.kt        成就 id → 徽章资源映射
-            ├── AchievementsDevScreen.kt 成就测试区
-            └── AchievementUnlock.kt     解锁弹窗
+        │   ├── Model.kt         数据模型
+        │   ├── Unit1~5.kt       主课程内容
+        │   ├── Expansion*.kt    后续补充题目
+        │   ├── NewLessons.kt    新大纲课程
+        │   ├── Curriculum.kt    课程大纲与目标山峰
+        │   ├── BundledBank.kt   课程池装配与复习题插入
+        │   ├── BookContent.kt   由 import/*.md 生成，勿手改
+        │   ├── Content.kt       界面统一入口与解锁规则
+        │   ├── Auth.kt          登录接口与本地模拟实现
+        │   ├── ProgressStore.kt 进度持久化
+        │   ├── bank/            题库配置、JSON 解码、网络层、仓库
+        │   ├── HandbookA~E.kt   技能书
+        │   └── Achievements.kt  35 枚成就定义
+        └── ui/                  各页面与组件
 ```
 
-### 扩展内容的方式
+## 改内容
 
-新增题目或课程**不需要改动已审核的 Unit1~5**，只需在 `data/Expansion.kt` 或 `data/Expansion2.kt` 里：
+给已有课程加题，写在 `data/Expansion*.kt`：
 
 ```kotlin
-// 给已有课程加题
-val EXTRA_QUESTIONS = mapOf("l5" to listOf(Question(...)))
-
-// 给营地加新课程
-val EXTRA_LESSONS = mapOf("u1" to listOf(myNewLesson))
+val EXTRA_QUESTIONS = mapOf(
+    "l5" to listOf(
+        Question(
+            prompt = "题干",
+            options = listOf("A", "B", "C"),
+            correct = 0,
+            explanation = "解析",
+            source = "出处"
+        )
+    )
+)
 ```
 
-`Content.kt` 会自动合并，并按全局课序号插入复习题。
+加新课程，在 `data/NewLessons.kt` 里写 `Lesson(...)`，再把 id 加进 `Curriculum.kt` 对应单元的 `lessonIds`。顺序和单元归属只改 `Curriculum.kt`，不用动课程本体。
 
-### 内容校验与题库导出
+从实体书整理题目走另一条流水线：
+
+```
+扫描校对稿
+   ↓ 人工 / OCR 整理
+import/*.md
+   ↓ node tools/qbank/build.mjs
+data/BookContent.kt
+   ↓ gradle assembleDebug
+内置题库
+```
+
+`import/` 下以 `_` 开头的 `.md` 是草稿，不参与编译。格式说明在 `import/README.md`。
+
+改完内容跑一次校验：
 
 ```bash
-bash ~/AscentApp/tools/contentcheck/run.sh
+bash tools/contentcheck/run.sh
 ```
 
-这一个命令会：把 App 的内容源同步进纯 JVM 工程 → 跑完整校验（题量、难度递增、答案越界、空题、解锁逻辑）→ 导出 `bank/bank.json` 与 `bank/manifest.json`。
+这个脚本会把 App 的内容源同步进一个纯 JVM 工程，跑真实装配逻辑，检查题量、难度递增、答案越界、空题、解锁逻辑和成就定义，然后导出 `bank/bank.json` 与 `bank/manifest.json`。不用装模拟器。
 
-改动内容后请同步把 `bank/BankConfig.BUNDLED_VERSION` +1，否则客户端不会认为有新版本。
+改动题库后记得把 `data/bank/BankConfig.kt` 里的 `BUNDLED_VERSION` 加一。否则客户端会认为没有新版本。
 
----
+## 题库在线更新
 
-## 七、登录接口说明
-
-界面只依赖 `AuthApi` 这一层接口：
-
-```kotlin
-interface AuthApi {
-    suspend fun login(email: String, password: String): AuthResult
-    suspend fun register(email: String, password: String, nickname: String): AuthResult
-    suspend fun logout()
-}
-```
-
-当前实现是 `MockAuthApi`：不联网，只做格式校验（邮箱格式、密码 ≥6 位），账号存在本机 SharedPreferences。
-**后端就绪后只需替换实现**（改为 HTTP 请求），UI 无需任何改动。建议的接口：
+题库有三层来源：
 
 ```
-POST /auth/login    { email, password }            -> { token, user }
-POST /auth/register { email, password, nickname }  -> { token, user }
-POST /auth/logout
+① 本地缓存    filesDir/bank_cache.json    之前下载并校验通过的 JSON
+② 内置题库    随 APK 编译进来              永远可用
+③ 在线题库    有网时检查，比本地新才覆盖 ①
 ```
 
----
+实际取用顺序是 ① → ②。在线题库只做增量更新，所以飞机上、山里没信号、服务端挂了、JSON 格式错、sha256 不匹配、版本更旧，这些情况都只会保留现状，不会影响学习。
 
-## 八、题库架构与在线更新
+启动后静默检查更新，距上次检查超过 6 小时、且已经配置地址才发请求。首次启动不会弹窗阻塞。
 
-### 三层来源
+发布一份新题库：
 
-```
-① 本地缓存副本  ← 之前从在线题库下载并校验通过的 JSON（filesDir/bank_cache.json）
-② 内置题库      ← 随 APK 编译进来（buildBundledUnits），永远可用
-③ 在线题库      ← 有网时检查，比本地新才下载覆盖 ①
-```
+1. 改内容
+2. 把 `BUNDLED_VERSION` 加一
+3. 跑 `bash tools/contentcheck/run.sh`
+4. 把 `bank/bank.json` 和 `bank/manifest.json` 传到服务器、CDN 或 GitHub raw
+5. 下次打开 App 自动更新，不用发版
 
-实际取用顺序是 **① → ②**。在线题库只做「增量更新」，因此：
+旧版 App 不会被新题库搞崩。`manifest.json` 里的 `minAppVersion` 会拦住版本不够的客户端，未知字段直接忽略，单条题目格式错误只会跳过那一条。
 
-- 飞机上 / 高山无信号 → 直接用 ②，功能与纯离线 App 完全一致
-- 服务端挂了 / JSON 格式错 / sha256 不匹配 / 版本更旧 → 全部保留现状，静默失败
-
-### 自动更新流程
-
-```
-启动 → 载入 ① 或 ②
-      ↓ 距上次检查超过 6 小时、且已配置地址
-取 manifest.json（小文件）→ 比版本
-      ↓ 有新版本
-下载 bank.json → 校验 sha256 → 解析校验 → 写缓存 → 立即生效（界面自动重建）
-```
-
-首次启动不会弹窗阻塞：所有网络动作都在协程里静默进行，失败只记录一条状态文案。
-
-### 发布一份新题库
-
-1. 改内容（改 `Unit*.kt` / `Expansion*.kt`）
-2. 把 `data/bank/BankConfig.kt` 里的 `BUNDLED_VERSION` +1
-3. 跑 `bash tools/contentcheck/run.sh` —— 会生成新的 `bank/bank.json` + `bank/manifest.json`
-4. 把 `bank/` 目录下两个文件传到你的服务器（或 CDN / GitHub raw）
-5. 完成。用户下次打开 App 自动更新，**不用发版**
-
-旧的 App 不会因新题库而崩：`manifest.json` 里的 `minAppVersion` 会拦住版本不足的客户端，只提示已是最新；未知字段直接忽略；单条题目格式错误只会跳过那一条。
-
-### 本机测试更新流程
+本机测试可以拿 Mac 当服务器：
 
 ```bash
-# 1) 把 Mac 当服务器（在 bank 目录下）
-cd ~/AscentApp/bank && python3 -m http.server 8099
-
-# 2) 手机与 Mac 连同一 Wi-Fi，然后在 App 里：
-#    我的 → 底部连点版本号 7 次 → 开发者模式 → 在线题库地址
-#    填入 http://<Mac 的局域网 IP>:8099   然后「保存并检查」
+cd bank && python3 -m http.server 8099
+# 手机和 Mac 连同一 Wi-Fi
+# App：我的 → 设置 → 关于 → 连点版本号 7 次 → 开发者模式 → 在线题库地址
+# 填 http://<Mac 的局域网 IP>:8099，保存并检查
 ```
 
-> debug 构建已允许明文 HTTP，release 仍强制 HTTPS。测完记得用「清空地址」恢复。
+debug 构建允许明文 HTTP，release 仍强制 HTTPS。测完用「清空地址」恢复。
 
-### JSON 结构
+### 题库 JSON 长什么样
 
 ```jsonc
 {
-  "schema": 1,              // 数据格式版本，高于 App 支持则拒绝
-  "version": 1,             // 题库版本号，与本地比较的那个值
-  "updatedAt": "2026-09-28T15:11:01+08:00",
-  "minAppVersion": 4,       // 低于这个 versionCode 的 App 不会被推送
-  "units": [
+  "schema": 2,
+  "version": 15,
+  "updatedAt": "2026-10-19T11:24:02+08:00",
+  "minAppVersion": 6,
+  "tracks": [
     {
-      "id": "u1", "index": 1, "code": "BASECAMP",
-      "title": "大本营 · 高山入门", "altitude": 3200,
-      "lessons": [
+      "id": "climb",
+      "title": "高山攀登",
+      "units": [
         {
-          "id": "l1", "title": "高山环境与风险认知",
-          "code": "ALPINE RISK", "icon": "🏔️", "needsCoach": false,
-          "brief": ["高山的危险分两类…"],
-          "questions": [
+          "id": "m5i",
+          "index": 1,
+          "code": "5000M · 入门",
+          "title": "5000 米 · 入门",
+          "altitude": 5000,
+          "subtitle": "以科普为主。这个高度的山峰多是徒步型，先把环境、装备、体能打好底。",
+          "peaks": [
+            { "name": "奥太娜", "altitude": 5211, "location": "四川·黑水", "style": "徒步型" }
+          ],
+          "lessons": [
             {
-              "prompt": "下列哪一项属于「客观危险」？",
-              "context": "可选的情境说明",
-              "options": ["落石与冰崩", "判断失误"],
-              "correct": 0,
-              "explanation": "客观危险指…",
-              "safetyCritical": false,
-              "review": false          // true = 复习题，答题界面会标记
+              "id": "l1",
+              "title": "高山环境与风险认知",
+              "code": "ALPINE RISK",
+              "icon": "🏔️",
+              "needsCoach": false,
+              "brief": ["高山的危险分两类……"],
+              "questions": [
+                {
+                  "type": "Single",
+                  "prompt": "题干",
+                  "options": ["A", "B"],
+                  "correct": 0,
+                  "explanation": "解析"
+                }
+              ]
             }
           ]
         }
@@ -381,106 +303,45 @@ cd ~/AscentApp/bank && python3 -m http.server 8099
 }
 ```
 
-`manifest.json`：
+`manifest.json` 只放版本、文件名、sha256 和最低 App 版本。不想写 manifest 也可以，只放 `bank.json`，App 会退化成整体下载后比较 `version`，代价是每次检查都要传完整文件。
 
-```json
-{
-  "version": 1,
-  "updatedAt": "2026-09-28T15:11:01+08:00",
-  "file": "bank.json",
-  "sha256": "86649492ff56df67…",
-  "minAppVersion": 4
+## 登录接口
+
+界面只依赖 `AuthApi` 这一层：
+
+```kotlin
+interface AuthApi {
+    suspend fun login(email: String, password: String): AuthResult
+    suspend fun register(email: String, password: String, nickname: String): AuthResult
+    suspend fun logout()
 }
 ```
 
-不想写 manifest 也可以：直接只放 `bank.json`，App 会退化为整体下载后比较 `version`（代价是每次检查都要传完整文件）。
+现在的实现是 `MockAuthApi`。不联网，只做格式校验，账号存在本机 SharedPreferences。所以登录页写的是「本地模拟登录」，没有写同步。
 
-### 当前题库规模
-
-| 项 | 值 |
-|---|---|
-| 题量 | **711 题**（含 82 道复习题） |
-| 课程 | **47 课 / 5 海拔单元** |
-| 题库版本 | v14（schema 2，minAppVersion 6） |
-| bank.json | 549 KB |
-
----
-
-## 九、实体书入库流水线
-
-内容来源的策略：**实体书扫描资料为主，网络公开资料为辅（用于交叉核对）**。
-
-
-### 流程
+后端就绪后换掉这个实现就行，UI 不用动。接口大致是：
 
 ```
-实体书扫描件
-   ↓ 人工 / OCR 整理（本目录 import/*.md）
-Markdown 源文件
-   ↓ node tools/qbank/build.mjs
-BookContent.kt（自动生成）
-   ↓ gradle assembleDebug
-内置题库（离线兼底）
-   ↓ bash tools/contentcheck/run.sh
-bank/bank.json + manifest.json
-   ↓ 上传服务器
-用户不发版即可收到新题库
+POST /auth/login    { email, password }            -> { token, user }
+POST /auth/register { email, password, nickname }  -> { token, user }
+POST /auth/logout
 ```
 
-### 录入
+## 已知限制
 
-完整格式说明见 **`import/README.md`**。最简形式：
+- 没有做模拟器运行时验证。本机没装 Android 模拟器，验证都是编译、打包、资源和逻辑校验，真机走查由开发者自己做。
+- 登录是本地模拟，没有真实后端和 token。
+- 进度只存在本机，登录之后也没有真正同步。
+- 内容没有经过登山教练和医生的实审。药物剂量和急救流程建议正式上线前请人过一遍。
+- 题图只随 APK 发布，还不能像题目那样从在线题库下载。图片加多了 APK 会变大。
+- 路径页的 UI 改版还在进行，部分设计稿没有落到 Compose。
 
-````markdown
-# 课程 l23 · 冰锥放置进阶
+## 许可
 
-- unit: u5
-- code: ICE SCREW
-- icon: 🧊
-- needsCoach: true
+这个项目用 [PolyForm Noncommercial License 1.0.0](LICENSE)。非商业用途可以自由使用、复制、修改和分发，商业用途需要另外的书面授权。教育、研究、公益、公共研究机构、政府机构这些属于许可范围内的非商业用途。
 
-## 要点
+第三方组件、内容来源和免责声明在 [NOTICE](NOTICE)。简单说几句：
 
-- 冰锥应打入冰质密实处，避开空腔与蜂窝冰。
-
-## 题目
-
-1. 打冰锥之前，最应该确认的是？
-   - 冰锥的颜色是否醒目
-   - 该处冰体是否密实，有无空腔或蜂窝化
-   答案：B
-   来源：《登山圣经》第 5 版 p.214
-   解析：冰锥的强度不取决于放置技巧，而取决于冰本身。
-````
-
-也支持 `# 追加 l13` 给已有课程补题。
-
-### 草稿文件
-
-`import/` 下以 `_` 开头的 `.md` 不会参与编译，适合放写到一半的稿子。
-
----
-
-## 十、已知限制
-
-**当前限制**
-
-- 未做模拟器运行时验证（本机未安装 Android 模拟器）；真机验证由开发者本人进行
-- 登录为本地模拟，没有真实后端与 token 机制
-- 进度仅存本机，登录后尚未真正同步
-- 内容未经登山教练 / 医生实审
-
----
-
-## 十一、许可
-
-本项目采用 **PolyForm Noncommercial License 1.0.0** —— 完整条款见 [`LICENSE`](LICENSE)。
-
-**摘要**：允许出于**非商业目的**使用、复制、修改与分发；**商业用途需另行书面授权**。
-教育、研究、公益慈善、公共研究/安全/卫生机构、政府机构等均属许可范围内的非商业用途。
-
-第三方组件、内容来源与免责声明见 [`NOTICE`](NOTICE)，其中明确：
-
-- 本仓库**不包含**任何纸质书的扫描原文，只含整理后的主题笔记
-- 35 枚成就徽章为 AI 渲染生成
-- 内容不构成医疗建议，药物清单仅为参考值
+- 仓库里不放纸质书的扫描原文，只放整理后的主题笔记。
+- 35 枚成就徽章是 AI 渲染生成的。
+- 内容不构成医疗建议，药物清单只是参考值。

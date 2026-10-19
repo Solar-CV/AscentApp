@@ -1,10 +1,16 @@
 import com.ascent.climb.data.ACHIEVEMENTS
+import com.ascent.climb.data.HANDBOOK_A
+import com.ascent.climb.data.HANDBOOK_B
+import com.ascent.climb.data.HANDBOOK_C
+import com.ascent.climb.data.HANDBOOK_D
+import com.ascent.climb.data.HANDBOOK_E
 import com.ascent.climb.data.ACHIEVEMENT_GLYPHS
 import com.ascent.climb.data.AchievementStats
 import com.ascent.climb.data.BASE_ALTITUDE
 import com.ascent.climb.data.CURRICULUM_LESSON_COUNT
 import com.ascent.climb.data.FIRST_LESSON_TARGET
 import com.ascent.climb.data.Lesson
+import com.ascent.climb.data.Question
 import com.ascent.climb.data.QType
 import com.ascent.climb.data.SUMMIT_TARGET
 import com.ascent.climb.data.Track
@@ -122,6 +128,37 @@ fun main() {
     println("  情景题=${questions.count { it.type == QType.Scenario }} 道（含子题 ${questions.filter { it.type == QType.Scenario }.sumOf { it.steps.size }} 个）")
     val dupIds = lessons.groupBy { it.id }.filter { it.value.size > 1 }.keys
     println("  重复课程 id=${dupIds.size}")
+
+    // ---- 文案规范 ----
+    // Compose 的 Text 不解析 Markdown，内容里出现 ** 会原样显示。这里把它当格式错误看。
+    fun collectQuestionText(q: Question, out: MutableList<String>) {
+        out += q.prompt
+        q.context?.let(out::add)
+        out += q.options
+        out += q.explanation
+        q.source?.let(out::add)
+        out += q.pairsLeft
+        out += q.pairsRight
+        out += q.answers
+        q.steps.forEach { collectQuestionText(it, out) }
+    }
+    val visibleTexts = buildList {
+        lessons.forEach { l ->
+            add(l.title)
+            addAll(l.brief)
+            l.questions.forEach { collectQuestionText(it, this) }
+        }
+        (HANDBOOK_A + HANDBOOK_B + HANDBOOK_C + HANDBOOK_D + HANDBOOK_E).forEach { a ->
+            add(a.title)
+            add(a.summary)
+            a.sections.forEach { add(it.heading); add(it.body) }
+        }
+    }
+    val boldTexts = visibleTexts.count { it.contains("**") }
+    val dashTexts = visibleTexts.count { it.contains("——") }
+    println("=== 文案规范 ===")
+    println("  含 ** 的文本=$boldTexts（应为 0）")
+    println("  含 —— 的文本=$dashTexts（仅记录，不强制）")
 
     // ---- 解锁逻辑 ----
     println("=== 解锁逻辑 ===")

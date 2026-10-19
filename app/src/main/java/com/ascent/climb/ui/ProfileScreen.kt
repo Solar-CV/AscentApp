@@ -416,7 +416,7 @@ private fun ProfileBody(
                     Column(modifier = Modifier.weight(1f)) {
                         Text("未登录", color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                         Spacer(Modifier.height(3.dp))
-                        Text("登录后可同步学习进度与徽章", color = Ascent.Fg3, fontSize = 12.sp)
+                        Text("本地模拟登录，暂不同步数据", color = Ascent.Fg3, fontSize = 12.sp)
                     }
                     SoftTag("登录 / 注册", Ascent.OnAccent, Ascent.Accent)
                 }
@@ -584,9 +584,9 @@ private fun AuthScreen(
         Spacer(Modifier.height(6.dp))
         Text(
             text = if (mode == AuthMode.Login) {
-                "同步你的海拔、徽章与学习记录"
+                "本地模拟登录，海拔和徽章仍存在这台设备上"
             } else {
-                "注册后可在多设备间同步进度"
+                "注册后也先存在本机，等后端接上再同步"
             },
             color = Ascent.Fg3,
             fontSize = 13.sp

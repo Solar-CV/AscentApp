@@ -1352,7 +1352,7 @@ private fun DoneView(
                 Spacer(Modifier.width(10.dp))
                 Text(
                     text = when {
-                        shaky -> "还有 $remaining 题未掌握，已进入复习队列——重做同一课不再获得海拔，但错题会回炉直到答对。"
+                        shaky -> "还有 $remaining 题没掌握，已经放进复习队列。重做同一课不再加海拔，错题会反复出现，直到答对。"
                         retried > 0 -> "错题重做 $retried 题 · 订正成功 $resolved 题。"
                         else -> ""
                     },

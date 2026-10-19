@@ -18,7 +18,7 @@ val HANDBOOK_C = listOf(
         code = "HAI PROTOCOL",
         icon = "\uD83E\uDE7A",
         category = "高海拔医学",
-        summary = "三类高海拔疾病（AMS / HACE / HAPE）的识别要点、用药剂量与处置顺序，按向导现场决策的顺序整理。",
+        summary = "AMS、HACE、HAPE 三类高海拔病的识别要点、用药剂量和处置顺序，按向导在现场做决定的顺序整理。",
         sections = listOf(
             HandbookSection(
                 "发病率与人群",
@@ -87,11 +87,11 @@ val HANDBOOK_C = listOf(
         code = "GEAR · TECH",
         icon = "\uD83D\uDCE1",
         category = "装备系统",
-        summary = "冰镐、冰爪、绳索器材、导航通讯与睡眠系统——决定你能否在山上自救的那部分装备。",
+        summary = "冰镐、冰爪、绳索、导航通讯和睡眠系统。这些装备决定你在山上能不能自救。",
         sections = listOf(
             HandbookSection(
                 "冰镐与冰爪",
-                "冰镐应为直柄尖头斧，既能作为行进支撑，也能在滑坠时用于自我制动与劈冰。长度按身高选择：低于约 157 厘米选 50 厘米，157–170 厘米选 55 厘米，173–180 厘米选 60 厘米，183 厘米以上选 65–70 厘米。冰爪首选 12 齿钢制并带防滑板，通过绑带或固定系统牢牢固定在靴子上——必须与靴子完美贴合。"
+                "冰镐应为直柄尖头斧，既能作为行进支撑，也能在滑坠时用于自我制动与劈冰。长度按身高选择：低于约 157 厘米选 50 厘米，157–170 厘米选 55 厘米，173–180 厘米选 60 厘米，183 厘米以上选 65–70 厘米。冰爪首选 12 齿钢制并带防滑板，通过绑带或固定系统牢牢固定在靴子上，并且必须与靴子贴合。"
             ),
             HandbookSection(
                 "攀爬与救援器材",
@@ -121,7 +121,7 @@ val HANDBOOK_C = listOf(
         code = "EXPEDITION BRIEF",
         icon = "\uD83D\uDCCB",
         category = "行前准备",
-        summary = "保险、航班、行李、营地纪律与登顶证书——出发前就该搞清楚的实务条款。",
+        summary = "保险、航班、行李、营地纪律、登顶证书。这些都是出发前该弄清楚的实务条款。",
         sections = listOf(
             HandbookSection(
                 "保险",

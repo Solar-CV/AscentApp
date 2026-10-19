@@ -12,7 +12,7 @@ val HANDBOOK_A = listOf(
         code = "AMS / HACE / HAPE",
         icon = "\uD83E\uDD15",
         category = "高海拔医学",
-        summary = "高海拔最常见的三类疾病：从可逆的 AMS，到可在数小时内致命的 HACE 与 HAPE。识别它们的关键在于症状的出现时点与变化速度。",
+        summary = "高海拔最常见的三类病：AMS 通常可逆，HACE 和 HAPE 可能在几小时内致命。识别它们，主要看症状什么时候出现、恶化有多快。",
         sections = listOf(
             HandbookSection(
                 "AMS（急性高原病）",
@@ -44,7 +44,7 @@ val HANDBOOK_A = listOf(
         code = "ACCLIMATIZATION",
         icon = "\uD83D\uDCC8",
         category = "高海拔医学",
-        summary = "适应是身体对低氧的代偿过程，需要时间。控制上升速度比任何药物都更根本。",
+        summary = "适应是身体对低氧的代偿，需要时间。控制上升速度，比吃任何药都更根本。",
         sections = listOf(
             HandbookSection(
                 "上升速度的两条硬指标",
@@ -75,7 +75,7 @@ val HANDBOOK_A = listOf(
         code = "HYPOTHERMIA",
         icon = "\uD83C\uDF28\uFE0F",
         category = "高海拔医学",
-        summary = "失温是核心体温的非计划性下降。它最危险的时刻不是最冷的时候，而是「颤抖停止」的那一刻。",
+        summary = "失温是核心体温意外下降。最危险的时刻往往不是最冷的时候，而是颤抖停止的那一刻。",
         sections = listOf(
             HandbookSection(
                 "三级识别",
@@ -106,7 +106,7 @@ val HANDBOOK_A = listOf(
         code = "FROSTBITE",
         icon = "\uD83E\uDDCA",
         category = "高海拔医学",
-        summary = "冻伤是组织结冰造成的损伤。现场最难的不是复温技术，而是判断「该不该复温」。",
+        summary = "冻伤是组织结冰造成的损伤。现场最难的往往不是怎么复温，而是判断该不该复温。",
         sections = listOf(
             HandbookSection(
                 "识别",
@@ -137,7 +137,7 @@ val HANDBOOK_A = listOf(
         code = "SELF-ARREST",
         icon = "\u26CF\uFE0F",
         category = "冰雪技术",
-        summary = "自我制动是登山中唯一能在几秒内救命的技能，也是唯一无法通过阅读学会的技能。",
+        summary = "自我制动能在几秒内止住滑坠，是登山里最救命的技能之一，也是读书看视频学不会的。",
         sections = listOf(
             HandbookSection(
                 "持镐与行进",
@@ -173,7 +173,7 @@ val HANDBOOK_A = listOf(
         code = "CRAMPON",
         icon = "\u2699\uFE0F",
         category = "冰雪技术",
-        summary = "法式省力、德式陡峭、混合式过渡。选对技术，同一个坡的体力消耗可以差出一倍。",
+        summary = "法式省力，德式适合陡坡，混合式用在过渡地形。技术选对了，同一个坡的体力消耗能差出一倍。",
         sections = listOf(
             HandbookSection(
                 "法式（平足法 / flat-footing）",

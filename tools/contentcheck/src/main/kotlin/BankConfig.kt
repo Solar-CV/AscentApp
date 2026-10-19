@@ -18,7 +18,7 @@ object BankConfig {
     const val DEFAULT_BASE_URL = "https://example.com/ascent-bank"
 
     /** 内置题库版本号。每次改动内置内容（Unit1~5 / Expansion* / NewLessons）都应该 +1。 */
-    const val BUNDLED_VERSION = 14
+    const val BUNDLED_VERSION = 15
 
     /** 在线题库要求的 App 版本下限（写入导出文件的 minAppVersion 字段）。 */
     const val MIN_APP_VERSION = 6
