@@ -47,7 +47,12 @@ private fun withExtraQuestions(l: Lesson): Lesson {
         EXTRA_QUESTIONS_12[l.id].orEmpty() +
         EXTRA_QUESTIONS_13[l.id].orEmpty() +
         BOOK_QUESTIONS[l.id].orEmpty()
-    return if (extra.isEmpty()) l else l.copy(questions = l.questions + extra)
+    val merged = if (extra.isEmpty()) l else l.copy(questions = l.questions + extra)
+    // 给每题一个稳定 id（课程 id + 课内序号）。内容层多语言按 id 取译文；
+    // 复习题是从这些题 copy 出来的，会继承同一个 id，译文自动复用。
+    return merged.copy(questions = merged.questions.mapIndexed { i, q ->
+        if (q.id.isEmpty()) q.copy(id = "${l.id}#$i") else q
+    })
 }
 
 /**
