@@ -186,7 +186,7 @@ v0.16 through v0.18 were all multilingual work; the bank structure and scoring l
 
 - Interface strings split into 10 `res/values*` sets; language can be set manually or follow the system, taking effect immediately
 - New `data/i18n/` content layer with four packs per language: entry, key points, handbook body, question bank. 4,727 items per language
-- All four layers complete in the nine translated languages (zh-TW, ja, de, fr, es, it, ru, sv), verified key by key against the English source, zero missing
+- All four layers complete in the nine translated languages (zh-TW, en, ja, de, fr, es, it, ru, sv); the eight beyond English were verified key by key against the English source, zero missing
 - Terminology aligned with each language's existing usage; doses, avalanche levels, slope angles and temperatures kept as-is
 - Added `tools/i18ncheck.py` so one command shows coverage across all four layers — no more "translated, but one lesson was missed"
 - Fixed a batch of copy issues along the way: a comma-before-dash punctuation error (140 in Swedish, 5 each in German and Spanish), two fill-in answers with a stray quote mark, and three French decimals
