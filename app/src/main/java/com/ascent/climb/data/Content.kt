@@ -28,7 +28,8 @@ val TOTAL_QUESTIONS: Int get() = BankRepository.totalQuestions
 val BANK_VERSION: Int get() = BankRepository.bankVersion
 
 /** 当前题库来源描述，例如「内置题库」「在线题库 v3」。 */
-val BANK_SOURCE: String get() = BankRepository.sourceDescription
+/** 题库来源语义码："bundled" / "online"；展示文案由 UI 层按当前语言解析。 */
+val BANK_SOURCE: String get() = BankRepository.sourceKind
 
 // ---------------- 技能书（目前仍为内置，后续可一并外置） ----------------
 

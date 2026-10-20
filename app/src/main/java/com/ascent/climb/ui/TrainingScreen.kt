@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -41,10 +43,10 @@ fun TrainingScreen(
     val nextLesson = ALL_LESSONS.firstOrNull { it.id !in completed && isUnlocked(it.id, completed, devUnlockAll) }
 
     val drills = listOf(
-        Triple(Ic.Footprints, "冰爪步伐 · 平地模拟", "法式 / 德式切换的肌肉记忆"),
-        Triple(Ic.Wind, "呼吸与步频 · 4-4 呼吸法", "提升缺氧耐受"),
-        Triple(Ic.Backpack, "装备清单默写", "出发前的固定动作"),
-        Triple(Ic.CloudSnow, "天气判读 · 看图识云", "识别积雨云与锋面")
+        Triple(Ic.Footprints, stringResource(R.string.tr_item1_title), stringResource(R.string.tr_item1_desc)),
+        Triple(Ic.Wind, stringResource(R.string.tr_item2_title), stringResource(R.string.tr_item2_desc)),
+        Triple(Ic.Backpack, stringResource(R.string.tr_item3_title), stringResource(R.string.tr_item3_desc)),
+        Triple(Ic.CloudSnow, stringResource(R.string.tr_item4_title), stringResource(R.string.tr_item4_desc))
     )
 
     LazyColumn(
@@ -53,9 +55,9 @@ fun TrainingScreen(
     ) {
         item(key = "title") {
             Column(modifier = Modifier.padding(bottom = 14.dp)) {
-                Text("训练", color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.tr_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(4.dp))
-                MonoLabel("按进度推荐 · TRAINING")
+                MonoLabel(stringResource(R.string.tr_subtitle))
             }
         }
 
@@ -76,7 +78,7 @@ fun TrainingScreen(
                 Spacer(Modifier.width(14.dp))
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        "今日推荐 · TODAY",
+                        stringResource(R.string.tr_today),
                         color = Color(0xB3FFFFFF),
                         fontSize = 10.sp,
                         fontFamily = MonoNumbers,
@@ -84,7 +86,7 @@ fun TrainingScreen(
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        text = if (nextLesson != null) "预习 · ${nextLesson.title}" else "绳结速度训练",
+                        text = if (nextLesson != null) stringResource(R.string.tr_preview, lessonTitle(nextLesson.id, nextLesson.title)) else stringResource(R.string.tr_knot_speed),
                         color = Color.White,
                         fontSize = 17.sp,
                         fontWeight = FontWeight.Bold
@@ -92,9 +94,9 @@ fun TrainingScreen(
                     Spacer(Modifier.height(3.dp))
                     Text(
                         text = if (nextLesson != null)
-                            "${nextLesson.questions.size} 题 · 当前海拔 ${formatMeters(altitude)} m"
+                            stringResource(R.string.tr_meta, nextLesson.questions.size, formatMeters(altitude))
                         else
-                            "5 分钟 · 双渔人结 / 抓结",
+                            stringResource(R.string.tr_knot_desc),
                         color = Color(0xCCFFFFFF),
                         fontSize = 12.sp
                     )
@@ -112,7 +114,7 @@ fun TrainingScreen(
         }
 
         item(key = "label") {
-            MonoLabel("为你推荐 · BASED ON PROGRESS", modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
+            MonoLabel(stringResource(R.string.tr_recommend), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
         }
 
         items(drills.size, key = { "d$it" }) { i ->
@@ -135,12 +137,10 @@ fun TrainingScreen(
                 Icon(Ic.TriangleAlert, contentDescription = null, tint = Ascent.Warning, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(12.dp))
                 Column {
-                    Text("安全边界", color = Ascent.Warning, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.tr_boundary), color = Ascent.Warning, fontSize = 13.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        text = "本计划只覆盖理论与认知准备。冰雪、绳索、攀冰等实践技能，" +
-                            "全部需要在持证教练现场指导下练习与评估。本应用不承诺登顶，" +
-                            "也不保证高海拔适应结果。",
+                        text = stringResource(R.string.tr_boundary_body),
                         color = Ascent.Fg2,
                         fontSize = 12.sp,
                         lineHeight = 19.sp

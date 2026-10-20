@@ -31,6 +31,14 @@ object Ic {
     val ChevronDown: ImageVector by lazy { icon("chevron-down", "m6 9 6 6 6-6") }
     val ChevronLeft: ImageVector by lazy { icon("chevron-left", "m15 18-6-6 6-6") }
     val ChevronRight: ImageVector by lazy { icon("chevron-right", "m9 18 6-6-6-6") }
+    val Globe: ImageVector by lazy {
+        icon(
+            "globe",
+            "M2 12 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 Z",
+            "M2 12h20",
+            "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
+        )
+    }
     val ChevronUp: ImageVector by lazy { icon("chevron-up", "m18 15-6-6-6 6") }
     val CircleCheck: ImageVector by lazy { icon("circle-check", "M2 12 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 Z", "m16 9-5.5 5.5L8 12") }
     val CircleDot: ImageVector by lazy { icon("circle-dot", "M11 12 a1 1 0 1 0 2 0 a1 1 0 1 0 -2 0 Z", "M2 12 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 Z") }

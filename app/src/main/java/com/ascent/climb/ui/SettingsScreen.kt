@@ -34,7 +34,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
 import com.ascent.climb.BuildConfig
+import com.ascent.climb.R
+import com.ascent.climb.i18n.AppLocale
 import com.ascent.climb.data.ACHIEVEMENTS
 import com.ascent.climb.data.BANK_VERSION
 import com.ascent.climb.data.ProgressStore
@@ -53,6 +56,8 @@ fun SettingsScreen(
     store: ProgressStore,
     themeMode: String,
     onThemeModeChange: (String) -> Unit,
+    languageMode: String,
+    onLanguageModeChange: (String) -> Unit,
     devUnlocked: Boolean,
     devUnlockAll: Boolean,
     devShowAnswers: Boolean,
@@ -72,9 +77,27 @@ fun SettingsScreen(
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
     var confirmReset by remember { mutableStateOf(false) }
     var confirmBankReset by remember { mutableStateOf(false) }
+    // 语言选择页（独立二级页面）
+    var showLanguage by remember { mutableStateOf(false) }
     // 隐藏入口：连点版本号 7 次
     var tapCount by remember { mutableStateOf(0) }
     var lastTapAt by remember { mutableStateOf(0L) }
+
+    // 系统语言自动匹配到的语言（用于「跟随系统」的副标题）
+    val autoLocale = AppLocale.resolve(AppLocale.AUTO)
+    val autoLabel = AppLocale.SUPPORTED
+        .firstOrNull { it.tag == autoLocale.toLanguageTag() }
+        ?.nativeName
+        ?: stringResource(R.string.lang_system_unknown)
+
+    if (showLanguage) {
+        LanguageScreen(
+            languageMode = languageMode,
+            onLanguageModeChange = onLanguageModeChange,
+            onBack = { showLanguage = false }
+        )
+        return
+    }
 
     // 系统返回 / 全面屏侧滑手势：回到上一个界面，而不是退出 App
     BackHandler { onBack() }
@@ -95,15 +118,15 @@ fun SettingsScreen(
                 ) {
                     Icon(Ic.ChevronLeft, contentDescription = null, tint = Ascent.Fg2, modifier = Modifier.width(20.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text("返回", color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                    Text(stringResource(R.string.common_back), color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
                 }
                 Spacer(Modifier.height(8.dp))
-                Text("设置", color = Ascent.Fg, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.prof_settings), color = Ascent.Fg, fontSize = 22.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(14.dp))
             }
 
             // ---------------- 外观 ----------------
-            item(key = "lbLook") { MonoLabel("外观", modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
+            item(key = "lbLook") { MonoLabel(stringResource(R.string.set_section_appearance), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
             item(key = "look") {
                 OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -115,13 +138,13 @@ fun SettingsScreen(
                         )
                         Spacer(Modifier.width(12.dp))
                         Column(modifier = Modifier.weight(1f)) {
-                            Text("主题", color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                            Text(stringResource(R.string.set_theme), color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                             Spacer(Modifier.height(3.dp))
                             Text(
                                 text = when (themeMode) {
-                                    "light" -> "始终浅色"
-                                    "dark" -> "始终深色"
-                                    else -> "跟随系统（当前${if (Ascent.IsDark) "深色" else "浅色"}）"
+                                    "light" -> stringResource(R.string.set_theme_desc_light)
+                                    "dark" -> stringResource(R.string.set_theme_desc_dark)
+                                    else -> stringResource(R.string.set_theme_system_current, stringResource(if (Ascent.IsDark) R.string.set_theme_dark else R.string.set_theme_light))
                                 },
                                 color = Ascent.Fg3,
                                 fontSize = 12.sp
@@ -129,7 +152,7 @@ fun SettingsScreen(
                         }
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-                        listOf("auto" to "跟随系统", "light" to "浅色", "dark" to "深色").forEach { (v, label) ->
+                        listOf("auto" to stringResource(R.string.set_theme_system), "light" to stringResource(R.string.set_theme_light), "dark" to stringResource(R.string.set_theme_dark)).forEach { (v, label) ->
                             Box(modifier = Modifier.weight(1f)) {
                                 PillButton(
                                     text = label,
@@ -143,8 +166,49 @@ fun SettingsScreen(
                 }
             }
 
+            // ---------------- 语言 ----------------
+            item(key = "lang") {
+                OutlineCard(
+                    modifier = Modifier.padding(bottom = 14.dp),
+                    gap = 0,
+                    onClick = { showLanguage = true }
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        IconBadge(Ic.Globe, Ascent.Accent, Ascent.AccentSoft, diameter = 40, iconSize = 20)
+                        Spacer(Modifier.width(12.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                stringResource(R.string.set_language),
+                                color = Ascent.Fg,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                            Spacer(Modifier.height(3.dp))
+                            Text(
+                                text = if (languageMode == AppLocale.AUTO) {
+                                    stringResource(R.string.set_language_desc_system, autoLabel)
+                                } else {
+                                    AppLocale.nativeName(languageMode)
+                                },
+                                color = Ascent.Fg3,
+                                fontSize = 12.sp
+                            )
+                        }
+                        Icon(
+                            Ic.ChevronRight,
+                            contentDescription = null,
+                            tint = Ascent.Fg3,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+                }
+            }
+
             // ---------------- 题库 ----------------
-            item(key = "lbBank") { MonoLabel("题库", modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
+            item(key = "lbBank") { MonoLabel(stringResource(R.string.set_section_bank), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
             item(key = "bank") {
                 OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -152,14 +216,14 @@ fun SettingsScreen(
                         Spacer(Modifier.width(12.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                "当前题库 v$BANK_VERSION",
+                                stringResource(R.string.set_bank_current, BANK_VERSION),
                                 color = Ascent.Fg,
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
                             Spacer(Modifier.height(3.dp))
                             Text(
-                                text = "${BankRepository.sourceDescription} · ${ALL_LESSONS.size} 课 · $TOTAL_QUESTIONS 题",
+                                text = stringResource(R.string.set_bank_meta, bankSourceText(BankRepository.sourceKind, BankRepository.bankVersion), ALL_LESSONS.size, TOTAL_QUESTIONS),
                                 color = Ascent.Fg3,
                                 fontSize = 11.sp
                             )
@@ -168,40 +232,38 @@ fun SettingsScreen(
                     if (bankMessage.isNotBlank()) {
                         Text(bankMessage, color = Ascent.Accent, fontSize = 11.sp, lineHeight = 17.sp)
                     }
-                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-                        Box(modifier = Modifier.weight(1f)) {
-                            PillButton(
-                                text = if (bankChecking) "检查中…" else "检查更新",
-                                style = BtnStyle.Primary,
-                                height = 44,
-                                enabled = !bankChecking,
-                                onClick = onCheckBank
-                            )
-                        }
-                        Box(modifier = Modifier.weight(1f)) {
-                            PillButton(
-                                text = if (confirmBankReset) "确认恢复？" else "恢复内置",
-                                style = BtnStyle.Secondary,
-                                height = 44,
-                                onClick = {
-                                    if (confirmBankReset) {
-                                        onResetBank()
-                                        confirmBankReset = false
-                                    } else {
-                                        confirmBankReset = true
-                                    }
+                    // 两个按钮竖排：俄/法/德/西/意 的按钮文案较长，
+                    // 并排在窄屏上会换行挤爆 44dp 的高度。
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
+                        PillButton(
+                            text = if (bankChecking) stringResource(R.string.set_bank_checking) else stringResource(R.string.set_bank_check),
+                            style = BtnStyle.Primary,
+                            height = 46,
+                            enabled = !bankChecking,
+                            onClick = onCheckBank
+                        )
+                        PillButton(
+                            text = if (confirmBankReset) stringResource(R.string.set_bank_confirm_restore) else stringResource(R.string.set_bank_restore),
+                            style = BtnStyle.Secondary,
+                            height = 46,
+                            onClick = {
+                                if (confirmBankReset) {
+                                    onResetBank()
+                                    confirmBankReset = false
+                                } else {
+                                    confirmBankReset = true
                                 }
-                            )
-                        }
+                            }
+                        )
                     }
                     Text(
-                        text = "有网时自动检查更新；离线时始终使用本地题库，功能不受影响。",
+                        text = stringResource(R.string.set_bank_note),
                         color = Ascent.Fg3,
                         fontSize = 10.sp,
                         lineHeight = 16.sp
                     )
                     if (devUnlocked) {
-                        Text("在线题库地址", color = Ascent.Fg3, fontSize = 11.sp)
+                        Text(stringResource(R.string.set_bank_url), color = Ascent.Fg3, fontSize = 11.sp)
                         OutlinedTextField(
                             value = bankUrlDraft,
                             onValueChange = { bankUrlDraft = it },
@@ -211,7 +273,7 @@ fun SettingsScreen(
                             modifier = Modifier.fillMaxWidth()
                         )
                         PillButton(
-                            text = "保存并检查",
+                            text = stringResource(R.string.set_bank_save_check),
                             style = BtnStyle.Secondary,
                             height = 42,
                             onClick = {
@@ -224,45 +286,45 @@ fun SettingsScreen(
             }
 
             // ---------------- 开发者模式 ----------------
-            item(key = "lbDev") { MonoLabel("开发者模式", modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
+            item(key = "lbDev") { MonoLabel(stringResource(R.string.set_section_dev), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
             item(key = "dev") {
                 OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
                     if (!devUnlocked) {
                         Text(
-                            "未开启 · 连点下方版本号 7 次开启",
+                            stringResource(R.string.set_dev_locked),
                             color = Ascent.Fg,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold
                         )
                         Text(
-                            text = "开发者模式仅用于测试：可解锁全部关卡、显示答案、进入成就测试区。",
+                            text = stringResource(R.string.set_dev_hint),
                             color = Ascent.Fg3,
                             fontSize = 11.sp,
                             lineHeight = 17.sp
                         )
                     } else {
-                        Text("开发者模式已开启", color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.Bold)
-                        Text("仅用于测试，不影响正式进度记录", color = Ascent.Fg3, fontSize = 11.sp)
+                        Text(stringResource(R.string.set_dev_on), color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.set_dev_on_desc), color = Ascent.Fg3, fontSize = 11.sp)
                         SettingsToggle(
-                            title = "解锁全部关卡",
-                            subtitle = "跳过前置要求，所有课程可直接进入",
+                            title = stringResource(R.string.set_dev_unlock_all),
+                            subtitle = stringResource(R.string.set_dev_unlock_all_desc),
                             checked = devUnlockAll,
                             onChange = onDevUnlockAllChange
                         )
                         SettingsToggle(
-                            title = "显示正确答案",
-                            subtitle = "答题前在正确选项旁标记 KEY",
+                            title = stringResource(R.string.set_dev_show_answers),
+                            subtitle = stringResource(R.string.set_dev_show_answers_desc),
                             checked = devShowAnswers,
                             onChange = onDevShowAnswersChange
                         )
                         PillButton(
-                            text = "成就测试区（${ACHIEVEMENTS.size} 项）",
+                            text = stringResource(R.string.set_dev_achievements, ACHIEVEMENTS.size),
                             style = BtnStyle.Secondary,
                             height = 44,
                             onClick = onOpenAchievements
                         )
                         PillButton(
-                            text = "退出开发者模式",
+                            text = stringResource(R.string.set_dev_exit),
                             style = BtnStyle.Secondary,
                             height = 42,
                             onClick = onDevExit
@@ -272,23 +334,23 @@ fun SettingsScreen(
             }
 
             // ---------------- 数据 ----------------
-            item(key = "lbData") { MonoLabel("数据", modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
+            item(key = "lbData") { MonoLabel(stringResource(R.string.set_section_data), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
             item(key = "data") {
                 OutlineCard(gap = 10, modifier = Modifier.padding(bottom = 14.dp)) {
                     Text(
-                        "重置学习进度",
+                        stringResource(R.string.set_reset),
                         color = Ascent.Fg,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
-                        text = "清空课程完成记录、星级、海拔与学习统计；成就记录也会一并清空。此操作不可撤销。",
+                        text = stringResource(R.string.set_reset_desc),
                         color = Ascent.Fg3,
                         fontSize = 11.sp,
                         lineHeight = 17.sp
                     )
                     PillButton(
-                        text = if (confirmReset) "确认重置？此操作不可撤销" else "重置学习进度",
+                        text = if (confirmReset) stringResource(R.string.set_reset_confirm) else stringResource(R.string.set_reset),
                         style = BtnStyle.Danger,
                         height = 44,
                         onClick = {
@@ -304,23 +366,23 @@ fun SettingsScreen(
             }
 
             // ---------------- 关于 ----------------
-            item(key = "lbAbout") { MonoLabel("关于", modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
+            item(key = "lbAbout") { MonoLabel(stringResource(R.string.set_section_about), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
             item(key = "about") {
                 OutlineCard(gap = 4, modifier = Modifier.padding(bottom = 14.dp)) {
                     Text(
-                        text = "ASCENT 攀登之路",
+                        text = stringResource(R.string.set_about_name),
                         color = Ascent.Fg,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
-                        text = "高海拔攀登 / 攀冰理论学习",
+                        text = stringResource(R.string.set_about_desc),
                         color = Ascent.Fg3,
                         fontSize = 11.sp
                     )
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        text = "版本 v${BuildConfig.VERSION_NAME}（${BuildConfig.VERSION_CODE}）",
+                        text = stringResource(R.string.set_version, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE),
                         color = Ascent.Fg2,
                         fontSize = 12.sp,
                         fontFamily = MonoNumbers,
@@ -338,7 +400,7 @@ fun SettingsScreen(
                     )
                     if (!devUnlocked && tapCount >= 3) {
                         Text(
-                            text = "再点击 ${7 - tapCount} 次解锁开发者模式",
+                            text = stringResource(R.string.dev_tap_hint, 7 - tapCount),
                             color = Ascent.Accent,
                             fontSize = 11.sp
                         )

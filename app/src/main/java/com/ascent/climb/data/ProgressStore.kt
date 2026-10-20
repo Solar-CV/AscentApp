@@ -293,6 +293,16 @@ class ProgressStore(context: Context) {
         get() = prefs.getString("themeMode", "auto") ?: "auto"
         set(value) = prefs.edit().putString("themeMode", value).apply()
 
+    /**
+     * 语言模式："auto"（跟随系统）或 BCP-47 语言标签（如 "zh-CN" / "en"）。
+     *
+     * 默认 "auto"，因此已安装的用户升级后行为不变、不会莫名丢偏好。
+     * 键名与 SharedPreferences 文件均未改动，属纯新增字段。
+     */
+    var languageMode: String
+        get() = prefs.getString("languageMode", "auto") ?: "auto"
+        set(value) = prefs.edit().putString("languageMode", value).apply()
+
     /** 开发者模式：清空待播弹窗队列（解卡用，不影响已解锁记录）。 */
     fun clearPendingAchievements() {
         if (pendingAchievements.isNotEmpty()) pendingAchievements = mutableListOf()

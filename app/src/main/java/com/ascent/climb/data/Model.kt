@@ -87,7 +87,14 @@ data class Question(
      * 子问题（仅支持 Single / Multi）。
      * 情景题本身用 prompt 做标题、context 做情境背景，不参与选答案。
      */
-    val steps: List<Question> = emptyList()
+    val steps: List<Question> = emptyList(),
+
+    /**
+     * 稳定标识，形如 `l3#4`（课程 id + 该课内的序号），由 BundledBank 统一赋值。
+     * 内容层多语言的 key 依赖它（`q.<id>.p` / `.o<n>` / `.e`）；
+     * 复习题是原题的副本，会继承同一个 id，译文因此自动复用。
+     */
+    val id: String = ""
 )
 
 /** 一门课程 = 路线上的一个节点。 */

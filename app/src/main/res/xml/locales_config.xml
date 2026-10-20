@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 13+（API 33）的系统「应用语言」设置会读取这个清单。
+  与 AppLocale.SUPPORTED 必须保持一致；新增语言时两处同步。
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="zh-CN" />
+    <locale android:name="zh-TW" />
+    <locale android:name="en" />
+    <locale android:name="ja" />
+    <locale android:name="ru" />
+    <locale android:name="fr" />
+    <locale android:name="sv" />
+    <locale android:name="de" />
+    <locale android:name="es" />
+    <locale android:name="it" />
+</locale-config>

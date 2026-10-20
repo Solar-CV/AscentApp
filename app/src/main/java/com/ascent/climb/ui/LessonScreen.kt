@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -228,7 +230,7 @@ fun LessonScreen(
                     .clickable { onClose() },
                 contentAlignment = Alignment.Center
             ) {
-                Icon(Ic.X, contentDescription = "关闭", tint = Ascent.Fg2, modifier = Modifier.size(22.dp))
+                Icon(Ic.X, contentDescription = stringResource(R.string.common_close), tint = Ascent.Fg2, modifier = Modifier.size(22.dp))
             }
             Spacer(Modifier.width(14.dp))
             val frac = when (phase) {
@@ -253,7 +255,7 @@ fun LessonScreen(
                     fontFamily = MonoNumbers
                 )
             } else {
-                Text("重做", color = Ascent.Fg3, fontSize = 12.sp, fontWeight = FontWeight.Medium)
+                Text(stringResource(R.string.common_retry), color = Ascent.Fg3, fontSize = 12.sp, fontWeight = FontWeight.Medium)
             }
         }
 
@@ -267,7 +269,7 @@ fun LessonScreen(
 
                 Phase.Quiz, Phase.Retry -> question?.let { q ->
                     QuizView(
-                        stepLabel = if (isRetry) "错题重做 ${retryPos + 1} / ${retryQueue.size}" else "${qIndex + 1} / $total",
+                        stepLabel = if (isRetry) stringResource(R.string.lesson_retry_progress, retryPos + 1, retryQueue.size) else "${qIndex + 1} / $total",
                         isRetry = isRetry,
                         q = q,
                         graded = graded,
@@ -375,10 +377,10 @@ fun LessonScreen(
                             Spacer(Modifier.width(8.dp))
                             Text(
                                 text = when {
-                                    lastCorrect && isRetry -> "订正成功"
-                                    lastCorrect -> "正确"
-                                    q.safetyCritical -> "安全关键题答错 — 必须掌握"
-                                    else -> "再想想"
+                                    lastCorrect && isRetry -> stringResource(R.string.lesson_fixed)
+                                    lastCorrect -> stringResource(R.string.lesson_correct)
+                                    q.safetyCritical -> stringResource(R.string.lesson_safety_wrong)
+                                    else -> stringResource(R.string.lesson_think_again)
                                 },
                                 color = if (lastCorrect) Ascent.Success else Ascent.Danger,
                                 fontSize = 14.sp,
@@ -387,7 +389,7 @@ fun LessonScreen(
                         }
                         Spacer(Modifier.height(6.dp))
                         Text(
-                            text = q.explanation,
+                            text = qExplanation(q),
                             color = Ascent.Fg,
                             fontSize = 13.sp,
                             lineHeight = 20.sp
@@ -395,7 +397,7 @@ fun LessonScreen(
                         if (!q.source.isNullOrBlank()) {
                             Spacer(Modifier.height(9.dp))
                             Text(
-                                text = "来源 · ${q.source}",
+                                text = stringResource(R.string.lesson_source, q.source),
                                 color = Ascent.Fg3,
                                 fontSize = 10.sp,
                                 lineHeight = 15.sp
@@ -406,11 +408,11 @@ fun LessonScreen(
 
                 PillButton(
                     text = when {
-                        !graded -> if (isRetry) "重做检查" else "检查"
+                        !graded -> if (isRetry) stringResource(R.string.lesson_recheck) else stringResource(R.string.common_check)
                         q.type == QType.Scenario ->
-                            if (scenarioStep + 1 >= q.steps.size) "完成" else "下一步"
-                        lastCorrect -> "继续"
-                        else -> "理解了，继续"
+                            if (scenarioStep + 1 >= q.steps.size) stringResource(R.string.common_done) else stringResource(R.string.common_next)
+                        lastCorrect -> stringResource(R.string.common_continue)
+                        else -> stringResource(R.string.lesson_understood)
                     },
                     style = if (q.type != QType.Scenario && graded && !lastCorrect && q.safetyCritical)
                         BtnStyle.Danger else BtnStyle.Primary,
@@ -460,14 +462,14 @@ private fun stars(correct: Int, total: Int): Int = when {
 @Composable
 private fun TypeBadge(q: Question) {
     val pair: Pair<String, ImageVector> = when (q.type) {
-        QType.Single -> "单选" to Ic.CircleDot
-        QType.Multi -> "多选 · 选出所有正确项" to Ic.CircleCheck
-        QType.Order -> "排序 · 调整顺序" to Ic.SlidersHorizontal
-        QType.Match -> "配对 · 先左后右" to Ic.Link
-        QType.Fill -> "填空 · 关键数据" to Ic.Book
-        QType.Calc -> "计算 · 输入数值" to Ic.Ruler
-        QType.Hotspot -> "热点 · 在图上点出位置" to Ic.MapPin
-        QType.Scenario -> "情景 · 共 ${q.steps.size} 步" to Ic.Brain
+        QType.Single -> stringResource(R.string.lesson_type_single) to Ic.CircleDot
+        QType.Multi -> stringResource(R.string.lesson_type_multi) to Ic.CircleCheck
+        QType.Order -> stringResource(R.string.lesson_type_order) to Ic.SlidersHorizontal
+        QType.Match -> stringResource(R.string.lesson_type_match) to Ic.Link
+        QType.Fill -> stringResource(R.string.lesson_type_fill) to Ic.Book
+        QType.Calc -> stringResource(R.string.lesson_type_calc) to Ic.Ruler
+        QType.Hotspot -> stringResource(R.string.lesson_type_hotspot) to Ic.MapPin
+        QType.Scenario -> stringResource(R.string.lesson_type_scenario, q.steps.size) to Ic.Brain
     }
     Row(
         modifier = Modifier.padding(bottom = 12.dp),
@@ -476,7 +478,7 @@ private fun TypeBadge(q: Question) {
     ) {
         SoftTag(pair.first, Ascent.Accent, Ascent.AccentSoft, icon = pair.second)
         if (q.safetyCritical) {
-            SoftTag("安全关键", Ascent.Warning, Ascent.WarningSoft, icon = Ic.ShieldAlert)
+            SoftTag(stringResource(R.string.lesson_safety_badge), Ascent.Warning, Ascent.WarningSoft, icon = Ic.ShieldAlert)
         }
     }
 }
@@ -524,17 +526,17 @@ private fun QuizView(
         ) {
             MonoLabel(stepLabel)
             if (isRetry) {
-                SoftTag("错题重做", Ascent.Warning, Ascent.WarningSoft, icon = Ic.RotateCcw)
+                SoftTag(stringResource(R.string.lesson_retry_tag), Ascent.Warning, Ascent.WarningSoft, icon = Ic.RotateCcw)
             }
         }
         Spacer(Modifier.height(12.dp))
 
         TypeBadge(q)
 
-        Text(q.prompt, color = Ascent.Fg, fontSize = 20.sp, lineHeight = 30.sp, fontWeight = FontWeight.Bold)
+        Text(qPrompt(q), color = Ascent.Fg, fontSize = 20.sp, lineHeight = 30.sp, fontWeight = FontWeight.Bold)
         if (!q.context.isNullOrBlank()) {
             Spacer(Modifier.height(8.dp))
-            Text(q.context, color = Ascent.Fg2, fontSize = 13.sp, lineHeight = 20.sp)
+            Text(qContext(q), color = Ascent.Fg2, fontSize = 13.sp, lineHeight = 20.sp)
         }
 
         // 非热点题如果配了图，在这里展示（热点题自带可点击图）
@@ -560,7 +562,7 @@ private fun QuizView(
                     )
                 } else {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text("题图缺失：${q.image}", color = Ascent.Fg3, fontSize = 11.sp)
+                        Text(stringResource(R.string.lesson_img_missing, q.image.orEmpty()), color = Ascent.Fg3, fontSize = 11.sp)
                     }
                 }
             }
@@ -571,7 +573,7 @@ private fun QuizView(
             ) {
                 Icon(Ic.Maximize2, contentDescription = null, tint = Ascent.Accent, modifier = Modifier.size(14.dp))
                 Spacer(Modifier.width(6.dp))
-                Text("点击图片可查看大图（支持双指缩放）", color = Ascent.Fg3, fontSize = 11.sp)
+                Text(stringResource(R.string.lesson_img_hint), color = Ascent.Fg3, fontSize = 11.sp)
             }
         }
 
@@ -582,7 +584,7 @@ private fun QuizView(
                 val isSel = pickIndex == i
                 OptionRow(
                     key = letters.getOrElse(pos) { "?" },
-                    text = q.options[i],
+                    text = qOption(q, i),
                     selected = isSel,
                     correct = graded && i == q.correct,
                     wrong = graded && isSel && i != q.correct,
@@ -591,12 +593,12 @@ private fun QuizView(
                 )
             }
 
-            QType.Multi -> q.options.forEachIndexed { i, opt ->
+            QType.Multi -> q.options.forEachIndexed { i, _ ->
                 val isSel = i in pickSet
                 val isRight = i in q.correctSet
                 OptionRow(
                     key = if (isSel) "\u2713" else letters.getOrElse(i) { "?" },
-                    text = opt,
+                    text = qOption(q, i),
                     selected = isSel,
                     correct = graded && isRight,
                     wrong = graded && isSel && !isRight,
@@ -642,17 +644,17 @@ private fun QuizView(
                         Text("${pos + 1}", color = Ascent.Fg2, fontSize = 12.sp, fontFamily = MonoNumbers, fontWeight = FontWeight.Medium)
                     }
                     Spacer(Modifier.width(12.dp))
-                    Text(q.options[optIdx], color = Ascent.Fg, fontSize = 14.sp, lineHeight = 21.sp, modifier = Modifier.weight(1f))
+                    Text(qOption(q, optIdx), color = Ascent.Fg, fontSize = 14.sp, lineHeight = 21.sp, modifier = Modifier.weight(1f))
                     if (!graded) {
                         Column {
                             Box(
                                 modifier = Modifier.size(30.dp).clickable { onMove(pos, -1) },
                                 contentAlignment = Alignment.Center
-                            ) { Icon(Ic.ChevronUp, contentDescription = "上移", tint = Ascent.Accent, modifier = Modifier.size(18.dp)) }
+                            ) { Icon(Ic.ChevronUp, contentDescription = stringResource(R.string.lesson_move_up), tint = Ascent.Accent, modifier = Modifier.size(18.dp)) }
                             Box(
                                 modifier = Modifier.size(30.dp).clickable { onMove(pos, 1) },
                                 contentAlignment = Alignment.Center
-                            ) { Icon(Ic.ChevronDown, contentDescription = "下移", tint = Ascent.Accent, modifier = Modifier.size(18.dp)) }
+                            ) { Icon(Ic.ChevronDown, contentDescription = stringResource(R.string.lesson_move_down), tint = Ascent.Accent, modifier = Modifier.size(18.dp)) }
                         }
                     }
                 }
@@ -664,13 +666,15 @@ private fun QuizView(
                     onValueChange = onFill,
                     enabled = !graded,
                     singleLine = true,
-                    placeholder = { Text("在此填写答案", fontSize = 14.sp) },
+                    placeholder = { Text(stringResource(R.string.lesson_fill_hint), fontSize = 14.sp) },
                     shape = RoundedCornerShape(14.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
                 if (graded) {
                     Spacer(Modifier.height(12.dp))
-                    AnswerLine("参考答案：${q.answers.joinToString(" / ")}")
+                    val parts = ArrayList<String>(q.answers.size)
+                    for (i in q.answers.indices) parts.add(qAnswer(q, i))
+                    AnswerLine(stringResource(R.string.lesson_answer_ref, parts.joinToString(" / ")))
                 }
             }
 
@@ -680,7 +684,7 @@ private fun QuizView(
                     val n = q.pairsRight.size
                     (0 until n).sortedBy { (it * 7 + 3) % n }
                 }
-                q.pairsLeft.forEachIndexed { i, left ->
+                q.pairsLeft.forEachIndexed { i, _ ->
                     val assigned = matchAssign.getOrElse(i) { -1 }
                     val isRight = graded && assigned == i
                     val shape = RoundedCornerShape(14.dp)
@@ -711,9 +715,9 @@ private fun QuizView(
                             .padding(13.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(left, color = Ascent.Fg, fontSize = 14.sp, modifier = Modifier.weight(1f))
+                        Text(qPairLeft(q, i), color = Ascent.Fg, fontSize = 14.sp, modifier = Modifier.weight(1f))
                         Text(
-                            text = if (assigned >= 0) q.pairsRight.getOrElse(assigned) { "?" } else "点此选择",
+                            text = if (assigned in q.pairsRight.indices) qPairRight(q, assigned) else stringResource(R.string.lesson_pick),
                             color = if (assigned >= 0) Ascent.Accent else Ascent.Fg3,
                             fontSize = 13.sp,
                             textAlign = TextAlign.End,
@@ -722,7 +726,7 @@ private fun QuizView(
                     }
                     if (graded && !isRight) {
                         Text(
-                            text = "　正确答案：${q.pairsRight.getOrElse(i) { "?" }}",
+                            text = stringResource(R.string.lesson_correct_pair, qPairRight(q, i)),
                             color = Ascent.Fg3,
                             fontSize = 11.sp,
                             modifier = Modifier.padding(bottom = 9.dp)
@@ -730,7 +734,7 @@ private fun QuizView(
                     }
                 }
                 Spacer(Modifier.height(4.dp))
-                MonoLabel("从下面选择（先点上方条目，再点这里）")
+                MonoLabel(stringResource(R.string.lesson_pick_pair))
                 Spacer(Modifier.height(8.dp))
                 rightOrder.forEach { r ->
                     val used = matchAssign.take(q.pairsLeft.size).contains(r)
@@ -746,7 +750,7 @@ private fun QuizView(
                             .padding(12.dp)
                     ) {
                         Text(
-                            q.pairsRight.getOrElse(r) { "?" },
+                            qPairRight(q, r),
                             color = if (used) Ascent.Fg3 else Ascent.Fg,
                             fontSize = 13.sp
                         )
@@ -763,7 +767,7 @@ private fun QuizView(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     placeholder = {
                         Text(
-                            if (q.unit != null) "填入数值（单位 ${q.unit}）" else "填入数值",
+                            if (q.unit != null) stringResource(R.string.lesson_number_unit, q.unit) else stringResource(R.string.lesson_number),
                             fontSize = 14.sp
                         )
                     },
@@ -774,8 +778,8 @@ private fun QuizView(
                     Spacer(Modifier.height(12.dp))
                     val head = q.answers.firstOrNull().orEmpty()
                     val u = q.unit?.let { " $it" }.orEmpty()
-                    val tol = if (q.tolerance > 0) "（容差 ±${q.tolerance}）" else ""
-                    AnswerLine("参考答案：$head$u$tol")
+                    val tol = if (q.tolerance > 0) stringResource(R.string.lesson_tolerance, q.tolerance) else ""
+                    AnswerLine(stringResource(R.string.lesson_answer_ref, "$head$u$tol"))
                 }
             }
 
@@ -820,7 +824,7 @@ private fun QuizView(
                         )
                     } else {
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            Text("题图缺失：${q.image}", color = Ascent.Fg3, fontSize = 11.sp)
+                            Text(stringResource(R.string.lesson_img_missing, q.image.orEmpty()), color = Ascent.Fg3, fontSize = 11.sp)
                         }
                     }
                     val hotspotAccent = Ascent.Accent
@@ -848,7 +852,7 @@ private fun QuizView(
                 }
                 Spacer(Modifier.height(10.dp))
                 Text(
-                    text = if (graded) "绿色圆环为正确区域" else "点击图中你认为正确的位置",
+                    text = if (graded) stringResource(R.string.lesson_hotspot_ok) else stringResource(R.string.lesson_hotspot_tap),
                     color = Ascent.Fg3,
                     fontSize = 11.sp
                 )
@@ -865,7 +869,7 @@ private fun QuizView(
                     ) {
                         Icon(Ic.Maximize2, contentDescription = null, tint = Ascent.Accent, modifier = Modifier.size(15.dp))
                         Spacer(Modifier.width(8.dp))
-                        Text("查看大图（支持双指缩放）", color = Ascent.Accent, fontSize = 12.sp, fontWeight = FontWeight.Medium)
+                        Text(stringResource(R.string.lesson_zoom_open), color = Ascent.Accent, fontSize = 12.sp, fontWeight = FontWeight.Medium)
                     }
                 }
             }
@@ -904,9 +908,11 @@ private fun QuizView(
                 }
 
                 if (step != null) {
-                    MonoLabel("第 ${scenarioStep + 1} 步 / 共 ${q.steps.size} 步")
+                    MonoLabel(stringResource(R.string.lesson_step_progress, scenarioStep + 1, q.steps.size))
                     Spacer(Modifier.height(10.dp))
                     ChoiceBlock(
+                        parent = q,
+                        stepIndex = scenarioStep,
                         step = step,
                         pickIndex = pickIndex,
                         pickSet = pickSet,
@@ -936,14 +942,14 @@ private fun QuizView(
                                 )
                                 Spacer(Modifier.width(8.dp))
                                 Text(
-                                    text = if (stepOk) "这一步正确" else "这一步答错",
+                                    text = if (stepOk) stringResource(R.string.lesson_step_ok) else stringResource(R.string.lesson_step_bad),
                                     color = if (stepOk) Ascent.Success else Ascent.Danger,
                                     fontSize = 13.sp,
                                     fontWeight = FontWeight.SemiBold
                                 )
                             }
                             Spacer(Modifier.height(5.dp))
-                            Text(step.explanation, color = Ascent.Fg, fontSize = 13.sp, lineHeight = 20.sp)
+                            Text(qStepExplanation(q, scenarioStep), color = Ascent.Fg, fontSize = 13.sp, lineHeight = 20.sp)
                         }
                     }
 
@@ -959,16 +965,16 @@ private fun QuizView(
                                 )
                                 Spacer(Modifier.width(8.dp))
                                 Text(
-                                    text = if (scenarioAllOk) "情景通过 · 全部步骤正确"
-                                    else "情景未通过 · 错题重做时会整段重来",
+                                    text = if (scenarioAllOk) stringResource(R.string.lesson_scenario_pass)
+                                    else stringResource(R.string.lesson_scenario_fail),
                                     color = if (scenarioAllOk) Ascent.Warning else Ascent.Fg2,
                                     fontSize = 13.sp,
                                     fontWeight = FontWeight.SemiBold
                                 )
                             }
-                            Text(q.explanation, color = Ascent.Fg2, fontSize = 13.sp, lineHeight = 20.sp)
+                            Text(qExplanation(q), color = Ascent.Fg2, fontSize = 13.sp, lineHeight = 20.sp)
                             if (!q.source.isNullOrBlank()) {
-                                Text("来源 · ${q.source}", color = Ascent.Fg3, fontSize = 10.sp)
+                                Text(stringResource(R.string.lesson_source, q.source), color = Ascent.Fg3, fontSize = 10.sp)
                             }
                         }
                     }
@@ -987,6 +993,8 @@ private fun AnswerLine(text: String) {
 
 @Composable
 private fun ChoiceBlock(
+    parent: Question,
+    stepIndex: Int,
     step: Question,
     pickIndex: Int?,
     pickSet: List<Int>,
@@ -1020,13 +1028,13 @@ private fun ChoiceBlock(
                 )
             } else {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("题图缺失：${step.image}", color = Ascent.Fg3, fontSize = 11.sp)
+                    Text(stringResource(R.string.lesson_img_missing, step.image.orEmpty()), color = Ascent.Fg3, fontSize = 11.sp)
                 }
             }
         }
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "点击图片可查看大图（支持双指缩放）",
+            text = stringResource(R.string.lesson_img_hint),
             color = Ascent.Fg3,
             fontSize = 11.sp,
             modifier = Modifier.clickable { onOpenImage(step.image) }
@@ -1034,19 +1042,19 @@ private fun ChoiceBlock(
         Spacer(Modifier.height(14.dp))
     }
 
-    Text(step.prompt, color = Ascent.Fg, fontSize = 18.sp, lineHeight = 27.sp, fontWeight = FontWeight.Bold)
+    Text(qStepPrompt(parent, stepIndex), color = Ascent.Fg, fontSize = 18.sp, lineHeight = 27.sp, fontWeight = FontWeight.Bold)
     if (!step.context.isNullOrBlank()) {
         Spacer(Modifier.height(8.dp))
-        Text(step.context, color = Ascent.Fg2, fontSize = 13.sp, lineHeight = 20.sp)
+        Text(step.context.orEmpty(), color = Ascent.Fg2, fontSize = 13.sp, lineHeight = 20.sp)
     }
     Spacer(Modifier.height(16.dp))
     if (step.type == QType.Multi) {
-        step.options.forEachIndexed { i, opt ->
+        step.options.forEachIndexed { i, _ ->
             val isSel = i in pickSet
             val isRight = i in step.correctSet
             OptionRow(
                 key = if (isSel) "\u2713" else letters.getOrElse(i) { "?" },
-                text = opt,
+                text = qStepOption(parent, stepIndex, i),
                 selected = isSel,
                 correct = graded && isRight,
                 wrong = graded && isSel && !isRight,
@@ -1058,7 +1066,7 @@ private fun ChoiceBlock(
         shuffledSingleDisplay(step).forEachIndexed { pos, i ->
             OptionRow(
                 key = letters.getOrElse(pos) { "?" },
-                text = step.options[i],
+                text = qStepOption(parent, stepIndex, i),
                 selected = pickIndex == i,
                 correct = graded && i == step.correct,
                 wrong = graded && pickIndex == i && i != step.correct,
@@ -1172,7 +1180,7 @@ private fun AssetImage(name: String, modifier: Modifier = Modifier) {
         )
     } else {
         Box(modifier = modifier, contentAlignment = Alignment.Center) {
-            Text("题图缺失：$name", color = Ascent.Fg3, fontSize = 11.sp)
+            Text(stringResource(R.string.lesson_img_missing, name), color = Ascent.Fg3, fontSize = 11.sp)
         }
     }
 }
@@ -1189,7 +1197,7 @@ private fun BriefView(lesson: Lesson, onStart: () -> Unit) {
             IconBadge(Ic.BookOpen, Ascent.Accent, Ascent.AccentSoft, diameter = 44, iconSize = 22)
             Spacer(Modifier.width(12.dp))
             Column {
-                Text(lesson.title, color = Ascent.Fg, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text(lessonTitle(lesson.id, lesson.title), color = Ascent.Fg, fontSize = 24.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(3.dp))
                 MonoLabel(lesson.code.uppercase())
             }
@@ -1198,13 +1206,13 @@ private fun BriefView(lesson: Lesson, onStart: () -> Unit) {
         val reviewCount = lesson.questions.count { it.review }
         val typeCount = lesson.questions.map { it.type }.distinct().size
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            SoftTag("${lesson.questions.size} 题", Ascent.Fg2, Ascent.Surface2, icon = Ic.Book)
-            SoftTag("约 ${lesson.questions.size * 40 / 60 + 1} 分钟", Ascent.Fg2, Ascent.Surface2, icon = Ic.Timer)
-            if (typeCount > 1) SoftTag("$typeCount 种题型", Ascent.Fg2, Ascent.Surface2)
+            SoftTag(stringResource(R.string.lesson_questions_n, lesson.questions.size), Ascent.Fg2, Ascent.Surface2, icon = Ic.Book)
+            SoftTag(stringResource(R.string.lesson_est_minutes, lesson.questions.size * 40 / 60 + 1), Ascent.Fg2, Ascent.Surface2, icon = Ic.Timer)
+            if (typeCount > 1) SoftTag(stringResource(R.string.lesson_types_n, typeCount), Ascent.Fg2, Ascent.Surface2)
         }
         Spacer(Modifier.height(18.dp))
 
-        MonoLabel("本课要点 · KEY POINTS", modifier = Modifier.padding(bottom = 10.dp))
+        MonoLabel(stringResource(R.string.lesson_key_points), modifier = Modifier.padding(bottom = 10.dp))
         OutlineCard(gap = 0, padding = 0, modifier = Modifier.padding(bottom = 14.dp)) {
             lesson.brief.forEachIndexed { idx, point ->
                 Row(
@@ -1213,7 +1221,7 @@ private fun BriefView(lesson: Lesson, onStart: () -> Unit) {
                 ) {
                     IconBadge(Ic.CircleDot, Ascent.Accent, Ascent.AccentSoft, diameter = 28, iconSize = 14)
                     Spacer(Modifier.width(12.dp))
-                    Text(point, color = Ascent.Fg, fontSize = 14.sp, lineHeight = 22.sp)
+                    Text(briefText(lesson.id, idx + 1, point), color = Ascent.Fg, fontSize = 14.sp, lineHeight = 22.sp)
                 }
                 if (idx < lesson.brief.size - 1) {
                     Box(Modifier.fillMaxWidth().height(1.dp).background(Ascent.Border))
@@ -1235,10 +1243,10 @@ private fun BriefView(lesson: Lesson, onStart: () -> Unit) {
                 Icon(Ic.ShieldAlert, contentDescription = null, tint = Ascent.Warning, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(12.dp))
                 Column {
-                    Text("实操技能", color = Ascent.Warning, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.lesson_practical), color = Ascent.Warning, fontSize = 13.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        "本课内容必须由持证教练现场指导与评估后，才能在真实环境中使用。",
+                        stringResource(R.string.lesson_practical_note),
                         color = Ascent.Fg2,
                         fontSize = 12.sp,
                         lineHeight = 19.sp
@@ -1248,7 +1256,7 @@ private fun BriefView(lesson: Lesson, onStart: () -> Unit) {
         }
 
         Spacer(Modifier.height(10.dp))
-        PillButton(text = "开始测验 · ${lesson.questions.size} 题", icon = Ic.ArrowRight, onClick = onStart)
+        PillButton(text = stringResource(R.string.lesson_start_quiz, lesson.questions.size), icon = Ic.ArrowRight, onClick = onStart)
         Spacer(Modifier.height(28.dp))
     }
 }
@@ -1283,13 +1291,13 @@ private fun DoneView(
         else -> Ascent.Success
     }
     val title = when {
-        perfect -> "满分通过"
-        shaky -> "完成 · 需巩固"
-        else -> "已完成"
+        perfect -> stringResource(R.string.lesson_perfect)
+        shaky -> stringResource(R.string.lesson_need_review)
+        else -> stringResource(R.string.lesson_completed)
     }
     val sub = when {
         perfect -> "PERFECT"
-        shaky -> "PASSED · 有错题"
+        shaky -> stringResource(R.string.lesson_passed_bad)
         else -> "PASSED"
     }
 
@@ -1331,11 +1339,11 @@ private fun DoneView(
         ) {
             StatTile(
                 value = if (total == 0) "100%" else "${correct * 100 / total}%",
-                label = "正确率",
+                label = stringResource(R.string.lesson_accuracy),
                 modifier = Modifier.weight(1f)
             )
-            StatTile(value = "$correct/$total", label = "首轮答对", modifier = Modifier.weight(1f))
-            StatTile(value = "+$gained m", label = "海拔", modifier = Modifier.weight(1f))
+            StatTile(value = "$correct/$total", label = stringResource(R.string.lesson_first_correct), modifier = Modifier.weight(1f))
+            StatTile(value = "+$gained m", label = stringResource(R.string.lesson_altitude), modifier = Modifier.weight(1f))
         }
 
         if (retried > 0 || shaky) {
@@ -1352,8 +1360,8 @@ private fun DoneView(
                 Spacer(Modifier.width(10.dp))
                 Text(
                     text = when {
-                        shaky -> "还有 $remaining 题没掌握，已经放进复习队列。重做同一课不再加海拔，错题会反复出现，直到答对。"
-                        retried > 0 -> "错题重做 $retried 题 · 订正成功 $resolved 题。"
+                        shaky -> stringResource(R.string.lesson_remaining_note, remaining)
+                        retried > 0 -> stringResource(R.string.lesson_retry_summary, retried, resolved)
                         else -> ""
                     },
                     color = Ascent.Fg2,
@@ -1366,19 +1374,19 @@ private fun DoneView(
         Spacer(Modifier.height(14.dp))
         OutlineCard(gap = 8) {
             Text(
-                text = "技能「${lesson.title}」理论部分已记录。",
+                text = stringResource(R.string.lesson_recorded, lessonTitle(lesson.id, lesson.title)),
                 color = Ascent.Fg,
                 fontSize = 13.sp,
                 lineHeight = 20.sp
             )
             if (lesson.needsCoach) {
-                Text("本课为实操技能，仍需教练现场指导与评估。", color = Ascent.Warning, fontSize = 12.sp, lineHeight = 19.sp)
+                Text(stringResource(R.string.lesson_practical_reminder), color = Ascent.Warning, fontSize = 12.sp, lineHeight = 19.sp)
             }
         }
 
         Spacer(Modifier.height(20.dp))
         PillButton(
-            text = "继续攀登",
+            text = stringResource(R.string.lesson_climb_on),
             icon = Ic.ArrowRight,
             style = if (shaky) BtnStyle.Secondary else BtnStyle.Primary,
             onClick = onContinue
@@ -1463,7 +1471,7 @@ private fun ImageViewerDialog(image: String, onClose: () -> Unit) {
                 Box(
                     modifier = Modifier.size(36.dp).clickable { onClose() },
                     contentAlignment = Alignment.Center
-                ) { Icon(Ic.X, contentDescription = "关闭", tint = Color.White, modifier = Modifier.size(24.dp)) }
+                ) { Icon(Ic.X, contentDescription = stringResource(R.string.common_close), tint = Color.White, modifier = Modifier.size(24.dp)) }
                 Text(
                     text = String.format(java.util.Locale.US, "%.1f×", scale),
                     color = Color.White,
@@ -1474,7 +1482,7 @@ private fun ImageViewerDialog(image: String, onClose: () -> Unit) {
                 Box(
                     modifier = Modifier.size(36.dp).clickable { scale = 1f; offset = Offset.Zero },
                     contentAlignment = Alignment.Center
-                ) { Icon(Ic.RotateCcw, contentDescription = "复位", tint = Color(0xB3FFFFFF), modifier = Modifier.size(20.dp)) }
+                ) { Icon(Ic.RotateCcw, contentDescription = stringResource(R.string.common_reset), tint = Color(0xB3FFFFFF), modifier = Modifier.size(20.dp)) }
             }
 
             if (bmp != null) {
@@ -1488,7 +1496,7 @@ private fun ImageViewerDialog(image: String, onClose: () -> Unit) {
                 )
             } else {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("题图缺失：$image", color = Color(0xFFA1A1AA), fontSize = 13.sp)
+                    Text(stringResource(R.string.lesson_img_missing, image), color = Color(0xFFA1A1AA), fontSize = 13.sp)
                 }
             }
 
@@ -1533,7 +1541,7 @@ private fun ImageViewerDialog(image: String, onClose: () -> Unit) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Ic.Maximize2, contentDescription = null, tint = Color(0x99FFFFFF), modifier = Modifier.size(15.dp))
                     Spacer(Modifier.width(8.dp))
-                    Text("双指缩放 · 拖动查看 · 双击复位", color = Color(0x99FFFFFF), fontSize = 12.sp)
+                    Text(stringResource(R.string.lesson_zoom_tip), color = Color(0x99FFFFFF), fontSize = 12.sp)
                 }
             }
         }

@@ -1,4 +1,337 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 默认资源 = 简体中文。其余语言见 values-en / values-zh-rTW / values-ja ... -->
     <string name="app_name">ASCENT 攀登</string>
+
+    <!-- ========== 通用 ========== -->
+    <string name="common_back">返回</string>
+    <string name="common_close">关闭</string>
+    <string name="common_done">完成</string>
+    <string name="common_next">下一步</string>
+    <string name="common_continue">继续</string>
+    <string name="common_retry">重做</string>
+    <string name="common_all">全部</string>
+    <string name="common_check">检查</string>
+    <string name="common_reset">复位</string>
+    <string name="common_start">开始</string>
+    <string name="common_minutes">%1$s 分钟</string>
+    <string name="common_minutes_read">%1$s 分钟阅读</string>
+    <string name="common_metric_m">%1$s 米</string>
+
+    <!-- ========== 底部导航 ========== -->
+    <string name="nav_path">路径</string>
+    <string name="nav_handbook">技能书</string>
+    <string name="nav_training">训练</string>
+    <string name="nav_review">复习</string>
+    <string name="nav_profile">我的</string>
+
+    <!-- ========== 语言选择页 ========== -->
+    <string name="lang_title">语言</string>
+    <string name="lang_section">显示语言</string>
+    <string name="lang_follow_system">跟随系统</string>
+    <string name="lang_follow_system_desc">当前：%1$s</string>
+    <string name="lang_section_all">全部语言</string>
+    <string name="lang_note">切换后界面立即生效，无需重启。课程正文、题库与技能书也会跟随界面语言切换。</string>
+    <string name="lang_system_unknown">无法识别</string>
+
+    <!-- ========== 设置页 ========== -->
+    <string name="set_title">设置</string>
+
+    <string name="set_section_appearance">外观</string>
+    <string name="set_theme">主题</string>
+    <string name="set_theme_system">跟随系统</string>
+    <string name="set_theme_light">浅色</string>
+    <string name="set_theme_dark">深色</string>
+    <string name="set_theme_desc_system">跟随系统（当前%1$s）</string>
+    <string name="set_theme_desc_light">始终浅色</string>
+    <string name="set_theme_desc_dark">始终深色</string>
+
+    <string name="set_language">语言</string>
+    <string name="set_language_desc_system">跟随系统（%1$s）</string>
+    <string name="set_language_desc_manual">%1$s</string>
+
+    <string name="set_section_bank">题库</string>
+    <string name="set_bank_version">当前题库 v%1$d</string>
+    <string name="set_bank_meta">%1$s · %2$d 课 · %3$d 题</string>
+    <string name="set_bank_check">检查更新</string>
+    <string name="set_bank_checking">检查中…</string>
+    <string name="set_bank_restore">恢复内置</string>
+    <string name="set_bank_confirm_restore">确认恢复？</string>
+    <string name="set_bank_note">有网时自动检查更新；离线时始终使用本地题库，功能不受影响。</string>
+    <string name="set_bank_url">在线题库地址</string>
+    <string name="set_bank_save_check">保存并检查</string>
+
+    <string name="set_section_dev">开发者模式</string>
+    <string name="set_dev_locked">未开启 · 连点下方版本号 7 次开启</string>
+    <string name="set_dev_hint">开发者模式仅用于测试：可解锁全部关卡、显示答案、进入成就测试区。</string>
+    <string name="set_dev_on">开发者模式已开启</string>
+    <string name="set_dev_on_desc">仅用于测试，不影响正式进度记录</string>
+    <string name="set_dev_unlock_all">解锁全部关卡</string>
+    <string name="set_dev_unlock_all_desc">跳过前置要求，所有课程可直接进入</string>
+    <string name="set_dev_show_answers">显示正确答案</string>
+    <string name="set_dev_show_answers_desc">答题前在正确选项旁标记 KEY</string>
+    <string name="set_dev_achievements">成就测试区（%1$d 项）</string>
+    <string name="set_dev_exit">退出开发者模式</string>
+    <string name="set_dev_tap_hint">再点击 %1$d 次解锁开发者模式</string>
+
+    <string name="set_section_data">数据</string>
+    <string name="set_reset">重置学习进度</string>
+    <string name="set_reset_desc">清空课程完成记录、星级、海拔与学习统计；成就记录也会一并清空。此操作不可撤销。</string>
+    <string name="set_reset_confirm">确认重置？此操作不可撤销</string>
+
+    <string name="set_section_about">关于</string>
+    <string name="set_about_name">ASCENT 攀登之路</string>
+    <string name="set_about_desc">高海拔攀登 / 攀冰理论学习</string>
+    <string name="set_about_version">版本 v%1$s（%2$d）</string>
+
+    <!-- ========== 我的（ProfileScreen） ========== -->
+    <string name="prof_not_logged_in">未登录</string>
+    <string name="prof_route_progress">理论路线 · %1$d / %2$d 课完成</string>
+    <string name="prof_settings">设置</string>
+    <string name="prof_current_altitude">当前海拔</string>
+    <string name="prof_to_summit">距顶峰 %1$s m</string>
+    <string name="prof_abilities">能力概览</string>
+    <string name="prof_ability_note">技术维度需教练现场评估，不计入自动评分。</string>
+    <string name="prof_badges">成就徽章 · %1$d / %2$d</string>
+    <string name="prof_badges_hint">点头像进入个人主页查看已解锁徽章</string>
+    <string name="prof_section_account">账号</string>
+    <string name="prof_login_mock">本地模拟登录，暂不同步数据</string>
+    <string name="prof_login_register">登录 / 注册</string>
+    <string name="prof_logout">退出登录</string>
+    <string name="prof_disclaimer_title">理论掌握不等于实际操作能力</string>
+    <string name="prof_disclaimer_body">本应用记录的是理论学习进度。冰雪、绳索、攀冰、救援等实践技能，必须由持证教练现场评估后，才能在真实环境中使用。涉及药物与急救的决策须咨询专业医生。</string>
+    <string name="prof_reset_all">重置全部学习进度</string>
+    <string name="prof_version_line">ASCENT 攀登 · v%1$s</string>
+
+    <!-- 登录 / 注册 -->
+    <string name="auth_login_title">登录 ASCENT</string>
+    <string name="auth_register_title">创建账号</string>
+    <string name="auth_login_note">本地模拟登录，海拔和徽章仍存在这台设备上</string>
+    <string name="auth_register_note">注册后也先存在本机，等后端接上再同步</string>
+    <string name="auth_login">登录</string>
+    <string name="auth_register">注册</string>
+    <string name="auth_nickname">昵称</string>
+    <string name="auth_email">邮箱</string>
+    <string name="auth_password">密码（至少 6 位）</string>
+    <string name="auth_wait">请稍候…</string>
+    <string name="auth_login_action">登录</string>
+    <string name="auth_register_action">注册并登录</string>
+    <string name="auth_mock_note">当前为本地模拟登录接口（MockAuthApi），不会联网、不上传任何数据。</string>
+    <string name="auth_backend_note">后端就绪后替换 AuthApi 的实现即可，界面无需改动。</string>
+
+    <!-- ========== 个人主页 ========== -->
+    <string name="home_title">我的主页</string>
+    <string name="home_subtitle">%1$s M · 已完成 %2$d / %3$d 课</string>
+    <string name="home_overview">学习概览</string>
+    <string name="home_streak">连续学习</string>
+    <string name="home_active_days">累计学习</string>
+    <string name="home_days_value">%1$d 天</string>
+    <string name="home_lessons_done">完成课程</string>
+    <string name="home_badges">成就徽章</string>
+    <string name="home_progress_total">总进度</string>
+    <string name="home_progress_altitude">海拔进度</string>
+    <string name="home_earned_badges">已解锁徽章 · %1$d</string>
+    <string name="home_no_badges">还没有解锁徽章。完成课程、保持连续学习即可获得。</string>
+    <string name="home_view_all_badges">查看全部徽章</string>
+    <string name="home_view_all_badges_n">查看全部 %1$d 枚徽章</string>
+
+    <!-- ========== 全部徽章墙 ========== -->
+    <string name="badge_wall_title">全部徽章</string>
+    <string name="badge_wall_subtitle">已解锁 %1$d / %2$d · 灰色为未解锁（仅预览）</string>
+    <string name="badge_hidden">隐藏成就</string>
+
+    <!-- ========== 成就解锁弹窗 ========== -->
+    <string name="ach_unlocked">成就解锁</string>
+    <string name="ach_accept">收下</string>
+    <!-- ========== 课程页 ========== -->
+    <string name="lesson_retry_progress">错题重做 %1$d / %2$d</string>
+    <string name="lesson_fixed">订正成功</string>
+    <string name="lesson_correct">正确</string>
+    <string name="lesson_safety_wrong">安全关键题答错 — 必须掌握</string>
+    <string name="lesson_think_again">再想想</string>
+    <string name="lesson_source">来源 · %1$s</string>
+    <string name="lesson_understood">理解了，继续</string>
+    <string name="lesson_type_single">单选</string>
+    <string name="lesson_type_multi">多选 · 选出所有正确项</string>
+    <string name="lesson_type_order">排序 · 调整顺序</string>
+    <string name="lesson_type_match">配对 · 先左后右</string>
+    <string name="lesson_type_fill">填空 · 关键数据</string>
+    <string name="lesson_type_calc">计算 · 输入数值</string>
+    <string name="lesson_type_hotspot">热点 · 在图上点出位置</string>
+    <string name="lesson_type_scenario">情景 · 共 %1$d 步</string>
+    <string name="lesson_safety_badge">安全关键</string>
+    <string name="lesson_img_missing">题图缺失：%1$s</string>
+    <string name="lesson_img_hint">点击图片可查看大图（支持双指缩放）</string>
+    <string name="lesson_move_up">上移</string>
+    <string name="lesson_move_down">下移</string>
+    <string name="lesson_fill_hint">在此填写答案</string>
+    <string name="lesson_answer_ref">参考答案：%1$s</string>
+    <string name="lesson_pick">点此选择</string>
+    <string name="lesson_pick_pair">从下面选择（先点上方条目，再点这里）</string>
+    <string name="lesson_number_unit">填入数值（单位 %1$s）</string>
+    <string name="lesson_number">填入数值</string>
+    <string name="lesson_tolerance">（容差 ±%1$s）</string>
+    <string name="lesson_hotspot_ok">绿色圆环为正确区域</string>
+    <string name="lesson_hotspot_tap">点击图中你认为正确的位置</string>
+    <string name="lesson_zoom_open">查看大图（支持双指缩放）</string>
+    <string name="lesson_step_progress">第 %1$d 步 / 共 %2$d 步</string>
+    <string name="lesson_step_ok">这一步正确</string>
+    <string name="lesson_step_bad">这一步答错</string>
+    <string name="lesson_scenario_pass">情景通过 · 全部步骤正确</string>
+    <string name="lesson_scenario_fail">情景未通过 · 错题重做时会整段重来</string>
+    <string name="lesson_questions_n">%1$d 题</string>
+    <string name="lesson_est_minutes">约 %1$d 分钟</string>
+    <string name="lesson_types_n">%1$d 种题型</string>
+    <string name="lesson_key_points">本课要点 · KEY POINTS</string>
+    <string name="lesson_practical">实操技能</string>
+    <string name="lesson_practical_note">本课内容必须由持证教练现场指导与评估后，才能在真实环境中使用。</string>
+    <string name="lesson_start_quiz">开始测验 · %1$d 题</string>
+    <string name="lesson_perfect">满分通过</string>
+    <string name="lesson_need_review">完成 · 需巩固</string>
+    <string name="lesson_completed">已完成</string>
+    <string name="lesson_passed_bad">PASSED · 有错题</string>
+    <string name="lesson_accuracy">正确率</string>
+    <string name="lesson_first_correct">首轮答对</string>
+    <string name="lesson_altitude">海拔</string>
+    <string name="lesson_remaining_note">还有 %1$d 题没掌握，已经放进复习队列。重做同一课不再加海拔，错题会反复出现，直到答对。</string>
+    <string name="lesson_retry_summary">错题重做 %1$d 题 · 订正成功 %2$d 题。</string>
+    <string name="lesson_recorded">技能「%1$s」理论部分已记录。</string>
+    <string name="lesson_practical_reminder">本课为实操技能，仍需教练现场指导与评估。</string>
+    <string name="lesson_climb_on">继续攀登</string>
+    <string name="lesson_peak">峰顶</string>
+    <string name="lesson_zoom_tip">双指缩放 · 拖动查看 · 双击复位</string>
+
+    <!-- ========== 技能书 ========== -->
+    <string name="hb_title">技能书</string>
+    <string name="hb_subtitle">%1$d 篇 · LIBRARY</string>
+    <string name="hb_search">搜索技能书</string>
+    <string name="hb_filter_all">全部</string>
+    <string name="hb_filter_gear">装备</string>
+    <string name="hb_filter_tech">技术</string>
+    <string name="hb_filter_med">医学</string>
+    <string name="hb_filter_health">健康</string>
+    <string name="hb_filter_weather">天气</string>
+    <string name="hb_filter_meteo">气象</string>
+    <string name="hb_filter_decision">决策</string>
+    <string name="hb_filter_judge">判断</string>
+    <string name="hb_filter_safety">安全</string>
+    <string name="hb_filter_risk">风险</string>
+    <string name="hb_empty">没有匹配的文章</string>
+    <string name="hb_empty_hint">换个关键词或分类试试</string>
+    <string name="hb_disclaimer_1">本手册为教学整理，不构成医疗建议，也不能替代持证教练的现场指导。</string>
+    <string name="hb_disclaimer_2">涉及药物、救援与急救的决策必须由专业人员评估。</string>
+    <string name="hb_meta">%1$s · %2$d 分钟</string>
+    <string name="hb_source">内容来源</string>
+    <string name="hb_article_note">本文为教学整理，不构成医疗建议。</string>
+    <!-- ========== 复习 ========== -->
+    <string name="rev_title">复习</string>
+    <string name="rev_subtitle">间隔重复 · SPACED REPETITION</string>
+    <string name="rev_due_today">今日待复习</string>
+    <string name="rev_safety_n">%1$d 道安全关键</string>
+    <string name="rev_queue_meta">队列 %1$d · 熟练度 %2$d%%</string>
+    <string name="rev_all_done">今天的复习已完成</string>
+    <string name="rev_pending_n">队列里还有 %1$d 题，到期后会自动出现在这里。</string>
+    <string name="rev_schedule_note">答错的题会自动进入队列，按间隔重复排期（1 / 3 / 7 / 16 / 35 天）。</string>
+    <string name="rev_start">开始复习 · %1$d 题</string>
+    <string name="rev_queue_safety">队列 · 安全关键优先</string>
+    <string name="rev_safety_weight">安全关键 · 权重 ×2</string>
+    <string name="rev_others">其他错题</string>
+    <string name="rev_coach_pending">待教练现场评估</string>
+    <string name="rev_theory_logged">理论已记录 · 需现场确认</string>
+
+    <!-- ========== 训练 ========== -->
+    <string name="tr_title">训练</string>
+    <string name="tr_subtitle">按进度推荐 · TRAINING</string>
+    <string name="tr_today">今日推荐 · TODAY</string>
+    <string name="tr_preview">预习 · %1$s</string>
+    <string name="tr_knot_speed">绳结速度训练</string>
+    <string name="tr_meta">%1$d 题 · 当前海拔 %2$s m</string>
+    <string name="tr_knot_desc">5 分钟 · 双渔人结 / 抓结</string>
+    <string name="tr_recommend">为你推荐 · BASED ON PROGRESS</string>
+    <string name="tr_boundary">安全边界</string>
+    <string name="tr_boundary_body">本计划只覆盖理论与认知准备。冰雪、绳索、攀冰等实践技能，全部需要在持证教练现场指导下练习与评估。本应用不承诺登顶，也不保证高海拔适应结果。</string>
+    <string name="tr_item1_title">冰爪步伐 · 平地模拟</string>
+    <string name="tr_item1_desc">法式 / 德式切换的肌肉记忆</string>
+    <string name="tr_item2_title">呼吸与步频 · 4-4 呼吸法</string>
+    <string name="tr_item2_desc">提升缺氧耐受</string>
+    <string name="tr_item3_title">装备清单默写</string>
+    <string name="tr_item3_desc">出发前的固定动作</string>
+    <string name="tr_item4_title">天气判读 · 看图识云</string>
+    <string name="tr_item4_desc">识别积雨云与锋面</string>
+
+    <!-- ========== 路径 ========== -->
+    <string name="path_camp_base">大本营 BASECAMP</string>
+    <string name="path_camp_c1">C1 营地</string>
+    <string name="path_camp_c2">C2 营地</string>
+    <string name="path_camp_c3">C3 营地</string>
+    <string name="path_camp_high">高营地 HIGH CAMP</string>
+    <string name="path_unit_meta">第 %1$d 单元 · %2$s</string>
+    <string name="path_lessons_range">%1$d 课 · %2$s – %3$s M</string>
+    <string name="path_summit">登顶 · %1$s %2$s M</string>
+    <string name="path_unit_clear">单元通关</string>
+    <string name="path_to_summit">距顶峰 %1$s M</string>
+    <string name="path_done_pct">已完成 %1$d / %2$d 课 · %3$d%%</string>
+    <string name="path_you_are_here">你在这里</string>
+
+    <!-- ========== 成就测试区 ========== -->
+    <string name="dev_back_to">返回开发者模式</string>
+    <string name="dev_title">成就测试区</string>
+    <string name="dev_unlocked_meta">已解锁 %1$d / %2$d · 预览与模拟均不影响真实进度</string>
+    <string name="dev_snapshot">判定数据快照</string>
+    <string name="dev_validity">定义有效性校验</string>
+    <string name="dev_valid_ok">%1$d 项全部通过：无重复 ID、徽章字形齐全、条件引用有效</string>
+    <string name="dev_batch">批量测试</string>
+    <string name="dev_batch_play">批量播放动画 ×3</string>
+    <string name="dev_reset_all">重置全部成就</string>
+    <string name="dev_reset_all_confirm">确认重置全部成就？</string>
+    <string name="dev_queue_empty">待播队列：空</string>
+    <string name="dev_queue_clear">清空待播队列（%1$d）</string>
+    <string name="dev_note_1">「批量播放」仅预览弹窗动画，不入库；「重置全部」只清成就字段，不动课程进度；</string>
+    <string name="dev_note_2">弹窗异常残留时用「清空待播队列」解卡。</string>
+    <string name="dev_unlocked">已解锁</string>
+    <string name="dev_locked">未解锁</string>
+    <string name="dev_preview">预览弹窗</string>
+    <string name="dev_reset_item">重置此项</string>
+    <string name="dev_force_unlock">强制解锁</string>
+    <string name="dev_stats_detail">maxStreak %1$d · 累计活跃 %2$d 天 · 课次 %3$d · 复习答对 %4$d · 队列 %5$d · 海拔 %6$d</string>
+
+    <!-- ========== 题库状态 ========== -->
+    <string name="bank_bundled">内置题库</string>
+    <string name="bank_online_v">在线题库 v%1$d</string>
+    <string name="bank_restored">已恢复内置题库</string>
+    <string name="bank_not_init">尚未初始化</string>
+    <string name="bank_no_url">未配置在线题库地址</string>
+    <string name="bank_need_app">在线题库需要 App v%1$d 以上</string>
+    <string name="bank_latest_v">已是最新（v%1$d）</string>
+    <string name="bank_download_fail">无法下载题库文件</string>
+    <string name="bank_sha_fail">题库校验失败（sha256 不匹配）</string>
+    <string name="bank_format_fail">题库格式不正确，已保留原题库</string>
+    <string name="bank_schema_high">题库 schema %1$d 高于本机支持（%2$d）</string>
+    <string name="bank_updated_v">已更新到 v%1$d</string>
+    <string name="bank_cache_fail">写入缓存失败：%1$s</string>
+
+    <!-- ========== 参数化补全（v0.16 i18n） ========== -->
+    <string name="badge_wall_subtitle_2">已解锁 %1$d / %2$d · 灰色为未解锁（仅预览）</string>
+    <string name="lesson_recheck">重做检查</string>
+    <string name="lesson_retry_tag">错题重做</string>
+    <string name="lesson_correct_pair">　正确答案：%1$s</string>
+    <string name="hb_read_minutes">%1$d 分钟阅读</string>
+    <string name="home_meta">%1$s M · 已完成 %2$d / %3$d 课</string>
+    <string name="common_days_n">%1$d 天</string>
+    <string name="home_badges_unlocked">已解锁徽章 · %1$d</string>
+    <string name="prof_route_meta">理论路线 · %1$d / %2$d 课完成</string>
+    <string name="prof_badges_meta">成就徽章 · %1$d / %2$d</string>
+    <string name="prof_version">ASCENT 攀登 · v%1$s</string>
+    <string name="cap_m5i">5000 入门</string>
+    <string name="cap_m5a">5000 进阶</string>
+    <string name="cap_m6">6000 米</string>
+    <string name="cap_m7">7000 米</string>
+    <string name="cap_m8">8000 米</string>
+    <string name="dev_tap_hint">再点击 %1$d 次解锁开发者模式</string>
+    <string name="set_theme_system_current">跟随系统（当前%1$s）</string>
+    <string name="set_bank_current">当前题库 v%1$d</string>
+    <string name="set_version">版本 v%1$s（%2$d）</string>
+    <string name="main_bank_updated">题库已更新到 v%1$d（%2$d 题）</string>
+    <string name="main_bank_latest">题库已是最新（v%1$d）</string>
+    <string name="main_bank_need_app">在线题库需要 App v%1$d 以上</string>
 </resources>

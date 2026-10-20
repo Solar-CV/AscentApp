@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -70,6 +72,8 @@ fun ProfileScreen(
     devShowAnswers: Boolean,
     themeMode: String,
     onThemeModeChange: (String) -> Unit,
+    languageMode: String,
+    onLanguageModeChange: (String) -> Unit,
     onDevUnlocked: () -> Unit,
     onDevUnlockAllChange: (Boolean) -> Unit,
     onDevShowAnswersChange: (Boolean) -> Unit,
@@ -113,6 +117,8 @@ fun ProfileScreen(
             store = store,
             themeMode = themeMode,
             onThemeModeChange = onThemeModeChange,
+            languageMode = languageMode,
+            onLanguageModeChange = onLanguageModeChange,
             devUnlocked = devUnlocked,
             devUnlockAll = devUnlockAll,
             devShowAnswers = devShowAnswers,
@@ -209,7 +215,7 @@ private fun ProfileBody(
     var tapCount by remember { mutableStateOf(0) }
     var lastTapAt by remember { mutableStateOf(0L) }
     val tapHint = if (!devUnlocked && tapCount >= 3) {
-        "再点击 ${7 - tapCount} 次解锁开发者模式"
+        stringResource(R.string.dev_tap_hint, 7 - tapCount)
     } else {
         null
     }
@@ -235,11 +241,11 @@ private fun ProfileBody(
     else completed.size.toFloat() / ALL_LESSONS.size.toFloat()
 
     val caps = listOf(
-        "5000 入门" to unitFraction("m5i"),
-        "5000 进阶" to unitFraction("m5a"),
-        "6000 米" to unitFraction("m6"),
-        "7000 米" to unitFraction("m7"),
-        "8000 米" to unitFraction("m8")
+        stringResource(R.string.cap_m5i) to unitFraction("m5i"),
+        stringResource(R.string.cap_m5a) to unitFraction("m5a"),
+        stringResource(R.string.cap_m6) to unitFraction("m6"),
+        stringResource(R.string.cap_m7) to unitFraction("m7"),
+        stringResource(R.string.cap_m8) to unitFraction("m8")
     )
 
     val unlockedAch = remember(achRevision) { store.unlockedAchievements.toSet() }
@@ -270,14 +276,14 @@ private fun ProfileBody(
                 Spacer(Modifier.width(14.dp))
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = account?.nickname ?: "未登录",
+                        text = account?.nickname ?: stringResource(R.string.prof_not_logged_in),
                         color = Ascent.Fg,
                         fontSize = 19.sp,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(Modifier.height(3.dp))
                     Text(
-                        text = "理论路线 · ${completed.size} / ${ALL_LESSONS.size} 课完成",
+                        text = stringResource(R.string.prof_route_meta, completed.size, ALL_LESSONS.size),
                         color = Ascent.Fg3,
                         fontSize = 12.sp
                     )
@@ -289,7 +295,7 @@ private fun ProfileBody(
                         .clickable { onOpenSettings() },
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(Ic.Settings, contentDescription = "设置", tint = Ascent.Fg2, modifier = Modifier.size(20.dp))
+                    Icon(Ic.Settings, contentDescription = stringResource(R.string.prof_settings), tint = Ascent.Fg2, modifier = Modifier.size(20.dp))
                 }
             }
         }
@@ -304,7 +310,7 @@ private fun ProfileBody(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Column {
-                        Text("当前海拔", color = Ascent.Fg3, fontSize = 12.sp)
+                        Text(stringResource(R.string.prof_current_altitude), color = Ascent.Fg3, fontSize = 12.sp)
                         Spacer(Modifier.height(4.dp))
                         Row(verticalAlignment = Alignment.Bottom) {
                             Text(
@@ -324,7 +330,7 @@ private fun ProfileBody(
                         }
                     }
                     Text(
-                        text = "距顶峰 ${formatMeters((SUMMIT_ALTITUDE - altitude).coerceAtLeast(0))} m",
+                        text = stringResource(R.string.path_to_summit, formatMeters((SUMMIT_ALTITUDE - altitude).coerceAtLeast(0))),
                         color = Ascent.Fg2,
                         fontSize = 12.sp
                     )
@@ -336,7 +342,7 @@ private fun ProfileBody(
         // ---------------- 能力概览 ----------------
         item(key = "caps") {
             OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
-                Text("能力概览", color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.prof_abilities), color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                 caps.forEach { (label, v) ->
                     Column {
                         Row(
@@ -357,7 +363,7 @@ private fun ProfileBody(
                     Spacer(Modifier.height(12.dp))
                 }
                 Text(
-                    text = "技术维度需教练现场评估，不计入自动评分。",
+                    text = stringResource(R.string.prof_ability_note),
                     color = Ascent.Fg3,
                     fontSize = 10.sp
                 )
@@ -382,13 +388,13 @@ private fun ProfileBody(
                 Spacer(Modifier.width(14.dp))
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        "成就徽章 · ${ACHIEVEMENTS.count { it.id in unlockedAch }} / ${ACHIEVEMENTS.size}",
+                        stringResource(R.string.prof_badges_meta, ACHIEVEMENTS.count { it.id in unlockedAch }, ACHIEVEMENTS.size),
                         color = Ascent.Fg,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                     Spacer(Modifier.height(3.dp))
-                    Text("点头像进入个人主页查看已解锁徽章", color = Ascent.Fg3, fontSize = 11.sp)
+                    Text(stringResource(R.string.prof_badges_hint), color = Ascent.Fg3, fontSize = 11.sp)
                 }
                 Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
             }
@@ -396,7 +402,7 @@ private fun ProfileBody(
 
         // ---------------- 账号 ----------------
         item(key = "account") {
-            MonoLabel("账号", modifier = Modifier.padding(top = 6.dp, bottom = 8.dp))
+            MonoLabel(stringResource(R.string.prof_section_account), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp))
         }
         item(key = "accountCard") {
             if (account == null) {
@@ -414,11 +420,11 @@ private fun ProfileBody(
                     IconBadge(Ic.UserRound, Ascent.Fg2, Ascent.Surface2, diameter = 46, iconSize = 22)
                     Spacer(Modifier.width(14.dp))
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("未登录", color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                        Text(stringResource(R.string.prof_not_logged_in), color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                         Spacer(Modifier.height(3.dp))
-                        Text("本地模拟登录，暂不同步数据", color = Ascent.Fg3, fontSize = 12.sp)
+                        Text(stringResource(R.string.prof_login_mock), color = Ascent.Fg3, fontSize = 12.sp)
                     }
-                    SoftTag("登录 / 注册", Ascent.OnAccent, Ascent.Accent)
+                    SoftTag(stringResource(R.string.prof_login_register), Ascent.OnAccent, Ascent.Accent)
                 }
                 Spacer(Modifier.height(14.dp))
             } else {
@@ -445,7 +451,7 @@ private fun ProfileBody(
                             Text(account.email, color = Ascent.Fg3, fontSize = 12.sp)
                         }
                     }
-                    PillButton(text = "退出登录", style = BtnStyle.Secondary, height = 44, onClick = onLogout)
+                    PillButton(text = stringResource(R.string.prof_logout), style = BtnStyle.Secondary, height = 44, onClick = onLogout)
                 }
             }
         }
@@ -465,11 +471,10 @@ private fun ProfileBody(
                 Icon(Ic.TriangleAlert, contentDescription = null, tint = Ascent.Warning, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(12.dp))
                 Column {
-                    Text("理论掌握不等于实际操作能力", color = Ascent.Warning, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.prof_disclaimer_title), color = Ascent.Warning, fontSize = 13.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(7.dp))
                     Text(
-                        text = "本应用记录的是理论学习进度。冰雪、绳索、攀冰、救援等实践技能，" +
-                            "必须由持证教练现场评估后，才能在真实环境中使用。涉及药物与急救的决策须咨询专业医生。",
+                        text = stringResource(R.string.prof_disclaimer_body),
                         color = Ascent.Fg2,
                         fontSize = 12.sp,
                         lineHeight = 19.sp
@@ -491,7 +496,7 @@ private fun ProfileBody(
                     .padding(vertical = 15.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Text("重置全部学习进度", color = Ascent.Danger, fontSize = 13.sp, fontWeight = FontWeight.Medium)
+                Text(stringResource(R.string.prof_reset_all), color = Ascent.Danger, fontSize = 13.sp, fontWeight = FontWeight.Medium)
             }
         }
 
@@ -504,7 +509,7 @@ private fun ProfileBody(
                     .padding(vertical = 18.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("ASCENT 攀登 · v${BuildConfig.VERSION_NAME}", color = Ascent.Fg3, fontSize = 11.sp)
+                Text(stringResource(R.string.prof_version, BuildConfig.VERSION_NAME), color = Ascent.Fg3, fontSize = 11.sp)
                 if (tapHint != null) {
                     Spacer(Modifier.height(8.dp))
                     Text(tapHint, color = Ascent.Warning, fontSize = 11.sp, fontWeight = FontWeight.Medium)
@@ -569,14 +574,14 @@ private fun AuthScreen(
         ) {
             Icon(Ic.ChevronLeft, contentDescription = null, tint = Ascent.Fg2, modifier = Modifier.size(20.dp))
             Spacer(Modifier.width(4.dp))
-            Text("返回", color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+            Text(stringResource(R.string.common_back), color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
         }
 
         Spacer(Modifier.height(26.dp))
         Icon(Ic.MountainSnow, contentDescription = null, tint = Ascent.Accent, modifier = Modifier.size(40.dp))
         Spacer(Modifier.height(12.dp))
         Text(
-            text = if (mode == AuthMode.Login) "登录 ASCENT" else "创建账号",
+            text = if (mode == AuthMode.Login) stringResource(R.string.auth_login_title) else stringResource(R.string.auth_register_title),
             color = Ascent.Fg,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold
@@ -584,9 +589,9 @@ private fun AuthScreen(
         Spacer(Modifier.height(6.dp))
         Text(
             text = if (mode == AuthMode.Login) {
-                "本地模拟登录，海拔和徽章仍存在这台设备上"
+                stringResource(R.string.auth_login_note)
             } else {
-                "注册后也先存在本机，等后端接上再同步"
+                stringResource(R.string.auth_register_note)
             },
             color = Ascent.Fg3,
             fontSize = 13.sp
@@ -602,7 +607,7 @@ private fun AuthScreen(
                 .background(Ascent.Surface2)
                 .padding(4.dp)
         ) {
-            listOf(AuthMode.Login to "登录", AuthMode.Register to "注册").forEach { (m, label) ->
+            listOf(AuthMode.Login to stringResource(R.string.auth_login_action), AuthMode.Register to stringResource(R.string.auth_register)).forEach { (m, label) ->
                 val on = mode == m
                 Box(
                     modifier = Modifier
@@ -632,7 +637,7 @@ private fun AuthScreen(
             AuthField(
                 value = nickname,
                 onChange = { nickname = it; error = null },
-                label = "昵称",
+                label = stringResource(R.string.auth_nickname),
                 keyboardType = KeyboardType.Text
             )
             Spacer(Modifier.height(12.dp))
@@ -641,7 +646,7 @@ private fun AuthScreen(
         AuthField(
             value = email,
             onChange = { email = it; error = null },
-            label = "邮箱",
+            label = stringResource(R.string.auth_email),
             keyboardType = KeyboardType.Email
         )
         Spacer(Modifier.height(12.dp))
@@ -649,7 +654,7 @@ private fun AuthScreen(
         AuthField(
             value = password,
             onChange = { password = it; error = null },
-            label = "密码（至少 6 位）",
+            label = stringResource(R.string.auth_password),
             keyboardType = KeyboardType.Password,
             isPassword = true
         )
@@ -671,9 +676,9 @@ private fun AuthScreen(
 
         PillButton(
             text = when {
-                loading -> "请稍候…"
-                mode == AuthMode.Login -> "登录"
-                else -> "注册并登录"
+                loading -> stringResource(R.string.auth_wait)
+                mode == AuthMode.Login -> stringResource(R.string.auth_login_action)
+                else -> stringResource(R.string.auth_register_action)
             },
             enabled = !loading,
             onClick = {
@@ -705,8 +710,8 @@ private fun AuthScreen(
                 .padding(13.dp)
         ) {
             Text(
-                text = "当前为本地模拟登录接口（MockAuthApi），不会联网、不上传任何数据。" +
-                    "后端就绪后替换 AuthApi 的实现即可，界面无需改动。",
+                text = stringResource(R.string.auth_mock_note) +
+                    stringResource(R.string.auth_backend_note),
                 color = Ascent.Fg2,
                 fontSize = 11.sp,
                 lineHeight = 18.sp

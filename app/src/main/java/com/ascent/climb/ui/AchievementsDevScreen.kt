@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -90,13 +92,13 @@ fun AchievementsDevScreen(
                 ) {
                     Icon(Ic.ChevronLeft, contentDescription = null, tint = Ascent.Fg2, modifier = Modifier.width(20.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text("返回开发者模式", color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                    Text(stringResource(R.string.dev_back_to), color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
                 }
                 Spacer(Modifier.height(8.dp))
-                Text("成就测试区", color = Ascent.Fg, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.dev_title), color = Ascent.Fg, fontSize = 22.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    "已解锁 ${unlocked.size} / ${ACHIEVEMENTS.size} · 预览与模拟均不影响真实进度",
+                    stringResource(R.string.dev_unlocked_meta, unlocked.size, ACHIEVEMENTS.size),
                     color = Ascent.Fg3,
                     fontSize = 12.sp
                 )
@@ -106,9 +108,9 @@ fun AchievementsDevScreen(
             // ---------------- 统计快照 ----------------
             item(key = "stats") {
                 OutlineCard(gap = 8, modifier = Modifier.padding(bottom = 14.dp)) {
-                    MonoLabel("判定数据快照")
+                    MonoLabel(stringResource(R.string.dev_snapshot))
                     Text(
-                        "maxStreak ${stats.maxStreak} · 累计活跃 ${stats.activeDays} 天 · 课次 ${stats.lessonRuns} · 复习答对 ${stats.reviewDone} · 队列 ${stats.reviewQueueSize} · 海拔 ${stats.altitude} · streakBroken=${stats.streakBroken}",
+                        stringResource(R.string.dev_stats_detail, stats.maxStreak, stats.activeDays, stats.lessonRuns, stats.reviewDone, stats.reviewQueueSize, stats.altitude) + " · streakBroken=${stats.streakBroken}",
                         color = Ascent.Fg2,
                         fontSize = 11.sp,
                         lineHeight = 17.sp,
@@ -120,10 +122,10 @@ fun AchievementsDevScreen(
             // ---------------- 有效性校验 ----------------
             item(key = "validate") {
                 OutlineCard(gap = 8, modifier = Modifier.padding(bottom = 14.dp)) {
-                    MonoLabel("定义有效性校验")
+                    MonoLabel(stringResource(R.string.dev_validity))
                     if (problems.isEmpty()) {
                         Text(
-                            "✓ ${ACHIEVEMENTS.size} 项全部通过：无重复 ID、徽章字形齐全、条件引用有效",
+                            "✓ " + stringResource(R.string.dev_valid_ok, ACHIEVEMENTS.size),
                             color = Ascent.Success,
                             fontSize = 12.sp
                         )
@@ -138,11 +140,11 @@ fun AchievementsDevScreen(
             // ---------------- 批量操作 ----------------
             item(key = "batch") {
                 OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
-                    MonoLabel("批量测试")
+                    MonoLabel(stringResource(R.string.dev_batch))
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
                         Box(modifier = Modifier.weight(1f)) {
                             PillButton(
-                                text = "批量播放动画 ×3",
+                                text = stringResource(R.string.dev_batch_play),
                                 style = BtnStyle.Secondary,
                                 height = 42,
                                 onClick = {
@@ -154,7 +156,7 @@ fun AchievementsDevScreen(
                         }
                         Box(modifier = Modifier.weight(1f)) {
                             PillButton(
-                                text = if (confirmResetAll) "确认重置全部成就？" else "重置全部成就",
+                                text = if (confirmResetAll) stringResource(R.string.dev_reset_all_confirm) else stringResource(R.string.dev_reset_all),
                                 style = BtnStyle.Secondary,
                                 height = 42,
                                 onClick = {
@@ -172,7 +174,7 @@ fun AchievementsDevScreen(
                     Spacer(Modifier.height(6.dp))
                     val queued = remember(revision) { store.pendingAchievements.toList() }
                     PillButton(
-                        text = if (queued.isEmpty()) "待播队列：空" else "清空待播队列（${queued.size}）",
+                        text = if (queued.isEmpty()) stringResource(R.string.dev_queue_empty) else stringResource(R.string.dev_queue_clear, queued.size),
                         style = BtnStyle.Secondary,
                         height = 38,
                         onClick = {
@@ -181,8 +183,8 @@ fun AchievementsDevScreen(
                         }
                     )
                     Text(
-                        "「批量播放」仅预览弹窗动画，不入库；「重置全部」只清成就字段，不动课程进度；" +
-                            "弹窗异常残留时用「清空待播队列」解卡。",
+                        stringResource(R.string.dev_note_1) +
+                            stringResource(R.string.dev_note_2),
                         color = Ascent.Fg3,
                         fontSize = 10.sp,
                         lineHeight = 15.sp
@@ -196,7 +198,7 @@ fun AchievementsDevScreen(
                 if (group.isEmpty()) return@forEach
                 item(key = "cat_$cat") {
                     MonoLabel(
-                        "${cat.label} · ${group.count { it.id in unlocked }} / ${group.size}",
+                        "${achCategoryName(cat)} · ${group.count { it.id in unlocked }} / ${group.size}",
                         modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)
                     )
                 }
@@ -216,14 +218,14 @@ fun AchievementsDevScreen(
                             Column(modifier = Modifier.weight(1f)) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Text(
-                                        text = if (concealed) "？？？" else a.title,
+                                        text = if (concealed) "？？？" else achievementTitle(a.id, a.title),
                                         color = if (isUnlocked) Ascent.Fg else Ascent.Fg2,
                                         fontSize = 14.sp,
                                         fontWeight = FontWeight.SemiBold
                                     )
                                     Spacer(Modifier.width(8.dp))
                                     SoftTag(
-                                        text = a.rarity.label,
+                                        text = rarityName(a.rarity),
                                         foreground = if (isUnlocked) rarityColors(a.rarity).face else Ascent.Fg3,
                                         background = if (isUnlocked) rarityColors(a.rarity).face.copy(alpha = 0.14f) else Ascent.Surface2
                                     )
@@ -232,14 +234,14 @@ fun AchievementsDevScreen(
                                 Text(a.id, color = Ascent.Fg3, fontSize = 10.sp, fontFamily = MonoNumbers)
                                 Spacer(Modifier.height(3.dp))
                                 Text(
-                                    text = if (concealed) "隐藏成就" else a.conditionText,
+                                    text = if (concealed) stringResource(R.string.badge_hidden) else a.conditionText,
                                     color = Ascent.Fg3,
                                     fontSize = 11.sp,
                                     lineHeight = 15.sp
                                 )
                             }
                             SoftTag(
-                                text = if (isUnlocked) "已解锁" else "未解锁",
+                                text = if (isUnlocked) stringResource(R.string.dev_unlocked) else stringResource(R.string.dev_locked),
                                 foreground = if (isUnlocked) Ascent.Success else Ascent.Fg3,
                                 background = if (isUnlocked) Ascent.SuccessSoft else Ascent.Surface2
                             )
@@ -260,7 +262,7 @@ fun AchievementsDevScreen(
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
                             Box(modifier = Modifier.weight(1f)) {
                                 PillButton(
-                                    text = "预览弹窗",
+                                    text = stringResource(R.string.dev_preview),
                                     style = BtnStyle.Secondary,
                                     height = 36,
                                     onClick = { previewQueue = listOf(a) }
@@ -269,7 +271,7 @@ fun AchievementsDevScreen(
                             Box(modifier = Modifier.weight(1f)) {
                                 if (isUnlocked) {
                                     PillButton(
-                                        text = "重置此项",
+                                        text = stringResource(R.string.dev_reset_item),
                                         style = BtnStyle.Secondary,
                                         height = 36,
                                         onClick = {
@@ -279,7 +281,7 @@ fun AchievementsDevScreen(
                                     )
                                 } else {
                                     PillButton(
-                                        text = "强制解锁",
+                                        text = stringResource(R.string.dev_force_unlock),
                                         style = BtnStyle.Primary,
                                         height = 36,
                                         onClick = {

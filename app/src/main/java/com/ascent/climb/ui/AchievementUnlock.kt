@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import android.provider.Settings
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.RepeatMode
@@ -127,7 +129,7 @@ fun AchievementUnlockOverlay(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "成就解锁",
+                text = stringResource(R.string.ach_unlocked),
                 color = colors.face,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
@@ -154,7 +156,7 @@ fun AchievementUnlockOverlay(
             }
             Spacer(Modifier.height(16.dp))
             Text(
-                text = achievement.title,
+                text = achievementTitle(achievement.id, achievement.title),
                 color = Ascent.Fg,
                 fontSize = 21.sp,
                 fontWeight = FontWeight.Bold,
@@ -162,7 +164,7 @@ fun AchievementUnlockOverlay(
             )
             Spacer(Modifier.height(6.dp))
             Text(
-                text = achievement.desc,
+                text = achievementDesc(achievement.id, achievement.desc),
                 color = Ascent.Fg2,
                 fontSize = 13.sp,
                 textAlign = TextAlign.Center,
@@ -170,13 +172,13 @@ fun AchievementUnlockOverlay(
             )
             Spacer(Modifier.height(12.dp))
             SoftTag(
-                text = "${achievement.rarity.label} · ${achievement.category.label}",
+                text = "${rarityName(achievement.rarity)} · ${achCategoryName(achievement.category)}",
                 foreground = if (achievement.rarity == Rarity.Legendary) LEGENDARY_TEXT else colors.face,
                 background = colors.face.copy(alpha = 0.14f)
             )
             Spacer(Modifier.height(18.dp))
             PillButton(
-                text = "收下",
+                text = stringResource(R.string.ach_accept),
                 style = BtnStyle.Primary,
                 height = 46,
                 onClick = onDismiss

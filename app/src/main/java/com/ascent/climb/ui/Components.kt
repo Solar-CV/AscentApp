@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -207,7 +209,7 @@ fun AscentHeader(
     ) {
         Column {
             Text(
-                text = titleOverride ?: "当前海拔",
+                text = titleOverride ?: stringResource(R.string.prof_current_altitude),
                 color = Ascent.Mut,
                 fontSize = 10.sp,
                 letterSpacing = 1.8.sp,
@@ -290,7 +292,16 @@ fun PillButton(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        Text(text = text, color = fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+        Text(
+            text = text,
+            color = fg,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+            maxLines = 2,
+            lineHeight = 19.sp,
+            modifier = Modifier.padding(horizontal = 14.dp)
+        )
         if (icon != null) {
             Spacer(Modifier.width(8.dp))
             Icon(icon, contentDescription = null, tint = fg, modifier = Modifier.size(18.dp))
@@ -543,7 +554,7 @@ fun ElevationProfile(
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Icon(Ic.MapPin, contentDescription = null, tint = pillFg, modifier = Modifier.size(11.dp))
-            Text("你在这里", color = pillFg, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
+            Text(stringResource(R.string.path_you_are_here), color = pillFg, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
         }
     }
 }
@@ -551,12 +562,14 @@ fun ElevationProfile(
 /** 底栏条目定义。 */
 data class TabItem(val icon: ImageVector, val label: String)
 
-val ASCENT_TABS = listOf(
-    TabItem(Ic.Mountain, "路径"),
-    TabItem(Ic.BookOpen, "技能书"),
-    TabItem(Ic.Dumbbell, "训练"),
-    TabItem(Ic.RotateCcw, "复习"),
-    TabItem(Ic.User, "我的")
+/** 底栏标签需要跟随语言，因此每次组合时构建（仅 5 项，开销可忽略）。 */
+@Composable
+fun ascentTabs(): List<TabItem> = listOf(
+    TabItem(Ic.Mountain, stringResource(R.string.nav_path)),
+    TabItem(Ic.BookOpen, stringResource(R.string.hb_title)),
+    TabItem(Ic.Dumbbell, stringResource(R.string.tr_title)),
+    TabItem(Ic.RotateCcw, stringResource(R.string.rev_title)),
+    TabItem(Ic.User, stringResource(R.string.nav_profile))
 )
 
 /** 浮起胶囊底栏（V2：当前项为绿色实心胶囊）。 */
@@ -580,7 +593,7 @@ fun CapsuleTabBar(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            ASCENT_TABS.forEachIndexed { i, tab ->
+            ascentTabs().forEachIndexed { i, tab ->
                 val on = i == selected
                 Column(
                     modifier = Modifier

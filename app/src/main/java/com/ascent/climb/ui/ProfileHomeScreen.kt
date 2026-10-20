@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -77,7 +79,7 @@ fun ProfileHomeScreen(
                 ) {
                     Icon(Ic.ChevronLeft, contentDescription = null, tint = Ascent.Fg2, modifier = Modifier.width(20.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text("返回", color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                    Text(stringResource(R.string.common_back), color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
                 }
                 Spacer(Modifier.height(10.dp))
             }
@@ -96,10 +98,10 @@ fun ProfileHomeScreen(
                     }
                     Spacer(Modifier.width(14.dp))
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("我的主页", color = Ascent.Fg, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.home_title), color = Ascent.Fg, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                         Spacer(Modifier.height(3.dp))
                         Text(
-                            text = "${formatMeters(altitude)} M · 已完成 ${completed.size} / ${ALL_LESSONS.size} 课",
+                            text = stringResource(R.string.home_meta, formatMeters(altitude), completed.size, ALL_LESSONS.size),
                             color = Ascent.Fg3,
                             fontSize = 12.sp
                         )
@@ -108,29 +110,29 @@ fun ProfileHomeScreen(
             }
 
             // ---------------- 学习概览 ----------------
-            item(key = "lbStat") { MonoLabel("学习概览", modifier = Modifier.padding(bottom = 8.dp)) }
+            item(key = "lbStat") { MonoLabel(stringResource(R.string.home_overview), modifier = Modifier.padding(bottom = 8.dp)) }
             item(key = "stat") {
                 OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = "$streak 天", label = "连续学习")
+                            StatTile(value = stringResource(R.string.common_days_n, streak), label = stringResource(R.string.home_streak))
                         }
                         Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = "${stats.activeDays} 天", label = "累计学习")
+                            StatTile(value = stringResource(R.string.common_days_n, stats.activeDays), label = stringResource(R.string.home_active_days))
                         }
                     }
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = "${completed.size} / ${ALL_LESSONS.size}", label = "完成课程")
+                            StatTile(value = "${completed.size} / ${ALL_LESSONS.size}", label = stringResource(R.string.home_lessons_done))
                         }
                         Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = "${earned.size} / ${ACHIEVEMENTS.size}", label = "成就徽章")
+                            StatTile(value = "${earned.size} / ${ACHIEVEMENTS.size}", label = stringResource(R.string.home_badges))
                         }
                     }
                     Spacer(Modifier.height(4.dp))
-                    MiniProgressRow(label = "总进度", frac = overall)
+                    MiniProgressRow(label = stringResource(R.string.home_progress_total), frac = overall)
                     Spacer(Modifier.height(8.dp))
-                    MiniProgressRow(label = "海拔进度", frac = altFrac)
+                    MiniProgressRow(label = stringResource(R.string.home_progress_altitude), frac = altFrac)
                 }
             }
 
@@ -140,7 +142,7 @@ fun ProfileHomeScreen(
                     modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    MonoLabel("已解锁徽章 · ${earned.size}", modifier = Modifier.weight(1f))
+                    MonoLabel(stringResource(R.string.home_badges_unlocked, earned.size), modifier = Modifier.weight(1f))
                     Row(
                         modifier = Modifier
                             .clip(RoundedCornerShape(999.dp))
@@ -148,7 +150,7 @@ fun ProfileHomeScreen(
                             .padding(horizontal = 6.dp, vertical = 4.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("全部", color = Ascent.Accent, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                        Text(stringResource(R.string.hb_filter_all), color = Ascent.Accent, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                         Icon(
                             Ic.ChevronRight,
                             contentDescription = null,
@@ -162,14 +164,14 @@ fun ProfileHomeScreen(
                 OutlineCard(gap = 10, modifier = Modifier.padding(bottom = 14.dp)) {
                     if (earned.isEmpty()) {
                         Text(
-                            text = "还没有解锁徽章。完成课程、保持连续学习即可获得。",
+                            text = stringResource(R.string.home_no_badges),
                             color = Ascent.Fg3,
                             fontSize = 12.sp,
                             lineHeight = 18.sp
                         )
                         Spacer(Modifier.height(6.dp))
                         PillButton(
-                            text = "查看全部徽章",
+                            text = stringResource(R.string.home_view_all_badges),
                             style = BtnStyle.Secondary,
                             height = 42,
                             onClick = onOpenAllBadges
@@ -178,7 +180,7 @@ fun ProfileHomeScreen(
                         BadgeGrid(items = shown)
                         if (earned.size > shown.size) {
                             PillButton(
-                                text = "查看全部 ${ACHIEVEMENTS.size} 枚徽章",
+                                text = stringResource(R.string.home_view_all_badges, ACHIEVEMENTS.size),
                                 style = BtnStyle.Secondary,
                                 height = 42,
                                 onClick = onOpenAllBadges
@@ -208,7 +210,7 @@ fun BadgeGrid(items: List<com.ascent.climb.data.Achievement>) {
                 AchievementBadge(id = a.id, unlocked = true, size = 56.dp)
                 Spacer(Modifier.height(5.dp))
                 Text(
-                    text = a.title,
+                    text = achievementTitle(a.id, a.title),
                     color = Ascent.Fg2,
                     fontSize = 10.sp,
                     maxLines = 1,

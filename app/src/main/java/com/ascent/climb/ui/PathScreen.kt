@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -58,7 +60,14 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 /** 单元营地名（用于单元横幅 kicker 与分区线）。 */
-private val CAMPS = listOf("大本营 BASECAMP", "C1 营地", "C2 营地", "C3 营地", "高营地 HIGH CAMP")
+@Composable
+private fun camps(): List<String> = listOf(
+    stringResource(R.string.path_camp_base),
+    stringResource(R.string.path_camp_c1),
+    stringResource(R.string.path_camp_c2),
+    stringResource(R.string.path_camp_c3),
+    stringResource(R.string.path_camp_high)
+)
 
 /**
  * 单元配色（参照设计稿 §7.5 派生规则：面 = 亮色，唇 = 面加深约 20%）。
@@ -142,7 +151,7 @@ fun PathScreen(
             if (ui > 0) {
                 item(key = "div_${unit.id}") {
                     CampDivider(
-                        label = "${CAMPS[ui.mod(CAMPS.size)]} · ${unit.title} · ${formatMeters(startAlt)} M"
+                        label = "${camps()[ui.mod(camps().size)]} · ${unitTitle(unit.id, unit.title)} · ${formatMeters(startAlt)} M"
                     )
                 }
             }
@@ -266,16 +275,16 @@ private fun UnitBanner(unit: ClimbUnit, done: Int, startAlt: Int, endAlt: Int, h
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = "第 ${unit.index} 单元 · ${CAMPS[(unit.index - 1).mod(CAMPS.size)]}",
+                text = stringResource(R.string.path_unit_meta, unit.index, camps()[(unit.index - 1).mod(camps().size)]),
                 color = GREEN_PALE,
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Medium
             )
             Spacer(Modifier.height(3.dp))
-            Text(unit.title, color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text(unitTitle(unit.id, unit.title), color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(3.dp))
             Text(
-                text = "${unit.lessons.size} 课 · ${formatMeters(startAlt)} – ${formatMeters(endAlt)} M",
+                text = stringResource(R.string.path_lessons_range, unit.lessons.size, formatMeters(startAlt), formatMeters(endAlt)),
                 color = GREEN_PALE,
                 fontSize = 11.sp,
                 fontFamily = MonoNumbers,
@@ -488,7 +497,7 @@ private fun LessonPath(
                             .background(face)
                             .padding(horizontal = 16.dp, vertical = 6.dp)
                     ) {
-                        Text("开始", color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.common_start), color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Bold)
                     }
                     Canvas(modifier = Modifier.size(14.dp, 8.dp)) {
                         val p = Path().apply {
@@ -527,9 +536,9 @@ private fun LessonPath(
                 contentAlignment = Alignment.TopCenter
             ) {
                 val label = when {
-                    e.lesson != null -> e.lesson.title
-                    peak != null -> "登顶 · ${peak.name} ${formatMeters(peak.altitude)} M"
-                    else -> "单元通关"
+                    e.lesson != null -> lessonTitle(e.lesson.id, e.lesson.title)
+                    peak != null -> stringResource(R.string.path_summit, peakName(peak.name), formatMeters(peak.altitude))
+                    else -> stringResource(R.string.path_unit_clear)
                 }
                 Text(
                     text = label,
@@ -652,7 +661,7 @@ private fun SummitBlock(toSummit: Int, done: Int, total: Int, pct: Int) {
         }
         Spacer(Modifier.height(10.dp))
         Text(
-            text = "距顶峰 ${formatMeters(toSummit)} M",
+            text = stringResource(R.string.path_to_summit, formatMeters(toSummit)),
             color = Ascent.DuoFg2,
             fontSize = 13.sp,
             fontWeight = FontWeight.Bold,
@@ -660,7 +669,7 @@ private fun SummitBlock(toSummit: Int, done: Int, total: Int, pct: Int) {
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = "已完成 $done / $total 课 · $pct%",
+            text = stringResource(R.string.path_done_pct, done, total, pct),
             color = Ascent.DuoFg3,
             fontSize = 11.sp,
             fontWeight = FontWeight.Medium

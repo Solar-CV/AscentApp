@@ -1,9 +1,13 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +39,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -75,7 +80,17 @@ fun HandbookScreen() {
 @Composable
 private fun ArticleList(onOpen: (String) -> Unit) {
     var query by remember { mutableStateOf("") }
-    var cat by remember { mutableStateOf("全部") }
+    val allLabel = stringResource(R.string.hb_filter_all)
+    // 语言切换时 allLabel 会变，用 key 重建状态，避免筛选值停留在旧语言
+    var cat by remember(allLabel) { mutableStateOf(allLabel) }
+
+    val ctx = LocalContext.current
+    val filtered = ALL_ARTICLES.filter { a ->
+        val title = localized(ctx, "hb.${a.id}.title", a.title)
+        val summary = localized(ctx, "hb.${a.id}.summary", a.summary)
+        (cat == allLabel || a.category == cat) &&
+            (query.isBlank() || title.contains(query, true) || summary.contains(query, true))
+    }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -83,9 +98,9 @@ private fun ArticleList(onOpen: (String) -> Unit) {
     ) {
         item(key = "title") {
             Column(modifier = Modifier.padding(bottom = 14.dp)) {
-                Text("技能书", color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.hb_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(4.dp))
-                MonoLabel("${ALL_ARTICLES.size} 篇 · LIBRARY")
+                MonoLabel(stringResource(R.string.hb_subtitle, ALL_ARTICLES.size))
             }
         }
 
@@ -105,7 +120,7 @@ private fun ArticleList(onOpen: (String) -> Unit) {
                 Spacer(Modifier.width(10.dp))
                 Box(modifier = Modifier.weight(1f)) {
                     if (query.isEmpty()) {
-                        Text("搜索技能书", color = Ascent.Fg3, fontSize = 14.sp)
+                        Text(stringResource(R.string.hb_search), color = Ascent.Fg3, fontSize = 14.sp)
                     }
                     BasicTextField(
                         value = query,
@@ -120,20 +135,22 @@ private fun ArticleList(onOpen: (String) -> Unit) {
         }
 
         item(key = "chips") {
+            // 分类有 10 个，固定一排放不下：原先用普通 Row 会被屏幕右边缘裁掉，
+            // 最后一个可见 chip 只剩一截没有文字的圆角底色（看起来像「空白长条」），
+            // 后面的分类也点不到。改为横向滚动，末尾留 16dp 由 contentPadding 承担。
             Row(
-                modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState())
+                    .padding(top = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                CategoryChip("全部", cat == "全部") { cat = "全部" }
+                CategoryChip(allLabel, cat == allLabel) { cat = allLabel }
                 HANDBOOK_CATEGORIES.forEach { c ->
-                    CategoryChip(c, cat == c) { cat = c }
+                    CategoryChip(categoryName(c), cat == c) { cat = c }
                 }
+                Spacer(Modifier.width(8.dp))
             }
-        }
-
-        val filtered = ALL_ARTICLES.filter { a ->
-            (cat == "全部" || a.category == cat) &&
-                (query.isBlank() || a.title.contains(query, true) || a.summary.contains(query, true))
         }
 
         items(filtered.size, key = { i -> filtered[i].id }) { i ->
@@ -149,9 +166,9 @@ private fun ArticleList(onOpen: (String) -> Unit) {
                 ) {
                     IconBadge(Ic.Search, Ascent.Fg3, Ascent.Surface2, diameter = 56, iconSize = 24)
                     Spacer(Modifier.height(12.dp))
-                    Text("没有匹配的文章", color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.hb_empty), color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(5.dp))
-                    Text("换个关键词或分类试试", color = Ascent.Fg3, fontSize = 12.sp)
+                    Text(stringResource(R.string.hb_empty_hint), color = Ascent.Fg3, fontSize = 12.sp)
                 }
             }
         }
@@ -170,8 +187,8 @@ private fun ArticleList(onOpen: (String) -> Unit) {
                 Icon(Ic.TriangleAlert, contentDescription = null, tint = Ascent.Warning, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(12.dp))
                 Text(
-                    text = "本手册为教学整理，不构成医疗建议，也不能替代持证教练的现场指导。" +
-                        "涉及药物、救援与急救的决策必须由专业人员评估。",
+                    text = stringResource(R.string.hb_disclaimer_1) +
+                        stringResource(R.string.hb_disclaimer_2),
                     color = Ascent.Fg2,
                     fontSize = 11.sp,
                     lineHeight = 18.sp
@@ -226,17 +243,17 @@ private fun ArticleCard(a: HandbookArticle, onClick: () -> Unit) {
         }
         Spacer(Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {
-            Text(a.title, color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+            Text(articleTitle(a.id, a.title), color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
             Spacer(Modifier.height(4.dp))
             Text(
-                text = "${a.category} · ${readingMinutes(a)} 分钟",
+                text = stringResource(R.string.hb_meta, categoryName(a.category), readingMinutes(a)),
                 color = Ascent.Fg3,
                 fontSize = 10.sp,
                 fontFamily = MonoNumbers,
                 letterSpacing = 0.3.sp
             )
             Spacer(Modifier.height(5.dp))
-            Text(a.summary, color = Ascent.Fg2, fontSize = 12.sp, lineHeight = 17.sp, maxLines = 2)
+            Text(articleSummary(a.id, a.summary), color = Ascent.Fg2, fontSize = 12.sp, lineHeight = 17.sp, maxLines = 2)
         }
         Spacer(Modifier.width(8.dp))
         Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
@@ -269,7 +286,7 @@ private fun ArticleDetail(article: HandbookArticle, onBack: () -> Unit) {
             ) {
                 Icon(Ic.ChevronLeft, contentDescription = null, tint = Ascent.Fg2, modifier = Modifier.size(20.dp))
                 Spacer(Modifier.width(4.dp))
-                Text("技能书", color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                Text(stringResource(R.string.hb_title), color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
             }
             Icon(Ic.Bookmark, contentDescription = null, tint = Ascent.Fg2, modifier = Modifier.size(20.dp))
         }
@@ -290,12 +307,12 @@ private fun ArticleDetail(article: HandbookArticle, onBack: () -> Unit) {
 
         Spacer(Modifier.height(14.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
-            SoftTag(article.category, Ascent.Warning, Ascent.WarningSoft)
+            SoftTag(categoryName(article.category), Ascent.Warning, Ascent.WarningSoft)
             Spacer(Modifier.width(10.dp))
-            MonoLabel("${readingMinutes(article)} 分钟阅读")
+            MonoLabel(stringResource(R.string.hb_read_minutes, readingMinutes(article)))
         }
         Spacer(Modifier.height(10.dp))
-        Text(article.title, color = Ascent.Fg, fontSize = 26.sp, lineHeight = 34.sp, fontWeight = FontWeight.Bold)
+        Text(articleTitle(article.id, article.title), color = Ascent.Fg, fontSize = 26.sp, lineHeight = 34.sp, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(6.dp))
         MonoLabel(article.code)
 
@@ -308,21 +325,21 @@ private fun ArticleDetail(article: HandbookArticle, onBack: () -> Unit) {
                 .background(Ascent.Surface2)
                 .padding(15.dp)
         ) {
-            Text(article.summary, color = Ascent.Fg2, fontSize = 13.sp, lineHeight = 21.sp)
+            Text(articleSummary(article.id, article.summary), color = Ascent.Fg2, fontSize = 13.sp, lineHeight = 21.sp)
         }
 
-        article.sections.forEach { s ->
+        article.sections.forEachIndexed { i, s ->
             Spacer(Modifier.height(22.dp))
-            Text(s.heading, color = Ascent.Fg, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(articleSectionHeading(article.id, i + 1, s.heading), color = Ascent.Fg, fontSize = 16.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(8.dp))
-            Text(s.body, color = Ascent.Fg2, fontSize = 14.sp, lineHeight = 23.sp)
+            Text(articleSectionBody(article.id, i + 1, s.body), color = Ascent.Fg2, fontSize = 14.sp, lineHeight = 23.sp)
         }
 
         // 出处仅保留 SEVEN SUMMIT TREKS 的来源；其余出处不展示
         val shownSources = article.sources.filter { it.contains("SEVEN SUMMIT TREKS") }
         if (shownSources.isNotEmpty()) {
             Spacer(Modifier.height(26.dp))
-            MonoLabel("内容来源")
+            MonoLabel(stringResource(R.string.hb_source))
             Spacer(Modifier.height(10.dp))
             shownSources.forEach { src ->
                 Row(modifier = Modifier.padding(bottom = 8.dp)) {
@@ -341,7 +358,7 @@ private fun ArticleDetail(article: HandbookArticle, onBack: () -> Unit) {
 
         Spacer(Modifier.height(20.dp))
         Text(
-            text = "本文为教学整理，不构成医疗建议。",
+            text = stringResource(R.string.hb_article_note),
             color = Ascent.Fg3,
             fontSize = 11.sp,
             textAlign = TextAlign.Center,

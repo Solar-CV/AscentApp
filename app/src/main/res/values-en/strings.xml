@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ASCENT</string>
+
+    <!-- Common -->
+    <string name="common_back">Back</string>
+    <string name="common_close">Close</string>
+    <string name="common_done">Done</string>
+    <string name="common_next">Next</string>
+    <string name="common_continue">Continue</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_all">All</string>
+    <string name="common_check">Check</string>
+    <string name="common_reset">Reset</string>
+    <string name="common_start">Start</string>
+    <string name="common_minutes">%1$s min</string>
+    <string name="common_minutes_read">%1$s min read</string>
+    <string name="common_metric_m">%1$s m</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_path">Path</string>
+    <string name="nav_handbook">Handbook</string>
+    <string name="nav_training">Training</string>
+    <string name="nav_review">Review</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Language -->
+    <string name="lang_title">Language</string>
+    <string name="lang_section">Display language</string>
+    <string name="lang_follow_system">Follow system</string>
+    <string name="lang_follow_system_desc">Current: %1$s</string>
+    <string name="lang_section_all">All languages</string>
+    <string name="lang_note">Changes apply immediately, no restart needed. Lesson texts, the question bank and the handbook follow the interface language.</string>
+    <string name="lang_system_unknown">Unrecognized</string>
+
+    <!-- Settings -->
+    <string name="set_title">Settings</string>
+
+    <string name="set_section_appearance">Appearance</string>
+    <string name="set_theme">Theme</string>
+    <string name="set_theme_system">System</string>
+    <string name="set_theme_light">Light</string>
+    <string name="set_theme_dark">Dark</string>
+    <string name="set_theme_desc_system">Follow system (currently %1$s)</string>
+    <string name="set_theme_desc_light">Always light</string>
+    <string name="set_theme_desc_dark">Always dark</string>
+
+    <string name="set_language">Language</string>
+    <string name="set_language_desc_system">Follow system (%1$s)</string>
+    <string name="set_language_desc_manual">%1$s</string>
+
+    <string name="set_section_bank">Question bank</string>
+    <string name="set_bank_version">Question bank v%1$d</string>
+    <string name="set_bank_meta">%1$s · %2$d lessons · %3$d questions</string>
+    <string name="set_bank_check">Check for updates</string>
+    <string name="set_bank_checking">Checking…</string>
+    <string name="set_bank_restore">Restore built-in</string>
+    <string name="set_bank_confirm_restore">Restore built-in bank?</string>
+    <string name="set_bank_note">Updates are checked automatically when online. Offline the local bank is always used and nothing stops working.</string>
+    <string name="set_bank_url">Online bank URL</string>
+    <string name="set_bank_save_check">Save &amp; check</string>
+
+    <string name="set_section_dev">Developer mode</string>
+    <string name="set_dev_locked">Off · tap the version number below 7 times to enable</string>
+    <string name="set_dev_hint">Developer mode is for testing only: unlock all lessons, show answers, open the achievement test area.</string>
+    <string name="set_dev_on">Developer mode is on</string>
+    <string name="set_dev_on_desc">For testing only; real progress is unaffected</string>
+    <string name="set_dev_unlock_all">Unlock all lessons</string>
+    <string name="set_dev_unlock_all_desc">Skip prerequisites; every lesson can be opened</string>
+    <string name="set_dev_show_answers">Show correct answers</string>
+    <string name="set_dev_show_answers_desc">Mark the correct option with KEY before answering</string>
+    <string name="set_dev_achievements">Achievement test area (%1$d)</string>
+    <string name="set_dev_exit">Exit developer mode</string>
+    <string name="set_dev_tap_hint">Tap %1$d more times to enable developer mode</string>
+
+    <string name="set_section_data">Data</string>
+    <string name="set_reset">Reset learning progress</string>
+    <string name="set_reset_desc">Clears completed lessons, stars, altitude and study stats; achievement records are cleared too. This cannot be undone.</string>
+    <string name="set_reset_confirm">Reset? This cannot be undone</string>
+
+    <string name="set_section_about">About</string>
+    <string name="set_about_name">ASCENT</string>
+    <string name="set_about_desc">High-altitude mountaineering / ice climbing theory</string>
+    <string name="set_about_version">Version v%1$s (%2$d)</string>
+
+    <!-- Profile -->
+    <string name="prof_not_logged_in">Not signed in</string>
+    <string name="prof_route_progress">Theory route · %1$d / %2$d lessons done</string>
+    <string name="prof_settings">Settings</string>
+    <string name="prof_current_altitude">Current altitude</string>
+    <string name="prof_to_summit">%1$s m to the summit</string>
+    <string name="prof_abilities">Skills overview</string>
+    <string name="prof_ability_note">Technical skills require on-site coach assessment and are not auto-scored.</string>
+    <string name="prof_badges">Achievement badges · %1$d / %2$d</string>
+    <string name="prof_badges_hint">Tap the avatar to see unlocked badges on your profile page</string>
+    <string name="prof_section_account">Account</string>
+    <string name="prof_login_mock">Local mock sign-in; data is not synced yet</string>
+    <string name="prof_login_register">Sign in / Sign up</string>
+    <string name="prof_logout">Sign out</string>
+    <string name="prof_disclaimer_title">Knowing the theory is not the same as being able to do it</string>
+    <string name="prof_disclaimer_body">This app records theory progress only. Practical skills — snow and ice, rope work, ice climbing, rescue — must be assessed on site by a certified instructor before use in real terrain. Decisions involving medication or first aid must be made with a physician.</string>
+    <string name="prof_reset_all">Reset all learning progress</string>
+    <string name="prof_version_line">ASCENT · v%1$s</string>
+
+    <!-- Auth -->
+    <string name="auth_login_title">Sign in to ASCENT</string>
+    <string name="auth_register_title">Create account</string>
+    <string name="auth_login_note">Local mock sign-in; altitude and badges stay on this device</string>
+    <string name="auth_register_note">Accounts are stored locally until the backend is connected</string>
+    <string name="auth_login">Sign in</string>
+    <string name="auth_register">Sign up</string>
+    <string name="auth_nickname">Nickname</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password (6+ characters)</string>
+    <string name="auth_wait">Please wait…</string>
+    <string name="auth_login_action">Sign in</string>
+    <string name="auth_register_action">Sign up &amp; sign in</string>
+    <string name="auth_mock_note">Currently a local mock auth API (MockAuthApi). It never goes online and uploads no data.</string>
+    <string name="auth_backend_note">Swap the AuthApi implementation once the backend is ready; the UI needs no changes.</string>
+
+    <!-- Profile home -->
+    <string name="home_title">My profile</string>
+    <string name="home_subtitle">%1$s m · %2$d / %3$d lessons done</string>
+    <string name="home_overview">Learning overview</string>
+    <string name="home_streak">Current streak</string>
+    <string name="home_active_days">Active days</string>
+    <string name="home_days_value">%1$d days</string>
+    <string name="home_lessons_done">Lessons done</string>
+    <string name="home_badges">Badges</string>
+    <string name="home_progress_total">Overall progress</string>
+    <string name="home_progress_altitude">Altitude progress</string>
+    <string name="home_earned_badges">Unlocked badges · %1$d</string>
+    <string name="home_no_badges">No badges yet. Complete lessons and keep a streak to earn them.</string>
+    <string name="home_view_all_badges">View all badges</string>
+    <string name="home_view_all_badges_n">View all %1$d badges</string>
+
+    <!-- Badge wall -->
+    <string name="badge_wall_title">All badges</string>
+    <string name="badge_wall_subtitle">Unlocked %1$d / %2$d · grey means locked (preview only)</string>
+    <string name="badge_hidden">Hidden achievement</string>
+
+    <!-- Achievement popup -->
+    <string name="ach_unlocked">Achievement unlocked</string>
+    <string name="ach_accept">Accept</string>
+
+    <!-- Lesson -->
+    <string name="lesson_retry_progress">Retry %1$d / %2$d</string>
+    <string name="lesson_fixed">Corrected</string>
+    <string name="lesson_correct">Correct</string>
+    <string name="lesson_safety_wrong">Safety-critical question answered wrong — you must master this</string>
+    <string name="lesson_think_again">Think again</string>
+    <string name="lesson_source">Source · %1$s</string>
+    <string name="lesson_understood">Got it, continue</string>
+    <string name="lesson_type_single">Single choice</string>
+    <string name="lesson_type_multi">Multiple choice · select all that apply</string>
+    <string name="lesson_type_order">Ordering · adjust the sequence</string>
+    <string name="lesson_type_match">Matching · pick left, then right</string>
+    <string name="lesson_type_fill">Fill in · key figures</string>
+    <string name="lesson_type_calc">Calculation · enter a value</string>
+    <string name="lesson_type_hotspot">Hotspot · tap the spot on the image</string>
+    <string name="lesson_type_scenario">Scenario · %1$d steps</string>
+    <string name="lesson_safety_badge">Safety critical</string>
+    <string name="lesson_img_missing">Image missing: %1$s</string>
+    <string name="lesson_img_hint">Tap the image to enlarge (pinch to zoom)</string>
+    <string name="lesson_move_up">Move up</string>
+    <string name="lesson_move_down">Move down</string>
+    <string name="lesson_fill_hint">Type your answer here</string>
+    <string name="lesson_answer_ref">Reference answer: %1$s</string>
+    <string name="lesson_pick">Tap to choose</string>
+    <string name="lesson_pick_pair">Choose below (tap an item above first)</string>
+    <string name="lesson_number_unit">Enter a value (unit: %1$s)</string>
+    <string name="lesson_number">Enter a value</string>
+    <string name="lesson_tolerance">(tolerance ±%1$s)</string>
+    <string name="lesson_hotspot_ok">The green ring marks the correct area</string>
+    <string name="lesson_hotspot_tap">Tap where you think is correct</string>
+    <string name="lesson_zoom_open">Open full image (pinch to zoom)</string>
+    <string name="lesson_step_progress">Step %1$d of %2$d</string>
+    <string name="lesson_step_ok">This step is correct</string>
+    <string name="lesson_step_bad">This step is wrong</string>
+    <string name="lesson_scenario_pass">Scenario passed · every step correct</string>
+    <string name="lesson_scenario_fail">Scenario failed · the whole scenario repeats in the retry round</string>
+    <string name="lesson_questions_n">%1$d questions</string>
+    <string name="lesson_est_minutes">About %1$d min</string>
+    <string name="lesson_types_n">%1$d question types</string>
+    <string name="lesson_key_points">Key points</string>
+    <string name="lesson_practical">Practical skill</string>
+    <string name="lesson_practical_note">This lesson must be taught and assessed on site by a certified instructor before use in real terrain.</string>
+    <string name="lesson_start_quiz">Start quiz · %1$d questions</string>
+    <string name="lesson_perfect">Perfect score</string>
+    <string name="lesson_need_review">Completed · needs review</string>
+    <string name="lesson_completed">Completed</string>
+    <string name="lesson_passed_bad">PASSED · with mistakes</string>
+    <string name="lesson_accuracy">Accuracy</string>
+    <string name="lesson_first_correct">First-try correct</string>
+    <string name="lesson_altitude">Altitude</string>
+    <string name="lesson_remaining_note">%1$d questions are still unmastered and have been added to the review queue. Repeating the same lesson no longer earns altitude; missed questions keep coming back until answered correctly.</string>
+    <string name="lesson_retry_summary">Retried %1$d questions · corrected %2$d.</string>
+    <string name="lesson_recorded">Theory for “%1$s” has been recorded.</string>
+    <string name="lesson_practical_reminder">This is a practical skill lesson and still requires on-site coaching and assessment.</string>
+    <string name="lesson_climb_on">Keep climbing</string>
+    <string name="lesson_peak">Summit</string>
+    <string name="lesson_zoom_tip">Pinch to zoom · drag to pan · double-tap to reset</string>
+
+    <!-- Handbook -->
+    <string name="hb_title">Handbook</string>
+    <string name="hb_subtitle">%1$d articles · LIBRARY</string>
+    <string name="hb_search">Search the handbook</string>
+    <string name="hb_filter_all">All</string>
+    <string name="hb_filter_gear">Gear</string>
+    <string name="hb_filter_tech">Technique</string>
+    <string name="hb_filter_med">Medicine</string>
+    <string name="hb_filter_health">Health</string>
+    <string name="hb_filter_weather">Weather</string>
+    <string name="hb_filter_meteo">Meteorology</string>
+    <string name="hb_filter_decision">Decisions</string>
+    <string name="hb_filter_judge">Judgement</string>
+    <string name="hb_filter_safety">Safety</string>
+    <string name="hb_filter_risk">Risk</string>
+    <string name="hb_empty">No matching articles</string>
+    <string name="hb_empty_hint">Try another keyword or category</string>
+    <string name="hb_disclaimer_1">This handbook is educational material. It is not medical advice and does not replace on-site instruction from a certified guide.</string>
+    <string name="hb_disclaimer_2">Decisions about medication, rescue and first aid must be assessed by a professional.</string>
+    <string name="hb_meta">%1$s · %2$d min</string>
+    <string name="hb_source">Sources</string>
+    <string name="hb_article_note">Educational material only; not medical advice.</string>
+
+    <!-- Review -->
+    <string name="rev_title">Review</string>
+    <string name="rev_subtitle">Spaced repetition</string>
+    <string name="rev_due_today">Due today</string>
+    <string name="rev_safety_n">%1$d safety-critical</string>
+    <string name="rev_queue_meta">Queue %1$d · mastery %2$d%%</string>
+    <string name="rev_all_done">Today’s review is done</string>
+    <string name="rev_pending_n">%1$d questions are still queued; they will appear here when due.</string>
+    <string name="rev_schedule_note">Missed questions join the queue automatically and are scheduled by spaced repetition (1 / 3 / 7 / 16 / 35 days).</string>
+    <string name="rev_start">Start review · %1$d questions</string>
+    <string name="rev_queue_safety">Queue · safety-critical first</string>
+    <string name="rev_safety_weight">Safety critical · weight ×2</string>
+    <string name="rev_others">Other mistakes</string>
+    <string name="rev_coach_pending">Awaiting coach assessment</string>
+    <string name="rev_theory_logged">Theory logged · needs on-site confirmation</string>
+
+    <!-- Training -->
+    <string name="tr_title">Training</string>
+    <string name="tr_subtitle">Recommended by progress · TRAINING</string>
+    <string name="tr_today">Today · TODAY</string>
+    <string name="tr_preview">Preview · %1$s</string>
+    <string name="tr_knot_speed">Knot speed drill</string>
+    <string name="tr_meta">%1$d questions · current altitude %2$s m</string>
+    <string name="tr_knot_desc">5 min · double fisherman’s / prusik</string>
+    <string name="tr_recommend">For you · BASED ON PROGRESS</string>
+    <string name="tr_boundary">Safety boundary</string>
+    <string name="tr_boundary_body">This plan covers theory and background only. Practical skills — snow and ice, rope work, ice climbing — must all be practised and assessed under a certified instructor. This app does not promise a summit and cannot guarantee how you acclimatize.</string>
+    <string name="tr_item1_title">Crampon footwork · flat-ground drill</string>
+    <string name="tr_item1_desc">Muscle memory for French / German technique</string>
+    <string name="tr_item2_title">Breathing &amp; cadence · 4-4 breathing</string>
+    <string name="tr_item2_desc">Build tolerance to hypoxia</string>
+    <string name="tr_item3_title">Gear list recall</string>
+    <string name="tr_item3_desc">The fixed routine before setting out</string>
+    <string name="tr_item4_title">Weather reading · cloud identification</string>
+    <string name="tr_item4_desc">Recognise cumulonimbus and fronts</string>
+
+    <!-- Path -->
+    <string name="path_camp_base">Base Camp</string>
+    <string name="path_camp_c1">Camp 1</string>
+    <string name="path_camp_c2">Camp 2</string>
+    <string name="path_camp_c3">Camp 3</string>
+    <string name="path_camp_high">High Camp</string>
+    <string name="path_unit_meta">Unit %1$d · %2$s</string>
+    <string name="path_lessons_range">%1$d lessons · %2$s – %3$s m</string>
+    <string name="path_summit">Summit · %1$s %2$s m</string>
+    <string name="path_unit_clear">Unit cleared</string>
+    <string name="path_to_summit">%1$s m to the summit</string>
+    <string name="path_done_pct">%1$d / %2$d lessons · %3$d%%</string>
+    <string name="path_you_are_here">You are here</string>
+
+    <!-- Achievement test area -->
+    <string name="dev_back_to">Back to developer mode</string>
+    <string name="dev_title">Achievement test area</string>
+    <string name="dev_unlocked_meta">Unlocked %1$d / %2$d · previews and simulations never affect real progress</string>
+    <string name="dev_snapshot">Stats snapshot</string>
+    <string name="dev_validity">Definition validation</string>
+    <string name="dev_valid_ok">All %1$d passed: no duplicate IDs, all glyphs present, all condition references valid</string>
+    <string name="dev_batch">Batch tests</string>
+    <string name="dev_batch_play">Play 3 unlock animations</string>
+    <string name="dev_reset_all">Reset all achievements</string>
+    <string name="dev_reset_all_confirm">Reset all achievements?</string>
+    <string name="dev_queue_empty">Pending queue: empty</string>
+    <string name="dev_queue_clear">Clear pending queue (%1$d)</string>
+    <string name="dev_note_1">“Play animations” only previews the popup and writes nothing; “Reset all” clears achievement fields only, never lesson progress;</string>
+    <string name="dev_note_2">if a popup gets stuck, use “Clear pending queue”.</string>
+    <string name="dev_unlocked">Unlocked</string>
+    <string name="dev_locked">Locked</string>
+    <string name="dev_preview">Preview popup</string>
+    <string name="dev_reset_item">Reset this</string>
+    <string name="dev_force_unlock">Force unlock</string>
+    <string name="dev_stats_detail">maxStreak %1$d · active %2$d days · runs %3$d · reviews correct %4$d · queue %5$d · altitude %6$d</string>
+
+    <!-- Bank status -->
+    <string name="bank_bundled">Built-in bank</string>
+    <string name="bank_online_v">Online bank v%1$d</string>
+    <string name="bank_restored">Built-in bank restored</string>
+    <string name="bank_not_init">Not initialized</string>
+    <string name="bank_no_url">No online bank URL configured</string>
+    <string name="bank_need_app">Online bank requires app v%1$d or newer</string>
+    <string name="bank_latest_v">Already up to date (v%1$d)</string>
+    <string name="bank_download_fail">Could not download the bank file</string>
+    <string name="bank_sha_fail">Bank verification failed (sha256 mismatch)</string>
+    <string name="bank_format_fail">Invalid bank format; the previous bank was kept</string>
+    <string name="bank_schema_high">Bank schema %1$d is newer than supported (%2$d)</string>
+    <string name="bank_updated_v">Updated to v%1$d</string>
+    <string name="bank_cache_fail">Failed to write cache: %1$s</string>
+
+    <!-- ========== 参数化补全（v0.16 i18n） ========== -->
+    <string name="badge_wall_subtitle_2">Unlocked %1$d / %2$d · grey = locked (preview only)</string>
+    <string name="lesson_recheck">Check again</string>
+    <string name="lesson_retry_tag">Retry</string>
+    <string name="lesson_correct_pair">Correct answer: %1$s</string>
+    <string name="hb_read_minutes">%1$d min read</string>
+    <string name="home_meta">%1$s M · %2$d / %3$d lessons done</string>
+    <string name="common_days_n">%1$d days</string>
+    <string name="home_badges_unlocked">Badges unlocked · %1$d</string>
+    <string name="prof_route_meta">Theory route · %1$d / %2$d lessons</string>
+    <string name="prof_badges_meta">Achievement badges · %1$d / %2$d</string>
+    <string name="prof_version">ASCENT · v%1$s</string>
+    <string name="cap_m5i">5000 Beginner</string>
+    <string name="cap_m5a">5000 Advanced</string>
+    <string name="cap_m6">6000 m</string>
+    <string name="cap_m7">7000 m</string>
+    <string name="cap_m8">8000 m</string>
+    <string name="dev_tap_hint">Tap %1$d more times to unlock developer mode</string>
+    <string name="set_theme_system_current">Follow system (currently %1$s)</string>
+    <string name="set_bank_current">Current bank v%1$d</string>
+    <string name="set_version">Version v%1$s (%2$d)</string>
+    <string name="main_bank_updated">Question bank updated to v%1$d (%2$d questions)</string>
+    <string name="main_bank_latest">Question bank is up to date (v%1$d)</string>
+    <string name="main_bank_need_app">Online bank requires app v%1$d or later</string>
+</resources>

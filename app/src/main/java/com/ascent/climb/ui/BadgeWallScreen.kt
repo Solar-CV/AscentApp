@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -61,13 +63,13 @@ fun BadgeWallScreen(
                 ) {
                     Icon(Ic.ChevronLeft, contentDescription = null, tint = Ascent.Fg2, modifier = Modifier.width(20.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text("返回", color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                    Text(stringResource(R.string.common_back), color = Ascent.Fg2, fontSize = 14.sp, fontWeight = FontWeight.Medium)
                 }
                 Spacer(Modifier.height(8.dp))
-                Text("全部徽章", color = Ascent.Fg, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.badge_wall_title), color = Ascent.Fg, fontSize = 22.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "已解锁 ${unlocked.size} / ${ACHIEVEMENTS.size} · 灰色为未解锁（仅预览）",
+                    text = stringResource(R.string.badge_wall_subtitle_2, unlocked.size, ACHIEVEMENTS.size),
                     color = Ascent.Fg3,
                     fontSize = 12.sp
                 )
@@ -79,7 +81,7 @@ fun BadgeWallScreen(
                 if (group.isEmpty()) return@forEach
                 item(key = "lb_$cat") {
                     MonoLabel(
-                        "${cat.label} · ${group.count { it.id in unlocked }} / ${group.size}",
+                        "${achCategoryName(cat)} · ${group.count { it.id in unlocked }} / ${group.size}",
                         modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)
                     )
                 }
@@ -118,7 +120,7 @@ private fun BadgeWallItem(a: Achievement, unlocked: Boolean) {
         )
         Spacer(Modifier.height(5.dp))
         Text(
-            text = if (concealed) "隐藏成就" else a.title,
+            text = if (concealed) stringResource(R.string.badge_hidden) else achievementTitle(a.id, a.title),
             color = if (unlocked) Ascent.Fg2 else Ascent.Fg3,
             fontSize = 10.sp,
             maxLines = 1,
@@ -126,7 +128,7 @@ private fun BadgeWallItem(a: Achievement, unlocked: Boolean) {
         )
         Spacer(Modifier.height(2.dp))
         Text(
-            text = a.rarity.label,
+            text = rarityName(a.rarity),
             color = if (unlocked) Ascent.Accent else Ascent.Fg3,
             fontSize = 9.sp
         )

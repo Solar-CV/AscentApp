@@ -30,7 +30,7 @@ sealed interface UpdateCheck {
     data class NeedAppUpgrade(val requiredAppVersion: Int) : UpdateCheck
 
     /** 检查失败（网络、格式、校验等）。 */
-    data class Failed(val message: String) : UpdateCheck
+    data class Failed(val message: String, val msg: BankMsg? = null) : UpdateCheck
 }
 
 /**

@@ -1,7 +1,11 @@
 package com.ascent.climb
 
 import android.app.Activity
+import android.content.Context
+import android.app.LocaleManager
+import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -14,6 +18,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -22,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
@@ -31,6 +37,9 @@ import com.ascent.climb.data.ALL_UNITS
 import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.achievementById
 import com.ascent.climb.data.bank.BankRepository
+import com.ascent.climb.ui.bankMsgOf
+import com.ascent.climb.ui.bankMsgText
+import com.ascent.climb.i18n.AppLocale
 import com.ascent.climb.data.bank.UpdateCheck
 import com.ascent.climb.data.altitudeAwardFor
 import com.ascent.climb.data.lessonById
@@ -56,6 +65,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             var themeMode by remember { mutableStateOf(store.themeMode) }
+            var languageMode by remember { mutableStateOf(store.languageMode) }
+
             val dark = when (themeMode) {
                 "light" -> false
                 "dark" -> true
@@ -68,32 +79,66 @@ class MainActivity : ComponentActivity() {
                 controller.isAppearanceLightStatusBars = !dark
                 controller.isAppearanceLightNavigationBars = !dark
             }
-            AscentTheme(darkTheme = dark) {
-                AscentRoot(
-                    store = store,
-                    themeMode = themeMode,
-                    onThemeModeChange = {
-                        store.themeMode = it
-                        themeMode = it
+
+            // 生效语言：手动选择优先，否则按系统语言列表匹配，都不支持则回退英文。
+            // 这里用 LocalConfiguration 而不是 LocaleList.getDefault()，
+            // 这样系统语言变化（Activity 重建）后能拿到最新值。
+            val systemLocales = LocalConfiguration.current.locales
+            val locale = remember(languageMode, systemLocales) {
+                AppLocale.resolve(languageMode, systemLocales)
+            }
+            val baseContext = LocalContext.current
+            val localized = remember(locale) {
+                AppLocale.localizedContext(baseContext, locale)
+            }
+
+            // Android 13+：同步到系统「应用语言」设置，保证系统设置页与本 App 一致。
+            // 「跟随系统」时清空，交还给系统。
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                LaunchedEffect(languageMode) {
+                    val lm = applicationContext.getSystemService(LocaleManager::class.java)
+                        ?: return@LaunchedEffect
+                    val target = if (languageMode == AppLocale.AUTO) {
+                        LocaleList.getEmptyLocaleList()
+                    } else {
+                        LocaleList.forLanguageTags(languageMode)
                     }
-                )
+                    if (lm.applicationLocales != target) {
+                        runCatching { lm.applicationLocales = target }
+                    }
+                }
+            }
+
+            CompositionLocalProvider(LocalContext provides localized) {
+                AscentTheme(darkTheme = dark) {
+                    AscentRoot(
+                        store = store,
+                        themeMode = themeMode,
+                        onThemeModeChange = {
+                            store.themeMode = it
+                            themeMode = it
+                        },
+                        languageMode = languageMode,
+                        onLanguageModeChange = {
+                            store.languageMode = it
+                            languageMode = it
+                        }
+                    )
+                }
             }
         }
     }
 }
 
-private fun describeCheck(r: UpdateCheck): String = when (r) {
-    is UpdateCheck.Downloaded -> "题库已更新到 v${r.version}（${r.questionCount} 题）"
-    is UpdateCheck.UpToDate -> "题库已是最新（v${r.version}）"
-    is UpdateCheck.NeedAppUpgrade -> "在线题库需要 App v${r.requiredAppVersion} 以上"
-    is UpdateCheck.Failed -> r.message
-}
+
 
 @Composable
 fun AscentRoot(
     store: ProgressStore,
     themeMode: String,
-    onThemeModeChange: (String) -> Unit
+    onThemeModeChange: (String) -> Unit,
+    languageMode: String,
+    onLanguageModeChange: (String) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -121,7 +166,9 @@ fun AscentRoot(
     // 题库状态
     var bankRevision by remember { mutableStateOf(0) }
     var bankChecking by remember { mutableStateOf(false) }
-    var bankMessage by remember { mutableStateOf(BankRepository.lastResult) }
+    var bankMsg by remember { mutableStateOf(BankRepository.lastResult) }
+    // 文案在组合期解析，语言切换后会自动跟着变
+    val bankMessage = bankMsgText(bankMsg)
     var checkTrigger by remember { mutableStateOf(0) }
 
     LaunchedEffect(Unit) {
@@ -144,7 +191,7 @@ fun AscentRoot(
         if (silent && (!BankRepository.hasRemoteConfigured || !BankRepository.shouldAutoCheck())) return@LaunchedEffect
         bankChecking = true
         val result = BankRepository.checkForUpdate()
-        bankMessage = describeCheck(result)
+        bankMsg = bankMsgOf(result)
         bankChecking = false
         if (result is UpdateCheck.Downloaded) {
             // 让界面重新读取新的题库
@@ -236,6 +283,8 @@ fun AscentRoot(
                             devShowAnswers = devShowAnswers,
                             themeMode = themeMode,
                             onThemeModeChange = onThemeModeChange,
+                            languageMode = languageMode,
+                            onLanguageModeChange = onLanguageModeChange,
                             onDevUnlocked = {
                                 store.devUnlocked = true
                                 devUnlocked = true
@@ -264,7 +313,7 @@ fun AscentRoot(
                             },
                             onResetBank = {
                                 BankRepository.resetToBundled()
-                                bankMessage = BankRepository.lastResult
+                                bankMsg = BankRepository.lastResult
                                 bankRevision += 1
                             },
                             onBankUrlChange = { url ->

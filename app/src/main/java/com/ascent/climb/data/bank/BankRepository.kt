@@ -18,6 +18,20 @@ import java.io.File
  * 在线 JSON 只做「增量更新」：有网时检查版本，比本地新才下载覆盖缓存；
  * 拉取失败、校验不通过、版本更旧，一律保留现状。因此离线行为与纯离线 App 完全一致。
  */
+/**
+ * 题库状态提示的语义码。
+ *
+ * 数据层不拼接面向用户的文案：这里只记录「要说什么」，
+ * 由 UI 层按当前语言查字符串资源（见 ui/BankText.kt）。
+ * 语言切换后提示也会跟着变。
+ */
+data class BankMsg(
+    val code: String,
+    val n1: Int = 0,
+    val n2: Int = 0,
+    val s1: String = ""
+)
+
 object BankRepository {
 
     private const val PREFS = "ascent_bank"
@@ -36,18 +50,19 @@ object BankRepository {
     private var units: List<Unit> = emptyList()
     private var lessons: List<Lesson> = emptyList()
     private var version: Int = 0
-    private var sourceLabel: String = "内置题库"
+    private var sourceKindValue: String = "bundled"
     private var updatedAt: String = ""
 
-    /** 最近一次检查更新的结果描述，用于界面展示。 */
-    var lastResult: String = ""
+    /** 最近一次检查更新的结果，用于界面展示（由 UI 按当前语言解析）。 */
+    var lastResult: BankMsg? = null
         private set
 
     val allTracks: List<Track> get() = tracks
     val allUnits: List<Unit> get() = units
     val allLessons: List<Lesson> get() = lessons
     val bankVersion: Int get() = version
-    val sourceDescription: String get() = sourceLabel
+    /** 题库来源："bundled" 或 "online"，由 UI 层翻译成当前语言。 */
+    val sourceKind: String get() = sourceKindValue
     val bankUpdatedAt: String get() = updatedAt
     val totalQuestions: Int get() = lessons.sumOf { it.questions.size }
 
@@ -88,7 +103,7 @@ object BankRepository {
     fun init(context: Context) {
         appContext = context.applicationContext
         val c = appContext!!
-        lastResult = prefs(c).getString(KEY_LAST_RESULT, "") ?: ""
+        lastResult = decodeMsg(prefs(c).getString(KEY_LAST_RESULT, "") ?: "")
 
         // 已经载入过就不重复解析（Activity 重建时会再次调用）
         if (units.isNotEmpty()) return
@@ -98,14 +113,14 @@ object BankRepository {
             val cachedVersion = prefs(c).getInt(KEY_CACHE_VERSION, 0)
             val payload = runCatching { BankJson.decode(cacheFile.readText()) }.getOrNull()
             if (payload != null && payload.tracks.isNotEmpty()) {
-                install(payload.tracks, payload.version, "在线题库 v${payload.version}", payload.updatedAt)
+                install(payload.tracks, payload.version, "online", payload.updatedAt)
                 return
             }
             // 缓存损坏：丢弃，回退内置
             cacheFile.delete()
             prefs(c).edit().remove(KEY_CACHE_VERSION).remove(KEY_CACHE_UPDATED).apply()
         }
-        install(buildBundledTracks(), BankConfig.BUNDLED_VERSION, "内置题库", "")
+        install(buildBundledTracks(), BankConfig.BUNDLED_VERSION, "bundled", "")
     }
 
     /** 恢复为内置题库（开发者模式 / 排障用）。 */
@@ -113,9 +128,9 @@ object BankRepository {
         val c = appContext ?: return
         File(c.filesDir, CACHE_FILE).delete()
         prefs(c).edit().remove(KEY_CACHE_VERSION).remove(KEY_CACHE_UPDATED).apply()
-        install(buildBundledTracks(), BankConfig.BUNDLED_VERSION, "内置题库", "")
-        lastResult = "已恢复内置题库"
-        prefs(c).edit().putString(KEY_LAST_RESULT, lastResult).apply()
+        install(buildBundledTracks(), BankConfig.BUNDLED_VERSION, "bundled", "")
+        lastResult = BankMsg("restored")
+        prefs(c).edit().putString(KEY_LAST_RESULT, encodeMsg(lastResult)).apply()
     }
 
     /**
@@ -123,15 +138,15 @@ object BankRepository {
      * 若比本地新，会下载、校验并直接切换为当前题库（同时写入缓存供下次启动使用）。
      */
     suspend fun checkForUpdate(): UpdateCheck {
-        val c = appContext ?: return UpdateCheck.Failed("尚未初始化")
+        val c = appContext ?: return UpdateCheck.Failed("", BankMsg("init_missing"))
         val base = baseUrl
-        if (base.isBlank()) return fail(c, "未配置在线题库地址")
+        if (base.isBlank()) return fail(c, BankMsg("no_url"))
 
         // 1) 优先取 manifest（小文件，只为了比版本）
         val manifest = remote.fetchManifest(base)
 
         if (manifest != null && manifest.minAppVersion > BuildConfig.VERSION_CODE) {
-            fail(c, "在线题库需要 App v${manifest.minAppVersion} 以上")
+            fail(c, BankMsg("need_app", manifest.minAppVersion))
             return UpdateCheck.NeedAppUpgrade(manifest.minAppVersion)
         }
 
@@ -140,33 +155,33 @@ object BankRepository {
 
         // 2) manifest 版本不比本地新就先不下载大文件
         if (manifest != null && manifestVersion in 1..version) {
-            succeed(c, "已是最新（v${version}）")
+            succeed(c, BankMsg("latest", version))
             return UpdateCheck.UpToDate(version)
         }
 
         // 3) 下载题库
         val text = remote.fetchBank(base, fileName)
-            ?: return fail(c, "无法下载题库文件")
+            ?: return fail(c, BankMsg("download_fail"))
 
         // 4) 校验
         manifest?.sha256?.let { expected ->
             val actual = remote.sha256(text)
             if (!actual.equals(expected, ignoreCase = true)) {
-                return fail(c, "题库校验失败（sha256 不匹配）")
+                return fail(c, BankMsg("sha_fail"))
             }
         }
 
         // 5) 解析
         val payload = BankJson.decode(text)
-            ?: return fail(c, "题库格式不正确，已保留原题库")
+            ?: return fail(c, BankMsg("format_fail"))
         if (payload.schema > BankJson.SCHEMA) {
-            return fail(c, "题库 schema ${payload.schema} 高于本机支持（${BankJson.SCHEMA}）")
+            return fail(c, BankMsg("schema_high", payload.schema, BankJson.SCHEMA))
         }
         if (payload.minAppVersion > BuildConfig.VERSION_CODE) {
             return UpdateCheck.NeedAppUpgrade(payload.minAppVersion)
         }
         if (payload.version <= version) {
-            succeed(c, "已是最新（v${version}）")
+            succeed(c, BankMsg("latest", version))
             return UpdateCheck.UpToDate(version)
         }
 
@@ -177,35 +192,58 @@ object BankRepository {
                 .putInt(KEY_CACHE_VERSION, payload.version)
                 .putString(KEY_CACHE_UPDATED, payload.updatedAt)
                 .apply()
-            install(payload.tracks, payload.version, "在线题库 v${payload.version}", payload.updatedAt)
-            succeed(c, "已更新到 v${payload.version}")
+            install(payload.tracks, payload.version, "online", payload.updatedAt)
+            succeed(c, BankMsg("updated", payload.version))
             UpdateCheck.Downloaded(payload.version, payload.updatedAt, payload.questionCount)
         } catch (e: Exception) {
-            fail(c, "写入缓存失败：${e.message}")
+            fail(c, BankMsg("cache_fail", s1 = e.message ?: ""))
         }
     }
 
-    private fun install(newTracks: List<Track>, v: Int, label: String, updated: String) {
+    private fun install(newTracks: List<Track>, v: Int, kind: String, updated: String) {
         tracks = newTracks
         units = newTracks.flatMap { it.units }
         lessons = units.flatMap { it.lessons }
         version = v
-        sourceLabel = label
+        sourceKindValue = kind
         updatedAt = updated
     }
 
     private fun prefs(c: Context) = c.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
-    private fun fail(c: Context, msg: String): UpdateCheck {
-        lastResult = msg
-        prefs(c).edit().putString(KEY_LAST_RESULT, msg).apply()
-        return UpdateCheck.Failed(msg)
+    private val KNOWN_CODES = setOf(
+        "restored", "init_missing", "no_url", "need_app", "latest",
+        "download_fail", "sha_fail", "format_fail", "schema_high", "updated", "cache_fail"
+    )
+
+    private fun encodeMsg(m: BankMsg?): String =
+        m?.let { "${it.code}|${it.n1}|${it.n2}|${it.s1}" } ?: ""
+
+    private fun decodeMsg(raw: String): BankMsg? {
+        if (raw.isBlank()) return null
+        val p = raw.split("|", limit = 4)
+        if (p.size >= 2 && p[0] in KNOWN_CODES) {
+            return BankMsg(
+                p[0],
+                p.getOrNull(1)?.toIntOrNull() ?: 0,
+                p.getOrNull(2)?.toIntOrNull() ?: 0,
+                p.getOrNull(3) ?: ""
+            )
+        }
+        // 旧版本存的是中文原文：原样展示，等下次检查成功后自然覆盖
+        return BankMsg("legacy", s1 = raw)
     }
 
-    private fun succeed(c: Context, msg: String) {
+    private fun fail(c: Context, msg: BankMsg): UpdateCheck {
+        lastResult = msg
+        prefs(c).edit().putString(KEY_LAST_RESULT, encodeMsg(msg)).apply()
+        return UpdateCheck.Failed("", msg)
+    }
+
+    private fun succeed(c: Context, msg: BankMsg) {
         lastResult = msg
         prefs(c).edit()
-            .putString(KEY_LAST_RESULT, msg)
+            .putString(KEY_LAST_RESULT, encodeMsg(msg))
             .putLong(KEY_LAST_CHECK, System.currentTimeMillis())
             .apply()
     }

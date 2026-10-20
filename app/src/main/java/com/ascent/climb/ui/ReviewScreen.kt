@@ -1,5 +1,7 @@
 package com.ascent.climb.ui
 
+import com.ascent.climb.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -68,9 +70,9 @@ fun ReviewScreen(
         // ---- 标题 ----
         item(key = "title") {
             Column(modifier = Modifier.padding(bottom = 14.dp)) {
-                Text("复习", color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.rev_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(4.dp))
-                MonoLabel("间隔重复 · SPACED REPETITION")
+                MonoLabel(stringResource(R.string.rev_subtitle))
             }
         }
 
@@ -91,7 +93,7 @@ fun ReviewScreen(
                             fontFamily = MonoNumbers
                         )
                         Text(
-                            text = "今日待复习",
+                            text = stringResource(R.string.rev_due_today),
                             color = Ascent.Fg2,
                             fontSize = 13.sp,
                             modifier = Modifier.padding(start = 8.dp, bottom = 6.dp)
@@ -100,14 +102,14 @@ fun ReviewScreen(
                     Column(horizontalAlignment = Alignment.End) {
                         if (safetyCriticalMisses.isNotEmpty()) {
                             SoftTag(
-                                text = "${safetyCriticalMisses.size} 道安全关键",
+                                text = stringResource(R.string.rev_safety_n, safetyCriticalMisses.size),
                                 foreground = Ascent.Warning,
                                 background = Ascent.WarningSoft,
                                 icon = Ic.ShieldAlert
                             )
                         }
                         Spacer(Modifier.height(6.dp))
-                        MonoLabel("队列 $reviewTotal · 熟练度 $accuracy%")
+                        MonoLabel(stringResource(R.string.rev_queue_meta, reviewTotal, accuracy))
                     }
                 }
                 val cells = 8
@@ -138,13 +140,13 @@ fun ReviewScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
                             IconBadge(Ic.CircleCheck, Ascent.Fg3, Ascent.Surface2, diameter = 56, iconSize = 26)
                             Spacer(Modifier.height(12.dp))
-                            Text("今天的复习已完成", color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                            Text(stringResource(R.string.rev_all_done), color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                             Spacer(Modifier.height(5.dp))
                             Text(
                                 text = if (reviewTotal > 0)
-                                    "队列里还有 $reviewTotal 题，到期后会自动出现在这里。"
+                                    stringResource(R.string.rev_pending_n, reviewTotal)
                                 else
-                                    "答错的题会自动进入队列，按间隔重复排期（1 / 3 / 7 / 16 / 35 天）。",
+                                    stringResource(R.string.rev_schedule_note),
                                 color = Ascent.Fg3,
                                 fontSize = 12.sp,
                                 lineHeight = 18.sp,
@@ -158,7 +160,7 @@ fun ReviewScreen(
             item(key = "cta") {
                 Spacer(Modifier.height(14.dp))
                 PillButton(
-                    text = "开始复习 · ${dueKeys.size} 题",
+                    text = stringResource(R.string.rev_start, dueKeys.size),
                     icon = Ic.ArrowRight,
                     onClick = { onOpenLesson(dueKeys.first().substringBefore("#")) }
                 )
@@ -168,13 +170,13 @@ fun ReviewScreen(
         // ---- 安全关键 ----
         if (safetyCriticalMisses.isNotEmpty()) {
             item(key = "sec_safety") {
-                MonoLabel("队列 · 安全关键优先", modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
+                MonoLabel(stringResource(R.string.rev_queue_safety), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
             }
             items(safetyCriticalMisses.size, key = { "sf_$it" }) { i ->
                 val (_, lesson) = safetyCriticalMisses[i]
                 ReviewRow(
                     lesson = lesson,
-                    sub = "安全关键 · 权重 ×2",
+                    sub = stringResource(R.string.rev_safety_weight),
                     icon = Ic.ShieldAlert,
                     tint = Ascent.Danger,
                     bg = Ascent.DangerSoft,
@@ -186,7 +188,7 @@ fun ReviewScreen(
         // ---- 其他错题 ----
         if (otherMisses.isNotEmpty()) {
             item(key = "sec_other") {
-                MonoLabel("其他错题", modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
+                MonoLabel(stringResource(R.string.rev_others), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
             }
             items(otherMisses.size, key = { "ot_$it" }) { i ->
                 val (_, lesson) = otherMisses[i]
@@ -204,13 +206,13 @@ fun ReviewScreen(
         // ---- 待教练评估 ----
         if (pendingCoach.isNotEmpty()) {
             item(key = "sec_coach") {
-                MonoLabel("待教练现场评估", modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
+                MonoLabel(stringResource(R.string.rev_coach_pending), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
             }
             items(pendingCoach.size, key = { "co_$it" }) { i ->
                 val lesson = pendingCoach[i]
                 ReviewRow(
                     lesson = lesson,
-                    sub = "理论已记录 · 需现场确认",
+                    sub = stringResource(R.string.rev_theory_logged),
                     icon = Ic.Users,
                     tint = Ascent.Warning,
                     bg = Ascent.WarningSoft,
@@ -245,7 +247,7 @@ private fun ReviewRow(
         IconBadge(icon, tint, bg, diameter = 30, iconSize = 15)
         Spacer(Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {
-            Text(lesson.title, color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+            Text(lessonTitle(lesson.id, lesson.title), color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.Medium)
             Spacer(Modifier.height(3.dp))
             Text(sub, color = Ascent.Fg3, fontSize = 10.sp, fontFamily = MonoNumbers, letterSpacing = 0.3.sp)
         }
