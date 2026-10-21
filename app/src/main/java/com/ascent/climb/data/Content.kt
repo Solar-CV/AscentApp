@@ -12,14 +12,31 @@ import com.ascent.climb.data.bank.BankRepository
  * 在线更新的逻辑见 bank/BankRepository.kt。
  */
 
-/** 全部课程轨道（高山攀登，以及后续的潜水等）。 */
+/** 全部课程轨道（高山攀登 / 徒步）。 */
 val ALL_TRACKS: List<Track> get() = BankRepository.allTracks
 
-/** 全部营地（当前轨道的海拔单元）。 */
-val ALL_UNITS: List<Unit> get() = BankRepository.allUnits
+/**
+ * 当前正在看的课程大类。
+ *
+ * 之所以放在数据层：TrainingScreen / ProfileScreen / 成就判定都用 ALL_UNITS、
+ * ALL_LESSONS 这两个聚合量。把它们限定在当前轨道上，这些页面就不必逐个改签名，
+ * 也不会出现「攀登用户看到 61 课」这种串味。
+ */
+@Volatile
+private var activeTrack: String = CLIMB_TRACK
 
-/** 全部课程，按路线展开后的线性顺序。 */
-val ALL_LESSONS: List<Lesson> get() = BankRepository.allLessons
+fun setActiveTrack(trackId: String) {
+    activeTrack = trackId
+}
+
+fun activeTrackId(): String = activeTrack
+
+/** 当前轨道的单元。 */
+val ALL_UNITS: List<Unit> get() = BankRepository.allTracks.firstOrNull { it.id == activeTrack }?.units
+    ?: BankRepository.allUnits
+
+/** 当前轨道的课程，按路线展开后的线性顺序。 */
+val ALL_LESSONS: List<Lesson> get() = ALL_UNITS.flatMap { it.lessons }
 
 /** 路线总题量。 */
 val TOTAL_QUESTIONS: Int get() = BankRepository.totalQuestions
@@ -33,9 +50,17 @@ val BANK_SOURCE: String get() = BankRepository.sourceKind
 
 // ---------------- 技能书（目前仍为内置，后续可一并外置） ----------------
 
-val ALL_ARTICLES: List<HandbookArticle> = HANDBOOK_A + HANDBOOK_B + HANDBOOK_C + HANDBOOK_D + HANDBOOK_E
+/** 全部技能书文章（不分轨道）。详情页按 id 查，切大类时不会丢。 */
+val ALL_ARTICLES: List<HandbookArticle> =
+    HANDBOOK_A + HANDBOOK_B + HANDBOOK_C + HANDBOOK_D + HANDBOOK_E + HANDBOOK_F
 
-val HANDBOOK_CATEGORIES: List<String> = ALL_ARTICLES.map { it.category }.distinct()
+/** 某条轨道可见的文章：冰山技术只在攀登出现，通用篇（医学、导航、营地、领导力）两边共享。 */
+fun articlesOfTrack(trackId: String): List<HandbookArticle> =
+    ALL_ARTICLES.filter { trackId in it.tracks }
+
+/** 某条轨道可见的分类（用于技能书顶部的筛选条）。 */
+fun handbookCategories(trackId: String): List<String> =
+    articlesOfTrack(trackId).map { it.category }.distinct()
 
 // ---------------- 路线参数 ----------------
 

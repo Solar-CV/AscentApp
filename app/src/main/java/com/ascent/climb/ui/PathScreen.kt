@@ -2,6 +2,19 @@ package com.ascent.climb.ui
 
 import com.ascent.climb.R
 import androidx.compose.ui.res.stringResource
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -47,8 +60,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ascent.climb.data.ALL_LESSONS
+import com.ascent.climb.data.ALL_TRACKS
 import com.ascent.climb.data.ALL_UNITS
+import com.ascent.climb.data.CLIMB_TRACK
+import com.ascent.climb.data.TREK_TRACK
+import com.ascent.climb.data.altitudeAfterUnit
+import com.ascent.climb.data.altitudeBeforeUnit
+import com.ascent.climb.data.currentLessonIdIn
+import com.ascent.climb.data.isUnlockedIn
+import com.ascent.climb.data.lessonsOfTrack
+import com.ascent.climb.data.summitOfTrack
+import com.ascent.climb.data.unitsOfTrack
 import com.ascent.climb.data.BASE_ALTITUDE
 import com.ascent.climb.data.Lesson
 import com.ascent.climb.data.SUMMIT_TARGET
@@ -119,92 +141,269 @@ private val HALO_W = 104.dp
 private val HALO_H = 83.dp
 private val GLYPH = 34.dp
 
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun PathScreen(
+    trackId: String,
     altitude: Int,
     streak: Int,
     rope: Int,
     completed: Set<String>,
     starsOf: (String) -> Int,
     devUnlockAll: Boolean = false,
-    onOpenLesson: (String) -> Unit
+    onOpenLesson: (String) -> Unit,
+    onSwitchTrack: (String) -> Unit = {}
 ) {
-    val currentId = currentLessonId(completed)
-    val total = ALL_LESSONS.size
-    val doneCount = completed.size
-    val pct = if (total == 0) 0 else doneCount * 100 / total
+    val units = unitsOfTrack(trackId)
+    val pages = remember(units) { units.chunked(2) }
+    val pageCount = pages.size.coerceAtLeast(1)
+    val pager = rememberPagerState(pageCount = { pageCount })
+    val scope = rememberCoroutineScope()
+    var sheetOpen by remember { mutableStateOf(false) }
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize().background(Ascent.DuoBg),
-        contentPadding = PaddingValues(bottom = 24.dp)
-    ) {
-        item(key = "stats") {
-            Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 22.dp)) {
+    val totalLessons = units.sumOf { it.lessons.size }
+    val doneCount = units.sumOf { u -> u.lessons.count { it.id in completed } }
+    val pct = if (totalLessons == 0) 0 else doneCount * 100 / totalLessons
+    val currentId = currentLessonIdIn(trackId, completed)
+
+    // 切大类后回到第一页，避免停在旧轨道的页码上
+    LaunchedEffect(trackId) { pager.scrollToPage(0) }
+
+    Box(modifier = Modifier.fillMaxSize().background(Ascent.DuoBg)) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 14.dp)) {
                 StatsRow(altitude = altitude, streak = streak, rope = rope)
             }
+            TrackSwitchRow(
+                trackId = trackId,
+                onOpenSheet = { sheetOpen = true }
+            )
+            HorizontalPager(
+                state = pager,
+                modifier = Modifier.fillMaxWidth().weight(1f)
+            ) { pageIndex ->
+                val pageUnits = pages.getOrNull(pageIndex).orEmpty()
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(top = 4.dp, bottom = 20.dp)
+                ) {
+                    pageUnits.forEach { unit ->
+                        val globalIndex = units.indexOfFirst { it.id == unit.id }
+                        val startAlt = altitudeBeforeUnit(trackId, globalIndex)
+                        val endAlt = altitudeAfterUnit(trackId, globalIndex)
+                        val unitDone = unit.lessons.count { it.id in completed }
+                        if (globalIndex > 0) {
+                            item(key = "div_${unit.id}") {
+                                CampDivider(
+                                    label = "${camps()[(unit.index - 1).mod(camps().size)]} · " +
+                                        "${unitTitle(unit.id, unit.title)} · ${formatMeters(startAlt)} M"
+                                )
+                            }
+                        }
+                        item(key = "u_${unit.id}") {
+                            Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+                                UnitBanner(
+                                    unit = unit,
+                                    done = unitDone,
+                                    startAlt = startAlt,
+                                    endAlt = endAlt,
+                                    hue = unitHue(unit.index),
+                                    lip = unitLip(unit.index)
+                                )
+                            }
+                        }
+                        item(key = "p_${unit.id}") {
+                            Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+                                LessonPath(
+                                    trackId = trackId,
+                                    unit = unit,
+                                    lessons = unit.lessons,
+                                    completed = completed,
+                                    currentId = currentId,
+                                    starsOf = starsOf,
+                                    devUnlockAll = devUnlockAll,
+                                    startAlt = startAlt,
+                                    endAlt = endAlt,
+                                    hue = unitHue(unit.index),
+                                    lip = unitLip(unit.index),
+                                    onOpenLesson = onOpenLesson
+                                )
+                            }
+                        }
+                    }
+                    if (pageIndex == pages.lastIndex) {
+                        item(key = "summit") {
+                            Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 14.dp)) {
+                                SummitBlock(
+                                    toSummit = (summitOfTrack(trackId) - altitude).coerceAtLeast(0),
+                                    done = doneCount,
+                                    total = totalLessons,
+                                    pct = pct
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            PageDots(
+                count = pageCount,
+                current = pager.currentPage,
+                onSelect = { target -> scope.launch { pager.animateScrollToPage(target) } }
+            )
         }
+    }
 
-        ALL_UNITS.forEachIndexed { ui, unit ->
-            val startAlt = altitudeBefore(ui)
-            val endAlt = altitudeAfter(ui)
-            val unitDone = unit.lessons.count { it.id in completed }
-            if (ui > 0) {
-                item(key = "div_${unit.id}") {
-                    CampDivider(
-                        label = "${camps()[ui.mod(camps().size)]} · ${unitTitle(unit.id, unit.title)} · ${formatMeters(startAlt)} M"
-                    )
+    if (sheetOpen) {
+        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        ModalBottomSheet(
+            onDismissRequest = { sheetOpen = false },
+            sheetState = sheetState,
+            containerColor = Color.White
+        ) {
+            TrackSheet(
+                currentTrackId = trackId,
+                onPick = { id ->
+                    sheetOpen = false
+                    onSwitchTrack(id)
                 }
-            }
-            item(key = "u_${unit.id}") {
-                Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-                    UnitBanner(
-                        unit = unit,
-                        done = unitDone,
-                        startAlt = startAlt,
-                        endAlt = endAlt,
-                        hue = unitHue(unit.index),
-                        lip = unitLip(unit.index)
-                    )
-                }
-            }
-            item(key = "p_${unit.id}") {
-                Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-                    LessonPath(
-                        unit = unit,
-                        lessons = unit.lessons,
-                        completed = completed,
-                        currentId = currentId,
-                        starsOf = starsOf,
-                        devUnlockAll = devUnlockAll,
-                        startAlt = startAlt,
-                        endAlt = endAlt,
-                        hue = unitHue(unit.index),
-                        lip = unitLip(unit.index),
-                        onOpenLesson = onOpenLesson
-                    )
-                }
-            }
+            )
         }
+    }
+}
 
-        item(key = "summit") {
-            Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 14.dp)) {
-                SummitBlock(
-                    toSummit = (SUMMIT_TARGET - altitude).coerceAtLeast(0),
-                    done = doneCount,
-                    total = total,
-                    pct = pct
+/** 顶部两个大类胶囊：当前项实心，点任一项开底部弹层。 */
+@Composable
+private fun TrackSwitchRow(trackId: String, onOpenSheet: () -> Unit) {
+    Row(
+        // 下方留 14dp：胶囊与下面单元横幅之间需要一道明确的空隙，
+        // 否则两颗胶囊贴着色块，视觉上会连成一块。
+        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 14.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        for (t in ALL_TRACKS) {
+            val active = t.id == trackId
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(999.dp))
+                    .background(if (active) Ascent.UGreen else Color.White)
+                    .border(1.5.dp, if (active) Ascent.UGreen else Ascent.DuoBorder, RoundedCornerShape(999.dp))
+                    .clickable { onOpenSheet() }
+                    .padding(horizontal = 14.dp, vertical = 7.dp)
+            ) {
+                Text(
+                    text = trackLabel(t.id),
+                    color = if (active) Color.White else Ascent.DuoFg2,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
     }
 }
 
-/** 该单元之前的累计海拔（用于「3,200 – 4,800 M」范围与分区线）。 */
-private fun altitudeBefore(unitIndex: Int): Int =
-    altitudeFor(ALL_UNITS.take(unitIndex).flatMap { u -> u.lessons.map { it.id } }.toSet())
+@Composable
+private fun trackLabel(id: String): String = when (id) {
+    TREK_TRACK -> stringResource(R.string.path_track_trek)
+    CLIMB_TRACK -> stringResource(R.string.path_track_climb)
+    else -> id
+}
 
-private fun altitudeAfter(unitIndex: Int): Int =
-    altitudeFor(ALL_UNITS.take(unitIndex + 1).flatMap { u -> u.lessons.map { it.id } }.toSet())
+/** 底部弹层：列出全部大类，带简介与当前标记。 */
+@Composable
+private fun TrackSheet(currentTrackId: String, onPick: (String) -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(bottom = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.track_sheet_title),
+            color = Ascent.DuoFg,
+            fontSize = 19.sp,
+            fontWeight = FontWeight.ExtraBold
+        )
+        Text(
+            text = stringResource(R.string.track_sheet_sub),
+            color = Ascent.DuoFg2,
+            fontSize = 12.sp
+        )
+        for (t in ALL_TRACKS) {
+            val active = t.id == currentTrackId
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(if (active) Color(0xFFF3FBE8) else Color.White)
+                    .border(
+                        if (active) 2.dp else 1.5.dp,
+                        if (active) Ascent.UGreen else Ascent.DuoBorder,
+                        RoundedCornerShape(16.dp)
+                    )
+                    .clickable { onPick(t.id) }
+                    .padding(horizontal = 14.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(if (active) Ascent.UGreen else Color(0xFFF2F2F2)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = if (t.id == TREK_TRACK) "≡" else "▲", color = if (active) Color.White else Ascent.DuoFg2, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                }
+                Spacer(Modifier.width(12.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(trackLabel(t.id), color = Ascent.DuoFg, fontSize = 16.sp, fontWeight = FontWeight.ExtraBold)
+                    Text(
+                        text = "${t.subtitle} · ${t.units.sumOf { it.lessons.size }} 课",
+                        color = Ascent.DuoFg2,
+                        fontSize = 11.sp
+                    )
+                }
+                Spacer(Modifier.width(8.dp))
+                if (active) {
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(999.dp))
+                            .background(Ascent.UGreen)
+                            .padding(horizontal = 10.dp, vertical = 5.dp)
+                    ) {
+                        Text(stringResource(R.string.track_current), color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    }
+                } else {
+                    Text(stringResource(R.string.track_switch), color = Ascent.UGreen, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                }
+            }
+        }
+        Text(
+            text = stringResource(R.string.track_sheet_note),
+            color = Ascent.DuoFg2,
+            fontSize = 11.sp
+        )
+    }
+}
+
+/** 三页的分页指示器。 */
+@Composable
+private fun PageDots(count: Int, current: Int, onSelect: (Int) -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        for (i in 0 until count) {
+            val active = i == current
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(999.dp))
+                    .background(if (active) Ascent.UGreen else Ascent.DuoBorder)
+                    .clickable { onSelect(i) }
+                    .size(width = if (active) 18.dp else 6.dp, height = 6.dp)
+            )
+        }
+    }
+}
 
 // ============================================================
 // 顶部数值条
@@ -331,6 +530,7 @@ private fun CampDivider(label: String) {
 
 @Composable
 private fun LessonPath(
+    trackId: String,
     unit: ClimbUnit,
     lessons: List<Lesson>,
     completed: Set<String>,
@@ -350,7 +550,7 @@ private fun LessonPath(
             val st = when {
                 l.id in completed -> NodeState.Done
                 l.id == currentId -> NodeState.Current
-                isUnlocked(l.id, completed, devUnlockAll) -> NodeState.Available
+                isUnlockedIn(trackId, l.id, completed, devUnlockAll) -> NodeState.Available
                 else -> NodeState.Locked
             }
             add(PathEntry(l, st, starsOf(l.id)))

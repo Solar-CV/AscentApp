@@ -5,6 +5,7 @@ import com.ascent.climb.BuildConfig
 import com.ascent.climb.data.Lesson
 import com.ascent.climb.data.Track
 import com.ascent.climb.data.Unit
+import com.ascent.climb.data.TREK_TRACK
 import com.ascent.climb.data.buildBundledTracks
 import java.io.File
 
@@ -201,12 +202,22 @@ object BankRepository {
     }
 
     private fun install(newTracks: List<Track>, v: Int, kind: String, updated: String) {
-        tracks = newTracks
-        units = newTracks.flatMap { it.units }
+        // 徒步轨道目前只存在于内置题库：在线题库的 JSON 还没有这条轨道，
+        // 因此不管来源是哪一份，都把它补进来，避免在线更新后大类消失。
+        val merged = withBundledTrek(newTracks)
+        tracks = merged
+        units = merged.flatMap { it.units }
         lessons = units.flatMap { it.lessons }
         version = v
         sourceKindValue = kind
         updatedAt = updated
+    }
+
+    /** 保证徒步轨道始终存在（内置内容，不依赖在线题库）。 */
+    private fun withBundledTrek(list: List<Track>): List<Track> {
+        if (list.any { it.id == TREK_TRACK }) return list
+        val trek = buildBundledTracks().firstOrNull { it.id == TREK_TRACK } ?: return list
+        return list + trek
     }
 
     private fun prefs(c: Context) = c.getSharedPreferences(PREFS, Context.MODE_PRIVATE)

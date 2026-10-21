@@ -297,4 +297,15 @@
     <string name="main_bank_updated">Frågebanken uppdaterades till v%1$d (%2$d frågor)</string>
     <string name="main_bank_latest">Frågebanken är redan uppdaterad (v%1$d)</string>
     <string name="main_bank_need_app">Onlinebanken kräver app v%1$d eller senare</string>
+    <string name="cap_t1">Dagsvandring</string>
+    <string name="cap_t2">Flerdagars</string>
+    <string name="cap_t3">Höghöjd</string>
+    <string name="cap_t4">Långled</string>
+    <string name="path_track_climb">Högfjäll</string>
+    <string name="path_track_trek">Vandring</string>
+    <string name="track_sheet_title">Välj kategori</string>
+    <string name="track_sheet_sub">Framsteg, märken och repetitionskön hålls åtskilda per kategori</string>
+    <string name="track_current">Nuvarande</string>
+    <string name="track_switch">Byt</string>
+    <string name="track_sheet_note">Vandringskategorin täcker grunderna, väder och huvud; ingen snö- och isteknik.</string>
 </resources>

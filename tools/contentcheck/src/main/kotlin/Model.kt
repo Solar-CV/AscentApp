@@ -173,5 +173,12 @@ data class HandbookArticle(
     val category: String,
     val summary: String,
     val sections: List<HandbookSection>,
-    val sources: List<String>
+    val sources: List<String>,
+    /**
+     * 这篇在哪条课程大类下可见。
+     *
+     * 默认只在「高山攀登」里出现：那批内容（冰镐、冰爪、攀冰、绳结、冰裂缝）对徒步用户没有意义。
+     * 通用篇（高原病、失温、导航、营地、领导力等）显式标成两条轨道共享。
+     */
+    val tracks: List<String> = listOf(CLIMB_TRACK)
 )

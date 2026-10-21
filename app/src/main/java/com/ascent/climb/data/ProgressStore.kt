@@ -102,6 +102,9 @@ class ProgressStore(context: Context) {
     val altitude: Int
         get() = altitudeFor(completed)
 
+    /** 某条轨道上的海拔（各轨道曲线不同）。 */
+    fun altitudeOn(trackId: String): Int = altitudeForTrack(trackId, completed)
+
     var streak: Int
         get() = prefs.getInt("streak", 0)
         private set(value) = prefs.edit().putInt("streak", value).apply()
@@ -213,7 +216,7 @@ class ProgressStore(context: Context) {
         lessonRuns += 1
         markActiveToday()
 
-        return if (firstTime) altitudeAwardFor(lessonId) else 0
+        return if (firstTime) altitudeAwardForTrack(trackOfLesson(lessonId), lessonId) else 0
     }
 
     fun markWrong(key: String) {
@@ -302,6 +305,14 @@ class ProgressStore(context: Context) {
     var languageMode: String
         get() = prefs.getString("languageMode", "auto") ?: "auto"
         set(value) = prefs.edit().putString("languageMode", value).apply()
+
+    /**
+     * 当前课程大类：climb（高山攀登）/ trek（徒步）。
+     * 只影响「看哪条路线」，进度本身按课程 id 存，两条轨道互不干扰。
+     */
+    var trackId: String
+        get() = prefs.getString("trackId", CLIMB_TRACK) ?: CLIMB_TRACK
+        set(value) = prefs.edit().putString("trackId", value).apply()
 
     /** 开发者模式：清空待播弹窗队列（解卡用，不影响已解锁记录）。 */
     fun clearPendingAchievements() {

@@ -17,6 +17,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h23",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "户外领导力：定义与软技能",
         code = "LEADERSHIP",
         icon = "\uD83E\uDDED",
@@ -65,6 +66,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h24",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "制定最佳决策",
         code = "DECISION",
         icon = "\u2696\uFE0F",
@@ -136,6 +138,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h25",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "领队责任、冲突与跟随者",
         code = "DUTY",
         icon = "\uD83E\uDD1D",
@@ -196,6 +199,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h26",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "山区导航与定向",
         code = "NAVIGATION",
         icon = "\uD83D\uDDFA\uFE0F",
@@ -255,6 +259,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h27",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "营地的选择、建设与 LNT 环保",
         code = "CAMPSITE",
         icon = "\u26FA\uFE0F",
@@ -317,6 +322,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h28",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "迷路与野外求救",
         code = "LOST & SOS",
         icon = "\uD83C\uDD98",
@@ -390,6 +396,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h29",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "脱水、体温过高与常见外伤",
         code = "HEAT & WOUND",
         icon = "\uD83C\uDF21\uFE0F",
@@ -460,6 +467,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h30",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "户外安全原则与风险管理",
         code = "RISK MGMT",
         icon = "\uD83D\uDEE1\uFE0F",
@@ -526,6 +534,7 @@ val HANDBOOK_E = listOf(
 
     HandbookArticle(
         id = "h31",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "高山攀登的营养与能量策略",
         code = "NUTRITION",
         icon = "\uD83D\uDD25",

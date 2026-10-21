@@ -319,4 +319,15 @@
     <string name="main_bank_updated">題庫已更新到 v%1$d（%2$d 題）</string>
     <string name="main_bank_latest">題庫已是最新（v%1$d）</string>
     <string name="main_bank_need_app">線上題庫需要 App v%1$d 以上</string>
+    <string name="cap_t1">一日徒步</string>
+    <string name="cap_t2">多日與露營</string>
+    <string name="cap_t3">高原徒步</string>
+    <string name="cap_t4">長線與應急</string>
+    <string name="path_track_climb">高山攀登</string>
+    <string name="path_track_trek">徒步</string>
+    <string name="track_sheet_title">選擇課程大類</string>
+    <string name="track_sheet_sub">兩大類的進度、徽章與複習隊列各自獨立</string>
+    <string name="track_current">當前</string>
+    <string name="track_switch">切換</string>
+    <string name="track_sheet_note">徒步大類側重基礎、天氣與心態，不包含冰雪技術內容。</string>
 </resources>

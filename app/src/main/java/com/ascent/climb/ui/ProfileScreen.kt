@@ -54,11 +54,36 @@ import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.TOTAL_QUESTIONS
 import com.ascent.climb.data.bank.BankRepository
 import com.ascent.climb.data.ALL_LESSONS
+import com.ascent.climb.data.ALL_TRACKS
 import com.ascent.climb.data.ALL_UNITS
 import com.ascent.climb.data.AuthResult
+import com.ascent.climb.data.CLIMB_TRACK
+import com.ascent.climb.data.TREK_TRACK
 import com.ascent.climb.data.MockAuthApi
-import com.ascent.climb.data.SUMMIT_ALTITUDE
+import com.ascent.climb.data.activeTrackId
+import com.ascent.climb.data.displaySummitOf
 import kotlinx.coroutines.launch
+
+@Composable
+private fun trackLabelOf(trackId: String): String = when (trackId) {
+    TREK_TRACK -> stringResource(R.string.path_track_trek)
+    CLIMB_TRACK -> stringResource(R.string.path_track_climb)
+    else -> trackId
+}
+
+/** 单元名：攀登是 5000 入门 / 6000 m 一类，徒步是一日徒步 / 高原徒步一类。 */
+@Composable
+private fun unitLabelOf(unitId: String, fallback: String): String = when (unitId) {
+    "m5i" -> stringResource(R.string.cap_m5i)
+    "m5a" -> stringResource(R.string.cap_m5a)
+    "m6" -> stringResource(R.string.cap_m6)
+    "m8" -> stringResource(R.string.cap_m8)
+    "t1" -> stringResource(R.string.cap_t1)
+    "t2" -> stringResource(R.string.cap_t2)
+    "t3" -> stringResource(R.string.cap_t3)
+    "t4" -> stringResource(R.string.cap_t4)
+    else -> fallback
+}
 
 @Composable
 fun ProfileScreen(
@@ -231,22 +256,17 @@ private fun ProfileBody(
         }
     }
 
-    fun unitFraction(unitId: String): Float {
-        val u = ALL_UNITS.firstOrNull { it.id == unitId } ?: return 0f
-        if (u.lessons.isEmpty()) return 0f
-        return u.lessons.count { it.id in completed }.toFloat() / u.lessons.size.toFloat()
-    }
+    fun unitFraction(total: Int, done: Int): Float = if (total == 0) 0f else done.toFloat() / total
 
     val overall = if (ALL_LESSONS.isEmpty()) 0f
     else completed.size.toFloat() / ALL_LESSONS.size.toFloat()
 
-    val caps = listOf(
-        stringResource(R.string.cap_m5i) to unitFraction("m5i"),
-        stringResource(R.string.cap_m5a) to unitFraction("m5a"),
-        stringResource(R.string.cap_m6) to unitFraction("m6"),
-        stringResource(R.string.cap_m7) to unitFraction("m7"),
-        stringResource(R.string.cap_m8) to unitFraction("m8")
-    )
+    // 能力概览按课程大类分组：两条轨道的单元都列出来，各自的进度独立计算。
+    val capsByTrack = ALL_TRACKS.map { track ->
+        track to track.units.map { u ->
+            unitLabelOf(u.id, u.title) to unitFraction(u.lessons.size, u.lessons.count { it.id in completed })
+        }
+    }
 
     val unlockedAch = remember(achRevision) { store.unlockedAchievements.toSet() }
 
@@ -302,7 +322,9 @@ private fun ProfileBody(
 
         // ---------------- 海拔 ----------------
         item(key = "alt") {
-            val frac = if (SUMMIT_ALTITUDE == 0) 0f else altitude.toFloat() / SUMMIT_ALTITUDE.toFloat()
+            // 目标刻度跟着当前大类走：攀登 8,000，徒步用自己路线的最高点
+            val summitAlt = displaySummitOf(activeTrackId())
+            val frac = if (summitAlt == 0) 0f else altitude.toFloat() / summitAlt.toFloat()
             OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -321,7 +343,7 @@ private fun ProfileBody(
                                 fontFamily = MonoNumbers
                             )
                             Text(
-                                text = "M / ${formatMeters(SUMMIT_ALTITUDE)}",
+                                text = "M / ${formatMeters(summitAlt)}",
                                 color = Ascent.Fg3,
                                 fontSize = 13.sp,
                                 fontFamily = MonoNumbers,
@@ -330,7 +352,7 @@ private fun ProfileBody(
                         }
                     }
                     Text(
-                        text = stringResource(R.string.path_to_summit, formatMeters((SUMMIT_ALTITUDE - altitude).coerceAtLeast(0))),
+                        text = stringResource(R.string.path_to_summit, formatMeters((summitAlt - altitude).coerceAtLeast(0))),
                         color = Ascent.Fg2,
                         fontSize = 12.sp
                     )
@@ -343,24 +365,51 @@ private fun ProfileBody(
         item(key = "caps") {
             OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
                 Text(stringResource(R.string.prof_abilities), color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
-                caps.forEach { (label, v) ->
-                    Column {
+                capsByTrack.forEachIndexed { trackIndex, (track, bars) ->
+                    Column(
+                        modifier = Modifier.padding(top = if (trackIndex == 0) 0.dp else 4.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        // 大类小标题：说明下面这几条属于哪套课程
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(label, color = Ascent.Fg2, fontSize = 12.sp)
                             Text(
-                                text = "${(v * 100).toInt()}%",
-                                color = Ascent.Fg3,
+                                text = trackLabelOf(track.id),
+                                color = Ascent.Accent,
                                 fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            val tTotal = track.units.sumOf { it.lessons.size }
+                            val tDone = track.units.sumOf { u -> u.lessons.count { it.id in completed } }
+                            Text(
+                                text = "${if (tTotal == 0) 0 else tDone * 100 / tTotal}% · $tDone/$tTotal",
+                                color = Ascent.Fg3,
+                                fontSize = 10.sp,
                                 fontFamily = MonoNumbers
                             )
                         }
-                        Spacer(Modifier.height(6.dp))
-                        AscentBar(fraction = v, height = 6, fill = Ascent.Accent)
+                        bars.forEach { (label, v) ->
+                            Column {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text(label, color = Ascent.Fg2, fontSize = 12.sp)
+                                    Text(
+                                        text = "${(v * 100).toInt()}%",
+                                        color = Ascent.Fg3,
+                                        fontSize = 11.sp,
+                                        fontFamily = MonoNumbers
+                                    )
+                                }
+                                Spacer(Modifier.height(6.dp))
+                                AscentBar(fraction = v, height = 6, fill = Ascent.Accent)
+                            }
+                        }
                     }
-                    Spacer(Modifier.height(12.dp))
                 }
                 Text(
                     text = stringResource(R.string.prof_ability_note),

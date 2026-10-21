@@ -46,8 +46,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ascent.climb.data.ALL_ARTICLES
-import com.ascent.climb.data.HANDBOOK_CATEGORIES
 import com.ascent.climb.data.HandbookArticle
+import com.ascent.climb.data.activeTrackId
+import com.ascent.climb.data.articlesOfTrack
+import com.ascent.climb.data.handbookCategories
 
 /** 分类 → 线性图标（替代 emoji）。 */
 private fun categoryIcon(category: String): ImageVector = when {
@@ -68,24 +70,28 @@ private fun readingMinutes(a: HandbookArticle): Int {
 @Composable
 fun HandbookScreen() {
     var openId by remember { mutableStateOf<String?>(null) }
+    // 详情页从全集里查：切换大类时若正读着一篇，不至于突然空掉
     val article = openId?.let { id -> ALL_ARTICLES.firstOrNull { it.id == id } }
+    val trackId = activeTrackId()
 
     if (article == null) {
-        ArticleList(onOpen = { openId = it })
+        ArticleList(trackId = trackId, onOpen = { openId = it })
     } else {
         ArticleDetail(article = article, onBack = { openId = null })
     }
 }
 
 @Composable
-private fun ArticleList(onOpen: (String) -> Unit) {
+private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
     var query by remember { mutableStateOf("") }
     val allLabel = stringResource(R.string.hb_filter_all)
     // 语言切换时 allLabel 会变，用 key 重建状态，避免筛选值停留在旧语言
-    var cat by remember(allLabel) { mutableStateOf(allLabel) }
+    var cat by remember(allLabel, trackId) { mutableStateOf(allLabel) }
+    val articles = remember(trackId) { articlesOfTrack(trackId) }
+    val categories = remember(trackId) { handbookCategories(trackId) }
 
     val ctx = LocalContext.current
-    val filtered = ALL_ARTICLES.filter { a ->
+    val filtered = articles.filter { a ->
         val title = localized(ctx, "hb.${a.id}.title", a.title)
         val summary = localized(ctx, "hb.${a.id}.summary", a.summary)
         (cat == allLabel || a.category == cat) &&
@@ -100,7 +106,7 @@ private fun ArticleList(onOpen: (String) -> Unit) {
             Column(modifier = Modifier.padding(bottom = 14.dp)) {
                 Text(stringResource(R.string.hb_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(4.dp))
-                MonoLabel(stringResource(R.string.hb_subtitle, ALL_ARTICLES.size))
+                MonoLabel(stringResource(R.string.hb_subtitle, articles.size))
             }
         }
 
@@ -146,7 +152,7 @@ private fun ArticleList(onOpen: (String) -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 CategoryChip(allLabel, cat == allLabel) { cat = allLabel }
-                HANDBOOK_CATEGORIES.forEach { c ->
+                categories.forEach { c ->
                     CategoryChip(categoryName(c), cat == c) { cat = c }
                 }
                 Spacer(Modifier.width(8.dp))

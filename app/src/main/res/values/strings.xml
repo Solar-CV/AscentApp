@@ -334,4 +334,15 @@
     <string name="main_bank_updated">题库已更新到 v%1$d（%2$d 题）</string>
     <string name="main_bank_latest">题库已是最新（v%1$d）</string>
     <string name="main_bank_need_app">在线题库需要 App v%1$d 以上</string>
+    <string name="path_track_climb">高山攀登</string>
+    <string name="path_track_trek">徒步</string>
+    <string name="track_sheet_title">选择课程大类</string>
+    <string name="track_sheet_sub">两个大类的进度、徽章与复习队列各自独立</string>
+    <string name="track_current">当前</string>
+    <string name="track_switch">切换</string>
+    <string name="track_sheet_note">徒步大类侧重基础、天气与心态，不包含冰雪技术内容。</string>
+    <string name="cap_t1">一日徒步</string>
+    <string name="cap_t2">多日与露营</string>
+    <string name="cap_t3">高原徒步</string>
+    <string name="cap_t4">长线与应急</string>
 </resources>

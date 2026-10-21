@@ -29,6 +29,18 @@ private val LESSON_POOL: Map<String, Lesson> = buildMap {
     EXTRA_LESSONS.values.forEach { list -> list.forEach { put(it.id, it) } }
     BOOK_LESSONS.values.forEach { list -> list.forEach { put(it.id, it) } }
     NEW_LESSONS.forEach { put(it.id, it) }
+    // 2026-10 扩充批次：攀登 19 课 + 徒步 7 课（简中首发）
+    NEW_LESSONS_U1.forEach { put(it.id, it) }
+    NEW_LESSONS_U2.forEach { put(it.id, it) }
+    NEW_LESSONS_U3A.forEach { put(it.id, it) }
+    NEW_LESSONS_U3B.forEach { put(it.id, it) }
+    NEW_LESSONS_C3A.forEach { put(it.id, it) }
+    NEW_LESSONS_C3B.forEach { put(it.id, it) }
+    NEW_LESSONS_C4A.forEach { put(it.id, it) }
+    NEW_LESSONS_C4B.forEach { put(it.id, it) }
+    NEW_LESSONS_C4C.forEach { put(it.id, it) }
+    NEW_LESSONS_U6B.forEach { put(it.id, it) }
+    NEW_LESSONS_U1B.forEach { put(it.id, it) }
 }
 
 /** 把扩充包 / 实体书里追加的题目并进课程。 */
@@ -46,6 +58,15 @@ private fun withExtraQuestions(l: Lesson): Lesson {
         EXTRA_QUESTIONS_11[l.id].orEmpty() +
         EXTRA_QUESTIONS_12[l.id].orEmpty() +
         EXTRA_QUESTIONS_13[l.id].orEmpty() +
+        EXTRA_QUESTIONS_25[l.id].orEmpty() +
+        EXTRA_QUESTIONS_26[l.id].orEmpty() +
+        EXTRA_QUESTIONS_27[l.id].orEmpty() +
+        EXTRA_QUESTIONS_28[l.id].orEmpty() +
+        EXTRA_QUESTIONS_29[l.id].orEmpty() +
+        EXTRA_QUESTIONS_30[l.id].orEmpty() +
+        EXTRA_QUESTIONS_31[l.id].orEmpty() +
+        EXTRA_QUESTIONS_32[l.id].orEmpty() +
+        EXTRA_QUESTIONS_33[l.id].orEmpty() +
         BOOK_QUESTIONS[l.id].orEmpty()
     val merged = if (extra.isEmpty()) l else l.copy(questions = l.questions + extra)
     // 给每题一个稳定 id（课程 id + 课内序号）。内容层多语言按 id 取译文；
@@ -87,11 +108,15 @@ private fun withReviewQuestions(lessons: List<Lesson>): List<Lesson> {
     return out
 }
 
-/** 按大纲组装一个轨道。 */
-private fun assemble(specs: List<UnitSpec>, track: String): List<Unit> {
+/** 按大纲组装一个轨道。[pool] 为课程池，徒步轨道用自己的池。 */
+private fun assemble(
+    specs: List<UnitSpec>,
+    track: String,
+    pool: Map<String, Lesson> = LESSON_POOL
+): List<Unit> {
     val skeleton = specs.map { spec ->
         val lessons = spec.lessonIds.mapNotNull { id ->
-            LESSON_POOL[id]?.let { withExtraQuestions(it) }
+            pool[id]?.let { withExtraQuestions(it) }
         }
         spec to lessons
     }
@@ -125,6 +150,12 @@ private fun assemble(specs: List<UnitSpec>, track: String): List<Unit> {
  */
 fun buildBundledUnits(): List<Unit> = assemble(CLIMB_CURRICULUM, CLIMB_TRACK)
 
+/** 徒步轨道的课程池（内容见 TrekLessons.kt）。 */
+private val TREK_POOL: Map<String, Lesson> = TREK_LESSONS.associateBy { it.id }
+
+/** 徒步轨道的单元。 */
+fun buildBundledTrekUnits(): List<Unit> = assemble(TREK_CURRICULUM, TREK_TRACK, TREK_POOL)
+
 /** 全部轨道。目前只有高山攀登有内容，其余轨道数据层已就绪，等接入内容。 */
 fun buildBundledTracks(): List<Track> {
     val climb = Track(
@@ -134,7 +165,14 @@ fun buildBundledTracks(): List<Track> {
         icon = "\uD83C\uDFD4\uFE0F",
         units = buildBundledUnits()
     )
-    return listOf(climb)
+    val trek = Track(
+        id = TREK_TRACK,
+        title = "徒步",
+        subtitle = "一日 → 长线，基础 · 天气 · 心态",
+        icon = "\uD83E\uDD7E",
+        units = buildBundledTrekUnits()
+    )
+    return listOf(climb, trek)
 }
 
 /** 大纲引用了但尚未写出的课程 id —— 供校验工具统计进度。 */

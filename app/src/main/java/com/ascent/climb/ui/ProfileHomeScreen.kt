@@ -33,7 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ascent.climb.data.ACHIEVEMENTS
 import com.ascent.climb.data.ProgressStore
-import com.ascent.climb.data.SUMMIT_ALTITUDE
+import com.ascent.climb.data.activeTrackId
+import com.ascent.climb.data.displaySummitOf
 import com.ascent.climb.data.ALL_LESSONS
 import com.ascent.climb.data.ALL_UNITS
 
@@ -59,7 +60,8 @@ fun ProfileHomeScreen(
     val shown = earned.take(8)
     val overall = if (ALL_LESSONS.isEmpty()) 0f
     else completed.size.toFloat() / ALL_LESSONS.size.toFloat()
-    val altFrac = if (SUMMIT_ALTITUDE == 0) 0f else altitude.toFloat() / SUMMIT_ALTITUDE.toFloat()
+    val summitAlt = displaySummitOf(activeTrackId())
+    val altFrac = if (summitAlt == 0) 0f else altitude.toFloat() / summitAlt.toFloat()
 
     // 系统返回 / 全面屏侧滑手势：回到「我的」，而不是退出 App
     BackHandler { onBack() }

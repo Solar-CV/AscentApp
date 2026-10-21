@@ -297,4 +297,15 @@
     <string name="main_bank_updated">Fragenbank auf v%1$d aktualisiert (%2$d Fragen)</string>
     <string name="main_bank_latest">Fragenbank ist bereits aktuell (v%1$d)</string>
     <string name="main_bank_need_app">Online-Fragenbank erfordert App v%1$d oder neuer</string>
+    <string name="cap_t1">Tagestour</string>
+    <string name="cap_t2">Mehrtagestour</string>
+    <string name="cap_t3">Höhentrekking</string>
+    <string name="cap_t4">Fernwanderung</string>
+    <string name="path_track_climb">Hochtouren</string>
+    <string name="path_track_trek">Wandern</string>
+    <string name="track_sheet_title">Kursbereich wählen</string>
+    <string name="track_sheet_sub">Fortschritt, Abzeichen und Wiederholungsliste sind je Bereich getrennt</string>
+    <string name="track_current">Aktuell</string>
+    <string name="track_switch">Wechseln</string>
+    <string name="track_sheet_note">Der Bereich Wandern deckt Grundlagen, Wetter und Kopf ab, keine Schnee- und Eistechnik.</string>
 </resources>

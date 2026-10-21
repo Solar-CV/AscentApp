@@ -319,4 +319,15 @@
     <string name="main_bank_updated">Банк обновлён до v%1$d (%2$d вопросов)</string>
     <string name="main_bank_latest">Банк уже актуален (v%1$d)</string>
     <string name="main_bank_need_app">Онлайн-банк требует приложение v%1$d или новее</string>
+    <string name="cap_t1">Однодневный</string>
+    <string name="cap_t2">Многодневный</string>
+    <string name="cap_t3">Высокогорный</string>
+    <string name="cap_t4">Длинный маршрут</string>
+    <string name="path_track_climb">Высокогорье</string>
+    <string name="path_track_trek">Треккинг</string>
+    <string name="track_sheet_title">Выбрать категорию</string>
+    <string name="track_sheet_sub">Прогресс, значки и очередь повторения у каждого раздела свои</string>
+    <string name="track_current">Текущий</string>
+    <string name="track_switch">Сменить</string>
+    <string name="track_sheet_note">Раздел треккинга — база, погода и психология; снежно-ледовой техники там нет.</string>
 </resources>

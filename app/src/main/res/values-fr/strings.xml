@@ -297,4 +297,15 @@
     <string name="main_bank_updated">Banque mise à jour vers v%1$d (%2$d questions)</string>
     <string name="main_bank_latest">Banque déjà à jour (v%1$d)</string>
     <string name="main_bank_need_app">La banque en ligne nécessite l\'app v%1$d ou plus</string>
+    <string name="cap_t1">Randonnée à la journée</string>
+    <string name="cap_t2">Plusieurs jours</string>
+    <string name="cap_t3">Altitude</string>
+    <string name="cap_t4">Longue distance</string>
+    <string name="path_track_climb">Alpinisme</string>
+    <string name="path_track_trek">Randonnée</string>
+    <string name="track_sheet_title">Choisir une catégorie</string>
+    <string name="track_sheet_sub">Progression, badges et file de révision sont séparés pour chaque catégorie</string>
+    <string name="track_current">Actuel</string>
+    <string name="track_switch">Changer</string>
+    <string name="track_sheet_note">La catégorie randonnée couvre les bases, la météo et le mental ; pas de technique neige et glace.</string>
 </resources>

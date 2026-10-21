@@ -313,5 +313,317 @@ internal val PACK_EN_BRIEF: Map<String, String> = mapOf(
     "lesson.l20.brief.1" to "Emergency sequence: make the scene safe → assess the casualty (airway, breathing, circulation, consciousness) → call for help → basic care (insulation, bleeding control, splinting) → move or wait for professional rescue.",
     "lesson.l20.brief.2" to "The first principle is: do not create a second casualty. Every rescue action must happen only with you and the rest of the team safe.",
     "lesson.l20.brief.3" to "High-altitude rescue is tightly constrained by weather, oxygen, communication and manpower, and often takes hours to days. Precisely because rescue is so hard, prevention is worth far more than rescue.",
-    "lesson.l20.brief.4" to "Leave a detailed itinerary and contact person before departure, and know the local rescue resources and communication options (satellite devices, radios, emergency frequencies). Without communication there is no call for help."
+    "lesson.l20.brief.4" to "Leave a detailed itinerary and contact person before departure, and know the local rescue resources and communication options (satellite devices, radios, emergency frequencies). Without communication there is no call for help.",
+
+    // ---------- l23 ----------
+    "lesson.l23.brief.1" to "Work the list in order of what can kill you: warmth and protection first, then technical gear, then comfort. A list built the other way round is the one that is missing something critical when the weather turns.",
+    "lesson.l23.brief.2" to "Summit pack 35–50 litres, duffel 90–120. The summit pack carries only that day's kit; bulk goes by porter or animal — the heavier the pack, the sooner you start making mistakes.",
+    "lesson.l23.brief.3" to "Load it heavy against your back, between the shoulder blades; light items outward and low. The hip belt takes 60–70% of the weight, and the shoulder straps only keep the pack against you.",
+    "lesson.l23.brief.4" to "Waterproofing is layered: one dry bag for the sleeping bag, one for the down jacket, one more layer for electronics and medication. The pack itself is not waterproof, so do not rely on it.",
+    "lesson.l23.brief.5" to "On summit day keep pack weight at 15–20% of body weight. Above that, leave things behind; carrying it anyway only buys a slower pace and more errors.",
+    "lesson.l23.brief.6" to "The last check before leaving covers the three things people most often forget: headlamp with spare batteries, spare gloves, first-aid kit.",
+
+    // ---------- l24 ----------
+    "lesson.l24.brief.1" to "Judge a sleeping bag by its comfort rating, not its extreme rating. Comfort should sit at least 5 °C below the coldest night you expect.",
+    "lesson.l24.brief.2" to "Down hates moisture. A liner, a separate dry bag, and ten minutes of airing every morning are what get it through a whole trip.",
+    "lesson.l24.brief.3" to "A sleeping pad has two jobs: blocking conduction (closed-cell foam) and comfort (inflatable). At altitude the usual answer is both, with the insulation values adding up.",
+    "lesson.l24.brief.4" to "A leaking inflatable is the most common camp failure. Carry patches, press the chambers before bed, and do not wait to be woken by cold at two in the morning.",
+    "lesson.l24.brief.5" to "A pillow and earplugs are not luxuries. Poor sleep at altitude is mostly hypoxia and noise; improve either and the next day feels different.",
+    "lesson.l24.brief.6" to "Never store a sleeping bag compressed. Spread it out and hang it at home so the loft comes back.",
+
+    // ---------- l25 ----------
+    "lesson.l25.brief.1" to "Permits and access usually need weeks of lead time: protected areas, border regions, climbing permits, and most require a local guide or liaison.",
+    "lesson.l25.brief.2" to "Check two things in your insurance: whether it covers technical climbing, and whether it covers helicopter evacuation from altitude. Ordinary travel policies usually exclude both.",
+    "lesson.l25.brief.3" to "Logistics is three things: getting in and out, transport for loads, and camp resupply. Every leg needs a fallback, because delay is the norm rather than the exception.",
+    "lesson.l25.brief.4" to "Document wallet: original permits, policy number and rescue phone numbers, plus the photographs and declaration forms some summits require.",
+    "lesson.l25.brief.5" to "Leave an itinerary with someone who is not going: route, checkpoint times, and how long silence should last before they raise the alarm.",
+    "lesson.l25.brief.6" to "Keep 20% of the budget in reserve. Delays, extra nights and an extra porter happen on almost every trip.",
+
+    // ---------- l26 ----------
+    "lesson.l26.brief.1" to "Start with scale: at 1:50,000, one centimetre on the map is 500 m on the ground. Get that wrong and everything downstream is off.",
+    "lesson.l26.brief.2" to "Contour interval sets the detail you can see: 5 m contours show small benches, 20 m and coarser only the big shapes.",
+    "lesson.l26.brief.3" to "A compass has two norths. The map is drawn to true north, the needle points to magnetic north, and the difference is declination.",
+    "lesson.l26.brief.4" to "Orienting in four steps: set the map to the ground, fix your position, take a bearing to the target, then walk the bearing and check the terrain as you go.",
+    "lesson.l26.brief.5" to "Compass work means following the angle and correcting with contours and features, not staring at the needle and walking straight.",
+    "lesson.l26.brief.6" to "GPS is an accelerator, not a replacement: batteries die and screens crack, so the paper map and compass stay in the pack.",
+    "lesson.l26.brief.7" to "The first thing to do when lost is admit it. Carrying on roughly that way is the most common fatal decision.",
+
+    // ---------- l27 ----------
+    "lesson.l27.brief.1" to "Six rules for a pitch: clear of rockfall and avalanche paths, sheltered from wind, level, well drained, near water but not on it, and with an escape route.",
+    "lesson.l27.brief.2" to "Safety comes first and the view comes last. The worst camp disasters on record almost all involve a tent pitched in a terrain trap.",
+    "lesson.l27.brief.3" to "On snow, stamp the surface and then cut a platform; on ice, fix with ice screws or snow anchors instead of weighing the tent down with rocks.",
+    "lesson.l27.brief.4" to "Zone a base camp: sleeping, cooking, storage and toilet areas separate, with a real gap between cooking and sleeping.",
+    "lesson.l27.brief.5" to "Bury human waste in a cat hole 15–20 cm deep and at least 60 m from water; carry the paper out rather than burning it.",
+    "lesson.l27.brief.6" to "Leave the site as you found it: rocks back in place, fire scars cleared, every scrap of rubbish carried out.",
+
+    // ---------- l28 ----------
+    "lesson.l28.brief.1" to "Stop first. STOP: Stop, Think, Observe, Plan. Walking on only takes you further from where you were certain.",
+    "lesson.l28.brief.2" to "Go back to the last certain position. Choose between retracing your steps and heading for obvious terrain, then commit — do not change your mind while walking.",
+    "lesson.l28.brief.3" to "The international distress signal is three: three blasts, three fires, three columns of smoke, three flashes, repeated after a minute.",
+    "lesson.l28.brief.4" to "A whistle beats shouting: less effort, carries further, and does not get lost in the wind. A mirror flash on a clear day carries for tens of kilometres.",
+    "lesson.l28.brief.5" to "Of the ten essentials, the headlamp and the insulating layer are the ones people leave behind — and exactly what an unplanned bivouac needs.",
+    "lesson.l28.brief.6" to "While waiting for rescue do three things: stay warm, find water, make yourself visible. Do not burn your reserves trying to find the trail.",
+
+    // ---------- l29 ----------
+    "lesson.l29.brief.1" to "The first sign of dehydration is not thirst but poorer judgement and darker urine. At altitude both get mistaken for altitude sickness.",
+    "lesson.l29.brief.2" to "Heat illness runs in four steps: cramps, heat exhaustion, impending heat stroke, heat stroke. Core temperature above 40 °C with altered consciousness is heat stroke.",
+    "lesson.l29.brief.3" to "Four moves for heat illness: shade, loosen clothing, cool physically (cold water or ice over the large vessels), replace electrolytes. Never force fluids into someone who is confused.",
+    "lesson.l29.brief.4" to "Do not pop blisters casually; if you must, drain from the edge with a sterile needle, keep the roof, and cover it.",
+    "lesson.l29.brief.5" to "Treat sunburn as a burn: cool it, hydrate, keep it out of the sun. Lips and the sides of the nose are the parts people forget.",
+    "lesson.l29.brief.6" to "For a scald, cool under running water for 20 minutes, then cover with a clean dressing. No toothpaste, no soy sauce, no ointment.",
+
+    // ---------- l30 ----------
+    "lesson.l30.brief.1" to "Three layers of kit: a personal pouch, a team kit, and a base-camp box. They do different jobs, so do not merge them into one heavy bag.",
+    "lesson.l30.brief.2" to "The pouch handles bleeding, blisters, pain relief and sun; the team kit handles splinting, wound cleaning, insulation and oxygen; the base box handles prescription drugs, monitoring and bulk resupply.",
+    "lesson.l30.brief.3" to "Prescription drugs must be prescribed by a doctor, with indications and contraindications written down. Nobody on the team recommends or hands out their own.",
+    "lesson.l30.brief.4" to "Record oxygen saturation and heart rate as a trend, not a single number. A steady fall at the same altitude means more than one low reading.",
+    "lesson.l30.brief.5" to "Settle the evacuation plan before departure: who decides, who is called, how the insurance claim works, where the nearest clinic is.",
+    "lesson.l30.brief.6" to "Medical preparation is less about how many drugs you carry than about who makes the call. Assign the role in advance, or everyone waits for everyone.",
+
+    // ---------- l31 ----------
+    "lesson.l31.brief.1" to "The strongest predictor is having been ill at altitude before. Anyone with a history of AMS is clearly more likely to get it again.",
+    "lesson.l31.brief.2" to "Rate of ascent and sleeping altitude matter more than fitness or age. Fit people often walk faster and sleep higher, and get into trouble more often.",
+    "lesson.l31.brief.3" to "Respiratory infection raises the risk sharply: going up with a cold is an open door for HAPE.",
+    "lesson.l31.brief.4" to "Age is not the main variable, individual variation is. A fit 60-year-old may acclimatise better than a 25-year-old who does not sleep.",
+    "lesson.l31.brief.5" to "Four pillars of prevention: control the rate of ascent, schedule rest days, never ascend with symptoms, and use medication under medical direction when needed.",
+    "lesson.l31.brief.6" to "Drugs assist, they do not substitute. Acetazolamide eases symptoms; it does not let you skip acclimatisation.",
+
+    // ---------- l32 ----------
+    "lesson.l32.brief.1" to "Three kinds of fixed rope: a handline for short exposed steps, a short fixed rope for one pitch climbed repeatedly, and expedition fixing for long routes with many pitches.",
+    "lesson.l32.brief.2" to "Keep the materials straight: dynamic rope (EN 892) for leading and falls, static rope (EN 1891) for fixed lines — low stretch and abrasion resistant.",
+    "lesson.l32.brief.3" to "Expedition fixing usually uses 9–11 mm static. Thinner wears through, thicker is dead weight.",
+    "lesson.l32.brief.4" to "Five anchor checks: independent, equalized, directional, backed up, sharp edges. Two anchors joined by one sling in a straight line is not redundancy, it is a serial failure.",
+    "lesson.l32.brief.5" to "A double figure-eight can tie two or three anchors together, which is standard UIAA practice.",
+    "lesson.l32.brief.6" to "A re-belay lets the rope run clean along the route and confines fall force and wear to a single section.",
+    "lesson.l32.brief.7" to "Knot the rope ends. Otherwise the tail can run out of the device — the easiest thing to forget, with the most direct consequence.",
+
+    // ---------- l33 ----------
+    "lesson.l33.brief.1" to "Standard set-up for ascending a fixed rope: handled ascender, chest ascender (or a second friction hitch), foot loop, back-up hitch, PAS or sling, helmet.",
+    "lesson.l33.brief.2" to "The sequence is stand, sit, push: stand on the foot loop, push the chest ascender up, sit, then push the handled ascender. Keep your weight against the rope rather than swinging out.",
+    "lesson.l33.brief.3" to "The iron rule is two connections: always two independent attachments. The only exception is a leader tied directly into the rope.",
+    "lesson.l33.brief.4" to "Passing a knot: build the new connection before releasing the old one. The two ascenders must never both be off the rope.",
+    "lesson.l33.brief.5" to "Switching ropes is where fixed-rope work most often goes wrong, because you transfer between dismantling an old system and building a new one.",
+    "lesson.l33.brief.6" to "Ascending to descending always runs the same order: clip into the anchor → install and test the descender → remove the ascenders → release the PAS → descend.",
+    "lesson.l33.brief.7" to "Descending demands a back-up friction hitch and knots in the ends; pass knots by moving gear in two steps with the PAS.",
+
+    // ---------- l34 ----------
+    "lesson.l34.brief.1" to "A glacier is not flat ground: it is crevasse fields, snow bridges, seracs, icefall and moraine, and each has its own kind of risk.",
+    "lesson.l34.brief.2" to "Crevasses run across, along and diagonally. Transverse ones appear where the gradient changes; longitudinal ones open in the stretching zones along the edges.",
+    "lesson.l34.brief.3" to "Roped spacing is usually 8–10 m, shortened through dense crevasse fields. A knot between climbers limits how far a fall runs and adds braking friction.",
+    "lesson.l34.brief.4" to "Three on a rope is safer than two: when one falls, two arrest and one prepares the system, which leaves far more margin for the rescue.",
+    "lesson.l34.brief.5" to "Read a snow bridge with eyes, ears and axe: dark or blue means thin; a sag or radial cracks mean go round; probe with the axe before you weight it.",
+    "lesson.l34.brief.6" to "Bridges are strongest in the early morning and weakest after the afternoon melt. Cross heavily crevassed ground at dawn or in the cold hours.",
+    "lesson.l34.brief.7" to "Move fast through icefall, keep spacing, wear a helmet, and never stop or wait roped up inside it.",
+
+    // ---------- l35 ----------
+    "lesson.l35.brief.1" to "Critical burial — head, neck and chest — survives about 48%; completely buried 47.6% on 2013 pooled figures; partially buried 96%. Depth of burial is the single strongest predictor.",
+    "lesson.l35.brief.2" to "The curve has four phases: survival (about 18 minutes, mostly trauma), asphyxia (18–35 minutes, steep fall), latency (35–90 minutes, air pocket plus cooling protection) and long duration (beyond 90 minutes, hypothermia dominated).",
+    "lesson.l35.brief.3" to "Asphyxia causes 65–100% of deaths, trauma 5–29%, hypothermia only 0–4%. That ordering sets the priority: ventilate first.",
+    "lesson.l35.brief.4" to "On site: 0–2 minutes to confirm secondary avalanche risk, appoint a lookout, record the time and the last seen point and call for help; 2–10 minutes to search, probe and start digging — the goal is contact, not a finished hole.",
+    "lesson.l35.brief.5" to "The first 60 seconds at the face: clear snow and ice from mouth and nose, check vital signs within a minute, and start rescue breaths at once instead of waiting for full extrication.",
+    "lesson.l35.brief.6" to "Quote figures with year and source: the 25% at 45 minutes sitting above 18% at 40 minutes is sample noise, not a rebound in the curve, and must never be presented as a promise.",
+
+    // ---------- l36 ----------
+    "lesson.l36.brief.1" to "The 2023 ICAR MedCom guidance moved the decision line from 35 to 60 minutes. The old figure is withdrawn, and teaching material has to follow the new one.",
+    "lesson.l36.brief.2" to "Buried 60 minutes or less with no vital signs: treat as asphyxial, give rescue breaths as early as possible, whether or not the airway is clear.",
+    "lesson.l36.brief.3" to "Buried more than 60 minutes, no vital signs, airway clear or unknown: treat as hypothermic cardiac arrest — start CPR and transport, unless core temperature has been measured and rules hypothermia out.",
+    "lesson.l36.brief.4" to "Buried more than 60 minutes with an obstructed airway and no core temperature available: treat as asphyxial arrest and do not start CPR.",
+    "lesson.l36.brief.5" to "Core temperature measured below 30 °C with a clear airway: attempt resuscitation regardless of burial time, and transport to a hospital able to rewarm on bypass.",
+    "lesson.l36.brief.6" to "Airway obstruction means mouth and nose packed solid with snow or debris; if unsure, treat it as clear. An air pocket changes probability, not the decision.",
+    "lesson.l36.brief.7" to "Compressions need not wait for full extrication and are possible in an abnormal position. Waiting to finish digging is a common and fatal delay.",
+
+    // ---------- l37 ----------
+    "lesson.l37.brief.1" to "An avalanche search has four stages that must run in order: signal and clue search → coarse → fine → pinpoint. Skipping a stage is the usual loss of efficiency.",
+    "lesson.l37.brief.2" to "Search strips about 40 m apart and about 20 m from the debris edge; if you are not sure you can cover a strip cleanly, narrow it to 30 m.",
+    "lesson.l37.brief.3" to "Look for surface clues first — glove, pole tip, helmet, pack strap. Do not put your head down over the beacon immediately; coverage matters more than precision.",
+    "lesson.l37.brief.4" to "In the coarse search read down to 3–5 m. If the distance grows you are heading the wrong way: back up along your own track.",
+    "lesson.l37.brief.5" to "The fine search is a cross held against the snow; mark the lowest reading, because that point sets how large an area you probe.",
+    "lesson.l37.brief.6" to "Probe at 90° to the snow surface and widen on a 25 cm grid if nothing is found; once the probe strikes, leave it in place as the marker.",
+    "lesson.l37.brief.7" to "Companion and organized rescue probe at different angles: companion rescue perpendicular to the snow, organized probe lines vertical so depths stay comparable.",
+
+    // ---------- l38 ----------
+    "lesson.l38.brief.1" to "First principle: always dig from the downhill side. Digging from above or from the uphill side rolls debris back onto the victim's face — slower and more dangerous.",
+    "lesson.l38.brief.2" to "The traditional rule: back off about 1.5 times the burial depth along the slope, cut in from downstream, and dig a ramp 1–2 m wide. It is a rule of thumb, not the only standard.",
+    "lesson.l38.brief.3" to "The ISSW 2023 snow-conveyor work argues that with three or more diggers and enough room you should dig straight down the fall line from the probe, which reaches the head faster.",
+    "lesson.l38.brief.4" to "Offset only in two cases: a very shallow burial where the feet are nearly as deep as the head, or too few hands, where a solo plan is the only option.",
+    "lesson.l38.brief.5" to "The conveyor is a V-shaped ramp 1–2 m wide plus a relay chain. Below about 26° of ramp angle, blocks roll back onto the probe.",
+    "lesson.l38.brief.6" to "Moving snow, fastest to slowest: paddling, scooping, cutting. Cutting blocks is only for hard snow.",
+    "lesson.l38.brief.7" to "At the face the order changes: clear mouth and nose and confirm the airway, then chest and arms, then legs and body. Never grab the shoulders and pull.",
+
+    // ---------- l39 ----------
+    "lesson.l39.brief.1" to "Leadership is behaviour, not a title. Someone with no rank can still shape a decision by asking, reminding and taking responsibility.",
+    "lesson.l39.brief.2" to "Hard skills decide whether a thing can be done; soft skills decide whether the team will do it together. In mountain accidents the second is usually what is missing.",
+    "lesson.l39.brief.3" to "Responsibility has three layers: behaviour (what was done), thinking (how it was judged) and feeling (how it felt). Watch only behaviour and the problem comes back.",
+    "lesson.l39.brief.4" to "Conflict is an iceberg: the position (I want the summit) sits above the water, the need (I am afraid of looking weak) below. Address the need and the position loosens.",
+    "lesson.l39.brief.5" to "The expert halo is a common trap: confidence and good gear get read as competence, and nobody dares challenge an obvious error.",
+    "lesson.l39.brief.6" to "Followers have duties too: ask, give feedback, and say stop when it is time to stop. Blind obedience is not loyalty, it is handing over your judgement.",
+    "lesson.l39.brief.7" to "Set a turnaround time in advance and tell the whole team before leaving. Raising it on the day means it was never there.",
+
+    // ---------- l40 ----------
+    "lesson.l40.brief.1" to "Three fuels: carbohydrate is the most direct, fat the most energy dense, protein mostly for repair. The first rule at altitude is to eat carbohydrate you can actually get down.",
+    "lesson.l40.brief.2" to "The share of energy from fat can be trained up over months, slowly. Expecting to switch over once you are on the mountain is unrealistic.",
+    "lesson.l40.brief.3" to "Appetite falls at altitude, and an energy deficit is common and hard to avoid. The strategy is small and often with high energy density, not waiting until you are hungry.",
+    "lesson.l40.brief.4" to "Split trail food in two: what you can eat while moving (gels, chews, bars) and what needs a stop (hot food). The first decides whether the pace survives.",
+    "lesson.l40.brief.5" to "Dehydration undermines both appetite and judgement, so plan fluids and energy together.",
+    "lesson.l40.brief.6" to "The branched-chain amino acid and ammonia story has some research behind it but limited evidence; it cannot replace eating enough total calories.",
+
+    // ---------- l41 ----------
+    "lesson.l41.brief.1" to "Expedition logistics is multi-leg transport: road, trek, animal or porter, high camp. Each leg has its own weight limit, lead time and risk.",
+    "lesson.l41.brief.2" to "Pack by order of arrival, not by category. Digging through ten crates for one gas canister is the classic high-camp time sink.",
+    "lesson.l41.brief.3" to "Permits are usually tied to a liaison officer, a route and a date. An extension means money and compliance problems, so build the buffer into the plan.",
+    "lesson.l41.brief.4" to "Many peaks require a rubbish deposit, refunded only if everything comes out. Budget money and manpower for it.",
+    "lesson.l41.brief.5" to "Loads for staff and porters have legal or industry limits; overloading them transfers risk and slows the whole team.",
+    "lesson.l41.brief.6" to "Write consumption rates into the resupply plan: fuel, canisters and food by people times days times ration, not by feel.",
+
+    // ---------- l42 ----------
+    "lesson.l42.brief.1" to "The 4-3-3 rule: keep a third of your strength, a third of your time and a third of your gear in reserve. The reserve is the room that weather, error and the unexpected need.",
+    "lesson.l42.brief.2" to "Three new things and you do not go: a new route, new partners and new gear. Never take more than one of the three on the same trip.",
+    "lesson.l42.brief.3" to "Risk equals consequence times likelihood. Cut the consequence first, because it is easier and because a consequence cannot be undone.",
+    "lesson.l42.brief.4" to "STOP: stop, think, observe, plan. Lost, weather turning, a partner not right — the first move is always to stop.",
+    "lesson.l42.brief.5" to "Three rules for a safe camp: avoid terrain traps, keep an escape route, and concentrate critical kit in one place.",
+    "lesson.l42.brief.6" to "Every plan needs a written abandon condition. A plan that only says how you will finish is not a plan.",
+
+    // ---------- l43 ----------
+    "lesson.l43.brief.1" to "Skin problems at altitude come from three things: dryness, UV and wind. Moisturiser, sunscreen and lip balm are daily work, not options.",
+    "lesson.l43.brief.2" to "Heat pads prevent hypothermia; they are not a comfort treat. Put them on the lower back, the abdomen or outside the boot, never directly on skin.",
+    "lesson.l43.brief.3" to "One set of bowl, cup and wash kit per person, marked with a name; wash water away from the stream, and pack out every scrap.",
+    "lesson.l43.brief.4" to "Wash and air base layers first: salt grinds the skin, and broken skin heals badly at altitude. Never wash down — just air it.",
+    "lesson.l43.brief.5" to "Three camp rules: boots in the porch, no food in the tent, rubbish gathered and hung high. They keep things dry, keep animals away and prevent contamination.",
+    "lesson.l43.brief.6" to "Personal care exists to keep the body able to work; comfort is the by-product.",
+
+    // ---------- t01 ----------
+    "lesson.t01.brief.1" to "Four things set the difficulty of a route: distance, total climb, surface, and where you can resupply or bail out.",
+    "lesson.t01.brief.2" to "Distance alone misleads. Ten flat kilometres and ten kilometres with 800 m of climbing are different routes entirely.",
+    "lesson.t01.brief.3" to "For a first route, stay under three hours and 300 m of climb. If you can walk the next day, the dose was right.",
+    "lesson.t01.brief.4" to "Confirm the exit points before the views: being able to get down halfway is what makes a route safe.",
+
+    // ---------- t02 ----------
+    "lesson.t02.brief.1" to "Fit comes down to one test: the heel does not slide up and the toes do not jam on the descent.",
+    "lesson.t02.brief.2" to "Blisters come from moisture plus friction plus local pressure. Remove any one of the three and the odds drop sharply.",
+    "lesson.t02.brief.3" to "No cotton socks on long days: they hold sweat instead of moving it, and wet cotton both rubs and stops insulating.",
+    "lesson.t02.brief.4" to "Stop at the first hot spot. Once it has blistered, every step hurts.",
+
+    // ---------- t03 ----------
+    "lesson.t03.brief.1" to "Load ceiling is roughly 10–20% of body weight; beginners should take the lower end. Knees and judgement fail first.",
+    "lesson.t03.brief.2" to "Keep heavy items close to your back, between the shoulder blades and the hips, so the weight does not pull you backwards.",
+    "lesson.t03.brief.3" to "The hip belt carries most of it and the shoulder straps keep the pack steady. Carry it on the shoulders alone and you will stiffen up within a day.",
+    "lesson.t03.brief.4" to "Weigh the pack once before leaving. Only with a baseline can you tell what is unnecessary.",
+
+    // ---------- t04 ----------
+    "lesson.t04.brief.1" to "Sustainable effort is being able to speak in full sentences. Too out of breath to talk means you are already overspending.",
+    "lesson.t04.brief.2" to "Drink by the clock, not by thirst: small sips every 20–30 minutes, with electrolytes on hot days.",
+    "lesson.t04.brief.3" to "Energy in small, frequent doses — 30–60 g of carbohydrate an hour works better than one large meal.",
+    "lesson.t04.brief.4" to "Keep breaks under ten minutes. Once the body cools, restarting costs more.",
+
+    // ---------- t05 ----------
+    "lesson.t05.brief.1" to "Set the daily ceiling first — distance, climb, hours — then fix resupply, escape points and spare days.",
+    "lesson.t05.brief.2" to "A spare day is a necessity, not slack. Weather and injury will make some day impossible to finish.",
+    "lesson.t05.brief.3" to "The most under-estimated time sinks: finding the route, filtering water, pitching and cooking. Together they add about 1.5–2 hours a day.",
+    "lesson.t05.brief.4" to "Put the longest day in the middle, use day one to settle in, and keep the last day short for the journey home.",
+
+    // ---------- t06 ----------
+    "lesson.t06.brief.1" to "Camp at least 60 m from water: it keeps the source clean and keeps you off the route animals use at night.",
+    "lesson.t06.brief.2" to "Avoid rockfall below steep ground, dry streambeds (flash flood), isolated trees (lightning) and game trails.",
+    "lesson.t06.brief.3" to "A 2–3° slope drains better, and sleeping head-high is more stable.",
+    "lesson.t06.brief.4" to "Door away from the wind, long side into it, and tension every guy line once it is up.",
+
+    // ---------- t07 ----------
+    "lesson.t07.brief.1" to "Budget fuel at 30–50 g of gas per person per day for boiling water; raise it in the cold and when melting snow.",
+    "lesson.t07.brief.2" to "Choose food for energy density, keeping quality, little washing up, and short cooking.",
+    "lesson.t07.brief.3" to "Eat more carbohydrate at altitude: it costs less oxygen to digest and converts faster than fat.",
+    "lesson.t07.brief.4" to "Any stove inside a tent needs ventilation. Carbon monoxide is colourless and odourless, and poisoning usually happens after you fall asleep.",
+
+    // ---------- t08 ----------
+    "lesson.t08.brief.1" to "Before leaving, look at three things: the 24–48 hour trend, the chance of precipitation, and wind with wind chill.",
+    "lesson.t08.brief.2" to "A cumulonimbus growing upwards with an anvil spreading out at the top means the storm is already mature.",
+    "lesson.t08.brief.3" to "Thunderstorm warning signs: distant thunder, a dark lowering cloud base, a sudden wind shift, hair standing up.",
+    "lesson.t08.brief.4" to "The earliest sign of hypothermia is continuous shivering and clumsy movement. Treat it with dry clothes, insulation underneath and calories.",
+
+    // ---------- t09 ----------
+    "lesson.t09.brief.1" to "Above 3,000 m, keep the daily rise in sleeping altitude under 500 m and take a rest day for every 1,000 m.",
+    "lesson.t09.brief.2" to "The three core signs of AMS: headache, nausea or poor appetite, and dizziness with fatigue.",
+    "lesson.t09.brief.3" to "With AMS, stop ascending — acclimatise in place or descend. Pushing on with drugs is the most common mistake.",
+    "lesson.t09.brief.4" to "Danger signs are breathlessness at rest, unsteady walking and altered consciousness. Descend at once.",
+
+    // ---------- t10 ----------
+    "lesson.t10.brief.1" to "Three layers are enough: wicking, insulating, windproof. Cold, add the middle layer; warm, open the collar first.",
+    "lesson.t10.brief.2" to "UV rises about 10–12% per 1,000 m, and snow reflects another 80%.",
+    "lesson.t10.brief.3" to "Four pieces of sun kit: UV400 glasses, SPF50+ sunscreen, lip balm, a hat.",
+    "lesson.t10.brief.4" to "Hands and feet chill first because the body protects its core. Wet gloves or spare socks have to be changed.",
+
+    // ---------- t11 ----------
+    "lesson.t11.brief.1" to "Appetite falls at altitude, so eat deliberately, in small amounts and often.",
+    "lesson.t11.brief.2" to "The air is dry and you lose water breathing, so pale urine is the sign you are drinking enough.",
+    "lesson.t11.brief.3" to "Periodic breathing, light sleep and waking often at night are normal.",
+    "lesson.t11.brief.4" to "Alcohol suppresses breathing and deepens hypoxia — more dangerous at altitude than at home.",
+
+    // ---------- t12 ----------
+    "lesson.t12.brief.1" to "Accept before you leave that you may not get there. A plan that allows turning back is a plan.",
+    "lesson.t12.brief.2" to "Pace pressure is the heaviest invisible load on beginners. Learn to say: I cannot keep this up, walk at the slowest pace.",
+    "lesson.t12.brief.3" to "Exposure and fear of heights ease with looking a few steps ahead, controlling your breathing, and keeping three points of contact.",
+    "lesson.t12.brief.4" to "We have come this far is sunk cost. It is not a reason to continue.",
+
+    // ---------- t13 ----------
+    "lesson.t13.brief.1" to "Put a resupply point every 3–5 days, cutting the long trail into sections you can finish and leave from.",
+    "lesson.t13.brief.2" to "Allow 600–800 g of dried food a day, about 2,500–3,000 kcal.",
+    "lesson.t13.brief.3" to "Check permits, fire rules, pack-out requirements and drone restrictions one by one before leaving.",
+    "lesson.t13.brief.4" to "Hold 20% in reserve: food, fuel, time and cash all count.",
+
+    // ---------- t14 ----------
+    "lesson.t14.brief.1" to "For a sprain, RICE: rest, ice or cold, compression, elevation.",
+    "lesson.t14.brief.2" to "Hypothermia in order: shelter from wind, dry clothes, insulation from the ground, warm drinks for the conscious, then slow rewarming.",
+    "lesson.t14.brief.3" to "Heat stroke: move to shade quickly, loosen clothing, cool physically and replace electrolytes.",
+    "lesson.t14.brief.4" to "Four things in a call for help: coordinates, number of people and injuries, gear and supplies, contact details.",
+
+    // ---------- t15 ----------
+    "lesson.t15.brief.1" to "The phone map is the main tool, but download the offline package first: the usual state in the hills is power, no signal.",
+    "lesson.t15.brief.2" to "At 1:50,000 one centimetre is 500 m. Learn the scale before reading terrain.",
+    "lesson.t15.brief.3" to "Learn three line types: contours (height), the route (direction), water (usually the lowest ground). Valleys and ridges decide whether you are on the right side of the slope.",
+    "lesson.t15.brief.4" to "A watch and the sun give a rough bearing: point the hour hand at the sun and bisect the angle to twelve for south. On grey days, use the compass.",
+    "lesson.t15.brief.5" to "The first move when lost is to stop. Looking back for three obvious landmarks and confirming where you came from beats pressing on.",
+
+    // ---------- t16 ----------
+    "lesson.t16.brief.1" to "Three zones in camp: sleep, cook, toilet. Sleeping downwind of food and away from cooking is the basic rule.",
+    "lesson.t16.brief.2" to "Bury waste in a cat hole 15–20 cm deep, at least 60 m from water and trails; carry the paper out rather than burning it.",
+    "lesson.t16.brief.3" to "Strain washing-up water and scatter it, then carry the solids out. Food scraps draw animals and foul the water.",
+    "lesson.t16.brief.4" to "Personal care starts with feet: wash, change socks and air boots daily. Blisters and immersion injuries begin there.",
+    "lesson.t16.brief.5" to "Leave the site as you found it: rocks back, fire scars cleared, all rubbish carried out.",
+
+    // ---------- t17 ----------
+    "lesson.t17.brief.1" to "Early dehydration shows as darker urine and poorer judgement, not thirst. Check urine colour once a day on the trail.",
+    "lesson.t17.brief.2" to "Heat illness stages: cramps, then heat exhaustion (dizzy, weak, clammy), then heat stroke (core above 40 °C with altered consciousness).",
+    "lesson.t17.brief.3" to "Order of treatment: shade, loosen clothing, cool physically, replace electrolytes. Never force fluids into someone confused.",
+    "lesson.t17.brief.4" to "Sprains follow RICE: rest, cold, compression, elevation. No heat and no deep massage in the first 48 hours.",
+    "lesson.t17.brief.5" to "Do not pop blisters casually; if you must, drain from the edge, keep the roof and cover it.",
+
+    // ---------- t18 ----------
+    "lesson.t18.brief.1" to "The risk is not depth but depth times speed. The engineering limit is 1.0 square metres per second, and above that you do not cross.",
+    "lesson.t18.brief.2" to "That 1.0 assumes healthy adults, a short crossing and no heavy pack. With a big load, near-zero water or beginners, lower it.",
+    "lesson.t18.brief.3" to "To judge speed, throw a stick in and follow it along the bank. If you have to jog to keep up, it is faster than walking pace.",
+    "lesson.t18.brief.4" to "Depth above the thigh of the shortest person means another spot or a detour — the danger does not begin at the waist.",
+    "lesson.t18.brief.5" to "Choose for three things: wide and shallow, off the outside of the bend, and a run-out without a waterfall, log jam or steep bank.",
+    "lesson.t18.brief.6" to "A 15 cm rise in level is enough to make a previously safe spot dangerous, and glacial melt runs higher in the afternoon than at dawn.",
+
+    // ---------- t19 ----------
+    "lesson.t19.brief.1" to "Triangle: three people facing in, hands on shoulders or packs, one person and one leg moving at a time, strongest upstream.",
+    "lesson.t19.brief.2" to "Line abreast: four or more, strongest at both ends, arms passed between pack and back to grip the far side, side-on and shuffling.",
+    "lesson.t19.brief.3" to "One command for everyone: step, stop, step. The upstream person watches the water and the run-out; everyone else watches their feet and the person in front.",
+    "lesson.t19.brief.4" to "First rule after a fall: do not stand up. A foot trapped in rocks or under a log is the classic mechanism in river deaths.",
+    "lesson.t19.brief.5" to "Right posture: face up, feet downstream, head up, arms out to steer, ferrying at an angle towards the bank.",
+    "lesson.t19.brief.6" to "Rope assistance is high risk and most teams are not practised. If you must, anchor only to the bank and never to a person.",
+
+    // ---------- t20 ----------
+    "lesson.t20.brief.1" to "Four checks before leaving: sole delamination, pack buckles, cracks in tent poles, a leaking sleeping pad.",
+    "lesson.t20.brief.2" to "Repair kit for hiking is three tapes and a needle: Dyneema tape for tent fabric and down, duct tape for temporary fixes, patch kits for air chambers.",
+    "lesson.t20.brief.3" to "A peeling sole is the classic long-trail failure: tape it to stop it spreading, then use proper adhesive in town.",
+    "lesson.t20.brief.4" to "A broken pole can be splinted with a repair sleeve; tape a torn flysheet rather than holding it near a flame.",
+    "lesson.t20.brief.5" to "When down escapes, patch first and press — do not pat the jacket, which just keeps pushing feathers out through the holes.",
+
+    // ---------- t21 ----------
+    "lesson.t21.brief.1" to "The first rule of night travel is do not walk at night unless you must. Navigation, route finding and reading terrain all get much harder.",
+    "lesson.t21.brief.2" to "If you must: headlamp, spare batteries, spare light. Losing light at night means losing the ability to move.",
+    "lesson.t21.brief.3" to "Slow the pace, close up the spacing, and have the lead group check on the tail often; leave someone at every junction.",
+    "lesson.t21.brief.4" to "Early thunderstorm signs: cumulus building fast, distant rumbling, a sudden wind shift, hair lifting. Any one of them means drop to lower ground.",
+    "lesson.t21.brief.5" to "Lightning rules: leave ridges, summits, water edges, isolated trees and metal railings; crouch separately with feet together, do not lie down.",
+    "lesson.t21.brief.6" to "Storms bring a sharp temperature drop and heavy rain, so hypothermia risk climbs with them. Keep the insulating layer within reach.",
 )

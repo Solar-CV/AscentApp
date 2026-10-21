@@ -107,31 +107,31 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
     ),
     Achievement(
         "basecamp_grad", "大本营毕业", "5000 米入门单元全部完成。",
-        AchCategory.Progress, Rarity.Rare, "tent", "单元 1（m5i）全部 12 课完成",
-        target = 12,
+        AchCategory.Progress, Rarity.Rare, "tent", "单元 1（m5i）全部 16 课完成",
+        target = 16,
         progress = { it.unitProgress["m5i"]?.first ?: 0 },
         unlocked = unitAll("m5i")
     ),
     Achievement(
         "tech_grad", "技术营毕业", "5000 米进阶单元全部完成。",
-        AchCategory.Progress, Rarity.Rare, "backpack", "单元 2（m5a）全部 9 课完成",
-        target = 9,
+        AchCategory.Progress, Rarity.Rare, "backpack", "单元 2（m5a）全部 12 课完成",
+        target = 12,
         progress = { it.unitProgress["m5a"]?.first ?: 0 },
         unlocked = unitAll("m5a")
     ),
     Achievement(
         "six_k_grad", "六千米毕业", "6000 米单元全部完成。",
-        AchCategory.Progress, Rarity.Rare, "mountain", "单元 3（m6）全部 10 课完成",
-        target = 10,
+        AchCategory.Progress, Rarity.Rare, "mountain", "单元 3（m6）全部 14 课完成",
+        target = 14,
         progress = { it.unitProgress["m6"]?.first ?: 0 },
         unlocked = unitAll("m6")
     ),
     Achievement(
         "seven_k_grad", "七千米毕业", "7000 米单元全部完成。",
-        AchCategory.Progress, Rarity.Epic, "snowflake", "单元 4（m7）全部 8 课完成",
-        target = 8,
-        progress = { it.unitProgress["m7"]?.first ?: 0 },
-        unlocked = unitAll("m7")
+        AchCategory.Progress, Rarity.Epic, "snowflake", "7000 米两个营地（C3 + C4）共 16 课完成",
+        target = 16,
+        progress = { s -> (s.unitProgress["m7"]?.first ?: 0) + (s.unitProgress["m7h"]?.first ?: 0) },
+        unlocked = { s -> unitAll("m7")(s) && unitAll("m7h")(s) }
     ),
     Achievement(
         "avalanche_eye", "雪崩之眼", "学会识别雪崩地形与风险。",
@@ -264,15 +264,15 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
     ),
     Achievement(
         "eight_k_grad", "八千米毕业", "8000 米单元全部完成。",
-        AchCategory.Explore, Rarity.Epic, "trophy", "单元 5（m8）全部 8 课完成",
-        target = 8,
+        AchCategory.Explore, Rarity.Epic, "trophy", "单元 6（m8）全部 10 课完成",
+        target = 10,
         progress = { it.unitProgress["m8"]?.first ?: 0 },
         unlocked = unitAll("m8")
     ),
     Achievement(
-        "full_route", "理论大满贯", "47 门课全部完成，理论路线走到终点。",
-        AchCategory.Explore, Rarity.Legendary, "award", "全部 47 课完成",
-        target = 47,
+        "full_route", "理论大满贯", "66 门课全部完成，理论路线走到终点。",
+        AchCategory.Explore, Rarity.Legendary, "award", "全部 66 课完成",
+        target = 66,
         progress = { it.completed.size },
         unlocked = { s -> s.unitProgress.isNotEmpty() && s.unitProgress.values.all { (d, t) -> t > 0 && d >= t } }
     ),

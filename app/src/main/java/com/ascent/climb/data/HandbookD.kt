@@ -15,6 +15,7 @@ val HANDBOOK_D = listOf(
 
     HandbookArticle(
         id = "h17",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "高海拔睡眠系统（睡袋与床垫）",
         code = "GEAR · SLEEP",
         icon = "\uD83D\uDECF\uFE0F",
@@ -47,6 +48,7 @@ val HANDBOOK_D = listOf(
 
     HandbookArticle(
         id = "h18",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "背包、行李与收纳",
         code = "GEAR · PACKS",
         icon = "\uD83C\uDF92",
@@ -82,6 +84,7 @@ val HANDBOOK_D = listOf(
 
     HandbookArticle(
         id = "h19",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "个人护理与营地生活",
         code = "GEAR · CARE",
         icon = "\uD83E\uDDF4",
@@ -160,6 +163,7 @@ val HANDBOOK_D = listOf(
 
     HandbookArticle(
         id = "h21",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "高原病风险人群与预防策略",
         code = "HAI RISK",
         icon = "\uD83D\uDEDF",

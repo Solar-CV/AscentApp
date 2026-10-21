@@ -2,26 +2,35 @@
 """内容层多语言覆盖率自检。
 
 用法：
+    bash tools/contentcheck/run.sh      # 先跑一次，生成 bank/bank.json
     python3 tools/i18ncheck.py
 
-检查三件事：
-  1. 每个语言包相对英文包缺哪些 key（缺失 = 运行时回退英文）
-  2. 数据层实际存在的课程 / 成就 / 技能书 / 单元，是否都有条目
-  3. 各语言覆盖率百分比
+为什么先要 contentcheck：题库的期望键由「课程 + 题目结构」推算（题干、选项数、
+配对列、填空答案、情景步数），这些只有序列化后的题库才拿得准。早期版本把
+英文包自己的 key 当分母，于是**新增课时永远不计入**，覆盖率会一直显示 100%。
 
-退出码：存在「结构性缺失」（数据层有实体但英文包没有）时返回 1，
-仅有语言间差异时返回 0 —— 因为回退英文是设计行为，不是错误。
+检查四件事：
+  1. 四层（入口 / 要点 / 技能书正文 / 题库）各自的期望键集合
+  2. 英文包是否覆盖全部期望键（英文是回退基准，缺了就是结构性缺口）
+  3. 每种语言相对期望键的覆盖情况
+  4. 数据层实体（课程 / 单元 / 成就 / 技能书 / 山峰 / 分类）是否都有条目
+
+退出码：英文包存在缺口时返回 1；仅其他语言有缺口时返回 0 ——
+因为回退英文是设计行为，不是错误。
 """
 import glob
+import json
 import os
 import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PACK_DIR = os.path.join(ROOT, "app/src/main/java/com/ascent/climb/data/i18n")
+DATA = os.path.join(ROOT, "app/src/main/java/com/ascent/climb/data")
+BANK = os.path.join(ROOT, "bank/bank.json")
 
 LANGS = [
-    ("en", ["PackEn", "PackEnBrief", "PackEnHandbook", "PackEnQuiz"]),
+    ("en", ["PackEn", "PackEnBrief", "PackEnHandbook", "PackEnQuiz", "PackEnQuiz2"]),
     ("zh-TW", ["PackZhTw", "PackZhTwBrief", "PackZhTwEntry", "PackZhTwHandbook", "PackZhTwQuiz"]),
     ("ja", ["PackJa", "PackJaBrief", "PackJaEntry", "PackJaHandbook", "PackJaQuiz"]),
     ("ru", ["PackRu", "PackRuBrief", "PackRuEntry", "PackRuHandbook", "PackRuQuiz"]),
@@ -32,7 +41,7 @@ LANGS = [
     ("it", ["PackIt", "PackItBrief", "PackItEntry", "PackItHandbook", "PackItQuiz"]),
 ]
 
-ENTRY = re.compile(r'"([a-z]+\.[^"]+)" to "((?:[^"\\]|\\.)*)"')
+ENTRY = re.compile(r'"([^"]+)" to "((?:[^"\\]|\\.)*)"')
 
 
 def read_pack(names):
@@ -44,108 +53,137 @@ def read_pack(names):
     return out
 
 
-def collect_ids():
-    data = os.path.join(ROOT, "app/src/main/java/com/ascent/climb/data")
+def load_bank():
+    if not os.path.exists(BANK):
+        print("找不到 bank/bank.json —— 先运行 bash tools/contentcheck/run.sh")
+        sys.exit(2)
+    return json.load(open(BANK, encoding="utf-8"))
+
+
+def quiz_keys(lid, l):
+    """按题目结构推出该课在题库层的全部键。"""
+    ks = []
+    for i, q in enumerate(l["questions"]):
+        # 复习副本是运行时 copy 出来的，id 沿用原题，不需要单独的译文键
+        if q.get("review"):
+            continue
+        base = f"q.{lid}#{i}"
+        t = q["type"]
+        ks.append(base + ".p")
+        if t in ("single", "multi", "order"):
+            ks += [f"{base}.o{n}" for n in range(len(q["options"]))]
+        elif t in ("fill", "calc"):
+            ks += [f"{base}.a{n}" for n in range(len(q["answers"]))]
+        elif t == "match":
+            ks += [f"{base}.l{n}" for n in range(len(q["pairsLeft"]))]
+            ks += [f"{base}.r{n}" for n in range(len(q["pairsRight"]))]
+        elif t == "scenario":
+            if q.get("context"):
+                ks.append(base + ".c")
+            for si, st in enumerate(q.get("steps", [])):
+                ks.append(f"{base}.s{si}.p")
+                ks += [f"{base}.s{si}.o{n}" for n in range(len(st["options"]))]
+                ks.append(f"{base}.s{si}.e")
+        ks.append(base + ".e")
+    return ks
+
+
+def data_entities():
+    lessons = []
+    for tr in load_bank()["tracks"]:
+        for u in tr["units"]:
+            for l in u["lessons"]:
+                lessons.append(l)
+
     src = ""
-    for f in glob.glob(os.path.join(data, "*.kt")):
+    for f in glob.glob(os.path.join(DATA, "*.kt")):
         if f.endswith(".bak-chatbox-0930"):
             continue
         src += open(f, encoding="utf-8").read() + "\n"
 
-    lessons = set(re.findall(r'Lesson\(\s*\n?\s*id = "([^"]+)"', src))
-    units = set()
-    for m in re.finditer(r'Unit\(([\s\S]{0,900}?)\)', src):
-        u = re.search(r'id = "(u\d+)"', m.group(1))
-        if u:
-            units.add(u.group(1))
+    units = re.findall(r'id = "(m[0-9a-z]+)", index = \d+', src)
+    peaks = sorted(set(re.findall(r'Peak\("([^"]+)"', src)))
+    cats = sorted(set(re.findall(r'category = "([^"]+)"', src)))
+    ach = sorted(set(re.findall(r'\n    Achievement\(\n\s*"([a-z0-9_]+)"', src)))
 
-    ach = set(re.findall(r'\n    Achievement\(\n\s*"([a-z0-9_]+)"', src))
-    hb = set(re.findall(r'HandbookArticle\(\s*id = "([^"]+)"', src))
-    return lessons, units, ach, hb
-
-
-def collect_handbook_sections():
-    """技能书 id → 章节数。按文章边界切片，避免把下一篇的章节算进来。"""
-    data = os.path.join(ROOT, "app/src/main/java/com/ascent/climb/data")
-    out = {}
-    for path in sorted(glob.glob(os.path.join(data, "Handbook*.kt"))):
-        src = open(path, encoding="utf-8").read()
-        starts = [m.start() for m in re.finditer(r'HandbookArticle\(', src)] + [len(src)]
+    hb = {}
+    for path in sorted(glob.glob(os.path.join(DATA, "Handbook*.kt"))):
+        s = open(path, encoding="utf-8").read()
+        starts = [m.start() for m in re.finditer(r'HandbookArticle\(', s)] + [len(s)]
         for i in range(len(starts) - 1):
-            seg = src[starts[i]:starts[i + 1]]
-            aid = re.search(r'id = "([^"]+)"', seg)
-            if not aid:
-                continue
-            out[aid.group(1)] = len(re.findall(r'HandbookSection\(', seg))
-    return out
+            seg = s[starts[i]:starts[i + 1]]
+            m = re.search(r'id = "([^"]+)"', seg)
+            if m:
+                hb[m.group(1)] = len(re.findall(r'HandbookSection\(', seg))
+    return lessons, units, ach, hb, peaks, cats
+
+
+def expectations():
+    lessons, units, ach, hb, peaks, cats = data_entities()
+    entry, brief, body, quiz = [], [], [], []
+    for l in lessons:
+        lid = l["id"]
+        entry.append(f"lesson.{lid}.title")
+        for n in range(len(l.get("brief", []))):
+            brief.append(f"lesson.{lid}.brief.{n + 1}")
+        quiz += quiz_keys(lid, l)
+    for u in units:
+        entry.append(f"unit.{u}.title")
+    for a in ach:
+        entry += [f"ach.{a}.title", f"ach.{a}.desc"]
+    for hid, n in hb.items():
+        entry += [f"hb.{hid}.title", f"hb.{hid}.summary"]
+        for k in range(1, n + 1):
+            body += [f"hb.{hid}.s{k}.h", f"hb.{hid}.s{k}.b"]
+    entry += [f"cat.{c}" for c in cats] + [f"peak.{p}" for p in peaks]
+    return {"入口": entry, "要点": brief, "正文": body, "题库": quiz}, lessons, hb
 
 
 def main():
+    expect, lessons, hb = expectations()
     packs = {tag: read_pack(name) for tag, name in LANGS}
     base = packs["en"]
     if not base:
         print("找不到英文包，检查路径:", PACK_DIR)
         return 1
 
-    lessons, units, ach, hb = collect_ids()
-    hb_secs = collect_handbook_sections()
-
-    structural = []
-    for i in sorted(lessons):
-        if f"lesson.{i}.title" not in base:
-            structural.append(f"lesson.{i}.title")
-    for i in sorted(units):
-        if f"unit.{i}.title" not in base:
-            structural.append(f"unit.{i}.title")
-    for i in sorted(ach):
-        for fld in ("title", "desc"):
-            if f"ach.{i}.{fld}" not in base:
-                structural.append(f"ach.{i}.{fld}")
-    for i in sorted(hb):
-        for fld in ("title", "summary"):
-            if f"hb.{i}.{fld}" not in base:
-                structural.append(f"hb.{i}.{fld}")
-        # 正文按章节检查；英文正文尚未建立时不报结构性缺失
-        if any(".s1.h" in k for k in base):
-            for n in range(1, hb_secs.get(i, 0) + 1):
-                for fld in ("h", "b"):
-                    if f"hb.{i}.s{n}.{fld}" not in base:
-                        structural.append(f"hb.{i}.s{n}.{fld}")
-
+    total = sum(len(v) for v in expect.values())
     print("=== 数据层实体 ===")
-    print(f"  课程 {len(lessons)} · 单元 {len(units)} · 成就 {len(ach)} · 技能书 {len(hb)}")
-    print(f"  英文包条目 {len(base)}")
-    if structural:
-        print(f"\n!! 英文包结构性缺失 {len(structural)} 项：")
-        for k in structural[:20]:
-            print("   ", k)
-    else:
-        print("  英文包覆盖完整（所有实体均有条目）")
+    print(f"  课程 {len(lessons)} · 技能书 {len(hb)} 篇 / {sum(hb.values())} 节")
+    print(f"  期望条目 {total}（入口 {len(expect['入口'])} / 要点 {len(expect['要点'])} / "
+          f"正文 {len(expect['正文'])} / 题库 {len(expect['题库'])}）")
 
-    def pct_of(k, pred):
-        total = [x for x in base if pred(x)]
-        hit = [x for x in total if x in k]
-        return len(hit), len(total)
+    print("\n=== 英文包（回退基准）===")
+    failed = False
+    for name, keys in expect.items():
+        miss = [k for k in keys if k not in base]
+        flag = "完整" if not miss else f"缺 {len(miss)}"
+        print(f"  {name:4s} {len(keys) - len(miss):5d}/{len(keys):<5d} {flag}")
+        if miss:
+            failed = True
+            for k in miss[:4]:
+                print("      ", k)
+            if len(miss) > 4:
+                print(f"       … 另 {len(miss) - 4} 条")
 
-    print("\n=== 各语言覆盖 ===")
-    print(f"{'语言':7s} {'导航/说明':>10s} {'课程要点':>10s} {'技能书正文':>10s} {'题库':>10s} {'总覆盖率':>9s}")
-    total_body = sum(hb_secs.values()) * 2
+    print("\n=== 各语言覆盖（相对期望键）===")
+    print(f"{'语言':7s} {'入口':>11s} {'要点':>11s} {'正文':>11s} {'题库':>13s} {'总覆盖率':>9s}")
     for tag, _ in LANGS:
         if tag == "en":
             continue
         k = packs[tag]
-        # 技能书章节 key 是 hb.*.sN.h/.b；题库子问题是 q.*.sN.*，不能混为一谈
-        body = lambda x: x.startswith("hb.") and re.search(r'\.s\d+\.', x) is not None
-        quiz = lambda x: x.startswith("q.")
-        a, at = pct_of(k, lambda x: ".brief." not in x and not body(x) and not quiz(x))
-        b, bt = pct_of(k, lambda x: ".brief." in x)
-        c, ct = pct_of(k, body)
-        d, dt = pct_of(k, quiz)
-        pct = 100.0 * len(set(base) & set(k)) / max(1, len(base))
-        print(f"{tag:7s} {a:4d}/{at:<4d} {b:4d}/{bt:<4d} {c:4d}/{ct:<4d} {d:4d}/{dt:<4d} {pct:8.1f}%")
+        cells, hit_all, exp_all = [], 0, 0
+        for name in ("入口", "要点", "正文", "题库"):
+            keys = expect[name]
+            hit = sum(1 for x in keys if x in k)
+            cells.append(f"{hit}/{len(keys)}")
+            hit_all += hit
+            exp_all += len(keys)
+        pct = 100.0 * hit_all / max(1, exp_all)
+        print(f"{tag:7s} {cells[0]:>11s} {cells[1]:>11s} {cells[2]:>11s} {cells[3]:>13s} {pct:8.1f}%")
 
     print("\n说明：缺失条目运行时回退英文（不是中文），属设计行为。")
-    return 1 if structural else 0
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

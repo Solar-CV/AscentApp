@@ -319,4 +319,15 @@
     <string name="main_bank_updated">題庫を v%1$d に更新しました（%2$d 問）</string>
     <string name="main_bank_latest">題庫は最新です（v%1$d）</string>
     <string name="main_bank_need_app">オンライン題庫には App v%1$d 以上が必要です</string>
+    <string name="cap_t1">日帰り</string>
+    <string name="cap_t2">小屋泊・幕営</string>
+    <string name="cap_t3">高所トレッキング</string>
+    <string name="cap_t4">ロングトレイル</string>
+    <string name="path_track_climb">高山登山</string>
+    <string name="path_track_trek">トレッキング</string>
+    <string name="track_sheet_title">コース区分を選択</string>
+    <string name="track_sheet_sub">進捗・バッジ・復習キューは2つの区分で別々に管理されます</string>
+    <string name="track_current">選択中</string>
+    <string name="track_switch">切り替え</string>
+    <string name="track_sheet_note">トレッキング区分は基礎・天気・メンタルが中心で、雪氷技術は含みません。</string>
 </resources>

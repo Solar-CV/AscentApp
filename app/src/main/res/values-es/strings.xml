@@ -297,4 +297,15 @@
     <string name="main_bank_updated">Banco actualizado a v%1$d (%2$d preguntas)</string>
     <string name="main_bank_latest">El banco ya está actualizado (v%1$d)</string>
     <string name="main_bank_need_app">El banco en línea requiere la app v%1$d o superior</string>
+    <string name="cap_t1">Un día</string>
+    <string name="cap_t2">Varios días</string>
+    <string name="cap_t3">Altitud</string>
+    <string name="cap_t4">Larga distancia</string>
+    <string name="path_track_climb">Alta montaña</string>
+    <string name="path_track_trek">Senderismo</string>
+    <string name="track_sheet_title">Elegir categoría</string>
+    <string name="track_sheet_sub">El progreso, las insignias y la cola de repaso son independientes en cada categoría</string>
+    <string name="track_current">Actual</string>
+    <string name="track_switch">Cambiar</string>
+    <string name="track_sheet_note">La categoría de senderismo cubre bases, meteorología y mentalidad; no incluye técnica de nieve y hielo.</string>
 </resources>

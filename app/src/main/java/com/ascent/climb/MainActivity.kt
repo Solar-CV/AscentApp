@@ -41,7 +41,9 @@ import com.ascent.climb.ui.bankMsgOf
 import com.ascent.climb.ui.bankMsgText
 import com.ascent.climb.i18n.AppLocale
 import com.ascent.climb.data.bank.UpdateCheck
-import com.ascent.climb.data.altitudeAwardFor
+import com.ascent.climb.data.altitudeAwardForTrack
+import com.ascent.climb.data.setActiveTrack
+import com.ascent.climb.data.trackOfLesson
 import com.ascent.climb.data.lessonById
 import com.ascent.climb.ui.AchievementUnlockOverlay
 import com.ascent.climb.ui.Ascent
@@ -142,7 +144,10 @@ fun AscentRoot(
 ) {
     val context = LocalContext.current
 
-    var altitude by remember { mutableStateOf(store.altitude) }
+    var trackId by remember { mutableStateOf(store.trackId) }
+    // 聚合数据（ALL_UNITS / ALL_LESSONS）跟随当前大类，供训练页、我的页与成就判定使用
+    setActiveTrack(trackId)
+    var altitude by remember { mutableStateOf(store.altitudeOn(store.trackId)) }
     var streak by remember { mutableStateOf(store.streak) }
     var rope by remember { mutableStateOf(store.rope) }
     var completed by remember { mutableStateOf(store.completed.toSet()) }
@@ -173,7 +178,7 @@ fun AscentRoot(
 
     LaunchedEffect(Unit) {
         store.touchDay()
-        altitude = store.altitude
+        altitude = store.altitudeOn(trackId)
         streak = store.streak
         rope = store.rope
         completed = store.completed.toSet()
@@ -207,14 +212,15 @@ fun AscentRoot(
         Box(modifier = Modifier.fillMaxSize().background(Ascent.Bg)) {
             LessonScreen(
                 lesson = openLesson,
-                altitudeAward = if (openLesson.id in completed) 0 else altitudeAwardFor(openLesson.id),
+                altitudeAward = if (openLesson.id in completed) 0 else
+                    altitudeAwardForTrack(trackOfLesson(openLesson.id), openLesson.id),
                 devShowAnswers = devShowAnswers,
                 onClose = { openLessonId = null },
                 onFinished = { stars, wrongCount, wrongKeys ->
                     store.finishLesson(openLesson.id, stars)
                     repeat(wrongCount) { store.loseRope() }
                     wrongKeys.forEach { store.markWrong(it) }
-                    altitude = store.altitude
+                    altitude = store.altitudeOn(trackId)
                     rope = store.rope
                     completed = store.completed.toSet()
                     dueKeys = store.dueReviewKeys()
@@ -245,13 +251,22 @@ fun AscentRoot(
                 key(bankRevision) {
                     when (tab) {
                         0 -> PathScreen(
+                            trackId = trackId,
                             altitude = altitude,
                             streak = streak,
                             rope = rope,
                             completed = completed,
                             starsOf = { store.starsFor(it) },
                             devUnlockAll = devUnlockAll,
-                            onOpenLesson = { openLessonId = it }
+                            onOpenLesson = { openLessonId = it },
+                            onSwitchTrack = { id ->
+                                if (id != trackId) {
+                                    trackId = id
+                                    store.trackId = id
+                                    setActiveTrack(id)
+                                    altitude = store.altitudeOn(id)
+                                }
+                            }
                         )
                         1 -> HandbookScreen()
                         2 -> TrainingScreen(

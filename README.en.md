@@ -2,9 +2,11 @@
 
 [简体中文](README.md) · **English**
 
-An Android app for people starting out in high-altitude mountaineering and ice climbing. The curriculum is organised by altitude: every lesson you pass moves you a little higher. Five units run from a 5,000 m introduction to 8,000 m, and after 47 lessons you have climbed from 3,200 m to 8,848 m.
+An Android app for people starting out in high-altitude mountaineering and ice climbing. The curriculum is organised by altitude: every lesson you pass moves you a little higher.
 
-Current version v0.18.35 (versionCode 71). This release closes out the multilingual work: the interface and the content are both available in 10 languages, and all four content layers are fully translated in the nine non-Chinese languages.
+Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
+
+Current version v0.19.11 (versionCode 86). This release brings **Japanese up to date**: 9,422 question-bank entries, 443 lesson briefs, all 89 lesson titles, unit names, peak names and handbook articles h32–h35 are now in place, so Japanese is complete across all four layers and matches the English key set entry for entry (10,544 / 10,544). Terminology follows what the existing pack already used rather than inventing a second vocabulary (アイゼン, ピッケル, ビレイステーション, 渡渉, フットエントラップ, ガモウバッグ, 運動失調 and so on). English and Traditional Chinese were completed in the two previous releases; the remaining six languages (ru / fr / sv / de / es / it) still cover only the pre-expansion bank.
 
 ## Install
 
@@ -21,13 +23,15 @@ Transfer the APK to your phone, allow installs from unknown sources, tap install
 
 ### The path
 
-The home screen is a route from base camp upwards, split into five altitude units. Lessons unlock linearly — pass one and the next opens. Nodes show stars, the current lesson carries a "start" hint, and the last lesson of a unit is marked in gold.
+The home screen is a route from base camp upwards, split into altitude units (six for climbing, four for trekking). Swipe horizontally to page through them, two units per page. Lessons unlock linearly — pass one and the next opens. Nodes show stars, the current lesson carries a "start" hint, and the last lesson of a unit is marked in gold.
+
+Two pills at the top switch course tracks; tapping one opens a bottom sheet. Switching returns to the first page and the choice is remembered.
 
 Progress is not a stored number. It is recomputed from the lessons you have completed, so if the altitude curve is adjusted later, old saves recalculate instead of getting stuck.
 
 ### Question bank
 
-629 formal questions plus 82 auto-inserted review copies, 711 display items in total. Volume rises with altitude: about 11 questions per lesson in the 5,000 m introduction, about 19 in the 8,000 m unit.
+1,533 formal questions plus 154 auto-inserted review copies, 1,687 display items in total. Volume rises with altitude: about 15 questions per lesson in the 5,000 m introduction, 30 in the 7,000 m technical units, and 8 across trekking.
 
 Eight question types: single choice, multiple choice, ordering, matching, fill-in, calculation, hotspot (tap a point on an image), and scenario (one stem answered in several steps).
 
@@ -35,7 +39,7 @@ Finishing a lesson drops you straight into redoing the ones you got wrong. Quest
 
 ### Handbook
 
-31 long-form articles, 4 to 8 sections each, sorted into gear, technique, medicine, health, weather, meteorology, decisions, judgement, safety and risk. Sources are public medical and technical material, three commercial guide documents, and edited transcripts of seven Chinese mountaineering books. Per product agreement, the Chinese books are not cited by title; the guide documents are.
+35 long-form articles, 4 to 8 sections each, sorted into gear, technique, medicine, health, weather, meteorology, decisions, judgement, safety, risk and avalanche rescue. The handbook is now filtered by track: snow-and-ice pieces appear only under climbing, while altitude medicine, hypothermia, navigation, camping and leadership are shared by both. Sources are public medical and technical material, three commercial guide documents, and edited transcripts of seven Chinese mountaineering books. Per product agreement, the Chinese books are not cited by title; the guide documents are.
 
 ### Training, review, profile
 
@@ -53,30 +57,42 @@ Interface strings and course content are available in:
 
 简体中文 (source), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-All four layers are complete in the nine translated languages:
+Interface strings cover all 10 languages. The content layers now hold 10,527 items across four layers, each at a different stage:
 
-| Layer | Items | Coverage |
-|---|---|---|
-| Navigation and notes | 232 | 100% |
-| Lesson key points | 215 | 100% |
-| Handbook body | 326 | 100% |
-| Question bank (stem / options / explanation) | 3,954 | 100% |
+| Layer | Items | English (fallback baseline) | Other 8 languages |
+|---|---|---|---|
+| Entry (lesson, unit, handbook titles, peaks) | 284 | 100% | 77% |
+| Lesson key points | 443 | 100% | 49% |
+| Handbook body | 378 | 100% | 86% |
+| Question bank (stem / options / explanation) | 9,422 | 53% | 42% |
 
 Terminology follows each language's own mountaineering usage rather than literal translation: Swedish uses stegjärn / isyxa / standplats, German Steigeisen / Pickel, Russian кошки / ледоруб. Medical doses, avalanche levels, slope angles and temperatures are carried over unchanged, with only the thousands separator and decimal mark adapted.
 
-If an item is missing in the selected language, it falls back to English rather than Chinese — at least that stays readable technical text.
+The October 2026 expansion (28 lessons, four handbook articles, backfilled questions) is not fully translated yet. English has finished the entry, brief and body layers; the question bank is still going in batches, and the other eight languages follow once the English is settled. When an item is missing in the selected language, it falls back to English, then to the Chinese source.
 
 ## Curriculum
 
+**Alpine climbing**
+
 | Unit | Altitude | Lessons | Questions | Per lesson |
 |---|---|---|---|---|
-| 5000M · Introduction | 5,000 m | 12 | 135 | 11 |
-| 5000M · Progression | 5,000 m | 9 | 112 | 12 |
-| 6000M | 6,000 m | 10 | 143 | 14 |
-| 7000M | 7,000 m | 8 | 163 | 20 |
-| 8000M | 8,000 m | 8 | 158 | 19 |
+| 5000M · Introduction | 5,000 m | 16 | 249 | 16 |
+| 5000M · Progression | 5,300 m | 12 | 221 | 18 |
+| 6000M | 6,000 m | 14 | 316 | 22 |
+| 7000M · C3 technical camp | 7,000 m | 6 | 185 | 31 |
+| 7000M · C4 high camp | 7,500 m | 10 | 279 | 28 |
+| 8000M | 8,000 m | 10 | 248 | 24 |
 
-Thirty target peaks are listed, from Aotaina at 5,211 m up to the fourteen 8,000 m peaks.
+**Trekking**
+
+| Unit | Altitude | Lessons | Questions | Per lesson |
+|---|---|---|---|---|
+| Day hikes | 1,200 m | 5 | 40 | 8 |
+| Multi-day and camping | 2,500 m | 8 | 79 | 10 |
+| High-altitude trekking | 3,800 m | 5 | 44 | 8 |
+| Long trails and emergency | 4,500 m | 3 | 26 | 8 |
+
+38 target peaks and routes in total: 30 for climbing, from Aotaina at 5,211 m up to the fourteen 8,000 m peaks; 8 for trekking, from the Huihang Trail to the Three Passes route at Everest.
 
 ## Where the content comes from
 
@@ -181,6 +197,15 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+v0.19 is the content expansion; the bank structure and scoring logic are unchanged.
+
+- Lessons 47 → 89: climbing now 68 (6000 / 7000 / 8000 m units, all fourteen 8000ers), plus 21 new trekking lessons
+- Questions 711 → 1,533 (9,422 keys), handbook 31 → 35 articles (avalanche burial and resuscitation, the avalanche trio, fixed ropes, river crossing), bank v15 → v19
+- Three languages now complete across all four content layers: English, Traditional Chinese, Japanese. Their key sets match English entry for entry (10,544 / 10,544), so nothing falls back to Chinese at runtime
+- Traditional Chinese runs through OpenCC s2twp plus a terminology table, validated by regression against the existing translations (zero differences); Japanese is a real translation, with one register for the question bank and another for the handbook
+- `tools/i18n/` provides three commands (`status.py` / `prep.py` / `apply.py`) that work across all nine languages; Traditional Chinese also has `tw.py` and `tw_entry.py`
+- The bank is split across files: a single Kotlin file of roughly 2,500 entries crashes the compiler, so English and Traditional Chinese use three parts each, and Japanese three
 
 v0.16 through v0.18 were all multilingual work; the bank structure and scoring logic did not change.
 

@@ -8,6 +8,7 @@ val HANDBOOK_A = listOf(
 
     HandbookArticle(
         id = "h1",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "急性高原病完全指南",
         code = "AMS / HACE / HAPE",
         icon = "\uD83E\uDD15",
@@ -40,6 +41,7 @@ val HANDBOOK_A = listOf(
 
     HandbookArticle(
         id = "h2",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "高原适应节奏与预防用药",
         code = "ACCLIMATIZATION",
         icon = "\uD83D\uDCC8",
@@ -71,6 +73,7 @@ val HANDBOOK_A = listOf(
 
     HandbookArticle(
         id = "h3",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "失温：分级与现场处置",
         code = "HYPOTHERMIA",
         icon = "\uD83C\uDF28\uFE0F",
@@ -102,6 +105,7 @@ val HANDBOOK_A = listOf(
 
     HandbookArticle(
         id = "h4",
+        tracks = listOf(CLIMB_TRACK, TREK_TRACK),
         title = "冻伤：识别、复温与决策",
         code = "FROSTBITE",
         icon = "\uD83E\uDDCA",

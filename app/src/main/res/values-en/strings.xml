@@ -335,4 +335,15 @@
     <string name="main_bank_updated">Question bank updated to v%1$d (%2$d questions)</string>
     <string name="main_bank_latest">Question bank is up to date (v%1$d)</string>
     <string name="main_bank_need_app">Online bank requires app v%1$d or later</string>
+    <string name="path_track_climb">Alpine</string>
+    <string name="path_track_trek">Trekking</string>
+    <string name="track_sheet_title">Choose a course track</string>
+    <string name="track_sheet_sub">Progress, badges and the review queue are kept separately for each track</string>
+    <string name="track_current">Current</string>
+    <string name="track_switch">Switch</string>
+    <string name="track_sheet_note">The trekking track covers basics, weather and mindset; it does not include snow and ice technique.</string>
+    <string name="cap_t1">Day hike</string>
+    <string name="cap_t2">Multi-day</string>
+    <string name="cap_t3">High altitude</string>
+    <string name="cap_t4">Long trail</string>
 </resources>
