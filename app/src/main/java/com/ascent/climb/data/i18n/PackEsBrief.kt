@@ -604,4 +604,11 @@ internal val PACK_ES_BRIEF: Map<String, String> = mapOf(
     "lesson.l40.brief.4" to "La comida de marcha se divide en dos grupos: lo que se come andando (geles, gominolas, barritas) y lo que exige parar (comida caliente). El primero decide si se mantiene el ritmo.",
     "lesson.l40.brief.5" to "La deshidratación debilita a la vez el apetito y el juicio; beber y comer tienen que planificarse juntos.",
     "lesson.l40.brief.6" to "Sobre la relación entre aminoácidos ramificados y amoniaco hay estudios, pero la evidencia es limitada: no sustituye a la base de comer suficientes calorías totales.",
+    // ---------- l41 Logística de expedición y permisos ----------
+    "lesson.l41.brief.1" to "La logística de expedición es un transporte en varias etapas: carretera, marcha a pie, porte y campamento de altura. Cada etapa tiene su propio límite de peso, sus plazos y sus riesgos.",
+    "lesson.l41.brief.2" to "El material se empaqueta por «orden de llegada», no por categorías. Rebuscar en diez cajas para encontrar un cartucho de gas es la forma más habitual de perder tiempo en un campamento de altura.",
+    "lesson.l41.brief.3" to "El permiso suele ir vinculado a un oficial de enlace, un itinerario y un plazo. Prorrogar implica a la vez un problema de coste y de cumplimiento, y hay que meterlo en el plan desde el principio.",
+    "lesson.l41.brief.4" to "El depósito de basura es una exigencia firme en muchas montañas: solo se devuelve si se saca toda la basura. Hay que reservar presupuesto y personal para ello.",
+    "lesson.l41.brief.5" to "La carga de colaboradores y porteadores tiene límites legales o del sector; sobrecargarles traslada el riesgo a ellos y ralentiza a todo el equipo.",
+    "lesson.l41.brief.6" to "El plan de avituallamiento debe expresar la tasa de consumo: combustible, cartuchos y comida se calculan como «personas × días × consumo», no a ojo.",
 )
