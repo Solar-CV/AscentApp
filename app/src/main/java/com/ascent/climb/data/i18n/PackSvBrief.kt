@@ -446,4 +446,10 @@ internal val PACK_SV_BRIEF: Map<String, String> = mapOf(
     "lesson.l40.brief.4" to "Dela marchmaten i två grupper: sådant man kan äta medan man går (gel, gummifrukt, bars) och sådant som kräver att man stannar (varm mat). Den första gruppen avgör om rytmen håller.",
     "lesson.l40.brief.5" to "Dehydrering försvagar både aptit och omdöme samtidigt, så vätske- och energiintag måste planeras tillsammans.",
     "lesson.l40.brief.6" to "Det finns studier på sambandet mellan BCAA och ammoniak, men evidensen är begränsad och ersätter inte grunden: att äta tillräckligt med kalorier totalt.",
+    "lesson.l41.brief.1" to "Expeditionslogistik är «transport i flera etapper»: väg → till fots → bärartransport → högläger. Varje etapp har egen viktgräns, tidplan och risk.",
+    "lesson.l41.brief.2" to "Materielen ska packas efter ankomstordning, inte efter kategori. Att rota igenom tio lådor för att hitta en gaskartong är det vanligaste sättet att slösa tid i ett högläger.",
+    "lesson.l41.brief.3" to "Tillståndet är ofta knutet till liaisonofficer, rutt och giltighetstid. En förlängning innebär både kostnads- och regelefterlevnadsproblem och måste räknas in i planen i förväg.",
+    "lesson.l41.brief.4" to "Skräpdepositionen är en hård regel på många berg: den återbetalas bara om allt skräp bärs ut. Både budget och personal måste avsättas för det.",
+    "lesson.l41.brief.5" to "Medhjälpare och bärare har lagliga eller branschmässiga lastgränser; överlast flyttar risken till dem och saktar ner hela laget.",
+    "lesson.l41.brief.6" to "Proviantplanen måste ange förbrukningstakten: bränsle, gaskartonger och mat räknas som «personer × dagar × förbrukning», inte på känn.",
 )
