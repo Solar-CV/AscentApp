@@ -463,4 +463,106 @@ internal val PACK_FR_BRIEF: Map<String, String> = mapOf(
     "lesson.t15.brief.3" to "Trois familles de traits à reconnaître : les courbes de niveau (le relief), l'itinéraire (la direction), l'hydrographie (souvent le point le plus bas). Vallons et crêtes décident si l'on est du même côté.",
     "lesson.t15.brief.4" to "Une montre et le soleil suffisent à une orientation grossière : l'aiguille des heures vers le soleil, la bissectrice entre cette aiguille et midi indique le sud. Par temps couvert, on revient à la boussole.",
     "lesson.t15.brief.5" to "Se perdre commence par s'arrêter. Regarder en arrière trois repères visibles et confirmer d'où l'on vient est bien plus utile que de continuer à chercher un chemin.",
+    // ---------- t05 Concevoir un itinéraire de plusieurs jours ----------
+    "lesson.t05.brief.1" to "Fixer d'abord les limites quotidiennes : distance, dénivelé, temps de marche ; puis les points de ravitaillement, les points de sortie et les journées de réserve.",
+    "lesson.t05.brief.2" to "Une journée de réserve n'est pas un luxe, c'est une nécessité : la météo et les blessures feront qu'une journée ne se bouclera pas.",
+    "lesson.t05.brief.3" to "Les temps les plus sous-estimés : chercher son chemin, prendre et filtrer de l'eau, monter le camp et cuisiner — en moyenne 1,5 à 2 heures de plus par jour.",
+    "lesson.t05.brief.4" to "Placer l'étape la plus longue au milieu : le premier jour sert à s'adapter, et le dernier garde une marge pour le retour.",
+
+    // ---------- t06 Choix et installation du camp ----------
+    "lesson.t06.brief.1" to "Le camp se tient à au moins 60 m d'un point d'eau : cela évite la pollution et les passages d'animaux la nuit.",
+    "lesson.t06.brief.2" to "Éviter les zones de chutes de pierres sous une pente raide, les lits de rivière asséchés (crue soudaine), les grands arbres isolés (foudre) et les pistes d'animaux.",
+    "lesson.t06.brief.3" to "Une pente légère de 2 à 3° facilite l'écoulement ; dormir la tête plus haut que les pieds est plus stable.",
+    "lesson.t06.brief.4" to "Entrée de tente sous le vent, grand côté face au vent, et tous les haubans tendus une fois la tente montée.",
+
+    // ---------- t07 Cuisine et plan de ravitaillement ----------
+    "lesson.t07.brief.1" to "Compter 30 à 50 g de gaz par personne et par jour pour une consommation centrée sur l'eau chaude ; augmenter par temps froid et pour faire fondre de la neige.",
+    "lesson.t07.brief.2" to "Privilégier la densité calorique, la conservation facile, peu de vaisselle et pas de cuisson longue.",
+    "lesson.t07.brief.3" to "En altitude, manger davantage de glucides : ils consomment moins d'oxygène à digérer et se transforment plus vite que les aliments gras.",
+    "lesson.t07.brief.4" to "Un réchaud sous la tente impose une ventilation : le monoxyde de carbone est incolore et inodore, et l'intoxication survient souvent pendant le sommeil.",
+
+    // ---------- t08 Premiers réflexes météo ----------
+    "lesson.t08.brief.1" to "Avant de partir, regarder trois choses : la tendance sur 24 à 48 heures, la probabilité de précipitations, le vent et la température ressentie.",
+    "lesson.t08.brief.2" to "Un cumulonimbus qui grandit vers le haut et dont le sommet s'étale en enclume signifie que l'orage est mature.",
+    "lesson.t08.brief.3" to "Signes d'orage imminent : tonnerre lointain, base nuageuse noircissant et descendant, vent qui tourne brutalement, cheveux qui se dressent.",
+    "lesson.t08.brief.4" to "La première manifestation de l'hypothermie est un frisson continu et une maladresse croissante : il faut changer de vêtements secs, ajouter une couche isolante et apporter des calories.",
+    // ---------- t16 Vie au camp et hygiène en pleine nature ----------
+    "lesson.t16.brief.1" to "Un camp se divise en trois zones : dormir, cuisiner, les toilettes. Ne pas dormir sous le vent et ne pas dormir près de la nourriture sont les règles de base.",
+    "lesson.t16.brief.2" to "Pour les selles, un trou de chat de 15 à 20 cm, à plus de 60 m de l'eau et des sentiers ; le papier toilette se remporte, il ne se brûle pas.",
+    "lesson.t16.brief.3" to "L'eau de vaisselle se filtre avant d'être dispersée, et les résidus sont emportés : ils attirent les animaux et polluent les points d'eau.",
+    "lesson.t16.brief.4" to "Le soin personnel se concentre sur les pieds : les laver chaque jour, changer de chaussettes, faire sécher les chaussures — ampoules et macération commencent là.",
+    "lesson.t16.brief.5" to "En partant, remettre le camp en état : les pierres à leur place, les traces de feu effacées, tous les déchets emportés.",
+
+    // ---------- t18 Franchissement de rivière : décision et choix du point ----------
+    "lesson.t18.brief.1" to "Le risque d'un franchissement n'est pas « la profondeur », mais « profondeur × vitesse ». La limite d'ingénierie est de 1,0 m² par seconde : au-delà, on ne passe pas.",
+    "lesson.t18.brief.2" to "Ce 1,0 vaut pour un adulte en bonne santé, sur une courte distance et sans gros sac. Avec un gros sac, une eau proche de zéro et des débutants dans l'équipe, il faut descendre.",
+    "lesson.t18.brief.3" to "Pour juger la vitesse : jeter un bâton dans l'eau et le suivre le long de la berge. Devoir trottiner pour le suivre signifie qu'on dépasse déjà l'allure d'une marche.",
+    "lesson.t18.brief.4" to "Si la profondeur dépasse la cuisse de la plus petite personne de l'équipe, il faut chercher un autre point ou contourner — ce n'est pas « à la taille que ça devient dangereux ».",
+    "lesson.t18.brief.5" to "Choisir le point sur trois critères : large et peu profond, éviter l'extérieur des virages, et vérifier en aval s'il y a une cascade, un tronc couché ou une berge abrupte.",
+    "lesson.t18.brief.6" to "Une hausse de 15 cm suffit à rendre dangereux un point qui paraissait sûr ; les rivières alimentées par la fonte sont en général plus grosses l'après-midi que le matin.",
+
+    // ---------- t19 Formation et réaction à la chute ----------
+    "lesson.t19.brief.1" to "Formation en triangle : trois personnes tournées vers l'intérieur, se tenant à l'épaule ou au sac, une seule personne et une seule jambe en mouvement à la fois, la plus forte côté amont.",
+    "lesson.t19.brief.2" to "Formation en ligne : à partir de trois personnes, les plus fortes aux deux extrémités, les bras passés entre le sac et le dos du coéquipier, déplacement latéral en pas glissés.",
+    "lesson.t19.brief.3" to "Consigne commune « un pas, stop, un pas ». La personne en amont surveille l'eau et la zone d'aval, les autres ne regardent que leurs pieds et la personne devant.",
+    "lesson.t19.brief.4" to "Premier principe après une chute : ne pas se relever. Le pied coincé dans une fissure ou sous un tronc est la cause la plus typique de noyade en rivière.",
+    "lesson.t19.brief.5" to "Bonne posture : sur le dos, pieds vers l'aval, tête relevée, bras écartés pour contrôler la direction, et progression en diagonale vers la berge (back ferry).",
+    "lesson.t19.brief.6" to "L'assistance par corde est très risquée : la plupart des équipes ne la maîtrisent pas. Si on doit l'utiliser, la corde se fixe uniquement sur la berge, jamais sur une personne.",
+
+    // ---------- t21 Marche de nuit et orage ----------
+    "lesson.t21.brief.1" to "Premier principe de la marche de nuit : ne pas marcher si ce n'est pas nécessaire. La navigation, la recherche de chemin et la lecture du terrain deviennent plusieurs fois plus difficiles.",
+    "lesson.t21.brief.2" to "Si la marche de nuit est inévitable : lampe frontale, piles de rechange et source de secours — les trois. Une panne d'éclairage de nuit équivaut à perdre toute capacité d'action.",
+    "lesson.t21.brief.3" to "Ralentir le rythme, resserrer les distances, faire confirmer régulièrement l'arrière par l'avant et laisser quelqu'un aux intersections.",
+    "lesson.t21.brief.4" to "Signaux précoces d'orage : cumulonimbus qui grandit vite, tonnerre sourd au loin, vent qui tourne brutalement, cheveux qui se dressent. Un seul de ces signes impose de descendre vers un point bas.",
+    "lesson.t21.brief.5" to "Pour se protéger de la foudre : quitter crêtes, sommets, bord de l'eau, arbres isolés et rambardes métalliques ; s'accroupir en étant espacés, pieds serrés, sans s'allonger.",
+    "lesson.t21.brief.6" to "Un orage s'accompagne souvent d'un refroidissement brutal et de pluies fortes : le risque d'hypothermie monte en même temps, et la couche chaude doit rester accessible.",
+    // ---------- t09 Mal des montagnes et rythme d'ascension ----------
+    "lesson.t09.brief.1" to "Au-dessus de 3 000 m, ne pas augmenter l'altitude de sommeil de plus de 500 m par jour, et prévoir une journée d'acclimatation tous les 1 000 m.",
+    "lesson.t09.brief.2" to "Les trois signes centraux du mal aigu des montagnes (AMS) : mal de tête, nausées ou perte d'appétit, vertiges et fatigue.",
+    "lesson.t09.brief.3" to "Dès l'apparition d'un AMS, arrêter la montée, s'acclimater sur place ou redescendre ; monter en se soutenant par des médicaments est l'erreur la plus fréquente.",
+    "lesson.t09.brief.4" to "Les signaux d'alarme sont l'essoufflement au repos, une démarche instable et une altération de la conscience : il faut alors descendre immédiatement.",
+
+    // ---------- t10 Se protéger du froid et du soleil en altitude ----------
+    "lesson.t10.brief.1" to "Trois couches suffisent : évacuation de la sueur, couche chaude, coupe-vent. On ajoute la couche intermédiaire quand on a froid, on ouvre le col d'abord quand on a chaud.",
+    "lesson.t10.brief.2" to "Tous les 1 000 m d'altitude, l'intensité des ultraviolets augmente d'environ 10 à 12 % ; la neige en réfléchit encore 80 %.",
+    "lesson.t10.brief.3" to "Le quatuor solaire : lunettes UV400, crème SPF50+, baume à lèvres, chapeau ou buff.",
+    "lesson.t10.brief.4" to "Mains et pieds refroidissent en premier parce que le corps protège d'abord sa température centrale ; gants et chaussettes de rechange mouillés doivent être changés sans attendre.",
+
+    // ---------- t11 Alimentation et sommeil en altitude ----------
+    "lesson.t11.brief.1" to "En altitude, la perte d'appétit est courante : il faut manger activement, en petites quantités répétées.",
+    "lesson.t11.brief.2" to "L'air est sec et la respiration fait perdre beaucoup d'eau : des urines jaune pâle sont le signe d'une hydratation suffisante.",
+    "lesson.t11.brief.3" to "Respiration périodique, sommeil léger et réveils fréquents sont normaux la nuit en altitude.",
+    "lesson.t11.brief.4" to "L'alcool déprime la respiration et aggrave l'hypoxie : il est plus dangereux en altitude qu'ailleurs.",
+
+    // ---------- t12 Équipe et préparation mentale ----------
+    "lesson.t12.brief.1" to "Accepter avant de partir une chose : cette fois, peut-être on n'arrivera pas. C'est en autorisant le retrait que le plan tient debout.",
+    "lesson.t12.brief.2" to "La pression du rythme est la charge invisible la plus lourde pour un débutant. Savoir dire « je ne suis pas, marchez au rythme du plus lent ».",
+    "lesson.t12.brief.3" to "Le vertige et le sentiment d'exposition s'atténuent en regardant par segments, en contrôlant sa respiration et en gardant trois points de contact.",
+    "lesson.t12.brief.4" to "« On est déjà venus si loin » est un coût irrécupérable typique : il ne constitue pas une raison de continuer.",
+
+    // ---------- t13 Planification longue distance et ravitaillement ----------
+    "lesson.t13.brief.1" to "Prévoir un point de ravitaillement tous les 3 à 5 jours, pour découper l'itinéraire en étapes réalisables et quittables.",
+    "lesson.t13.brief.2" to "Compter 600 à 800 g de nourriture déshydratée par jour, soit environ 2 500 à 3 000 kcal.",
+    "lesson.t13.brief.3" to "Permis, règles sur le feu, obligation d'emporter ses déchets, restrictions sur les drones : tout vérifier point par point avant de partir.",
+    "lesson.t13.brief.4" to "Garder 20 % de marge : cela vaut pour la nourriture, le combustible, le temps et l'argent liquide.",
+
+    // ---------- t14 Urgences courantes et appel aux secours ----------
+    "lesson.t14.brief.1" to "Entorse : appliquer le RICE — repos, froid, compression, surélévation.",
+    "lesson.t14.brief.2" to "Hypothermie : couper le vent, changer de vêtements, isoler du sol, donner une boisson chaude si la personne est consciente, réchauffer lentement.",
+    "lesson.t14.brief.3" to "Coup de chaleur : mettre rapidement à l'ombre, desserrer les vêtements, refroidir physiquement et apporter des électrolytes.",
+    "lesson.t14.brief.4" to "Un message de secours contient quatre choses : coordonnées de position, nombre de personnes et état des blessures, matériel et ravitaillement, moyens de contact.",
+
+    // ---------- t17 Déshydratation, coup de chaleur et traumatismes courants ----------
+    "lesson.t17.brief.1" to "Les premiers signes de déshydratation sont des urines plus foncées et une baisse du jugement, pas la soif. En randonnée, on regarde la couleur des urines une fois par jour.",
+    "lesson.t17.brief.2" to "Le coup de chaleur se gradue : crampes de chaleur, puis épuisement (vertiges, faiblesse, peau froide et moite), puis coup de chaleur (température centrale supérieure à 40 °C avec altération de la conscience).",
+    "lesson.t17.brief.3" to "Ordre des gestes : mettre à l'ombre, desserrer les vêtements, refroidir physiquement, apporter des électrolytes. Si la conscience est altérée, ne pas forcer à boire.",
+    "lesson.t17.brief.4" to "Entorse : RICE — repos, froid, compression, surélévation. Pas de chaleur ni de massage appuyé pendant 48 heures.",
+    "lesson.t17.brief.5" to "Ne pas percer une ampoule à la légère ; si c'est nécessaire, drainer depuis le bord, conserver l'épiderme et couvrir d'un pansement.",
+
+    // ---------- t20 Entretien et réparation du matériel ----------
+    "lesson.t20.brief.1" to "Quatre contrôles avant le départ : semelle décollée, boucles de sac en bon état, arceaux de tente fissurés, matelas qui fuit.",
+    "lesson.t20.brief.2" to "Le cœur de la réparation en randonnée tient en « trois adhésifs et une aiguille » : adhésif Dyneema pour la toile et le duvet, adhésif toilé pour un maintien provisoire, rustines pour la chambre à air.",
+    "lesson.t20.brief.3" to "Une semelle qui se décolle est la panne la plus fréquente sur un itinéraire long : fixer d'abord à l'adhésif pour empêcher la déchirure de progresser, puis utiliser une colle adaptée en ville.",
+    "lesson.t20.brief.4" to "Un arceau cassé se répare avec un manchon et continue de servir ; une toile déchirée se répare à l'adhésif, jamais au feu.",
+    "lesson.t20.brief.5" to "Doudoune percée : poser une rustine et appuyer, sans tapoter — tapoter fait sortir le duvet en continu par les trous d'aiguille.",
 )
