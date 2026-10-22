@@ -397,4 +397,26 @@ internal val PACK_DE_BRIEF: Map<String, String> = mapOf(
     "lesson.l38.brief.5" to "Der Konveyor besteht aus einem V-förmigen Kanal (1–2 Meter breit) plus Weitergabe in der Kette. Liegt die Kanalneigung unter etwa 26 Grad, rollen die Schneeblöcke zum Sondenstab zurück.",
     "lesson.l38.brief.6" to "Reihenfolge der Effizienz beim Wegbewegen des Schnees: Schlagen (paddling) ist am schnellsten, Schaufeln (scooping) folgt, Schneiden von Blöcken (cutting) ist am langsamsten. Blöcke schneidet man nur bei hartem Schnee.",
     "lesson.l38.brief.7" to "Nach Erreichen des Gesichts ändert sich die Reihenfolge: erst Mund und Nase freimachen und die Atemwege prüfen, dann Brust und Arme, zuletzt Beine und Körper. Nicht an den Schultern herausziehen.",
+    // ---------- l23 Ausrüstungsliste und Tragesystem ----------
+    "lesson.l23.brief.1" to "Die Liste in der Reihenfolge durchgehen, in der ein Fehler tödlich endet: erst Wärme und Schutz, dann technische Ausrüstung, zuletzt der Komfort. Eine umgekehrt aufgebaute Liste lässt bei Schlechtwetter genau das fehlen, was zählt.",
+    "lesson.l23.brief.2" to "Gipfelrucksack 35–50 Liter, Transporttasche 90–120 Liter. In den Gipfelrucksack kommt nur, was am Tag gebraucht wird; das Schwere reist als Last. Je schwerer der Rucksack, desto früher beginnen die Fehler.",
+    "lesson.l23.brief.3" to "Tragereihenfolge: Schweres am Rücken zwischen den Schulterblättern, Leichtes nach aussen und unten. Der Hüftgurt trägt 60–70 % des Gewichts, die Schultergurte halten den Rucksack nur am Körper.",
+    "lesson.l23.brief.4" to "Nässeschutz in Schichten: Schlafsack und Daunenjacke je in einem eigenen Packsack, Elektronik und Medikamente nochmals extra. Der Rucksack selbst ist nicht dicht; darauf zu bauen ist ein Fehler.",
+    "lesson.l23.brief.5" to "Am Gipfeltag das Rucksackgewicht bei 15–20 % des Körpergewichts halten. Wer darüber liegt, sollte reduzieren; durchbeissen bringt nur ein langsameres Tempo und mehr Fehler.",
+    "lesson.l23.brief.6" to "Vor dem Abmarsch die drei am leichtesten vergessenen Dinge prüfen: Stirnlampe mit Ersatzbatterien, Reservehandschuhe, Erste-Hilfe-Set.",
+
+    // ---------- l24 Schlafsystem und Lagerausrüstung ----------
+    "lesson.l24.brief.1" to "Beim Schlafsack zählt der Komfortbereich, nicht der Extrembereich. Der Komfortbereich sollte mindestens 5 °C unter der erwarteten Tiefsttemperatur liegen.",
+    "lesson.l24.brief.2" to "Daunen vertragen Nässe am schlechtesten. Inlett, eigener wasserdichter Packsack und zehn Minuten Lüften mit gewendetem Schlafsack jeden Morgen entscheiden, ob er die ganze Reise durchhält.",
+    "lesson.l24.brief.3" to "Die Isomatte hat zwei Aufgaben: Bodenleitung unterbrechen (geschlossenzelliger Schaum) und Komfort schaffen (Luftmatte). In grosser Höhe ist die Kombination beider üblich; die Dämmwerte addieren sich.",
+    "lesson.l24.brief.4" to "Ein Luftmattenleck ist der häufigste Defekt im Lager. Reparaturflicken mitnehmen und vor dem Schlafen die Kammern abdrücken, statt nachts vom Frieren geweckt zu werden.",
+    "lesson.l24.brief.5" to "Kissen und Ohrstöpsel sind kein Luxus. Schlechter Schlaf in der Höhe hat vor allem zwei Ursachen: Sauerstoffmangel und Lärm. Jede kleine Verbesserung verändert den Zustand am nächsten Tag.",
+    "lesson.l24.brief.6" to "Den Schlafsack nicht dauerhaft komprimiert lagern. Zu Hause ausbreiten oder locker aufhängen, damit die Daune ihre Loft zurückgewinnt.",
+    // ---------- l25 Vorbereitung: Genehmigungen, Versicherung, Logistik ----------
+    "lesson.l25.brief.1" to "Genehmigungen brauchen oft Wochen Vorlauf: Schutzgebiet, Grenzregion, Bergsteigergenehmigung – meist ist zusätzlich ein lokaler Bergführer oder eine Kontaktperson vorgeschrieben.",
+    "lesson.l25.brief.2" to "Bei der Versicherung sind zwei Punkte gezielt zu prüfen: Sind technisches Bergsteigen und Hubschrauberrettung in grosser Höhe gedeckt? Übliche Reiseversicherungen schliessen beides aus.",
+    "lesson.l25.brief.3" to "Drei Logistikpunkte: An- und Abreise, Lastentransport und Träger, Versorgung im Lager. Für jeden Abschnitt braucht es eine Alternative, denn Verzögerungen sind die Regel, nicht der Ausnahmefall.",
+    "lesson.l25.brief.4" to "Dokumentenmappe: Genehmigung im Original, Versicherungsnummer und Rettungsnummer, dazu Fotos und Erklärungsformular für den Gipfelnachweis.",
+    "lesson.l25.brief.5" to "Vor dem Start einen Tourenplan bei einer daheimgebliebenen Kontaktperson hinterlegen: Route, Zeiten der Kontrollpunkte, ab wann ohne Meldung der Notfallplan greift.",
+    "lesson.l25.brief.6" to "20 % Budgetreserve einplanen. Verzögerungen, zusätzliche Übernachtungen und spontan engagierte Träger kommen fast jedes Mal vor.",
 )
