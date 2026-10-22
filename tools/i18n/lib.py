@@ -26,7 +26,7 @@ PACKS = {
     "sv": ["PackSv", "PackSvBrief", "PackSvEntry", "PackSvHandbook", "PackSvQuiz"],
     "de": ["PackDe", "PackDeBrief", "PackDeEntry", "PackDeHandbook", "PackDeQuiz",
            "PackDeQuiz2", "PackDeQuiz3"],
-    "es": ["PackEs", "PackEsBrief", "PackEsEntry", "PackEsHandbook", "PackEsQuiz"],
+    "es": ["PackEs", "PackEsBrief", "PackEsEntry", "PackEsHandbook", "PackEsQuiz", "PackEsQuiz2"],
     "it": ["PackIt", "PackItBrief", "PackItEntry", "PackItHandbook", "PackItQuiz"],
 }
 
@@ -47,7 +47,7 @@ TARGETS = {
     "de": {"entry": "PackDeEntry.kt", "brief": "PackDeBrief.kt",
            "handbook": "PackDeHandbook.kt", "quiz": "PackDeQuiz3.kt"},
     "es": {"entry": "PackEsEntry.kt", "brief": "PackEsBrief.kt",
-           "handbook": "PackEsHandbook.kt", "quiz": "PackEsQuiz.kt"},
+           "handbook": "PackEsHandbook.kt", "quiz": "PackEsQuiz2.kt"},
     "it": {"entry": "PackItEntry.kt", "brief": "PackItBrief.kt",
            "handbook": "PackItHandbook.kt", "quiz": "PackItQuiz.kt"},
 }

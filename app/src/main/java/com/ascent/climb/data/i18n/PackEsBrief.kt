@@ -313,5 +313,19 @@ internal val PACK_ES_BRIEF: Map<String, String> = mapOf(
     "lesson.m25.brief.2" to "«Ya que hemos venido hasta aquí» es la frase más cara de la montaña: convierte el tiempo ya invertido en motivo para seguir arriesgando. La montaña no reduce el riesgo porque hayas invertido mucho.",
     "lesson.m25.brief.3" to "Cuando el cuerpo da señales, el primer paso no es «aguantar», sino parar, observar y decirlo con sinceridad al compañero o al guía. El guía solo puede decidir si lo sabe.",
     "lesson.m25.brief.4" to "Lento es rápido: un ritmo constante y sostenible ahorra tiempo y es más seguro que esprints repetidos; describe una ley del metabolismo energético, no una actitud.",
-    "lesson.m25.brief.5" to "Los desacuerdos deben decirse. La minoría silenciosa aparece siempre en los análisis de accidentes; guardar una reserva y ejecutar no son incompatibles."
+    "lesson.m25.brief.5" to "Los desacuerdos deben decirse. La minoría silenciosa aparece siempre en los análisis de accidentes; guardar una reserva y ejecutar no son incompatibles.",
+    // ---------- l23 Lista de material y sistema de carga ----------
+    "lesson.l23.brief.1" to "Pasar la lista en el orden en que un fallo mata: primero abrigo y protección, luego material técnico y al final la comodidad. Una lista al revés es la que deja fuera lo esencial con mal tiempo.",
+    "lesson.l23.brief.2" to "Mochila de cumbre de 35–50 litros, petate de 90–120 litros. En la de cumbre solo va lo del día; el bulto grande viaja en carga. Cuanto más pesa la mochila, antes empiezas a cometer errores.",
+    "lesson.l23.brief.3" to "Orden de carga: lo pesado pegado a la espalda entre los omóplatos, lo ligero hacia fuera y abajo. El cinturón soporta un 60–70 % del peso; los tirantes solo mantienen la mochila pegada al cuerpo.",
+    "lesson.l23.brief.4" to "Impermeabilizar por capas: saco y plumas, cada uno en su bolsa estanca; electrónica y medicamentos en otra capa. La mochila no es impermeable, no cuentes con ella.",
+    "lesson.l23.brief.5" to "El día de cumbre, mantener el peso de la mochila entre el 15 y el 20 % del peso corporal. Por encima hay que quitar cosas: aguantar solo trae un ritmo más lento y más errores.",
+    "lesson.l23.brief.6" to "Antes de salir, revisar las tres cosas que más se olvidan: frontal con pilas de repuesto, guantes de repuesto y botiquín.",
+    // ---------- l24 Sistema de dormir y equipo de campo ----------
+    "lesson.l24.brief.1" to "En el saco se mira la temperatura de confort, no la extrema. La de confort debe quedar al menos 5 °C por debajo de la mínima que se espera.",
+    "lesson.l24.brief.2" to "Las plumas temen la humedad. Sábana interior, bolsa estanca propia y diez minutos de aireado dándole la vuelta cada mañana son las tres cosas que deciden si el saco aguanta toda la salida.",
+    "lesson.l24.brief.3" to "La esterilla tiene dos patas: cortar la conducción (espuma de célula cerrada) y dar confort (hinchable). En altitud lo habitual es superponerlas y sumar los valores de aislamiento.",
+    "lesson.l24.brief.4" to "Un pinchazo en la colchoneta es la avería más común en el campo. Llevar parches, apretar las cámaras antes de dormir y no esperar a despertarse helado a medianoche.",
+    "lesson.l24.brief.5" to "Almohada y tapones no son un lujo. En altura se duerme mal sobre todo por falta de oxígeno y por ruido; mejorar un poco cambia el estado del día siguiente.",
+    "lesson.l24.brief.6" to "No guardar el saco comprimido de forma permanente. En casa, extenderlo o colgarlo suelto para que las plumas recuperen el volumen.",
 )
