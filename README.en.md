@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.19.12 (versionCode 87). This release brings **Russian up to date**: 9,422 question-bank entries, 443 lesson briefs, all 89 lesson titles, unit names, peak names and handbook articles h32–h35 are now in place, so Russian is complete across all four layers and matches the English key set entry for entry (10,544 / 10,544). Terminology follows what the existing pack already used rather than inventing a second vocabulary (кошки, ледоруб, торможение, перила, схватывающий узел, заклинивание стопы and so on). English, Traditional Chinese and Japanese were completed in the three previous releases; the remaining five languages (fr / sv / de / es / it) still cover only the pre-expansion bank.
+Current version v0.19.23 (versionCode 98). This release brings **French and Swedish up to date**: 9,422 question-bank entries, 443 lesson briefs, all 89 lesson titles, unit names, peak names and handbook articles h32–h35 are now in place, so both languages are complete across all four layers and match the English key set entry for entry (10,544 / 10,544), with no missing or orphan keys. Terminology follows each language's own professional usage rather than literal translation (French nœud autobloquant, défaillance en série, tapis roulant à neige; Swedish mellanförankring, seriefel, snötransportband, handräcke). English, Traditional Chinese, Japanese, Russian, German and Spanish were completed in earlier releases, so the content layers now hold **eight complete languages**; only Italian still covers the pre-expansion bank, and its new questions fall back to English.
 
 ## Install
 
@@ -202,8 +202,8 @@ v0.19 is the content expansion; the bank structure and scoring logic are unchang
 
 - Lessons 47 → 89: climbing now 68 (6000 / 7000 / 8000 m units, all fourteen 8000ers), plus 21 new trekking lessons
 - Questions 711 → 1,533 (9,422 keys), handbook 31 → 35 articles (avalanche burial and resuscitation, the avalanche trio, fixed ropes, river crossing), bank v15 → v19
-- Six languages now complete across all four content layers: English, Traditional Chinese, Japanese, Russian, German, Spanish. Their key sets match English entry for entry (10,544 / 10,544), so nothing falls back to Chinese at runtime
-- German uses the impersonal man-form and Spanish addresses the reader as tú; both follow local number conventions (6,5 °C, 1.000 m, 35–50)
+- Eight languages now complete across all four content layers: English, Traditional Chinese, Japanese, Russian, German, Spanish, French, Swedish. Their key sets match English entry for entry (10,544 / 10,544), so nothing falls back to Chinese at runtime
+- German uses the impersonal man-form, Spanish addresses the reader as tú, French uses vous and Swedish uses du; each follows local number conventions — German and Spanish write 1.000 m, French and Swedish 5 000 m, all four use a decimal comma
 - Traditional Chinese runs through OpenCC s2twp plus a terminology table, validated by regression against the existing translations (zero differences); Japanese is a real translation, with one register for the question bank and another for the handbook
 - `tools/i18n/` provides three commands (`status.py` / `prep.py` / `apply.py`) that work across all nine languages; Traditional Chinese also has `tw.py` and `tw_entry.py`
 - The bank is split across files: a single Kotlin file of roughly 2,500 entries crashes the compiler, so English and Traditional Chinese use three parts each, and Japanese three
