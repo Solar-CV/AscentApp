@@ -116,7 +116,6 @@ internal val PACK_DE_QUIZ: Map<String, String> = mapOf(
     "q.l2#4.e" to "Ein Steigeisen ist nur so gut wie seine Verbindung zum Schuh. Mehr Zacken sind nicht automatisch besser; Passform und Antistollplatten (die verhindern, dass sich Schnee darunter ballt) entscheiden. Schlechte Passform ist der klassische Weg, am Steilhang ein Steigeisen zu verlieren.",
 
     "q.l2#5.p" to "【Szenario】Für einen technischen Gipfeltag in der Höhe mit Steigeisen, Pickel, Reserve-Isolationsschicht, Essen, Wasser und Notfallset – welches Netto-Rucksackvolumen wird empfohlen?",
-    "q.l2#5.c" to "Für das Rucksackvolumen gibt es keine einzige richtige Antwort – es hängt von der Route ab, davon, ob Sie die Technik selbst tragen, und davon, wer die Gruppenaustrüstung trägt.",
     "q.l2#5.o0" to "15–25 Liter",
     "q.l2#5.o1" to "35–50 Liter",
     "q.l2#5.o2" to "60–75 Liter",
@@ -3191,7 +3190,6 @@ internal val PACK_DE_QUIZ: Map<String, String> = mapOf(
     "q.m15#16.e" to "Diese vier kommen aus vier Dimensionen — Wetter, Schneedecke, Navigation und Physiologie — und gemeinsam ist ihnen, dass sie fortschreitend sind: Der Preis jetzt ist weit geringer als der Preis in zehn Minuten. Je früher Sie sich zum Abstieg entscheiden, desto billiger wird es.",
 
     "q.m15#17.p" to "Klicken Sie in der Grafik die Kurve an, die die Nullgradgrenze darstellt.",
-    "q.m15#17.c" to "Diese Vorhersage zeigt das Wetter in verschiedenen Höhen desselben Berges in übereinanderliegenden Zeilen. Die violette Kurve in der Legende markiert die Nullgradgrenze — die Höhe der Regen-Schnee-Grenze.",
     "q.m15#17.e" to "Die Kurve der Nullgradgrenze ist eine der nützlichsten Informationen dieser Vorhersage: Sie markiert die Höhe, in der Niederschlag von Regen zu Schnee übergeht. Eine steigende Kurve heißt, wärmere und feuchtere Luft kommt an und der Niederschlag geht von Schnee zu Regen über; eine fallende Kurve heißt, kalte Luft ist da und höher gelegene Flächen bekommen Schnee. Für die Frage, ob Sie in Ihrer Höhe Schneefall treffen, ist sie besser als das Lesen von Temperaturzahlen.",
 
     "q.m15#18.p" to "Dies ist die Vorhersage für denselben Berg, bei dem die Saison früh endete. Wie hoch ist der Gesamtschneefall in Zentimetern über die drei Perioden am Fr 25 (vormittags / nachmittags / nachts)? Geben Sie die Summe ein.",
@@ -3441,7 +3439,6 @@ internal val PACK_DE_QUIZ: Map<String, String> = mapOf(
     "q.m16#17.s2.e" to "Eine nach der anderen begrenzt das Risiko auf eine Person und lässt den Beobachter sich auf eine Person konzentrieren. Die ganze Gruppe gleichzeitig zu exponieren vergrößert die Folge von 'vielleicht eine Person verschüttet' auf 'vielleicht alle'.",
 
     "q.m16#18.p" to "Klicken Sie auf der Karte den ungefähren Bereich des Manaslu-Gipfels an.",
-    "q.m16#18.c" to "Dies ist eine Höhenlinienkarte des Manaslu aus NASA-SRTM-Höhendaten mit 50 m Äquidistanz; die Beschriftungen geben die Höhe jeder Höhenlinie an.",
     "q.m16#18.e" to "Ein Gipfel ist auf einer Höhenlinienkarte unverkennbar: Geschlossene Linien ziehen sich Ring für Ring nach innen zusammen, während die Beschriftungen nach oben steigen (7600 → 7750 → 7900 → 7950 …). Finden Sie den Punkt, der von Ringen kleiner geschlossener Kurven umschlossen ist, haben Sie die höchste Stelle.\nUmgekehrt: Wo die Linien nach außen auseinanderlaufen und die Beschriftungen fallen, geht es abwärts — was nebenbei zeigt, auf welcher Seite die Aufstiegsroute verläuft.",
 
     "q.m16#19.p" to "Auf derselben Karte sind die Höhenlinien auf der Nordost- bis Ostseite extrem dicht. Was bedeutet das?",
@@ -3481,7 +3478,6 @@ internal val PACK_DE_QUIZ: Map<String, String> = mapOf(
     "q.m16#21.e" to "Die beiden Quellen lösen verschiedene Probleme. Reliefschattierung und Ortsbezeichnungen von Google bauen schnell ein Raumgefühl auf: wo der Berg ist, seine grobe Form, wohin die Route läuft. Die 50-m-Höhenlinien von SRTM tragen die quantifizierte Beurteilung: wie viele Grad dieser Hang hat, ob es irgendwo Platz für ein Lager gibt.\nMit der anschaulichen Karte überschauen, mit der hochauflösenden bestätigen — das ist die praktische Arbeitsteilung. Nur eine zu nutzen ist entweder langsam oder falsch.",
 
     "q.m16#22.p" to "Klicken Sie auf der Karte den ungefähren Bereich des Everest-Gipfels an.",
-    "q.m16#22.c" to "Dies ist eine SRTM-Höhenlinienkarte des Gebiets Everest–Lhotse; auf einem Blatt sind zwei 8.000er sichtbar.",
     "q.m16#22.e" to "Um einen Gipfel zu finden, suchen Sie die höchste beschriftete geschlossene Höhenlinie. Hier steigen die Beschriftungen in diesem Bereich auf 8600 und 8700 m, während sich die Ringe nach innen zusammenziehen; der innerste ist der Gipfel (8.848 m).\nAchten Sie darauf, hoch und steil zu trennen: Gipfelgelände ist oft nicht der steilste Teil des Berges — am steilsten ist es dort, wo die Höhenlinien am dichtesten liegen. Diese Unterscheidung ist für das Routenrisiko wichtig: Der Gipfel fordert Akklimatisierung und Kondition, das technische Risiko sitzt vor allem in einigen Hängen auf dem Weg hinauf und hinunter.",
 
     "q.m16#23.p" to "Zwischen den dichten geschlossenen Höhenlinien von Everest und Lhotse auf derselben Karte liegt eine Zone, in der die Linien deutlich dünner werden und das Gelände leicht absinkt. Was ist das geländekundlich?",
@@ -3492,7 +3488,6 @@ internal val PACK_DE_QUIZ: Map<String, String> = mapOf(
     "q.m16#23.e" to "Zwischen zwei dichten geschlossenen Hochpunkten, wo die Linien dünner werden und das Gelände absinkt, liegt ein Sattel. Der zwischen Everest und Lhotse ist der South Col auf etwa 7.900 m, wo das vierte Lager der Südroute liegt — der letzte Halt vor dem Gipfelanstieg.\nSättel auf der Höhenlinienkarte zu erkennen ist sehr praktisch. Sie bedeuten meist starken Wind und Exposition, aber verhältnismäßig flaches Gelände: gut für ein Lager, schlecht zum Verweilen — deshalb liegen Gipfellager meist auf einem Sattel und werden noch in derselben Nacht geräumt.",
 
     "q.m16#24.p" to "Klicken Sie auf der Karte den ungefähren Bereich des Muztagh-Ata-Gipfels an.",
-    "q.m16#24.c" to "Dies ist eine SRTM-Höhenlinienkarte des Muztagh Ata (7.509 m). Sein Oberteil ist kein spitzer Gipfel, sondern eine breite Schneekuppel.",
     "q.m16#24.e" to "Die Gipfelform des Muztagh Ata ist typisch: eine Kuppel, oben breit und flach, bei der die höchste geschlossene Höhenlinie weit gespreizt ist statt eng geschachtelt wie bei einem spitzen Gipfel. Um einen solchen Gipfel zu finden, suchen Sie die höchste Höhenbeschriftung (hier 7.500 m) und den geschlossenen Ring, in dem sie liegt.\nDie Form wirkt direkt auf das Bergerlebnis. Eine Kuppel heißt: Der Gipfelabschnitt ist nicht steil, dauert aber lange; bei wenig Relief und ohne markante Orientierungspunkte verliert man im Schneefeld beim Abstieg leicht die Richtung. Genau dieses Risiko wird im Zusammenhang mit dem Muztagh Ata oft genannt.",
 
     // ---------- m17 Lagerführung in der Höhe ----------
