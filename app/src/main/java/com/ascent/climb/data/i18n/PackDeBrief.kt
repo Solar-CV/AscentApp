@@ -351,4 +351,10 @@ internal val PACK_DE_BRIEF: Map<String, String> = mapOf(
     "lesson.l30.brief.4" to "Sauerstoffsättigung und Puls werden als Verlauf dokumentiert, nicht als Einzelwert. Ein kontinuierlicher Abfall auf gleicher Höhe sagt mehr als ein einzelner niedriger Wert.",
     "lesson.l30.brief.5" to "Der Evakuierungsplan steht vor dem Start: Wer darf die Evakuierung entscheiden, wen ruft man an, wie wird mit der Versicherung abgerechnet, wo ist die nächste medizinische Versorgung.",
     "lesson.l30.brief.6" to "Kern der medizinischen Vorbereitung ist nicht die Menge der Medikamente, sondern die Frage «wer beurteilt». Sind die Rollen vorher klar, wartet vor Ort niemand auf den anderen.",
+    "lesson.l31.brief.1" to "Der stärkste Prädiktor ist «früher schon einmal Höhenkrankheit gehabt». Wer eine AMS-Vorgeschichte hat, erkrankt mit deutlich höherer Wahrscheinlichkeit erneut.",
+    "lesson.l31.brief.2" to "Aufstiegsgeschwindigkeit und Schlafhöhe sind wichtiger als Fitness und Alter. Fitte Menschen gehen oft schneller und höher und geraten dadurch eher in Probleme.",
+    "lesson.l31.brief.3" to "Atemwegsinfekte erhöhen das Risiko deutlich: mit einer Erkältung aufzusteigen öffnet dem HAPE die Tür.",
+    "lesson.l31.brief.4" to "Das Alter ist keine Hauptvariable, individuelle Unterschiede sind es. Ein trainierter 60-Jähriger kann sich besser akklimatisieren als ein 25-Jähriger, der nächtelang wach war.",
+    "lesson.l31.brief.5" to "Vier Säulen der Vorbeugung: Aufstiegsgeschwindigkeit begrenzen, Akklimatisationstage einplanen, nicht mit Symptomen aufsteigen, bei Bedarf Medikamente nach ärztlicher Anweisung.",
+    "lesson.l31.brief.6" to "Medikamente sind Ergänzung, nicht Ersatz. Acetazolamid lindert Symptome, ersetzt aber keine Akklimatisation.",
 )
