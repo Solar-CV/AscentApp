@@ -24,7 +24,8 @@ PACKS = {
            "PackRuQuiz2", "PackRuQuiz3"],
     "fr": ["PackFr", "PackFrBrief", "PackFrEntry", "PackFrHandbook", "PackFrQuiz"],
     "sv": ["PackSv", "PackSvBrief", "PackSvEntry", "PackSvHandbook", "PackSvQuiz"],
-    "de": ["PackDe", "PackDeBrief", "PackDeEntry", "PackDeHandbook", "PackDeQuiz"],
+    "de": ["PackDe", "PackDeBrief", "PackDeEntry", "PackDeHandbook", "PackDeQuiz",
+           "PackDeQuiz2", "PackDeQuiz3"],
     "es": ["PackEs", "PackEsBrief", "PackEsEntry", "PackEsHandbook", "PackEsQuiz"],
     "it": ["PackIt", "PackItBrief", "PackItEntry", "PackItHandbook", "PackItQuiz"],
 }
@@ -44,7 +45,7 @@ TARGETS = {
     "sv": {"entry": "PackSvEntry.kt", "brief": "PackSvBrief.kt",
            "handbook": "PackSvHandbook.kt", "quiz": "PackSvQuiz.kt"},
     "de": {"entry": "PackDeEntry.kt", "brief": "PackDeBrief.kt",
-           "handbook": "PackDeHandbook.kt", "quiz": "PackDeQuiz.kt"},
+           "handbook": "PackDeHandbook.kt", "quiz": "PackDeQuiz2.kt"},
     "es": {"entry": "PackEsEntry.kt", "brief": "PackEsBrief.kt",
            "handbook": "PackEsHandbook.kt", "quiz": "PackEsQuiz.kt"},
     "it": {"entry": "PackItEntry.kt", "brief": "PackItBrief.kt",
