@@ -452,4 +452,144 @@ internal val PACK_DE_BRIEF: Map<String, String> = mapOf(
     "lesson.l41.brief.4" to "Müllpfand ist an vielen Bergen Pflicht: zurückgezahlt wird nur, wenn der gesamte Müll hinausgebracht ist. Budget und Personal müssen dafür Platz haben.",
     "lesson.l41.brief.5" to "Für Co-Team und Träger gelten gesetzliche oder branchenübliche Lastgrenzen; Überlast verlagert das Risiko auf sie und bremst die ganze Gruppe.",
     "lesson.l41.brief.6" to "Der Versorgungsplan braucht Verbrauchsraten: Brennstoff, Gaskartuschen und Lebensmittel werden als Personen × Tage × Bedarf gerechnet, nicht nach Gefühl.",
+    // ---------- l40 Ernährung und Versorgung über 8.000 m ----------
+    "lesson.l40.brief.1" to "Drei Energieträger: Kohlenhydrate wirken am direktesten, Fett hat die höchste Energiedichte, Protein dient vor allem der Reparatur. Erstes Prinzip in der Höhe: «Kohlenhydrate hineinbringen».",
+    "lesson.l40.brief.2" to "Der Fettanteil an der Energiebereitstellung lässt sich durch langes Training steigern, aber langsam; auf eine Umschaltung «erst am Berg» zu hoffen ist unrealistisch.",
+    "lesson.l40.brief.3" to "Nachlassender Appetit ist in der Höhe normal, ein Energiedefizit häufig und kaum vermeidbar. Die Strategie heisst «kleine Portionen häufig plus hohe Energiedichte» statt auf den Hunger zu warten.",
+    "lesson.l40.brief.4" to "Marschverpflegung in zwei Gruppen teilen: im Gehen essbar (Gel, Fruchtgummi, Riegel) und nur mit Halt essbar (warme Speisen). Die erste Gruppe entscheidet, ob der Rhythmus hält.",
+    "lesson.l40.brief.5" to "Dehydratation schwächt Appetit und Urteilsvermögen zugleich; Trinken und Energiezufuhr müssen gemeinsam geplant werden.",
+    "lesson.l40.brief.6" to "Zum Zusammenhang von BCAA und Ammoniak gibt es Untersuchungen, die Evidenz ist aber begrenzt – sie ersetzt nicht die Grundlage, genug Gesamtkalorien zu essen.",
+    // ---------- t01 Routenschwierigkeit und Selbsteinschätzung ----------
+    "lesson.t01.brief.1" to "Die Schwierigkeit einer Route hängt an vier Dingen: Distanz, Gesamtaufstieg, Wegbeschaffenheit sowie Versorgung und Ausstiegspunkte.",
+    "lesson.t01.brief.2" to "Nur die Kilometer zu betrachten führt am leichtesten zu Fehleinschätzungen. 10 km flach und 10 km mit 800 m Aufstieg sind zwei völlig verschiedene Routen.",
+    "lesson.t01.brief.3" to "Für die erste Route: unter drei Stunden, Gesamtaufstieg unter 300 m, und am nächsten Tag noch gehen können – das ist die passende Menge.",
+    "lesson.t01.brief.4" to "Ausstiegspunkte sind wichtiger als die Aussicht: Nur wenn ein Abstieg möglich ist, lässt sich von Sicherheit sprechen.",
+
+    // ---------- t02 Schuhe, Socken und Füsse ----------
+    "lesson.t02.brief.1" to "Für die Passform gibt es nur ein Kriterium: Die Ferse rutscht nicht auf und ab, und beim Abstieg stossen die Zehen nicht an.",
+    "lesson.t02.brief.2" to "Blasen entstehen aus Nässe plus Reibung plus örtlichem Druck. Fällt einer der drei Faktoren weg, sinkt die Wahrscheinlichkeit deutlich.",
+    "lesson.t02.brief.3" to "Auf langen Strecken keine Baumwollsocken: Sie nehmen Feuchtigkeit auf, geben sie nicht weiter, reiben nass und wärmen nicht mehr.",
+    "lesson.t02.brief.4" to "Beim ersten Anzeichen eines Hotspots anhalten und behandeln – ist die Haut erst offen, schmerzt jeder weitere Schritt.",
+
+    // ---------- t03 Rucksack und Last ----------
+    "lesson.t03.brief.1" to "Die Obergrenze beim Traggewicht liegt bei etwa 10–20 % des Körpergewichts, Anfänger an der unteren Grenze. Bei Überlast geben zuerst die Knie und das Urteilsvermögen nach.",
+    "lesson.t03.brief.2" to "Schweres nah am Rücken, zwischen den Schulterblättern und der Taille – nur so zieht der Schwerpunkt nicht nach hinten.",
+    "lesson.t03.brief.3" to "Der Hüftgurt trägt den grössten Teil des Gewichts, die Schultergurte halten und stabilisieren. Wer nur über die Schultern trägt, hat nach einem Tag einen steifen Nacken.",
+    "lesson.t03.brief.4" to "Vor dem Start einmal wiegen: Nur mit einem Referenzgewicht lässt sich beurteilen, was überflüssig ist.",
+    // ---------- t04 Tempo, Flüssigkeit und Energie ----------
+    "lesson.t04.brief.1" to "Die durchhaltbare Intensität ist «man kann ganze Sätze sprechen». Wer nicht mehr sprechen kann, überzieht bereits.",
+    "lesson.t04.brief.2" to "Trinken nach Zeit, nicht nach Durst: alle 20–30 Minuten kleine Schlucke, bei Hitze mit Elektrolyten.",
+    "lesson.t04.brief.3" to "Energie in kleinen Mengen häufig, 30–60 g Kohlenhydrate pro Stunde – wirksamer als eine grosse Mahlzeit.",
+    "lesson.t04.brief.4" to "Pausen nicht länger als zehn Minuten; ist der Körper ausgekühlt, kostet der Wiedereinstieg mehr.",
+
+    // ---------- t15 Karte und Navigation in der Praxis ----------
+    "lesson.t15.brief.1" to "Die Handykarte ist das Hauptwerkzeug, aber das Offline-Paket muss vorher geladen sein: der häufigste Zustand im Gelände ist «Akku da, kein Netz».",
+    "lesson.t15.brief.2" to "Auf der Karte 1:50.000 ist ein Zentimeter 500 Meter; erst den Massstab beherrschen, dann über Geländelesen sprechen.",
+    "lesson.t15.brief.3" to "Drei Linienarten erkennen: Höhenlinien (Hoch und Tief), Route (Verlauf), Gewässer (meist die tiefste Stelle). Tal und Grat entscheiden, ob man auf derselben Seite bleibt.",
+    "lesson.t15.brief.4" to "Mit Uhr und Sonne lässt sich grob orientieren: Stundenzeiger zur Sonne, die Winkelhalbierende zwischen Stundenzeiger und 12 zeigt nach Süden. Bei Bewölkung zählt der Kompass.",
+    "lesson.t15.brief.5" to "Beim Verlaufen ist der erste Schritt anzuhalten. Über drei markante Geländepunkte zurückzuschauen und zu klären, woher man kommt, hilft viel mehr, als weiter nach dem Weg zu suchen.",
+
+    // ---------- t05 Mehrtagestouren planen ----------
+    "lesson.t05.brief.1" to "Zuerst die Obergrenzen pro Tag festlegen: Distanz, Aufstieg, Zeitbedarf; dann Versorgungspunkte, Ausstiegspunkte und Reservetage.",
+    "lesson.t05.brief.2" to "Ein Reservetag ist kein Luxus, sondern notwendig. Wetter und Verletzungen sorgen dafür, dass ein Tag nicht aufgeht.",
+    "lesson.t05.brief.3" to "Am leichtesten unterschätzt: Wegsuche, Wasserholen und Filtern, Zeltaufbau und Kochen – im Schnitt 1,5–2 Stunden pro Tag zusätzlich.",
+    "lesson.t05.brief.4" to "Den längsten Tag in die Mitte legen, den ersten zum Ankommen nutzen und am letzten Tag Reserve für die Rückreise lassen.",
+
+    // ---------- t06 Lagerplatz und Zelten ----------
+    "lesson.t06.brief.1" to "Das Lager mindestens 60 m vom Wasser entfernt: Das vermeidet Verunreinigung und die Routen der Tiere, die nachts zur Tränke kommen.",
+    "lesson.t06.brief.2" to "Meiden: Steinschlagbereich unter Steilhängen, ausgetrocknete Flussbetten (Sturzflut), einzelnstehende grosse Bäume (Blitzschlag) und Wildwechsel.",
+    "lesson.t06.brief.3" to "Der Boden darf 2–3° geneigt sein, das hilft beim Ablaufen; mit dem Kopf etwas höher liegt man stabiler.",
+    "lesson.t06.brief.4" to "Zelteingang im Windschatten, Längsseite im Wind, und nach dem Aufbau alle Abspannleinen festziehen.",
+
+    // ---------- t07 Kochen und Essensplanung ----------
+    "lesson.t07.brief.1" to "Brennstoff mit 30–50 g Gaskartusche pro Person und Tag schätzen (überwiegend Wasser kochen); bei Kälte und Schneeschmelzen nach oben korrigieren.",
+    "lesson.t07.brief.2" to "Beim Essen zählen Energiedichte, Haltbarkeit, wenig Abwasch und keine langen Kochzeiten.",
+    "lesson.t07.brief.3" to "In der Höhe mehr Kohlenhydrate: Verdauung braucht weniger Sauerstoff, die Umsetzung geht schneller – geeigneter als fettreiche Kost.",
+    "lesson.t07.brief.4" to "Der Kocher im Zelt verlangt zwingend Lüftung; Kohlenmonoxid ist farb- und geruchlos, und die Vergiftung passiert meist im Schlaf.",
+
+    // ---------- t08 Wetter: Grundlagen ----------
+    "lesson.t08.brief.1" to "Vor dem Start drei Dinge prüfen: Trend der nächsten 24–48 Stunden, Niederschlagswahrscheinlichkeit, Wind und gefühlte Temperatur.",
+    "lesson.t08.brief.2" to "Wächst ein Cumulonimbus hoch und läuft oben ambossförmig aus, ist das Gewitter ausgereift.",
+    "lesson.t08.brief.3" to "Signale nahenden Gewitters: ferner Donner, schwarze absinkende Wolkenbasis, plötzliche Winddrehung, aufgestellte Haare.",
+    "lesson.t08.brief.4" to "Unterkühlung zeigt sich zuerst als anhaltendes Zittern und ungeschickte Bewegungen; behandeln heisst trockene Kleidung, Isolationsschicht, Energiezufuhr.",
+    // ---------- t16 Lagerleben und Hygiene im Gelände ----------
+    "lesson.t16.brief.1" to "Das Lager hat drei Zonen: Schlafen, Kochen, Toilette. Am Schlafplatz kein offenes Feuer und kein Essen in der Nähe – das ist Grundregel.",
+    "lesson.t16.brief.2" to "Für die Notdurft ein Katzengrab von 15–20 cm, mindestens 60 m von Wasser und Weg entfernt; Toilettenpapier mitnehmen, nicht verbrennen.",
+    "lesson.t16.brief.3" to "Abwaschwasser filtern, Reste mitnehmen, das Wasser breitflächig ausgiessen. Essensreste locken Tiere an und verunreinigen das Wasser.",
+    "lesson.t16.brief.4" to "Der Schwerpunkt der Körperpflege sind die Füsse: täglich waschen, Socken wechseln, Schuhe lüften. Blasen und Aufweichungen beginnen hier.",
+    "lesson.t16.brief.5" to "Beim Abbau den Platz wiederherstellen: Steine zurücklegen, Feuerstelle beseitigen, allen Abfall mitnehmen.",
+
+    // ---------- t18 Flussquerung: Beurteilung und Stellenwahl ----------
+    "lesson.t18.brief.1" to "Das Risiko einer Furt ist nicht die Tiefe, sondern Tiefe × Fliessgeschwindigkeit. Die technische Obergrenze liegt bei 1,0 Quadratmeter pro Sekunde; darüber wird nicht gewatet.",
+    "lesson.t18.brief.2" to "Die 1,0 gilt für gesunde Erwachsene, kurze Strecken, ohne schwere Last. Mit grossem Rucksack, Wassertemperaturen nahe null und Unerfahrenen im Team muss man darunter bleiben.",
+    "lesson.t18.brief.3" to "Geschwindigkeit abschätzen: einen Ast ins Wasser werfen und am Ufer mitgehen. Muss man traben, um mitzukommen, ist sie schneller als Schrittgeschwindigkeit.",
+    "lesson.t18.brief.4" to "Über Oberschenkelhöhe der kleinsten Person im Team sollte eine andere Stelle gesucht oder umgangen werden – nicht erst, wenn es an die Hüfte geht.",
+    "lesson.t18.brief.5" to "Bei der Stellenwahl zählt dreierlei: breit und flach, nicht die Kurvenaussenseite, und der Blick auf den Run-out flussabwärts – Wasserfälle, Treibholz, Steilufer.",
+    "lesson.t18.brief.6" to "15 cm höherer Wasserstand genügen, um eine vorher sichere Stelle gefährlich zu machen; Gletscherschmelzwasser führt nachmittags meist mehr als morgens.",
+
+    // ---------- t19 Formation und Sturzbehandlung ----------
+    "lesson.t19.brief.1" to "Dreiecksformation: drei Personen einander zugewandt, an Schulter oder Rucksack gefasst, jeweils nur eine Person und ein Bein in Bewegung, die stärkste Person stromaufwärts.",
+    "lesson.t19.brief.2" to "Querformation: ab drei Personen, die stärksten an den Enden, die Arme zwischen Rucksack und Rücken der Nachbarin geführt, seitwärts schleifend.",
+    "lesson.t19.brief.3" to "Kommandos einheitlich als «ein Schritt, Stopp, ein Schritt». Die stromaufwärtige Person beobachtet Wasser und Run-out, alle anderen nur die Füsse und die Person davor.",
+    "lesson.t19.brief.4" to "Erste Regel nach einem Sturz: nicht aufstehen. Ein eingeklemmter Fuss in Felsspalte oder Treibholz ist die typische Ursache tödlicher Flussunfälle.",
+    "lesson.t19.brief.5" to "Richtige Lage: Rückenlage, Füsse flussabwärts, Kopf hoch, Arme offen zur Steuerung, schräg zum Ufer schwimmen (back ferry).",
+    "lesson.t19.brief.6" to "Seilsicherung ist riskant, weil die meisten Teams darin nicht geübt sind. Wenn überhaupt, dann nur am Ufer befestigt und niemals am Körper.",
+
+    // ---------- t21 Nachtmarsch und Gewitter ----------
+    "lesson.t21.brief.1" to "Erste Regel beim Nachtmarsch: nicht gehen, wenn es nicht nötig ist. Navigation, Wegsuche und Geländebeurteilung werden nachts um ein Vielfaches schwerer.",
+    "lesson.t21.brief.2" to "Wenn Nachtmarsch unvermeidlich ist: Stirnlampe, Ersatzbatterien und eine zweite Lichtquelle – alle drei. Ein Lichtausfall bedeutet nachts Handlungsunfähigkeit.",
+    "lesson.t21.brief.3" to "Nachts langsamer gehen, den Abstand verkleinern, die Spitze bestätigt regelmässig die Nachhut; an Abzweigungen jemanden stehen lassen.",
+    "lesson.t21.brief.4" to "Frühe Gewitterzeichen: schnell wachsender Cumulonimbus, ferner dumpfer Donner, plötzliche Winddrehung, aufgestellte Haare. Bei einem dieser Zeichen ins Tiefere absteigen.",
+    "lesson.t21.brief.5" to "Blitzschutz: Grat, Gipfel, Gewässer, Einzelbäume und Metallgeländer verlassen; verteilt in die Hocke, Füsse geschlossen, nicht hinlegen.",
+    "lesson.t21.brief.6" to "Gewitter bringen meist starken Temperaturabfall und Starkregen; das Unterkühlungsrisiko steigt gleichzeitig, die Wärmeschicht muss griffbereit sein.",
+
+    // ---------- t09 Höhenkrankheit und Aufstiegsrhythmus ----------
+    "lesson.t09.brief.1" to "Über 3.000 m die Schlafhöhe um höchstens 500 m pro Tag steigern und alle 1.000 m einen Akklimatisierungstag einplanen.",
+    "lesson.t09.brief.2" to "Die drei Kernzeichen der akuten Bergkrankheit (AMS): Kopfschmerz, Übelkeit oder Appetitlosigkeit, Schwindel und Schwäche.",
+    "lesson.t09.brief.3" to "Bei AMS den Aufstieg stoppen, vor Ort akklimatisieren oder absteigen. Mit Medikamenten weiter nach oben zu drücken ist der häufigste Fehler.",
+    "lesson.t09.brief.4" to "Warnsignale sind Atemnot in Ruhe, unsicherer Gang und Bewusstseinsveränderung – dann muss sofort abgestiegen werden.",
+
+    // ---------- t10 Wärme und Sonnenschutz in der Höhe ----------
+    "lesson.t10.brief.1" to "Drei Schichten genügen: Funktionsschicht, Wärmeschicht, Windschicht. Kalt heisst mittlere Schicht dazu, warm heisst zuerst am Kragen öffnen.",
+    "lesson.t10.brief.2" to "Pro 1.000 Höhenmeter nimmt die UV-Intensität um etwa 10–12 % zu; die Schneeoberfläche reflektiert zusätzlich rund 80 %.",
+    "lesson.t10.brief.3" to "Sonnenschutz in vier Teilen: UV400-Brille, Sonnencreme SPF50+, Lippenpflege, Sonnenhut.",
+    "lesson.t10.brief.4" to "Hände und Füsse frieren zuerst, weil der Körper die Kerntemperatur priorisiert; nasse Handschuhe und Ersatzsocken müssen sofort gewechselt werden.",
+
+    // ---------- t11 Essen und Schlafen in der Höhe ----------
+    "lesson.t11.brief.1" to "Nachlassender Appetit ist in der Höhe häufig – aktiv essen, in kleinen Portionen, häufig.",
+    "lesson.t11.brief.2" to "In der Höhe ist die Luft trocken und über die Atmung geht viel Wasser verloren; erst hellgelber Urin zeigt ausreichendes Trinken.",
+    "lesson.t11.brief.3" to "Nächtliche periodische Atmung, leichter Schlaf und häufiges Aufwachen sind normal.",
+    "lesson.t11.brief.4" to "Alkohol dämpft die Atmung und verstärkt den Sauerstoffmangel – in der Höhe gefährlicher als im Flachland.",
+
+    // ---------- t12 Gruppe und mentale Vorbereitung ----------
+    "lesson.t12.brief.1" to "Vor dem Start eine Sache akzeptieren: Es kann sein, dass man diesmal nicht hinaufkommt. Erst wenn der Rückzug erlaubt ist, steht der Plan.",
+    "lesson.t12.brief.2" to "Tempodruck ist die grösste unsichtbare Last für Unerfahrene. Lernen, «ich halte nicht mit, geht nach der langsamsten Person» zu sagen.",
+    "lesson.t12.brief.3" to "Höhenangst und Exposition lassen sich mit abschnittsweisem Schauen, kontrollierter Atmung und drei Kontaktpunkten dämpfen.",
+    "lesson.t12.brief.4" to "«Wir sind schon so weit gekommen» ist typischer versunkener Aufwand und kein Grund weiterzugehen.",
+
+    // ---------- t13 Langstreckenplanung und Versorgung ----------
+    "lesson.t13.brief.1" to "Alle 3–5 Tage einen Versorgungspunkt setzen und die lange Strecke in Abschnitte teilen, die machbar und verlassbar sind.",
+    "lesson.t13.brief.2" to "Getrocknete Nahrung mit 600–800 g pro Tag ansetzen, das entspricht etwa 2.500–3.000 kcal.",
+    "lesson.t13.brief.3" to "Genehmigung, Feuerregeln, Müllmitnahme und Drohnenverbote vor dem Start Punkt für Punkt klären.",
+    "lesson.t13.brief.4" to "20 % Reserve einplanen – für Essen, Brennstoff, Zeit und Bargeld gleichermassen.",
+
+    // ---------- t14 Häufige Notfälle und Hilferuf ----------
+    "lesson.t14.brief.1" to "Verstauchung nach RICE behandeln: Ruhe, Kühlung, Kompression, Hochlagern.",
+    "lesson.t14.brief.2" to "Reihenfolge bei Unterkühlung: Windschutz, trockene Kleidung, Isolation zum Boden, wachen Personen warme Getränke, langsam wiedererwärmen.",
+    "lesson.t14.brief.3" to "Bei Hitzeerschöpfung zügig in den Schatten, Kleidung öffnen, physikalisch kühlen und Elektrolyte zuführen.",
+    "lesson.t14.brief.4" to "Eine Notfallmeldung braucht vier Dinge: Positionskoordinaten, Personenzahl und Verletzungen, Ausrüstung und Versorgung, Kontaktmöglichkeit.",
+
+    // ---------- t17 Dehydratation, Hitze und häufige Verletzungen ----------
+    "lesson.t17.brief.1" to "Frühe Zeichen der Dehydratation sind dunkler Urin und nachlassendes Urteilsvermögen, nicht Durst. Beim Wandern täglich einmal auf die Urinfarbe schauen.",
+    "lesson.t17.brief.2" to "Hitzeschäden verlaufen stufenweise: Hitzekrämpfe, Hitzeerschöpfung (Schwindel, Schwäche, feuchtkalte Haut), Hitzschlag (Kerntemperatur über 40 °C mit Bewusstseinsveränderung).",
+    "lesson.t17.brief.3" to "Behandlung: in den Schatten, Kleidung öffnen, kühlen, Elektrolyte zuführen. Bei getrübtem Bewusstsein nichts einflössen.",
+    "lesson.t17.brief.4" to "Verstauchung nach RICE: Ruhe, Kühlung, Kompression, Hochlagern. In den ersten 48 Stunden nicht wärmen und nicht kräftig massieren.",
+    "lesson.t17.brief.5" to "Blasen nicht leichtfertig eröffnen; wenn nötig, vom Rand entlasten, die Blasendecke erhalten und abdecken.",
+
+    // ---------- t20 Ausrüstungspflege und Reparatur ----------
+    "lesson.t20.brief.1" to "Vor dem Start vier Dinge prüfen: löst sich die Sohle, sind die Verschlüsse am Rucksack in Ordnung, hat das Zeltgestänge Risse, ist die Matte dicht.",
+    "lesson.t20.brief.2" to "Der Kern der Reparatur sind drei Klebebänder und eine Nadel: Dyneema-Tape für Zeltstoff und Daunen, Gewebeband zum Fixieren, Mattenflicken für die Kammer.",
+    "lesson.t20.brief.3" to "Sich lösende Sohlen sind der häufigste Defekt auf Langstrecken: zuerst mit Tape gegen Weiterreissen sichern, in der Stadt dann Spezialkleber.",
+    "lesson.t20.brief.4" to "Ein gebrochenes Gestänge lässt sich mit einem Reparaturhülsrohr weiter nutzen; gerissener Zeltstoff wird zuerst beklebt, nicht mit Feuer behandelt.",
+    "lesson.t20.brief.5" to "Bei einem Loch in der Daunenjacke erst flicken und andrücken, nicht klopfen – Klopfen lässt die Daunen weiter aus den Nadelstichen austreten.",
 )
