@@ -328,4 +328,35 @@ internal val PACK_FR_BRIEF: Map<String, String> = mapOf(
     "lesson.l24.brief.4" to "Une fuite sur un matelas gonflable est la panne la plus fréquente au camp. Emporter des rustines, presser les alvéoles avant de se coucher et ne pas attendre d'être réveillé de froid à minuit.",
     "lesson.l24.brief.5" to "Oreiller et bouchons ne sont pas des luxes. En altitude on dort mal surtout par manque d'oxygène et à cause du bruit ; améliorer un peu change l'état du lendemain.",
     "lesson.l24.brief.6" to "Ne pas laisser le sac comprimé en permanence. À la maison, l'étendre ou le suspendre lâche, pour que le duvet retrouve son gonflant.",
+    // ---------- l42 Principes de sécurité et gestion du risque ----------
+    "lesson.l42.brief.1" to "Principe « quatre, trois, trois » : garder un tiers de marge en énergie, en temps et en matériel. C'est l'espace laissé à l'imprévu, à la météo et aux erreurs de jugement.",
+    "lesson.l42.brief.2" to "« Trois nouveautés, on ne part pas » : itinéraire nouveau, partenaires nouveaux et matériel nouveau ; mieux vaut ne pas en cumuler plus de deux sur une même sortie. Plus il y a de nouveau, plus il y a d'inconnu.",
+    "lesson.l42.brief.3" to "Risque = conséquence × probabilité. On réduit d'abord la conséquence (c'est plus facile à obtenir), ensuite la probabilité — parce qu'une conséquence survenue ne se rattrape pas.",
+    "lesson.l42.brief.4" to "STOP : s'arrêter, réfléchir, observer, planifier. Perte de repères, changement brutal de météo, état anormal d'un membre du groupe : le premier geste est toujours de s'arrêter.",
+    "lesson.l42.brief.5" to "Trois clés pour un campement sûr : éviter les pièges du terrain, garder une voie d'évacuation et regrouper le matériel critique en un seul endroit.",
+    "lesson.l42.brief.6" to "Le plan doit indiquer « dans quels cas on renonce ». Un plan qui ne dit que comment réussir revient, en pratique, à ne pas avoir de plan.",
+
+    // ---------- l26 Cartes, boussole et orientation en pleine nature ----------
+    "lesson.l26.brief.1" to "D'abord l'échelle : sur une carte au 1:50 000, 1 cm représente 500 m sur le terrain. Une erreur à cette étape fausse tout ce qui suit.",
+    "lesson.l26.brief.2" to "L'équidistance fixe le niveau de détail : avec des courbes tous les 5 m on distingue les petits replats, avec 20 m ou plus on ne voit que les grandes structures.",
+    "lesson.l26.brief.3" to "La boussole a deux « nord » : le géographique et le magnétique. La carte est dessinée sur le nord géographique, l'aiguille indique le magnétique, et leur différence est la déclinaison.",
+    "lesson.l26.brief.4" to "Quatre étapes d'orientation : orienter la carte sur le terrain réel, localiser sa position, tracer l'azimut vers l'objectif, puis progresser sur cet azimut en vérifiant le terrain.",
+    "lesson.l26.brief.5" to "Naviguer à la boussole, c'est « suivre un angle en corrigeant avec les courbes de niveau et les détails du terrain », pas marcher droit les yeux rivés sur l'aiguille.",
+    "lesson.l26.brief.6" to "Le GPS est un accélérateur, pas un substitut : la batterie s'épuise et l'écran se casse, donc carte papier et boussole restent toujours sur soi.",
+    "lesson.l26.brief.7" to "La première chose à faire quand on s'est perdu, c'est d'admettre qu'on est perdu. Continuer avec un « c'est à peu près par là » est la décision mortelle la plus fréquente.",
+    // ---------- l27 Choix et aménagement du camp ----------
+    "lesson.l27.brief.1" to "Six critères d'emplacement : loin des chutes de pierres et des couloirs d'avalanche, abrité du vent, sol plat, bon drainage, proche de l'eau sans être dessus, et une voie d'évacuation libre.",
+    "lesson.l27.brief.2" to "La sécurité passe toujours avant, le paysage toujours après. Les accidents de camp les plus graves de l'histoire ont presque tous consisté à planter la tente dans un piège du terrain.",
+    "lesson.l27.brief.3" to "Sur neige, on tasse d'abord puis on creuse une plateforme ; sur glace, on fixe avec des broches ou des ancres à neige, jamais seulement avec des pierres posées dessus.",
+    "lesson.l27.brief.4" to "Zones d'un camp de base : couchage, cuisine, stockage et toilettes, séparées ; la cuisine doit rester à une distance nette du couchage.",
+    "lesson.l27.brief.5" to "Les excréments vont dans un trou de 15–20 cm de profondeur, à plus de 60 m de l'eau ; le papier est emporté, pas brûlé.",
+    "lesson.l27.brief.6" to "En partant, on remet le camp en état : les pierres à leur place, plus aucune trace de feu, tous les déchets emportés.",
+
+    // ---------- l25 Préparation : permis, assurance et logistique ----------
+    "lesson.l25.brief.1" to "Les permis et accès se demandent souvent plusieurs semaines à l'avance : réserves, zones frontalières, permis d'ascension, et beaucoup exigent un guide local ou une personne de liaison.",
+    "lesson.l25.brief.2" to "Sur l'assurance, deux points précis à vérifier : la couverture de l'escalade technique et celle de l'évacuation en hélicoptère à haute altitude. Les assurances voyage ordinaires excluent généralement les deux.",
+    "lesson.l25.brief.3" to "Trois fronts logistiques : transport aller et retour, portage et porteurs, ravitaillement du camp. Chaque étape a besoin d'une alternative, car le retard est la norme et non l'exception.",
+    "lesson.l25.brief.4" to "Dossier de documents : permis original, numéro de police et téléphone des secours, et les photos et la déclaration demandées pour le certificat de sommet.",
+    "lesson.l25.brief.5" to "Avant de partir, laisser une fiche d'itinéraire à un contact qui ne vient pas : itinéraire, heure des points de contrôle, et au bout de combien de temps sans nouvelles on déclenche le protocole.",
+    "lesson.l25.brief.6" to "Garder 20 % de marge budgétaire. Retards, nuits supplémentaires et porteurs ajoutés arrivent quasiment à chaque fois.",
 )
