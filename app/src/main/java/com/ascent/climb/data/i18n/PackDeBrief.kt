@@ -419,4 +419,37 @@ internal val PACK_DE_BRIEF: Map<String, String> = mapOf(
     "lesson.l25.brief.4" to "Dokumentenmappe: Genehmigung im Original, Versicherungsnummer und Rettungsnummer, dazu Fotos und Erklärungsformular für den Gipfelnachweis.",
     "lesson.l25.brief.5" to "Vor dem Start einen Tourenplan bei einer daheimgebliebenen Kontaktperson hinterlegen: Route, Zeiten der Kontrollpunkte, ab wann ohne Meldung der Notfallplan greift.",
     "lesson.l25.brief.6" to "20 % Budgetreserve einplanen. Verzögerungen, zusätzliche Übernachtungen und spontan engagierte Träger kommen fast jedes Mal vor.",
+    // ---------- l32 Fixseile und Ankersysteme ----------
+    "lesson.l32.brief.1" to "Fixseile werden nach Zweck in drei Klassen geteilt: Handlauf für kurze exponierte Passagen, kurzes Fixseil für einen Seilabschnitt, der wiederholt auf und ab begangen wird, Expeditionseinrichtung für lange Routen mit vielen Seillängen.",
+    "lesson.l32.brief.2" to "Material trennen: dynamisches Seil (EN 892) für Vorstieg und Sturz, statisches Seil (EN 1891) für Fixseile – dehnungsarm und abriebfest.",
+    "lesson.l32.brief.3" to "Für Expeditionseinrichtungen werden meist statische Seile von 9–11 mm verwendet. Zu dünn verschleisst schnell, zu dick wird schwer.",
+    "lesson.l32.brief.4" to "Fünf Ankerprüfungen: unabhängig, lastverteilt, richtungsgerecht, mit Backup, kanten geschützt. Zwei Ankerpunkte auf einer gemeinsamen Bandschlinge sind keine Redundanz, sondern eine Reihenschaltung.",
+    "lesson.l32.brief.5" to "Der doppelte Achterknoten kann zwei bis drei Ankerpunkte gleichzeitig verbinden; das ist die gängige UIAA-Praxis.",
+    "lesson.l32.brief.6" to "Eine Zwischenumlenkung (re-belay) lässt das Seil der Route glatt folgen und begrenzt Sturz und Abrieb auf einen Abschnitt.",
+    "lesson.l32.brief.7" to "Am Seilende muss ein Stopfknoten sitzen, sonst rutscht es aus dem Gerät – der am leichtesten übersehene Punkt mit den direktesten Folgen.",
+
+    // ---------- l33 Aufstieg, Knotenpassage und Seilwechsel ----------
+    "lesson.l33.brief.1" to "Standardausrüstung für den Aufstieg am Fixseil: Handsteigklemme, Bruststeigklemme (oder ein zweiter Klemmknoten), Fussstrippe, Backup-Klemmknoten, PAS oder Bandschlinge, Helm.",
+    "lesson.l33.brief.2" to "Der Ablauf heisst «aufstehen, setzen, schieben»: mit beiden Füssen in die Fussstrippe stehen, Bruststeigklemme schieben, setzen, dann die Handsteigklemme schieben. Schwerpunkt am Seil halten, nicht nach aussen pendeln.",
+    "lesson.l33.brief.3" to "Eherne Regel sind zwei Verbindungen: zu jedem Zeitpunkt zwei unabhängige Verbindungen. Die einzige Ausnahme ist das direkte Einbinden beim Vorstieg.",
+    "lesson.l33.brief.4" to "Für die Knotenpassage gilt: erst die neue Verbindung aufbauen, dann die alte lösen. Zwei Steigklemmen dürfen nie gleichzeitig vom Seil.",
+    "lesson.l33.brief.5" to "Der Seilwechsel ist der unfallträchtigste Teil der Fixseilarbeit, weil dabei zwischen «altes System lösen» und «neues System aufbauen» umgelastet wird.",
+    "lesson.l33.brief.6" to "Die Reihenfolge Aufstieg zu Abseilen ist fest: in den Ankerpunkt einhängen, Abseilgerät montieren und testen, Steigklemmen lösen, PAS lösen, abseilen.",
+    "lesson.l33.brief.7" to "Beim Abseilen gehören ein Backup-Reibungsknoten und ein Stopfknoten am Seilende dazu; bei der Knotenpassage wird das Gerät mit dem PAS in zwei Schritten umgesetzt.",
+    // ---------- l39 Führung und Rollen in der Gruppe ----------
+    "lesson.l39.brief.1" to "Führung ist Verhalten, keine Position. Auch ohne Titel kann man durch Fragen, Erinnern und Übernehmen von Verantwortung Entscheidungen beeinflussen.",
+    "lesson.l39.brief.2" to "Harte Fähigkeiten entscheiden, ob man es kann; weiche Fähigkeiten entscheiden, ob die Gruppe es gemeinsam tun will. In Bergunfällen fehlt meist das Zweite.",
+    "lesson.l39.brief.3" to "Verantwortung hat drei Ebenen: Verhalten (was getan wurde), Denken (wie geurteilt wurde), Fühlen (wie es sich anfühlt). Wer nur das Verhalten ansieht, erlebt dieselben Probleme wieder.",
+    "lesson.l39.brief.4" to "Konflikte sind wie ein Eisberg: über Wasser die Position (ich will auf den Gipfel), unter Wasser das Bedürfnis (ich fürchte, geringgeschätzt zu werden). Erst wenn das Bedürfnis angesprochen wird, lockert sich die Position.",
+    "lesson.l39.brief.5" to "Der Expertenhalo ist eine häufige Falle: selbstsichere Sprache und professionelle Ausrüstung werden für Können gehalten, und niemand wagt mehr, einen offensichtlichen Fehler zu hinterfragen.",
+    "lesson.l39.brief.6" to "Auch Mitgehende haben Pflichten: fragen, Rückmeldung geben und «Stopp» sagen, wenn gestoppt werden muss. Blindes Gehorchen ist keine Loyalität, sondern der Verzicht auf eigenes Urteil.",
+    "lesson.l39.brief.7" to "Entscheidungen brauchen eine vorab gesetzte Frist (Umkehrzeit), die die ganze Gruppe vor dem Start kennt – nachträglich genannt ist sie wirkungslos.",
+
+    // ---------- l41 Expeditionslogistik und Genehmigungen ----------
+    "lesson.l41.brief.1" to "Expeditionslogistik ist Transport in mehreren Abschnitten: Strasse, Fussweg, Lastentransport, Hochlager. Jeder Abschnitt hat eigene Gewichtslimits, Fristen und Risiken.",
+    "lesson.l41.brief.2" to "Material wird nach Ankunftsreihenfolge verpackt, nicht nach Kategorie. Zehn Kisten nach einer Gaskartusche zu durchsuchen ist die häufigste Zeitverschwendung im Hochlager.",
+    "lesson.l41.brief.3" to "Genehmigungen sind oft an Verbindungsbeamten, Route und Frist gebunden. Eine Verlängerung bedeutet Kosten und Auflagen zugleich und muss vorab im Plan stehen.",
+    "lesson.l41.brief.4" to "Müllpfand ist an vielen Bergen Pflicht: zurückgezahlt wird nur, wenn der gesamte Müll hinausgebracht ist. Budget und Personal müssen dafür Platz haben.",
+    "lesson.l41.brief.5" to "Für Co-Team und Träger gelten gesetzliche oder branchenübliche Lastgrenzen; Überlast verlagert das Risiko auf sie und bremst die ganze Gruppe.",
+    "lesson.l41.brief.6" to "Der Versorgungsplan braucht Verbrauchsraten: Brennstoff, Gaskartuschen und Lebensmittel werden als Personen × Tage × Bedarf gerechnet, nicht nach Gefühl.",
 )
