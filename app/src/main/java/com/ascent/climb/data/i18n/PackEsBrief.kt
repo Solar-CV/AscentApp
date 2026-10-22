@@ -581,4 +581,11 @@ internal val PACK_ES_BRIEF: Map<String, String> = mapOf(
     "lesson.l31.brief.4" to "La edad no es la variable principal; lo son las diferencias individuales. Una persona de 60 años que entrena con regularidad puede aclimatarse mejor que una de 25 que no duerme.",
     "lesson.l31.brief.5" to "Cuatro pilares de la prevención: controlar la velocidad de ascensión, programar días de aclimatación, no subir con síntomas y, cuando haga falta, medicarse bajo indicación médica.",
     "lesson.l31.brief.6" to "La medicación es un apoyo, no un sustituto. La acetazolamida alivia síntomas, pero no permite saltarse la aclimatación.",
+    // ---------- l43 Vida en el campamento y cuidado personal ----------
+    "lesson.l43.brief.1" to "Los problemas de piel en altura vienen de tres cosas: sequedad, radiación ultravioleta y viento. Hidratar, proteger del sol y cuidar los labios es tarea diaria, no una opción.",
+    "lesson.l43.brief.2" to "La bolsa de calor químico es una herramienta para «prevenir la hipotermia», no un capricho para entrar en calor. Va en la zona lumbar, el abdomen o el exterior de la bota, nunca pegada a la piel.",
+    "lesson.l43.brief.3" to "Cubiertos y útiles de aseo, uno por persona y con el nombre marcado; el agua de fregar, lejos del agua, y los restos siempre se llevan.",
+    "lesson.l43.brief.4" to "La primera capa es la prioridad para lavar y secar: la sal del sudor irrita y rompe la piel, y en altura una escoriación cura muy mal. El plumón no se lava: si se moja, solo se seca al aire.",
+    "lesson.l43.brief.5" to "Tres normas de orden en el campamento: el calzado en el ábside, la comida fuera de la tienda y la basura agrupada y colgada en alto. Las tres previenen humedad, animales y contaminación a la vez.",
+    "lesson.l43.brief.6" to "El objetivo del cuidado personal es «mantener el cuerpo en estado de poder trabajar»; la comodidad es solo un efecto secundario.",
 )
