@@ -116,7 +116,6 @@ internal val PACK_FR_QUIZ: Map<String, String> = mapOf(
     "q.l2#4.e" to "Un crampon ne vaut que par sa liaison avec la chaussure. Plus de pointes n'est pas automatiquement mieux ; ce qui compte, c'est l'ajustement et les plaques anti-bottage (qui empêchent la neige de s'accumuler sous le pied). Un mauvais ajustement est la façon classique de perdre un crampon dans une pente raide.",
 
     "q.l2#5.p" to "[Mise en situation] Pour une journée de sommet technique en haute altitude avec crampons, piolet, couche isolante de rechange, nourriture, eau et kit d'urgence, quel volume net de sac est recommandé ?",
-    "q.l2#5.c" to "Il n'y a pas de réponse unique pour le volume du sac — cela dépend de l'itinéraire, du fait que vous portiez vous-même le matériel technique, et de qui porte le matériel collectif.",
     "q.l2#5.o0" to "15–25 litres",
     "q.l2#5.o1" to "35–50 litres",
     "q.l2#5.o2" to "60–75 litres",
@@ -3175,7 +3174,6 @@ internal val PACK_FR_QUIZ: Map<String, String> = mapOf(
     "q.m15#16.e" to "Ces quatre cas viennent de quatre dimensions — météo, manteau neigeux, orientation et physiologie — et leur point commun est d'être progressifs, ce qui signifie que le coût maintenant est bien inférieur au coût dans dix minutes. Plus tôt vous décidez de descendre, moins cela coûte cher.",
 
     "q.m15#17.p" to "Touchez sur le graphique la courbe qui représente l'isotherme 0 °C.",
-    "q.m15#17.c" to "Cette prévision présente la météo à différentes altitudes de la même montagne en lignes empilées. La courbe violette de la légende marque l'isotherme 0 °C — l'altitude de la limite pluie/neige.",
     "q.m15#17.e" to "La courbe de l'isotherme 0 °C est l'une des informations les plus utiles de cette prévision : elle marque l'altitude où les précipitations passent de la pluie à la neige. Une courbe qui monte signifie l'arrivée d'air plus doux et plus humide et une bascule des précipitations vers la pluie ; une courbe qui descend signifie de l'air froid et un passage à la neige en altitude. Pour savoir si vous rencontrerez de la neige à votre altitude, elle bat la lecture des températures.",
 
     "q.m15#18.p" to "Voici la prévision de la même montagne pour une saison d'alpinisme terminée prématurément. Quel est le cumul de neige, en centimètres, sur les trois périodes du vendredi 25 (matin / après-midi / nuit) ? Saisissez la somme.",
@@ -3424,7 +3422,6 @@ internal val PACK_FR_QUIZ: Map<String, String> = mapOf(
     "q.m16#17.s2.e" to "Un par un limite le risque à une personne et permet au guetteur de se concentrer sur une seule. Exposer toute la cordée en même temps amplifie la conséquence : peut-être une personne ensevelie devient peut-être tout le monde.",
 
     "q.m16#18.p" to "Touchez sur la carte la zone approximative du sommet du Manaslu.",
-    "q.m16#18.c" to "Ceci est une carte à courbes de niveau du Manaslu générée à partir des données d'élévation SRTM de la NASA, avec une équidistance de 50 m ; les étiquettes donnent l'altitude de chaque courbe.",
     "q.m16#18.e" to "Un sommet est identifiable sans ambiguïté sur une carte à courbes de niveau : les courbes fermées se resserrent anneau après anneau tandis que les étiquettes montent (7600 → 7750 → 7900 → 7950 …). Trouvez le point entouré de petits anneaux fermés et vous avez le point le plus haut.\nÀ l'inverse, là où les courbes s'évasent vers l'extérieur et où les étiquettes descendent, c'est la descente — ce qui vous indique au passage de quel côté passe l'itinéraire.",
 
     "q.m16#19.p" to "Sur la même carte, les courbes du flanc nord-est à est sont extrêmement serrées. Qu'est-ce que cela indique ?",
@@ -3464,7 +3461,6 @@ internal val PACK_FR_QUIZ: Map<String, String> = mapOf(
     "q.m16#21.e" to "Les deux sources résolvent des problèmes différents. L'ombrage et les noms de lieux de Google construisent vite le sens de l'espace : où est la montagne, sa forme générale, par où passe l'itinéraire. Les courbes à 50 m de SRTM permettent un jugement quantifié : combien de degrés fait cette pente, y a-t-il un endroit pour un camp.\nRepérer avec la carte intuitive, confirmer avec la carte haute résolution — c'est la répartition pratique. N'en utiliser qu'une rend soit lent, soit faux.",
 
     "q.m16#22.p" to "Touchez sur la carte la zone approximative du sommet de l'Everest.",
-    "q.m16#22.c" to "Ceci est une carte à courbes de niveau SRTM de la zone Everest–Lhotse ; deux sommets de 8 000 m sont visibles sur la même feuille.",
     "q.m16#22.e" to "Pour trouver un sommet, cherchez la courbe fermée étiquetée la plus haute. Ici les étiquettes proches de cette zone montent à 8600 et 8700 m avec des anneaux qui se resserrent vers l'intérieur ; le plus interne est le sommet (8 848 m).\nAttention à distinguer haut et raide : le terrain sommital n'est souvent pas la partie la plus raide de la montagne — le terrain le plus raide est là où les courbes sont les plus denses. Cette distinction compte pour le risque de l'itinéraire : atteindre le sommet teste l'acclimatation et la condition physique, tandis que le risque technique se situe surtout sur quelques pentes à la montée et à la descente.",
 
     "q.m16#23.p" to "Entre les courbes fermées denses de l'Everest et du Lhotse, sur la même carte, il y a une zone où les courbes s'espacent nettement et où le terrain s'abaisse légèrement. Qu'est-ce que c'est, en termes de terrain ?",
@@ -3475,7 +3471,6 @@ internal val PACK_FR_QUIZ: Map<String, String> = mapOf(
     "q.m16#23.e" to "Entre deux points hauts fermés et denses, là où les courbes s'espacent et où le terrain s'abaisse, vous avez un col. Celui entre l'Everest et le Lhotse est le col Sud, à environ 7 900 m, où se trouve le quatrième camp de l'itinéraire du versant sud — le dernier arrêt avant la course au sommet.\nReconnaître les cols sur une carte à courbes est très pratique. Ils signifient généralement du vent fort et de l'exposition, mais un terrain relativement doux : bon pour un camp, mauvais pour s'attarder — d'où le fait que les camps de sommet sont souvent sur un col et sont abandonnés la nuit même.",
 
     "q.m16#24.p" to "Touchez sur la carte la zone approximative du sommet du Muztagh Ata.",
-    "q.m16#24.c" to "Ceci est une carte à courbes de niveau SRTM du Muztagh Ata (7 509 m). Son sommet n'est pas une pointe acérée mais un large dôme de névé.",
     "q.m16#24.e" to "La forme du sommet du Muztagh Ata est représentative : un dôme, large et doux au sommet, où la courbe fermée la plus haute est largement étalée plutôt que finement emboîtée comme sur une pointe acérée. Pour trouver ce type de sommet, cherchez l'étiquette d'altitude la plus haute (7 500 m ici) et l'anneau fermé dans lequel elle se trouve.\nLa forme se traduit directement dans l'expérience de l'ascension. Un dôme signifie que la section sommitale n'est pas raide mais prend beaucoup de temps ; avec peu de relief et aucun repère évident, il est facile de perdre le sens de l'orientation sur le névé pendant la descente. C'est un risque souvent évoqué à propos du Muztagh Ata.",
     // ---------- m17 Gestion du camp ----------
     "q.m17#0.p" to "Quel est l'objectif central de la gestion d'un camp de haute altitude ?",

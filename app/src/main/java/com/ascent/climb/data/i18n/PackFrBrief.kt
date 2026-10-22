@@ -580,4 +580,36 @@ internal val PACK_FR_BRIEF: Map<String, String> = mapOf(
     "lesson.l31.brief.4" to "L'âge n'est pas la variable principale, les différences individuelles le sont. Une personne de 60 ans qui s'entraîne régulièrement peut s'acclimater mieux qu'une de 25 ans qui ne dort pas.",
     "lesson.l31.brief.5" to "Quatre piliers de la prévention : contrôler la vitesse de montée, programmer des journées d'acclimatation, ne pas monter avec des symptômes, et si nécessaire se traiter sous indication médicale.",
     "lesson.l31.brief.6" to "Un médicament est une aide, pas un substitut. L'acétazolamide atténue les symptômes, mais ne permet pas de faire l'économie de l'acclimatation.",
+    // ---------- l43 Vie au camp et soins personnels ----------
+    "lesson.l43.brief.1" to "Les problèmes de peau en altitude viennent de trois choses : la sécheresse, les ultraviolets, le vent. Hydrater, protéger du soleil et soigner les lèvres est un devoir quotidien, pas une option.",
+    "lesson.l43.brief.2" to "La chaufferette chimique est un outil pour « prévenir l'hypothermie », pas un plaisir de confort. Elle se place dans le bas du dos, sur l'abdomen ou à l'extérieur de la botte, jamais directement sur la peau.",
+    "lesson.l43.brief.3" to "Couverts et articles de toilette : un par personne, marqué au nom ; l'eau de vaisselle loin des points d'eau, et les résidus toujours emportés.",
+    "lesson.l43.brief.4" to "Laver et sécher en priorité la couche de dessous : le sel de la sueur irrite et entaille la peau, et une plaie cicatrise très mal en altitude. La doudoune ne se lave pas : mouillée, elle sèche seulement.",
+    "lesson.l43.brief.5" to "Trois règles d'ordre au camp : les chaussures dans l'absidiole, la nourriture hors de la tente, les déchets regroupés et suspendus en hauteur. Elles préviennent à la fois l'humidité, les animaux et la pollution.",
+    "lesson.l43.brief.6" to "L'objectif du soin personnel est de « maintenir le corps en état de pouvoir travailler » ; le confort n'est qu'un effet secondaire.",
+
+    // ---------- l39 Leadership et rôles dans l'équipe ----------
+    "lesson.l39.brief.1" to "Le leadership est un comportement, pas un poste. Quelqu'un sans titre peut aussi influencer les décisions en posant des questions, en signalant et en assumant.",
+    "lesson.l39.brief.2" to "Les compétences techniques décident « si c'est faisable » ; les compétences relationnelles, « si l'équipe veut le faire ensemble ». Dans les accidents de haute montagne, ce sont souvent les secondes qui manquent.",
+    "lesson.l39.brief.3" to "La responsabilité a trois niveaux : le comportement (ce que l'on fait), la pensée (comment on juge), le ressenti (comment on éprouve). Ne regarder que le comportement fait revenir le problème.",
+    "lesson.l39.brief.4" to "Le conflit est un iceberg : en surface la position (« je veux le sommet »), en dessous le besoin (« je crains d'être méprisé »). C'est en traitant le besoin que la position s'assouplit.",
+    "lesson.l39.brief.5" to "Le « halo de l'expert » est un piège fréquent : prendre l'assurance dans le discours et le matériel sophistiqué pour de la compétence, jusqu'à ce que personne n'ose contester une erreur évidente.",
+    "lesson.l39.brief.6" to "Celui qui suit a aussi des responsabilités : poser des questions, donner un retour, et dire stop quand il le faut. L'obéissance aveugle n'est pas de la loyauté : c'est renoncer à son propre jugement.",
+    "lesson.l39.brief.7" to "Toute décision a besoin d'une heure limite fixée à l'avance (turnaround time), communiquée à toute l'équipe avant le départ. La proposer après coup revient à ne pas en avoir.",
+
+    // ---------- l40 Nutrition et ravitaillement au-dessus de 8 000 m ----------
+    "lesson.l40.brief.1" to "Trois sources d'énergie : les glucides agissent le plus directement, les lipides ont la plus forte densité énergétique, les protéines servent surtout à la réparation. Premier principe en altitude : « faire passer des glucides ».",
+    "lesson.l40.brief.2" to "La part des lipides dans l'apport énergétique peut augmenter avec un entraînement long, mais lentement ; espérer « basculer une fois en montagne » n'est pas réaliste.",
+    "lesson.l40.brief.3" to "La baisse d'appétit est normale en altitude, le déficit énergétique est courant et difficile à éviter. La stratégie est « petites portions fréquentes plus forte densité énergétique », pas attendre la faim.",
+    "lesson.l40.brief.4" to "Séparer la nourriture de marche en deux groupes : ce qui se mange en avançant (gels, gominoles, barres) et ce qui exige de s'arrêter (plats chauds). Le premier décide si le rythme tient.",
+    "lesson.l40.brief.5" to "La déshydratation affaiblit à la fois l'appétit et le jugement ; boire et manger doivent se planifier ensemble.",
+    "lesson.l40.brief.6" to "Sur le lien entre acides aminés ramifiés et ammoniac, des travaux existent, mais les preuves sont limitées : ils ne remplacent pas la base, qui est de manger assez de calories au total.",
+
+    // ---------- l41 Logistique d'expédition et permis ----------
+    "lesson.l41.brief.1" to "La logistique d'expédition est un transport en plusieurs étapes : route, marche, portage, camp d'altitude. Chaque étape a ses propres limites de charge, délais et risques.",
+    "lesson.l41.brief.2" to "Le matériel se conditionne par « ordre d'arrivée », pas par catégorie. Chercher dans dix caisses une cartouche de gaz est la façon la plus courante de perdre du temps en camp d'altitude.",
+    "lesson.l41.brief.3" to "Le permis est souvent lié à un officier de liaison, à un itinéraire et à une durée. Une prolongation implique à la fois un problème de coût et de conformité, à intégrer au plan dès le départ.",
+    "lesson.l41.brief.4" to "Le dépôt de garantie pour les déchets est une exigence ferme sur beaucoup de montagnes : il n'est restitué que si tous les déchets sont redescendus. Budget et main-d'œuvre doivent lui être réservés.",
+    "lesson.l41.brief.5" to "La charge des collaborateurs et des porteurs a des plafonds légaux ou professionnels ; surcharger transfère le risque sur eux et ralentit toute l'équipe.",
+    "lesson.l41.brief.6" to "Le plan de ravitaillement doit exprimer le taux de consommation : carburant, cartouches et nourriture se calculent en « personnes × jours × consommation », pas au feeling.",
 )
