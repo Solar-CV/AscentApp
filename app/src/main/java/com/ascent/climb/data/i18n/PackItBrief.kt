@@ -405,4 +405,21 @@ internal val PACK_IT_BRIEF: Map<String, String> = mapOf(
     "lesson.l36.brief.5" to "Se la temperatura centrale è misurabile e inferiore a 30 °C con vie aeree libere, tentare la rianimazione indipendentemente dal tempo di seppellimento e trasportare in un ospedale con capacità di riscaldamento extracorporeo.",
     "lesson.l36.brief.6" to "L'ostruzione delle vie aeree significa naso e bocca completamente riempiti di neve compatta o detriti; in caso di dubbio si considera libera. La presenza di sacca d'aria non cambia la gestione.",
     "lesson.l36.brief.7" to "Le compressioni toraciche non devono aspettare l'estrazione completa e sono possibili anche in posizione anomala. Aspettare «di aver finito di scavare» è un ritardo spesso fatale.",
+    // ---------- l37 Il trittico: ricerca ARVA e sondaggio ----------
+    "lesson.l37.brief.1" to "Una ricerca in valanga si divide in quattro fasi da svolgere in ordine: ricerca del segnale e degli indizi → ricerca grossolana → ricerca fine → sondaggio puntuale. Saltare una fase è la causa più comune di perdita di efficienza.",
+    "lesson.l37.brief.2" to "La distanza tra le corsie è di circa 40 metri, e circa 20 metri dal bordo del deposito. Quando non si è sicuri di coprire bene tutta l'area, si scende a 30 metri.",
+    "lesson.l37.brief.3" to "Prima si guardano gli indizi in superficie: guanti, punte di bastoncino, casco, cinghie dello zaino. Non si parte con gli occhi sull'ARVA: coprire l'area conta più della precisione.",
+    "lesson.l37.brief.4" to "La ricerca grossolana porta la lettura a 3–5 metri; se il valore aumenta, la direzione è sbagliata e si torna indietro.",
+    "lesson.l37.brief.5" to "La ricerca fine si fa tenendo l'ARVA vicino alla neve, incrociando le direzioni; si individua e si marca il punto di lettura minima, che determina l'area da sondare.",
+    "lesson.l37.brief.6" to "Il sondaggio puntuale si fa a 90 gradi rispetto alla superficie della neve; se non si trova nulla si allarga su una maglia di 25 centimetri, e quando si trova si lascia la sonda sul posto come riferimento.",
+    "lesson.l37.brief.7" to "L'angolo della sonda cambia tra soccorso tra compagni e soccorso organizzato: nel primo caso è perpendicolare alla neve, nel secondo la linea resta verticale per avere letture di profondità confrontabili.",
+
+    // ---------- l38 Scavo e nastro trasportatore di neve ----------
+    "lesson.l38.brief.1" to "Primo principio: lavorare sempre dal lato a valle. Scavare dall'alto o dal lato a monte fa rotolare i blocchi sul viso del sepolto: è più lento e più pericoloso.",
+    "lesson.l38.brief.2" to "La regola tradizionale dice di arretrare di circa 1,5 volte la profondità lungo il pendio, tagliare di lato dal lato a valle e aprire un canale inclinato largo 1–2 metri. È una regola empirica, non l'unico standard.",
+    "lesson.l38.brief.3" to "La ricerca ISSW 2023 sul nastro trasportatore sostiene che con almeno 3 persone e spazio sufficiente conviene scavare direttamente dalla sonda lungo la linea di massima pendenza: si arriva alla testa più in fretta.",
+    "lesson.l38.brief.4" to "Solo due eccezioni giustificano di spostare il punto di partenza: sepoltura molto superficiale con i piedi quasi alla stessa profondità, oppure personale insufficiente che impone una soluzione a una persona.",
+    "lesson.l38.brief.5" to "Il nastro trasportatore è un canale a V (largo 1–2 metri) più una catena di smaltimento. Sotto circa 26 gradi di pendenza i blocchi rotolano di nuovo verso la sonda.",
+    "lesson.l38.brief.6" to "Ordine di efficienza nello smaltimento: spazzare (paddling) è il più rapido, paleggiare (scooping) viene dopo, tagliare a blocchi (cutting) è il più lento. Il taglio serve solo con neve dura.",
+    "lesson.l38.brief.7" to "Arrivati al viso l'ordine cambia: prima liberare bocca e naso e verificare le vie aeree, poi torace e braccia, infine gambe e corpo. Non tirare le spalle per estrarre la persona.",
 )
