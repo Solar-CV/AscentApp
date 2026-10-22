@@ -387,4 +387,11 @@ internal val PACK_SV_BRIEF: Map<String, String> = mapOf(
     "lesson.l33.brief.5" to "Repbyte är det mest olycksdrabbade momentet vid arbete på fast rep, eftersom man förflyttar sig mellan att riva det gamla och bygga det nya systemet.",
     "lesson.l33.brief.6" to "Ordningen från uppstigning till nedfirning är fast: koppla in i förankringen → montera bromsen och testa → ta av jumaren → lossa PAS → firning.",
     "lesson.l33.brief.7" to "Vid nedfirning krävs backupknut och knuten repände; vid knutpassage flyttar man utrustningen i två steg med PAS.",
+    "lesson.l34.brief.1" to "En glaciär är inte ett plant fält: den består av sprickzoner, snöbroar, seraker, isfall och morän, och varje avsnitt har sin egen risktyp.",
+    "lesson.l34.brief.2" to "Sprickor är tvärgående, längsgående eller diagonala. Tvärsprickor uppstår ofta där lutningen ändras, längsgående i sträckningszonerna vid glaciärens sidor.",
+    "lesson.l34.brief.3" to "Repspannet i replag är oftast 8–10 meter och kortas i täta sprickfält; knutar med jämna mellanrum på repet begränsar fallhöjden och ökar bromsfriktionen.",
+    "lesson.l34.brief.4" to "Replag om tre är säkrare än två: om en faller bromsar två och en kan förbereda systemet, vilket ger mycket större marginal.",
+    "lesson.l34.brief.5" to "En snöbro ska «ses, höras och provas»: mörk eller blåaktig färg betyder tunn, nedsjunkning och radiella sprickor betyder omväg, och isyxan används före första steget.",
+    "lesson.l34.brief.6" to "Snöbroar är starkast tidigt på morgonen och svagast efter middagens smältning. Passage av täta sprickfält läggs helst till morgon eller natt.",
+    "lesson.l34.brief.7" to "I isfallsområden gäller snabb passage, avstånd, hjälm och inga uppehåll — man varken vilar eller väntar på varandra där inne.",
 )
