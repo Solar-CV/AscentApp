@@ -202,7 +202,8 @@ v0.19 is the content expansion; the bank structure and scoring logic are unchang
 
 - Lessons 47 → 89: climbing now 68 (6000 / 7000 / 8000 m units, all fourteen 8000ers), plus 21 new trekking lessons
 - Questions 711 → 1,533 (9,422 keys), handbook 31 → 35 articles (avalanche burial and resuscitation, the avalanche trio, fixed ropes, river crossing), bank v15 → v19
-- Three languages now complete across all four content layers: English, Traditional Chinese, Japanese. Their key sets match English entry for entry (10,544 / 10,544), so nothing falls back to Chinese at runtime
+- Six languages now complete across all four content layers: English, Traditional Chinese, Japanese, Russian, German, Spanish. Their key sets match English entry for entry (10,544 / 10,544), so nothing falls back to Chinese at runtime
+- German uses the impersonal man-form and Spanish addresses the reader as tú; both follow local number conventions (6,5 °C, 1.000 m, 35–50)
 - Traditional Chinese runs through OpenCC s2twp plus a terminology table, validated by regression against the existing translations (zero differences); Japanese is a real translation, with one register for the question bank and another for the handbook
 - `tools/i18n/` provides three commands (`status.py` / `prep.py` / `apply.py`) that work across all nine languages; Traditional Chinese also has `tw.py` and `tw_entry.py`
 - The bank is split across files: a single Kotlin file of roughly 2,500 entries crashes the compiler, so English and Traditional Chinese use three parts each, and Japanese three
