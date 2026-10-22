@@ -313,5 +313,27 @@ internal val PACK_SV_BRIEF: Map<String, String> = mapOf(
     "lesson.m25.brief.2" to "«Nu är vi ändå här» är den dyraste meningen i bergen: den gör redan investerad tid till skäl att fortsätta riskera. Berget sänker inte risken för att du lagt ner mycket.",
     "lesson.m25.brief.3" to "När kroppen signalerar är första steget inte att «bita ihop», utan att stanna, observera och ärligt säga det till kamraten eller guiden. Guiden kan bara besluta om han vet.",
     "lesson.m25.brief.4" to "Långsamt är snabbt: ett jämnt, hållbart tempo sparar tid och är säkrare än upprepade spurtar — det beskriver en lag om energiomsättningen, inte en attityd.",
-    "lesson.m25.brief.5" to "Meningsskiljaktigheter måste sägas högt. Den tysta minoriteten dyker alltid upp i olycksutredningar; att hysa en invändning och ändå utföra går att förena."
+    "lesson.m25.brief.5" to "Meningsskiljaktigheter måste sägas högt. Den tysta minoriteten dyker alltid upp i olycksutredningar; att hysa en invändning och ändå utföra går att förena.",
+    // ---------- l23 Packlista och bärsystem ----------
+    "lesson.l23.brief.1" to "Listan gås igenom i \"ordningen som kan döda\": först värme och skydd, sedan teknisk utrustning, sist bekvämlighet. En lista i omvänd ordning är den som saknar det avgörande i dåligt väder.",
+    "lesson.l23.brief.2" to "Toppryggsäck 35–50 liter, transportbag 90–120 liter. Toppryggsäcken tar bara det som används under dagen; det stora godset går med bärare — ju tyngre säck, desto tidigare börjar du göra fel.",
+    "lesson.l23.brief.3" to "Packordning: tungt mot ryggen, mellan skulderbladen, lätt utåt och nedåt. Höftbältet bär 60–70 procent av vikten, axelremmarna håller bara säcken intill kroppen.",
+    "lesson.l23.brief.4" to "Vattentäta i lager: sovsäck och dun i varsin vattentät påse, elektronik och medicin i ytterligare ett lager. Säcken är inte vattentät, förlita dig inte på den.",
+    "lesson.l23.brief.5" to "På toppdagen hålls säcken på 15–20 procent av kroppsvikten. Över det ska något bort — att hålla ut ger bara långsammare tempo och fler misstag.",
+    "lesson.l23.brief.6" to "Före avfärd, en sista kontroll av de tre saker som glöms lättast: pannlampa med reservbatterier, reservhandskar och sjukvårdskit.",
+    // ---------- l24 Sovsystem och lägerutrustning ----------
+    "lesson.l24.brief.1" to "På sovsäcken tittar man på komforttemperaturen, inte på extremtemperaturen. Komforttemperaturen ska ligga minst 5 °C under den lägsta temperatur du räknar med.",
+    "lesson.l24.brief.2" to "Dun tål fukt sämst. Innerlakan, egen vattentät påse och tio minuters vädring med ut-och-invänd säck varje morgon — de tre avgör om säcken håller hela turen.",
+    "lesson.l24.brief.3" to "Liggunderlaget har två ben: att bryta ledning (cellplast med slutna celler) och att ge komfort (uppblåsbart). På höjd lägger man dem oftast på varandra och adderar isolervärdena.",
+    "lesson.l24.brief.4" to "Punktering på ett uppblåsbart underlag är det vanligaste felet i lägret. Ta med lappar, känn igenom kammarna före sänggåendet och vänta inte på att vakna genomfrusen mitt i natten.",
+    "lesson.l24.brief.5" to "Kudde och öronproppar är ingen lyx. På höjd sover man dåligt framför allt av syrebrist och ljud; blir det lite bättre förändras nästa dags form.",
+    "lesson.l24.brief.6" to "Förvara inte sovsäcken hoptryckt permanent. Hemma lägger man den utbredd eller hänger den löst, så att dunet återfår sin lofft.",
+
+    // ---------- l25 Förberedelser: tillstånd, försäkring och logistik ----------
+    "lesson.l25.brief.1" to "Tillstånd och tillträde måste ofta ordnas veckor i förväg: reservat, gränsområden, klättringstillstånd, och många kräver lokal guide eller kontaktperson.",
+    "lesson.l25.brief.2" to "I försäkringen ska två saker särskilt bekräftas: att teknisk klättring omfattas och att helikopterevakuering på hög höjd omfattas. Vanliga reseförsäkringar undantar oftast båda.",
+    "lesson.l25.brief.3" to "Tre logistikfrontar: transport till och från, bärning och bärare, lägrets försörjning. Varje etapp behöver ett alternativ, för förseningar är normen och inte undantaget.",
+    "lesson.l25.brief.4" to "Dokumentpacke: originaltillstånd, försäkringsnummer och räddningstelefon, samt de foton och den deklaration som krävs för toppintyget.",
+    "lesson.l25.brief.5" to "Lämna en reseplan till en kontakt som inte följer med: rutt, tider för kontrollpunkterna och hur länge utan kontakt som startar larmplanen.",
+    "lesson.l25.brief.6" to "Lägg 20 procent marginal i budgeten. Förseningar, extra övernattningar och tillkommande bärare inträffar i praktiken varje gång.",
 )
