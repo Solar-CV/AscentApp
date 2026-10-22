@@ -565,4 +565,19 @@ internal val PACK_FR_BRIEF: Map<String, String> = mapOf(
     "lesson.t20.brief.3" to "Une semelle qui se décolle est la panne la plus fréquente sur un itinéraire long : fixer d'abord à l'adhésif pour empêcher la déchirure de progresser, puis utiliser une colle adaptée en ville.",
     "lesson.t20.brief.4" to "Un arceau cassé se répare avec un manchon et continue de servir ; une toile déchirée se répare à l'adhésif, jamais au feu.",
     "lesson.t20.brief.5" to "Doudoune percée : poser une rustine et appuyer, sans tapoter — tapoter fait sortir le duvet en continu par les trous d'aiguille.",
+    // ---------- l30 Trousse de secours et préparation médicale d'expédition ----------
+    "lesson.l30.brief.1" to "La trousse se divise en trois niveaux : trousse de poche personnelle, trousse d'équipe, caisse médicale de camp de base. Les usages sont totalement différents et ne doivent pas être fondus en un seul sac.",
+    "lesson.l30.brief.2" to "La trousse de poche traite « hémorragie, ampoules, antalgie, protection solaire » ; celle d'équipe traite « immobiliser, nettoyer une plaie, isoler, donner de l'oxygène » ; la caisse de camp de base traite « médicaments sur ordonnance, surveillance, réserves pour plusieurs jours ».",
+    "lesson.l30.brief.3" to "Les médicaments sur ordonnance sont prescrits par un médecin, avec indications et contre-indications ; au sein de l'équipe, on ne se les recommande pas et on ne les administre pas à un autre.",
+    "lesson.l30.brief.4" to "La saturation et la fréquence cardiaque se lisent en tendance, pas en valeur isolée. Une baisse continue à la même altitude en dit plus qu'un chiffre bas ponctuel.",
+    "lesson.l30.brief.5" to "Le plan d'évacuation se décide avant le départ : qui peut la déclencher, qui appeler, comment la déclarer à l'assurance, où se trouve le point médical le plus proche.",
+    "lesson.l30.brief.6" to "Le cœur de la préparation médicale n'est pas la quantité de médicaments emportés, mais « qui décide ». Les rôles une fois fixés, personne n'attend l'autre sur le terrain.",
+
+    // ---------- l31 Sujets à risque et stratégies de prévention en altitude ----------
+    "lesson.l31.brief.1" to "Le prédicteur le plus puissant est « avoir déjà fait un mal des montagnes ». Quelqu'un qui a un antécédent d'AMS le refera avec une probabilité nettement plus élevée.",
+    "lesson.l31.brief.2" to "La vitesse d'ascension et l'altitude de sommeil comptent plus que la condition physique et l'âge. Les personnes en bonne forme marchent souvent plus vite et montent plus haut, et se trouvent donc plus souvent en difficulté.",
+    "lesson.l31.brief.3" to "Une infection respiratoire augmente nettement le risque : monter avec un rhume, c'est ouvrir la porte au HAPE.",
+    "lesson.l31.brief.4" to "L'âge n'est pas la variable principale, les différences individuelles le sont. Une personne de 60 ans qui s'entraîne régulièrement peut s'acclimater mieux qu'une de 25 ans qui ne dort pas.",
+    "lesson.l31.brief.5" to "Quatre piliers de la prévention : contrôler la vitesse de montée, programmer des journées d'acclimatation, ne pas monter avec des symptômes, et si nécessaire se traiter sous indication médicale.",
+    "lesson.l31.brief.6" to "Un médicament est une aide, pas un substitut. L'acétazolamide atténue les symptômes, mais ne permet pas de faire l'économie de l'acclimatation.",
 )
