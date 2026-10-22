@@ -328,4 +328,137 @@ internal val PACK_ES_BRIEF: Map<String, String> = mapOf(
     "lesson.l24.brief.4" to "Un pinchazo en la colchoneta es la avería más común en el campo. Llevar parches, apretar las cámaras antes de dormir y no esperar a despertarse helado a medianoche.",
     "lesson.l24.brief.5" to "Almohada y tapones no son un lujo. En altura se duerme mal sobre todo por falta de oxígeno y por ruido; mejorar un poco cambia el estado del día siguiente.",
     "lesson.l24.brief.6" to "No guardar el saco comprimido de forma permanente. En casa, extenderlo o colgarlo suelto para que las plumas recuperen el volumen.",
+    // ---------- t01 Dificultad de la ruta y nivel propio ----------
+    "lesson.t01.brief.1" to "La dificultad de una ruta depende de cuatro cosas: distancia, desnivel acumulado, tipo de firme y puntos de avituallamiento y de salida.",
+    "lesson.t01.brief.2" to "Mirar solo los kilómetros es lo que más engaña. 10 km llanos y 10 km con 800 m de desnivel son dos rutas completamente distintas.",
+    "lesson.t01.brief.3" to "Para la primera ruta: menos de tres horas, desnivel acumulado por debajo de 300 m y poder caminar al día siguiente. Esa es la cantidad adecuada.",
+    "lesson.t01.brief.4" to "Los puntos de salida importan más que las vistas: solo si se puede bajar a mitad hay verdadera seguridad y margen para ajustar.",
+
+    // ---------- t02 Botas, calcetines y pies ----------
+    "lesson.t02.brief.1" to "Para el ajuste hay un solo criterio: el talón no se mueve arriba y abajo y al bajar los dedos no chocan con la puntera.",
+    "lesson.t02.brief.2" to "Las ampollas salen de la suma de humedad, roce y presión local. Si se elimina uno de los tres, la probabilidad baja mucho.",
+    "lesson.t02.brief.3" to "En rutas largas, nada de calcetines de algodón: absorben el sudor, no lo evacuan, rozan mojados y dejan de abrigar.",
+    "lesson.t02.brief.4" to "Al primer punto caliente, parar y tratarlo: cuando la piel ya está abierta, cada paso duele.",
+
+    // ---------- t03 Mochila y carga ----------
+    "lesson.t03.brief.1" to "El límite de carga ronda el 10–20 % del peso corporal, con los principiantes en el límite bajo. Con sobrecarga fallan primero las rodillas y el juicio.",
+    "lesson.t03.brief.2" to "Lo pesado pegado a la espalda, entre los omóplatos y la cintura: así el centro de gravedad no tira hacia atrás.",
+    "lesson.t03.brief.3" to "El cinturón soporta la mayor parte del peso y los tirantes mantienen y estabilizan. Quien carga solo sobre los hombros acaba con el cuello rígido.",
+    "lesson.t03.brief.4" to "Pesar la mochila una vez antes de salir: solo con un peso de referencia se puede juzgar qué sobra.",
+
+    // ---------- t04 Ritmo, hidratación y energía ----------
+    "lesson.t04.brief.1" to "La intensidad sostenible es «poder hablar en frases completas». Si ya no puedes hablar, estás sobrepasando el límite.",
+    "lesson.t04.brief.2" to "Beber por tiempo, no por sed: pequeños sorbos cada 20–30 minutos, con electrolitos si hace calor.",
+    "lesson.t04.brief.3" to "Energía en pequeñas cantidades y a menudo, 30–60 g de hidratos por hora: más eficaz que una sola comida copiosa.",
+    "lesson.t04.brief.4" to "Las pausas no deberían pasar de diez minutos; si el cuerpo se enfría, retomar cuesta más.",
+
+    // ---------- t15 Mapa y navegación en la práctica ----------
+    "lesson.t15.brief.1" to "El mapa del móvil es la herramienta principal, pero el paquete sin conexión hay que descargarlo antes: en el campo lo normal es «batería sí, cobertura no».",
+    "lesson.t15.brief.2" to "En un mapa 1:50.000, un centímetro son 500 metros; primero dominar la escala y después hablar de leer el terreno.",
+    "lesson.t15.brief.3" to "Distinguir tres tipos de línea: curvas de nivel (alto y bajo), ruta (trazado) y cursos de agua (casi siempre lo más bajo). El valle y la cresta deciden si sigues en la misma vertiente.",
+    "lesson.t15.brief.4" to "Con reloj y sol también se orienta uno a grandes rasgos: la aguja horaria hacia el sol y la bisectriz entre esa aguja y las 12 señala el sur. Con nubes, manda la brújula.",
+    "lesson.t15.brief.5" to "Al perderse, lo primero es parar. Mirar atrás y reconocer tres referencias claras del terreno sirve mucho más que seguir buscando el camino.",
+
+    // ---------- t05 Diseñar una ruta de varios días ----------
+    "lesson.t05.brief.1" to "Fijar primero los límites de cada día: distancia, desnivel y tiempo; después los puntos de avituallamiento, los de salida y los días de reserva.",
+    "lesson.t05.brief.2" to "El día de reserva no es un lujo, es necesario: el tiempo y las lesiones hacen que algún día no salga.",
+    "lesson.t05.brief.3" to "Lo que más se subestima: buscar el camino, coger y filtrar agua, montar la tienda y cocinar. De media, 1,5–2 horas más al día.",
+    "lesson.t05.brief.4" to "El día más largo en el medio, el primero para adaptarse y el último con margen para el regreso.",
+
+    // ---------- t06 Elegir campamento y montar la tienda ----------
+    "lesson.t06.brief.1" to "El campamento a un mínimo de 60 m del agua: evita contaminarla y evita las rutas de los animales que bajan a beber de noche.",
+    "lesson.t06.brief.2" to "Evitar: zonas de caída de piedras bajo laderas empinadas, cauces secos (riadas), árboles grandes y aislados (rayos) y pasos de animales.",
+    "lesson.t06.brief.3" to "Que el suelo tenga 2–3° de pendiente ayuda al drenaje; con la cabeza algo más alta se duerme más estable.",
+    "lesson.t06.brief.4" to "Entrada a sotavento, lado largo al viento y, una vez montada, tensar todas las cuerdas de viento.",
+
+    // ---------- t07 Cocina y planificación de comidas ----------
+    "lesson.t07.brief.1" to "Calcular el combustible con 30–50 g de cartucho por persona y día (sobre todo para hervir agua); con frío y nieve derretida, subir la cifra.",
+    "lesson.t07.brief.2" to "En la comida priman la densidad energética, la conservación, poco lavado y tiempos cortos de cocción.",
+    "lesson.t07.brief.3" to "En altitud, más hidratos: la digestión consume menos oxígeno y la transformación es más rápida, mejor que una dieta muy grasa.",
+    "lesson.t07.brief.4" to "El hornillo dentro de la tienda exige ventilación obligatoria; el monóxido de carbono no tiene color ni olor y la intoxicación suele ocurrir durmiendo.",
+
+    // ---------- t08 Meteorología básica para senderistas ----------
+    "lesson.t08.brief.1" to "Antes de salir, tres cosas: tendencia de las próximas 24–48 horas, probabilidad de precipitación y viento con sensación térmica.",
+    "lesson.t08.brief.2" to "Cuando un cumulonimbo crece mucho y se abre arriba en yunque, la tormenta ha madurado.",
+    "lesson.t08.brief.3" to "Señales de tormenta cercana: trueno lejano, base nubosa negra y descendente, giro brusco del viento y pelos erizados.",
+    "lesson.t08.brief.4" to "La hipotermia se manifiesta primero como temblor continuo y torpeza; tratarla es ropa seca, capa de aislamiento y aporte de energía.",
+    // ---------- t09 Mal de altura y ritmo de ascenso ----------
+    "lesson.t09.brief.1" to "Por encima de 3.000 m, subir la altitud de pernocta como máximo 500 m al día y prever un día de aclimatación cada 1.000 m.",
+    "lesson.t09.brief.2" to "Las tres manifestaciones centrales del mal agudo de montaña (AMS): dolor de cabeza, náuseas o falta de apetito, y mareo con debilidad.",
+    "lesson.t09.brief.3" to "Con AMS se detiene el ascenso, se aclimata en el sitio o se desciende. Seguir subiendo con medicación es el error más frecuente.",
+    "lesson.t09.brief.4" to "Las señales de alarma son falta de aire en reposo, marcha inestable y alteración de la conciencia: hay que descender de inmediato.",
+
+    // ---------- t10 Abrigo y protección solar en altitud ----------
+    "lesson.t10.brief.1" to "Con tres capas basta: evacuación, abrigo y cortavientos. Con frío se añade la intermedia; con calor, primero se abre el cuello.",
+    "lesson.t10.brief.2" to "Por cada 1.000 m de altitud la intensidad UV sube un 10–12 %; la nieve refleja además alrededor del 80 %.",
+    "lesson.t10.brief.3" to "Protección solar en cuatro piezas: gafas UV400, crema SPF50+, protector labial y sombrero.",
+    "lesson.t10.brief.4" to "Manos y pies se enfrían primero porque el cuerpo prioriza la temperatura central; unos guantes o calcetines mojados hay que cambiarlos de inmediato.",
+
+    // ---------- t11 Comer y dormir en altitud ----------
+    "lesson.t11.brief.1" to "La falta de apetito es habitual en altura: comer de forma activa, en raciones pequeñas y frecuentes.",
+    "lesson.t11.brief.2" to "En altura el aire es seco y se pierde mucha agua por la respiración; solo la orina amarillo claro indica que se bebe suficiente.",
+    "lesson.t11.brief.3" to "La respiración periódica nocturna, el sueño ligero y los despertares frecuentes son normales.",
+    "lesson.t11.brief.4" to "El alcohol deprime la respiración y agrava la hipoxia: es más peligroso en altura que en el llano.",
+
+    // ---------- t12 Grupo y preparación mental ----------
+    "lesson.t12.brief.1" to "Antes de salir hay que aceptar una cosa: puede que esta vez no se llegue. El plan solo se sostiene si la retirada está permitida.",
+    "lesson.t12.brief.2" to "La presión del ritmo es la carga invisible más grande para quien empieza. Hay que aprender a decir «no sigo el ritmo, id al del más lento».",
+    "lesson.t12.brief.3" to "El miedo a las alturas y la exposición se amortiguan mirando por tramos, controlando la respiración y manteniendo tres puntos de contacto.",
+    "lesson.t12.brief.4" to "«Ya hemos llegado muy lejos» es el clásico coste irrecuperable y no es motivo para seguir.",
+
+    // ---------- t13 Planificación de travesías largas y avituallamiento ----------
+    "lesson.t13.brief.1" to "Poner un punto de avituallamiento cada 3–5 días y dividir la travesía en tramos que se puedan completar y abandonar.",
+    "lesson.t13.brief.2" to "Calcular la comida deshidratada en 600–800 g al día, que vienen a ser unas 2.500–3.000 kcal.",
+    "lesson.t13.brief.3" to "Aclarar punto por punto antes de salir: permiso, normas de fuego, retirada de basura y prohibiciones de drones.",
+    "lesson.t13.brief.4" to "Reservar un 20 % tanto en comida y combustible como en tiempo y efectivo.",
+
+    // ---------- t14 Urgencias frecuentes y pedir ayuda ----------
+    "lesson.t14.brief.1" to "Un esguince se trata con RICE: reposo, frío, compresión y elevación.",
+    "lesson.t14.brief.2" to "Orden en la hipotermia: cortar el viento, ropa seca, aislar del suelo, bebida caliente solo si está consciente y recalentar despacio.",
+    "lesson.t14.brief.3" to "Con agotamiento por calor, llevar rápido a la sombra, abrir la ropa, enfriar físicamente y aportar electrolitos.",
+    "lesson.t14.brief.4" to "Un aviso de emergencia necesita cuatro cosas: coordenadas, número de personas y lesiones, material y víveres, y forma de contacto.",
+
+    // ---------- t16 Vida en el campamento e higiene en el campo ----------
+    "lesson.t16.brief.1" to "El campamento tiene tres zonas: dormir, cocinar y letrina. En la zona de dormir, ni fuego abierto ni comida cerca, como regla básica.",
+    "lesson.t16.brief.2" to "Hoyo de letrina de 15–20 cm, a más de 60 m del agua y del sendero; el papel se lleva, no se quema.",
+    "lesson.t16.brief.3" to "Filtrar el agua de fregar, llevarse los restos y verter el agua repartida. Los restos atraen animales y contaminan el agua.",
+    "lesson.t16.brief.4" to "El centro del cuidado personal son los pies: lavar a diario, cambiar calcetines y airear las botas. Ahí empiezan ampollas y maceraciones.",
+    "lesson.t16.brief.5" to "Al desmontar, restituir el sitio: devolver las piedras, borrar las huellas de fuego y llevarse toda la basura.",
+    // ---------- t17 Deshidratación, golpe de calor y lesiones frecuentes ----------
+    "lesson.t17.brief.1" to "Las señales tempranas de deshidratación son orina oscura y peor juicio, no la sed. Al caminar, mirar el color de la orina una vez al día.",
+    "lesson.t17.brief.2" to "El daño por calor avanza por fases: calambres, agotamiento (mareo, debilidad, piel fría y sudorosa) y golpe de calor (temperatura central por encima de 40 °C con alteración de la conciencia).",
+    "lesson.t17.brief.3" to "Tratamiento: sombra, abrir la ropa, enfriar y aportar electrolitos. Con la conciencia alterada, no dar de beber.",
+    "lesson.t17.brief.4" to "El esguince se trata con RICE: reposo, frío, compresión y elevación. En las primeras 48 horas, ni calor ni masaje enérgico.",
+    "lesson.t17.brief.5" to "Las ampollas no se abren a la ligera; si hay que hacerlo, drenar desde el borde, conservar la piel y cubrir.",
+
+    // ---------- t18 Leer un río y elegir el paso ----------
+    "lesson.t18.brief.1" to "El riesgo de un vado no es la profundidad, sino profundidad por velocidad. El límite técnico está en 1,0 metros cuadrados por segundo; por encima, no se vadea.",
+    "lesson.t18.brief.2" to "Ese 1,0 vale para adultos sanos, tramos cortos y sin carga. Con mochila grande, agua cerca de cero y gente sin experiencia, hay que bajar el límite.",
+    "lesson.t18.brief.3" to "Estimar la velocidad: lanzar un palo al agua y seguirlo por la orilla. Si hay que trotar para seguirlo, supera la velocidad de paso.",
+    "lesson.t18.brief.4" to "Por encima del muslo de la persona más baja hay que buscar otro punto o dar un rodeo, no esperar a que llegue a la cintura.",
+    "lesson.t18.brief.5" to "Al elegir punto cuentan tres cosas: ancho y somero, evitar el exterior de la curva y mirar el run-out aguas abajo: cascadas, troncos, taludes.",
+    "lesson.t18.brief.6" to "15 cm de subida del nivel bastan para volver peligroso un punto antes seguro; el agua de deshielo glaciar lleva más caudal por la tarde que por la mañana.",
+
+    // ---------- t19 Formaciones y manejo de la caída ----------
+    "lesson.t19.brief.1" to "Triángulo: tres personas mirándose, agarradas a hombro o mochila, con una sola persona y una sola pierna en movimiento, la más fuerte aguas arriba.",
+    "lesson.t19.brief.2" to "Formación en línea: a partir de tres personas, las más fuertes en los extremos, los brazos pasados entre la mochila y la espalda del vecino, avanzando de lado.",
+    "lesson.t19.brief.3" to "Voces unificadas: «un paso, alto, un paso». La persona de aguas arriba vigila el agua y el run-out; el resto solo mira sus pies y a quien tiene delante.",
+    "lesson.t19.brief.4" to "Primera regla tras la caída: no levantarse. El pie atrapado en una grieta o bajo un tronco es el mecanismo típico de las muertes en ríos.",
+    "lesson.t19.brief.5" to "Postura correcta: boca arriba, pies aguas abajo, cabeza alta, brazos abiertos para dirigirse y nadar en diagonal hacia la orilla (back ferry).",
+    "lesson.t19.brief.6" to "El aseguramiento con cuerda es arriesgado porque la mayoría de los grupos no lo domina. Si se usa, solo fijada en la orilla y nunca al cuerpo.",
+
+    // ---------- t20 Mantenimiento y reparación del material ----------
+    "lesson.t20.brief.1" to "Antes de salir, revisar cuatro cosas: si la suela se despega, si los cierres de la mochila están enteros, si el varillaje tiene grietas y si la colchoneta pierde aire.",
+    "lesson.t20.brief.2" to "El núcleo de la reparación son tres cintas y una aguja: cinta de Dyneema para tejido y plumas, cinta de tela para fijar y parches para la cámara.",
+    "lesson.t20.brief.3" to "La suela que se despega es la avería más común en travesías largas: fijarla con cinta para que no siga rasgándose y, en un pueblo, adhesivo específico.",
+    "lesson.t20.brief.4" to "Un varillaje roto se puede seguir usando con un tubo de reparación; el tejido rasgado se parchea, nunca se trata con fuego.",
+    "lesson.t20.brief.5" to "Ante un agujero en la chaqueta de plumas, parchear y presionar, sin golpear: golpear hace que las plumas sigan saliendo por la costura.",
+
+    // ---------- t21 Marcha nocturna y tormentas ----------
+    "lesson.t21.brief.1" to "Primera regla de la marcha nocturna: no caminar si no es necesario. De noche, navegación, búsqueda de camino y lectura del terreno se vuelven mucho más difíciles.",
+    "lesson.t21.brief.2" to "Si es inevitable: frontal, pilas de repuesto y una segunda fuente de luz, las tres cosas. Quedarse sin luz de noche es quedarse sin capacidad de actuar.",
+    "lesson.t21.brief.3" to "De noche, ir más despacio, acortar distancias, con la cabeza confirmando a la cola con frecuencia y alguien esperando en los cruces.",
+    "lesson.t21.brief.4" to "Señales tempranas de tormenta: cumulonimbo que crece rápido, trueno lejano y sordo, giro brusco del viento y pelos erizados. Con cualquiera de ellas, perder altura.",
+    "lesson.t21.brief.5" to "Protección contra el rayo: salir de la cresta, la cima, el agua, los árboles aislados y las barandillas metálicas; separados en cuclillas, pies juntos, sin tumbarse.",
+    "lesson.t21.brief.6" to "Las tormentas traen a menudo bajada fuerte de temperatura y lluvia intensa; el riesgo de hipotermia sube a la vez y la capa de abrigo debe estar a mano.",
 )
