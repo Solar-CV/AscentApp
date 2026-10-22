@@ -484,4 +484,34 @@ internal val PACK_IT_BRIEF: Map<String, String> = mapOf(
     "lesson.t04.brief.2" to "Bere a tempo, non per sete: piccoli sorsi ogni 20–30 minuti, con sali minerali nelle giornate calde.",
     "lesson.t04.brief.3" to "Energia in piccole dosi frequenti, 30–60 g di carboidrati all'ora: funziona meglio di un unico pasto abbondante.",
     "lesson.t04.brief.4" to "Le pause non dovrebbero superare i 10 minuti: quando il corpo si raffredda, ripartire costa molto di più.",
+    // ---------- t05 Itinerario di più giorni ----------
+    "lesson.t05.brief.1" to "Prima si fissano i limiti giornalieri: chilometri, dislivello, ore. Poi i punti di rifornimento, i punti di uscita e i giorni di riserva.",
+    "lesson.t05.brief.2" to "Il giorno di riserva non è un surplus, è un necessario: meteo e infortuni faranno sì che una giornata non si chiuda come previsto.",
+    "lesson.t05.brief.3" to "I tempi che si sottostimano più facilmente: cercare la via, prendere e filtrare l'acqua, montare il campo e cucinare — in media 1,5–2 ore in più al giorno.",
+    "lesson.t05.brief.4" to "La giornata più lunga va messa a metà percorso, la prima serve ad adattarsi, l'ultima lascia margine per il rientro.",
+
+    // ---------- t06 Scelta e montaggio del campo ----------
+    "lesson.t06.brief.1" to "Il campo va ad almeno 60 m dall'acqua: evita di inquinare la fonte e di stare sulla via che gli animali percorrono di notte.",
+    "lesson.t06.brief.2" to "Vanno evitati la zona di caduta sassi sotto un pendio ripido, il letto asciutto di un torrente (piena), l'albero isolato (fulmine) e le piste di animali.",
+    "lesson.t06.brief.3" to "Un terreno inclinato di 2–3° favorisce il drenaggio, e dormendo con la testa più in alto si sta più stabili.",
+    "lesson.t06.brief.4" to "Ingresso della tenda sottovento, lato lungo sopravvento, e tutti i tiranti ben tesi dopo il montaggio.",
+
+    // ---------- t07 Cucina e piano alimentare ----------
+    "lesson.t07.brief.1" to "Il combustibile si stima su 30–50 g di gas per persona al giorno (soprattutto per scaldare acqua); con freddo e neve da sciogliere va aumentato.",
+    "lesson.t07.brief.2" to "Nel cibo si privilegiano densità energetica, buona conservazione, poco da lavare e nessuna cottura lunga.",
+    "lesson.t07.brief.3" to "In quota si aumentano i carboidrati: costano meno ossigeno da digerire e si trasformano in fretta, quindi sono più adatti dei cibi molto grassi.",
+    "lesson.t07.brief.4" to "Il fornello in tenda richiede ventilazione: il monossido di carbonio è incolore e inodore, e l'intossicazione avviene spesso mentre si dorme.",
+
+    // ---------- t08 Introduzione al meteo ----------
+    "lesson.t08.brief.1" to "Prima di partire si guardano tre cose: la tendenza sulle 24–48 ore, la probabilità di precipitazioni, il vento e la temperatura percepita.",
+    "lesson.t08.brief.2" to "Un cumulonembo che cresce in verticale e si allarga a incudine significa che il temporale è maturo.",
+    "lesson.t08.brief.3" to "Segnali dell'arrivo di un temporale: tuoni lontani, base delle nuvole scura e in calo, vento che gira all'improvviso, capelli che si rizzano.",
+    "lesson.t08.brief.4" to "Il primo segno di ipotermia è tremare in continuazione e diventare goffi nei movimenti; si interviene con abiti asciutti, uno strato isolante e calorie.",
+
+    // ---------- t15 Carta e navigazione ----------
+    "lesson.t15.brief.1" to "La mappa del telefono è lo strumento principale, ma va scaricata offline in anticipo: in montagna la condizione più frequente è «batteria sì, segnale no».",
+    "lesson.t15.brief.2" to "Su una carta 1:50.000 un centimetro è 500 metri: prima si impara la scala, poi si parla di lettura del terreno.",
+    "lesson.t15.brief.3" to "Tre tipi di linee da riconoscere: curve di livello (dislivello), itinerario (direzione), idrografia (spesso il punto più basso). Valle e cresta dicono se si sta sullo stesso versante.",
+    "lesson.t15.brief.4" to "Con orologio e sole si può orientarsi a grandi linee: la lancetta delle ore verso il sole, la bisettrice fra quella e le 12 indica il sud. Con cielo coperto serve la bussola.",
+    "lesson.t15.brief.5" to "La prima cosa quando ci si perde è fermarsi. Riguardare tre riferimenti evidenti e capire da dove si è arrivati serve molto più che continuare a cercare la via.",
 )
