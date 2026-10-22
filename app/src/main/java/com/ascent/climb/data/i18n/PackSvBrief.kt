@@ -440,4 +440,10 @@ internal val PACK_SV_BRIEF: Map<String, String> = mapOf(
     "lesson.l39.brief.5" to "«Expertglorian» är en vanlig fälla: att ta självsäkerhet och påkostad utrustning för kompetens, tills ingen vågar ifrågasätta ett uppenbart fel.",
     "lesson.l39.brief.6" to "Den som följer har också ansvar: fråga, ge återkoppling och säga stopp när det behövs. Blind lydnad är inte lojalitet utan att ge bort sitt eget omdöme.",
     "lesson.l39.brief.7" to "Beslut behöver en i förväg satt tidsgräns (turnaround time) som hela gruppen känner till före avfärd. Att ta upp den efteråt är detsamma som att inte ha någon.",
+    "lesson.l40.brief.1" to "Tre energigivande ämnen: kolhydrater verkar snabbast, fett har högst energitäthet och protein används främst för reparation. Första principen på höjd: «få i sig kolhydrater».",
+    "lesson.l40.brief.2" to "Andelen fett i energiförsörjningen kan ökas med lång träning, men långsamt. Att hoppas på att «byta om uppe på berget» är orealistiskt.",
+    "lesson.l40.brief.3" to "Sänkt aptit är normalt på höjd, och energiunderskott är vanligt och svårt att undvika. Strategin är «små portioner ofta plus hög energitäthet» i stället för att vänta på hunger.",
+    "lesson.l40.brief.4" to "Dela marchmaten i två grupper: sådant man kan äta medan man går (gel, gummifrukt, bars) och sådant som kräver att man stannar (varm mat). Den första gruppen avgör om rytmen håller.",
+    "lesson.l40.brief.5" to "Dehydrering försvagar både aptit och omdöme samtidigt, så vätske- och energiintag måste planeras tillsammans.",
+    "lesson.l40.brief.6" to "Det finns studier på sambandet mellan BCAA och ammoniak, men evidensen är begränsad och ersätter inte grunden: att äta tillräckligt med kalorier totalt.",
 )
