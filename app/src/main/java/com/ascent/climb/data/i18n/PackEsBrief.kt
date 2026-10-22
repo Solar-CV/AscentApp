@@ -588,4 +588,20 @@ internal val PACK_ES_BRIEF: Map<String, String> = mapOf(
     "lesson.l43.brief.4" to "La primera capa es la prioridad para lavar y secar: la sal del sudor irrita y rompe la piel, y en altura una escoriación cura muy mal. El plumón no se lava: si se moja, solo se seca al aire.",
     "lesson.l43.brief.5" to "Tres normas de orden en el campamento: el calzado en el ábside, la comida fuera de la tienda y la basura agrupada y colgada en alto. Las tres previenen humedad, animales y contaminación a la vez.",
     "lesson.l43.brief.6" to "El objetivo del cuidado personal es «mantener el cuerpo en estado de poder trabajar»; la comodidad es solo un efecto secundario.",
+    // ---------- l39 Liderazgo y roles en el equipo ----------
+    "lesson.l39.brief.1" to "El liderazgo es conducta, no cargo. Quien no tiene título también puede influir en las decisiones preguntando, avisando y asumiendo responsabilidad.",
+    "lesson.l39.brief.2" to "Las competencias duras deciden «si se puede hacer»; las blandas, «si el equipo quiere hacerlo junto». En los accidentes de alta montaña suele faltar lo segundo.",
+    "lesson.l39.brief.3" to "La responsabilidad tiene tres niveles: conducta (qué se hace), pensamiento (cómo se juzga) y emoción (cómo se siente). Mirar solo la conducta hace que el problema se repita.",
+    "lesson.l39.brief.4" to "El conflicto es como un iceberg: en la superficie está la posición («quiero la cumbre») y debajo la necesidad («temo que me desprecien»). Atender la necesidad es lo que flexibiliza la posición.",
+    "lesson.l39.brief.5" to "El «halo del experto» es una trampa frecuente: tomar la seguridad en sí mismo y el material llamativo por competencia, hasta que nadie se atreve a discutir un error evidente.",
+    "lesson.l39.brief.6" to "Quien sigue también tiene responsabilidades: preguntar, dar retroalimentación y decir basta cuando toca. La obediencia ciega no es lealtad: es renunciar al propio juicio.",
+    "lesson.l39.brief.7" to "Toda decisión necesita una hora límite fijada de antemano (turnaround time) y comunicada a todo el equipo antes de salir. Plantearla después equivale a no tenerla.",
+
+    // ---------- l40 Nutrición y avituallamiento por encima de 8.000 m ----------
+    "lesson.l40.brief.1" to "Tres fuentes de energía: los hidratos actúan de forma más directa, la grasa tiene la mayor densidad energética y la proteína sirve sobre todo para reparar. Primer principio en altura: «meter hidratos».",
+    "lesson.l40.brief.2" to "La proporción de grasa en el aporte energético se puede aumentar con entrenamiento largo, pero despacio; esperar a «cambiar el metabolismo ya en la montaña» no es realista.",
+    "lesson.l40.brief.3" to "La pérdida de apetito es normal en altura y el déficit energético es habitual y difícil de evitar. La estrategia es «tomas pequeñas y frecuentes más alta densidad energética» en lugar de esperar al hambre.",
+    "lesson.l40.brief.4" to "La comida de marcha se divide en dos grupos: lo que se come andando (geles, gominolas, barritas) y lo que exige parar (comida caliente). El primero decide si se mantiene el ritmo.",
+    "lesson.l40.brief.5" to "La deshidratación debilita a la vez el apetito y el juicio; beber y comer tienen que planificarse juntos.",
+    "lesson.l40.brief.6" to "Sobre la relación entre aminoácidos ramificados y amoniaco hay estudios, pero la evidencia es limitada: no sustituye a la base de comer suficientes calorías totales.",
 )
