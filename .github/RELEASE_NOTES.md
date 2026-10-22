@@ -6,6 +6,50 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ---
 
+## v0.19.24 要点
+
+从 v0.19.11 算起，这一系列版本只做了一件事：**把内容层铺到十种语言**。v0.19.24 是收官——最后一种语言（Italiano）四层全量，十种界面语言全部有内容支撑，运行时不再回退。
+
+### 语言：十种界面语言，九种翻译语言四层全量
+
+内容层分四层（入口 / 课程要点 / 技能书正文 / 题库）。这一版把 **Italiano** 补到全量：
+
+- **Italiano**：9,422 条题库 + 443 条要点 + 全部课名、单元名、山峰与技能书 h32–h35。题干与解析用 *tu*，要点用无人称句
+
+加上此前完成的 English / 繁體中文 / 日本語 / Русский / Deutsch / Español / Français / Svenska，**九种翻译语言**与英文键集合逐条一致（10,544 / 10,544），缺项 0、重复 0、孤儿键 0。简体中文作为原文语言，内容层本身就是它——十种界面语言至此全部落地。
+
+顺带清了最后一批历史遗留的孤儿键（`q.l2#5.c`、`m15#17.c`、`m16#18.c`、`m16#22.c`、`m16#24.c`）——中文侧早前删过带上下文的情景题，英文当时清了，其余语言在逐语补齐的过程中陆续跟上。**十种语言现在都没有孤儿键。**
+
+如果某一项在所选语言里意外缺失，回退顺序是「当前语言 → 英文 → 中文原文」。这条路径现在只是兜底，正常不会再触发。
+
+### 三种数字写法，刻意分开
+
+同一套内容，各语言按本地习惯写数字。三种口径在译文和术语表里都标住了，不会混：
+
+- 英文、中文、日文：`6.5 °C`、`5,000 m`
+- 德文、西文、意文：`6,5 °C`、`1.000 m`（小数逗号、千位点）
+- 法文、瑞典文：`6,5 °C`、`5 000 m`（小数逗号、千位空格）
+
+人称也各自不同：德文无人称 man-Form、西文 *tú*、法文 *vous*、瑞典文与意文 *du* / *tu*，而课程要点在所有语言里都是无人称句。
+
+### 术语一致性
+
+各语言沿用自己登山圈既有的专业写法，不做音译：
+
+- 德文：Selbstbremsgriff、Flachfusstechnik、Klemmknoten、Prusiken、Fussstrippe、Umlenkpunkt、Schneefang、Wechte、Apsis、versunkener Aufwand、Gruppendenken
+- 西文：autorretención、técnica francesa、nudo autobloqueante、refilado、reunión、cordada、ARVA、placa de viento、cinta transportadora de nieve
+- 法文：nœud autobloquant、défaillance en série、tapis roulant à neige、ensevelissement critique、poche d'air、phase d'asphyxie / de latence、ECLS
+- 瑞典文：handräcke、kort fast rep、expeditionsutläggning、mellanförankring (re-belay)、seriefel（对 redundans）、snötransportband、lufthåla
+- 意文：corda fissa、corrimano、attrezzamento della via、rinvio intermedio (re-belay)、guasto in serie、bloccante per mano / pettorale、nastro trasportatore di neve、seppellimento critico、sacca d'aria
+
+医学与救援的硬数字一律照技能书原值，不取整：雪崩存活 48 / 47,6 / 96 %，死因窒息 65–100 %、创伤 5–29 %、低温 0–4 %；决策线 2023 版 60 分钟并保留 2013 版 35 分钟作为历史口径；搜索带 40 m、定点网格 25 cm、雪传送带 26° 与 13,2 / 25,3 cm/min；渡河 1,0 m²/s 上限、队伍内控 0,8、水位 15 cm、胸带必解；固定绳 EN 892 / 1891 A / 567 / 12277。
+
+### 工程
+
+- 题库按语言拆文件：单个 Kotlin 文件约 2,500 条会让编译守护进程崩溃（`Daemon compilation failed: null`），所以英文、繁中、日文、俄文、德文、西文、法文、瑞典文、意文各拆三支，合并行在 `ContentPack.kt`
+- `tools/i18n/` 的三个命令（`status.py` / `prep.py` / `apply.py`）在十种语言上通用，`--lang` 决定读写哪一套包；繁中另有 `tw.py`、`tw_entry.py`
+- 每批译文进库前跑五项自查：键集合与「真实缺失集」的差集（缺 + 多）、片段内重复键、CJK 残留、英文单词残留、空值键。其中「多」这一栏在最后三种语言里抓出了六次误插的空值占位行
+
 ## v0.19.23 要点
 
 从上个发布版（v0.19.21）到现在，还是同一件事：**把剩下的语言也铺满**。
@@ -136,6 +180,6 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 - 本 App 只覆盖理论与认知准备。冰雪、绳索、攀冰、救援等实践技能，必须由持证教练现场指导与评估
 - 内容不构成医疗建议。技能书里涉及药物与急救的部分，尤其《探险医疗与急救包》，都是参考值，具体情况必须由医生当面评估后现场确认
 
-完整变更记录见 `README.md` 的「最近改了什么」一节（英文版见 `README.en.md`）。
+完整变更记录见 `README.zh-CN.md` 的「最近改了什么」一节（英文版即默认的 `README.md`）。
 
 许可：PolyForm Noncommercial License 1.0.0，仅限非商业用途，商业使用需另行书面授权（详见 `LICENSE` 与 `NOTICE`）。

@@ -1,135 +1,143 @@
-# ASCENT · 攀登之路
+# ASCENT
 
-**简体中文** · [English](README.en.md)
+**English** · [简体中文](README.zh-CN.md)
 
-一个给高海拔攀登和攀冰新手做的 Android 应用。课程按海拔组织：每过一课，海拔往上走一段。
+An Android app for people starting out in high-altitude mountaineering and ice climbing. The curriculum is organised by altitude: every lesson you pass moves you a little higher.
 
-两个课程大类可以自由切换：**高山攀登** 6 个单元、68 课，从 5,000 米入门排到 8,000 米，走完海拔从 3,200 m 到 8,848 m；**徒步** 4 个单元、21 课，从一日徒步排到长线，走完海拔从 200 m 到 5,630 m。两条大类的进度、徽章与复习队列各自独立。
+Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-当前版本 v0.19.23（versionCode 98）。这一版把**法文与瑞典文补齐**：题库 9,422 条、课程要点 443 条、课程名（89 课）、单元名、山峰名与技能书 h32–h35 全部落地，两门语言都与英文键集合逐条对齐（10,544 / 10,544），缺项 0、孤儿键 0。术语沿用各自语言既有的专业写法，不音译（法文 nœud autobloquant、défaillance en série、tapis roulant à neige；瑞典文 mellanförankring、seriefel、snötransportband、handräcke）。英文、繁體中文、日文、俄文、德文、西班牙文在此前各版已全量完成，内容层现为**八种语言四层全量**；只剩意大利语仍覆盖扩充之前的旧题库，新增题目回退英文。
+Current version v0.19.24 (versionCode 99). This release closes the language project. **Italian** is now complete across all four layers — 9,422 question-bank entries, 443 lesson briefs, all 89 lesson titles, unit names, peak names and handbook articles h32–h35 — and matches the English key set entry for entry (10,544 / 10,544), with no missing or orphan keys. Italian addresses the reader as *tu* in questions and explanations and uses impersonal sentences in the lesson briefs, and writes numbers the Italian way (1.000 m, 8.848,86 m — thousands point, decimal comma). With this, **nine languages are complete across all four content layers**: English, Traditional Chinese, Japanese, Russian, German, Spanish, French, Swedish and Italian. Together with Simplified Chinese as the source language, all ten interface languages now have full content behind them, and nothing falls back at runtime.
 
-## 装到手机上
+The five orphaned `.c` keys left over from earlier content edits (`q.l2#5`, `m15#17`, `m16#18`, `m16#22`, `m16#24`) were removed from every language in the course of this work, so the key sets are now clean on all ten.
 
-最省事是从 [Releases](https://github.com/Solar-CV/AscentApp/releases) 下预构建的 debug APK。推 `v*` 标签时，GitHub Actions 会自动构建并附到 release 上。
+## Install
 
-- 包名：`com.ascent.climb`
-- 最低系统：Android 8.0（API 26）
-- 体积：约 19 MB
-- 权限：联网与网络状态，只用于检查题库更新。断网时所有功能照常，内置题库一直在
+The easiest route is the prebuilt debug APK from [Releases](https://github.com/Solar-CV/AscentApp/releases). Pushing a `v*` tag makes GitHub Actions build and attach a fresh APK.
 
-安装没什么特别：把 APK 传到手机，在系统设置里允许安装未知来源应用，点安装。第一次打开不需要登录。
+- Package: `com.ascent.climb`
+- Minimum: Android 8.0 (API 26)
+- Size: about 19 MB
+- Permissions: network and network state, used only to check for question-bank updates. Everything works offline; the bundled bank is always there
 
-## 里面有什么
+Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
 
-### 路径
+## What's inside
 
-主页面是一条从大本营往上走的路线，按海拔分单元（攀登 6 个、徒步 4 个）。可以左右滑分页，每页两个单元。课程线性解锁，过一课开下一课。节点上会显示星级，当前课有「开始」提示，单元最后一课用金色标出来。
+### The path
 
-顶部两颗胶囊切换课程大类，点开是底部弹层；切换后自动回到第一页，选择会记住。
+The home screen is a route from base camp upwards, split into altitude units (six for climbing, four for trekking). Swipe horizontally to page through them, two units per page. Lessons unlock linearly — pass one and the next opens. Nodes show stars, the current lesson carries a "start" hint, and the last lesson of a unit is marked in gold.
 
-进度不是另外存一个数字，而是由「已完成课程」实时算出来的。这样以后调整海拔曲线，旧存档也会跟着重算。
+Two pills at the top switch course tracks; tapping one opens a bottom sheet. Switching returns to the first page and the choice is remembered.
 
-### 题库
+Progress is not a stored number. It is recomputed from the lessons you have completed, so if the altitude curve is adjusted later, old saves recalculate instead of getting stuck.
 
-1,533 道正式题，加上 154 道自动插入的复习副本，一共 1,687 条展示项。题量随海拔递增：5,000 米入门平均每课 15 题，7,000 米的技术单元平均 30 题，徒步单元 8 题。
+### Question bank
 
-题型八种：单选、多选、排序、配对、填空、计算、热点题（在图上点位置）、情景题（一道题干里分几步作答）。
+1,533 formal questions plus 154 auto-inserted review copies, 1,687 display items in total. Volume rises with altitude: about 15 questions per lesson in the 5,000 m introduction, 30 in the 7,000 m technical units, and 8 across trekking.
 
-答完当课立刻进入错题重做。答对的错题加分，仍然错的进复习中心。复习用间隔重复，间隔是 0、1、3、7、16、35 天。安全关键题加权，答错后要求确认理解才能继续。
+Eight question types: single choice, multiple choice, ordering, matching, fill-in, calculation, hotspot (tap a point on an image), and scenario (one stem answered in several steps).
 
-### 技能书
+Finishing a lesson drops you straight into redoing the ones you got wrong. Questions you then answer correctly gain credit; the rest go to the review centre. Review uses spaced repetition at 0, 1, 3, 7, 16 and 35 days. Safety-critical questions are weighted, and require confirming you understand before you can move on.
 
-35 篇长文，每篇 4 到 8 节，按装备、技术、医学、健康、天气、气象、决策、判断、安全、风险、雪崩救援分类。技能书现在按课程大类过滤：冰雪技术篇只在攀登出现，高原病、失温、导航、营地、领导力这些通用篇两边共享。内容来自公共医学与技术资料、三份商业向导资料，以及 7 本中文登山书的整理稿。中文书的部分按产品约定不显示出处，向导资料的部分标来源。
+### Handbook
 
-### 训练、复习、我的
+35 long-form articles, 4 to 8 sections each, sorted into gear, technique, medicine, health, weather, meteorology, decisions, judgement, safety, risk and avalanche rescue. The handbook is now filtered by track: snow-and-ice pieces appear only under climbing, while altitude medicine, hypothermia, navigation, camping and leadership are shared by both. Sources are public medical and technical material, three commercial guide documents, and edited transcripts of seven Chinese mountaineering books. Per product agreement, the Chinese books are not cited by title; the guide documents are.
 
-训练页给一个准备度百分比和目标峰海拔。复习页把今天到期的题和安全关键错题排在前面。「我的」页有档案头、当前海拔、能力概览、徽章入口和账号区。点右上角齿轮进设置，点头像进个人主页。
+### Training, review, profile
 
-个人主页只展示已经解锁的徽章。全部 35 枚在「全部徽章」页，未解锁的显示为灰度预览，隐藏成就给一个「?」。
+Training gives a readiness percentage and the target peak's altitude. Review puts today's due questions and safety-critical misses first. Profile holds the header, current altitude, ability overview, badge entry and account area. The gear icon opens settings, the avatar opens the profile page.
 
-### 设置
+The profile shows unlocked badges only. All 35 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
 
-外观可以跟随系统，也可以手动锁浅色或深色，选择会持久化，状态栏配色一起变。语言可以跟随系统或手动指定，切换后界面和内容一起变，不需要重启。题库区能看当前版本、检查更新、恢复内置题库。开发者模式藏在关于页的版本号后面，连点 7 次打开。
+### Settings
 
-## 十种语言
+Appearance follows the system or can be pinned to light or dark, persisted, with the status bar matching. Language follows the system or can be set manually; interface and content both switch, no restart. The bank section shows the current version, checks for updates and restores the bundled bank. Developer mode hides behind the version number in About — tap it seven times.
 
-界面文案和课程内容都提供这些语言：
+## Ten languages
 
-简体中文（原文）、繁體中文、English、日本語、Deutsch、Français、Español、Italiano、Русский、Svenska
+Interface strings and course content are available in:
 
-界面文案 10 种语言齐全。内容层现在共 10,527 条，分四层，各层进度不同：
+简体中文 (source), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-| 层 | 条目 | 英文（回退基准） | 其余 8 种语言 |
-|---|---|---|---|
-| 入口（课程名 / 单元 / 技能书标题 / 山峰） | 284 | 100% | 77% |
-| 课程要点 | 443 | 100% | 49% |
-| 技能书正文 | 378 | 100% | 86% |
-| 题库（题干 / 选项 / 解析） | 9,422 | 53% | 42% |
+All ten languages are complete. Every language has its own entry layer, lesson briefs, handbook body and question bank, and each key set matches the English one entry for entry — **10,544 / 10,544**, with nothing missing, nothing duplicated and no orphan keys.
 
-术语按各语言登山圈的通行说法走，不是逐字直译：瑞典语用 stegjärn / isyxa / standplats，德语用 Steigeisen / Pickel，俄语用 кошки / ледоруб。医学剂量、雪崩等级、坡度、气温这些数字在翻译中原样保留，只按语言习惯换千位分隔符和小数点。
+| Layer | Items | All 9 translated languages |
+|---|---|---|
+| Entry (lesson, unit, handbook titles, peaks) | 117 | 100% |
+| Lesson key points | 443 | 100% |
+| Handbook body | 378 | 100% |
+| Question bank (stem / options / explanation) | 9,422 | 100% |
 
-2026-10 的扩充（28 课、4 篇技能书、旧课补题）尚未译完。英文的入口、要点、正文三层已收尾，题库还在分批补；其余 8 种语言的题库要等英文定稿后再跟。条目在所选语言里缺失时的回退顺序是：当前语言 → 英文 → 中文原文。
+Terminology follows each language's own mountaineering usage rather than literal translation: Swedish stegjärn / isyxa / standplats, German Steigeisen / Pickel, Russian кошки / ледоруб, Italian corda fissa / bloccante / sosta. Medical doses, avalanche levels, slope angles and temperatures are carried over unchanged — only the number format is adapted, and the three conventions are kept apart on purpose:
 
-## 课程怎么排
+- English, Chinese and Japanese: `6.5 °C`, `5,000 m`
+- German, Spanish and Italian: `6,5 °C`, `1.000 m` (decimal comma, thousands point)
+- French and Swedish: `6,5 °C`, `5 000 m` (decimal comma, thousands space)
 
-**高山攀登**
+The learner-facing voice also differs by language: German uses the impersonal *man*-form, Spanish addresses the reader as *tú*, French as *vous*, Swedish and Italian as *du* / *tu*, while lesson briefs stay impersonal in all of them.
 
-| 单元 | 海拔 | 课程 | 题量 | 平均每课 |
+If an item ever is missing in the selected language, the fallback order is: selected language → English → Chinese source. That path is now only a safety net.
+
+## Curriculum
+
+**Alpine climbing**
+
+| Unit | Altitude | Lessons | Questions | Per lesson |
 |---|---|---|---|---|
-| 5000M · 入门 | 5,000 m | 16 | 249 | 16 题 |
-| 5000M · 进阶 | 5,300 m | 12 | 221 | 18 题 |
-| 6000M | 6,000 m | 14 | 316 | 22 题 |
-| 7000M · C3 技术营地 | 7,000 m | 6 | 185 | 31 题 |
-| 7000M · C4 高营地 | 7,500 m | 10 | 279 | 28 题 |
-| 8000M | 8,000 m | 10 | 248 | 24 题 |
+| 5000M · Introduction | 5,000 m | 16 | 249 | 16 |
+| 5000M · Progression | 5,300 m | 12 | 221 | 18 |
+| 6000M | 6,000 m | 14 | 316 | 22 |
+| 7000M · C3 technical camp | 7,000 m | 6 | 185 | 31 |
+| 7000M · C4 high camp | 7,500 m | 10 | 279 | 28 |
+| 8000M | 8,000 m | 10 | 248 | 24 |
 
-**徒步**
+**Trekking**
 
-| 单元 | 海拔 | 课程 | 题量 | 平均每课 |
+| Unit | Altitude | Lessons | Questions | Per lesson |
 |---|---|---|---|---|
-| 一日徒步 | 1,200 m | 5 | 40 | 8 题 |
-| 多日与露营 | 2,500 m | 8 | 79 | 10 题 |
-| 高原徒步 | 3,800 m | 5 | 44 | 8 题 |
-| 长线与应急 | 4,500 m | 3 | 26 | 8 题 |
+| Day hikes | 1,200 m | 5 | 40 | 8 |
+| Multi-day and camping | 2,500 m | 8 | 79 | 10 |
+| High-altitude trekking | 3,800 m | 5 | 44 | 8 |
+| Long trails and emergency | 4,500 m | 3 | 26 | 8 |
 
-目标山峰与线路共 38 条：攀登 30 座，从 5,211 m 的奥太娜一直到 14 座 8,000 米级山峰；徒步 8 条，从徽杭古道到 EBC 三条垭口。
+38 target peaks and routes in total: 30 for climbing, from Aotaina at 5,211 m up to the fourteen 8,000 m peaks; 8 for trekking, from the Huihang Trail to the Three Passes route at Everest.
 
-## 内容从哪来
+## Where the content comes from
 
-题目和技能书主要来自两类材料。
+Two main streams feed the questions and the handbook.
 
-公共资料包括 Wilderness Medical Society 的《急性高原病临床实践指南》2024 更新版、CDC Yellow Book、American Alpine Institute 和 American Alpine Club 的技术资料、REI Expert Advice、UIAA 与 CE 的装备标准，以及 avalanche.org 的雪崩数据。
+Public sources include the Wilderness Medical Society's 2024 update of the clinical practice guidelines for acute altitude illness, the CDC Yellow Book, technical material from the American Alpine Institute and the American Alpine Club, REI Expert Advice, UIAA and CE equipment standards, and avalanche data from avalanche.org.
 
-SEVEN SUMMIT TREKS 的三份向导资料是另一条主线：高原病、装备指南、探险活动通用指南。
+The three SEVEN SUMMIT TREKS guide documents — altitude illness, equipment, general expedition practice — are the second stream.
 
-后来又把 7 本中文登山书的校对稿整理进技能书。书里的知识和案例用自己的话重写，出处标到页码。仓库里不放纸质书的扫描原文。
+Later, proofed transcripts of seven Chinese mountaineering books were edited into the handbook. Knowledge and cases are rewritten in our own words, with page references; the scanned source text is not kept in the repository.
 
-| 材料 | 用在哪 |
+| Source | Used for |
 |---|---|
-| WMS / CDC / StatPearls | 高海拔医学题与技能书 |
-| AAI / AAC / REI / BMC | 冰雪技术与行进 |
-| UIAA / CE 标准 | 装备题 |
-| avalanche.org | 雪崩判断 |
-| SEVEN SUMMIT TREKS 三份资料 | 技能书 h17–h22 与相关题目 |
-| 7 本中文登山书 | 技能书 h23–h31 |
+| WMS / CDC / StatPearls | Altitude medicine questions and handbook |
+| AAI / AAC / REI / BMC | Snow, ice and movement technique |
+| UIAA / CE standards | Equipment questions |
+| avalanche.org | Avalanche judgement |
+| SEVEN SUMMIT TREKS documents | Handbook h17–h22 and related questions |
+| 7 Chinese mountaineering books | Handbook h23–h31 |
 
-## 安全边界
+## Safety boundary
 
-这个 App 只覆盖理论和认知准备。冰雪、绳索、攀冰、救援这些实践技能，必须由持证教练现场指导和评估。
+The app covers theory and cognitive preparation only. Practical skills — snow and ice, rope work, ice climbing, rescue — must be taught and assessed on site by a certified instructor.
 
-内容不构成医疗建议。涉及药物和急救的决定，要问医生。
+Nothing here is medical advice. Decisions about medication and first aid belong with a doctor.
 
-不承诺登顶，也不保证高海拔适应结果。
+No summit is promised and no acclimatisation outcome is guaranteed.
 
-标了「需教练评估」的课程，学完理论后会明确提示还需要实操验证。
+Lessons marked as needing an instructor say so explicitly once the theory is done.
 
-## 自己构建
+## Building it yourself
 
-工具链可以全部装在用户目录，不需要 Homebrew 或 Android Studio。本机现在用的是：
+The whole toolchain can live in your home directory — no Homebrew, no Android Studio. What this machine uses:
 
-- `~/android-toolchain/jdk`：Temurin OpenJDK 17
-- `~/android-toolchain/sdk`：Android SDK，platforms;android-34、build-tools;34.0.0、platform-tools
-- `~/android-toolchain/gradle-8.9`：Gradle 8.9
+- `~/android-toolchain/jdk`: Temurin OpenJDK 17
+- `~/android-toolchain/sdk`: Android SDK with platforms;android-34, build-tools;34.0.0, platform-tools
+- `~/android-toolchain/gradle-8.9`: Gradle 8.9
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -140,90 +148,91 @@ cd AscentApp
 "$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
 ```
 
-仓库里也带了 Gradle Wrapper 8.9，本机没装 Gradle 也能直接用：
+The repo also ships the Gradle 8.9 wrapper, so a machine without Gradle works too:
 
 ```bash
 cd AscentApp
 ./gradlew assembleDebug
 ```
 
-产物在 `app/build/outputs/apk/debug/app-debug.apk`。
+Output lands in `app/build/outputs/apk/debug/app-debug.apk`.
 
-## 项目结构
+## Project layout
 
 ```
 AscentApp/
-├── import/                      题库编写（Markdown，实体书整理）
-├── knowledge/                   纸质资料知识库
+├── import/                      Question authoring (Markdown, from print books)
+├── knowledge/                   Print-source knowledge base
 ├── tools/
-│   ├── contentcheck/            内容校验 + 题库导出（纯 JVM）
-│   ├── i18ncheck.py             多语言覆盖率校验（四层逐语言）
-│   └── qbank/build.mjs          Markdown → 题库编译器
+│   ├── contentcheck/            Content checks + bank export (plain JVM)
+│   ├── i18ncheck.py             Per-language coverage across all four layers
+│   └── qbank/build.mjs          Markdown → question bank compiler
 └── app/src/main/
-    ├── res/values*/             10 种语言的界面文案
+    ├── res/values*/             Interface strings for 10 languages
     └── java/com/ascent/climb/
         ├── data/
-        │   ├── Unit1~5.kt       主课程内容
-        │   ├── NewLessons.kt    新大纲课程
-        │   ├── i18n/Pack*.kt    内容层翻译（入口 / 要点 / 技能书 / 题库）
-        │   ├── BundledBank.kt   课程池装配与复习题插入
-        │   └── bank/            题库配置、JSON 解码、网络层、仓库
-        └── ui/                  各页面与组件
+        │   ├── Unit1~5.kt       Main lesson content
+        │   ├── NewLessons.kt    Newer curriculum lessons
+        │   ├── i18n/Pack*.kt    Content translations (entry / brief / handbook / quiz)
+        │   ├── BundledBank.kt   Lesson pool assembly and review insertion
+        │   └── bank/            Bank config, JSON decoding, network, repository
+        └── ui/                  Screens and components
 ```
 
-## 改内容
+## Changing content
 
-给已有课程加题，写在 `data/Expansion*.kt`。加新课程，在 `data/NewLessons.kt` 里写 `Lesson(...)`，再把 id 加进 `Curriculum.kt` 对应单元。顺序和单元归属只改 `Curriculum.kt`。
+To add questions to an existing lesson, edit `data/Expansion*.kt`. For a new lesson, write `Lesson(...)` in `data/NewLessons.kt` and add its id to the right unit in `Curriculum.kt`. Ordering and unit membership live only in `Curriculum.kt`.
 
-改完内容跑一次校验：
+Then run the checks:
 
 ```bash
 bash tools/contentcheck/run.sh
 python3 tools/i18ncheck.py
 ```
 
-第一个脚本把 App 的内容源同步进一个纯 JVM 工程，跑真实装配逻辑，检查题量、难度递增、答案越界、空题、解锁逻辑和成就定义，然后导出 `bank/bank.json` 与 `bank/manifest.json`。第二个逐语言统计四层覆盖率，并做 key 差集。两个都不用装模拟器。
+The first script syncs the app's content into a plain JVM project, runs the real assembly logic, and checks question counts, difficulty progression, out-of-range answers, empty questions, unlock logic and achievement definitions, then exports `bank/bank.json` and `bank/manifest.json`. The second reports coverage per language across the four layers and diffs the keys. Neither needs an emulator.
 
-改动题库后记得把 `data/bank/BankConfig.kt` 里的 `BUNDLED_VERSION` 加一，否则客户端会认为没有新版本。
+After touching the bank, bump `BUNDLED_VERSION` in `data/bank/BankConfig.kt`, otherwise clients will think nothing has changed.
 
-## 题库在线更新
+## Online bank updates
 
-题库有三层来源：本地缓存、随包内置、在线增量。实际取用顺序是缓存 → 内置；在线那份只在比本地新时才覆盖缓存。
+The bank has three layers: local cache, bundled, and an online delta. Lookup order is cache → bundled; the online copy only overwrites the cache when it is newer.
 
-所以飞机上、山里没信号、服务端挂了、JSON 格式错、sha256 不匹配、版本更旧，这些情况都只会保留现状，不影响学习。启动后静默检查更新，距上次检查超过 6 小时、且已经配置地址才发请求。
+So a plane, a valley with no signal, a dead server, malformed JSON, a sha256 mismatch or an older version all leave things as they are. Updates are checked silently after launch, at most every six hours, and only once a URL is configured.
 
-发布一份新题库：改内容 → `BUNDLED_VERSION` 加一 → 跑 `contentcheck` → 把 `bank/bank.json` 和 `bank/manifest.json` 传到服务器或 CDN → 下次打开 App 自动更新，不用发版。
+To publish a new bank: change content → bump `BUNDLED_VERSION` → run `contentcheck` → upload `bank/bank.json` and `bank/manifest.json` to a server or CDN → the app picks it up next launch, no release needed.
 
-旧版 App 不会被新题库搞崩。`manifest.json` 里的 `minAppVersion` 会拦住版本不够的客户端，未知字段直接忽略，单条题目格式错误只跳过那一条。
+Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
-## 最近改了什么
+## Recent changes
 
-v0.19 是内容扩充，题库结构与判分逻辑没动。
+v0.19 is the content expansion; the bank structure and scoring logic are unchanged.
 
-- 课程 47 → 89 课：攀登补到 68 课（6000 / 7000 / 8000 米三个单元、14 座 8000 米峰），新增徒步轨道 21 课
-- 题目 711 → 1,533 道（9,422 条 key），技能书 31 → 35 篇（雪崩埋压与复苏、雪崩三件套、固定绳、渡河），题库 v15 → v19
-- 内容层**六种语言**做到四层全量：英文、繁體中文、日文、俄文、德文、西班牙文，键集合与英文逐条一致（10,544 / 10,544），运行时不再回退中文
-- 德文用无人称 man-Form、西语题干用 tú；两门语言的数字都走本地写法（6,5 °C、1.000 m、35–50）
-- 繁中走 OpenCC s2twp 加术语表，并用既有译文做回归校验（复现差异 0）；日文是真翻译，题库与技能书分两种语体
-- `tools/i18n/` 三个命令（`status.py` / `prep.py` / `apply.py`）在九种语言上通用，繁中另有 `tw.py`、`tw_entry.py`
-- 题库按文件拆：单个 Kotlin 文件约 2,500 条会让编译器崩，英文、繁中各三支，日文三支
+- Lessons 47 → 89: climbing now 68 (6000 / 7000 / 8000 m units, all fourteen 8000ers), plus 21 new trekking lessons
+- Questions 711 → 1,533 (9,422 keys), handbook 31 → 35 articles (avalanche burial and resuscitation, the avalanche trio, fixed ropes, river crossing), bank v15 → v19
+- **Nine languages now complete across all four content layers**: English, Traditional Chinese, Japanese, Russian, German, Spanish, French, Swedish and Italian. Their key sets match English entry for entry (10,544 / 10,544), so nothing falls back at runtime
+- German uses the impersonal man-form, Spanish addresses the reader as tú, French as vous, Swedish and Italian as du / tu; each follows local number conventions — German, Spanish and Italian write 1.000 m, French and Swedish 5 000 m, all of them use a decimal comma
+- Leftover orphaned keys from earlier content edits (`q.l2#5.c`, `m15#17.c`, `m16#18.c`, `m16#22.c`, `m16#24.c`) were removed from all nine languages, bringing every key set back to a clean 10,544
+- Traditional Chinese runs through OpenCC s2twp plus a terminology table, validated by regression against the existing translations (zero differences); Japanese is a real translation, with one register for the question bank and another for the handbook
+- `tools/i18n/` provides three commands (`status.py` / `prep.py` / `apply.py`) that work across all nine languages; Traditional Chinese also has `tw.py` and `tw_entry.py`
+- The bank is split across files: a single Kotlin file of roughly 2,500 entries crashes the compiler, so English and Traditional Chinese use three parts each, and Japanese three
 
-v0.16 到 v0.18 都是多语言，没有改题库结构和判分逻辑。
+v0.16 through v0.18 were all multilingual work; the bank structure and scoring logic did not change.
 
-- 界面文案拆成 10 套 `res/values*`，语言可在设置里手动指定，也可跟随系统，切换即时生效
-- 内容层新建 `data/i18n/`，按语言分四个包：入口、要点、技能书正文、题库。每种语言合计 4,727 条
-- 9 种翻译语言（繁中、英、日、德、法、西、意、俄、瑞）四层全部完成；除英文外的 8 种逐 key 对英文源做差集校验，缺项 0
-- 术语按各语言既有说法统一，医学剂量、雪崩等级、坡度、气温等数字原样保留
-- 新增 `tools/i18ncheck.py`，一条命令看完四层覆盖率，避免「翻完了但漏了某课」这类问题
-- 顺带修了若干文案问题：一处逗号加破折号的标点错误（瑞典语 140 处、德语与西语各 5 处）、两处填空答案多出引号、法语三个小数的写法
+- Interface strings split into 10 `res/values*` sets; language can be set manually or follow the system, taking effect immediately
+- New `data/i18n/` content layer with four packs per language: entry, key points, handbook body, question bank. 4,727 items per language
+- All four layers complete in the nine translated languages (zh-TW, en, ja, de, fr, es, it, ru, sv); the eight beyond English were verified key by key against the English source, zero missing
+- Terminology aligned with each language's existing usage; doses, avalanche levels, slope angles and temperatures kept as-is
+- Added `tools/i18ncheck.py` so one command shows coverage across all four layers — no more "translated, but one lesson was missed"
+- Fixed a batch of copy issues along the way: a comma-before-dash punctuation error (140 in Swedish, 5 each in German and Spanish), two fill-in answers with a stray quote mark, and three French decimals
 
-再往前：
+Earlier:
 
-- v0.15.1：应用内文案清理，去掉字面 `**` 标记，重写一批解析，登录页不再承诺未实现的同步
-- v0.15.0：技能书补 9 篇中文书籍篇（h23–h31），新增「户外领导力」分类，22 → 31 篇
-- v0.14.0：补 6 篇 SEVEN SUMMIT TREKS 向导内容
-- v0.13.x：设置页、个人主页、全部徽章墙；次级页面接入返回手势
+- v0.15.1: in-app copy clean-up, removed literal `**` markers, rewrote a batch of explanations, login page no longer promises unimplemented sync
+- v0.15.0: nine more handbook articles from Chinese books (h23–h31), new "outdoor leadership" category, 22 → 31 articles
+- v0.14.0: six SEVEN SUMMIT TREKS guide articles
+- v0.13.x: settings, profile page, badge wall; back gesture on secondary screens
 
-## 许可
+## Licence
 
-PolyForm Noncommercial License 1.0.0，仅限非商业用途。商业使用需另行书面授权，详见 `LICENSE` 与 `NOTICE`。
+PolyForm Noncommercial License 1.0.0 — noncommercial use only. Commercial use requires separate written permission; see `LICENSE` and `NOTICE`.
