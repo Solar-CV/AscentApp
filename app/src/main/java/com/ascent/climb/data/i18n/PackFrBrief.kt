@@ -433,4 +433,34 @@ internal val PACK_FR_BRIEF: Map<String, String> = mapOf(
     "lesson.l38.brief.5" to "Le tapis roulant, c'est un couloir en V (1–2 m de large) plus une chaîne d'évacuation. Si la pente du couloir descend sous environ 26 degrés, la neige retombe vers la sonde.",
     "lesson.l38.brief.6" to "Ordre d'efficacité d'évacuation : le balayage (paddling) est le plus rapide, l'écopage (scooping) vient ensuite, la découpe en blocs (cutting) est la plus lente. La découpe ne sert qu'en neige dure.",
     "lesson.l38.brief.7" to "Une fois le visage atteint, l'ordre change : dégager la bouche et le nez pour vérifier les voies aériennes, puis le thorax et les bras, enfin les jambes et le corps. Ne pas tirer par les épaules.",
+    // ---------- t01 Difficulté d'un itinéraire et auto-évaluation ----------
+    "lesson.t01.brief.1" to "La difficulté d'un itinéraire tient à quatre choses : la distance, le dénivelé cumulé, l'état du terrain, et les possibilités de ravitaillement et de sortie.",
+    "lesson.t01.brief.2" to "Se fier au kilométrage est l'erreur la plus fréquente. 10 km de plat et 10 km avec 800 m de montée sont deux itinéraires totalement différents.",
+    "lesson.t01.brief.3" to "Pour une première sortie, viser moins de 3 heures et moins de 300 m de dénivelé cumulé : si l'on peut encore marcher le lendemain, la dose était juste.",
+    "lesson.t01.brief.4" to "Les points de sortie méritent d'être vérifiés avant le paysage : pouvoir descendre en cours de route, c'est ce qui rend la sortie sûre.",
+
+    // ---------- t02 Chaussures, chaussettes et pieds ----------
+    "lesson.t02.brief.1" to "Un seul critère d'ajustement compte : le talon ne glisse pas de haut en bas, et en descente les orteils ne butent pas contre le bout.",
+    "lesson.t02.brief.2" to "Une ampoule est le résultat de l'humidité plus le frottement plus une pression locale ; en supprimant un seul des trois, la probabilité chute nettement.",
+    "lesson.t02.brief.3" to "Sur longue distance, éviter les chaussettes en coton : elles absorbent la sueur sans l'évacuer, et une fois mouillées elles frottent et ne gardent plus la chaleur.",
+    "lesson.t02.brief.4" to "Dès qu'un « point chaud » apparaît, s'arrêter pour le traiter : une fois la peau ouverte, chaque pas fait mal.",
+
+    // ---------- t03 Sac à dos et portage ----------
+    "lesson.t03.brief.1" to "La charge maximale tourne autour de 10 à 20 % du poids du corps, et un débutant reste dans la limite basse. Ce qui cède en premier quand on surcharge, ce sont les genoux et le jugement.",
+    "lesson.t03.brief.2" to "Le lourd se place contre le dos, entre le bas des omoplates et la taille : c'est ainsi que le centre de gravité ne part pas vers l'arrière.",
+    "lesson.t03.brief.3" to "La ceinture porte l'essentiel du poids, les bretelles assurent le plaquage et la stabilité ; avec les bretelles seules, on finit la journée avec la nuque et les épaules raides.",
+    "lesson.t03.brief.4" to "Peser son sac une fois avant de partir donne un poids de référence, et c'est seulement à partir de là qu'on peut juger de ce qui est superflu.",
+
+    // ---------- t04 Allure, hydratation et énergie ----------
+    "lesson.t04.brief.1" to "L'intensité tenable, c'est « pouvoir dire une phrase entière ». Quand on n'arrive plus à parler, on est déjà en train de puiser dans ses réserves.",
+    "lesson.t04.brief.2" to "Boire au temps, pas à la soif : par petites gorgées toutes les 20 à 30 minutes, avec des électrolytes par temps chaud.",
+    "lesson.t04.brief.3" to "L'énergie se prend en petites quantités répétées, 30 à 60 g de glucides par heure : c'est plus efficace qu'un seul gros repas.",
+    "lesson.t04.brief.4" to "Ne pas dépasser 10 minutes de pause : une fois le corps refroidi, le redémarrage coûte plus cher.",
+
+    // ---------- t15 Carte et navigation pratique ----------
+    "lesson.t15.brief.1" to "La carte du téléphone est l'outil principal, mais il faut télécharger les fonds hors ligne à l'avance : en montagne, l'état le plus courant est « batterie pleine, pas de réseau ».",
+    "lesson.t15.brief.2" to "Sur une carte au 1:50 000, 1 cm vaut 500 m : savoir lire l'échelle avant de parler de relief.",
+    "lesson.t15.brief.3" to "Trois familles de traits à reconnaître : les courbes de niveau (le relief), l'itinéraire (la direction), l'hydrographie (souvent le point le plus bas). Vallons et crêtes décident si l'on est du même côté.",
+    "lesson.t15.brief.4" to "Une montre et le soleil suffisent à une orientation grossière : l'aiguille des heures vers le soleil, la bissectrice entre cette aiguille et midi indique le sud. Par temps couvert, on revient à la boussole.",
+    "lesson.t15.brief.5" to "Se perdre commence par s'arrêter. Regarder en arrière trois repères visibles et confirmer d'où l'on vient est bien plus utile que de continuer à chercher un chemin.",
 )
