@@ -374,4 +374,63 @@ internal val PACK_FR_BRIEF: Map<String, String> = mapOf(
     "lesson.l29.brief.4" to "On ne perce pas une ampoule à la légère ; s'il faut le faire, on draine depuis le bord avec une aiguille désinfectée, on conserve l'épiderme et on couvre d'un pansement.",
     "lesson.l29.brief.5" to "Le coup de soleil se traite comme une brûlure : froid local, hydratation et éviter une nouvelle exposition. Les lèvres et les ailes du nez sont les zones les plus oubliées.",
     "lesson.l29.brief.6" to "Une brûlure se rince à l'eau froide pendant 20 minutes, puis se couvre d'un pansement propre. Ni dentifrice, ni sauce de soja, ni pommade grasse.",
+    // ---------- l32 Corde fixe et systèmes d'ancrage ----------
+    "lesson.l32.brief.1" to "Trois types de corde fixe : la main courante (petit passage exposé), la corde fixe courte (une longueur que l'on monte et redescend), l'équipement de la voie (itinéraire long, plusieurs longueurs).",
+    "lesson.l32.brief.2" to "Distinguer les matériaux : la corde dynamique (EN 892) sert à l'ouverture et aux chutes ; la corde fixe se fait en statique (EN 1891), peu allongeable et résistante à l'abrasion.",
+    "lesson.l32.brief.3" to "L'équipement de la voie se fait couramment en statique de 9–11 mm. Plus fin, l'usure est rapide ; plus gros, le poids devient lourd.",
+    "lesson.l32.brief.4" to "Cinq contrôles d'ancrage : indépendance, répartition, direction, redondance, arêtes. Deux ancrages enfilés sur une même sangle, ce n'est pas de la redondance, c'est une défaillance en série.",
+    "lesson.l32.brief.5" to "Le nœud de huit double permet de relier deux ou trois ancrages à la fois ; c'est la pratique courante de l'UIAA.",
+    "lesson.l32.brief.6" to "Le relais intermédiaire (re-belay) fait suivre la corde le long de l'itinéraire et limite la chute comme l'usure à un seul tronçon.",
+    "lesson.l32.brief.7" to "Le bout de corde doit être noué, sinon il peut sortir du matériel : c'est le point le plus souvent oublié et celui dont les conséquences sont les plus directes.",
+
+    // ---------- l33 Remontée, passage de nœud et changement de corde ----------
+    "lesson.l33.brief.1" to "Configuration standard pour remonter une corde fixe : bloqueur de poignée, bloqueur de poitrine (ou un second nœud autobloquant), étrier, nœud autobloquant de secours, PAS ou sangle, casque.",
+    "lesson.l33.brief.2" to "Le mouvement est « se lever, s'asseoir, pousser » : debout sur l'étrier, on pousse le bloqueur de poitrine, on s'assoit, puis on pousse celui de poignée. Le centre de gravité reste contre la corde, sans partir vers l'extérieur.",
+    "lesson.l33.brief.3" to "La règle dure est deux connexions : à tout moment, deux liens indépendants. La seule exception est l'encordement direct pour ouvrir.",
+    "lesson.l33.brief.4" to "Principe du passage de nœud : d'abord créer la nouvelle connexion, ensuite retirer l'ancienne. Les deux bloqueurs ne doivent jamais quitter la corde en même temps.",
+    "lesson.l33.brief.5" to "Le changement de corde est l'étape la plus accidentogène du travail sur corde fixe, parce qu'il faut transférer entre démonter l'ancien système et construire le nouveau.",
+    "lesson.l33.brief.6" to "L'ordre de la conversion montée-descente est fixe : se vacher au relais, installer le descendeur et l'essayer, retirer les bloqueurs, libérer le PAS, descendre.",
+    "lesson.l33.brief.7" to "En descente, un nœud de friction de secours est obligatoire et le bout doit être noué ; au passage d'un nœud, on transfère le matériel en deux temps avec le PAS.",
+
+    // ---------- l34 Progression sur glacier et choix d'itinéraire ----------
+    "lesson.l34.brief.1" to "Un glacier n'est pas une plaine : il se compose de zones de crevasses, de ponts de neige, de séracs, de cascades de glace et de moraines, et chaque partie a son propre type de risque.",
+    "lesson.l34.brief.2" to "Les crevasses sont transversales, longitudinales ou obliques. Les transversales apparaissent aux changements de pente, les longitudinales dans les bandes d'étirement sur les côtés.",
+    "lesson.l34.brief.3" to "En progression encordée, l'espacement est en général de 8–10 m, raccourci en zone dense ; un nœud tous les quelques mètres limite la profondeur de chute et ajoute du frottement au blocage.",
+    "lesson.l34.brief.4" to "Une cordée de trois est plus sûre qu'une cordée de deux : si l'un tombe, deux bloquent et l'un prépare le système, ce qui laisse bien plus de marge au sauvetage.",
+    "lesson.l34.brief.5" to "Un pont de neige se juge en regardant, en écoutant et en sondant : une couleur sombre ou bleutée signale une faible épaisseur ; un affaissement ou des fissures rayonnantes imposent de contourner ; on sonde au piolet avant de poser le pied.",
+    "lesson.l34.brief.6" to "Les ponts sont les plus solides tôt le matin et les plus faibles après la fonte de l'après-midi. Le franchissement d'une zone dense se programme donc tôt ou pendant les heures froides de la nuit.",
+    "lesson.l34.brief.7" to "En zone de séracs, on passe vite, on garde les distances, on porte le casque, et on ne s'y arrête ni n'y attend encordés.",
+    // ---------- l35 Ensevelissement : fenêtre de survie et ordre sur place ----------
+    "lesson.l35.brief.1" to "Ensevelissement critique (tête, cou et poitrine recouverts) : survie d'environ 48 %, contre 47,6 % pour l'ensevelissement complet dans la référence 2013 ; ensevelissement partiel 96 %. Le degré d'ensevelissement est le facteur prédictif isolé le plus fort.",
+    "lesson.l35.brief.2" to "La courbe de survie a quatre phases : survie (environ 18 minutes, décès surtout traumatiques), asphyxie (18–35 minutes, chute brutale), latence (35–90 minutes, entrée en protection hypothermique pour ceux qui ont une poche d'air), phase prolongée (au-delà de 90 minutes, l'hypothermie domine).",
+    "lesson.l35.brief.3" to "La première cause de décès est l'asphyxie, avec 65–100 % ; traumatismes 5–29 % ; hypothermie seulement 0–4 %. Cela fixe la priorité : ventiler d'abord.",
+    "lesson.l35.brief.4" to "Ordre sur place : de 0 à 2 minutes, vérifier le risque d'avalanche secondaire, désigner un guetteur, noter l'heure et le dernier point vu, appeler les secours ; de 2 à 10 minutes, rechercher, sonder, commencer à creuser — l'objectif est le contact, pas le dégagement complet.",
+    "lesson.l35.brief.5" to "Les 60 premières secondes après avoir atteint le visage : dégager la neige et les morceaux de glace de la bouche et du nez, vérifier les signes vitaux dans la minute, ventiler immédiatement en l'absence de respiration, sans attendre le dégagement du corps.",
+    "lesson.l35.brief.6" to "Toujours donner les chiffres avec l'année et la référence : 25 % à 45 minutes contre 18 % à 40 minutes relève d'une fluctuation d'échantillon, pas d'un rebond de la courbe, et ne peut jamais être présenté comme une promesse.",
+
+    // ---------- l36 Réanimation sous avalanche : règle des 60 minutes et voies aériennes ----------
+    "lesson.l36.brief.1" to "L'ICAR MedCom a porté la ligne de décision de 35 à 60 minutes dans sa version 2023. L'ancienne référence est abrogée : les supports de cours doivent suivre la nouvelle.",
+    "lesson.l36.brief.2" to "Ensevelissement de 60 minutes ou moins sans signe vital : traiter comme une asphyxie, ventiler au plus vite, que les voies aériennes soient libres ou non.",
+    "lesson.l36.brief.3" to "Plus de 60 minutes, aucun signe vital mais voies aériennes libres ou inconnues : traiter comme un arrêt cardiaque hypothermique ; sauf si une mesure de température exclut l'hypothermie, commencer la RCP et évacuer.",
+    "lesson.l36.brief.4" to "Plus de 60 minutes, voies aériennes obstruées et température centrale non mesurable : traiter comme un arrêt cardiaque asphyxique et ne pas commencer la RCP.",
+    "lesson.l36.brief.5" to "Si la température centrale est mesurable et inférieure à 30 °C avec des voies aériennes libres : tenter la réanimation quelle que soit la durée, et évacuer vers un hôpital capable de réchauffement par circulation extracorporelle.",
+    "lesson.l36.brief.6" to "L'obstruction des voies aériennes se définit par un remplissage complet de la bouche et du nez par de la neige tassée ou des débris ; en cas de doute, on considère les voies libres. La présence d'une poche d'air ne change pas la conduite.",
+    "lesson.l36.brief.7" to "Les compressions thoraciques n'attendent pas le dégagement complet et restent possibles en position anormale. Attendre « d'avoir fini de creuser pour masser » est un retard fatal classique.",
+    // ---------- l37 Les trois outils : recherche ARVA et sondage ----------
+    "lesson.l37.brief.1" to "Une recherche d'avalanche se fait en quatre phases, dans l'ordre : recherche de signal et d'indices, recherche grossière, recherche fine, sondage ponctuel. Sauter une phase est la perte d'efficacité la plus fréquente.",
+    "lesson.l37.brief.2" to "Espacement des bandes d'environ 40 m et environ 20 m depuis le bord des débris. Si l'on n'est pas sûr de couvrir proprement, on descend à 30 m.",
+    "lesson.l37.brief.3" to "Regarder d'abord les indices de surface : gants, pointes de bâtons, casque, sangle de sac. Ne pas plonger le nez sur l'ARVA d'entrée : couvrir la surface compte plus que la précision.",
+    "lesson.l37.brief.4" to "La recherche grossière ramène la lecture à 3–5 m ; si la distance augmente, on est parti dans le mauvais sens et on revient sur ses pas.",
+    "lesson.l37.brief.5" to "La recherche fine se fait ARVA près de la surface, en croisements : on trouve le point de lecture minimale et on le marque. C'est lui qui détermine la surface à sonder.",
+    "lesson.l37.brief.6" to "Le sondage ponctuel se fait à 90 degrés de la surface ; si rien n'est touché, on étend sur une grille de 25 cm, et une fois la victime touchée, la sonde reste en place comme repère.",
+    "lesson.l37.brief.7" to "L'angle de sonde diffère entre secours par les coéquipiers et recherche organisée : en secours par les coéquipiers, perpendiculaire à la surface ; sur une ligne organisée, verticale, pour que les profondeurs lues soient comparables.",
+
+    // ---------- l38 Dégagement et tapis roulant à neige ----------
+    "lesson.l38.brief.1" to "Premier principe : toujours travailler depuis le côté aval. Creuser depuis le dessus ou depuis l'amont fait retomber les blocs sur le visage de la victime : c'est plus lent et plus dangereux.",
+    "lesson.l38.brief.2" to "Le repère classique consiste à reculer d'environ 1,5 fois la profondeur depuis la sonde en descendant la pente, à attaquer latéralement côté aval et à ouvrir un couloir en pente de 1–2 m de large. C'est une règle empirique, pas l'unique référence.",
+    "lesson.l38.brief.3" to "L'étude de l'ISSW 2023 sur le tapis roulant à neige soutient qu'à partir de trois personnes et si la place le permet, creuser directement depuis la sonde en suivant la ligne de plus grande pente atteint la tête plus vite.",
+    "lesson.l38.brief.4" to "Deux exceptions seulement justifient de décaler le départ : un ensevelissement très peu profond avec les pieds engagés presque à la même profondeur, ou un effectif insuffisant imposant une solution en solo.",
+    "lesson.l38.brief.5" to "Le tapis roulant, c'est un couloir en V (1–2 m de large) plus une chaîne d'évacuation. Si la pente du couloir descend sous environ 26 degrés, la neige retombe vers la sonde.",
+    "lesson.l38.brief.6" to "Ordre d'efficacité d'évacuation : le balayage (paddling) est le plus rapide, l'écopage (scooping) vient ensuite, la découpe en blocs (cutting) est la plus lente. La découpe ne sert qu'en neige dure.",
+    "lesson.l38.brief.7" to "Une fois le visage atteint, l'ordre change : dégager la bouche et le nez pour vérifier les voies aériennes, puis le thorax et les bras, enfin les jambes et le corps. Ne pas tirer par les épaules.",
 )
