@@ -422,4 +422,28 @@ internal val PACK_IT_BRIEF: Map<String, String> = mapOf(
     "lesson.l38.brief.5" to "Il nastro trasportatore è un canale a V (largo 1–2 metri) più una catena di smaltimento. Sotto circa 26 gradi di pendenza i blocchi rotolano di nuovo verso la sonda.",
     "lesson.l38.brief.6" to "Ordine di efficienza nello smaltimento: spazzare (paddling) è il più rapido, paleggiare (scooping) viene dopo, tagliare a blocchi (cutting) è il più lento. Il taglio serve solo con neve dura.",
     "lesson.l38.brief.7" to "Arrivati al viso l'ordine cambia: prima liberare bocca e naso e verificare le vie aeree, poi torace e braccia, infine gambe e corpo. Non tirare le spalle per estrarre la persona.",
+    // ---------- l42 Principi di sicurezza ----------
+    "lesson.l42.brief.1" to "Principio «quattro, tre, tre»: lasciare un terzo di margine su energia, tempo e attrezzatura. È lo spazio riservato all'imprevisto, al meteo e agli errori di valutazione.",
+    "lesson.l42.brief.2" to "«Tre novità, non si parte»: itinerario nuovo, compagni nuovi e attrezzatura nuova. Non se ne sommano più di due nella stessa uscita: più novità significa più incognite.",
+    "lesson.l42.brief.3" to "Rischio = conseguenza × probabilità. Si riduce prima la conseguenza (è più facile da ottenere) e poi la probabilità, perché una conseguenza avvenuta non si recupera.",
+    "lesson.l42.brief.4" to "STOP: fermarsi, pensare, osservare, pianificare. Aver perso i riferimenti, un cambio brusco di meteo, un compagno in condizioni anomale: il primo gesto è sempre fermarsi.",
+    "lesson.l42.brief.5" to "Tre cardini per un campo sicuro: evitare le trappole del terreno, tenere libera una via di evacuazione e raccogliere i materiali critici in un punto solo.",
+    "lesson.l42.brief.6" to "Nel piano deve essere scritto «in quali casi si rinuncia». Un piano che dice solo come riuscire, in pratica, equivale a non avere un piano.",
+
+    // ---------- l43 Vita al campo ----------
+    "lesson.l43.brief.1" to "I problemi di pelle in quota vengono da tre cose: secchezza, raggi ultravioletti e vento. Idratare, proteggere dal sole e curare le labbra è lavoro quotidiano, non un'opzione.",
+    "lesson.l43.brief.2" to "La piastra scalda-corpo è uno strumento per «prevenire l'ipotermia», non un piacere per riscaldarsi. Va sulla zona lombare, sull'addome o all'esterno dello scarpone, mai a contatto con la pelle.",
+    "lesson.l43.brief.3" to "Posate e articoli per l'igiene: uno per persona, con il nome marcato; l'acqua per lavare va tenuta lontano dalle fonti e i residui vanno sempre portati via.",
+    "lesson.l43.brief.4" to "Lo strato intimo è la priorità da lavare e asciugare: il sale del sudore irrita e rompe la pelle, e in quota una lesione guarisce molto male. Il piumino non si lava: se si bagna, si asciuga all'aria.",
+    "lesson.l43.brief.5" to "Tre regole d'ordine al campo: scarpe nell'abside, cibo fuori dalla tenda, rifiuti raccolti e appesi in alto. Insieme prevengono umidità, animali e contaminazione.",
+    "lesson.l43.brief.6" to "L'obiettivo della cura personale è «mantenere il corpo in condizione di poter lavorare»; la comodità è solo un effetto collaterale.",
+
+    // ---------- l39 Leadership ----------
+    "lesson.l39.brief.1" to "La leadership è comportamento, non incarico. Anche chi non ha un titolo può influenzare le decisioni facendo domande, segnalando e prendendosi responsabilità.",
+    "lesson.l39.brief.2" to "Le competenze tecniche decidono «se si può fare», quelle relazionali «se la squadra vuole farlo insieme». Negli incidenti d'alta quota spesso manca la seconda.",
+    "lesson.l39.brief.3" to "La responsabilità ha tre livelli: comportamento (che cosa si fa), pensiero (come si giudica) ed emozione (come si sente). Guardare solo il comportamento fa ripetere il problema.",
+    "lesson.l39.brief.4" to "Il conflitto è come un iceberg: in superficie c'è la posizione («voglio la vetta»), sotto il bisogno («temo di essere disprezzato»). Rispondere al bisogno è ciò che rende flessibile la posizione.",
+    "lesson.l39.brief.5" to "L'«alone dell'esperto» è una trappola frequente: scambiare la sicurezza in sé e l'attrezzatura appariscente per competenza, finché nessuno osa contestare un errore evidente.",
+    "lesson.l39.brief.6" to "Anche chi segue ha responsabilità: fare domande, dare riscontri e dire basta quando serve. L'obbedienza cieca non è lealtà: è rinunciare al proprio giudizio.",
+    "lesson.l39.brief.7" to "Ogni decisione ha bisogno di un'ora limite fissata prima (turnaround time) e comunicata a tutta la squadra prima di partire. Deciderla dopo equivale a non averla.",
 )
