@@ -446,4 +446,19 @@ internal val PACK_IT_BRIEF: Map<String, String> = mapOf(
     "lesson.l39.brief.5" to "L'«alone dell'esperto» è una trappola frequente: scambiare la sicurezza in sé e l'attrezzatura appariscente per competenza, finché nessuno osa contestare un errore evidente.",
     "lesson.l39.brief.6" to "Anche chi segue ha responsabilità: fare domande, dare riscontri e dire basta quando serve. L'obbedienza cieca non è lealtà: è rinunciare al proprio giudizio.",
     "lesson.l39.brief.7" to "Ogni decisione ha bisogno di un'ora limite fissata prima (turnaround time) e comunicata a tutta la squadra prima di partire. Deciderla dopo equivale a non averla.",
+    // ---------- l40 Nutrizione sopra gli 8.000 m ----------
+    "lesson.l40.brief.1" to "Tre fonti di energia: i carboidrati agiscono nel modo più diretto, i grassi hanno la densità energetica più alta, le proteine servono soprattutto a riparare. Primo principio in quota: «far entrare carboidrati».",
+    "lesson.l40.brief.2" to "La quota di energia dai grassi si può aumentare con un allenamento lungo, ma lentamente; sperare in un «cambio di metabolismo già in montagna» non è realistico.",
+    "lesson.l40.brief.3" to "La perdita di appetito è normale in quota e il deficit energetico è frequente e difficile da evitare. La strategia è «porzioni piccole e frequenti più alta densità energetica», invece di aspettare la fame.",
+    "lesson.l40.brief.4" to "Il cibo da cammino si divide in due gruppi: quello che si mangia camminando (gel, caramelle gommose, barrette) e quello che richiede una sosta (cibo caldo). Il primo decide se il ritmo tiene.",
+    "lesson.l40.brief.5" to "La disidratazione indebolisce insieme appetito e lucidità; bere e mangiare vanno pianificati insieme.",
+    "lesson.l40.brief.6" to "Sul rapporto tra aminoacidi ramificati e ammoniaca esistono studi, ma le prove sono limitate: non sostituiscono la base, cioè mangiare abbastanza calorie totali.",
+
+    // ---------- l41 Logistica di spedizione ----------
+    "lesson.l41.brief.1" to "La logistica di spedizione è un trasporto in più tratte: strada, cammino, trasporto a dorso, campo alto. Ogni tratta ha limiti di carico, tempi e rischi propri.",
+    "lesson.l41.brief.2" to "I materiali si confezionano per «ordine di arrivo», non per categoria. Cercare in dieci casse una cartuccia di gas è il modo più comune di perdere tempo in un campo alto.",
+    "lesson.l41.brief.3" to "Il permesso è di solito vincolato a un ufficiale di collegamento, a un itinerario e a una scadenza. La proroga comporta insieme un problema di costo e di conformità, e va messa nel piano fin dall'inizio.",
+    "lesson.l41.brief.4" to "Il deposito cauzionale per i rifiuti è una regola rigida su molte montagne: si restituisce solo portando fuori tutti i rifiuti. Vanno riservati budget e personale.",
+    "lesson.l41.brief.5" to "Il carico di collaboratori e portatori ha limiti di legge o di settore; sovraccaricarli trasferisce il rischio su di loro e rallenta tutta la squadra.",
+    "lesson.l41.brief.6" to "Il piano di rifornimento deve esprimere il tasso di consumo: combustibile, cartucce e cibo si calcolano come «persone × giorni × consumo», non a occhio.",
 )
