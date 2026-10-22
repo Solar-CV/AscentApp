@@ -421,4 +421,10 @@ internal val PACK_SV_BRIEF: Map<String, String> = mapOf(
     "lesson.l38.brief.5" to "Transportbandet = V-formad kanal (1–2 meter bred) plus kedja. Under cirka 26 graders lutning rullar snöblocken tillbaka mot sonden.",
     "lesson.l38.brief.6" to "Effektivitetsordning för snötransport: paddling (svepa) är snabbast, scooping (ösa) näst och cutting (skära block) långsammast. Cutting används bara i hård snö.",
     "lesson.l38.brief.7" to "När man når ansiktet ändras ordningen: rensa mun och näsa och säkra luftvägen, därefter bröstkorg och armar, sist ben och kropp. Dra inte i axlarna för att få ut personen.",
+    "lesson.l42.brief.1" to "Principen «fyra, tre, tre»: behåll en tredjedel marginal i ork, tid och utrustning. Marginalen är utrymmet för det oväntade, för vädret och för felbedömningar.",
+    "lesson.l42.brief.2" to "«Tre nya — stanna hemma»: ny rutt, nya kamrater och ny utrustning. Ta inte med mer än två av dem på samma tur. Ju fler nya saker, desto fler okända faktorer.",
+    "lesson.l42.brief.3" to "Risk = konsekvens × sannolikhet. Sänk konsekvensen först (det är lättare) och sannolikheten sedan — eftersom en inträffad konsekvens inte går att göra ogjord.",
+    "lesson.l42.brief.4" to "STOP: stanna, tänk, observera, planera. Vid vilsegång, plötslig väderförändring eller avvikande tillstånd hos en deltagare är första åtgärden alltid att stanna.",
+    "lesson.l42.brief.5" to "Tre nycklar för en säker lägerplats: undvik terrängfällor, håll en reträttväg öppen och samla kritisk utrustning på ett ställe.",
+    "lesson.l42.brief.6" to "Planen måste innehålla «i vilka lägen vi ger upp». En plan som bara beskriver hur man ska lyckas är i praktiken ingen plan.",
 )
