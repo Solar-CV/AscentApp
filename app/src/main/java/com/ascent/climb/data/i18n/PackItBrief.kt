@@ -514,4 +514,39 @@ internal val PACK_IT_BRIEF: Map<String, String> = mapOf(
     "lesson.t15.brief.3" to "Tre tipi di linee da riconoscere: curve di livello (dislivello), itinerario (direzione), idrografia (spesso il punto più basso). Valle e cresta dicono se si sta sullo stesso versante.",
     "lesson.t15.brief.4" to "Con orologio e sole si può orientarsi a grandi linee: la lancetta delle ore verso il sole, la bisettrice fra quella e le 12 indica il sud. Con cielo coperto serve la bussola.",
     "lesson.t15.brief.5" to "La prima cosa quando ci si perde è fermarsi. Riguardare tre riferimenti evidenti e capire da dove si è arrivati serve molto più che continuare a cercare la via.",
+    // ---------- t09 Mal di montagna e ritmo di salita ----------
+    "lesson.t09.brief.1" to "Sopra i 3.000 m la quota di sonno non sale più di 500 m al giorno, e ogni 1.000 m va previsto un giorno di adattamento.",
+    "lesson.t09.brief.2" to "I tre segni centrali del mal acuto di montagna (AMS): mal di testa, nausea o inappetenza, vertigini e debolezza.",
+    "lesson.t09.brief.3" to "Comparso un AMS si ferma la salita: ci si acclimata sul posto o si scende; tirare avanti con i farmaci è l'errore più comune.",
+    "lesson.t09.brief.4" to "I segnali di pericolo sono dispnea a riposo, andatura instabile e alterazione della coscienza: in quel caso bisogna scendere subito.",
+
+    // ---------- t10 Caldo e sole in quota ----------
+    "lesson.t10.brief.1" to "Bastano tre strati: quello che smaltisce il sudore, quello caldo e quello antivento. Se fa freddo si aggiunge lo strato intermedio, se fa caldo si apre prima il collo.",
+    "lesson.t10.brief.2" to "Ogni 1.000 m di quota l'intensità degli ultravioletti aumenta di circa il 10–12 %; la neve ne riflette un altro 80 %.",
+    "lesson.t10.brief.3" to "Quattro strumenti per il sole: occhiali UV400, crema SPF50+, burrocacao e cappello a tesa.",
+    "lesson.t10.brief.4" to "Mani e piedi si raffreddano per primi perché il corpo difende la temperatura centrale; guanti e calze di riserva vanno cambiati appena si bagnano.",
+
+    // ---------- t11 Alimentazione e sonno in quota ----------
+    "lesson.t11.brief.1" to "La perdita di appetito in quota è comune: bisogna mangiare attivamente, in piccole dosi frequenti.",
+    "lesson.t11.brief.2" to "In quota l'aria è secca e con il respiro si perde molta acqua: le urine devono restare giallo chiaro per dire che si beve abbastanza.",
+    "lesson.t11.brief.3" to "Di notte respiro periodico, sonno leggero e risvegli frequenti sono normali.",
+    "lesson.t11.brief.4" to "L'alcol deprime la respirazione e aggrava l'ipossia: in quota è più pericoloso che altrove.",
+
+    // ---------- t12 Squadra e preparazione psicologica ----------
+    "lesson.t12.brief.1" to "Prima di partire va accettata una cosa: questa volta si potrebbe non arrivare. Solo ammettendo la rinuncia il piano sta in piedi.",
+    "lesson.t12.brief.2" to "La pressione del ritmo è il peso invisibile più grande per un principiante. Bisogna saper dire «non vi tengo, andate al passo del più lento».",
+    "lesson.t12.brief.3" to "Paura del vuoto ed esposizione si attenuano guardando a tratti, controllando il respiro e mantenendo tre punti di appoggio.",
+    "lesson.t12.brief.4" to "«Siamo già arrivati fin qui» è il classico costo sommerso: non costituisce una ragione per continuare.",
+
+    // ---------- t13 Pianificazione di lunga percorrenza ----------
+    "lesson.t13.brief.1" to "Un punto di rifornimento ogni 3–5 giorni spezza il lungo itinerario in tratte realizzabili e abbandonabili.",
+    "lesson.t13.brief.2" to "Il cibo liofilizzato si stima su 600–800 g al giorno, per circa 2.500–3.000 kcal.",
+    "lesson.t13.brief.3" to "Permessi, norme sull'uso del fuoco, rifiuti da portare fuori e limiti ai droni: tutto va verificato voce per voce prima di partire.",
+    "lesson.t13.brief.4" to "Lasciare il 20 % di margine: vale per cibo, combustibile, tempo e contanti.",
+
+    // ---------- t14 Pronto soccorso e chiamata di soccorso ----------
+    "lesson.t14.brief.1" to "La distorsione si tratta con RICE: riposo, freddo, bendaggio compressivo, sollevamento dell'arto.",
+    "lesson.t14.brief.2" to "Ipotermia, ordine di intervento: riparo dal vento, abiti asciutti, isolamento dal terreno, bevande calde a chi è cosciente, riscaldamento graduale.",
+    "lesson.t14.brief.3" to "Nel colpo di calore bisogna portare subito all'ombra, slacciare i vestiti, raffreddare fisicamente e reintegrare gli elettroliti.",
+    "lesson.t14.brief.4" to "Quattro cose in una richiesta di soccorso: coordinate della posizione, numero di persone e condizioni, attrezzatura e rifornimenti, recapiti.",
 )
