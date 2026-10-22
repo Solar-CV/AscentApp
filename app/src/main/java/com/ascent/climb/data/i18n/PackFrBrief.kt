@@ -313,5 +313,19 @@ internal val PACK_FR_BRIEF: Map<String, String> = mapOf(
     "lesson.m25.brief.2" to "« On est venus jusqu'ici » est la phrase la plus coûteuse en montagne : elle transforme le temps déjà investi en raison de continuer à risquer. La montagne ne réduit pas le risque parce que tu as beaucoup investi.",
     "lesson.m25.brief.3" to "Quand le corps envoie des signaux, le premier pas n'est pas de « serrer les dents », mais de s'arrêter, d'observer et de le dire honnêtement au partenaire ou au guide. Le guide ne peut décider que s'il sait.",
     "lesson.m25.brief.4" to "Lent, c'est rapide : une allure régulière et soutenable fait gagner du temps et de la sécurité par rapport à des sprints répétés — cela décrit une loi du métabolisme énergétique, pas une attitude.",
-    "lesson.m25.brief.5" to "Les désaccords doivent être dits. La minorité silencieuse revient régulièrement dans les retours d'accident ; garder une réserve et exécuter ne s'excluent pas."
+    "lesson.m25.brief.5" to "Les désaccords doivent être dits. La minorité silencieuse revient régulièrement dans les retours d'accident ; garder une réserve et exécuter ne s'excluent pas.",
+    // ---------- l23 Liste de matériel et système de portage ----------
+    "lesson.l23.brief.1" to "La liste se parcourt dans l'ordre « ce qui peut tuer » : d'abord l'isolation et la protection, ensuite le matériel technique, et en dernier le confort. Une liste construite dans l'autre sens est celle qui laisse manquer l'essentiel par mauvais temps.",
+    "lesson.l23.brief.2" to "Sac d'assaut de 35–50 litres, sac de voyage de 90–120 litres. Dans le sac d'assaut, seulement ce qui sert dans la journée ; le gros volume voyage en portage. Plus le sac est lourd, plus tôt on commence à faire des erreurs.",
+    "lesson.l23.brief.3" to "Ordre de chargement : le lourd contre le dos, entre les omoplates, le léger vers l'extérieur et vers le bas. La ceinture supporte 60 à 70 % du poids ; les bretelles servent seulement à garder le sac contre le corps.",
+    "lesson.l23.brief.4" to "L'étanchéité se fait par couches : sac de couchage et doudoune chacun dans son sac étanche, l'électronique et les médicaments dans une couche de plus. Le sac lui-même n'est pas étanche, ne comptez pas sur lui.",
+    "lesson.l23.brief.5" to "Le jour du sommet, garder un sac de 15 à 20 % du poids du corps. Au-delà, il faut retirer des choses : s'obstiner n'apporte qu'un rythme plus lent et plus d'erreurs.",
+    "lesson.l23.brief.6" to "Avant de partir, dernier contrôle des trois objets qu'on oublie le plus : la frontale avec piles de rechange, les gants de rechange et la trousse de secours.",
+    // ---------- l24 Système de couchage et matériel de camp ----------
+    "lesson.l24.brief.1" to "On regarde la température de confort du sac, pas la température limite. La température de confort doit être au moins 5 °C sous la minimale attendue.",
+    "lesson.l24.brief.2" to "Le duvet craint l'humidité. Une chaussette intérieure, un sac étanche séparé et dix minutes d'aération en retournant le sac chaque matin : ce sont ces trois gestes qui décident s'il tiendra toute la sortie.",
+    "lesson.l24.brief.3" to "Le tapis de sol a deux jambes : couper la conduction (mousse à cellules fermées) et apporter du confort (gonflable). En altitude, on les superpose le plus souvent, en additionnant les valeurs isolantes.",
+    "lesson.l24.brief.4" to "Une fuite sur un matelas gonflable est la panne la plus fréquente au camp. Emporter des rustines, presser les alvéoles avant de se coucher et ne pas attendre d'être réveillé de froid à minuit.",
+    "lesson.l24.brief.5" to "Oreiller et bouchons ne sont pas des luxes. En altitude on dort mal surtout par manque d'oxygène et à cause du bruit ; améliorer un peu change l'état du lendemain.",
+    "lesson.l24.brief.6" to "Ne pas laisser le sac comprimé en permanence. À la maison, l'étendre ou le suspendre lâche, pour que le duvet retrouve son gonflant.",
 )
