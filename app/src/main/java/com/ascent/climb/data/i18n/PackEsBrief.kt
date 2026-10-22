@@ -566,4 +566,19 @@ internal val PACK_ES_BRIEF: Map<String, String> = mapOf(
     "lesson.l29.brief.4" to "Las ampollas no se pinchan a la ligera; si hay que hacerlo, se drenan desde el borde con una aguja desinfectada, se conserva la piel y se cubre con un apósito.",
     "lesson.l29.brief.5" to "La quemadura solar se trata como una quemadura: frío local, hidratación y evitar nueva exposición. Labios y alas de la nariz son las zonas que más se olvidan.",
     "lesson.l29.brief.6" to "Ante una quemadura se enjuaga con agua fría durante 20 minutos y después se cubre con un apósito limpio. Nada de pasta de dientes, salsa de soja ni pomadas grasas.",
+    // ---------- l30 Botiquín y preparación médica de expedición ----------
+    "lesson.l30.brief.1" to "El botiquín se organiza en tres niveles: botiquín personal de bolsillo, botiquín de equipo y botiquín médico de campamento base. Los usos son completamente distintos y no se deben fundir en una sola bolsa.",
+    "lesson.l30.brief.2" to "El de bolsillo resuelve «hemorragias, ampollas, analgesia y protección solar»; el de equipo resuelve «inmovilizar, limpiar heridas, abrigar y dar oxígeno»; el de campamento base resuelve «medicación con receta, monitorización y suministros para varios días».",
+    "lesson.l30.brief.3" to "La medicación con receta la prescribe un médico y debe indicar indicaciones y contraindicaciones; dentro del equipo no se recomienda ni se administra medicación a otro.",
+    "lesson.l30.brief.4" to "La saturación y la frecuencia cardíaca se registran como tendencia, no como valor aislado. Un descenso sostenido a la misma altitud dice más que una cifra baja puntual.",
+    "lesson.l30.brief.5" to "El plan de evacuación se decide antes de salir: quién puede ordenarla, a quién se llama, cómo se tramita con el seguro y dónde está el punto médico más cercano.",
+    "lesson.l30.brief.6" to "El núcleo de la preparación médica no es cuánta medicación se lleva, sino «quién decide». Con los roles definidos de antemano, en el terreno nadie se queda esperando al otro.",
+
+    // ---------- l31 Personas susceptibles y estrategias de prevención en altura ----------
+    "lesson.l31.brief.1" to "El predictor más potente es «haber tenido mal de altura antes». Quien tiene antecedente de AMS vuelve a presentarlo con una probabilidad claramente mayor.",
+    "lesson.l31.brief.2" to "La velocidad de ascensión y la altura de sueño importan más que la forma física y la edad. La gente en buena forma suele caminar más rápido y subir más alto, y por eso se pone peor.",
+    "lesson.l31.brief.3" to "Una infección respiratoria aumenta mucho el riesgo: subir con un catarro es abrirle la puerta al HAPE.",
+    "lesson.l31.brief.4" to "La edad no es la variable principal; lo son las diferencias individuales. Una persona de 60 años que entrena con regularidad puede aclimatarse mejor que una de 25 que no duerme.",
+    "lesson.l31.brief.5" to "Cuatro pilares de la prevención: controlar la velocidad de ascensión, programar días de aclimatación, no subir con síntomas y, cuando haga falta, medicarse bajo indicación médica.",
+    "lesson.l31.brief.6" to "La medicación es un apoyo, no un sustituto. La acetazolamida alivia síntomas, pero no permite saltarse la aclimatación.",
 )
