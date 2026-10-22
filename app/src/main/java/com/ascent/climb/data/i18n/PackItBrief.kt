@@ -549,4 +549,48 @@ internal val PACK_IT_BRIEF: Map<String, String> = mapOf(
     "lesson.t14.brief.2" to "Ipotermia, ordine di intervento: riparo dal vento, abiti asciutti, isolamento dal terreno, bevande calde a chi è cosciente, riscaldamento graduale.",
     "lesson.t14.brief.3" to "Nel colpo di calore bisogna portare subito all'ombra, slacciare i vestiti, raffreddare fisicamente e reintegrare gli elettroliti.",
     "lesson.t14.brief.4" to "Quattro cose in una richiesta di soccorso: coordinate della posizione, numero di persone e condizioni, attrezzatura e rifornimenti, recapiti.",
+    // ---------- t16 Vita al campo e igiene ----------
+    "lesson.t16.brief.1" to "Il campo si divide in tre zone: dove si dorme, dove si cucina, la latrina. La regola di base è che dove si dorme non sta sottovento e non sta vicino al cibo.",
+    "lesson.t16.brief.2" to "I bisogni vanno in una buca di 15–20 centimetri, ad almeno 60 metri dall'acqua e dal sentiero; la carta igienica si porta via, non si brucia.",
+    "lesson.t16.brief.3" to "L'acqua per i piatti va filtrata dai residui e poi dispersa, portando via i residui. I resti di cibo attirano animali e inquinano le fonti.",
+    "lesson.t16.brief.4" to "Nella cura personale il punto è il piede: lavarlo ogni giorno, cambiare le calze, far asciugare le scarpe. Vesciche e macerazioni partono tutte da lì.",
+    "lesson.t16.brief.5" to "Alla partenza il campo va riportato com'era: pietre al loro posto, tracce di fuoco eliminate, rifiuti tutti portati via.",
+
+    // ---------- t17 Disidratazione, caldo e traumi ----------
+    "lesson.t17.brief.1" to "Il primo segno di disidratazione è il colore scuro delle urine e il calo di lucidità, non la sete. In escursione va controllato una volta al giorno.",
+    "lesson.t17.brief.2" to "Il colpo di calore ha fasi: crampi da calore → esaurimento (vertigini, debolezza, pelle fredda e sudata) → colpo di calore (temperatura centrale >40 °C con alterazione della coscienza).",
+    "lesson.t17.brief.3" to "Ordine di intervento: all'ombra → slacciare i vestiti → raffreddamento fisico → elettroliti. Con coscienza alterata non si forza a bere.",
+    "lesson.t17.brief.4" to "La distorsione si tratta con RICE: riposo, freddo, compressione, sollevamento. Nelle prime 48 ore niente calore e niente massaggi energici.",
+    "lesson.t17.brief.5" to "Le vesciche non si bucano alla leggera; quando è necessario si drenano dal bordo, conservando l'epidermide e coprendo con una medicazione.",
+
+    // ---------- t18 Guado ----------
+    "lesson.t18.brief.1" to "Il rischio di un guado non è «la profondità», ma «profondità × velocità». Il limite tecnico è 1,0 m²/s: sopra non si guada.",
+    "lesson.t18.brief.2" to "Quel 1,0 vale per adulti in salute, su breve distanza e senza zaino pesante. Con zaino grande, acqua vicina a zero gradi e principianti in squadra va abbassato.",
+    "lesson.t18.brief.3" to "Per stimare la corrente si getta un rametto e lo si segue lungo la riva: se bisogna trottare per stargli dietro, la velocità supera quella del passo.",
+    "lesson.t18.brief.4" to "Se l'acqua supera la coscia della persona più bassa della squadra conviene cambiare punto o aggirare, non aspettare che arrivi alla vita.",
+    "lesson.t18.brief.5" to "Nella scelta del punto si guardano tre cose: tratto largo e basso, esterno delle curve evitato, e cosa c'è nel run-out a valle (cascate, tronchi, sponde ripide).",
+    "lesson.t18.brief.6" to "Bastano 15 centimetri di crescita del livello perché un punto prima sicuro diventi pericoloso; nei torrenti di fusione glaciale il pomeriggio è di solito più pieno del mattino.",
+
+    // ---------- t19 Formazioni e caduta in acqua ----------
+    "lesson.t19.brief.1" to "Formazione a triangolo: in tre rivolti verso l'interno, afferrando spalle o zaino, muovendo una persona e una gamba per volta, con il più forte sul lato a monte.",
+    "lesson.t19.brief.2" to "Formazione in linea: almeno tre persone, i più forti alle estremità, braccio passato fra zaino e schiena del compagno, spostamento laterale a piccoli passi.",
+    "lesson.t19.brief.3" to "Comandi uguali per tutti: «un passo, stop, un passo». Chi sta a monte guarda l'acqua e il run-out, gli altri guardano i piedi e chi hanno davanti.",
+    "lesson.t19.brief.4" to "Dopo una caduta la prima regola è non rialzarsi. Il piede incastrato in una fessura o sotto un tronco è la causa più tipica di morte nel guado.",
+    "lesson.t19.brief.5" to "Posizione corretta: sulla schiena, piedi verso valle, testa sollevata, braccia aperte per governare la direzione, remando in diagonale verso riva (back ferry).",
+    "lesson.t19.brief.6" to "La corda di sicurezza è ad alto rischio: molte squadre non sono abbastanza addestrate. Se serve, si fissa solo a riva, mai legata a una persona.",
+
+    // ---------- t20 Manutenzione e riparazione ----------
+    "lesson.t20.brief.1" to "Quattro controlli prima di partire: suola che si scolla, fibbie dello zaino integre, palo della tenda senza crepe, materassino che non perde.",
+    "lesson.t20.brief.2" to "Il kit di riparazione da trekking è «tre tipi di nastro più un ago»: nastro Dyneema per telo e piumino, nastro telato per fissaggi temporanei, toppe per la camera d'aria.",
+    "lesson.t20.brief.3" to "La suola che si scolla è il guasto più frequente sui lunghi itinerari: prima si fissa con nastro per fermare lo strappo, poi in paese si usa la colla specifica.",
+    "lesson.t20.brief.4" to "Un palo della tenda rotto si ripara con la boccola, e si continua a usarlo; un telo strappato si rattoppa con nastro, senza avvicinarlo al fuoco.",
+    "lesson.t20.brief.5" to "Quando il piumino si buca, prima si mette la toppa e si preme: non si scuote, perché scuotere fa uscire la piuma dal foro in continuazione.",
+
+    // ---------- t21 Marcia notturna e temporali ----------
+    "lesson.t21.brief.1" to "Primo principio della marcia notturna: se non è necessario, non si cammina. Di notte navigazione, ricerca della via e lettura del terreno diventano molto più difficili.",
+    "lesson.t21.brief.2" to "Quando è indispensabile: frontale, batterie di riserva e fonte di luce di riserva, tutte e tre. Senza luce, di notte, si perde la capacità di agire.",
+    "lesson.t21.brief.3" to "Di notte si rallenta e si riduce la distanza fra le persone; chi sta davanti verifica spesso che gli altri seguano, e ai bivi si lascia qualcuno.",
+    "lesson.t21.brief.4" to "Segnali precoci di temporale: cumulonembi che crescono rapidamente, tuoni sordi lontani, vento che gira all'improvviso, capelli che si rizzano. Al primo segnale si scende più in basso.",
+    "lesson.t21.brief.5" to "Regole contro il fulmine: lasciare creste, cime, rive, alberi isolati e ringhiere metalliche; accovacciarsi distanziati con i piedi uniti, senza sdraiarsi.",
+    "lesson.t21.brief.6" to "Il temporale porta spesso calo di temperatura e pioggia intensa, quindi il rischio di ipotermia sale insieme: lo strato caldo deve essere a portata di mano.",
 )
