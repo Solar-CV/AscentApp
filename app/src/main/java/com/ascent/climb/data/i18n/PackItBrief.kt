@@ -461,4 +461,27 @@ internal val PACK_IT_BRIEF: Map<String, String> = mapOf(
     "lesson.l41.brief.4" to "Il deposito cauzionale per i rifiuti è una regola rigida su molte montagne: si restituisce solo portando fuori tutti i rifiuti. Vanno riservati budget e personale.",
     "lesson.l41.brief.5" to "Il carico di collaboratori e portatori ha limiti di legge o di settore; sovraccaricarli trasferisce il rischio su di loro e rallenta tutta la squadra.",
     "lesson.l41.brief.6" to "Il piano di rifornimento deve esprimere il tasso di consumo: combustibile, cartucce e cibo si calcolano come «persone × giorni × consumo», non a occhio.",
+    // ---------- t01 Difficoltà dell'itinerario ----------
+    "lesson.t01.brief.1" to "La difficoltà di un itinerario dipende da quattro cose: distanza, dislivello cumulato, condizioni del fondo, rifornimenti e punti di uscita.",
+    "lesson.t01.brief.2" to "Guardare solo i chilometri è il modo più facile di sbagliare. Dieci chilometri in pianura e dieci con 800 metri di dislivello sono due itinerari completamente diversi.",
+    "lesson.t01.brief.3" to "Il primo itinerario va tenuto entro 3 ore e 300 metri di dislivello cumulato: se il giorno dopo si riesce ancora a camminare, la misura era giusta.",
+    "lesson.t01.brief.4" to "I punti di uscita vanno verificati prima del panorama: solo potendo scendere a metà percorso si può parlare di sicurezza.",
+
+    // ---------- t02 Scarpe, calze e piedi ----------
+    "lesson.t02.brief.1" to "Il criterio di calzata è uno solo: il tallone non scorre su e giù e in discesa le dita non urtano la punta.",
+    "lesson.t02.brief.2" to "La vescica nasce dalla somma di umidità, sfregamento e pressione localizzata: togliendone uno, la probabilità cala molto.",
+    "lesson.t02.brief.3" to "Sulle lunghe distanze non usare calze di cotone: assorbe il sudore senza smaltirlo, e bagnato sfregia e non tiene caldo.",
+    "lesson.t02.brief.4" to "Appena si sente un «punto caldo» ci si ferma e lo si tratta: dopo che si è rotto, ogni passo fa male.",
+
+    // ---------- t03 Zaino e carico ----------
+    "lesson.t03.brief.1" to "Il limite di carico è circa il 10–20 % del peso corporeo, con i principianti al limite inferiore. Con il sovraccarico cedono prima le ginocchia e il giudizio.",
+    "lesson.t03.brief.2" to "Le cose pesanti vanno vicino alla schiena, fra le scapole e la vita: solo così il baricentro non tira indietro.",
+    "lesson.t03.brief.3" to "La cintura lombare porta la maggior parte del peso, gli spallacci servono ad aderire e stabilizzare; portando tutto sugli spallacci, dopo un giorno collo e spalle sono rigidi.",
+    "lesson.t03.brief.4" to "Pesare lo zaino prima di partire dà il peso di riferimento: solo con un numero si capisce che cosa è superfluo.",
+
+    // ---------- t04 Andatura, acqua ed energia ----------
+    "lesson.t04.brief.1" to "L'intensità sostenibile è «riuscire a dire una frase intera». Quando non si riesce più a parlare, si sta già spendendo più di quanto si ha.",
+    "lesson.t04.brief.2" to "Bere a tempo, non per sete: piccoli sorsi ogni 20–30 minuti, con sali minerali nelle giornate calde.",
+    "lesson.t04.brief.3" to "Energia in piccole dosi frequenti, 30–60 g di carboidrati all'ora: funziona meglio di un unico pasto abbondante.",
+    "lesson.t04.brief.4" to "Le pause non dovrebbero superare i 10 minuti: quando il corpo si raffredda, ripartire costa molto di più.",
 )
