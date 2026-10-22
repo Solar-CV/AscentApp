@@ -27,7 +27,7 @@ PACKS = {
     "de": ["PackDe", "PackDeBrief", "PackDeEntry", "PackDeHandbook", "PackDeQuiz",
            "PackDeQuiz2", "PackDeQuiz3"],
     "es": ["PackEs", "PackEsBrief", "PackEsEntry", "PackEsHandbook", "PackEsQuiz", "PackEsQuiz2", "PackEsQuiz3"],
-    "it": ["PackIt", "PackItBrief", "PackItEntry", "PackItHandbook", "PackItQuiz", "PackItQuiz2"],
+    "it": ["PackIt", "PackItBrief", "PackItEntry", "PackItHandbook", "PackItQuiz", "PackItQuiz2", "PackItQuiz3"],
 }
 
 # 各层写到哪个文件（按语言）。新增语言时把这里补上，其余脚本不用改。
@@ -49,7 +49,7 @@ TARGETS = {
     "es": {"entry": "PackEsEntry.kt", "brief": "PackEsBrief.kt",
            "handbook": "PackEsHandbook.kt", "quiz": "PackEsQuiz3.kt"},
     "it": {"entry": "PackItEntry.kt", "brief": "PackItBrief.kt",
-           "handbook": "PackItHandbook.kt", "quiz": "PackItQuiz2.kt"},
+           "handbook": "PackItHandbook.kt", "quiz": "PackItQuiz3.kt"},
 }
 
 # 向后兼容：默认语言是英文
