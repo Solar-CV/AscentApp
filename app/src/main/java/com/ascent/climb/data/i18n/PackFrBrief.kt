@@ -359,4 +359,19 @@ internal val PACK_FR_BRIEF: Map<String, String> = mapOf(
     "lesson.l25.brief.4" to "Dossier de documents : permis original, numéro de police et téléphone des secours, et les photos et la déclaration demandées pour le certificat de sommet.",
     "lesson.l25.brief.5" to "Avant de partir, laisser une fiche d'itinéraire à un contact qui ne vient pas : itinéraire, heure des points de contrôle, et au bout de combien de temps sans nouvelles on déclenche le protocole.",
     "lesson.l25.brief.6" to "Garder 20 % de marge budgétaire. Retards, nuits supplémentaires et porteurs ajoutés arrivent quasiment à chaque fois.",
+    // ---------- l28 Se perdre et appeler à l'aide en pleine nature ----------
+    "lesson.l28.brief.1" to "La première chose à faire quand on s'est perdu, c'est s'arrêter : STOP, soit Stop, Think, Observe, Plan. Continuer à marcher ne fait que s'éloigner.",
+    "lesson.l28.brief.2" to "Il faut revenir à la « dernière position sûre ». On choisit entre revenir sur ses pas ou rejoindre un terrain évident, sans changer d'avis en route.",
+    "lesson.l28.brief.3" to "La convention internationale de détresse est le « trois » : trois coups de sifflet, trois feux, trois colonnes de fumée, trois éclats, répétés avec une minute d'intervalle.",
+    "lesson.l28.brief.4" to "Le sifflet est plus efficace que le cri : moins fatigant, il porte plus loin et le vent ne le couvre pas. Par soleil, le reflet d'un miroir peut se voir à plus de dix kilomètres.",
+    "lesson.l28.brief.5" to "Parmi les dix essentiels, ce qui reste le plus souvent au camp, ce sont la frontale et la couche chaude — précisément ce qu'il faut quand on doit passer la nuit dehors.",
+    "lesson.l28.brief.6" to "Pendant l'attente des secours, trois priorités : se protéger du froid, trouver de l'eau et se rendre visible. On ne gaspille pas son énergie à chercher un chemin.",
+
+    // ---------- l29 Déshydratation, coup de chaleur et traumatismes courants ----------
+    "lesson.l29.brief.1" to "Le premier signe de déshydratation n'est pas la soif, mais la baisse du jugement et des urines plus foncées. En altitude, les deux se confondent facilement avec le mal des montagnes.",
+    "lesson.l29.brief.2" to "L'hyperthermie a quatre degrés : crampes de chaleur, épuisement par la chaleur, coup de chaleur débutant, coup de chaleur. Une température centrale supérieure à 40 °C avec trouble de la conscience signe le coup de chaleur.",
+    "lesson.l29.brief.3" to "Quatre clés du traitement : mettre à l'ombre, desserrer les vêtements, refroidir physiquement (eau froide ou froid sur les gros vaisseaux) et réhydrater avec des électrolytes. Si la conscience est altérée, on ne force pas à boire.",
+    "lesson.l29.brief.4" to "On ne perce pas une ampoule à la légère ; s'il faut le faire, on draine depuis le bord avec une aiguille désinfectée, on conserve l'épiderme et on couvre d'un pansement.",
+    "lesson.l29.brief.5" to "Le coup de soleil se traite comme une brûlure : froid local, hydratation et éviter une nouvelle exposition. Les lèvres et les ailes du nez sont les zones les plus oubliées.",
+    "lesson.l29.brief.6" to "Une brûlure se rince à l'eau froide pendant 20 minutes, puis se couvre d'un pansement propre. Ni dentifrice, ni sauce de soja, ni pommade grasse.",
 )
