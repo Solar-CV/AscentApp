@@ -369,4 +369,20 @@ internal val PACK_IT_BRIEF: Map<String, String> = mapOf(
     "lesson.l31.brief.4" to "L'età non è la variabile principale: lo sono le differenze individuali. Una persona di 60 anni che si allena con regolarità può acclimatarsi meglio di una di 25 che non dorme.",
     "lesson.l31.brief.5" to "Quattro pilastri della prevenzione: controllare la velocità di salita, programmare giorni di acclimatazione, non salire con sintomi e, quando serve, usare farmaci sotto indicazione medica.",
     "lesson.l31.brief.6" to "Il farmaco è un aiuto, non un sostituto. L'acetazolamide allevia i sintomi, ma non consente di saltare l'acclimatazione.",
+    // ---------- l32/l33 punti chiave ----------
+    "lesson.l32.brief.1" to "Le corde fisse sono di tre tipi: corrimano (breve tratto esposto), corda fissa corta (un tiro percorso più volte) e attrezzamento della via (via lunga, molti tiri).",
+    "lesson.l32.brief.2" to "I materiali vanno distinti: corda dinamica (EN 892) per salita di conserva e cadute; per la corda fissa si usa una statica (EN 1891), a bassa estensibilità e resistente all'abrasione.",
+    "lesson.l32.brief.3" to "Nell'attrezzamento delle vie si usano di solito statiche da 9–11 millimetri. Troppo sottili si consumano in fretta, troppo grosse pesano.",
+    "lesson.l32.brief.4" to "Cinque controlli dell'ancoraggio: indipendenza, equilibrio, direzione, backup, spigoli vivi. Due ancoraggi collegati da un'unica fettuccia non sono ridondanza, sono un guasto in serie.",
+    "lesson.l32.brief.5" to "Il nodo a otto doppio può collegare due o tre ancoraggi contemporaneamente: è la pratica diffusa dello UIAA.",
+    "lesson.l32.brief.6" to "Il rinvio intermedio (re-belay) fa scorrere la corda in modo fluido lungo l'itinerario e limita caduta e usura a un solo tratto.",
+    "lesson.l32.brief.7" to "L'estremità della corda va sempre annodata: altrimenti il capo scivola fuori dall'attrezzo. È la regola più trascurata e con le conseguenze più dirette.",
+
+    "lesson.l33.brief.1" to "Dotazione standard per salire su corda fissa: bloccante per mano, bloccante pettorale (o un secondo nodo autobloccante), staffa, nodo autobloccante di riserva, PAS o fettuccia, casco.",
+    "lesson.l33.brief.2" to "Il movimento è «alzarsi, sedersi, spingere»: piedi nella staffa e ci si alza, si spinge il pettorale, ci si siede, si spinge il bloccante a mano. Baricentro vicino alla corda, senza oscillare all'esterno.",
+    "lesson.l33.brief.3" to "La regola rigida è il doppio collegamento: in ogni momento devono esserci due collegamenti indipendenti. L'unica eccezione è salire legati direttamente in testa alla corda.",
+    "lesson.l33.brief.4" to "Al passaggio del nodo vale: prima costruire il nuovo collegamento, poi togliere il vecchio. I due bloccanti non devono mai lasciare la corda contemporaneamente.",
+    "lesson.l33.brief.5" to "Il cambio di corda è la fase più rischiosa del lavoro su corda fissa, perché bisogna trasferirsi tra «smontare il vecchio» e «costruire il nuovo».",
+    "lesson.l33.brief.6" to "L'ordine da salita a discesa è fisso: collegarsi all'ancoraggio → montare il discensore e provarlo → togliere i bloccanti → sganciare il PAS → scendere.",
+    "lesson.l33.brief.7" to "In discesa servono sempre il nodo autobloccante di backup e il nodo all'estremità; al passaggio di un nodo si spostano gli attrezzi in due tempi con il PAS.",
 )
