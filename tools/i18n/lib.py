@@ -38,7 +38,7 @@ TARGETS = {
     "ja": {"entry": "PackJaEntry.kt", "brief": "PackJaBrief.kt",
            "handbook": "PackJaHandbook.kt", "quiz": "PackJaQuiz3.kt"},
     "ru": {"entry": "PackRuEntry.kt", "brief": "PackRuBrief.kt",
-           "handbook": "PackRuHandbook.kt", "quiz": "PackRuQuiz2.kt"},
+           "handbook": "PackRuHandbook.kt", "quiz": "PackRuQuiz3.kt"},
     "fr": {"entry": "PackFrEntry.kt", "brief": "PackFrBrief.kt",
            "handbook": "PackFrHandbook.kt", "quiz": "PackFrQuiz.kt"},
     "sv": {"entry": "PackSvEntry.kt", "brief": "PackSvBrief.kt",
