@@ -461,4 +461,109 @@ internal val PACK_ES_BRIEF: Map<String, String> = mapOf(
     "lesson.t21.brief.4" to "Señales tempranas de tormenta: cumulonimbo que crece rápido, trueno lejano y sordo, giro brusco del viento y pelos erizados. Con cualquiera de ellas, perder altura.",
     "lesson.t21.brief.5" to "Protección contra el rayo: salir de la cresta, la cima, el agua, los árboles aislados y las barandillas metálicas; separados en cuclillas, pies juntos, sin tumbarse.",
     "lesson.t21.brief.6" to "Las tormentas traen a menudo bajada fuerte de temperatura y lluvia intensa; el riesgo de hipotermia sube a la vez y la capa de abrigo debe estar a mano.",
+    // ---------- l32 Cuerdas fijas y sistemas de anclaje ----------
+    "lesson.l32.brief.1" to "Tres tipos de cuerda fija: pasamanos (tramos expuestos y cortos), cuerda fija corta (un largo por el que se sube y se baja repetidamente) y equipamiento de ruta (rutas largas, varios largos).",
+    "lesson.l32.brief.2" to "Hay que distinguir el material: la cuerda dinámica (EN 892) es para abrir en punta y para absorber caídas; la cuerda fija es estática (EN 1891), con poco alargamiento y buena resistencia al roce.",
+    "lesson.l32.brief.3" to "El equipamiento de expedición suele hacerse con cuerda estática de 9–11 mm. Más fina se desgasta rápido; más gruesa pesa demasiado.",
+    "lesson.l32.brief.4" to "Cinco controles del anclaje: independencia, equilibrio, dirección, respaldo y aristas. Dos anclajes enlazados en una misma cinta no son redundancia: son un fallo en serie.",
+    "lesson.l32.brief.5" to "El nudo de ocho doble permite conectar dos o tres anclajes a la vez, y es la práctica habitual de la UIAA.",
+    "lesson.l32.brief.6" to "El reenvío intermedio (re-belay) permite que la cuerda pase con suavidad por la ruta y limita caída y desgaste a un solo tramo.",
+    "lesson.l32.brief.7" to "El cabo debe ir anudado, o se saldrá del dispositivo. Es lo que más se olvida y lo de consecuencias más directas.",
+
+    // ---------- l33 Ascenso, paso de nudos y cambio de cuerda ----------
+    "lesson.l33.brief.1" to "Configuración estándar para ascender por cuerda fija: bloqueador de mano, bloqueador de pecho (o un segundo nudo autobloqueante), estribo, nudo autobloqueante de respaldo, PAS o cinta, casco.",
+    "lesson.l33.brief.2" to "La secuencia es «levantarse, sentarse, empujar»: pisar el estribo y subir, empujar el bloqueador de pecho, sentarse, empujar el de mano. Peso pegado a la cuerda, sin balancearse hacia fuera.",
+    "lesson.l33.brief.3" to "La regla de hierro son las dos conexiones: en todo momento debe haber dos independientes. La única excepción es ir encordado directamente en punta.",
+    "lesson.l33.brief.4" to "Principio al pasar un nudo: primero se crea la conexión nueva y después se suelta la vieja. No se permite que los dos bloqueadores dejen la cuerda a la vez.",
+    "lesson.l33.brief.5" to "El cambio de cuerda es el momento más delicado del trabajo con cuerda fija, porque obliga a transferir entre desmontar el sistema viejo y montar el nuevo.",
+    "lesson.l33.brief.6" to "El orden de ascenso a descenso es fijo: colgarse del anclaje, montar el descendedor y probarlo, soltar los bloqueadores, liberar el PAS y descender.",
+    "lesson.l33.brief.7" to "Al descender, nudo de fricción de respaldo y cabo anudado; al pasar un nudo, transferir el material en dos tiempos con el PAS.",
+    // ---------- l34 Progresión en glaciar y elección de itinerario ----------
+    "lesson.l34.brief.1" to "Un glaciar no es una llanura: se compone de zonas de grietas, puentes de nieve, seracs, cascadas de hielo y morenas, y cada tramo tiene un tipo de riesgo distinto.",
+    "lesson.l34.brief.2" to "Las grietas pueden ser transversales, longitudinales o diagonales. Las transversales aparecen en los cambios de pendiente; las longitudinales, en las bandas de tracción de los laterales.",
+    "lesson.l34.brief.3" to "La distancia entre cordada suele ser de 8–10 m y se acorta en zona de grietas densas; hacer nudos en la cuerda limita la profundidad de caída y añade fricción de frenado.",
+    "lesson.l34.brief.4" to "Una cordada de tres es más segura que una de dos: si uno cae, dos frenan y uno prepara el sistema, con mucho más margen de rescate.",
+    "lesson.l34.brief.5" to "Un puente de nieve se juzga mirando, escuchando y probando: color oscuro o azulado indica poco espesor; si hay hundimientos y grietas radiales, se rodea; antes de pisar se sondea con el piolet.",
+    "lesson.l34.brief.6" to "El puente está más firme de madrugada y más débil después de la fusión de la tarde. El paso por zona de grietas densas se programa en horas frías, de madrugada o de noche.",
+    "lesson.l34.brief.7" to "La zona de seracs se pasa rápido, manteniendo distancia y con casco; no se para ni se hace reunión dentro.",
+
+    // ---------- l35 Enterramiento en alud: ventana de supervivencia y orden en escena ----------
+    "lesson.l35.brief.1" to "El enterramiento crítico (cabeza, cuello y tórax cubiertos) sobrevive alrededor de un 48 %, y el enterramiento completo un 47,6 % según el criterio de 2013; el parcial alcanza el 96 %. El grado de enterramiento es el mejor predictor único.",
+    "lesson.l35.brief.2" to "La curva de supervivencia tiene cuatro tramos: periodo de supervivencia (unos 18 minutos, muerte sobre todo por traumatismo), fase de asfixia (18–35 minutos, caída brusca), fase de latencia (35–90 minutos, quien tiene bolsa de aire entra en protección por frío) y fase prolongada (más de 90 minutos, predomina la hipotermia).",
+    "lesson.l35.brief.3" to "La causa principal es la asfixia, con un 65–100 %; el traumatismo supone un 5–29 % y la hipotermia solo un 0–4 %. Esto fija la prioridad: primero ventilar.",
+    "lesson.l35.brief.4" to "Orden en escena: de 0 a 2 minutos, confirmar riesgo de segunda alud, nombrar vigía, anotar hora y último punto avistado y pedir ayuda; de 2 a 10 minutos, buscar, sondear y empezar a palear con el objetivo de «tocar», no de «terminar de sacar».",
+    "lesson.l35.brief.5" to "En los primeros 60 segundos tras llegar a la cara: limpiar nieve y hielo de boca y nariz, comprobar signos vitales en el primer minuto y, si no respira, dar ventilaciones de rescate sin esperar a desenterrar el cuerpo.",
+    "lesson.l35.brief.6" to "Los números se explican con año y criterio: un 25 % a los 45 minutos frente a un 18 % a los 40 es fluctuación de muestra, no un repunte de la curva, y no puede presentarse como promesa.",
+
+    // ---------- l36 Reanimación en alud: regla de 60 minutos y vía aérea ----------
+    "lesson.l36.brief.1" to "El ICAR MedCom de 2023 movió la línea de decisión de 35 a 60 minutos. El criterio antiguo está derogado y el material docente debe escribirse con la versión nueva.",
+    "lesson.l36.brief.2" to "Enterramiento de 60 minutos o menos sin signos vitales: tratar como asfixia y dar ventilaciones de rescate cuanto antes, esté la vía aérea libre o no.",
+    "lesson.l36.brief.3" to "Más de 60 minutos, sin signos vitales pero con vía aérea libre o desconocida: tratar como parada cardíaca por hipotermia; salvo que la temperatura medida la descarte, iniciar reanimación y trasladar.",
+    "lesson.l36.brief.4" to "Más de 60 minutos, vía aérea obstruida y sin posibilidad de medir temperatura central: tratar como parada por asfixia y no iniciar reanimación.",
+    "lesson.l36.brief.5" to "Si se puede medir la temperatura central y es inferior a 30 °C con vía aérea libre: intentar reanimar sin importar el tiempo de enterramiento y trasladar a un hospital con capacidad de recalentamiento por circulación extracorpórea.",
+    "lesson.l36.brief.6" to "La obstrucción de la vía aérea se define como boca y nariz completamente llenas de nieve compacta o detritos; en caso de duda se considera libre. La presencia de bolsa de aire no cambia la actuación.",
+    "lesson.l36.brief.7" to "Las compresiones torácicas no esperan a que el cuerpo esté completamente desenterrado y también son posibles con posturas anómalas. Esperar a «sacar del todo para comprimir» es un retraso letal frecuente.",
+    // ---------- l37 El trío: búsqueda con ARVA y sondeo puntual ----------
+    "lesson.l37.brief.1" to "Una búsqueda en alud tiene cuatro fases que deben hacerse en orden: búsqueda de señal e indicios, búsqueda gruesa, búsqueda fina y sondeo puntual. Saltarse una es la forma más habitual de perder eficacia.",
+    "lesson.l37.brief.2" to "La separación entre bandas es de unos 40 m y unos 20 m hasta el borde del depósito. Si no se está seguro de cubrir bien la zona, se baja a 30 m.",
+    "lesson.l37.brief.3" to "Primero se buscan indicios en superficie: un guante, la punta de un bastón, un casco, la cinta de una mochila. No se empieza mirando el ARVA: cubrir superficie importa más que la precisión.",
+    "lesson.l37.brief.4" to "En la búsqueda gruesa se lleva la distancia a 3–5 m; si la lectura aumenta, el rumbo es erróneo y hay que volver por donde se vino.",
+    "lesson.l37.brief.5" to "En la búsqueda fina se pega el ARVA a la nieve y se trazan cruces hasta localizar el punto de lectura mínima, que se marca: ese punto define la zona a sondear.",
+    "lesson.l37.brief.6" to "El sondeo puntual entra a 90 grados de la superficie; si no se toca, se amplía con una cuadrícula de 25 cm; al tocar, la sonda se deja clavada como marca.",
+    "lesson.l37.brief.7" to "El ángulo de la sonda no es el mismo en rescate por compañeros y en rescate organizado: en compañeros, perpendicular a la nieve; en organizado, vertical, para que las profundidades leídas por todos sean comparables.",
+
+    // ---------- l38 Excavación y cinta transportadora de nieve ----------
+    "lesson.l38.brief.1" to "Primer principio: trabajar siempre desde el lado de abajo. Cavar desde arriba o desde el lado de arriba hace que los bloques vuelvan a la cara de la víctima: es lento y peligroso.",
+    "lesson.l38.brief.2" to "La regla tradicional manda retroceder desde la sonda unas 1,5 veces la profundidad de enterramiento pendiente abajo, entrar en diagonal desde aguas abajo y abrir un canal en rampa de 1–2 m de ancho. Es una regla empírica, no el único criterio.",
+    "lesson.l38.brief.3" to "El estudio sobre la cinta transportadora de nieve del ISSW 2023 sostiene que, con tres o más personas y espacio suficiente, cavar directamente desde la sonda siguiendo la línea de máxima pendiente llega antes a la cabeza.",
+    "lesson.l38.brief.4" to "Solo hay dos excepciones para desplazar el inicio: enterramiento muy somero con los pies casi a la misma profundidad, o falta de gente que obligue a un plan individual.",
+    "lesson.l38.brief.5" to "La cinta transportadora es un canal en V (1–2 m de ancho) más una cadena de relevos. Con pendiente inferior a unos 26 grados, los bloques vuelven rodando a la sonda.",
+    "lesson.l38.brief.6" to "Orden de eficacia en la evacuación: barrer (paddling) es lo más rápido, cucharear (scooping) va después y cortar bloques (cutting) es lo más lento. Cortar solo se usa con nieve dura.",
+    "lesson.l38.brief.7" to "Al llegar a la cara cambia el orden: primero limpiar boca y nariz y confirmar la vía aérea, después tórax y brazos, y al final piernas y cuerpo. No se tira de los hombros hacia fuera.",
+    // ---------- l42 Principios de seguridad y gestión del riesgo ----------
+    "lesson.l42.brief.1" to "Principio «cuatro, tres, tres»: reservar un tercio de margen en fuerzas, en tiempo y en material. Es el espacio que se deja para el imprevisto, el tiempo y los errores de juicio.",
+    "lesson.l42.brief.2" to "«Tres novedades, no salgas»: itinerario nuevo, compañeros nuevos y material nuevo; no conviene juntar más de dos en una misma salida. Cuantas más novedades, más incógnitas.",
+    "lesson.l42.brief.3" to "Riesgo = consecuencia × probabilidad. Primero se baja la consecuencia (suele ser más fácil) y después la probabilidad, porque una consecuencia consumada ya no se puede revertir.",
+    "lesson.l42.brief.4" to "STOP: parar, pensar, observar, planificar. Ante una pérdida de rumbo, un cambio brusco del tiempo o un estado raro en alguien del grupo, la primera acción siempre es parar.",
+    "lesson.l42.brief.5" to "Tres claves para un campamento seguro: evitar las trampas del terreno, dejar libre una vía de evacuación y concentrar el material crítico en un solo punto.",
+    "lesson.l42.brief.6" to "En el plan tiene que estar escrito «en qué casos se abandona». Un plan que solo dice cómo llegar a la cima es, en la práctica, no tener plan.",
+
+    // ---------- l26 Mapas, brújula y orientación en el medio natural ----------
+    "lesson.l26.brief.1" to "Lo primero es tener clara la escala: en un mapa 1:50.000, 1 cm son 500 m sobre el terreno. Un error en este paso desvía todo lo que viene después.",
+    "lesson.l26.brief.2" to "La equidistancia fija el detalle del relieve: con curvas cada 5 m se ven las mesetas pequeñas; con 20 m o más solo se ven las estructuras grandes.",
+    "lesson.l26.brief.3" to "La brújula tiene dos nortes: el verdadero y el magnético. El mapa se dibuja con el norte verdadero y la aguja apunta al magnético; la diferencia es la declinación.",
+    "lesson.l26.brief.4" to "Cuatro pasos de orientación: orientar el mapa con el terreno real, localizar la propia posición, trazar el rumbo al objetivo y avanzar en ese rumbo comprobando el terreno.",
+    "lesson.l26.brief.5" to "Navegar con brújula es «seguir un ángulo corrigiendo con curvas de nivel y detalles del terreno», no caminar recto con la vista clavada en la aguja.",
+    "lesson.l26.brief.6" to "El GPS es un acelerador, no un sustituto: la batería se agota y la pantalla se rompe, así que el mapa de papel y la brújula tienen que ir siempre encima.",
+    "lesson.l26.brief.7" to "Lo primero al perderse es admitir que uno se ha perdido. Seguir con un «vamos más o menos hacia allí» es la decisión letal más frecuente.",
+    // ---------- l27 Elección y construcción del campamento ----------
+    "lesson.l27.brief.1" to "Seis criterios de emplazamiento: lejos de caída de piedras y de canales de alud, resguardado del viento, suelo llano, buen drenaje, cerca del agua pero sin pegarse a ella y con vía de evacuación libre.",
+    "lesson.l27.brief.2" to "La seguridad va siempre primero y el paisaje al final. Los accidentes de campamento más graves de la historia casi siempre consistieron en poner la tienda dentro de una trampa del terreno.",
+    "lesson.l27.brief.3" to "En nieve hay que compactar primero y excavar después una plataforma; sobre hielo se fija con tornillos o anclajes de nieve, nunca solo con piedras encima.",
+    "lesson.l27.brief.4" to "Zonas en un campamento base: dormir, cocinar, almacenar y letrina, separadas; la zona de cocina debe quedar a una distancia clara de la de dormir.",
+    "lesson.l27.brief.5" to "Los excrementos van en un cat hole de 15–20 cm de profundidad y a más de 60 m del agua; el papel se lleva, no se quema.",
+    "lesson.l27.brief.6" to "Al marcharse, el campamento se deja como estaba: las piedras en su sitio, sin rastro de fuego y toda la basura recogida.",
+
+    // ---------- l25 Preparación previa: permisos, seguro y logística ----------
+    "lesson.l25.brief.1" to "Los permisos y accesos suelen tramitarse con semanas de antelación: reservas, zonas fronterizas, permisos de ascensión, y muchos exigen guía local o persona de enlace.",
+    "lesson.l25.brief.2" to "Del seguro hay que confirmar dos cosas concretas: que cubra la escalada técnica y que cubra la evacuación en helicóptero a gran altitud. Los seguros de viaje normales suelen excluir ambas.",
+    "lesson.l25.brief.3" to "Tres frentes logísticos: transporte de entrada y salida, porte y porteadores, y avituallamiento del campamento. Cada tramo necesita alternativa, porque el retraso es la norma y no la excepción.",
+    "lesson.l25.brief.4" to "Carpeta de documentos: permiso original, número de póliza y teléfono de rescate, y las fotos y la declaración que se piden para el certificado de cumbre.",
+    "lesson.l25.brief.5" to "Antes de salir hay que dejar una hoja de ruta a un contacto que no va: itinerario, horas de los puntos de control y cuánto tiempo sin noticias activa el protocolo.",
+    "lesson.l25.brief.6" to "Dejar un 20 % de margen en el presupuesto. Retrasos, noches extra y porteadores añadidos ocurren prácticamente siempre.",
+    // ---------- l28 Perderse y pedir ayuda en el medio natural ----------
+    "lesson.l28.brief.1" to "Lo primero al perderse es parar: STOP, es decir Stop, Think, Observe y Plan. Seguir caminando solo sirve para alejarse más.",
+    "lesson.l28.brief.2" to "Hay que volver a la «última posición segura». Se elige entre regresar por donde se vino o alcanzar un terreno evidente, y no se cambia de idea a mitad de camino.",
+    "lesson.l28.brief.3" to "La convención internacional de socorro es el «tres»: tres silbidos, tres luces, tres columnas de humo, tres destellos, repetidos con un minuto de intervalo.",
+    "lesson.l28.brief.4" to "El silbato es más eficaz que gritar: cansa menos, llega más lejos y el viento no lo tapa. El reflejo de un espejo con sol puede verse a más de diez kilómetros.",
+    "lesson.l28.brief.5" to "De los diez esenciales, lo que más se queda en el campamento son el frontal y la capa de abrigo, y son justo lo que hace falta cuando toca pasar la noche fuera.",
+    "lesson.l28.brief.6" to "Mientras se espera el rescate hay tres prioridades: abrigo, agua y hacerse visible. No se gasta la energía buscando camino.",
+
+    // ---------- l29 Deshidratación, golpe de calor y traumatismos frecuentes ----------
+    "lesson.l29.brief.1" to "La primera señal de deshidratación no es la sed, sino el deterioro del juicio y la orina más oscura. En altura, ambas cosas se confunden fácilmente con el mal de altura.",
+    "lesson.l29.brief.2" to "La hipertermia tiene cuatro grados: calambres por calor, agotamiento por calor, golpe de calor incipiente y golpe de calor. Con temperatura central superior a 40 °C y alteración del estado mental es un golpe de calor.",
+    "lesson.l29.brief.3" to "Cuatro claves en el manejo del problema por calor: llevar a la sombra, aflojar la ropa, enfriar físicamente (agua fría o hielo en los grandes vasos) y reponer electrolitos. Con la consciencia alterada no se fuerza la ingesta de líquidos.",
+    "lesson.l29.brief.4" to "Las ampollas no se pinchan a la ligera; si hay que hacerlo, se drenan desde el borde con una aguja desinfectada, se conserva la piel y se cubre con un apósito.",
+    "lesson.l29.brief.5" to "La quemadura solar se trata como una quemadura: frío local, hidratación y evitar nueva exposición. Labios y alas de la nariz son las zonas que más se olvidan.",
+    "lesson.l29.brief.6" to "Ante una quemadura se enjuaga con agua fría durante 20 minutos y después se cubre con un apósito limpio. Nada de pasta de dientes, salsa de soja ni pomadas grasas.",
 )
