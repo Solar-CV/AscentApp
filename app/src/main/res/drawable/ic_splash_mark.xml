@@ -7,8 +7,8 @@
   在浅色启动背景上会露出一个深色圆盘。这里单独给一幅透明底的矢量，
   挂到 android:windowSplashScreenAnimatedIcon 上，中央就只剩雪山本身。
 
-  288×288 视口、内容居中，符合 Android 12 启动图标的安全区口径
-  （内容落在中央 192dp 以内），各屏幕密度下都不会被裁切。
+  288×288 视口。图形以中心 (144,144) 为基准等比缩放 0.6 —— 比初版小 40%。
+  内容高度约 113/288，留白更足，小屏上不会顶到状态栏。
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="288dp"
@@ -17,20 +17,20 @@
     android:viewportHeight="288">
     <!-- 山体 -->
     <path
-        android:pathData="M144,89.6 L225.6,225.6 L62.4,225.6 Z"
+        android:pathData="M144,111.36 L192.96,192.96 L95.04,192.96 Z"
         android:fillColor="#6FD3F2" />
     <!-- 雪帽 -->
     <path
-        android:pathData="M144,89.6 L176.3,140.6 L144,127 L113.4,140.6 Z"
+        android:pathData="M144,111.36 L163.38,141.96 L144,133.8 L125.64,141.96 Z"
         android:fillColor="#EAF6FC" />
     <!-- 旗杆 -->
     <path
-        android:pathData="M144,89.6 L144,48.8"
+        android:pathData="M144,111.36 L144,86.88"
         android:strokeColor="#F5B942"
-        android:strokeWidth="10.88"
+        android:strokeWidth="6.53"
         android:strokeLineCap="round" />
     <!-- 旗面 -->
     <path
-        android:pathData="M144,48.8 L181.4,64.1 L144,79.4 Z"
+        android:pathData="M144,86.88 L166.44,96.06 L144,105.24 Z"
         android:fillColor="#F5B942" />
 </vector>

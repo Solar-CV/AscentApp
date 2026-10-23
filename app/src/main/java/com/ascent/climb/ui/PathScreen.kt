@@ -350,7 +350,13 @@ private fun TrackSheet(currentTrackId: String, onPick: (String) -> Unit) {
                         .background(if (active) Ascent.UGreen else Color(0xFFF2F2F2)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(text = if (t.id == TREK_TRACK) "≡" else "▲", color = if (active) Color.White else Ascent.DuoFg2, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                    // 大类图标：实心卡通（雪山 / 登山靴），替代原来的 ▲ / ≡ 文本字符
+                    Icon(
+                        imageVector = if (t.id == TREK_TRACK) Ic.TrackTrek else Ic.TrackClimb,
+                        contentDescription = null,
+                        tint = if (active) Color.White else Ascent.DuoFg2,
+                        modifier = Modifier.size(26.dp)
+                    )
                 }
                 Spacer(Modifier.width(12.dp))
                 Column(modifier = Modifier.weight(1f)) {

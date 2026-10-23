@@ -1,6 +1,7 @@
 package com.ascent.climb.ui
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
@@ -101,7 +102,53 @@ object Ic {
     val Wind: ImageVector by lazy { icon("wind", "M12.8 19.6A2 2 0 1 0 14 16H2", "M17.5 8a2.5 2.5 0 1 1 2 4H2", "M9.8 4.4A2 2 0 1 1 11 8H2") }
     val X: ImageVector by lazy { icon("x", "M18 6 6 18", "m6 6 12 12") }
     val ZoomIn: ImageVector by lazy { icon("zoom-in", "M3 11 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0 Z", "M21 21 L16.65 16.65", "M11 8 L11 14", "M8 11 L14 11") }
+
+    // ---------------- 课程大类图标（实心卡通，v0.19.28） ----------------
+    //
+    // 这两个不是线型图标，而是实心剪影：24 网格、evenodd 挖孔。
+    // 用 filledIcon 生成后仍然可以用 Icon(tint = ...) 整体着色，
+    // 所以选中态（绿底白图标）与未选中态（灰底灰图标）共用同一份路径。
+    //
+    // 雪山：三角山体 + 一条锯齿雪线（挖空）。雪山本身比「▲」多一层信息，
+    // 用户一眼能看出是「高山」而不是任意三角形。
+    val TrackClimb: ImageVector by lazy {
+        filledIcon(
+            "track-climb",
+            "M3.6 19.9 L10.3 6.6 Q12 3.5 13.7 6.6 L20.4 19.9 Q20.9 21 19.7 21 H4.3 Q3.2 21 3.6 19.9 Z" +
+                " M7.95 12.2 Q9.3 13.1 10 14.3 Q10.9 12.5 12 11.4 Q13.1 12.5 14 14.3 Q14.7 13.1 16.05 12.2" +
+                " L16.95 13.8 Q15.4 14.6 14.2 16 Q13.2 14.3 12 13.1 Q10.8 14.3 9.8 16 Q8.6 14.6 7.05 13.8 Z"
+        )
+    }
+
+    // 徒步：登山靴（鞋帮 + 带齿鞋底 + 两道鞋带）。原来的「≡」三条横杠
+    // 完全看不出含义；靴子在 44dp 下轮廓清楚，也不与雪山混淆。
+    val TrackTrek: ImageVector by lazy {
+        filledIcon(
+            "track-trek",
+            "M7.4 6.2 H12.2 Q13 6.2 13 7 V11 L18.9 14.3 Q19.9 14.9 19.9 15.9 V16.4 H7.4 Q6.6 16.4 6.6 15.6 V7 Q6.6 6.2 7.4 6.2 Z" +
+                " M5.9 16.9 H20.3 Q21.1 16.9 21.1 17.7 V19 Q21.1 19.8 20.3 19.8 H5.9 Q5.1 19.8 5.1 19 V17.7 Q5.1 16.9 5.9 16.9 Z" +
+                " M7.8 19.1 H9.4 V19.9 H7.8 Z M11.6 19.1 H13.2 V19.9 H11.6 Z M15.4 19.1 H17 V19.9 H15.4 Z" +
+                " M8 8 H11.2 V8.9 H8 Z M8 10 H11.2 V10.9 H8 Z"
+        )
+    }
 }
+
+private fun filledIcon(name: String, vararg paths: String): ImageVector =
+    ImageVector.Builder(
+        name = name,
+        defaultWidth = 24.dp,
+        defaultHeight = 24.dp,
+        viewportWidth = 24f,
+        viewportHeight = 24f
+    ).apply {
+        for (d in paths) {
+            addPath(
+                pathData = PathParser().parsePathString(d).toNodes(),
+                pathFillType = PathFillType.EvenOdd,
+                fill = SolidColor(Color.Black)
+            )
+        }
+    }.build()
 
 private fun icon(name: String, vararg paths: String): ImageVector =
     ImageVector.Builder(
