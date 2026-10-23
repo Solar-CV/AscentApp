@@ -36,7 +36,6 @@ import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.activeTrackId
 import com.ascent.climb.data.displaySummitOf
 import com.ascent.climb.data.ALL_LESSONS
-import com.ascent.climb.data.ALL_UNITS
 
 /**
  * 个人主页（「我的」页点头像进入）。
@@ -55,11 +54,14 @@ fun ProfileHomeScreen(
     onOpenAllBadges: () -> Unit
 ) {
     val unlocked = remember(achRevision) { store.unlockedAchievements.toSet() }
-    val stats = remember(achRevision) { store.achievementStats(ALL_UNITS) }
+    val stats = remember(achRevision) { store.achievementStats() }
     val earned = ACHIEVEMENTS.filter { it.id in unlocked }
     val shown = earned.take(8)
+    // completed 是两条轨道共用的 id 集合，分母是当前轨道，分子必须也只数当前轨道，
+    // 否则「攀登完成 68 课、切到徒步」会显示 68 / 21。
+    val doneHere = ALL_LESSONS.count { it.id in completed }
     val overall = if (ALL_LESSONS.isEmpty()) 0f
-    else completed.size.toFloat() / ALL_LESSONS.size.toFloat()
+    else doneHere.toFloat() / ALL_LESSONS.size.toFloat()
     val summitAlt = displaySummitOf(activeTrackId())
     val altFrac = if (summitAlt == 0) 0f else altitude.toFloat() / summitAlt.toFloat()
 
@@ -103,7 +105,7 @@ fun ProfileHomeScreen(
                         Text(stringResource(R.string.home_title), color = Ascent.Fg, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                         Spacer(Modifier.height(3.dp))
                         Text(
-                            text = stringResource(R.string.home_meta, formatMeters(altitude), completed.size, ALL_LESSONS.size),
+                            text = stringResource(R.string.home_meta, formatMeters(altitude), doneHere, ALL_LESSONS.size),
                             color = Ascent.Fg3,
                             fontSize = 12.sp
                         )
@@ -125,7 +127,7 @@ fun ProfileHomeScreen(
                     }
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = "${completed.size} / ${ALL_LESSONS.size}", label = stringResource(R.string.home_lessons_done))
+                            StatTile(value = "$doneHere / ${ALL_LESSONS.size}", label = stringResource(R.string.home_lessons_done))
                         }
                         Box(modifier = Modifier.weight(1f)) {
                             StatTile(value = "${earned.size} / ${ACHIEVEMENTS.size}", label = stringResource(R.string.home_badges))

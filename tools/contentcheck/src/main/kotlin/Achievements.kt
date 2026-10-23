@@ -39,8 +39,10 @@ data class AchievementStats(
     val streakBroken: Boolean,
     /** 开发者模式已解锁 */
     val devUnlocked: Boolean,
-    /** 单元进度：unitId -> (完成数, 总数) */
-    val unitProgress: Map<String, Pair<Int, Int>>
+    /** 单元进度：unitId -> (完成数, 总数)，覆盖**全部轨道** */
+    val unitProgress: Map<String, Pair<Int, Int>>,
+    /** 轨道进度：trackId -> (完成数, 总数)，与当前选中轨道无关 */
+    val trackProgress: Map<String, Pair<Int, Int>> = emptyMap()
 )
 
 data class Achievement(
@@ -64,6 +66,33 @@ private fun lesson(id: String): (AchievementStats) -> Boolean = { id in it.compl
 
 private fun unitAll(uid: String): (AchievementStats) -> Boolean =
     { s -> s.unitProgress[uid]?.let { (d, t) -> t > 0 && d >= t } == true }
+
+/*
+ * 两条轨道的单元 id。
+ *
+ * 第 1 版（66 课时代）只有攀登一条线，`five_zones` / `full_route` 直接数
+ * 「所有单元」，语义是对的。补上徒步之后这个写法就塌了：
+ * 徒步只有 4 个单元，数「所有单元」会把徒步也算进攀登的大满贯，
+ * 于是徒步走完 21 课就能拿到「理论大满贯」。所以这里把两条线的单元显式列出来，
+ * 各自的成就只认自己那串 id。
+ */
+private val CLIMB_UNITS = listOf("m5i", "m5a", "m6", "m7", "m7h", "m8")
+private val TREK_UNITS = listOf("t1", "t2", "t3", "t4")
+
+/** 指定单元里已完成的课数合计。 */
+private fun unitsDone(s: AchievementStats, ids: List<String>): Int =
+    ids.sumOf { s.unitProgress[it]?.first ?: 0 }
+
+/** 指定单元是否全部完成（缺数据一律判否，避免题库缺单元时误发）。 */
+private fun unitsAllDone(s: AchievementStats, ids: List<String>): Boolean =
+    ids.all { id -> s.unitProgress[id]?.let { (d, t) -> t > 0 && d >= t } == true }
+
+/** 指定单元里「至少完成 1 课」的单元数。 */
+private fun unitsTouched(s: AchievementStats, ids: List<String>): Int =
+    ids.count { id -> s.unitProgress[id]?.let { (d, t) -> t > 0 && d >= 1 } == true }
+
+private fun trackDone(s: AchievementStats, trackId: String): Int =
+    s.trackProgress[trackId]?.first ?: 0
 
 private fun perfectCount(s: AchievementStats): Int = s.stars.count { it.value >= 3 }
 
@@ -256,11 +285,11 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
 
     // ---------------- D · 探索与特殊里程碑 ----------------
     Achievement(
-        "five_zones", "五区足迹", "五个海拔单元都留下过完成记录。",
-        AchCategory.Explore, Rarity.Rare, "map", "5 个单元各完成 ≥1 课",
-        target = 5,
-        progress = { s -> s.unitProgress.values.count { (d, t) -> t > 0 && d >= 1 } },
-        unlocked = { s -> s.unitProgress.values.count { (d, t) -> t > 0 && d >= 1 } >= 5 }
+        "five_zones", "六区足迹", "攀登六个海拔单元都留下过完成记录。",
+        AchCategory.Explore, Rarity.Rare, "map", "攀登 6 个单元各完成 ≥1 课（m5i / m5a / m6 / m7 / m7h / m8）",
+        target = 6,
+        progress = { unitsTouched(it, CLIMB_UNITS) },
+        unlocked = { unitsTouched(it, CLIMB_UNITS) >= CLIMB_UNITS.size }
     ),
     Achievement(
         "eight_k_grad", "八千米毕业", "8000 米单元全部完成。",
@@ -270,11 +299,11 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = unitAll("m8")
     ),
     Achievement(
-        "full_route", "理论大满贯", "66 门课全部完成，理论路线走到终点。",
-        AchCategory.Explore, Rarity.Legendary, "award", "全部 66 课完成",
-        target = 66,
-        progress = { it.completed.size },
-        unlocked = { s -> s.unitProgress.isNotEmpty() && s.unitProgress.values.all { (d, t) -> t > 0 && d >= t } }
+        "full_route", "攀登大满贯", "攀登 68 门课全部完成，理论路线走到终点。",
+        AchCategory.Explore, Rarity.Legendary, "award", "攀登全部 68 课完成（m5i / m5a / m6 / m7 / m7h / m8 六个单元）",
+        target = 68,
+        progress = { unitsDone(it, CLIMB_UNITS) },
+        unlocked = { unitsAllDone(it, CLIMB_UNITS) }
     ),
     Achievement(
         "fourteen_peaks", "十四座巡礼", "读完世界 14 座 8000 米级山峰。",
@@ -296,6 +325,48 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         target = 2,
         progress = { listOf("l14", "l16").count { id -> id in it.completed } },
         unlocked = { "l14" in it.completed && "l16" in it.completed }
+    ),
+
+    // ---------------- E · 徒步线（v0.19.27 新增） ----------------
+    //
+    // 徒步 21 课此前完全没有成就，走完整条线没有任何反馈。
+    // 这里按「入门 → 两个单元 → 全线 → 跨线」四级铺开，
+    // 与攀登的 l1 / 单元 / 大满贯同一套节奏。
+    Achievement(
+        "trail_first", "走出第一步", "完成第一门徒步课，路线从脚下开始。",
+        AchCategory.Progress, Rarity.Common, "footprints", "完成 t01（线路难度与自我定位）",
+        progress = { if ("t01" in it.completed) 1 else 0 },
+        unlocked = lesson("t01")
+    ),
+    Achievement(
+        "trail_camp", "扎营一夜", "多日徒步的营地那几件事，都过了一遍。",
+        AchCategory.Progress, Rarity.Rare, "tent", "徒步单元 t2（多日与露营）全部 8 课完成",
+        target = 8,
+        progress = { it.unitProgress["t2"]?.first ?: 0 },
+        unlocked = unitAll("t2")
+    ),
+    Achievement(
+        "trail_high", "高原行走", "海拔升高之后，走路这件事本身要重新学。",
+        AchCategory.Progress, Rarity.Rare, "mountain-snow", "徒步单元 t3（高原徒步）全部 5 课完成",
+        target = 5,
+        progress = { it.unitProgress["t3"]?.first ?: 0 },
+        unlocked = unitAll("t3")
+    ),
+    Achievement(
+        "trail_finish", "徒步毕业", "徒步 21 门课全部完成，长线也能自己带。",
+        AchCategory.Progress, Rarity.Epic, "flag", "徒步全部 21 课完成（t1 / t2 / t3 / t4 四个单元）",
+        target = 21,
+        progress = { unitsDone(it, TREK_UNITS) },
+        unlocked = { unitsAllDone(it, TREK_UNITS) }
+    ),
+    Achievement(
+        "two_tracks", "双线并进", "攀登与徒步各走 10 课，两条路一起走。",
+        AchCategory.Explore, Rarity.Epic, "map", "攀登完成 ≥10 课，且徒步完成 ≥10 课",
+        target = 20,
+        progress = { s ->
+            minOf(trackDone(s, CLIMB_TRACK), 10) + minOf(trackDone(s, TREK_TRACK), 10)
+        },
+        unlocked = { s -> trackDone(s, CLIMB_TRACK) >= 10 && trackDone(s, TREK_TRACK) >= 10 }
     )
 )
 

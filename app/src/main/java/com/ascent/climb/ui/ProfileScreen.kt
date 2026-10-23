@@ -261,8 +261,10 @@ private fun ProfileBody(
 
     fun unitFraction(total: Int, done: Int): Float = if (total == 0) 0f else done.toFloat() / total
 
+    // completed 覆盖两条轨道，分母是当前轨道的课数，分子也必须只数当前轨道
+    val doneHere = ALL_LESSONS.count { it.id in completed }
     val overall = if (ALL_LESSONS.isEmpty()) 0f
-    else completed.size.toFloat() / ALL_LESSONS.size.toFloat()
+    else doneHere.toFloat() / ALL_LESSONS.size.toFloat()
 
     // 能力概览按课程大类分组：两条轨道的单元都列出来，各自的进度独立计算。
     val capsByTrack = ALL_TRACKS.map { track ->
@@ -306,7 +308,7 @@ private fun ProfileBody(
                     )
                     Spacer(Modifier.height(3.dp))
                     Text(
-                        text = stringResource(R.string.prof_route_meta, completed.size, ALL_LESSONS.size),
+                        text = stringResource(R.string.prof_route_meta, doneHere, ALL_LESSONS.size),
                         color = Ascent.Fg3,
                         fontSize = 12.sp
                     )

@@ -36,8 +36,7 @@ import androidx.compose.ui.unit.sp
 import com.ascent.climb.data.ACHIEVEMENTS
 import com.ascent.climb.data.AchCategory
 import com.ascent.climb.data.Achievement
-import com.ascent.climb.data.ALL_LESSONS
-import com.ascent.climb.data.ALL_UNITS
+import com.ascent.climb.data.ALL_UNITS_EVERY_TRACK
 import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.achievementById
 import com.ascent.climb.data.validateAchievements
@@ -61,10 +60,12 @@ fun AchievementsDevScreen(
     var confirmResetAll by remember { mutableStateOf(false) }
 
     val unlocked = remember(revision) { store.unlockedAchievements.toSet() }
-    val stats = remember(revision) { store.achievementStats(ALL_UNITS) }
+    val stats = remember(revision) { store.achievementStats() }
+    // 校验用全轨道的课程/单元 id：成就条件里会引用徒步的 t01、t1–t4，
+    // 只用当前轨道会让这些引用在攀登轨道上被误报为「不存在」。
     val problems = remember { validateAchievements(
-        validLessonIds = ALL_LESSONS.map { it.id }.toSet(),
-        validUnitIds = ALL_UNITS.map { it.id }.toSet(),
+        validLessonIds = ALL_UNITS_EVERY_TRACK.flatMap { it.lessons }.map { it.id }.toSet(),
+        validUnitIds = ALL_UNITS_EVERY_TRACK.map { it.id }.toSet(),
         glyphKeys = BADGE_GLYPH_KEYS
     ) }
 

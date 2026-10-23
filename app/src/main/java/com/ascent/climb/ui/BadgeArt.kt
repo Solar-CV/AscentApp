@@ -45,5 +45,14 @@ fun badgeRes(id: String): Int? = when (id) {
     "streak_30" -> R.drawable.badge_streak_30
     "streak_7" -> R.drawable.badge_streak_7
     "tech_grad" -> R.drawable.badge_tech_grad
+
+    // v0.19.27 新增的徒步线成就：徽章还没画，先共用一张占位图。
+    // 定稿后把下面几行换成各自的 badge_<id>.webp 即可，业务定义不用动。
+    "trail_first" -> R.drawable.badge_placeholder_agi
+    "trail_camp" -> R.drawable.badge_placeholder_agi
+    "trail_high" -> R.drawable.badge_placeholder_agi
+    "trail_finish" -> R.drawable.badge_placeholder_agi
+    "two_tracks" -> R.drawable.badge_placeholder_agi
+
     else -> null
 }

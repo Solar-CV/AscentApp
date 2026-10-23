@@ -145,7 +145,8 @@ fun AscentRoot(
     val context = LocalContext.current
 
     var trackId by remember { mutableStateOf(store.trackId) }
-    // 聚合数据（ALL_UNITS / ALL_LESSONS）跟随当前大类，供训练页、我的页与成就判定使用
+    // 聚合数据（ALL_UNITS / ALL_LESSONS）跟随当前大类，供训练页与我的页使用；
+    // 成就判定不用它们，走 ProgressStore 内部的全轨道统计
     setActiveTrack(trackId)
     var altitude by remember { mutableStateOf(store.altitudeOn(store.trackId)) }
     var streak by remember { mutableStateOf(store.streak) }
@@ -163,7 +164,7 @@ fun AscentRoot(
 
     /** 事件后统一做成就判定并把新解锁排进待播队列。 */
     fun refreshAchievements() {
-        store.grantAchievements(ALL_UNITS)
+        store.grantAchievements()
         pendingAchievements = store.pendingAchievements.toList()
         achRevision += 1
     }

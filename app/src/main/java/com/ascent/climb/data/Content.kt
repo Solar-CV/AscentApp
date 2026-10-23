@@ -38,6 +38,15 @@ val ALL_UNITS: List<Unit> get() = BankRepository.allTracks.firstOrNull { it.id =
 /** 当前轨道的课程，按路线展开后的线性顺序。 */
 val ALL_LESSONS: List<Lesson> get() = ALL_UNITS.flatMap { it.lessons }
 
+/**
+ * 全部轨道的全部单元。
+ *
+ * 成就判定必须用这个而不是 [ALL_UNITS]：成就的解锁状态是跨轨道的（同一套
+ * 「已完成课程 id」），只看当前轨道会出现「切到徒步后攀登进度变 0，
+ * 大满贯成就反而更容易拿到」这种错判。
+ */
+val ALL_UNITS_EVERY_TRACK: List<Unit> get() = ALL_TRACKS.flatMap { it.units }
+
 /** 路线总题量。 */
 val TOTAL_QUESTIONS: Int get() = BankRepository.totalQuestions
 

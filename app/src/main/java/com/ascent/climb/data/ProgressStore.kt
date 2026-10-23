@@ -252,8 +252,14 @@ class ProgressStore(context: Context) {
         private set(value) = prefs.edit()
             .putString("pendingAchievements", value.joinToString(",")).apply()
 
-    /** 组装成就判定输入。 */
-    fun achievementStats(units: List<Unit>): AchievementStats {
+    /**
+     * 组装成就判定输入。
+     *
+     * 单元/轨道进度一律按**全部轨道**统计（[ALL_UNITS_EVERY_TRACK] / [ALL_TRACKS]），
+     * 与当前选中哪条路线无关 —— 成就库里只有一套解锁状态，
+     * 若按当前轨道统计，切轨道会让进度忽大忽小，大满贯这类成就会误判。
+     */
+    fun achievementStats(): AchievementStats {
         val done = completed
         return AchievementStats(
             completed = done,
@@ -266,15 +272,19 @@ class ProgressStore(context: Context) {
             altitude = altitude,
             streakBroken = streakBroken,
             devUnlocked = devUnlocked,
-            unitProgress = units.associate { u ->
+            unitProgress = ALL_UNITS_EVERY_TRACK.associate { u ->
                 u.id to (u.lessons.count { it.id in done } to u.lessons.size)
+            },
+            trackProgress = ALL_TRACKS.associate { t ->
+                val ls = t.units.flatMap { it.lessons }
+                t.id to (ls.count { it.id in done } to ls.size)
             }
         )
     }
 
     /** 事件后统一判定：把新解锁写入库 + 追加到待播队列，返回新解锁列表（已按稀有度排序）。 */
-    fun grantAchievements(units: List<Unit>): List<Achievement> {
-        val newly = evaluate(achievementStats(units), unlockedAchievements)
+    fun grantAchievements(): List<Achievement> {
+        val newly = evaluate(achievementStats(), unlockedAchievements)
         if (newly.isEmpty()) return emptyList()
         val u = unlockedAchievements
         u.addAll(newly.map { it.id })
