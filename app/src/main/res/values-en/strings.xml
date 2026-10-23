@@ -361,8 +361,12 @@
     <string name="fb_diag_desc">App version, OS and device, UI language, question bank version, and the most recent error.</string>
     <string name="fb_diag_crash">A recent error was found and will be attached.</string>
     <string name="fb_send">Send feedback</string>
-    <string name="fb_send_note">Your email app opens — review the text and hit send.</string>
+    <string name="fb_send_note">Submits right away — no email app needed.</string>
     <string name="fb_sent">Email app opened.</string>
     <string name="fb_no_mail">No email app found; the report was copied to the clipboard.</string>
     <string name="fb_need_text">Write something first.</string>
+    <string name="fb_sending">Sending…</string>
+    <string name="fb_ok">Sent. Thank you!</string>
+    <string name="fb_fail">Couldn\'t send. Check your connection and try again.</string>
+    <string name="fb_mail_alt">Send by email instead</string>
 </resources>

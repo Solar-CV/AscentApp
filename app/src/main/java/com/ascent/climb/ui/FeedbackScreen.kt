@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,88 +46,126 @@ import com.ascent.climb.data.ACHIEVEMENTS
 import com.ascent.climb.data.BANK_SOURCE
 import com.ascent.climb.data.BANK_VERSION
 import com.ascent.climb.data.Diagnostics
+import com.ascent.climb.data.FeedbackSender
 import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.activeTrackId
+import kotlinx.coroutines.launch
 
 /**
- * 反馈收件邮箱。
+ * 反馈收件邮箱，仅用于「改用邮件发送」这条退路。
  *
- * - 填了 → 用 ACTION_SENDTO(mailto:) 打开邮件应用，收件人已预填，用户点「发送」即可
- * - 留空 → 退化成系统分享（ACTION_SEND），由用户自己挑应用
- *
- * 之所以不在 App 里直连 SMTP 或某个表单接口：SMTP 需要把账号密码打进 APK，
- * 谁都能扒出来；表单接口需要一个后端。等有了固定收件邮箱，只改这一行即可。
+ * 主路径已经走 Formspree（见 data/FeedbackSender.kt），不依赖邮件应用。
+ * 这里留空时，邮件退路的收件人由用户自己填；填了就会预填。
  */
-private const val FEEDBACK_EMAIL = ""
+private const val FALLBACK_EMAIL = ""
 
-/** 反馈类型。索引与界面上的顺序一致。 */
+/**
+ * 反馈类型。索引与界面上的顺序一致。
+ */
 private val FEEDBACK_TYPES = listOf(
     R.string.fb_type_issue,
     R.string.fb_type_idea,
     R.string.fb_type_content
 )
 
+/** 提交阶段。 */
+private object FbPhase {
+    const val IDLE = 0
+    const val SENDING = 1
+    const val OK = 2
+    const val FAIL = 3
+    const val NEED_TEXT = 4
+    const val MAIL_OPENED = 5
+    const val MAIL_MISSING = 6
+}
+
 /**
  * 反馈与建议。
  *
- * 发送方式复用系统邮件应用，不在 App 内直连服务器：
- * 不需要额外权限（邮件应用自己有），也不会有「反馈服务器挂了」这种失败态。
- * 诊断信息默认不附带，必须用户自己打开开关。
+ * 主路径：直接 POST 到 Formspree（JSON），点一下就提交，不经过邮件应用；
+ * 退路：网络失败时可以「改用邮件发送」，走 ACTION_SENDTO，并把正文复制进剪贴板兜底。
+ *
+ * 诊断信息默认不附带，必须用户自己打开开关；附带时随请求一起提交，
+ * 内容口径见 fb_diag_desc（不含课程内容、做题记录、账号与任何用户输入）。
  */
 @Composable
 fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     var typeIndex by remember { mutableStateOf(0) }
     var message by remember { mutableStateOf("") }
     var contact by remember { mutableStateOf("") }
     var attachDiag by remember { mutableStateOf(false) }
-    // 0 未发送 / 1 已唤起邮件 / 2 没有邮件应用已复制 / 3 内容为空
-    var status by remember { mutableStateOf(0) }
+    var phase by remember { mutableStateOf(FbPhase.IDLE) }
     val crashAvailable = remember { Diagnostics.hasCrash(context) }
 
     BackHandler { onBack() }
 
-    fun buildBody(): String = buildString {
-        appendLine(message.trim())
-        if (contact.isNotBlank()) {
-            appendLine()
-            appendLine("Contact: ${contact.trim()}")
-        }
-        if (attachDiag) {
-            appendLine()
-            appendLine("— Diagnostics —")
-            appendLine(
-                Diagnostics.environment(
-                    context,
-                    listOf(
-                        "Bank" to "v$BANK_VERSION · $BANK_SOURCE",
-                        "Track" to activeTrackId(),
-                        "Done" to "${store.completed.size}",
-                        "Badges" to "${store.unlockedAchievements.size}/${ACHIEVEMENTS.size}"
-                    )
+    /** 诊断块：环境 + 最近崩溃，拼成一段可读文本。 */
+    fun diagnosticsText(): String = buildString {
+        appendLine(
+            Diagnostics.environment(
+                context,
+                listOf(
+                    "Bank" to "v$BANK_VERSION · $BANK_SOURCE",
+                    "Track" to activeTrackId(),
+                    "Done" to "${store.completed.size}",
+                    "Badges" to "${store.unlockedAchievements.size}/${ACHIEVEMENTS.size}"
                 )
             )
-            Diagnostics.lastCrash(context)?.let {
-                appendLine()
-                appendLine("— Last crash —")
-                appendLine(it)
+        )
+        Diagnostics.lastCrash(context)?.let {
+            appendLine()
+            appendLine("— Last crash —")
+            appendLine(it)
+        }
+    }
+
+    fun submit() {
+        if (message.isBlank()) {
+            phase = FbPhase.NEED_TEXT
+            return
+        }
+        val payload = linkedMapOf(
+            "type" to context.getString(FEEDBACK_TYPES[typeIndex]),
+            "message" to message.trim(),
+            "app" to "ASCENT ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+            "_subject" to "${context.getString(FEEDBACK_TYPES[typeIndex])} · ASCENT ${BuildConfig.VERSION_NAME}"
+        )
+        if (contact.isNotBlank()) payload["email"] = contact.trim()
+        if (attachDiag) payload["diagnostics"] = diagnosticsText()
+
+        phase = FbPhase.SENDING
+        scope.launch {
+            phase = when (FeedbackSender.submit(payload)) {
+                is FeedbackSender.Result.Success -> FbPhase.OK
+                is FeedbackSender.Result.Failure -> FbPhase.FAIL
             }
         }
     }
 
-    fun send() {
+    fun sendViaMail() {
         if (message.isBlank()) {
-            status = 3
+            phase = FbPhase.NEED_TEXT
             return
         }
-        val body = buildBody()
+        val body = buildString {
+            appendLine(message.trim())
+            if (contact.isNotBlank()) {
+                appendLine()
+                appendLine("Contact: ${contact.trim()}")
+            }
+            if (attachDiag) {
+                appendLine()
+                appendLine("— Diagnostics —")
+                appendLine(diagnosticsText())
+            }
+        }
         val subject = "${context.getString(FEEDBACK_TYPES[typeIndex])} · ASCENT ${BuildConfig.VERSION_NAME}"
-        val ok = runCatching {
-            // ACTION_SENDTO + mailto: 只会命中邮件应用（不会弹出微信、记事本之类）。
-            // 收件人留空时，用户自己在邮件里填；填了就预填好，点发送即可。
-            val uri = Uri.parse(if (FEEDBACK_EMAIL.isNotBlank()) "mailto:$FEEDBACK_EMAIL" else "mailto:")
+        val uri = Uri.parse(if (FALLBACK_EMAIL.isNotBlank()) "mailto:$FALLBACK_EMAIL" else "mailto:")
+        val opened = runCatching {
             val intent = Intent(Intent.ACTION_SENDTO, uri).apply {
-                if (FEEDBACK_EMAIL.isNotBlank()) putExtra(Intent.EXTRA_EMAIL, arrayOf(FEEDBACK_EMAIL))
+                if (FALLBACK_EMAIL.isNotBlank()) putExtra(Intent.EXTRA_EMAIL, arrayOf(FALLBACK_EMAIL))
                 putExtra(Intent.EXTRA_SUBJECT, subject)
                 putExtra(Intent.EXTRA_TEXT, body)
             }
@@ -134,11 +173,11 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(Intent.createChooser(intent, null))
         }.isSuccess
-        if (ok) {
-            status = 1
+        if (opened) {
+            phase = FbPhase.MAIL_OPENED
         } else {
             copyToClipboard(context, body)
-            status = 2
+            phase = FbPhase.MAIL_MISSING
         }
     }
 
@@ -181,7 +220,7 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
                                 height = 42,
                                 onClick = {
                                     typeIndex = i
-                                    if (status == 1 || status == 2) status = 0
+                                    if (phase != FbPhase.IDLE && phase != FbPhase.SENDING) phase = FbPhase.IDLE
                                 }
                             )
                         }
@@ -197,7 +236,7 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
                         value = message,
                         onValueChange = {
                             message = it
-                            if (status != 0) status = 0
+                            if (phase != FbPhase.IDLE && phase != FbPhase.SENDING) phase = FbPhase.IDLE
                         },
                         minLines = 5,
                         maxLines = 10,
@@ -241,7 +280,13 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
                             )
                         }
                         Spacer(Modifier.width(12.dp))
-                        Switch(checked = attachDiag, onCheckedChange = { attachDiag = it })
+                        Switch(
+                            checked = attachDiag,
+                            onCheckedChange = {
+                                attachDiag = it
+                                if (phase != FbPhase.IDLE && phase != FbPhase.SENDING) phase = FbPhase.IDLE
+                            }
+                        )
                     }
                     if (attachDiag && crashAvailable) {
                         Text(
@@ -255,26 +300,43 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
             }
 
             item(key = "send") {
+                val sending = phase == FbPhase.SENDING
                 PillButton(
-                    text = stringResource(R.string.fb_send),
+                    text = if (sending) stringResource(R.string.fb_sending) else stringResource(R.string.fb_send),
                     style = BtnStyle.Primary,
                     height = 50,
-                    enabled = message.isNotBlank(),
-                    onClick = { send() }
+                    enabled = !sending && message.isNotBlank(),
+                    onClick = { submit() }
                 )
                 Spacer(Modifier.height(10.dp))
-                val note = when (status) {
-                    1 -> stringResource(R.string.fb_sent)
-                    2 -> stringResource(R.string.fb_no_mail)
-                    3 -> stringResource(R.string.fb_need_text)
+                val note = when (phase) {
+                    FbPhase.OK -> stringResource(R.string.fb_ok)
+                    FbPhase.FAIL -> stringResource(R.string.fb_fail)
+                    FbPhase.NEED_TEXT -> stringResource(R.string.fb_need_text)
+                    FbPhase.MAIL_OPENED -> stringResource(R.string.fb_sent)
+                    FbPhase.MAIL_MISSING -> stringResource(R.string.fb_no_mail)
                     else -> stringResource(R.string.fb_send_note)
                 }
                 Text(
                     text = note,
-                    color = if (status == 3) Ascent.Danger else Ascent.Fg3,
+                    color = when (phase) {
+                        FbPhase.OK -> Ascent.Success
+                        FbPhase.FAIL, FbPhase.NEED_TEXT -> Ascent.Danger
+                        else -> Ascent.Fg3
+                    },
                     fontSize = 11.sp,
                     lineHeight = 17.sp
                 )
+                // 网络不通时的退路：走系统邮件
+                if (phase == FbPhase.FAIL || phase == FbPhase.MAIL_MISSING) {
+                    Spacer(Modifier.height(12.dp))
+                    PillButton(
+                        text = stringResource(R.string.fb_mail_alt),
+                        style = BtnStyle.Ghost,
+                        height = 42,
+                        onClick = { sendViaMail() }
+                    )
+                }
             }
         }
     }

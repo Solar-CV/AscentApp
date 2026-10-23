@@ -345,8 +345,12 @@
     <string name="fb_diag_desc">應用程式版本、系統與機型、介面語言、題庫版本、最近一次錯誤紀錄。</string>
     <string name="fb_diag_crash">偵測到一筆最近的錯誤紀錄，傳送時會一併附上。</string>
     <string name="fb_send">傳送回饋</string>
-    <string name="fb_send_note">會開啟你的郵件應用程式，確認內容後按傳送即可。</string>
+    <string name="fb_send_note">按傳送即刻提交，不需要開啟信箱。</string>
     <string name="fb_sent">已開啟郵件應用程式。</string>
     <string name="fb_no_mail">找不到可用的郵件應用程式，回饋內容已複製到剪貼簿。</string>
     <string name="fb_need_text">先寫點內容再傳送。</string>
+    <string name="fb_sending">傳送中…</string>
+    <string name="fb_ok">已收到，謝謝！</string>
+    <string name="fb_fail">傳送失敗，請檢查網路後再試。</string>
+    <string name="fb_mail_alt">改用郵件傳送</string>
 </resources>

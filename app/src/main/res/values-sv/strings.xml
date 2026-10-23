@@ -323,8 +323,12 @@
     <string name="fb_diag_desc">Appversion, system och enhet, språk, frågebankens version, senaste felet.</string>
     <string name="fb_diag_crash">Ett nyligen inträffat fel hittades och bifogas.</string>
     <string name="fb_send">Skicka feedback</string>
-    <string name="fb_send_note">Din mejlapp öppnas – granska och skicka.</string>
+    <string name="fb_send_note">Skickas direkt, ingen mejlapp behövs.</string>
     <string name="fb_sent">Mejlappen öppnades.</string>
     <string name="fb_no_mail">Ingen mejlapp hittades; texten kopierades till urklipp.</string>
     <string name="fb_need_text">Skriv något först.</string>
+    <string name="fb_sending">Skickar…</string>
+    <string name="fb_ok">Mottaget, tack!</string>
+    <string name="fb_fail">Det gick inte att skicka. Kontrollera anslutningen och försök igen.</string>
+    <string name="fb_mail_alt">Skicka via mejl i stället</string>
 </resources>

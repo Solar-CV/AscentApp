@@ -323,8 +323,12 @@
     <string name="fb_diag_desc">Versión de la app, sistema y modelo, idioma, versión del banco de preguntas y el último error.</string>
     <string name="fb_diag_crash">Se ha encontrado un error reciente y se adjuntará.</string>
     <string name="fb_send">Enviar comentarios</string>
-    <string name="fb_send_note">Se abrirá tu app de correo: revisa el texto y pulsa enviar.</string>
+    <string name="fb_send_note">Se envía al momento, sin abrir el correo.</string>
     <string name="fb_sent">App de correo abierta.</string>
     <string name="fb_no_mail">No se encontró ninguna app de correo; el texto se copió al portapapeles.</string>
     <string name="fb_need_text">Escribe algo antes de enviar.</string>
+    <string name="fb_sending">Enviando…</string>
+    <string name="fb_ok">Recibido, ¡gracias!</string>
+    <string name="fb_fail">No se pudo enviar. Comprueba la conexión e inténtalo de nuevo.</string>
+    <string name="fb_mail_alt">Enviar por correo</string>
 </resources>

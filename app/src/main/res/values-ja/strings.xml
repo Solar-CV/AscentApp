@@ -345,8 +345,12 @@
     <string name="fb_diag_desc">アプリのバージョン、OS と端末、表示言語、問題集のバージョン、直近のエラー記録。</string>
     <string name="fb_diag_crash">直近のエラー記録が見つかりました。送信時に一緒に添付されます。</string>
     <string name="fb_send">フィードバックを送信</string>
-    <string name="fb_send_note">メールアプリが開きます。内容を確認して送信してください。</string>
+    <string name="fb_send_note">送信するとすぐに届きます。メールアプリは不要です。</string>
     <string name="fb_sent">メールアプリを開きました。</string>
     <string name="fb_no_mail">メールアプリが見つかりません。内容をクリップボードにコピーしました。</string>
     <string name="fb_need_text">内容を入力してから送信してください。</string>
+    <string name="fb_sending">送信中…</string>
+    <string name="fb_ok">受け取りました。ありがとうございます！</string>
+    <string name="fb_fail">送信できませんでした。通信状況を確認して再試行してください。</string>
+    <string name="fb_mail_alt">メールで送る</string>
 </resources>

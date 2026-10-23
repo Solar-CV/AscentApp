@@ -323,8 +323,12 @@
     <string name="fb_diag_desc">Version de l\'app, système et appareil, langue, version de la banque de questions, dernière erreur.</string>
     <string name="fb_diag_crash">Une erreur récente a été détectée ; elle sera jointe.</string>
     <string name="fb_send">Envoyer</string>
-    <string name="fb_send_note">Votre application de messagerie va s\'ouvrir : vérifiez puis envoyez.</string>
+    <string name="fb_send_note">Envoi immédiat, sans passer par la messagerie.</string>
     <string name="fb_sent">Application de messagerie ouverte.</string>
     <string name="fb_no_mail">Aucune application de messagerie trouvée ; le texte a été copié.</string>
     <string name="fb_need_text">Écrivez d\'abord quelque chose.</string>
+    <string name="fb_sending">Envoi…</string>
+    <string name="fb_ok">Bien reçu, merci !</string>
+    <string name="fb_fail">L\'envoi a échoué. Vérifiez votre connexion et réessayez.</string>
+    <string name="fb_mail_alt">Envoyer par e-mail</string>
 </resources>

@@ -345,8 +345,12 @@
     <string name="fb_diag_desc">Версия приложения, система и модель, язык интерфейса, версия банка вопросов, последняя ошибка.</string>
     <string name="fb_diag_crash">Найдена недавняя запись об ошибке — она будет приложена.</string>
     <string name="fb_send">Отправить</string>
-    <string name="fb_send_note">Откроется почтовое приложение: проверьте текст и нажмите «Отправить».</string>
+    <string name="fb_send_note">Отправляется сразу, почтовое приложение не нужно.</string>
     <string name="fb_sent">Почтовое приложение открыто.</string>
     <string name="fb_no_mail">Почтовое приложение не найдено, текст скопирован в буфер обмена.</string>
     <string name="fb_need_text">Сначала напишите что-нибудь.</string>
+    <string name="fb_sending">Отправка…</string>
+    <string name="fb_ok">Получено, спасибо!</string>
+    <string name="fb_fail">Не удалось отправить. Проверьте соединение и повторите.</string>
+    <string name="fb_mail_alt">Отправить по почте</string>
 </resources>

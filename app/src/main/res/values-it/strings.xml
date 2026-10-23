@@ -323,8 +323,12 @@
     <string name="fb_diag_desc">Versione dell\'app, sistema e modello, lingua, versione del questionario, ultimo errore.</string>
     <string name="fb_diag_crash">È stato trovato un errore recente: verrà allegato.</string>
     <string name="fb_send">Invia feedback</string>
-    <string name="fb_send_note">Si apre l\'app di posta: controlla e invia.</string>
+    <string name="fb_send_note">Invio immediato, senza aprire l\'app di posta.</string>
     <string name="fb_sent">App di posta aperta.</string>
     <string name="fb_no_mail">Nessuna app di posta trovata; testo copiato negli appunti.</string>
     <string name="fb_need_text">Scrivi qualcosa prima di inviare.</string>
+    <string name="fb_sending">Invio…</string>
+    <string name="fb_ok">Ricevuto, grazie!</string>
+    <string name="fb_fail">Invio non riuscito. Controlla la connessione e riprova.</string>
+    <string name="fb_mail_alt">Invia per email</string>
 </resources>

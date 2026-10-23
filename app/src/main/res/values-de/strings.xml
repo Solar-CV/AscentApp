@@ -323,8 +323,12 @@
     <string name="fb_diag_desc">App-Version, System und Gerät, Sprache, Version des Fragenpools, letzter Fehler.</string>
     <string name="fb_diag_crash">Ein letzter Fehler wurde gefunden und wird mitgesendet.</string>
     <string name="fb_send">Feedback senden</string>
-    <string name="fb_send_note">Die E-Mail-App öffnet sich – Inhalt prüfen und senden.</string>
+    <string name="fb_send_note">Wird sofort gesendet – ohne E-Mail-App.</string>
     <string name="fb_sent">E-Mail-App geöffnet.</string>
     <string name="fb_no_mail">Keine E-Mail-App gefunden, Text in die Zwischenablage kopiert.</string>
     <string name="fb_need_text">Bitte zuerst etwas schreiben.</string>
+    <string name="fb_sending">Wird gesendet…</string>
+    <string name="fb_ok">Angekommen, danke!</string>
+    <string name="fb_fail">Senden fehlgeschlagen. Verbindung prüfen und erneut versuchen.</string>
+    <string name="fb_mail_alt">Stattdessen per E-Mail</string>
 </resources>

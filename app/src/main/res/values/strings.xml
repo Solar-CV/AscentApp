@@ -360,8 +360,12 @@
     <string name="fb_diag_desc">应用版本、系统与机型、界面语言、题库版本、最近一次错误记录。</string>
     <string name="fb_diag_crash">检测到一条最近的错误记录，发送时会一并附上。</string>
     <string name="fb_send">发送反馈</string>
-    <string name="fb_send_note">会打开你的邮件应用，确认内容后点发送即可。</string>
+    <string name="fb_send_note">点发送即刻提交，不需要打开邮箱。</string>
     <string name="fb_sent">已打开邮件应用。</string>
     <string name="fb_no_mail">没找到可用的邮件应用，反馈内容已复制到剪贴板。</string>
     <string name="fb_need_text">先写点内容再发送。</string>
+    <string name="fb_sending">发送中…</string>
+    <string name="fb_ok">已收到，谢谢！</string>
+    <string name="fb_fail">发送失败，请检查网络后重试。</string>
+    <string name="fb_mail_alt">改用邮件发送</string>
 </resources>
