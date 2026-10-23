@@ -120,7 +120,6 @@ fun ProfileScreen(
     var showSettings by remember { mutableStateOf(false) }
     var showProfileHome by remember { mutableStateOf(false) }
     var showBadgeWall by remember { mutableStateOf(false) }
-    var showBadge3D by remember { mutableStateOf(false) }
     var showFeedback by remember { mutableStateOf(false) }
 
     if (showBadgeWall) {
@@ -148,8 +147,6 @@ fun ProfileScreen(
             onBack = { showAchievements = false },
             onChanged = onAchChanged
         )
-    } else if (showBadge3D) {
-        Badge3DPocScreen(onBack = { showBadge3D = false })
     } else if (showFeedback) {
         FeedbackScreen(store = store, onBack = { showFeedback = false })
     } else if (showSettings) {
@@ -167,7 +164,6 @@ fun ProfileScreen(
             onDevUnlockAllChange = onDevUnlockAllChange,
             onDevShowAnswersChange = onDevShowAnswersChange,
             onOpenAchievements = { showAchievements = true },
-            onOpenBadge3D = { showBadge3D = true },
             bankChecking = bankChecking,
             bankMessage = bankMessage,
             onCheckBank = onCheckBank,

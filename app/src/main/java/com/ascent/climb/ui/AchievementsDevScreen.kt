@@ -58,6 +58,13 @@ fun AchievementsDevScreen(
     // 会永远算出同一项而卡死（表现为「收下」无反应）。
     var previewQueue by remember { mutableStateOf<List<Achievement>>(emptyList()) }
     var confirmResetAll by remember { mutableStateOf(false) }
+    // 3D 展示：null 表示不在展示页。成就测试区是唯一入口（设置页的旧入口已移除）。
+    var stageId by remember { mutableStateOf<String?>(null) }
+
+    stageId?.let { id ->
+        Badge3DStageScreen(achievementId = id, onBack = { stageId = null })
+        return
+    }
 
     val unlocked = remember(revision) { store.unlockedAchievements.toSet() }
     val stats = remember(revision) { store.achievementStats() }
@@ -209,12 +216,19 @@ fun AchievementsDevScreen(
                     val cur = a.progress(stats).coerceIn(0, a.target)
                     OutlineCard(gap = 8, padding = 12, modifier = Modifier.padding(bottom = 8.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            AchievementBadge(
-                                id = a.id,
-                                unlocked = isUnlocked,
-                                concealed = concealed,
-                                size = 48.dp
-                            )
+                            // 点徽章直接看 3D 展示（真实模型或图片假 3D）
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .clickable { stageId = a.id }
+                            ) {
+                                AchievementBadge(
+                                    id = a.id,
+                                    unlocked = isUnlocked,
+                                    concealed = concealed,
+                                    size = 48.dp
+                                )
+                            }
                             Spacer(Modifier.width(12.dp))
                             Column(modifier = Modifier.weight(1f)) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -267,6 +281,14 @@ fun AchievementsDevScreen(
                                     style = BtnStyle.Secondary,
                                     height = 36,
                                     onClick = { previewQueue = listOf(a) }
+                                )
+                            }
+                            Box(modifier = Modifier.weight(0.72f)) {
+                                PillButton(
+                                    text = "3D",
+                                    style = BtnStyle.Secondary,
+                                    height = 36,
+                                    onClick = { stageId = a.id }
                                 )
                             }
                             Box(modifier = Modifier.weight(1f)) {

@@ -5,6 +5,9 @@ import android.view.Choreographer
 import android.view.MotionEvent
 import android.view.TextureView
 import androidx.compose.foundation.background
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -18,9 +21,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +40,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -37,6 +54,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.filament.Camera
+import com.ascent.climb.R
+import com.ascent.climb.data.achievementById
 import com.google.android.filament.Engine
 import com.google.android.filament.EntityManager
 import com.google.android.filament.Filament
@@ -75,6 +94,12 @@ import kotlin.math.tan
  * 不是产品代码：徽章写死 first_step，文案写死中文，引擎不释放（App 生命周期常驻）。
  */
 
+/** 成就 id → glb 资源。没有登记的成就走「图片假 3D」。 */
+private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
+    "first_steps" to "badges/first_step.glb",
+)
+
+/** 默认模型（POC Activity / 调试直连时用）。 */
 private const val MODEL_PATH = "badges/first_step.glb"
 private const val IBL_PATH = "env/studio_ibl.ktx"
 
@@ -141,7 +166,7 @@ private object Badge3D {
     private val loader by lazy { AssetLoader(engine, materialProvider, EntityManager.get()) }
     private val resourceLoader by lazy { ResourceLoader(engine) }
 
-    private var asset: FilamentAsset? = null
+    private val assetCache = HashMap<String, FilamentAsset>()
     private var ibl: IndirectLight? = null
     private var iblTried = false
 
@@ -171,17 +196,17 @@ private object Badge3D {
         return ibl
     }
 
-    fun asset(): FilamentAsset? {
-        asset?.let { return it }
+    fun asset(path: String): FilamentAsset? {
+        assetCache[path]?.let { return it }
         val ctx = appContext ?: return null
-        val buf = directBuffer(ctx, MODEL_PATH) ?: return null
+        val buf = directBuffer(ctx, path) ?: return null
         val loaded = runCatching {
             val a = loader.createAsset(buf) ?: return null
             resourceLoader.loadResources(a)
             a.releaseSourceData()
             a
         }.getOrNull() ?: return null
-        asset = loaded
+        assetCache[path] = loaded
         return loaded
     }
 
@@ -278,6 +303,7 @@ private fun translation(x: Float, y: Float, z: Float): FloatArray = floatArrayOf
  */
 private class Badge3DRenderer(
     private val textureView: TextureView,
+    private val modelPath: String,
     private val startNanos: Long,
     private val onStats: (String) -> Unit
 ) {
@@ -301,6 +327,7 @@ private class Badge3DRenderer(
     private var pitch = -10f
     private var spinVelocity = 0f
     private var autoSpin = true
+    private var spinPhase = 0f
     private var zoom = 1f
     private var lastAspect = 1f
     private var pinchBase = 1f
@@ -362,6 +389,8 @@ private class Badge3DRenderer(
             clear = true
             clearColor = doubleArrayOf(0.0, 0.0, 0.0, 0.0)
         }
+        // 透明底：关掉后处理（tonemap 会把 alpha 写成 1），并按半透明合成
+        view.blendMode = View.BlendMode.TRANSLUCENT
 
         runCatching { buildScene() }.onFailure {
             Badge3D.markStage(app, "X 场景构建失败: ${it.javaClass.simpleName}")
@@ -387,7 +416,7 @@ private class Badge3DRenderer(
 
     private fun buildScene() {
         val app = textureView.context.applicationContext
-        val asset = Badge3D.asset()
+        val asset = Badge3D.asset(modelPath)
 
         // 无论模型是否加载成功，view 必须带相机，否则渲染器会在原生层直接 abort
         view.scene = scene
@@ -513,7 +542,10 @@ private class Badge3DRenderer(
                 yaw += spinVelocity * dt * 60f
                 spinVelocity *= 0.92f
             } else if (autoSpin && now - lastTouchAt > 3000L) {
-                yaw += 12f * dt
+                // 自动展示只在正面 ±22° 摆动：模型背面是一块素板，转过去不好看；
+                // 手动拖动仍可看完整 360°。
+                spinPhase += dt
+                yaw = 18f + sin(spinPhase * 0.9f) * 22f
                 spinVelocity = 0f
             }
         }
@@ -574,9 +606,10 @@ private class Badge3DRenderer(
                 } else {
                     val dx = event.x - lastX
                     val dy = event.y - lastY
-                    yaw -= dx * 0.42f
-                    pitch = (pitch - dy * 0.26f).coerceIn(-26f, 26f)
-                    spinVelocity = -dx * 0.42f
+                    // 反向手感：向右/向下拖动，徽章朝同方向转
+                    yaw += dx * 0.42f
+                    pitch = (pitch + dy * 0.26f).coerceIn(-26f, 26f)
+                    spinVelocity = dx * 0.42f
                     lastX = event.x
                     lastY = event.y
                 }
@@ -599,8 +632,14 @@ private class Badge3DRenderer(
 
 // ---------------------------------------------------------------- Compose 封装
 
+private val INK = Color(0xFF14232A)
+private val INK2 = Color(0xFF455963)
+private val INK3 = Color(0xFF6E808A)
+
+/** 真实 3D 视图：一个 TextureView + 一套渲染器。 */
 @Composable
 private fun Badge3DView(
+    modelPath: String,
     modifier: Modifier = Modifier,
     onStats: (String) -> Unit = {}
 ) {
@@ -621,7 +660,7 @@ private fun Badge3DView(
             TextureView(ctx).apply {
                 isOpaque = false
                 val t0 = System.nanoTime()
-                val r = Badge3DRenderer(this, t0, onStats)
+                val r = Badge3DRenderer(this, modelPath, t0, onStats)
                 renderer = r
                 setOnTouchListener { _, event -> r.onTouch(event) }
                 r.start()
@@ -632,175 +671,186 @@ private fun Badge3DView(
 }
 
 /**
- * POC 页面：简略（小窗）+ 详细（全屏 + 背景）两种形态共用同一套渲染。
+ * 图片假 3D：没有 glb 的成就先用这张定稿图做透视旋转。
  *
- * 两种形态**不会同时存在**——同一时刻只有一个 TextureView、一个 swapchain。
+ * 用 graphicsLayer 的 rotationX/rotationY + cameraDistance 得到真透视，
+ * 不用建模型也不需要引擎；摆动限制在 ±55°，避免转出背面（背面会是镜像）。
  */
 @Composable
-fun Badge3DPocScreen(onBack: () -> Unit) {
-    val context = LocalContext.current
-    var detail by remember { mutableStateOf(false) }
-    var stats by remember { mutableStateOf("等待首帧…") }
-    var useVulkan by remember { mutableStateOf(Badge3D.useVulkan(context)) }
-    var useIbl by remember { mutableStateOf(Badge3D.useIbl(context)) }
-    // 上一次会话留下的阶段记录：原生崩溃时 Java 栈拿不到，只能靠它定位
-    val lastStage = remember { Badge3D.lastStage(context) }
-    val scroll = rememberScrollState()
+private fun FakeBadge3D(res: Int, modifier: Modifier = Modifier) {
+    var yaw by remember { mutableFloatStateOf(16f) }
+    var pitch by remember { mutableFloatStateOf(-8f) }
+    var auto by remember { mutableStateOf(true) }
+    var lastTouch by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    val density = LocalDensity.current.density
 
-    if (!detail) {
-        Column(
+    LaunchedEffect(Unit) {
+        var t0 = 0L
+        while (true) {
+            withFrameNanos { now ->
+                if (t0 == 0L) t0 = now
+                if (auto && System.currentTimeMillis() - lastTouch > 3000L) {
+                    val t = (now - t0) / 1e9f
+                    yaw = 16f + sin(t * 0.8f) * 24f
+                }
+            }
+        }
+    }
+
+    Box(
+        modifier = modifier.pointerInput(Unit) {
+            detectDragGestures(
+                onDragStart = {
+                    auto = false
+                    lastTouch = System.currentTimeMillis()
+                },
+                onDragEnd = { lastTouch = System.currentTimeMillis() },
+                onDragCancel = { lastTouch = System.currentTimeMillis() },
+                onDrag = { change, drag ->
+                    change.consume()
+                    // 与真实 3D 同一套反向手感
+                    yaw = (yaw + drag.x * 0.35f).coerceIn(-55f, 55f)
+                    pitch = (pitch + drag.y * 0.22f).coerceIn(-30f, 30f)
+                }
+            )
+        },
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(res),
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
             modifier = Modifier
-                .fillMaxSize()
-                .background(Ascent.Bg)
-                .verticalScroll(scroll)
-                .padding(horizontal = 20.dp, vertical = 12.dp)
-        ) {
+                .fillMaxWidth(0.82f)
+                .aspectRatio(1f)
+                // 定稿图自带深色底，直接转会像贴了块黑方片；
+                // 圆角 + 投影把它变成一张收藏卡片，和亮背景才不打架。
+                .shadow(20.dp, RoundedCornerShape(26.dp))
+                .graphicsLayer {
+                    rotationY = yaw
+                    rotationX = pitch
+                    cameraDistance = 6f * density
+                }
+                .clip(RoundedCornerShape(26.dp))
+        )
+    }
+}
+
+/**
+ * 3D 徽章展示页：同一个入口既服务「已有 glb 的成就」，也服务「只有定稿图的成就」。
+ *
+ * 背景是重模糊的亮色风景（res/drawable-nodpi/badge_bg.jpg），
+ * 3D 视图用透明 TextureView 叠在上面，因此背景与徽章是两层独立合成。
+ */
+@Composable
+fun Badge3DStageScreen(
+    achievementId: String,
+    onBack: () -> Unit
+) {
+    val ach = remember(achievementId) { achievementById(achievementId) }
+    val modelPath = MODEL_OF_ACHIEVEMENT[achievementId]
+    var stats by remember { mutableStateOf("") }
+
+    BackHandler { onBack() }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(R.drawable.badge_bg),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        // 极淡白纱：让暗色金属与深色文字都压得住
+        Box(modifier = Modifier.fillMaxSize().background(Color(0x12FFFFFF)))
+
+        Column(modifier = Modifier.fillMaxSize()) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 6.dp),
+                    .padding(start = 12.dp, top = 8.dp, end = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = "← 返回",
-                    color = Ascent.Fg2,
-                    fontSize = 14.sp,
+                    color = INK2,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Medium,
                     modifier = Modifier
                         .clip(RoundedCornerShape(999.dp))
                         .clickable { onBack() }
-                        .padding(end = 12.dp)
+                        .padding(horizontal = 8.dp, vertical = 10.dp)
                 )
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "3D 徽章 POC",
-                        color = Ascent.Fg,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                Spacer(Modifier.weight(1f))
+                SoftTag(
+                    text = if (modelPath != null) "真实 3D" else "图片 3D",
+                    foreground = if (modelPath != null) Color(0xFF17603F) else Color(0xFF4A5560),
+                    background = if (modelPath != null) Color(0x2E1D9E75) else Color(0x24142028)
+                )
             }
-
-            Spacer(Modifier.height(10.dp))
-            Text("简略展示 · 200dp 小窗（可拖动）", color = Ascent.Fg3, fontSize = 11.sp)
-            Spacer(Modifier.height(8.dp))
 
             Box(
                 modifier = Modifier
-                    .size(200.dp)
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Ascent.Surface)
+                    .weight(1f)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
             ) {
-                Badge3DView(
-                    modifier = Modifier.fillMaxSize(),
-                    onStats = { stats = it }
-                )
-            }
-
-            Spacer(Modifier.height(12.dp))
-            Text(stats, color = Ascent.Fg3, fontSize = 11.sp)
-            Text(
-                "单指横拖旋转 · 竖拖俯仰 · 双指捏合缩放 · 静止 3 秒自动慢转",
-                color = Ascent.Fg3,
-                fontSize = 11.sp
-            )
-
-            Spacer(Modifier.height(12.dp))
-            Text(
-                "上次最后阶段：$lastStage",
-                color = Ascent.Fg3,
-                fontSize = 10.sp
-            )
-            Spacer(Modifier.height(8.dp))
-            POC_Button(
-                text = if (useVulkan) "后端：Vulkan（点此改回 GLES）" else "后端：GLES（点此改 Vulkan）",
-                onClick = {
-                    useVulkan = !useVulkan
-                    Badge3D.setUseVulkan(context, useVulkan)
-                    stats = "后端已改为 ${if (useVulkan) "Vulkan" else "GLES"}，重启 App 生效"
-                }
-            )
-            Spacer(Modifier.height(8.dp))
-            POC_Button(
-                text = if (useIbl) "环境光 IBL：开（点此关闭）" else "环境光 IBL：关（点此开启）",
-                onClick = {
-                    useIbl = !useIbl
-                    Badge3D.setUseIbl(context, useIbl)
-                    stats = "IBL 已${if (useIbl) "开启" else "关闭"}，重启 App 生效"
-                }
-            )
-
-            Spacer(Modifier.height(18.dp))
-            POC_Button("进入详细展示", onClick = { detail = true })
-            Spacer(Modifier.height(10.dp))
-            POC_Button("返回", onClick = onBack)
-        }
-    } else {
-        Box(modifier = Modifier.fillMaxSize()) {
-            // 专属背景：POC 先用同色系渐变占位，验证 3D 能否透明叠在普通页面之上
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(Color(0xFF10202A), Color(0xFF060C11))
-                        )
+                if (modelPath != null) {
+                    Badge3DView(
+                        modelPath = modelPath,
+                        modifier = Modifier.fillMaxSize(),
+                        onStats = { stats = it }
                     )
-            )
-
-            Badge3DView(
-                modifier = Modifier.fillMaxSize(),
-                onStats = { stats = it }
-            )
+                } else {
+                    val res = badgeRes(achievementId)
+                    if (res != null) {
+                        FakeBadge3D(
+                            res = res,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 36.dp, vertical = 24.dp)
+                        )
+                    } else {
+                        Text("该成就暂无图形资源", color = INK2, fontSize = 13.sp)
+                    }
+                }
+            }
 
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp),
-                verticalArrangement = Arrangement.Bottom
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 24.dp, bottom = 26.dp)
             ) {
                 Text(
-                    text = "FIRST STEP",
-                    color = Color(0xFFE8F3F7),
-                    fontSize = 22.sp,
+                    text = ach?.let { achievementTitle(it.id, it.title) } ?: achievementId,
+                    color = INK,
+                    fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
-                Spacer(Modifier.height(4.dp))
-                Text("迈出第一步 · Common", color = Color(0xFF8FB3C0), fontSize = 12.sp)
-                Spacer(Modifier.height(2.dp))
-                Text(stats, color = Color(0xFF6E8E9B), fontSize = 10.sp)
-                Spacer(Modifier.height(14.dp))
-                POC_Button("退出详细展示", onClick = { detail = false })
+                Spacer(Modifier.height(6.dp))
+                if (ach != null) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .size(8.dp)
+                                .clip(CircleShape)
+                                .background(rarityColors(ach.rarity).face)
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Text(rarityName(ach.rarity), color = INK2, fontSize = 12.sp)
+                    }
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        text = ach.conditionText,
+                        color = INK2,
+                        fontSize = 12.sp,
+                        lineHeight = 18.sp
+                    )
+                }
+                if (modelPath != null && stats.isNotEmpty()) {
+                    Spacer(Modifier.height(8.dp))
+                    Text(stats, color = INK2, fontSize = 10.sp)
+                }
             }
-
-            Text(
-                text = "← 返回",
-                color = Color(0xFFBBD3DC),
-                fontSize = 14.sp,
-                modifier = Modifier
-                    .padding(20.dp)
-                    .clip(RoundedCornerShape(999.dp))
-                    .clickable { detail = false }
-            )
         }
-    }
-}
-
-@Composable
-private fun POC_Button(text: String, onClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(46.dp)
-            .clip(RoundedCornerShape(14.dp))
-            .background(Ascent.AccentSoft)
-            .clickable { onClick() },
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = text,
-            color = Ascent.Fg,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium
-        )
     }
 }
