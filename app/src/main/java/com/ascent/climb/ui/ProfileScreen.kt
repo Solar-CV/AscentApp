@@ -137,6 +137,15 @@ fun ProfileScreen(
             onBack = { showProfileHome = false },
             onOpenAllBadges = { showBadgeWall = true }
         )
+    // 注意分支顺序：成就测试页是从设置页里点开的，必须排在 showSettings 之前判断。
+    // 否则 showSettings 仍为 true，先命中设置页，点了按钮界面纹丝不动
+    //（曾经就是这个顺序导致「成就测试点不进去」）。
+    } else if (showAchievements) {
+        AchievementsDevScreen(
+            store = store,
+            onBack = { showAchievements = false },
+            onChanged = onAchChanged
+        )
     } else if (showSettings) {
         SettingsScreen(
             store = store,
@@ -159,12 +168,6 @@ fun ProfileScreen(
             onBankUrlChange = onBankUrlChange,
             onReset = onReset,
             onBack = { showSettings = false }
-        )
-    } else if (showAchievements) {
-        AchievementsDevScreen(
-            store = store,
-            onBack = { showAchievements = false },
-            onChanged = onAchChanged
         )
     } else if (showAuth) {
         AuthScreen(

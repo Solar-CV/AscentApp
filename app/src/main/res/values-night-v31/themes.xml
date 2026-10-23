@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 夜间模式 · Android 12+（系统启动画面由 SplashScreen API 接管） -->
+<resources>
+    <style name="Theme.Ascent" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/ascent_bg</item>
+        <item name="android:statusBarColor">@color/ascent_bg</item>
+        <item name="android:navigationBarColor">@color/ascent_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- 启动画面：背景与页面一致，中央只画雪山本身（无深色底） -->
+        <item name="android:windowSplashScreenBackground">@color/ascent_bg</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_mark</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+    </style>
+</resources>

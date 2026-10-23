@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  开屏专用的雪山标记（仅图形，无底色）。
+
+  为什么不复用 @mipmap/ic_launcher：系统启动画面默认拿桌面图标绘制，
+  而桌面图标是 adaptive-icon（深色底 #0B1522 + 雪山前景），
+  在浅色启动背景上会露出一个深色圆盘。这里单独给一幅透明底的矢量，
+  挂到 android:windowSplashScreenAnimatedIcon 上，中央就只剩雪山本身。
+
+  288×288 视口、内容居中，符合 Android 12 启动图标的安全区口径
+  （内容落在中央 192dp 以内），各屏幕密度下都不会被裁切。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="288dp"
+    android:height="288dp"
+    android:viewportWidth="288"
+    android:viewportHeight="288">
+    <!-- 山体 -->
+    <path
+        android:pathData="M144,89.6 L225.6,225.6 L62.4,225.6 Z"
+        android:fillColor="#6FD3F2" />
+    <!-- 雪帽 -->
+    <path
+        android:pathData="M144,89.6 L176.3,140.6 L144,127 L113.4,140.6 Z"
+        android:fillColor="#EAF6FC" />
+    <!-- 旗杆 -->
+    <path
+        android:pathData="M144,89.6 L144,48.8"
+        android:strokeColor="#F5B942"
+        android:strokeWidth="10.88"
+        android:strokeLineCap="round" />
+    <!-- 旗面 -->
+    <path
+        android:pathData="M144,48.8 L181.4,64.1 L144,79.4 Z"
+        android:fillColor="#F5B942" />
+</vector>
