@@ -19,6 +19,11 @@ android {
         resourceConfigurations += listOf(
             "zh", "zh-rCN", "zh-rTW", "en", "ja", "ru", "fr", "sv", "de", "es", "it"
         )
+        // 3D 徽章 POC：Filament 体积几乎全在原生库上，先只打 64 位，省掉 x86/armeabi 约 6 MB。
+        // 正式接入时改用 App Bundle 按 ABI 分发，或保留 armeabi-v7a 覆盖 32 位老机。
+        ndk {
+            abiFilters += listOf("arm64-v8a")
+        }
     }
 
     buildTypes {
@@ -65,6 +70,14 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material3:material3")
+
+    // 3D 徽章 POC：Filament（渲染）+ gltfio（glb 加载）+ utils（KTX 环境光加载）
+    // 锁 1.75.0：1.76.0 起 AAR 声明 minCompileSdk=37，本工程 compileSdk 34 + AGP 8.5.2 装不下。
+    // 要升级 Filament 必须同时升 compileSdk/AGP，属于独立议题，不在 POC 范围内。
+    val filament = "1.75.0"
+    implementation("com.google.android.filament:filament-android:$filament")
+    implementation("com.google.android.filament:gltfio-android:$filament")
+    implementation("com.google.android.filament:filament-utils-android:$filament")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

@@ -66,6 +66,7 @@ fun SettingsScreen(
     onDevUnlockAllChange: (Boolean) -> Unit,
     onDevShowAnswersChange: (Boolean) -> Unit,
     onOpenAchievements: () -> Unit,
+    onOpenBadge3D: () -> Unit,
     bankChecking: Boolean,
     bankMessage: String,
     onCheckBank: () -> Unit,
@@ -322,6 +323,12 @@ fun SettingsScreen(
                             style = BtnStyle.Secondary,
                             height = 44,
                             onClick = onOpenAchievements
+                        )
+                        PillButton(
+                            text = "3D 徽章 POC（first_step）",
+                            style = BtnStyle.Secondary,
+                            height = 44,
+                            onClick = onOpenBadge3D
                         )
                         PillButton(
                             text = stringResource(R.string.set_dev_exit),
