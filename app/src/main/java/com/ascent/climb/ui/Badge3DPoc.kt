@@ -6,6 +6,8 @@ import android.view.MotionEvent
 import android.view.TextureView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -91,20 +93,34 @@ private val STUDIO_SH = floatArrayOf(
 private object Badge3D {
     var appContext: Context? = null
 
-    /** 强制走 GLES（Mali 驱动上 Vulkan 与 Adreno 行为不同，POC 需要能对照）。 */
-    fun forceGles(context: Context): Boolean =
+    private fun prefs(context: Context) =
         context.getSharedPreferences("poc3d", Context.MODE_PRIVATE)
-            .getBoolean("force_gles", false)
 
-    fun setForceGles(context: Context, value: Boolean) {
-        context.getSharedPreferences("poc3d", Context.MODE_PRIVATE)
-            .edit().putBoolean("force_gles", value).apply()
+    /** 默认 GLES。Mali（麒麟）的 Vulkan 驱动容易在原生层直接 abort，POC 先走稳的一条。 */
+    fun useVulkan(context: Context) = prefs(context).getBoolean("use_vulkan", false)
+    fun setUseVulkan(context: Context, value: Boolean) =
+        prefs(context).edit().putBoolean("use_vulkan", value).apply()
+
+    /** 环境光开关：用来隔离「崩溃是不是 IBL 引起的」。 */
+    fun useIbl(context: Context) = prefs(context).getBoolean("use_ibl", true)
+    fun setUseIbl(context: Context, value: Boolean) =
+        prefs(context).edit().putBoolean("use_ibl", value).apply()
+
+    /**
+     * 阶段埋点。原生 abort（SIGABRT/SIGSEGV）拿不到 Java 栈，
+     * 这里每一步立即 commit 到 SharedPreferences，重进页面即可看到死在哪。
+     */
+    fun markStage(context: Context, stage: String) {
+        prefs(context).edit().putString("last_stage", stage).commit()
     }
+
+    fun lastStage(context: Context): String =
+        prefs(context).getString("last_stage", "（无记录）") ?: "（无记录）"
 
     val engine: Engine by lazy {
         val ctx = appContext
-        if (ctx != null && forceGles(ctx)) Engine.create(Engine.Backend.OPENGL)
-        else Engine.create()
+        if (ctx != null && useVulkan(ctx)) Engine.create(Engine.Backend.VULKAN)
+        else Engine.create(Engine.Backend.OPENGL)
     }
 
     private val materialProvider by lazy { UbershaderProvider(engine) }
@@ -120,6 +136,7 @@ private object Badge3D {
             iblTried = true
             ibl = runCatching {
                 val ctx = appContext ?: return null
+                if (!useIbl(ctx)) return null
                 val buf = directBuffer(ctx, IBL_PATH) ?: return null
                 val tex = KTX1Loader.createTexture(
                     engine, buf, KTX1Loader.Options().apply { srgb = true }
@@ -276,13 +293,17 @@ private class Badge3DRenderer(
     }
 
     fun start() {
+        val app = textureView.context.applicationContext
         // appContext 必须在 buildScene（读 assets）之前就位，否则会静默判定为加载失败
-        Badge3D.appContext = textureView.context.applicationContext
+        Badge3D.appContext = app
+        Badge3D.markStage(app, "2 渲染器已建（Engine $badgeBackendLabel）")
 
         uiHelper.setRenderCallback(object : UiHelper.RendererCallback {
             override fun onNativeWindowChanged(surface: android.view.Surface) {
+                Badge3D.markStage(app, "6 拿到 Surface")
                 swapChain?.let { engine.destroySwapChain(it) }
                 swapChain = engine.createSwapChain(surface)
+                Badge3D.markStage(app, "7 SwapChain 已建")
             }
 
             override fun onDetachedFromSurface() {
@@ -311,12 +332,19 @@ private class Badge3DRenderer(
             clearColor = doubleArrayOf(0.0, 0.0, 0.0, 0.0)
         }
 
-        buildScene()
+        runCatching { buildScene() }.onFailure {
+            Badge3D.markStage(app, "X 场景构建失败: ${it.javaClass.simpleName}")
+            onStats("场景构建失败：${it.message}")
+            return
+        }
 
         running = true
         uiHelper.attachTo(textureView)
+        Badge3D.markStage(app, "8 已挂载，等待首帧")
         Choreographer.getInstance().postFrameCallback(frameCallback)
     }
+
+    private val badgeBackendLabel: String get() = runCatching { Badge3D.backendName() }.getOrDefault("?")
 
     fun stop() {
         running = false
@@ -327,14 +355,26 @@ private class Badge3DRenderer(
     }
 
     private fun buildScene() {
+        val app = textureView.context.applicationContext
         val asset = Badge3D.asset()
+
+        // 无论模型是否加载成功，view 必须带相机，否则渲染器会在原生层直接 abort
+        view.scene = scene
+        view.camera = camera
+        camera.setProjection(32.0, 1.0, 0.05, 50.0, Camera.Fov.VERTICAL)
+        applyCamera()
+
         if (asset == null) {
-            onStats("模型加载失败")
+            Badge3D.markStage(app, "X glb 加载失败")
+            onStats("glb 加载失败")
             return
         }
+        Badge3D.markStage(app, "3 glb 已加载")
 
         scene.addEntities(asset.entities)
-        Badge3D.indirectLight()?.let { scene.indirectLight = it }
+        val ibl = Badge3D.indirectLight()
+        ibl?.let { scene.indirectLight = it }
+        Badge3D.markStage(app, if (ibl != null) "4 IBL 已建" else "4 IBL 跳过")
 
         // 主光：左上前方的暖白，负责金属高光
         val key = EntityManager.get().create()
@@ -371,11 +411,7 @@ private class Badge3DRenderer(
         val tm = engine.transformManager
         rootInstance = tm.getInstance(asset.root)
         if (rootInstance != 0) tm.setTransform(rootInstance, baseMatrix)
-
-        view.scene = scene
-        view.camera = camera
-        camera.setProjection(32.0, 1.0, 0.05, 50.0, Camera.Fov.VERTICAL)
-        applyCamera()
+        Badge3D.markStage(app, "5 场景已就绪（三角面 ${asset.entities.size} 实体）")
     }
 
     private fun applyCamera() {
@@ -393,11 +429,16 @@ private class Badge3DRenderer(
         val sc = swapChain ?: return
         advance(frameTimeNanos)
 
+        if (!view.hasCamera()) return
         if (renderer.beginFrame(sc, frameTimeNanos)) {
             renderer.render(view)
             renderer.endFrame()
             if (firstFrameMs < 0.0) {
                 firstFrameMs = (System.nanoTime() - startNanos) / 1e6
+                Badge3D.markStage(
+                    textureView.context.applicationContext,
+                    "OK 首帧完成（%.0f ms）".format(firstFrameMs)
+                )
             }
         }
         report(frameTimeNanos)
@@ -518,6 +559,9 @@ private fun Badge3DView(
     AndroidView(
         modifier = modifier,
         factory = { ctx ->
+            val app = ctx.applicationContext
+            // 埋点要在 Engine 创建（渲染器构造）之前落盘
+            Badge3D.markStage(app, "1 开始创建渲染器")
             TextureView(ctx).apply {
                 isOpaque = false
                 val t0 = System.nanoTime()
@@ -541,13 +585,18 @@ fun Badge3DPocScreen(onBack: () -> Unit) {
     val context = LocalContext.current
     var detail by remember { mutableStateOf(false) }
     var stats by remember { mutableStateOf("等待首帧…") }
-    var forceGles by remember { mutableStateOf(Badge3D.forceGles(context)) }
+    var useVulkan by remember { mutableStateOf(Badge3D.useVulkan(context)) }
+    var useIbl by remember { mutableStateOf(Badge3D.useIbl(context)) }
+    // 上一次会话留下的阶段记录：原生崩溃时 Java 栈拿不到，只能靠它定位
+    val lastStage = remember { Badge3D.lastStage(context) }
+    val scroll = rememberScrollState()
 
     if (!detail) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Ascent.Bg)
+                .verticalScroll(scroll)
                 .padding(horizontal = 20.dp, vertical = 12.dp)
         ) {
             Row(
@@ -601,11 +650,25 @@ fun Badge3DPocScreen(onBack: () -> Unit) {
 
             Spacer(Modifier.height(12.dp))
             POC_Button(
-                text = if (forceGles) "后端：GLES（点此切回默认）" else "后端：默认/Vulkan（点此强制 GLES）",
+                text = "上次最后阶段：$lastStage",
+                onClick = { }
+            )
+            Spacer(Modifier.height(8.dp))
+            POC_Button(
+                text = if (useVulkan) "后端：Vulkan（点此改回 GLES）" else "后端：GLES（点此改 Vulkan）",
                 onClick = {
-                    forceGles = !forceGles
-                    Badge3D.setForceGles(context, forceGles)
-                    stats = "已切换，需重启 App 生效"
+                    useVulkan = !useVulkan
+                    Badge3D.setUseVulkan(context, useVulkan)
+                    stats = "后端已改为 ${if (useVulkan) "Vulkan" else "GLES"}，重启 App 生效"
+                }
+            )
+            Spacer(Modifier.height(8.dp))
+            POC_Button(
+                text = if (useIbl) "环境光 IBL：开（点此关闭）" else "环境光 IBL：关（点此开启）",
+                onClick = {
+                    useIbl = !useIbl
+                    Badge3D.setUseIbl(context, useIbl)
+                    stats = "IBL 已${if (useIbl) "开启" else "关闭"}，重启 App 生效"
                 }
             )
 
