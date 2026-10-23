@@ -74,6 +74,11 @@ internal val PACK_DE_ENTRY: Map<String, String> = mapOf(
     "ach.fourteen_peaks.desc" to "Über alle vierzehn 8.000er gelesen.",
     "ach.curious_dev.desc" to "Den versteckten Eingang gefunden.",
     "ach.safety_first.desc" to "Die beiden großen Höhentöter gemeistert: HACE/HAPE und Unterkühlung/Erfrierung.",
+    "ach.trail_first.desc" to "Die erste Trekking-Lektion geschafft — der Weg beginnt zu Füßen.",
+    "ach.trail_camp.desc" to "Alles zum Lagern auf Mehrtagestouren einmal durchgegangen.",
+    "ach.trail_high.desc" to "Oberhalb einer gewissen Höhe muss man das Gehen neu lernen.",
+    "ach.trail_finish.desc" to "Alle 21 Trekking-Lektionen geschafft — lange Wege führst du selbst.",
+    "ach.two_tracks.desc" to "Je zehn Lektionen auf beiden Linien: Hochtour und Weitwanderweg.",
 
     // ---------- Handbuch-Zusammenfassungen ----------
     "hb.h1.summary" to "Die drei häufigsten Höhenkrankheiten: AMS ist meist umkehrbar, HACE und HAPE können innerhalb von Stunden tödlich enden. Entscheidend ist, wann die Symptome beginnen und wie schnell sie sich verschlechtern.",

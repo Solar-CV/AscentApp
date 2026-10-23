@@ -92,6 +92,11 @@ internal val PACK_SV: Map<String, String> = mapOf(
     "ach.fourteen_peaks.title" to "Fjorton toppar",
     "ach.curious_dev.title" to "Nyfikenhet",
     "ach.safety_first.title" to "Säkerhet först",
+    "ach.trail_first.title" to "Första stegen på leden",
+    "ach.trail_camp.title" to "En natt i tält",
+    "ach.trail_high.title" to "Vandring på höjd",
+    "ach.trail_finish.title" to "Vandringsexamen",
+    "ach.two_tracks.title" to "Två spår",
 
     "hb.h1.title" to "Akut höghöjdssjuka: komplett guide",
     "hb.h2.title" to "Acklimatiseringstakt och förebyggande läkemedel",

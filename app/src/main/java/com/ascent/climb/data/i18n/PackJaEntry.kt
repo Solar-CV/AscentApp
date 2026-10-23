@@ -74,6 +74,11 @@ internal val PACK_JA_ENTRY: Map<String, String> = mapOf(
     "ach.fourteen_peaks.desc" to "世界の 8,000 m 峰 14 座をすべて読んだ。",
     "ach.curious_dev.desc" to "隠し入口を見つけた。",
     "ach.safety_first.desc" to "高所の二大殺し屋（HACE/HAPE、低体温症・凍傷）をすべて学んだ。",
+    "ach.trail_first.desc" to "最初のトレッキング課程を修了。道は足元から始まる。",
+    "ach.trail_camp.desc" to "数日にわたるトレッキングの設営と野営をひととおり学んだ。",
+    "ach.trail_high.desc" to "標高が上がれば、歩くこと自体を学び直す必要がある。",
+    "ach.trail_finish.desc" to "トレッキング 21 課程をすべて修了。長い道も自分で引ける。",
+    "ach.two_tracks.desc" to "登山とトレッキングで各 10 課程。二つの道を並べて進む。",
 
     // ---------- スキルブックの要約 ----------
     "hb.h1.summary" to "高所で最も多い 3 つの病気。AMS は通常回復するが、HACE と HAPE は数時間で命を奪いうる。見極めの鍵は、症状がいつ出て、どれだけ速く悪化するか。",

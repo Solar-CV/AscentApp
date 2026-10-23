@@ -145,6 +145,11 @@ internal val PACK_EN: Map<String, String> = mapOf(
     "ach.fourteen_peaks.title" to "Fourteen Peaks",
     "ach.curious_dev.title" to "Curiosity",
     "ach.safety_first.title" to "Safety First",
+    "ach.trail_first.title" to "First Trail Steps",
+    "ach.trail_camp.title" to "Night Under Canvas",
+    "ach.trail_high.title" to "Walking at Altitude",
+    "ach.trail_finish.title" to "Trekking Graduate",
+    "ach.two_tracks.title" to "Two Tracks",
 
     // ---------- 成就：描述 ----------
     "ach.first_steps.desc" to "Complete your first lesson — the first step on the climb.",
@@ -182,6 +187,11 @@ internal val PACK_EN: Map<String, String> = mapOf(
     "ach.fourteen_peaks.desc" to "Read about all fourteen 8,000 m peaks.",
     "ach.curious_dev.desc" to "Find the hidden entrance.",
     "ach.safety_first.desc" to "Master the two great high-altitude killers: HACE/HAPE and hypothermia/frostbite.",
+    "ach.trail_first.desc" to "Finish your first trekking lesson — the trail starts at your feet.",
+    "ach.trail_camp.desc" to "The camp craft of multi-day trekking, covered end to end.",
+    "ach.trail_high.desc" to "Above a certain height, walking itself has to be relearned.",
+    "ach.trail_finish.desc" to "All 21 trekking lessons done — long trails are yours to lead.",
+    "ach.two_tracks.desc" to "Ten lessons on each track: the alpine route and the trail.",
 
     // ---------- 技能书：标题 ----------
     "hb.h1.title" to "Acute Mountain Sickness: Complete Guide",

@@ -42,6 +42,11 @@ internal val PACK_ZH_TW_ENTRY: Map<String, String> = mapOf(
     "ach.fourteen_peaks.desc" to "讀完世界 14 座 8000 公尺級山峰。",
     "ach.curious_dev.desc" to "發現了隱藏入口。",
     "ach.safety_first.desc" to "高海拔兩大殺手（HACE/HAPE、失溫凍傷）全部學會。",
+    "ach.trail_first.desc" to "完成第一門徒步課，路線從腳下開始。",
+    "ach.trail_camp.desc" to "多日徒步的營地那幾件事，都過了一遍。",
+    "ach.trail_high.desc" to "海拔升高之後，走路這件事本身要重新學。",
+    "ach.trail_finish.desc" to "徒步 21 門課全部完成，長線也能自己帶。",
+    "ach.two_tracks.desc" to "攀登與徒步各走 10 課，兩條路一起走。",
 
     // ---------- 技能書摘要 ----------
     "hb.h1.summary" to "高海拔最常見的三類病：AMS 通常可逆，HACE 和 HAPE 可能在數小時內致命。辨識它們，主要看症狀什麼時候出現、惡化有多快。",

@@ -74,6 +74,11 @@ internal val PACK_FR_ENTRY: Map<String, String> = mapOf(
     "ach.fourteen_peaks.desc" to "Lire les quatorze 8 000.",
     "ach.curious_dev.desc" to "Trouver l'entrée cachée.",
     "ach.safety_first.desc" to "Maîtriser les deux grands tueurs d'altitude : OACM/OAPM et hypothermie/gelures.",
+    "ach.trail_first.desc" to "Première leçon de randonnée terminée : le chemin commence à vos pieds.",
+    "ach.trail_camp.desc" to "Tout le campement des randos de plusieurs jours, passé en revue.",
+    "ach.trail_high.desc" to "Au-delà d'une certaine altitude, marcher s'apprend à nouveau.",
+    "ach.trail_finish.desc" to "Les 21 leçons de randonnée terminées : les longs itinéraires sont à vous.",
+    "ach.two_tracks.desc" to "Dix leçons sur chaque itinéraire : alpinisme et randonnée.",
 
     // ---------- Résumés du manuel ----------
     "hb.h1.summary" to "Les trois maladies d'altitude les plus courantes : le MAM est généralement réversible, l'OACM et l'OAPM peuvent tuer en quelques heures. Ce qui compte, c'est quand les symptômes apparaissent et à quelle vitesse ils s'aggravent.",

@@ -92,6 +92,11 @@ internal val PACK_ZH_TW: Map<String, String> = mapOf(
     "ach.fourteen_peaks.title" to "十四座巡禮",
     "ach.curious_dev.title" to "好奇心",
     "ach.safety_first.title" to "安全至上",
+    "ach.trail_first.title" to "踏出第一步",
+    "ach.trail_camp.title" to "扎營一夜",
+    "ach.trail_high.title" to "高原行走",
+    "ach.trail_finish.title" to "徒步畢業",
+    "ach.two_tracks.title" to "雙線並進",
 
     "hb.h1.title" to "急性高山症完全指南",
     "hb.h2.title" to "高原適應節奏與預防用藥",

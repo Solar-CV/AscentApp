@@ -92,6 +92,11 @@ internal val PACK_JA: Map<String, String> = mapOf(
     "ach.fourteen_peaks.title" to "14 座巡礼",
     "ach.curious_dev.title" to "好奇心",
     "ach.safety_first.title" to "安全第一",
+    "ach.trail_first.title" to "トレイルの第一歩",
+    "ach.trail_camp.title" to "野営の一夜",
+    "ach.trail_high.title" to "高度を歩く",
+    "ach.trail_finish.title" to "トレッキング卒業",
+    "ach.two_tracks.title" to "二つのルート",
 
     "hb.h1.title" to "急性高山病 完全ガイド",
     "hb.h2.title" to "順化のペースと予防薬",

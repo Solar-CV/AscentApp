@@ -74,6 +74,11 @@ internal val PACK_SV_ENTRY: Map<String, String> = mapOf(
     "ach.fourteen_peaks.desc" to "Läsa om alla fjorton 8 000-meterberg.",
     "ach.curious_dev.desc" to "Hitta den dolda ingången.",
     "ach.safety_first.desc" to "Behärska höjdens två stora dödare: HACE/HAPE och hypotermi/förfrysning.",
+    "ach.trail_first.desc" to "Första vandringslektionen klar — leden börjar vid dina fötter.",
+    "ach.trail_camp.desc" to "Allt om läger på flerdagsturer, genomgånget.",
+    "ach.trail_high.desc" to "Ovanför en viss höjd måste själva gåendet läras om.",
+    "ach.trail_finish.desc" to "Alla 21 vandringslektioner klara — långa leder kan du leda själv.",
+    "ach.two_tracks.desc" to "Tio lektioner i vartdera spåret: högfjäll och vandring.",
 
     // ---------- Handbokens sammanfattningar ----------
     "hb.h1.summary" to "De tre vanligaste höjdsjukdomarna: AMS är oftast reversibel, medan HACE och HAPE kan döda inom timmar. Det avgörande är när symtomen kommer och hur snabbt de förvärras.",

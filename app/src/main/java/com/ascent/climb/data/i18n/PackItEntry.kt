@@ -74,6 +74,11 @@ internal val PACK_IT_ENTRY: Map<String, String> = mapOf(
     "ach.fourteen_peaks.desc" to "Leggere tutti e quattordici gli ottomila.",
     "ach.curious_dev.desc" to "Trovare l'ingresso nascosto.",
     "ach.safety_first.desc" to "Padroneggiare i due grandi killer d'alta quota: HACE/HAPE e ipotermia/congelamento.",
+    "ach.trail_first.desc" to "Prima lezione di escursionismo completata: il cammino inizia ai tuoi piedi.",
+    "ach.trail_camp.desc" to "Tutto ciò che serve al campo nei trekking di più giorni, passato in rassegna.",
+    "ach.trail_high.desc" to "Oltre una certa quota, anche il camminare va imparato di nuovo.",
+    "ach.trail_finish.desc" to "Tutte le 21 lezioni di escursionismo completate: i lunghi itinerari sono tuoi.",
+    "ach.two_tracks.desc" to "Dieci lezioni per percorso: alpinismo ed escursionismo.",
 
     // ---------- Riassunti del manuale ----------
     "hb.h1.summary" to "Le tre malattie d'alta quota più comuni: l'AMS di solito è reversibile, HACE e HAPE possono uccidere in poche ore. Conta quando compaiono i sintomi e quanto in fretta peggiorano.",

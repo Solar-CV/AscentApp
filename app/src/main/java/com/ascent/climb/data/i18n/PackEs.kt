@@ -92,6 +92,11 @@ internal val PACK_ES: Map<String, String> = mapOf(
     "ach.fourteen_peaks.title" to "Catorce cumbres",
     "ach.curious_dev.title" to "Curiosidad",
     "ach.safety_first.title" to "La seguridad primero",
+    "ach.trail_first.title" to "Primer paso en el sendero",
+    "ach.trail_camp.title" to "Noche de acampada",
+    "ach.trail_high.title" to "Caminar en altura",
+    "ach.trail_finish.title" to "Graduado en senderismo",
+    "ach.two_tracks.title" to "Dos rutas",
 
     "hb.h1.title" to "Mal agudo de montaña: guía completa",
     "hb.h2.title" to "Ritmo de aclimatación y medicación preventiva",
