@@ -330,4 +330,23 @@
     <string name="track_current">Текущий</string>
     <string name="track_switch">Сменить</string>
     <string name="track_sheet_note">Раздел треккинга — база, погода и психология; снежно-ледовой техники там нет.</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">Обратная связь</string>
+    <string name="fb_sub">Нашли ошибку, есть идея или заметили неточность в материалах курса — напишите здесь.</string>
+    <string name="fb_entry_sub">Проблема, идея, правка</string>
+    <string name="fb_type_issue">Сообщить о проблеме</string>
+    <string name="fb_type_idea">Предложить функцию</string>
+    <string name="fb_type_content">Исправить материал</string>
+    <string name="fb_msg_label">Описание</string>
+    <string name="fb_msg_hint">Что произошло и на каком экране? Чем подробнее, тем лучше…</string>
+    <string name="fb_contact_label">Почта для ответа (необязательно)</string>
+    <string name="fb_contact_hint">Оставьте адрес, чтобы мы могли ответить</string>
+    <string name="fb_diag">Приложить диагностику</string>
+    <string name="fb_diag_desc">Версия приложения, система и модель, язык интерфейса, версия банка вопросов, последняя ошибка.</string>
+    <string name="fb_diag_crash">Найдена недавняя запись об ошибке — она будет приложена.</string>
+    <string name="fb_send">Отправить</string>
+    <string name="fb_send_note">Откроется почтовое приложение: проверьте текст и нажмите «Отправить».</string>
+    <string name="fb_sent">Почтовое приложение открыто.</string>
+    <string name="fb_no_mail">Почтовое приложение не найдено, текст скопирован в буфер обмена.</string>
+    <string name="fb_need_text">Сначала напишите что-нибудь.</string>
 </resources>

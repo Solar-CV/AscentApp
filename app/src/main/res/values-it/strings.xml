@@ -308,4 +308,23 @@
     <string name="track_current">Attuale</string>
     <string name="track_switch">Cambia</string>
     <string name="track_sheet_note">La categoria escursionismo copre basi, meteo e testa; non include tecnica su neve e ghiaccio.</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">Feedback</string>
+    <string name="fb_sub">Un problema, un\'idea o un errore nei contenuti del corso? Scrivilo qui.</string>
+    <string name="fb_entry_sub">Problema, idea, correzione</string>
+    <string name="fb_type_issue">Segnala un problema</string>
+    <string name="fb_type_idea">Proponi una funzione</string>
+    <string name="fb_type_content">Correggi contenuto</string>
+    <string name="fb_msg_label">Descrizione</string>
+    <string name="fb_msg_hint">Cosa è successo e in quale schermata? Più dettagli, meglio è…</string>
+    <string name="fb_contact_label">Email di contatto (facoltativa)</string>
+    <string name="fb_contact_hint">Lascia un indirizzo per la risposta</string>
+    <string name="fb_diag">Allega la diagnostica</string>
+    <string name="fb_diag_desc">Versione dell\'app, sistema e modello, lingua, versione del questionario, ultimo errore.</string>
+    <string name="fb_diag_crash">È stato trovato un errore recente: verrà allegato.</string>
+    <string name="fb_send">Invia feedback</string>
+    <string name="fb_send_note">Si apre l\'app di posta: controlla e invia.</string>
+    <string name="fb_sent">App di posta aperta.</string>
+    <string name="fb_no_mail">Nessuna app di posta trovata; testo copiato negli appunti.</string>
+    <string name="fb_need_text">Scrivi qualcosa prima di inviare.</string>
 </resources>

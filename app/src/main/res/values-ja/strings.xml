@@ -330,4 +330,23 @@
     <string name="track_current">選択中</string>
     <string name="track_switch">切り替え</string>
     <string name="track_sheet_note">トレッキング区分は基礎・天気・メンタルが中心で、雪氷技術は含みません。</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">フィードバック</string>
+    <string name="fb_sub">不具合の報告、ご意見、コース内容の誤りの指摘はこちらから。</string>
+    <string name="fb_entry_sub">不具合・ご意見・内容の訂正</string>
+    <string name="fb_type_issue">不具合の報告</string>
+    <string name="fb_type_idea">機能のご要望</string>
+    <string name="fb_type_content">内容の訂正</string>
+    <string name="fb_msg_label">具体的な内容</string>
+    <string name="fb_msg_hint">何が起きましたか？どの画面で？詳しく書いていただけると助かります…</string>
+    <string name="fb_contact_label">連絡先メール（任意）</string>
+    <string name="fb_contact_hint">返信できるメールアドレスがあればご記入ください</string>
+    <string name="fb_diag">診断情報を添付</string>
+    <string name="fb_diag_desc">アプリのバージョン、OS と端末、表示言語、問題集のバージョン、直近のエラー記録。</string>
+    <string name="fb_diag_crash">直近のエラー記録が見つかりました。送信時に一緒に添付されます。</string>
+    <string name="fb_send">フィードバックを送信</string>
+    <string name="fb_send_note">メールアプリが開きます。内容を確認して送信してください。</string>
+    <string name="fb_sent">メールアプリを開きました。</string>
+    <string name="fb_no_mail">メールアプリが見つかりません。内容をクリップボードにコピーしました。</string>
+    <string name="fb_need_text">内容を入力してから送信してください。</string>
 </resources>

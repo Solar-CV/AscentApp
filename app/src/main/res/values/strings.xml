@@ -345,4 +345,23 @@
     <string name="cap_t2">多日与露营</string>
     <string name="cap_t3">高原徒步</string>
     <string name="cap_t4">长线与应急</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">反馈与建议</string>
+    <string name="fb_sub">遇到问题、有建议，或发现课程内容有误，都可以在这里说。</string>
+    <string name="fb_entry_sub">问题、建议、内容纠错</string>
+    <string name="fb_type_issue">问题反馈</string>
+    <string name="fb_type_idea">功能建议</string>
+    <string name="fb_type_content">内容纠错</string>
+    <string name="fb_msg_label">具体描述</string>
+    <string name="fb_msg_hint">发生了什么？在哪个页面？越具体越好…</string>
+    <string name="fb_contact_label">联系邮箱（选填）</string>
+    <string name="fb_contact_hint">留个邮箱，方便回复你</string>
+    <string name="fb_diag">附带诊断信息</string>
+    <string name="fb_diag_desc">应用版本、系统与机型、界面语言、题库版本、最近一次错误记录。</string>
+    <string name="fb_diag_crash">检测到一条最近的错误记录，发送时会一并附上。</string>
+    <string name="fb_send">发送反馈</string>
+    <string name="fb_send_note">会打开你的邮件应用，确认内容后点发送即可。</string>
+    <string name="fb_sent">已打开邮件应用。</string>
+    <string name="fb_no_mail">没找到可用的邮件应用，反馈内容已复制到剪贴板。</string>
+    <string name="fb_need_text">先写点内容再发送。</string>
 </resources>

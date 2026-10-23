@@ -330,4 +330,23 @@
     <string name="track_current">當前</string>
     <string name="track_switch">切換</string>
     <string name="track_sheet_note">徒步大類側重基礎、天氣與心態，不包含冰雪技術內容。</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">回饋與建議</string>
+    <string name="fb_sub">遇到問題、有建議，或發現課程內容有誤，都可以在這裡說。</string>
+    <string name="fb_entry_sub">問題、建議、內容糾錯</string>
+    <string name="fb_type_issue">問題回饋</string>
+    <string name="fb_type_idea">功能建議</string>
+    <string name="fb_type_content">內容糾錯</string>
+    <string name="fb_msg_label">具體描述</string>
+    <string name="fb_msg_hint">發生了什麼？在哪個頁面？越具體越好…</string>
+    <string name="fb_contact_label">聯絡信箱（選填）</string>
+    <string name="fb_contact_hint">留個信箱，方便回覆你</string>
+    <string name="fb_diag">附上診斷資訊</string>
+    <string name="fb_diag_desc">應用程式版本、系統與機型、介面語言、題庫版本、最近一次錯誤紀錄。</string>
+    <string name="fb_diag_crash">偵測到一筆最近的錯誤紀錄，傳送時會一併附上。</string>
+    <string name="fb_send">傳送回饋</string>
+    <string name="fb_send_note">會開啟你的郵件應用程式，確認內容後按傳送即可。</string>
+    <string name="fb_sent">已開啟郵件應用程式。</string>
+    <string name="fb_no_mail">找不到可用的郵件應用程式，回饋內容已複製到剪貼簿。</string>
+    <string name="fb_need_text">先寫點內容再傳送。</string>
 </resources>

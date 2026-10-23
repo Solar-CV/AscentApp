@@ -120,6 +120,7 @@ fun ProfileScreen(
     var showSettings by remember { mutableStateOf(false) }
     var showProfileHome by remember { mutableStateOf(false) }
     var showBadgeWall by remember { mutableStateOf(false) }
+    var showFeedback by remember { mutableStateOf(false) }
 
     if (showBadgeWall) {
         BadgeWallScreen(
@@ -146,6 +147,8 @@ fun ProfileScreen(
             onBack = { showAchievements = false },
             onChanged = onAchChanged
         )
+    } else if (showFeedback) {
+        FeedbackScreen(store = store, onBack = { showFeedback = false })
     } else if (showSettings) {
         SettingsScreen(
             store = store,
@@ -207,6 +210,7 @@ fun ProfileScreen(
             },
             onOpenSettings = { showSettings = true },
             onOpenProfileHome = { showProfileHome = true },
+            onOpenFeedback = { showFeedback = true },
             onReset = onReset
         )
     }
@@ -236,6 +240,7 @@ private fun ProfileBody(
     onLogout: () -> Unit,
     onOpenSettings: () -> Unit,
     onOpenProfileHome: () -> Unit,
+    onOpenFeedback: () -> Unit,
     onReset: () -> Unit
 ) {
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
@@ -508,6 +513,15 @@ private fun ProfileBody(
                     PillButton(text = stringResource(R.string.prof_logout), style = BtnStyle.Secondary, height = 44, onClick = onLogout)
                 }
             }
+        }
+
+        // ---------------- 反馈与建议 ----------------
+        // 位置按用户要求：账号下方、风险声明上方
+        item(key = "feedback") {
+            FeedbackEntryCard(
+                onOpen = onOpenFeedback,
+                modifier = Modifier.padding(bottom = 14.dp)
+            )
         }
 
         // ---------------- 声明 ----------------

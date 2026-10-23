@@ -308,4 +308,23 @@
     <string name="track_current">Actuel</string>
     <string name="track_switch">Changer</string>
     <string name="track_sheet_note">La catégorie randonnée couvre les bases, la météo et le mental ; pas de technique neige et glace.</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">Votre avis</string>
+    <string name="fb_sub">Un problème, une idée, ou une erreur dans le contenu du cours ? Écrivez-nous ici.</string>
+    <string name="fb_entry_sub">Problème, idée, correction</string>
+    <string name="fb_type_issue">Signaler un problème</string>
+    <string name="fb_type_idea">Proposer une fonction</string>
+    <string name="fb_type_content">Corriger le contenu</string>
+    <string name="fb_msg_label">Description</string>
+    <string name="fb_msg_hint">Que s\'est-il passé, et sur quel écran ? Plus vous êtes précis, mieux c\'est…</string>
+    <string name="fb_contact_label">E-mail de contact (facultatif)</string>
+    <string name="fb_contact_hint">Laissez une adresse pour notre réponse</string>
+    <string name="fb_diag">Joindre les diagnostics</string>
+    <string name="fb_diag_desc">Version de l\'app, système et appareil, langue, version de la banque de questions, dernière erreur.</string>
+    <string name="fb_diag_crash">Une erreur récente a été détectée ; elle sera jointe.</string>
+    <string name="fb_send">Envoyer</string>
+    <string name="fb_send_note">Votre application de messagerie va s\'ouvrir : vérifiez puis envoyez.</string>
+    <string name="fb_sent">Application de messagerie ouverte.</string>
+    <string name="fb_no_mail">Aucune application de messagerie trouvée ; le texte a été copié.</string>
+    <string name="fb_need_text">Écrivez d\'abord quelque chose.</string>
 </resources>

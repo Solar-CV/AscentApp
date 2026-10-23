@@ -308,4 +308,23 @@
     <string name="track_current">Nuvarande</string>
     <string name="track_switch">Byt</string>
     <string name="track_sheet_note">Vandringskategorin täcker grunderna, väder och huvud; ingen snö- och isteknik.</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">Feedback</string>
+    <string name="fb_sub">Problem, förslag eller fel i kursinnehållet? Skriv här.</string>
+    <string name="fb_entry_sub">Problem, förslag, innehållsrättelse</string>
+    <string name="fb_type_issue">Rapportera problem</string>
+    <string name="fb_type_idea">Föreslå funktion</string>
+    <string name="fb_type_content">Rätta innehåll</string>
+    <string name="fb_msg_label">Beskrivning</string>
+    <string name="fb_msg_hint">Vad hände, och på vilken skärm? Ju mer detaljer, desto bättre…</string>
+    <string name="fb_contact_label">Kontaktmejl (valfritt)</string>
+    <string name="fb_contact_hint">Lämna en adress så vi kan svara</string>
+    <string name="fb_diag">Bifoga diagnostik</string>
+    <string name="fb_diag_desc">Appversion, system och enhet, språk, frågebankens version, senaste felet.</string>
+    <string name="fb_diag_crash">Ett nyligen inträffat fel hittades och bifogas.</string>
+    <string name="fb_send">Skicka feedback</string>
+    <string name="fb_send_note">Din mejlapp öppnas – granska och skicka.</string>
+    <string name="fb_sent">Mejlappen öppnades.</string>
+    <string name="fb_no_mail">Ingen mejlapp hittades; texten kopierades till urklipp.</string>
+    <string name="fb_need_text">Skriv något först.</string>
 </resources>

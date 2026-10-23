@@ -291,12 +291,20 @@ private fun TrackSwitchRow(trackId: String, onOpenSheet: () -> Unit) {
                     .clickable { onOpenSheet() }
                     .padding(horizontal = 14.dp, vertical = 7.dp)
             ) {
-                Text(
-                    text = trackLabel(t.id),
-                    color = if (active) Color.White else Ascent.DuoFg2,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Icon(
+                        imageVector = if (t.id == TREK_TRACK) Ic.TrackTrek else Ic.TrackClimb,
+                        contentDescription = null,
+                        tint = if (active) Color.White else Ascent.DuoFg2,
+                        modifier = Modifier.size(14.dp)
+                    )
+                    Text(
+                        text = trackLabel(t.id),
+                        color = if (active) Color.White else Ascent.DuoFg2,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
     }

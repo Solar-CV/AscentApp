@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import com.ascent.climb.data.ALL_UNITS
+import com.ascent.climb.data.Diagnostics
 import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.achievementById
 import com.ascent.climb.data.bank.BankRepository
@@ -62,6 +63,9 @@ class MainActivity : ComponentActivity() {
 
         // 题库必须在 setContent 之前完成载入：缓存副本 → 内置题库
         BankRepository.init(applicationContext)
+
+        // 崩溃记录：只落文件、不拦截，反馈页可选择性附带
+        Diagnostics.installCrashHandler(applicationContext)
 
         val store = ProgressStore(this)
 

@@ -308,4 +308,23 @@
     <string name="track_current">Aktuell</string>
     <string name="track_switch">Wechseln</string>
     <string name="track_sheet_note">Der Bereich Wandern deckt Grundlagen, Wetter und Kopf ab, keine Schnee- und Eistechnik.</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">Feedback</string>
+    <string name="fb_sub">Problem gefunden, eine Idee oder einen Fehler im Kursinhalt entdeckt? Hier ist der Platz dafür.</string>
+    <string name="fb_entry_sub">Problem, Idee, Inhaltsfehler</string>
+    <string name="fb_type_issue">Problem melden</string>
+    <string name="fb_type_idea">Funktion vorschlagen</string>
+    <string name="fb_type_content">Inhalt korrigieren</string>
+    <string name="fb_msg_label">Beschreibung</string>
+    <string name="fb_msg_hint">Was ist passiert, und auf welchem Bildschirm? Je genauer, desto besser…</string>
+    <string name="fb_contact_label">Kontakt-E-Mail (optional)</string>
+    <string name="fb_contact_hint">Adresse für eine Antwort hinterlassen</string>
+    <string name="fb_diag">Diagnose anhängen</string>
+    <string name="fb_diag_desc">App-Version, System und Gerät, Sprache, Version des Fragenpools, letzter Fehler.</string>
+    <string name="fb_diag_crash">Ein letzter Fehler wurde gefunden und wird mitgesendet.</string>
+    <string name="fb_send">Feedback senden</string>
+    <string name="fb_send_note">Die E-Mail-App öffnet sich – Inhalt prüfen und senden.</string>
+    <string name="fb_sent">E-Mail-App geöffnet.</string>
+    <string name="fb_no_mail">Keine E-Mail-App gefunden, Text in die Zwischenablage kopiert.</string>
+    <string name="fb_need_text">Bitte zuerst etwas schreiben.</string>
 </resources>

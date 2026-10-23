@@ -308,4 +308,23 @@
     <string name="track_current">Actual</string>
     <string name="track_switch">Cambiar</string>
     <string name="track_sheet_note">La categoría de senderismo cubre bases, meteorología y mentalidad; no incluye técnica de nieve y hielo.</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">Comentarios</string>
+    <string name="fb_sub">¿Un problema, una idea o un error en el contenido del curso? Cuéntanoslo aquí.</string>
+    <string name="fb_entry_sub">Problema, idea, corrección</string>
+    <string name="fb_type_issue">Informar de un problema</string>
+    <string name="fb_type_idea">Proponer una función</string>
+    <string name="fb_type_content">Corregir contenido</string>
+    <string name="fb_msg_label">Descripción</string>
+    <string name="fb_msg_hint">¿Qué pasó y en qué pantalla? Cuanto más detalle, mejor…</string>
+    <string name="fb_contact_label">Correo de contacto (opcional)</string>
+    <string name="fb_contact_hint">Déjanos un correo para poder responderte</string>
+    <string name="fb_diag">Adjuntar diagnóstico</string>
+    <string name="fb_diag_desc">Versión de la app, sistema y modelo, idioma, versión del banco de preguntas y el último error.</string>
+    <string name="fb_diag_crash">Se ha encontrado un error reciente y se adjuntará.</string>
+    <string name="fb_send">Enviar comentarios</string>
+    <string name="fb_send_note">Se abrirá tu app de correo: revisa el texto y pulsa enviar.</string>
+    <string name="fb_sent">App de correo abierta.</string>
+    <string name="fb_no_mail">No se encontró ninguna app de correo; el texto se copió al portapapeles.</string>
+    <string name="fb_need_text">Escribe algo antes de enviar.</string>
 </resources>

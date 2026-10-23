@@ -346,4 +346,23 @@
     <string name="cap_t2">Multi-day</string>
     <string name="cap_t3">High altitude</string>
     <string name="cap_t4">Long trail</string>
+    <!-- ========== 反馈与建议 ========== -->
+    <string name="fb_title">Feedback and suggestions</string>
+    <string name="fb_sub">Found a bug, have an idea, or spotted a mistake in the course content? Tell us here.</string>
+    <string name="fb_entry_sub">Bug, idea, content fix</string>
+    <string name="fb_type_issue">Bug report</string>
+    <string name="fb_type_idea">Feature request</string>
+    <string name="fb_type_content">Content correction</string>
+    <string name="fb_msg_label">Description</string>
+    <string name="fb_msg_hint">What happened, and on which screen? The more detail the better…</string>
+    <string name="fb_contact_label">Contact email (optional)</string>
+    <string name="fb_contact_hint">Leave an address so we can reply</string>
+    <string name="fb_diag">Attach diagnostics</string>
+    <string name="fb_diag_desc">App version, OS and device, UI language, question bank version, and the most recent error.</string>
+    <string name="fb_diag_crash">A recent error was found and will be attached.</string>
+    <string name="fb_send">Send feedback</string>
+    <string name="fb_send_note">Your email app opens — review the text and hit send.</string>
+    <string name="fb_sent">Email app opened.</string>
+    <string name="fb_no_mail">No email app found; the report was copied to the clipboard.</string>
+    <string name="fb_need_text">Write something first.</string>
 </resources>
