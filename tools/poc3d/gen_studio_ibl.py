@@ -41,20 +41,20 @@ def radiance(d):
     y = d[1]
     # 背景：上冷下暖的极暗渐变
     t = (y + 1.0) * 0.5
-    r = 0.010 + 0.030 * t
-    g = 0.013 + 0.038 * t
-    b = 0.018 + 0.052 * t
+    r = 0.030 + 0.070 * t
+    g = 0.038 + 0.085 * t
+    b = 0.052 + 0.110 * t
     # 主光：暖白，左下前方
-    k = smooth_lobe(d, norm(KEY_DIR), 0.42) ** 2.4 * 1.00
+    k = smooth_lobe(d, norm(KEY_DIR), 0.58) ** 2.0 * 1.00
     r += k * 1.00; g += k * 0.94; b += k * 0.84
     # 补光：冷蓝，右侧
-    f = smooth_lobe(d, norm(FILL_DIR), 0.62) ** 2.0 * 0.34
+    f = smooth_lobe(d, norm(FILL_DIR), 0.70) ** 1.8 * 0.46
     r += f * 0.55; g += f * 0.75; b += f * 1.00
     # 顶部柔光：中性，给金属一个从上往下的亮度梯度
-    tp = smooth_lobe(d, norm(TOP_DIR), 1.15) ** 1.6 * 0.42
+    tp = smooth_lobe(d, norm(TOP_DIR), 1.20) ** 1.5 * 0.62
     r += tp * 0.92; g += tp * 0.96; b += tp * 1.00
     # 地面反光：暖褐极弱
-    bnc = smooth_lobe(d, norm(BOUNCE_DIR), 0.85) ** 2.0 * 0.10
+    bnc = smooth_lobe(d, norm(BOUNCE_DIR), 0.90) ** 1.8 * 0.16
     r += bnc * 1.00; g += bnc * 0.70; b += bnc * 0.45
     return min(r, 1.0), min(g, 1.0), min(b, 1.0)
 

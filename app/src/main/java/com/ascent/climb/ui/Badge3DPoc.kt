@@ -39,6 +39,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.filament.Camera
 import com.google.android.filament.Engine
 import com.google.android.filament.EntityManager
+import com.google.android.filament.Filament
 import com.google.android.filament.IndirectLight
 import com.google.android.filament.LightManager
 import com.google.android.filament.Renderer
@@ -49,6 +50,7 @@ import com.google.android.filament.Viewport
 import com.google.android.filament.android.UiHelper
 import com.google.android.filament.gltfio.AssetLoader
 import com.google.android.filament.gltfio.FilamentAsset
+import com.google.android.filament.gltfio.Gltfio
 import com.google.android.filament.gltfio.ResourceLoader
 import com.google.android.filament.gltfio.UbershaderProvider
 import com.google.android.filament.utils.KTX1Loader
@@ -78,15 +80,15 @@ private const val IBL_PATH = "env/studio_ibl.ktx"
 
 /** 棚拍环境的 3 波段辐照度 SH（由 tools/poc3d/gen_studio_ibl.py 算出，linear）。 */
 private val STUDIO_SH = floatArrayOf(
-    1.048368f, 1.139804f, 1.285377f,
-    0.569332f, 0.614961f, 0.665967f,
-    0.288779f, 0.288789f, 0.285139f,
-    -0.030211f, -0.003779f, 0.032231f,
-    -0.078805f, -0.064596f, -0.043296f,
-    0.298662f, 0.304838f, 0.301797f,
-    -0.122837f, -0.131313f, -0.144427f,
-    -0.107003f, -0.080241f, -0.042032f,
-    -0.287974f, -0.269272f, -0.247473f,
+    2.088282f, 2.282543f, 2.600507f,
+    0.995556f, 1.079737f, 1.173898f,
+    0.507665f, 0.507686f, 0.504159f,
+    -0.059955f, -0.011492f, 0.053057f,
+    -0.144433f, -0.119596f, -0.084267f,
+    0.485929f, 0.498635f, 0.498646f,
+    -0.196516f, -0.208764f, -0.228055f,
+    -0.184369f, -0.136366f, -0.070259f,
+    -0.449479f, -0.413325f, -0.372863f,
 )
 
 /** 引擎级单例：Engine / IBL / glb 只建一次，两个展示形态共用。 */
@@ -118,9 +120,21 @@ private object Badge3D {
         prefs(context).getString("last_stage", "（无记录）") ?: "（无记录）"
 
     val engine: Engine by lazy {
+        initJni()
         val ctx = appContext
         if (ctx != null && useVulkan(ctx)) Engine.create(Engine.Backend.VULKAN)
         else Engine.create(Engine.Backend.OPENGL)
+    }
+
+    /**
+     * 三个 jni 库都要显式加载，Filament 不会自动 loadLibrary：
+     *   filament-jni（Filament.init）、gltfio-jni（Gltfio.init）、filament-utils-jni（无 init 入口）
+     * 漏掉任何一个都会在用到时才抛 UnsatisfiedLinkError，表现为"点进去就崩"。
+     */
+    private fun initJni() {
+        Filament.init()
+        Gltfio.init()
+        runCatching { System.loadLibrary("filament-utils-jni") }
     }
 
     private val materialProvider by lazy { UbershaderProvider(engine) }
@@ -134,8 +148,9 @@ private object Badge3D {
     fun indirectLight(): IndirectLight? {
         if (!iblTried) {
             iblTried = true
+            val ctx = appContext
             ibl = runCatching {
-                val ctx = appContext ?: return null
+                if (ctx == null) return null
                 if (!useIbl(ctx)) return null
                 val buf = directBuffer(ctx, IBL_PATH) ?: return null
                 val tex = KTX1Loader.createTexture(
@@ -146,6 +161,11 @@ private object Badge3D {
                     .irradiance(3, STUDIO_SH)
                     .intensity(30000f)
                     .build(engine)
+            }.onSuccess { android.util.Log.i("POC3D", "IBL ok: ${it != null}") }.onFailure {
+                if (ctx != null) {
+                    markStage(ctx, "X IBL 失败: ${it.javaClass.simpleName}: ${it.message}")
+                    android.util.Log.e("POC3D", "IBL failed", it)
+                }
             }.getOrNull()
         }
         return ibl
@@ -224,6 +244,18 @@ private fun rotationX(degrees: Float): FloatArray {
     )
 }
 
+private fun rotationZ(degrees: Float): FloatArray {
+    val rad = Math.toRadians(degrees.toDouble())
+    val c = cos(rad).toFloat()
+    val s = sin(rad).toFloat()
+    return floatArrayOf(
+        c, s, 0f, 0f,
+        -s, c, 0f, 0f,
+        0f, 0f, 1f, 0f,
+        0f, 0f, 0f, 1f
+    )
+}
+
 private fun scaling(s: Float): FloatArray = floatArrayOf(
     s, 0f, 0f, 0f,
     0f, s, 0f, 0f,
@@ -265,12 +297,14 @@ private class Badge3DRenderer(
     private var objectRadius = 1f
 
     // 交互状态
-    private var yaw = 24f
+    private var yaw = 18f
     private var pitch = -10f
     private var spinVelocity = 0f
-    private var cameraDistance = 2.35f
+    private var autoSpin = true
+    private var zoom = 1f
+    private var lastAspect = 1f
     private var pinchBase = 1f
-    private var lastTouchAt = 0L
+    private var lastTouchAt = System.currentTimeMillis()
     private var lastX = 0f
     private var lastY = 0f
     private var dragging = false
@@ -316,14 +350,11 @@ private class Badge3DRenderer(
 
             override fun onResized(width: Int, height: Int) {
                 if (width <= 0 || height <= 0) return
+                android.util.Log.i("POC3D", "onResized ${width}x${height} aspect=${width.toFloat()/height}")
                 view.viewport = Viewport(0, 0, width, height)
-                camera.setProjection(
-                    32.0,
-                    width.toDouble() / height.toDouble(),
-                    0.05,
-                    50.0,
-                    Camera.Fov.VERTICAL
-                )
+                lastAspect = width.toFloat() / height.toFloat()
+                camera.setProjection(32.0, lastAspect.toDouble(), 0.05, 50.0, Camera.Fov.VERTICAL)
+                applyCamera()
             }
         })
 
@@ -396,16 +427,34 @@ private class Badge3DRenderer(
             .build(engine, rim)
         scene.addEntity(rim)
 
-        // 归一化：把模型缩到约 1 单位大小并居中，相机距离才有统一含义
+        // 归一化 + 姿态修正：
+        // Blender 是 Z-up，glTF 导出后模型躺在 XZ 平面（正面朝 +Y），
+        // 这里绕 X 轴 +90° 把它立起来，正面朝向相机（+Z），浮雕朝观众凸出。
         val bbox = asset.boundingBox
         val center = bbox.center
         val half = bbox.halfExtent
         val maxHalf = max(half[0], max(half[1], half[2])).coerceAtLeast(1e-5f)
         val scale = 0.5f / maxHalf
         objectRadius = maxHalf * scale
+        android.util.Log.i(
+            "POC3D",
+            "bbox center=${center.toList()} half=${half.toList()} scale=$scale"
+        )
+        val fix = runCatching {
+            ((textureView.context as? android.app.Activity)?.intent?.getStringExtra("fix")) ?: "x+"
+        }.getOrDefault("x+")
+        val fixMatrix = when (fix) {
+            "none" -> identity()
+            "x-" -> rotationX(-90f)
+            "y" -> rotationY(90f)
+            "z" -> rotationZ(90f)
+            "x-" -> rotationX(-90f)
+            else -> rotationX(90f)
+        }
+        android.util.Log.i("POC3D", "fix=$fix")
         baseMatrix = multiply(
-            scaling(scale),
-            translation(-center[0], -center[1], -center[2])
+            fixMatrix,
+            multiply(scaling(scale), translation(-center[0], -center[1], -center[2]))
         )
 
         val tm = engine.transformManager
@@ -414,9 +463,17 @@ private class Badge3DRenderer(
         Badge3D.markStage(app, "5 场景已就绪（三角面 ${asset.entities.size} 实体）")
     }
 
+    /**
+     * 按视口宽高比自适应取景：竖屏时水平方向更窄，必须用水平约束反推距离，
+     * 否则徽章会在左右被裁掉（POC 第一版就是这么翻车的）。
+     */
     private fun applyCamera() {
-        // 相机在 +Z 轴上，向原点看；徽章正面朝 +Z，因此初始是正视
-        camera.setModelMatrix(translation(0f, 0f, cameraDistance))
+        val halfTan = tan(Math.toRadians(32.0 / 2.0)).toFloat()
+        val aspect = lastAspect.coerceIn(0.2f, 5f)
+        val fitY = 0.5f / halfTan
+        val fitX = 0.5f / (halfTan * aspect)
+        val dist = max(fitY, fitX) * 1.18f * zoom
+        camera.setModelMatrix(translation(0f, 0f, dist))
     }
 
     private fun applyTransform() {
@@ -455,7 +512,7 @@ private class Badge3DRenderer(
             if (abs(spinVelocity) > 0.02f) {
                 yaw += spinVelocity * dt * 60f
                 spinVelocity *= 0.92f
-            } else if (now - lastTouchAt > 3000L) {
+            } else if (autoSpin && now - lastTouchAt > 3000L) {
                 yaw += 12f * dt
                 spinVelocity = 0f
             }
@@ -511,8 +568,7 @@ private class Badge3DRenderer(
                 if (multiTouch && event.pointerCount >= 2) {
                     val d = distanceOf(event)
                     if (pinchBase > 0f && d > 0f) {
-                        cameraDistance = (cameraDistance * (pinchBase / d))
-                            .coerceIn(1.65f, 3.6f)
+                        zoom = (zoom * (pinchBase / d)).coerceIn(0.8f, 1.8f)
                         pinchBase = d
                     }
                 } else {
@@ -625,7 +681,7 @@ fun Badge3DPocScreen(onBack: () -> Unit) {
             }
 
             Spacer(Modifier.height(10.dp))
-            Text("简略展示 · 160dp 小窗", color = Ascent.Fg3, fontSize = 11.sp)
+            Text("简略展示 · 200dp 小窗（可拖动）", color = Ascent.Fg3, fontSize = 11.sp)
             Spacer(Modifier.height(8.dp))
 
             Box(
@@ -649,9 +705,10 @@ fun Badge3DPocScreen(onBack: () -> Unit) {
             )
 
             Spacer(Modifier.height(12.dp))
-            POC_Button(
-                text = "上次最后阶段：$lastStage",
-                onClick = { }
+            Text(
+                "上次最后阶段：$lastStage",
+                color = Ascent.Fg3,
+                fontSize = 10.sp
             )
             Spacer(Modifier.height(8.dp))
             POC_Button(
