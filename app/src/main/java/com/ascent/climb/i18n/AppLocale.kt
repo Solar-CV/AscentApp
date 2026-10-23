@@ -83,14 +83,21 @@ object AppLocale {
     /**
      * 把一个系统 Locale 映射到受支持的语言，不支持则返回 null。
      *
-     * 中文要区分简繁：Android 上 zh-TW / zh-HK / zh-MO 以及带 Hant 脚本的
-     * 都会落到 zh-TW；zh-CN / zh-SG / 带 Hans 脚本的落到 zh-CN。
+     * 中文要区分简繁，判定顺序是**脚本优先于地区**：
+     *
+     * - 显式 `Hant` → 繁体；显式 `Hans` → 简体（`zh-Hans-HK` / `zh-Hans-MO`
+     *   是「港澳用简体」，不能因为地区落在繁体区就翻成繁体）
+     * - 没有脚本时才看地区：zh-TW / zh-HK / zh-MO → 繁体，其余 → 简体
      */
     fun matchSupported(locale: Locale): Locale? {
         if (locale.language == "zh") {
             val script = locale.script
             val country = locale.country.uppercase(Locale.ROOT)
-            val traditional = script.equals("Hant", ignoreCase = true) || country in HANT_REGIONS
+            val traditional = when {
+                script.equals("Hant", ignoreCase = true) -> true
+                script.equals("Hans", ignoreCase = true) -> false
+                else -> country in HANT_REGIONS
+            }
             return if (traditional) Locale.forLanguageTag("zh-TW")
             else Locale.forLanguageTag("zh-CN")
         }

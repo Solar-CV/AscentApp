@@ -29,12 +29,21 @@ object ContentPack {
         "it" to PACK_IT + PACK_IT_BRIEF + PACK_IT_ENTRY + PACK_IT_HANDBOOK + PACK_IT_QUIZ + PACK_IT_QUIZ_B + PACK_IT_QUIZ_C
     )
 
-    /** 把 BCP-47 标签归一到 pack 的键；中文区分简繁。 */
+    /**
+     * 把 BCP-47 标签归一到 pack 的键；中文区分简繁。
+     *
+     * 脚本优先于地区：`zh-Hans-HK` / `zh-Hans-MO` 显式写了简体，
+     * 不能因为地区在港澳就判成繁体（与 AppLocale.matchSupported 同一条规则）。
+     */
     fun normalize(tag: String): String {
         val t = tag.replace('_', '-')
         if (t.startsWith("zh", ignoreCase = true)) {
             val u = t.uppercase()
-            val hant = u.contains("HANT") || u.contains("TW") || u.contains("HK") || u.contains("MO")
+            val hant = when {
+                u.contains("HANT") -> true
+                u.contains("HANS") -> false
+                else -> u.contains("TW") || u.contains("HK") || u.contains("MO")
+            }
             return if (hant) "zh-TW" else "zh-CN"
         }
         return t.substringBefore('-').lowercase()
