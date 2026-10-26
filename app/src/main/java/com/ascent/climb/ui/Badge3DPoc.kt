@@ -120,6 +120,9 @@ private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
 
 /** 默认模型（POC Activity / 调试直连时用）。 */
 private const val MODEL_PATH = "badges/first_steps.glb"
+
+/** 提升 glTF 自带点/聚光灯的强度，使其在当前场景曝光下可见。 */
+private const val PUNCTUAL_LIGHT_GAIN = 20f
 private const val IBL_PATH = "env/studio_ibl.ktx"
 
 /** 棚拍环境的 3 波段辐照度 SH（由 tools/poc3d/gen_studio_ibl.py 算出，linear）。 */
@@ -203,7 +206,7 @@ private object Badge3D {
                 IndirectLight.Builder()
                     .reflections(tex)
                     .irradiance(3, STUDIO_SH)
-                    .intensity(46000f)
+                    .intensity(38000f)
                     .build(engine)
             }.onSuccess { android.util.Log.i("POC3D", "IBL ok: ${it != null}") }.onFailure {
                 if (ctx != null) {
@@ -359,6 +362,8 @@ private class Badge3DRenderer(
 
     // 统计
     private var firstFrameMs = -1.0
+    private var slowFrames = 0
+    private var bloomDropped = false
     private var lastFrameNanos = 0L
     private var prevReportNanos = 0L
     private var frameAccum = 0.0
@@ -441,6 +446,17 @@ private class Badge3DRenderer(
         // 无论模型是否加载成功，view 必须带相机，否则渲染器会在原生层直接 abort
         view.scene = scene
         view.camera = camera
+        // 泛光：自发光（灯笼 / 星点 / 镜片）才真正"发光"，否则只是一块亮色
+        view.bloomOptions = View.BloomOptions().apply {
+            enabled = true
+            // 泛光只用来让自发光（灯笼 / 星点 / 镜片）溢出成光晕，
+            // 层级与分辨率都压到最低：低端 GPU 上这是最贵的一步
+            strength = 0.26f
+            threshold = true
+            levels = 3
+            resolution = 180
+            quality = View.QualityLevel.LOW
+        }
         camera.setProjection(32.0, 1.0, 0.05, 50.0, Camera.Fov.VERTICAL)
         applyCamera()
 
@@ -452,6 +468,27 @@ private class Badge3DRenderer(
         Badge3D.markStage(app, "3 glb 已加载")
 
         scene.addEntities(asset.entities)
+        // glTF 的 KHR_lights_punctual（例如 peak_scout 观测镜的聚光）不会随
+        // 根实体自动进场景，必须单独把光源实体加进去，否则模型自带的光就丢了。
+        runCatching {
+            val lights = asset.lightEntities
+            android.util.Log.i(
+                "POC3D",
+                "entities=${asset.entities.size} lights=${lights.size} renderables=${asset.renderableEntities.size}"
+            )
+            val lm = engine.lightManager
+            lights.forEach { entity ->
+                scene.addEntity(entity)
+                // 关键：模型里的聚光灯是按 Blender 场景曝光的（如 54 cd），
+                // 而本场景主光是 66000 lux，量级差几个数量级，不放大等于没开。
+                val inst = lm.getInstance(entity)
+                if (inst != 0) {
+                    val raw = lm.getIntensity(inst)
+                    lm.setIntensity(inst, raw * PUNCTUAL_LIGHT_GAIN)
+                    android.util.Log.i("POC3D", "light raw=$raw -> ${raw * PUNCTUAL_LIGHT_GAIN}")
+                }
+            }
+        }.onFailure { android.util.Log.e("POC3D", "light entity failure", it) }
         val ibl = Badge3D.indirectLight()
         ibl?.let { scene.indirectLight = it }
         Badge3D.markStage(app, if (ibl != null) "4 IBL 已建" else "4 IBL 跳过")
@@ -460,7 +497,7 @@ private class Badge3DRenderer(
         val key = EntityManager.get().create()
         LightManager.Builder(LightManager.Type.DIRECTIONAL)
             .color(1.0f, 0.96f, 0.90f)
-            .intensity(74000f)
+            .intensity(66000f)
             .direction(-0.38f, -0.72f, -0.58f)
             .castShadows(false)
             .build(engine, key)
@@ -589,6 +626,18 @@ private class Badge3DRenderer(
 
         val ms = frameAccum / frameCount
         val fps = if (ms > 0.0) 1000.0 / ms else 0.0
+        // 低端机兜底：帧时间持续拉垮就先砍泛光（它是这条链路里最贵的一步），
+        // 宁可少一层光晕，也不要为了光晕掉到 30fps 以下。
+        if (!bloomDropped && ms > 28.0) {
+            slowFrames++
+            if (slowFrames >= 2) {
+                bloomDropped = true
+                view.bloomOptions = View.BloomOptions().apply { enabled = false }
+                android.util.Log.i("POC3D", "bloom disabled for perf, ${ms}ms/frame")
+            }
+        } else if (ms <= 28.0) {
+            slowFrames = 0
+        }
         onStats(
             "%.1f fps · %.1f ms/帧 · 首帧 %.0f ms · %s".format(
                 fps, ms, firstFrameMs.coerceAtLeast(0.0), Badge3D.backendName()
