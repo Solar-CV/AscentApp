@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.19.30 (versionCode 105). The language work closed with v0.19.24 — Italian finished the set, so all nine translated languages match English key for key (10,554 / 10,554). Everything since has been app work: achievements realigned with the 89-lesson bank, the track icons redrawn, the splash mark scaled down, and a feedback screen that posts straight to the maintainer's inbox.
+Current version v0.20.1 (versionCode 108). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: seventeen achievements now render as real-time 3D relics instead of flat images, the unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 39 MB.
 
 ## Install
 
@@ -14,7 +14,7 @@ The easiest route is the prebuilt debug APK from [Releases](https://github.com/S
 
 - Package: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26)
-- Size: about 21 MB
+- Size: about 39 MB (20 MB of it is 3D badge models)
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
 Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
@@ -46,6 +46,8 @@ Finishing a lesson drops you straight into redoing the ones you got wrong. Quest
 Training gives a readiness percentage and the target peak's altitude. Review puts today's due questions and safety-critical misses first. Profile holds the header, current altitude, ability overview, badge entry, account area and a feedback entry. The gear icon opens settings, the avatar opens the profile page.
 
 The profile shows unlocked badges only. All 40 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
+
+Seventeen of them also exist as real 3D models — metal frames, enamel insets, relief. Open the achievements test screen and tap a badge to see it spin: drag to rotate, pinch to zoom, and it sways gently on its own when you stop. The other twenty-three use their still art tilted in perspective, so they read as a collectible card rather than a flat picture; adding a model later switches them over with no code change. Unlocking an achievement anywhere in the app shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges of the screen.
 
 ### Settings
 
@@ -211,6 +213,16 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+**v0.20.0 – v0.20.1: 3D badges**
+
+- Seventeen achievements render as real-time 3D (Filament 1.75, glTF, PBR metal and enamel). Drag to rotate, pinch to zoom, gentle sway when idle; the automatic motion stays on the front face because the back of a medal is a plain plate
+- The remaining twenty-three keep their still art, tilted in perspective with rounded corners and a shadow — a collectible card, not a flat image. They switch to 3D automatically once a model lands
+- Unlock and preview dialogs go through the same renderer, with a light pedestal behind the model (a dark model on a dark card disappears) and a 56-ribbon burst from both edges. Reduce-motion disables the ribbons
+- Display page sits on a heavily blurred landscape, generated procedurally (27 KB) — sky, four ridges, mist, no photo licensing to worry about
+- Drag directions inverted per feedback; the whole scene brightened, then pulled back slightly so emissive parts keep their contrast
+- Lights authored inside the models now survive: `KHR_lights_punctual` entities are added to the scene explicitly (glTF asset entities do not include them) and their intensity is scaled to the scene exposure — 54 cd next to a 66,000 lux key light is invisible otherwise. `KHR_materials_emissive_strength` is baked into `emissiveFactor` at build time, and bloom is on, auto-disabled when frame time stays above 28 ms
+- Package 21 → 39 MB; the models are 20.4 MB of that
 
 **v0.19.25 – v0.19.30: app work**
 

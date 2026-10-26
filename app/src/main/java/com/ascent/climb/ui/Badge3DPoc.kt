@@ -451,7 +451,7 @@ private class Badge3DRenderer(
             enabled = true
             // 泛光只用来让自发光（灯笼 / 星点 / 镜片）溢出成光晕，
             // 层级与分辨率都压到最低：低端 GPU 上这是最贵的一步
-            strength = 0.26f
+            strength = 0.13f
             threshold = true
             levels = 3
             resolution = 180
