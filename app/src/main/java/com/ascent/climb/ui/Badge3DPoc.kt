@@ -94,13 +94,32 @@ import kotlin.math.tan
  * 不是产品代码：徽章写死 first_step，文案写死中文，引擎不释放（App 生命周期常驻）。
  */
 
-/** 成就 id → glb 资源。没有登记的成就走「图片假 3D」。 */
+/**
+ * 成就 id → glb 资源。没有登记的成就自动回退「图片假 3D」。
+ * 目前 17 枚已出模型（2026-10-26 模型库），其余 23 枚仍用定稿图。
+ */
 private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
-    "first_steps" to "badges/first_step.glb",
+    "first_steps" to "badges/first_steps.glb",
+    "crampon_ready" to "badges/crampon_ready.glb",
+    "self_arrest" to "badges/self_arrest.glb",
+    "knot_tied" to "badges/knot_tied.glb",
+    "ams_guardian" to "badges/ams_guardian.glb",
+    "peak_scout" to "badges/peak_scout.glb",
+    "basecamp_grad" to "badges/basecamp_grad.glb",
+    "tech_grad" to "badges/tech_grad.glb",
+    "six_k_grad" to "badges/six_k_grad.glb",
+    "seven_k_grad" to "badges/seven_k_grad.glb",
+    "avalanche_eye" to "badges/avalanche_eye.glb",
+    "perfect_1" to "badges/perfect_1.glb",
+    "perfect_5" to "badges/perfect_5.glb",
+    "curious_dev" to "badges/curious_dev.glb",
+    "trail_first" to "badges/trail_first.glb",
+    "trail_camp" to "badges/trail_camp.glb",
+    "trail_high" to "badges/trail_high.glb",
 )
 
 /** 默认模型（POC Activity / 调试直连时用）。 */
-private const val MODEL_PATH = "badges/first_step.glb"
+private const val MODEL_PATH = "badges/first_steps.glb"
 private const val IBL_PATH = "env/studio_ibl.ktx"
 
 /** 棚拍环境的 3 波段辐照度 SH（由 tools/poc3d/gen_studio_ibl.py 算出，linear）。 */
@@ -184,7 +203,7 @@ private object Badge3D {
                 IndirectLight.Builder()
                     .reflections(tex)
                     .irradiance(3, STUDIO_SH)
-                    .intensity(30000f)
+                    .intensity(46000f)
                     .build(engine)
             }.onSuccess { android.util.Log.i("POC3D", "IBL ok: ${it != null}") }.onFailure {
                 if (ctx != null) {
@@ -305,7 +324,8 @@ private class Badge3DRenderer(
     private val textureView: TextureView,
     private val modelPath: String,
     private val startNanos: Long,
-    private val onStats: (String) -> Unit
+    private val onStats: (String) -> Unit,
+    private val onReady: () -> Unit
 ) {
     private val engine = Badge3D.engine
     private val uiHelper = UiHelper(UiHelper.ContextErrorPolicy.DONT_CHECK).apply {
@@ -440,7 +460,7 @@ private class Badge3DRenderer(
         val key = EntityManager.get().create()
         LightManager.Builder(LightManager.Type.DIRECTIONAL)
             .color(1.0f, 0.96f, 0.90f)
-            .intensity(65000f)
+            .intensity(74000f)
             .direction(-0.38f, -0.72f, -0.58f)
             .castShadows(false)
             .build(engine, key)
@@ -450,7 +470,7 @@ private class Badge3DRenderer(
         val rim = EntityManager.get().create()
         LightManager.Builder(LightManager.Type.DIRECTIONAL)
             .color(0.62f, 0.78f, 1.0f)
-            .intensity(22000f)
+            .intensity(26000f)
             .direction(0.55f, -0.15f, 0.82f)
             .castShadows(false)
             .build(engine, rim)
@@ -521,6 +541,7 @@ private class Badge3DRenderer(
             renderer.endFrame()
             if (firstFrameMs < 0.0) {
                 firstFrameMs = (System.nanoTime() - startNanos) / 1e6
+                onReady()
                 Badge3D.markStage(
                     textureView.context.applicationContext,
                     "OK 首帧完成（%.0f ms）".format(firstFrameMs)
@@ -641,7 +662,8 @@ private val INK3 = Color(0xFF6E808A)
 private fun Badge3DView(
     modelPath: String,
     modifier: Modifier = Modifier,
-    onStats: (String) -> Unit = {}
+    onStats: (String) -> Unit = {},
+    onReady: () -> Unit = {}
 ) {
     val context = LocalContext.current
     var renderer by remember { mutableStateOf<Badge3DRenderer?>(null) }
@@ -660,7 +682,7 @@ private fun Badge3DView(
             TextureView(ctx).apply {
                 isOpaque = false
                 val t0 = System.nanoTime()
-                val r = Badge3DRenderer(this, modelPath, t0, onStats)
+                val r = Badge3DRenderer(this, modelPath, t0, onStats, onReady)
                 renderer = r
                 setOnTouchListener { _, event -> r.onTouch(event) }
                 r.start()
@@ -734,6 +756,30 @@ private fun FakeBadge3D(res: Int, modifier: Modifier = Modifier) {
                 .clip(RoundedCornerShape(26.dp))
         )
     }
+}
+
+/**
+ * 统一的徽章展示入口：有 glb 走实时 3D，没有则用定稿图做假 3D。
+ * 解锁弹窗、成就测试页、展示页都走这一个函数，避免三处各写一套。
+ */
+/** 该成就是否已有 3D 模型（决定要不要垫浅色底盘）。 */
+fun badgeHasModel(achievementId: String): Boolean = MODEL_OF_ACHIEVEMENT.containsKey(achievementId)
+
+@Composable
+fun Badge3DAuto(
+    achievementId: String,
+    modifier: Modifier = Modifier,
+    onStats: (String) -> Unit = {},
+    onReady: () -> Unit = {}
+) {
+    val modelPath = MODEL_OF_ACHIEVEMENT[achievementId]
+    if (modelPath != null) {
+        Badge3DView(modelPath, modifier, onStats, onReady)
+        return
+    }
+    val res = badgeRes(achievementId) ?: return
+    LaunchedEffect(Unit) { onReady() }
+    FakeBadge3D(res, modifier)
 }
 
 /**
