@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 仅 debug 构建允许明文 HTTP，方便用本机/局域网服务器测试题库更新；release 仍强制 HTTPS。 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:usesCleartextTraffic="true" />
+    <application android:usesCleartextTraffic="true">
+        <!-- 仅 debug：直接拉起 3D 徽章 POC，便于 adb / 模拟器排查 -->
+        <activity
+            android:name=".Poc3DActivity"
+            android:exported="true"
+            android:label="POC 3D" />
+    </application>
 </manifest>
