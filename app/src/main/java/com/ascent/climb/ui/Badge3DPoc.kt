@@ -122,7 +122,7 @@ private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
 private const val MODEL_PATH = "badges/first_steps.glb"
 
 /** 提升 glTF 自带点/聚光灯的强度，使其在当前场景曝光下可见。 */
-private const val PUNCTUAL_LIGHT_GAIN = 100f
+private const val PUNCTUAL_LIGHT_GAIN = 5f
 private const val IBL_PATH = "env/studio_ibl.ktx"
 
 /** 棚拍环境的 3 波段辐照度 SH（由 tools/poc3d/gen_studio_ibl.py 算出，linear）。 */
