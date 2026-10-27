@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.20.1 (versionCode 108). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: seventeen achievements now render as real-time 3D relics instead of flat images, the unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 39 MB.
+Current version v0.20.2 (versionCode 109). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: seventeen achievements now render as real-time 3D relics instead of flat images, the unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 39 MB.
 
 ## Install
 
@@ -14,7 +14,7 @@ The easiest route is the prebuilt debug APK from [Releases](https://github.com/S
 
 - Package: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26)
-- Size: about 39 MB (20 MB of it is 3D badge models)
+- Size: about 40 MB (21 MB of it is 3D badge models)
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
 Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
@@ -214,7 +214,7 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 
 ## Recent changes
 
-**v0.20.0 – v0.20.1: 3D badges**
+**v0.20.0 – v0.20.2: 3D badges**
 
 - Seventeen achievements render as real-time 3D (Filament 1.75, glTF, PBR metal and enamel). Drag to rotate, pinch to zoom, gentle sway when idle; the automatic motion stays on the front face because the back of a medal is a plain plate
 - The remaining twenty-three keep their still art, tilted in perspective with rounded corners and a shadow — a collectible card, not a flat image. They switch to 3D automatically once a model lands
@@ -222,7 +222,7 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 - Display page sits on a heavily blurred landscape, generated procedurally (27 KB) — sky, four ridges, mist, no photo licensing to worry about
 - Drag directions inverted per feedback; the whole scene brightened, then pulled back slightly so emissive parts keep their contrast
 - Lights authored inside the models now survive: `KHR_lights_punctual` entities are added to the scene explicitly (glTF asset entities do not include them) and their intensity is scaled to the scene exposure — 54 cd next to a 66,000 lux key light is invisible otherwise. `KHR_materials_emissive_strength` is baked into `emissiveFactor` at build time, and bloom is on, auto-disabled when frame time stays above 28 ms
-- Package 21 → 39 MB; the models are 20.4 MB of that
+- Five models re-exported (high-altitude guardian, avalanche eye, seven-thousand graduation, technical graduation, trail high); package 21 → 40 MB, the models are 21 MB of that
 
 **v0.19.25 – v0.19.30: app work**
 

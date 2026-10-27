@@ -122,7 +122,7 @@ private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
 private const val MODEL_PATH = "badges/first_steps.glb"
 
 /** 提升 glTF 自带点/聚光灯的强度，使其在当前场景曝光下可见。 */
-private const val PUNCTUAL_LIGHT_GAIN = 20f
+private const val PUNCTUAL_LIGHT_GAIN = 100f
 private const val IBL_PATH = "env/studio_ibl.ktx"
 
 /** 棚拍环境的 3 波段辐照度 SH（由 tools/poc3d/gen_studio_ibl.py 算出，linear）。 */
@@ -451,7 +451,7 @@ private class Badge3DRenderer(
             enabled = true
             // 泛光只用来让自发光（灯笼 / 星点 / 镜片）溢出成光晕，
             // 层级与分辨率都压到最低：低端 GPU 上这是最贵的一步
-            strength = 0.13f
+            strength = 0.05f
             threshold = true
             levels = 3
             resolution = 180
@@ -485,7 +485,14 @@ private class Badge3DRenderer(
                 if (inst != 0) {
                     val raw = lm.getIntensity(inst)
                     lm.setIntensity(inst, raw * PUNCTUAL_LIGHT_GAIN)
-                    android.util.Log.i("POC3D", "light raw=$raw -> ${raw * PUNCTUAL_LIGHT_GAIN}")
+                    val pos = lm.getPosition(inst, FloatArray(3))
+                    val dir = lm.getDirection(inst, FloatArray(3))
+                    // 位置/朝向直接决定光斑能不能落到徽章上，打点便于真机排查
+                    android.util.Log.i(
+                        "POC3D",
+                        "light type=${lm.getType(inst)} raw=$raw -> ${raw * PUNCTUAL_LIGHT_GAIN} " +
+                            "pos=${pos.toList()} dir=${dir.toList()}"
+                    )
                 }
             }
         }.onFailure { android.util.Log.e("POC3D", "light entity failure", it) }
