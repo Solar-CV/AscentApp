@@ -6,14 +6,14 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.20.2 (versionCode 109). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: twenty-eight achievements now render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 38 MB.
+Current version v0.20.3 (versionCode 110). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: twenty-eight achievements now render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 38 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it.
 
 ## Install
 
 The easiest route is the prebuilt debug APK from [Releases](https://github.com/Solar-CV/AscentApp/releases). Pushing a `v*` tag makes GitHub Actions build and attach a fresh APK.
 
 - Package: `com.ascent.climb`
-- Minimum: Android 8.0 (API 26)
+- Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
 - Size: about 38 MB (27 MB of uncompressed badge models, ~8 MB after packaging)
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
@@ -172,9 +172,13 @@ AscentApp/
 ├── tools/
 │   ├── contentcheck/            Content checks + bank export (plain JVM)
 │   ├── i18ncheck.py             Per-language coverage across all four layers
-│   └── qbank/build.mjs          Markdown → question bank compiler
+│   ├── qbank/build.mjs          Markdown → question bank compiler
+│   └── poc3d/                   Model sync, icon cut-out, emissive baking
 └── app/src/main/
     ├── res/values*/             Interface strings for 10 languages
+    ├── assets/
+    │   ├── badges/*.glb         28 badge models
+    │   └── env/studio_ibl.ktx   Procedurally generated IBL environment
     └── java/com/ascent/climb/
         ├── data/
         │   ├── Unit1~5.kt       Main lesson content
@@ -184,7 +188,7 @@ AscentApp/
         │   ├── FeedbackSender.kt  Formspree POST (HttpURLConnection, no extra deps)
         │   ├── BundledBank.kt   Lesson pool assembly and review insertion
         │   └── bank/            Bank config, JSON decoding, network, repository
-        └── ui/                  Screens and components
+        └── ui/                  Screens and components (Badge3D.kt = Filament scene, framing, lights)
 ```
 
 ## Changing content
@@ -214,17 +218,18 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 
 ## Recent changes
 
-**v0.20.0 – v0.20.2: 3D badges**
+**v0.20.0 – v0.20.3: 3D badges**
 
-- Seventeen achievements render as real-time 3D (Filament 1.75, glTF, PBR metal and enamel). Drag to rotate, pinch to zoom, gentle sway when idle; the automatic motion stays on the front face because the back of a medal is a plain plate
-- The remaining twenty-three keep their still art, tilted in perspective with rounded corners and a shadow — a collectible card, not a flat image. They switch to 3D automatically once a model lands
+- Twenty-eight achievements render as real-time 3D (Filament 1.75, glTF, PBR metal and enamel). Drag to rotate, pinch to zoom, gentle sway when idle; the automatic motion stays on the front face because the back of a medal is a plain plate
+- The remaining twelve keep their still art, tilted in perspective with rounded corners and a shadow — a collectible card, not a flat image. They switch to 3D automatically once a model lands
 - Unlock and preview dialogs go through the same renderer, with a light pedestal behind the model (a dark model on a dark card disappears) and a 56-ribbon burst from both edges. Reduce-motion disables the ribbons
 - Display page sits on a heavily blurred landscape, generated procedurally (27 KB) — sky, four ridges, mist, no photo licensing to worry about
 - Drag directions inverted per feedback; the whole scene brightened, then pulled back slightly so emissive parts keep their contrast
 - Lights authored inside the models now survive: `KHR_lights_punctual` entities are added to the scene explicitly (glTF asset entities do not include them) and their intensity is scaled to the scene exposure — 54 cd next to a 66,000 lux key light is invisible otherwise. `KHR_materials_emissive_strength` is baked into `emissiveFactor` at build time, and bloom is on, auto-disabled when frame time stays above 28 ms
-- Model library grew 17 → **28**: streak, perfect, review, retreat, trail-finish and three re-exports (crampon graduation, curious dev, perfect) joined; package 21 → 38 MB
+- The model library grew from 17 to 28 in this stretch: streak, perfect, review, retreat, trail-finish and three re-exports joined; package 21 → 38 MB
 - **Badge icons now come from the models**: each badge's front render is knocked out of its black backdrop into a transparent 256 px icon, so the wall, the unlock dialog and the 3D view all show the same object. The AI-generated illustrations for those badges were dropped
 - Spotlight gain simplified to 5× (the model's own spot light aims into the medal body, so no gain makes it visible from the front — that needs a fix in the Blender source), bloom dialled down to 0.05
+- v0.20.3: list scroll position now survives a trip into a secondary screen (settings → language, handbook → article, profile → settings, review → lesson), and returning from a lesson no longer resets the path pager to page one
 
 **v0.19.25 – v0.19.30: app work**
 
