@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -31,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -122,22 +125,33 @@ fun ProfileScreen(
     var showBadgeWall by remember { mutableStateOf(false) }
     var showFeedback by remember { mutableStateOf(false) }
 
+    // 列表滚动位置提到这里：切到设置/成就/反馈等二级页时，ProfileBody 会离开组合，
+    // 状态若留在它内部就会被丢掉，返回时弹回顶部。
+    val listState = rememberLazyListState()
+
+    // 个人主页 ↔ 全部徽章墙 也是互斥分支，回来时同样要保住列表位置
+    val branchStates = rememberSaveableStateHolder()
+
     if (showBadgeWall) {
-        BadgeWallScreen(
-            store = store,
-            achRevision = achRevision,
-            onBack = { showBadgeWall = false }
-        )
+        branchStates.SaveableStateProvider("badgeWall") {
+            BadgeWallScreen(
+                store = store,
+                achRevision = achRevision,
+                onBack = { showBadgeWall = false }
+            )
+        }
     } else if (showProfileHome) {
-        ProfileHomeScreen(
-            store = store,
-            altitude = altitude,
-            streak = streak,
-            completed = completed,
-            achRevision = achRevision,
-            onBack = { showProfileHome = false },
-            onOpenAllBadges = { showBadgeWall = true }
-        )
+        branchStates.SaveableStateProvider("home") {
+            ProfileHomeScreen(
+                store = store,
+                altitude = altitude,
+                streak = streak,
+                completed = completed,
+                achRevision = achRevision,
+                onBack = { showProfileHome = false },
+                onOpenAllBadges = { showBadgeWall = true }
+            )
+        }
     // 注意分支顺序：成就测试页是从设置页里点开的，必须排在 showSettings 之前判断。
     // 否则 showSettings 仍为 true，先命中设置页，点了按钮界面纹丝不动
     //（曾经就是这个顺序导致「成就测试点不进去」）。
@@ -211,6 +225,7 @@ fun ProfileScreen(
             onOpenSettings = { showSettings = true },
             onOpenProfileHome = { showProfileHome = true },
             onOpenFeedback = { showFeedback = true },
+            listState = listState,
             onReset = onReset
         )
     }
@@ -241,6 +256,7 @@ private fun ProfileBody(
     onOpenSettings: () -> Unit,
     onOpenProfileHome: () -> Unit,
     onOpenFeedback: () -> Unit,
+    listState: LazyListState,
     onReset: () -> Unit
 ) {
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
@@ -281,6 +297,7 @@ private fun ProfileBody(
     val unlockedAch = remember(achRevision) { store.unlockedAchievements.toSet() }
 
     LazyColumn(
+        state = listState,
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 28.dp)
     ) {

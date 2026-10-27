@@ -31,6 +31,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -74,19 +76,24 @@ fun HandbookScreen() {
     val article = openId?.let { id -> ALL_ARTICLES.firstOrNull { it.id == id } }
     val trackId = activeTrackId()
 
-    if (article == null) {
-        ArticleList(trackId = trackId, onOpen = { openId = it })
-    } else {
-        ArticleDetail(article = article, onBack = { openId = null })
+    // 列表与详情是互斥分支，读文章时列表整棵子树会离开组合。
+    // 用状态槽按分支保管，返回时滚动位置与搜索/筛选都还在。
+    val pageStates = rememberSaveableStateHolder()
+    pageStates.SaveableStateProvider(if (article == null) "hb-list" else "hb-detail") {
+        if (article == null) {
+            ArticleList(trackId = trackId, onOpen = { openId = it })
+        } else {
+            ArticleDetail(article = article, onBack = { openId = null })
+        }
     }
 }
 
 @Composable
 private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
-    var query by remember { mutableStateOf("") }
+    var query by rememberSaveable { mutableStateOf("") }
     val allLabel = stringResource(R.string.hb_filter_all)
     // 语言切换时 allLabel 会变，用 key 重建状态，避免筛选值停留在旧语言
-    var cat by remember(allLabel, trackId) { mutableStateOf(allLabel) }
+    var cat by rememberSaveable(allLabel, trackId) { mutableStateOf(allLabel) }
     val articles = remember(trackId) { articlesOfTrack(trackId) }
     val categories = remember(trackId) { handbookCategories(trackId) }
 

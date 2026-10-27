@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
@@ -79,6 +80,10 @@ fun SettingsScreen(
     var confirmBankReset by remember { mutableStateOf(false) }
     // 语言选择页（独立二级页面）
     var showLanguage by remember { mutableStateOf(false) }
+
+    // 必须放在 showLanguage 的提前返回之前：进语言页时这一层列表会离开组合，
+    // 状态留在这里才不会跟着丢，返回时还在原位。
+    val listState = rememberLazyListState()
     // 隐藏入口：连点版本号 7 次
     var tapCount by remember { mutableStateOf(0) }
     var lastTapAt by remember { mutableStateOf(0L) }
@@ -104,6 +109,7 @@ fun SettingsScreen(
 
     Box(modifier = Modifier.fillMaxWidth().background(Ascent.Bg)) {
         LazyColumn(
+            state = listState,
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 28.dp)
         ) {

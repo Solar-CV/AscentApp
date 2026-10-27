@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -159,6 +160,9 @@ fun AscentRoot(
     var dueKeys by remember { mutableStateOf(store.dueReviewKeys()) }
     var reviewTotal by remember { mutableStateOf(store.reviewTotal()) }
     var tab by remember { mutableStateOf(0) }
+    // 每个 tab 一份可保存状态（LazyListState / PagerState 都靠 rememberSaveable）。
+    // 切 tab 或进课程再退出来，列表停在原来的位置，而不是弹回顶部。
+    val tabStates = rememberSaveableStateHolder()
     var openLessonId by remember { mutableStateOf<String?>(null) }
     var devUnlocked by remember { mutableStateOf(store.devUnlocked) }
     var devUnlockAll by remember { mutableStateOf(store.devUnlockAll) }
@@ -254,107 +258,109 @@ fun AscentRoot(
             ) {
                 // 题库更新后重建整棵子树，确保各页面读到新数据
                 key(bankRevision) {
-                    when (tab) {
-                        0 -> PathScreen(
-                            trackId = trackId,
-                            altitude = altitude,
-                            streak = streak,
-                            rope = rope,
-                            completed = completed,
-                            starsOf = { store.starsFor(it) },
-                            devUnlockAll = devUnlockAll,
-                            onOpenLesson = { openLessonId = it },
-                            onSwitchTrack = { id ->
-                                if (id != trackId) {
-                                    trackId = id
-                                    store.trackId = id
-                                    setActiveTrack(id)
-                                    altitude = store.altitudeOn(id)
+                    tabStates.SaveableStateProvider("tab-$tab") {
+                        when (tab) {
+                            0 -> PathScreen(
+                                trackId = trackId,
+                                altitude = altitude,
+                                streak = streak,
+                                rope = rope,
+                                completed = completed,
+                                starsOf = { store.starsFor(it) },
+                                devUnlockAll = devUnlockAll,
+                                onOpenLesson = { openLessonId = it },
+                                onSwitchTrack = { id ->
+                                    if (id != trackId) {
+                                        trackId = id
+                                        store.trackId = id
+                                        setActiveTrack(id)
+                                        altitude = store.altitudeOn(id)
+                                    }
                                 }
-                            }
-                        )
-                        1 -> HandbookScreen()
-                        2 -> TrainingScreen(
-                            altitude = altitude,
-                            completed = completed,
-                            devUnlockAll = devUnlockAll
-                        )
-                        3 -> ReviewScreen(
-                            completed = completed,
-                            dueKeys = dueKeys,
-                            reviewTotal = reviewTotal,
-                            starsOf = { store.starsFor(it) },
-                            onOpenLesson = { openLessonId = it },
-                            onGradeReview = { key, ok ->
-                                store.gradeReview(key, ok)
-                                dueKeys = store.dueReviewKeys()
-                                reviewTotal = store.reviewTotal()
-                                refreshAchievements()
-                            }
-                        )
-                        else -> ProfileScreen(
-                            altitude = altitude,
-                            streak = streak,
-                            completed = completed,
-                            store = store,
-                            achRevision = achRevision,
-                            devUnlocked = devUnlocked,
-                            devUnlockAll = devUnlockAll,
-                            devShowAnswers = devShowAnswers,
-                            themeMode = themeMode,
-                            onThemeModeChange = onThemeModeChange,
-                            languageMode = languageMode,
-                            onLanguageModeChange = onLanguageModeChange,
-                            onDevUnlocked = {
-                                store.devUnlocked = true
-                                devUnlocked = true
-                                refreshAchievements()
-                            },
-                            onDevUnlockAllChange = {
-                                store.devUnlockAll = it
-                                devUnlockAll = it
-                            },
-                            onDevShowAnswersChange = {
-                                store.devShowAnswers = it
-                                devShowAnswers = it
-                            },
-                            onDevExit = {
-                                store.devUnlocked = false
-                                store.devUnlockAll = false
-                                store.devShowAnswers = false
-                                devUnlocked = false
-                                devUnlockAll = false
-                                devShowAnswers = false
-                            },
-                            bankChecking = bankChecking,
-                            bankMessage = bankMessage,
-                            onCheckBank = {
-                                checkTrigger += 1
-                            },
-                            onResetBank = {
-                                BankRepository.resetToBundled()
-                                bankMsg = BankRepository.lastResult
-                                bankRevision += 1
-                            },
-                            onBankUrlChange = { url ->
-                                BankRepository.setBaseUrl(url)
-                            },
-                            onReset = {
-                                store.reset()
-                                altitude = store.altitude
-                                streak = store.streak
-                                rope = store.rope
-                                completed = store.completed.toSet()
-                                dueKeys = store.dueReviewKeys()
-                                reviewTotal = store.reviewTotal()
-                                achRevision += 1
-                                tab = 0
-                            },
-                            onAchChanged = {
-                                pendingAchievements = store.pendingAchievements.toList()
-                                achRevision += 1
-                            }
-                        )
+                            )
+                            1 -> HandbookScreen()
+                            2 -> TrainingScreen(
+                                altitude = altitude,
+                                completed = completed,
+                                devUnlockAll = devUnlockAll
+                            )
+                            3 -> ReviewScreen(
+                                completed = completed,
+                                dueKeys = dueKeys,
+                                reviewTotal = reviewTotal,
+                                starsOf = { store.starsFor(it) },
+                                onOpenLesson = { openLessonId = it },
+                                onGradeReview = { key, ok ->
+                                    store.gradeReview(key, ok)
+                                    dueKeys = store.dueReviewKeys()
+                                    reviewTotal = store.reviewTotal()
+                                    refreshAchievements()
+                                }
+                            )
+                            else -> ProfileScreen(
+                                altitude = altitude,
+                                streak = streak,
+                                completed = completed,
+                                store = store,
+                                achRevision = achRevision,
+                                devUnlocked = devUnlocked,
+                                devUnlockAll = devUnlockAll,
+                                devShowAnswers = devShowAnswers,
+                                themeMode = themeMode,
+                                onThemeModeChange = onThemeModeChange,
+                                languageMode = languageMode,
+                                onLanguageModeChange = onLanguageModeChange,
+                                onDevUnlocked = {
+                                    store.devUnlocked = true
+                                    devUnlocked = true
+                                    refreshAchievements()
+                                },
+                                onDevUnlockAllChange = {
+                                    store.devUnlockAll = it
+                                    devUnlockAll = it
+                                },
+                                onDevShowAnswersChange = {
+                                    store.devShowAnswers = it
+                                    devShowAnswers = it
+                                },
+                                onDevExit = {
+                                    store.devUnlocked = false
+                                    store.devUnlockAll = false
+                                    store.devShowAnswers = false
+                                    devUnlocked = false
+                                    devUnlockAll = false
+                                    devShowAnswers = false
+                                },
+                                bankChecking = bankChecking,
+                                bankMessage = bankMessage,
+                                onCheckBank = {
+                                    checkTrigger += 1
+                                },
+                                onResetBank = {
+                                    BankRepository.resetToBundled()
+                                    bankMsg = BankRepository.lastResult
+                                    bankRevision += 1
+                                },
+                                onBankUrlChange = { url ->
+                                    BankRepository.setBaseUrl(url)
+                                },
+                                onReset = {
+                                    store.reset()
+                                    altitude = store.altitude
+                                    streak = store.streak
+                                    rope = store.rope
+                                    completed = store.completed.toSet()
+                                    dueKeys = store.dueReviewKeys()
+                                    reviewTotal = store.reviewTotal()
+                                    achRevision += 1
+                                    tab = 0
+                                },
+                                onAchChanged = {
+                                    pendingAchievements = store.pendingAchievements.toList()
+                                    achRevision += 1
+                                }
+                            )
+                        }
                     }
                 }
             }

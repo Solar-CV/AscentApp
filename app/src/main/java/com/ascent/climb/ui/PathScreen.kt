@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.launch
@@ -166,8 +167,16 @@ fun PathScreen(
     val pct = if (totalLessons == 0) 0 else doneCount * 100 / totalLessons
     val currentId = currentLessonIdIn(trackId, completed)
 
-    // 切大类后回到第一页，避免停在旧轨道的页码上
-    LaunchedEffect(trackId) { pager.scrollToPage(0) }
+    // 切大类后回到第一页，避免停在旧轨道的页码上。
+    // 用记住的「上次轨道」判断：从课程页返回时也会重新进入组合，
+    // 那一次不该把人踢回第一页 —— 页码应当保持在离开时的位置。
+    var lastTrackId by rememberSaveable { mutableStateOf(trackId) }
+    LaunchedEffect(trackId) {
+        if (lastTrackId != trackId) {
+            lastTrackId = trackId
+            pager.scrollToPage(0)
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize().background(Ascent.DuoBg)) {
         Column(modifier = Modifier.fillMaxSize()) {
