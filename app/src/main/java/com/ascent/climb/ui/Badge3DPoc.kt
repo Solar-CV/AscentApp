@@ -96,27 +96,37 @@ import kotlin.math.tan
 
 /**
  * 成就 id → glb 资源。没有登记的成就自动回退「图片假 3D」。
- * 目前 17 枚已出模型（2026-10-26 模型库），其余 23 枚仍用定稿图。
+ * 当前 28 枚有模型，其余 12 枚仍用成就图标。
  */
 private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
-    "first_steps" to "badges/first_steps.glb",
-    "crampon_ready" to "badges/crampon_ready.glb",
-    "self_arrest" to "badges/self_arrest.glb",
-    "knot_tied" to "badges/knot_tied.glb",
     "ams_guardian" to "badges/ams_guardian.glb",
-    "peak_scout" to "badges/peak_scout.glb",
-    "basecamp_grad" to "badges/basecamp_grad.glb",
-    "tech_grad" to "badges/tech_grad.glb",
-    "six_k_grad" to "badges/six_k_grad.glb",
-    "seven_k_grad" to "badges/seven_k_grad.glb",
     "avalanche_eye" to "badges/avalanche_eye.glb",
-    "perfect_1" to "badges/perfect_1.glb",
-    "perfect_5" to "badges/perfect_5.glb",
+    "basecamp_grad" to "badges/basecamp_grad.glb",
+    "crampon_ready" to "badges/crampon_ready.glb",
     "curious_dev" to "badges/curious_dev.glb",
-    "trail_first" to "badges/trail_first.glb",
+    "first_steps" to "badges/first_steps.glb",
+    "knot_tied" to "badges/knot_tied.glb",
+    "peak_scout" to "badges/peak_scout.glb",
+    "perfect_1" to "badges/perfect_1.glb",
+    "perfect_15" to "badges/perfect_15.glb",
+    "perfect_30" to "badges/perfect_30.glb",
+    "perfect_5" to "badges/perfect_5.glb",
+    "retreat_wise" to "badges/retreat_wise.glb",
+    "review_20" to "badges/review_20.glb",
+    "review_clear" to "badges/review_clear.glb",
+    "review_first" to "badges/review_first.glb",
+    "self_arrest" to "badges/self_arrest.glb",
+    "seven_k_grad" to "badges/seven_k_grad.glb",
+    "six_k_grad" to "badges/six_k_grad.glb",
+    "streak_14" to "badges/streak_14.glb",
+    "streak_3" to "badges/streak_3.glb",
+    "streak_30" to "badges/streak_30.glb",
+    "streak_7" to "badges/streak_7.glb",
+    "tech_grad" to "badges/tech_grad.glb",
     "trail_camp" to "badges/trail_camp.glb",
-    "trail_high" to "badges/trail_high.glb",
-)
+    "trail_finish" to "badges/trail_finish.glb",
+    "trail_first" to "badges/trail_first.glb",
+    "trail_high" to "badges/trail_high.glb",)
 
 /** 默认模型（POC Activity / 调试直连时用）。 */
 private const val MODEL_PATH = "badges/first_steps.glb"

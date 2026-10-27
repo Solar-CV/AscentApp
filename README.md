@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.20.2 (versionCode 109). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: seventeen achievements now render as real-time 3D relics instead of flat images, the unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 39 MB.
+Current version v0.20.2 (versionCode 109). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: twenty-eight achievements now render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 38 MB.
 
 ## Install
 
@@ -14,7 +14,7 @@ The easiest route is the prebuilt debug APK from [Releases](https://github.com/S
 
 - Package: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26)
-- Size: about 40 MB (21 MB of it is 3D badge models)
+- Size: about 38 MB (27 MB of uncompressed badge models, ~8 MB after packaging)
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
 Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
@@ -47,7 +47,7 @@ Training gives a readiness percentage and the target peak's altitude. Review put
 
 The profile shows unlocked badges only. All 40 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
 
-Seventeen of them also exist as real 3D models — metal frames, enamel insets, relief. Open the achievements test screen and tap a badge to see it spin: drag to rotate, pinch to zoom, and it sways gently on its own when you stop. The other twenty-three use their still art tilted in perspective, so they read as a collectible card rather than a flat picture; adding a model later switches them over with no code change. Unlocking an achievement anywhere in the app shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges of the screen.
+Most of them also exist as real 3D models — metal frames, enamel insets, relief. Open the achievements test screen and tap a badge to see it spin: drag to rotate, pinch to zoom, and it sways gently on its own when you stop. Their icons are rendered from the models themselves, so the wall and the 3D view show the same object; the old AI illustrations were retired. The remaining twelve without a model keep hand-drawn art and fall back to a perspective-tilted card. Unlocking an achievement anywhere in the app shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges of the screen.
 
 ### Settings
 
@@ -222,7 +222,9 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 - Display page sits on a heavily blurred landscape, generated procedurally (27 KB) — sky, four ridges, mist, no photo licensing to worry about
 - Drag directions inverted per feedback; the whole scene brightened, then pulled back slightly so emissive parts keep their contrast
 - Lights authored inside the models now survive: `KHR_lights_punctual` entities are added to the scene explicitly (glTF asset entities do not include them) and their intensity is scaled to the scene exposure — 54 cd next to a 66,000 lux key light is invisible otherwise. `KHR_materials_emissive_strength` is baked into `emissiveFactor` at build time, and bloom is on, auto-disabled when frame time stays above 28 ms
-- Five models re-exported (high-altitude guardian, avalanche eye, seven-thousand graduation, technical graduation, trail high); package 21 → 40 MB, the models are 21 MB of that
+- Model library grew 17 → **28**: streak, perfect, review, retreat, trail-finish and three re-exports (crampon graduation, curious dev, perfect) joined; package 21 → 38 MB
+- **Badge icons now come from the models**: each badge's front render is knocked out of its black backdrop into a transparent 256 px icon, so the wall, the unlock dialog and the 3D view all show the same object. The AI-generated illustrations for those badges were dropped
+- Spotlight gain simplified to 5× (the model's own spot light aims into the medal body, so no gain makes it visible from the front — that needs a fix in the Blender source), bloom dialled down to 0.05
 
 **v0.19.25 – v0.19.30: app work**
 
