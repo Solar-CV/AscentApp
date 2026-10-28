@@ -6,7 +6,7 @@ Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. 
 
 Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 68 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 21 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
 
-Versión actual v0.20.11 (versionCode 118). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: 28 logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 38 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
+Versión actual v0.20.13 (versionCode 120). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: 34 logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 39 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
 
 ## Instalación
 
@@ -14,7 +14,7 @@ Lo más fácil es el APK debug ya compilado de [Releases](https://github.com/Sol
 
 - Paquete: `com.ascent.climb`
 - Mínimo: Android 8.0 (API 26), **solo arm64-v8a** — los móviles de solo 32 bits no pueden instalarlo
-- Tamaño: unos 38 MB (27 MB de modelos sin comprimir, unos 8 MB tras empaquetar)
+- Tamaño: unos 39 MB (32 MB de modelos sin comprimir, unos 9 MB tras empaquetar)
 - Permisos: red y estado de red — para comprobar actualizaciones del banco de preguntas y enviar comentarios. Todo funciona sin conexión; el banco incluido siempre está ahí
 
 Pasa el APK al móvil, permite instalar desde orígenes desconocidos y toca instalar. En el primer arranque no hay que iniciar sesión.
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Textos de interfaz en 10 idiomas
     ├── assets/
-    │   ├── badges/*.glb         28 modelos de insignia
+    │   ├── badges/*.glb         34 modelos de insignia
     │   └── env/studio_ibl.ktx   Entorno IBL generado por código
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,11 @@ Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVe
 
 ## Cambios recientes
 
+**v0.20.13: seis modelos de insignia más**
+
+- La biblioteca pasa de 28 a 34: 6.000 m de aprendizaje, regreso, huellas de siete días y de tres semanas, veinte carreras y un mosquetón en D para «la seguridad primero»; self_arrest reexportado
+- El recorte de iconos ahora también elimina el fondo *encerrado* por la forma de la insignia: el agujero central del mosquetón y las perforaciones de una tarjeta troquelada salían como discos negros macizos. Cada región cerrada se juzga por separado: un color uniforme igual al fondo cuenta como agujero, los degradados se quedan. Paquete 38.5 → 39.4 MB
+
 **v0.20.11: iluminación y fondo de la vista 3D de insignias**
 
 - La vista del emblema usaba dos luces, así que el metal solo tenía un brillo curvo y el relieve quedaba plano. Ahora son cinco luces direccionales — clave, superior, relleno frontal, contorno y un rebote tenue desde abajo — con la iluminación total sin cambios: gana profundidad sin lavarse
@@ -240,13 +245,13 @@ Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVe
 
 **v0.20.0 – v0.20.3: insignias 3D**
 
-- 28 logros se dibujan en 3D en tiempo real (Filament 1.75, glTF, metal y esmalte PBR). Arrastra para girar, pellizca para acercar, se mece despacio al soltar; el movimiento automático se queda en la cara frontal porque el reverso de una medalla es una placa lisa
-- Los otros doce conservan su ilustración fija, inclinada en perspectiva con esquinas redondeadas y sombra: una tarjeta de colección, no una imagen plana. Pasan a 3D en cuanto llega un modelo
+- 34 logros se dibujan en 3D en tiempo real (Filament 1.75, glTF, metal y esmalte PBR). Arrastra para girar, pellizca para acercar, se mece despacio al soltar; el movimiento automático se queda en la cara frontal porque el reverso de una medalla es una placa lisa
+- Los otros seis conservan su ilustración fija, inclinada en perspectiva con esquinas redondeadas y sombra: una tarjeta de colección, no una imagen plana. Pasan a 3D en cuanto llega un modelo
 - Los diálogos de desbloqueo y vista previa usan el mismo motor, con un pedestal claro detrás del modelo (un modelo oscuro sobre tarjeta oscura desaparece) y 56 cintas desde los dos bordes. «Reducir movimiento» desactiva las cintas
 - La página de exhibición se apoya en un paisaje muy desenfocado, generado por código (27 KB): cielo, cuatro crestas, niebla, sin licencias de fotos
 - Direcciones de arrastre invertidas según los comentarios; la escena se aclaró y luego se replegó un poco para que las partes emisivas conserven contraste
 - Las luces creadas dentro de los modelos ya sobreviven: las entidades `KHR_lights_punctual` se añaden explícitamente a la escena (las entidades del asset glTF no las incluyen) y su intensidad se escala a la exposición de la escena — 54 cd junto a una luz principal de 66.000 lux son invisibles si no. `KHR_materials_emissive_strength` se hornea en `emissiveFactor` al compilar, y el bloom queda activo, desactivándose solo si el tiempo de fotograma supera los 28 ms
-- La biblioteca de modelos pasó de 17 a 28 en este tramo: rachas, perfectos, repaso, retirada, fin de senderismo y tres reexportaciones; paquete 21 → 38 MB
+- La biblioteca de modelos pasó de 17 a 34 en este tramo: rachas, perfectos, repaso, retirada, fin de senderismo y tres reexportaciones; paquete 21 → 39 MB
 - **Los iconos de insignia salen ahora de los modelos**: el render frontal se recorta de su fondo negro a un icono transparente de 256 px, así que el muro, el diálogo de desbloqueo y la vista 3D muestran el mismo objeto. Las ilustraciones de IA de esas insignias se descartaron
 - Ganancia del foco simplificada a 5× (el foco propio del modelo apunta al cuerpo de la medalla, ninguna ganancia lo hace visible de frente — eso se arregla en el origen de Blender), bloom bajado a 0,05
 - v0.20.3: la posición de una lista sobrevive al viaje a una pantalla secundaria (ajustes → idioma, manual → artículo, perfil → ajustes, repaso → lección), y volver de una lección ya no reinicia el paginador de la ruta a la primera página

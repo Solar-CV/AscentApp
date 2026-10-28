@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.20.11 (versionCode 118). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: twenty-eight achievements now render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 38 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+Current version v0.20.13 (versionCode 120). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: thirty-four achievements now render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 39 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 ## Install
 
@@ -14,7 +14,7 @@ The easiest route is the prebuilt debug APK from [Releases](https://github.com/S
 
 - Package: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
-- Size: about 38 MB (27 MB of uncompressed badge models, ~8 MB after packaging)
+- Size: about 39 MB (32 MB of uncompressed badge models, ~9 MB after packaging)
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
 Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
@@ -47,7 +47,7 @@ Training gives a readiness percentage and the target peak's altitude. Review put
 
 The profile shows unlocked badges only. All 40 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
 
-Most of them also exist as real 3D models — metal frames, enamel insets, relief. Open the achievements test screen and tap a badge to see it spin: drag to rotate, pinch to zoom, and it sways gently on its own when you stop. Their icons are rendered from the models themselves, so the wall and the 3D view show the same object; the old AI illustrations were retired. The remaining twelve without a model keep hand-drawn art and fall back to a perspective-tilted card. Unlocking an achievement anywhere in the app shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges of the screen.
+Most of them also exist as real 3D models — metal frames, enamel insets, relief. Open the achievements test screen and tap a badge to see it spin: drag to rotate, pinch to zoom, and it sways gently on its own when you stop. Their icons are rendered from the models themselves, so the wall and the 3D view show the same object; the old AI illustrations were retired. The remaining six without a model keep hand-drawn art and fall back to a perspective-tilted card. Unlocking an achievement anywhere in the app shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges of the screen.
 
 ### Settings
 
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Interface strings for 10 languages
     ├── assets/
-    │   ├── badges/*.glb         28 badge models
+    │   ├── badges/*.glb         34 badge models
     │   └── env/studio_ibl.ktx   Procedurally generated IBL environment
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,11 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 
 ## Recent changes
 
+**v0.20.13: six more badge models**
+
+- The library went from 28 to 34: 6,000 m of learning, comeback, seven-day and three-week footprints, twenty runs, and a D-shaped carabiner for safety first; self_arrest re-exported
+- The icon knockout now also clears background *enclosed* by the badge shape — the carabiner's centre hole and a punched card's perforations used to come out as solid black discs. Each enclosed region is judged on its own: a uniform colour matching the backdrop counts as a hole, gradients stay. Package 38.5 → 39.4 MB
+
 **v0.20.11: badge stage lighting and backdrop**
 
 - The badge view used two lights, so the metal only ever had one curved highlight and the relief sat flat. It now has five directional lights — key, top, front fill, rim and a weak bounce from below — with the total illumination kept where it was, so the metal gains depth without washing out
@@ -240,13 +245,13 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 
 **v0.20.0 – v0.20.3: 3D badges**
 
-- Twenty-eight achievements render as real-time 3D (Filament 1.75, glTF, PBR metal and enamel). Drag to rotate, pinch to zoom, gentle sway when idle; the automatic motion stays on the front face because the back of a medal is a plain plate
-- The remaining twelve keep their still art, tilted in perspective with rounded corners and a shadow — a collectible card, not a flat image. They switch to 3D automatically once a model lands
+- Thirty-four achievements render as real-time 3D (Filament 1.75, glTF, PBR metal and enamel). Drag to rotate, pinch to zoom, gentle sway when idle; the automatic motion stays on the front face because the back of a medal is a plain plate
+- The remaining six keep their still art, tilted in perspective with rounded corners and a shadow — a collectible card, not a flat image. They switch to 3D automatically once a model lands
 - Unlock and preview dialogs go through the same renderer, with a light pedestal behind the model (a dark model on a dark card disappears) and a 56-ribbon burst from both edges. Reduce-motion disables the ribbons
 - Display page sits on a heavily blurred landscape, generated procedurally (27 KB) — sky, four ridges, mist, no photo licensing to worry about
 - Drag directions inverted per feedback; the whole scene brightened, then pulled back slightly so emissive parts keep their contrast
 - Lights authored inside the models now survive: `KHR_lights_punctual` entities are added to the scene explicitly (glTF asset entities do not include them) and their intensity is scaled to the scene exposure — 54 cd next to a 66,000 lux key light is invisible otherwise. `KHR_materials_emissive_strength` is baked into `emissiveFactor` at build time, and bloom is on, auto-disabled when frame time stays above 28 ms
-- The model library grew from 17 to 28 in this stretch: streak, perfect, review, retreat, trail-finish and three re-exports joined; package 21 → 38 MB
+- The model library grew from 17 to 34 in this stretch: streak, perfect, review, retreat, trail-finish, altitude, comeback, weekly footprints, runs and a carabiner joined, plus several re-exports; package 21 → 39 MB
 - **Badge icons now come from the models**: each badge's front render is knocked out of its black backdrop into a transparent 256 px icon, so the wall, the unlock dialog and the 3D view all show the same object. The AI-generated illustrations for those badges were dropped
 - Spotlight gain simplified to 5× (the model's own spot light aims into the medal body, so no gain makes it visible from the front — that needs a fix in the Blender source), bloom dialled down to 0.05
 - v0.20.3: list scroll position now survives a trip into a secondary screen (settings → language, handbook → article, profile → settings, review → lesson), and returning from a lesson no longer resets the path pager to page one

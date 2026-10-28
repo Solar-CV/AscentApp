@@ -104,14 +104,18 @@ import kotlin.math.tan
 
 /**
  * 成就 id → glb 资源。没有登记的成就自动回退「图片假 3D」。
- * 当前 28 枚有模型，其余 12 枚仍用成就图标。
+ * 当前 34 枚有模型，其余 6 枚仍用成就图标。
  */
 private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
+    "altitude_6000" to "badges/altitude_6000.glb",
     "ams_guardian" to "badges/ams_guardian.glb",
     "avalanche_eye" to "badges/avalanche_eye.glb",
     "basecamp_grad" to "badges/basecamp_grad.glb",
+    "comeback" to "badges/comeback.glb",
     "crampon_ready" to "badges/crampon_ready.glb",
     "curious_dev" to "badges/curious_dev.glb",
+    "days_21" to "badges/days_21.glb",
+    "days_7" to "badges/days_7.glb",
     "first_steps" to "badges/first_steps.glb",
     "knot_tied" to "badges/knot_tied.glb",
     "peak_scout" to "badges/peak_scout.glb",
@@ -123,6 +127,8 @@ private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
     "review_20" to "badges/review_20.glb",
     "review_clear" to "badges/review_clear.glb",
     "review_first" to "badges/review_first.glb",
+    "runs_20" to "badges/runs_20.glb",
+    "safety_first" to "badges/safety_first.glb",
     "self_arrest" to "badges/self_arrest.glb",
     "seven_k_grad" to "badges/seven_k_grad.glb",
     "six_k_grad" to "badges/six_k_grad.glb",
@@ -134,7 +140,8 @@ private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
     "trail_camp" to "badges/trail_camp.glb",
     "trail_finish" to "badges/trail_finish.glb",
     "trail_first" to "badges/trail_first.glb",
-    "trail_high" to "badges/trail_high.glb",)
+    "trail_high" to "badges/trail_high.glb",
+)
 
 /** 默认模型（POC Activity / 调试直连时用）。 */
 private const val MODEL_PATH = "badges/first_steps.glb"

@@ -6,7 +6,7 @@ Une application Android pour celles et ceux qui débutent en alpinisme d’altit
 
 Deux parcours se changent librement. La **haute montagne** compte six unités et 68 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 21 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.20.11 (versionCode 118). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : 28 succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 38 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+Version actuelle v0.20.13 (versionCode 120). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : 34 succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 39 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Le plus simple est l’APK debug déjà compilé des [Releases](https://github.c
 
 - Paquet : `com.ascent.climb`
 - Minimum : Android 8.0 (API 26), **arm64-v8a uniquement** — les téléphones uniquement 32 bits ne peuvent pas installer cette version
-- Taille : environ 38 Mo (27 Mo de modèles non compressés, environ 8 Mo après empaquetage)
+- Taille : environ 39 Mo (32 Mo de modèles non compressés, environ 9 Mo après empaquetage)
 - Autorisations : réseau et état du réseau — pour vérifier les mises à jour de la banque de questions et envoyer un retour. Tout fonctionne hors ligne ; la banque embarquée est toujours là
 
 Transférez l’APK sur le téléphone, autorisez l’installation de sources inconnues, appuyez sur installer. Aucune connexion au premier lancement.
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Textes d’interface pour 10 langues
     ├── assets/
-    │   ├── badges/*.glb         28 modèles de badge
+    │   ├── badges/*.glb         34 modèles de badge
     │   └── env/studio_ibl.ktx   Environnement IBL généré par code
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,11 @@ Les anciennes versions de l’application ne cassent pas face à une banque plus
 
 ## Changements récents
 
+**v0.20.13 : six modèles de badge de plus**
+
+- La bibliothèque passe de 28 à 34 : 6 000 m d’apprentissage, le retour, les traces de sept jours et de trois semaines, vingt courses et un mousqueton en D pour « la sécurité d’abord » ; self_arrest réexporté
+- Le détourage des icônes retire désormais aussi le fond *encerclé* par la forme du badge — le trou central du mousqueton et les perforations d’une carte poinçonnée sortaient en disques noirs pleins. Chaque zone fermée est jugée séparément : une couleur uniforme identique au fond compte comme un trou, les dégradés sont conservés. Paquet 38.5 → 39.4 Mo
+
 **v0.20.11 : éclairage et fond de la vue 3D des badges**
 
 - La vue du badge n'avait que deux lumières : le métal ne recevait qu'un seul reflet courbe et le relief restait plat. Elle en a maintenant cinq — clé, zénith, remplissage frontal, contre-jour et un léger rebond par le bas — à éclairage total constant : plus de relief, sans délavage
@@ -240,13 +245,13 @@ Les anciennes versions de l’application ne cassent pas face à une banque plus
 
 **v0.20.0 – v0.20.3 : badges 3D**
 
-- 28 succès sont rendus en 3D temps réel (Filament 1.75, glTF, métal et émail PBR). Glisser pour pivoter, pincer pour zoomer, une légère oscillation au repos ; le mouvement automatique reste sur la face avant, car le revers d’une médaille est une plaque lisse
-- Les douze autres gardent leur illustration fixe, inclinée en perspective avec coins arrondis et ombre — une carte de collection, pas une image plate. Ils passent en 3D dès qu’un modèle arrive
+- 34 succès sont rendus en 3D temps réel (Filament 1.75, glTF, métal et émail PBR). Glisser pour pivoter, pincer pour zoomer, une légère oscillation au repos ; le mouvement automatique reste sur la face avant, car le revers d’une médaille est une plaque lisse
+- Les six autres gardent leur illustration fixe, inclinée en perspective avec coins arrondis et ombre — une carte de collection, pas une image plate. Ils passent en 3D dès qu’un modèle arrive
 - Les fenêtres de déblocage et d’aperçu passent par le même moteur, avec un socle clair derrière le modèle (un modèle sombre sur une carte sombre disparaît) et 56 rubans depuis les deux bords. « Réduire les animations » coupe les rubans
 - La page de présentation repose sur un paysage très flou, généré par code (27 Ko) : ciel, quatre crêtes, brume, aucune licence photo à gérer
 - Sens de glissement inversés après retour ; la scène éclaircie puis légèrement reprise pour que les parties émissives gardent leur contraste
 - Les lumières créées dans les modèles survivent enfin : les entités `KHR_lights_punctual` sont ajoutées explicitement à la scène (les entités d’un asset glTF ne les incluent pas) et leur intensité est mise à l’échelle de l’exposition — 54 cd à côté d’une lumière principale à 66 000 lux sont invisibles sinon. `KHR_materials_emissive_strength` est cuit dans `emissiveFactor` à la compilation, et le bloom reste actif, désactivé quand le temps de frame dépasse 28 ms
-- La bibliothèque de modèles est passée de 17 à 28 : séries, sans-faute, révision, retrait, fin de randonnée et trois réexports ; paquet 21 → 38 Mo
+- La bibliothèque de modèles est passée de 17 à 34 : séries, sans-faute, révision, retrait, fin de randonnée et trois réexports ; paquet 21 → 39 Mo
 - **Les icônes de badge viennent maintenant des modèles** : le rendu de face est détouré de son fond noir en icône transparente de 256 px, si bien que le mur, la fenêtre de déblocage et la vue 3D montrent le même objet. Les illustrations générées par IA de ces badges ont été abandonnées
 - Gain du spot simplifié à 5× (le spot du modèle vise l’intérieur de la médaille, aucun gain ne le rend visible de face — cela se corrige dans la source Blender), bloom ramené à 0,05
 - v0.20.3 : la position d’une liste survit au passage par un écran secondaire (réglages → langue, manuel → article, profil → réglages, révision → leçon), et revenir d’une leçon ne remet plus le pagineur du parcours à la première page

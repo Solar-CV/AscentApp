@@ -6,7 +6,7 @@ Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist
 
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 68 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 21 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.20.11 (versionCode 118). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: 28 Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 38 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.20.13 (versionCode 120). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: 34 Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 39 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Am einfachsten über das fertige Debug-APK aus den [Releases](https://github.com
 
 - Paket: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26), **nur arm64-v8a** — reine 32-Bit-Geräte können diese Version nicht installieren
-- Größe: etwa 38 MB (27 MB unkomprimierte Abzeichenmodelle, rund 8 MB nach dem Paketieren)
+- Größe: etwa 39 MB (32 MB unkomprimierte Abzeichenmodelle, rund 9 MB nach dem Paketieren)
 - Berechtigungen: Netzwerk und Netzwerkstatus — für die Prüfung auf Fragenpool-Updates und für Feedback. Alles funktioniert offline, der mitgelieferte Pool ist immer da
 
 APK aufs Telefon übertragen, Installation aus unbekannten Quellen erlauben, tippen. Beim ersten Start ist keine Anmeldung nötig.
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Oberflächentexte für 10 Sprachen
     ├── assets/
-    │   ├── badges/*.glb         28 Abzeichenmodelle
+    │   ├── badges/*.glb         34 Abzeichenmodelle
     │   └── env/studio_ibl.ktx   Prozedural erzeugte IBL-Umgebung
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,11 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 
 ## Letzte Änderungen
 
+**v0.20.13: sechs weitere Abzeichenmodelle**
+
+- Die Bibliothek wächst von 28 auf 34: 6.000 m Lernen, Comeback, Sieben-Tage- und Drei-Wochen-Spuren, zwanzig Läufe und ein D-förmiger Karabiner für „Sicherheit zuerst“; self_arrest neu exportiert
+- Die Icon-Freistellung entfernt jetzt auch Hintergrund, der von der Abzeichenform *umschlossen* ist — das Mittelloch des Karabiners und die Lochung einer Stanzkarte waren bisher massiv schwarze Scheiben. Jede eingeschlossene Fläche wird einzeln geprüft: gleichmäßige Farbe wie der Hintergrund gilt als Loch, Verläufe bleiben. Paket 38.5 → 39.4 MB
+
 **v0.20.11: Beleuchtung und Hintergrund der 3D-Badge-Ansicht**
 
 - Die Badge-Ansicht hatte zwei Lichter, daher gab es nur einen einzigen Glanzbogen und das Relief blieb flach. Jetzt sind es fünf gerichtete Lichter — Key, Top, Front-Fill, Rim und ein schwacher Bounce von unten — bei unveränderter Gesamtbeleuchtung: mehr Tiefe, ohne auszubleichen
@@ -240,13 +245,13 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 
 **v0.20.0 – v0.20.3: 3D-Abzeichen**
 
-- 28 Erfolge werden in Echtzeit 3D gerendert (Filament 1.75, glTF, PBR-Metall und Emaille). Ziehen dreht, zwei Finger zoomen, in Ruhe wiegt sich das Objekt leicht; die automatische Bewegung bleibt an der Vorderseite, weil die Rückseite einer Medaille eine glatte Platte ist
-- Die übrigen zwölf behalten ihre stehende Grafik, perspektivisch gekippt, mit runden Ecken und Schatten — eine Sammelkarte, kein flaches Bild. Sobald ein Modell vorliegt, wechseln sie automatisch auf 3D
+- 34 Erfolge werden in Echtzeit 3D gerendert (Filament 1.75, glTF, PBR-Metall und Emaille). Ziehen dreht, zwei Finger zoomen, in Ruhe wiegt sich das Objekt leicht; die automatische Bewegung bleibt an der Vorderseite, weil die Rückseite einer Medaille eine glatte Platte ist
+- Die übrigen sechs behalten ihre stehende Grafik, perspektivisch gekippt, mit runden Ecken und Schatten — eine Sammelkarte, kein flaches Bild. Sobald ein Modell vorliegt, wechseln sie automatisch auf 3D
 - Freischalt- und Vorschau-Dialoge laufen über denselben Renderer, mit hellem Sockel hinter dem Modell (ein dunkles Modell auf dunkler Karte verschwindet) und 56 Bändern aus beiden Richtungen. „Bewegung reduzieren" schaltet die Bänder ab
 - Die Anzeigeseite sitzt auf einer stark unscharfen Landschaft, prozedural erzeugt (27 KB) — Himmel, vier Grate, Nebel, keine Fotolizenz nötig
 - Ziehrichtungen nach Feedback umgedreht; die Szene insgesamt aufgehellt und dann leicht zurückgenommen, damit emittierende Teile Kontrast behalten
 - In den Modellen angelegte Lichter überleben jetzt: `KHR_lights_punctual`-Entitäten werden ausdrücklich in die Szene gehängt (glTF-Asset-Entitäten enthalten sie nicht) und ihre Intensität wird an die Belichtung der Szene skaliert — 54 cd neben einem Schlüssellicht mit 66.000 Lux sind sonst unsichtbar. `KHR_materials_emissive_strength` wird beim Bauen in `emissiveFactor` gebacken, Bloom ist an und schaltet sich ab, wenn die Frame-Zeit über 28 ms bleibt
-- Die Modellbibliothek wuchs in diesem Abschnitt von 17 auf 28: Serien, Perfekt, Wiederholung, Rückzug, Trekking-Abschluss und drei Neuausgaben kamen dazu; Paket 21 → 38 MB
+- Die Modellbibliothek wuchs in diesem Abschnitt von 17 auf 34: Serien, Perfekt, Wiederholung, Rückzug, Trekking-Abschluss und drei Neuausgaben kamen dazu; Paket 21 → 39 MB
 - **Abzeichen-Icons kommen jetzt aus den Modellen**: vom Frontrender wird der schwarze Hintergrund zur transparenten 256-px-Grafik freigestellt, sodass Wand, Freischaltdialog und 3D-Ansicht dasselbe Objekt zeigen. Die KI-Illustrationen dieser Abzeichen wurden verworfen
 - Spotlight-Verstärkung auf 5× vereinfacht (das eigene Spotlight des Modells zielt in den Medaillenkörper, aus keiner Verstärkung wird es von vorn sichtbar — das gehört in die Blender-Quelle), Bloom auf 0,05 gedreht
 - v0.20.3: Die Scrollposition einer Liste überlebt den Ausflug in einen Unterschirm (Einstellungen → Sprache, Handbuch → Artikel, Profil → Einstellungen, Wiederholung → Lektion), und die Rückkehr aus einer Lektion setzt den Routen-Pager nicht mehr auf Seite eins

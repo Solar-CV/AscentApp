@@ -6,7 +6,7 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 68 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 21 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.20.11 (versionCode 118). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: 28 prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 38 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.20.13 (versionCode 120). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: 34 prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 39 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Enklaste vägen är det färdigbyggda debug-APK:t från [Releases](https://githu
 
 - Paket: `com.ascent.climb`
 - Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen
-- Storlek: cirka 38 MB (27 MB okomprimerade emblemmodeller, ungefär 8 MB efter paketering)
+- Storlek: cirka 39 MB (32 MB okomprimerade emblemmodeller, ungefär 9 MB efter paketering)
 - Behörigheter: nätverk och nätverksstatus — för att söka efter uppdateringar av frågebanken och skicka feedback. Allt fungerar offline; den medföljande banken finns alltid där
 
 Flytta över APK:n till telefonen, tillåt installation från okända källor och tryck på installera. Ingen inloggning vid första starten.
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Gränssnittstexter för 10 språk
     ├── assets/
-    │   ├── badges/*.glb         28 emblemmodeller
+    │   ├── badges/*.glb         34 emblemmodeller
     │   └── env/studio_ibl.ktx   Procedurellt genererad IBL-miljö
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,11 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 
 ## Senaste ändringar
 
+**v0.20.13: sex emblemmodeller till**
+
+- Biblioteket växer från 28 till 34: 6 000 m lärande, comeback, sju dagars och tre veckors spår, tjugo rundor och en D-formad karbinhake för ”säkerhet först”; self_arrest omexporterad
+- Ikonurklippningen tar nu även bort bakgrund som *omsluts* av emblemets form — karbinhakens mitthål och en stansad kortets hål blev tidigare solida svarta skivor. Varje sluten yta bedöms för sig: jämn färg som matchar bakgrunden räknas som hål, gradienter behålls. Paketet 38.5 → 39.4 MB
+
 **v0.20.11: ljus och bakgrund i 3D-emblemvyn**
 
 - Emblemvyn hade två ljus, så metallen fick bara en enda böjd glans och reliefen låg platt. Nu är det fem riktade ljus — huvud, topp, frontfyllnad, kant och ett svagt studs underifrån — med samma totala belysning: mer djup utan att blekas ur
@@ -240,13 +245,13 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 
 **v0.20.0 – v0.20.3: 3D-emblem**
 
-- 28 prestationer renderas i 3D i realtid (Filament 1.75, glTF, metall och emalj i PBR). Dra för att rotera, nyp för att zooma, det gungar sakta när du släpper; den automatiska rörelsen stannar på framsidan eftersom baksidan av en medalj är en slät platta
-- De övriga tolv behåller sin stillbild, lutad i perspektiv med rundade hörn och skugga: ett samlarkort, inte en platt bild. De byter till 3D så snart en modell finns
+- 34 prestationer renderas i 3D i realtid (Filament 1.75, glTF, metall och emalj i PBR). Dra för att rotera, nyp för att zooma, det gungar sakta när du släpper; den automatiska rörelsen stannar på framsidan eftersom baksidan av en medalj är en slät platta
+- De övriga sex behåller sin stillbild, lutad i perspektiv med rundade hörn och skugga: ett samlarkort, inte en platt bild. De byter till 3D så snart en modell finns
 - Upplåsnings- och förhandsvisningsdialoger går genom samma renderare, med en ljus piedestal bakom modellen (en mörk modell på ett mörkt kort försvinner) och 56 band från båda kanterna. "Minska rörelse" stänger av banden
 - Visningssidan vilar på ett kraftigt suddigt landskap, procedurellt genererat (27 kB): himmel, fyra åsar, dimma, inga fotolicenser att tänka på
 - Dragriktningarna inverterade efter feedback; hela scenen ljusades upp och drogs sedan tillbaka lite så att emittersande delar behåller kontrasten
 - Ljus som skapats inne i modellerna överlever nu: `KHR_lights_punctual`-entiteter läggs uttryckligen till i scenen (glTF-tillgångens entiteter innehåller dem inte) och deras intensitet skalas till scenens exponering — 54 cd bredvid ett huvudljus på 66 000 lux syns annars inte. `KHR_materials_emissive_strength` bakas in i `emissiveFactor` vid bygget, och bloom är på och stängs av automatiskt när bildtiden ligger över 28 ms
-- Modellbiblioteket växte från 17 till 28 under den här perioden: serier, fullpoäng, repetition, reträtt, vandringsmål och tre omexporteringar tillkom; paketet 21 → 38 MB
+- Modellbiblioteket växte från 17 till 34 under den här perioden: serier, fullpoäng, repetition, reträtt, vandringsmål och tre omexporteringar tillkom; paketet 21 → 39 MB
 - **Emblemikonerna kommer nu från modellerna**: frontrenderingen skärs ut ur sin svarta bakgrund till en transparent ikon på 256 px, så väggen, upplåsningsdialogen och 3D-vyn visar samma föremål. AI-illustrationerna för dem togs bort
 - Spotlight-förstärkningen förenklad till 5× (modellens egen spotlight riktar in i medaljkroppen, ingen förstärkning gör den synlig framifrån — det måste rättas i Blender-källan), bloom nedskruvad till 0,05
 - v0.20.3: en listas scrolläge överlever en tur till en underskärm (inställningar → språk, handbok → artikel, profil → inställningar, repetition → lektion), och att gå tillbaka från en lektion nollställer inte längre ruttens sidbläddrare till första sidan
