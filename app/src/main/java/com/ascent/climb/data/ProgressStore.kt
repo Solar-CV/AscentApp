@@ -307,11 +307,15 @@ class ProgressStore(context: Context) {
         set(value) = prefs.edit().putString("themeMode", value).apply()
 
     /**
-     * 3D 徽章展示页的背景："auto"（跟随系统明暗）/ "light" / "dark"。
+     * 3D 徽章展示页的背景："dark"（默认）/ "light"。
      * 只影响那一个全屏页，不动 App 主题；手动切换后记住，下次进来沿用。
+     *
+     * 暗色是默认：金属与珐琅在深底上反光更清楚，亮底会吃掉高光。
+     * 旧版本存过的 "auto"（跟随系统）现在按暗色处理 —— 否则浅色主题的用户
+     * 升级后仍然看到亮色，等于默认没改。
      */
     var badgeStageBg: String
-        get() = prefs.getString("badgeStageBg", "auto") ?: "auto"
+        get() = prefs.getString("badgeStageBg", "dark") ?: "dark"
         set(value) = prefs.edit().putString("badgeStageBg", value).apply()
 
     /**

@@ -6,7 +6,6 @@ import android.view.Choreographer
 import android.view.MotionEvent
 import android.view.TextureView
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -980,7 +979,7 @@ fun Badge3DAuto(
  * 背景两张重模糊风景，都是 1080×1920：
  *   badge_bg.jpg       亮色，清晨山脊（`gen_badge_bg.py`）
  *   badge_bg_dark.jpg  暗色，合成波落日（`gen_badge_bg.py --dark`）
- * 默认跟随系统明暗，右上角可手动切换，选择记在 [ProgressStore.badgeStageBg]。
+ * 默认暗色（金属高光在深底上更立），右上角可切到亮色，选择记在 [ProgressStore.badgeStageBg]。
  * 3D 视图是透明 TextureView，与背景两层独立合成，因此换背景不影响渲染。
  */
 @Composable
@@ -994,13 +993,10 @@ fun Badge3DStageScreen(
 
     val context = LocalContext.current
     val store = remember { ProgressStore(context) }
-    val systemDark = isSystemInDarkTheme()
     var bgMode by remember { mutableStateOf(store.badgeStageBg) }
-    val dark = when (bgMode) {
-        "dark" -> true
-        "light" -> false
-        else -> systemDark
-    }
+    // 暗色是默认；只有明确选过 "light" 才走亮色。
+    // 旧版本存的 "auto"（跟随系统）按暗色处理，见 ProgressStore.badgeStageBg 注释。
+    val dark = bgMode != "light"
     // 交叉淡入：两张底图叠着，避免切换时中间闪一帧
     val darkAlpha by animateFloatAsState(
         targetValue = if (dark) 1f else 0f,
@@ -1105,8 +1101,14 @@ fun Badge3DStageScreen(
                     text = stringResource(
                         if (modelPath != null) R.string.badge_stage_real3d else R.string.badge_stage_image3d
                     ),
-                    foreground = if (modelPath != null) Color(0xFF17603F) else Color(0xFF4A5560),
-                    background = if (modelPath != null) Color(0x2E1D9E75) else Color(0x24142028)
+                    // 暗底是默认，标签必须跟着翻色：深绿字压深底几乎看不见
+                    foreground = when {
+                        modelPath != null && dark -> Color(0xFF9BE7C4)
+                        modelPath != null -> Color(0xFF17603F)
+                        dark -> Color(0xFFC2CBD5)
+                        else -> Color(0xFF4A5560)
+                    },
+                    background = if (modelPath != null) Color(0x331D9E75) else Color(0x24142028)
                 )
             }
 

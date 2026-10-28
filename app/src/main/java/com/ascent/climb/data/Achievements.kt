@@ -135,29 +135,29 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = lesson("m05")
     ),
     Achievement(
-        "basecamp_grad", "大本营毕业", "5000 米入门单元全部完成。",
+        "basecamp_grad", "大本营毕业", "5,000 米入门单元全部完成。",
         AchCategory.Progress, Rarity.Rare, "tent", "单元 1（m5i）全部 16 课完成",
         target = 16,
         progress = { it.unitProgress["m5i"]?.first ?: 0 },
         unlocked = unitAll("m5i")
     ),
     Achievement(
-        "tech_grad", "技术营毕业", "5000 米进阶单元全部完成。",
+        "tech_grad", "技术营毕业", "5,000 米进阶单元全部完成。",
         AchCategory.Progress, Rarity.Rare, "backpack", "单元 2（m5a）全部 12 课完成",
         target = 12,
         progress = { it.unitProgress["m5a"]?.first ?: 0 },
         unlocked = unitAll("m5a")
     ),
     Achievement(
-        "six_k_grad", "六千米毕业", "6000 米单元全部完成。",
+        "six_k_grad", "六千米毕业", "6,000 米单元全部完成。",
         AchCategory.Progress, Rarity.Rare, "mountain", "单元 3（m6）全部 14 课完成",
         target = 14,
         progress = { it.unitProgress["m6"]?.first ?: 0 },
         unlocked = unitAll("m6")
     ),
     Achievement(
-        "seven_k_grad", "七千米毕业", "7000 米单元全部完成。",
-        AchCategory.Progress, Rarity.Epic, "snowflake", "7000 米两个营地（C3 + C4）共 16 课完成",
+        "seven_k_grad", "七千米毕业", "7,000 米单元全部完成。",
+        AchCategory.Progress, Rarity.Epic, "snowflake", "7,000 米两个营地（C3 + C4）共 16 课完成",
         target = 16,
         progress = { s -> (s.unitProgress["m7"]?.first ?: 0) + (s.unitProgress["m7h"]?.first ?: 0) },
         unlocked = { s -> unitAll("m7")(s) && unitAll("m7h")(s) }
@@ -277,7 +277,7 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
     ),
     Achievement(
         "final_exam", "终极考核", "通过终极综合考核（上、下）。",
-        AchCategory.Depth, Rarity.Epic, "graduation-cap", "完成 m23 且 m24（终极综合考核）",
+        AchCategory.Depth, Rarity.Epic, "graduation-cap", "完成 m23 和 m24（终极综合考核）",
         target = 2,
         progress = { listOf("m23", "m24").count { id -> id in it.completed } },
         unlocked = { "m23" in it.completed && "m24" in it.completed }
@@ -285,14 +285,14 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
 
     // ---------------- D · 探索与特殊里程碑 ----------------
     Achievement(
-        "five_zones", "六区足迹", "攀登六个海拔单元都留下过完成记录。",
+        "five_zones", "六区足迹", "攀登的六个海拔单元，每个都留下过完成记录。",
         AchCategory.Explore, Rarity.Rare, "map", "攀登 6 个单元各完成 ≥1 课（m5i / m5a / m6 / m7 / m7h / m8）",
         target = 6,
         progress = { unitsTouched(it, CLIMB_UNITS) },
         unlocked = { unitsTouched(it, CLIMB_UNITS) >= CLIMB_UNITS.size }
     ),
     Achievement(
-        "eight_k_grad", "八千米毕业", "8000 米单元全部完成。",
+        "eight_k_grad", "八千米毕业", "8,000 米单元全部完成。",
         AchCategory.Explore, Rarity.Epic, "trophy", "单元 6（m8）全部 10 课完成",
         target = 10,
         progress = { it.unitProgress["m8"]?.first ?: 0 },
@@ -306,8 +306,8 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = { unitsAllDone(it, CLIMB_UNITS) }
     ),
     Achievement(
-        "fourteen_peaks", "十四座巡礼", "读完世界 14 座 8000 米级山峰。",
-        AchCategory.Explore, Rarity.Epic, "flag", "完成 m21 且 m22（世界 14 座 8000 米）",
+        "fourteen_peaks", "十四座巡礼", "读完世界 14 座 8,000 米级山峰。",
+        AchCategory.Explore, Rarity.Epic, "flag", "完成 m21 和 m22（世界 14 座 8,000 米）",
         target = 2,
         progress = { listOf("m21", "m22").count { id -> id in it.completed } },
         unlocked = { "m21" in it.completed && "m22" in it.completed }
@@ -320,8 +320,8 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = { it.devUnlocked }
     ),
     Achievement(
-        "safety_first", "安全至上", "高海拔两大杀手（HACE/HAPE、失温冻伤）全部学会。",
-        AchCategory.Explore, Rarity.Rare, "square-check-big", "完成 l14 且 l16",
+        "safety_first", "安全至上", "高海拔两大杀手（HACE/HAPE、失温与冻伤）全部学会。",
+        AchCategory.Explore, Rarity.Rare, "square-check-big", "完成 l14 和 l16",
         target = 2,
         progress = { listOf("l14", "l16").count { id -> id in it.completed } },
         unlocked = { "l14" in it.completed && "l16" in it.completed }
@@ -360,8 +360,8 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = { unitsAllDone(it, TREK_UNITS) }
     ),
     Achievement(
-        "two_tracks", "双线并进", "攀登与徒步各走 10 课，两条路一起走。",
-        AchCategory.Explore, Rarity.Epic, "map", "攀登完成 ≥10 课，且徒步完成 ≥10 课",
+        "two_tracks", "双线并进", "攀登与徒步各 10 课，两条线一起走。",
+        AchCategory.Explore, Rarity.Epic, "map", "攀登和徒步各完成 ≥10 课",
         target = 20,
         progress = { s ->
             minOf(trackDone(s, CLIMB_TRACK), 10) + minOf(trackDone(s, TREK_TRACK), 10)
