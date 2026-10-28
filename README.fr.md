@@ -221,7 +221,8 @@ Les anciennes versions de l’application ne cassent pas face à une banque plus
 **v0.20.14 : les badges s’ouvrent partout**
 
 - Plus besoin de passer par la zone de test développeur : touchez n’importe quel badge débloqué dans « Mon profil » ou sur le mur des badges, il s’ouvre en plein écran. La vue se superpose à l’app au lieu de remplacer la page : au retour vous retrouvez l’écran quitté, position de liste comprise, et la barre du bas est masquée
-- « Trail Finish » affichait encore l’icône de remplacement partagée alors que son modèle était livré ; le mappage pointe désormais sur l’icône rendue. « Two Tracks » n’a pas encore de modèle et garde l’icône de remplacement
+- « Trail Finish » affichait encore l’icône de remplacement partagée alors que son modèle était livré ; le mappage pointe désormais sur l’icône rendue
+- « Two Tracks » avait pour icône la photo d’une personne, un marqueur oublié. Elle utilise désormais une plaque dessinée (émail bleu marine, bord laiton, deux tracés pointillés vers le sommet), et la photo a disparu du paquet
 
 **v0.20.13 : six modèles de badge de plus**
 

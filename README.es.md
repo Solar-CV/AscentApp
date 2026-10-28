@@ -221,7 +221,8 @@ Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVe
 **v0.20.14: las insignias se abren en cualquier sitio**
 
 - Ya no hace falta entrar en la zona de pruebas de desarrollo: toca cualquier insignia desbloqueada en «Mi perfil» o en el muro y se abre a pantalla completa. La vista se superpone a la app en vez de sustituir la página, así que al volver sigues donde estabas —con la posición de la lista— y la barra inferior queda tapada
-- «Trail Finish» seguía mostrando el icono de reserva compartido aunque su modelo ya estaba; ahora apunta al icono renderizado. «Two Tracks» aún no tiene modelo y conserva el de reserva
+- «Trail Finish» seguía mostrando el icono de reserva compartido aunque su modelo ya estaba; ahora apunta al icono renderizado
+- «Two Tracks» tenía como icono la fotografía de una persona —un marcador heredado—. Ahora usa una placa dibujada (esmalte azul marino, borde de latón, dos rutas discontinuas al pico) y la foto ya no viaja en el paquete
 
 **v0.20.13: seis modelos de insignia más**
 

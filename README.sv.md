@@ -221,7 +221,8 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 **v0.20.14: emblemen öppnas överallt**
 
 - Du behöver inte längre gå via utvecklartestytan: tryck på ett upplåst emblem i ”Min profil” eller på emblemväggen så öppnas det i fullskärm. Vyn läggs ovanpå appen i stället för att ersätta sidan, så du kommer tillbaka till samma skärm — inklusive listans position — och den nedre listen döljs
-- ”Trail Finish” visade fortfarande den delade platshållaren trots att modellen redan fanns; mappningen pekar nu på den renderade ikonen. ”Two Tracks” har ingen modell än och behåller platshållaren
+- ”Trail Finish” visade fortfarande den delade platshållaren trots att modellen redan fanns; mappningen pekar nu på den renderade ikonen
+- ”Two Tracks” hade ett fotografi av en person som ikon — en kvarglömd platshållare. Nu är det en ritad platta (marinblå emalj, mässingsram, två streckade leder mot toppen), och fotot finns inte längre i paketet
 
 **v0.20.13: sex emblemmodeller till**
 

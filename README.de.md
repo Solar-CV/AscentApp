@@ -221,7 +221,8 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 **v0.20.14: Abzeichen überall öffnen**
 
 - Abzeichen sind nicht mehr nur im Entwickler-Testbereich erreichbar: Tippe in „Mein Profil“ oder auf der Abzeichenwand ein freigeschaltetes Abzeichen an, und es öffnet sich im Vollbild. Die Ansicht liegt über der App, statt die Seite zu ersetzen — zurück geht es dorthin, wo du warst, inklusive Scrollposition, und die untere Leiste ist verdeckt
-- „Trail Finish“ zeigte noch das geteilte Platzhalter-Icon, obwohl das Modell längst da war; die Zuordnung zeigt jetzt auf das gerenderte Icon. „Two Tracks“ hat noch kein Modell und behält den Platzhalter
+- „Trail Finish“ zeigte noch das geteilte Platzhalter-Icon, obwohl das Modell längst da war; die Zuordnung zeigt jetzt auf das gerenderte Icon
+- „Two Tracks“ hatte das Foto einer Person als Icon — ein übrig gebliebener Platzhalter. Jetzt steht dort eine gezeichnete Platte (marineblaues Email, Messingrand, zwei gestrichelte Routen zum Gipfel), und das Foto ist aus dem Paket verschwunden
 
 **v0.20.13: sechs weitere Abzeichenmodelle**
 

@@ -221,7 +221,8 @@ Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `min
 **v0.20.14: i badge si aprono ovunque**
 
 - Non serve più passare dall'area di test sviluppatore: tocca un badge sbloccato in «Il mio profilo» o nella bacheca e si apre a schermo intero. La vista si sovrappone all'app invece di sostituire la pagina, quindi tornando indietro resti dov'eri — posizione della lista compresa — e la barra in basso resta coperta
-- «Trail Finish» mostrava ancora l'icona segnaposto condivisa anche se il modello era già arrivato; ora la mappatura punta all'icona renderizzata. «Two Tracks» non ha ancora un modello e mantiene il segnaposto
+- «Trail Finish» mostrava ancora l'icona segnaposto condivisa anche se il modello era già arrivato; ora la mappatura punta all'icona renderizzata
+- «Two Tracks» aveva come icona la fotografia di una persona, un segnaposto rimasto lì. Ora usa una placca disegnata (smalto blu navy, bordo in ottone, due rotte tratteggiate verso la vetta) e la foto non è più nel pacchetto
 
 **v0.20.13: sei modelli di badge in più**
 

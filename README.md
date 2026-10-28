@@ -221,7 +221,8 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 **v0.20.14: badges open anywhere**
 
 - Badges are no longer reachable only from the developer test area: tap any unlocked badge on My profile or on the badge wall and it opens full screen. The view is laid over the app rather than replacing the page, so going back returns you where you were — list position included — and the bottom bar stays out of the way
-- Trail Finish was still showing the shared placeholder icon even though its model had shipped; the mapping now points at the rendered icon. Two Tracks has no model yet and keeps the placeholder
+- Trail Finish was still showing the shared placeholder icon even though its model had shipped; the mapping now points at the rendered icon
+- Two Tracks had a photograph of a person as its icon — a leftover placeholder. It now uses a drawn plate (navy enamel, brass rim, two dashed routes meeting at a peak), and the photo is gone from the package
 
 **v0.20.13: six more badge models**
 
