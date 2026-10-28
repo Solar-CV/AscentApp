@@ -140,6 +140,7 @@
     <!-- ========== 成就解锁弹窗 ========== -->
     <string name="ach_unlocked">成就解锁</string>
     <string name="ach_accept">收下</string>
+    <string name="ach_tap_again">再点一次关闭</string>
     <!-- ========== 课程页 ========== -->
     <string name="lesson_retry_progress">错题重做 %1$d / %2$d</string>
     <string name="lesson_fixed">订正成功</string>

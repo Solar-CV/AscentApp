@@ -139,6 +139,7 @@
     <!-- Achievement popup -->
     <string name="ach_unlocked">Achievement unlocked</string>
     <string name="ach_accept">Accept</string>
+    <string name="ach_tap_again">Tap again to close</string>
 
     <!-- Lesson -->
     <string name="lesson_retry_progress">Retry %1$d / %2$d</string>

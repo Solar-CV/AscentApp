@@ -39,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.CornerRadius
@@ -111,6 +112,16 @@ fun AchievementUnlockOverlay(
         ).value
     } else 1f
 
+    // 防误触：遮罩（卡片以外的边框区域）第一次点击只「上膛」，第二次才关。
+    // 弹窗往往在某次点击后立刻出现，手指可能还在屏幕上，一次点击就关掉等于白得一枚徽章。
+    var scrimArmed by remember(achievement.id) { mutableStateOf(false) }
+    // 上膛后淡入一行小字，免得用户以为点了没反应
+    val hintAlpha by animateFloatAsState(
+        targetValue = if (scrimArmed) 1f else 0f,
+        animationSpec = if (reduce) tween(0) else tween(180),
+        label = "hintAlpha"
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -118,7 +129,7 @@ fun AchievementUnlockOverlay(
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
-            ) { onDismiss() },
+            ) { if (scrimArmed) onDismiss() else scrimArmed = true },
         contentAlignment = Alignment.Center
     ) {
         if (!reduce) {
@@ -217,6 +228,19 @@ fun AchievementUnlockOverlay(
                 style = BtnStyle.Primary,
                 height = 46,
                 onClick = onDismiss
+            )
+        }
+
+        if (hintAlpha > 0f) {
+            Text(
+                text = stringResource(R.string.ach_tap_again),
+                color = Color.White.copy(alpha = 0.82f),
+                fontSize = 12.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 46.dp)
+                    .alpha(hintAlpha)
             )
         }
     }

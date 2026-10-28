@@ -115,6 +115,7 @@
     <string name="badge_hidden">Obiettivo nascosto</string>
     <string name="ach_unlocked">Obiettivo sbloccato</string>
     <string name="ach_accept">Accetta</string>
+    <string name="ach_tap_again">Tocca di nuovo per chiudere</string>
     <string name="lesson_retry_progress">Ripetizione %1$d / %2$d</string>
     <string name="lesson_fixed">Corretto</string>
     <string name="lesson_correct">Corretto</string>

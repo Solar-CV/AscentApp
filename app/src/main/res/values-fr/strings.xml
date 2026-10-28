@@ -115,6 +115,7 @@
     <string name="badge_hidden">Succès caché</string>
     <string name="ach_unlocked">Succès débloqué</string>
     <string name="ach_accept">Accepter</string>
+    <string name="ach_tap_again">Touchez à nouveau pour fermer</string>
     <string name="lesson_retry_progress">Reprise %1$d / %2$d</string>
     <string name="lesson_fixed">Corrigé</string>
     <string name="lesson_correct">Correct</string>

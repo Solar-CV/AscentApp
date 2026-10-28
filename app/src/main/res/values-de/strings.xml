@@ -115,6 +115,7 @@
     <string name="badge_hidden">Verborgener Erfolg</string>
     <string name="ach_unlocked">Erfolg freigeschaltet</string>
     <string name="ach_accept">Annehmen</string>
+    <string name="ach_tap_again">Erneut tippen zum Schließen</string>
     <string name="lesson_retry_progress">Wiederholung %1$d / %2$d</string>
     <string name="lesson_fixed">Korrigiert</string>
     <string name="lesson_correct">Richtig</string>

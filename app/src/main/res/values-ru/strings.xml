@@ -130,6 +130,7 @@
 
     <string name="ach_unlocked">Достижение получено</string>
     <string name="ach_accept">Принять</string>
+    <string name="ach_tap_again">Нажмите ещё раз, чтобы закрыть</string>
 
     <string name="lesson_retry_progress">Повтор %1$d / %2$d</string>
     <string name="lesson_fixed">Исправлено</string>
