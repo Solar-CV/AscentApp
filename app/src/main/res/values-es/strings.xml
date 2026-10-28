@@ -286,7 +286,8 @@
     <string name="cap_m5i">5000 inicial</string>
     <string name="cap_m5a">5000 avanzado</string>
     <string name="cap_m6">6000 m</string>
-    <string name="cap_m7">7000 m</string>
+    <string name="cap_m7">7000 m · C3</string>
+    <string name="cap_m7h">7000 m · C4</string>
     <string name="cap_m8">8000 m</string>
     <string name="set_theme_system_current">Seguir el sistema (ahora %1$s)</string>
     <string name="set_bank_current">Banco actual v%1$d</string>
@@ -328,4 +329,10 @@
     <string name="fb_ok">Recibido, ¡gracias!</string>
     <string name="fb_fail">No se pudo enviar. Comprueba la conexión e inténtalo de nuevo.</string>
     <string name="fb_mail_alt">Enviar por correo</string>
+    <!-- 3D badge stage -->
+    <string name="badge_stage_real3d">3D real</string>
+    <string name="badge_stage_image3d">3D de imagen</string>
+    <string name="badge_stage_no_asset">Aún no hay ilustración para este logro</string>
+    <string name="badge_stage_bg_light">Claro</string>
+    <string name="badge_stage_bg_dark">Oscuro</string>
 </resources>

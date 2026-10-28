@@ -286,7 +286,8 @@
     <string name="cap_m5i">5000 nybörjare</string>
     <string name="cap_m5a">5000 avancerad</string>
     <string name="cap_m6">6000 m</string>
-    <string name="cap_m7">7000 m</string>
+    <string name="cap_m7">7000 m · C3</string>
+    <string name="cap_m7h">7000 m · C4</string>
     <string name="cap_m8">8000 m</string>
     <string name="set_theme_system_current">Följ systemet (nu %1$s)</string>
     <string name="set_bank_current">Aktuell frågebank v%1$d</string>
@@ -328,4 +329,10 @@
     <string name="fb_ok">Mottaget, tack!</string>
     <string name="fb_fail">Det gick inte att skicka. Kontrollera anslutningen och försök igen.</string>
     <string name="fb_mail_alt">Skicka via mejl i stället</string>
+    <!-- 3D badge stage -->
+    <string name="badge_stage_real3d">Riktig 3D</string>
+    <string name="badge_stage_image3d">Bild-3D</string>
+    <string name="badge_stage_no_asset">Det finns ännu ingen grafik för denna utmärkelse</string>
+    <string name="badge_stage_bg_light">Ljus</string>
+    <string name="badge_stage_bg_dark">Mörk</string>
 </resources>

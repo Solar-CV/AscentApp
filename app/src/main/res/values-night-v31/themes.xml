@@ -11,4 +11,16 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_mark</item>
         <item name="android:windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
     </style>
+
+    <!-- Android 12+ 启动画面（深色）：背景 #0B0B0D、图标全透明、不播图标动画。 -->
+    <style name="Theme.Ascent.Launch" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/splash_bg_dark</item>
+        <item name="android:statusBarColor">@color/splash_bg_dark</item>
+        <item name="android:navigationBarColor">@color/splash_bg_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowSplashScreenBackground">@color/splash_bg_dark</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_blank</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+        <item name="android:windowSplashScreenAnimationDuration">0</item>
+    </style>
 </resources>

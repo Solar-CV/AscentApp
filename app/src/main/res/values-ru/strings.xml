@@ -308,7 +308,8 @@
     <string name="cap_m5i">5000 начальный</string>
     <string name="cap_m5a">5000 продвинутый</string>
     <string name="cap_m6">6000 м</string>
-    <string name="cap_m7">7000 м</string>
+    <string name="cap_m7">7000 м · C3</string>
+    <string name="cap_m7h">7000 м · C4</string>
     <string name="cap_m8">8000 м</string>
     <string name="set_theme_system_current">Как в системе (сейчас %1$s)</string>
     <string name="set_bank_current">Текущий банк v%1$d</string>
@@ -350,4 +351,10 @@
     <string name="fb_ok">Получено, спасибо!</string>
     <string name="fb_fail">Не удалось отправить. Проверьте соединение и повторите.</string>
     <string name="fb_mail_alt">Отправить по почте</string>
+    <!-- 3D badge stage -->
+    <string name="badge_stage_real3d">Настоящее 3D</string>
+    <string name="badge_stage_image3d">3D-картинка</string>
+    <string name="badge_stage_no_asset">Для этого достижения пока нет графики</string>
+    <string name="badge_stage_bg_light">Светлый</string>
+    <string name="badge_stage_bg_dark">Тёмный</string>
 </resources>

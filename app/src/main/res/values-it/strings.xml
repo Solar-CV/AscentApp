@@ -286,7 +286,8 @@
     <string name="cap_m5i">5000 base</string>
     <string name="cap_m5a">5000 avanzato</string>
     <string name="cap_m6">6000 m</string>
-    <string name="cap_m7">7000 m</string>
+    <string name="cap_m7">7000 m · C3</string>
+    <string name="cap_m7h">7000 m · C4</string>
     <string name="cap_m8">8000 m</string>
     <string name="set_theme_system_current">Segui il sistema (ora %1$s)</string>
     <string name="set_bank_current">Banca attuale v%1$d</string>
@@ -328,4 +329,10 @@
     <string name="fb_ok">Ricevuto, grazie!</string>
     <string name="fb_fail">Invio non riuscito. Controlla la connessione e riprova.</string>
     <string name="fb_mail_alt">Invia per email</string>
+    <!-- 3D badge stage -->
+    <string name="badge_stage_real3d">3D reale</string>
+    <string name="badge_stage_image3d">3D immagine</string>
+    <string name="badge_stage_no_asset">Nessuna grafica per questo obiettivo</string>
+    <string name="badge_stage_bg_light">Chiaro</string>
+    <string name="badge_stage_bg_dark">Scuro</string>
 </resources>

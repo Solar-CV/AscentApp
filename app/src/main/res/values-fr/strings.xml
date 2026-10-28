@@ -286,7 +286,8 @@
     <string name="cap_m5i">5000 débutant</string>
     <string name="cap_m5a">5000 avancé</string>
     <string name="cap_m6">6000 m</string>
-    <string name="cap_m7">7000 m</string>
+    <string name="cap_m7">7000 m · C3</string>
+    <string name="cap_m7h">7000 m · C4</string>
     <string name="cap_m8">8000 m</string>
     <string name="set_theme_system_current">Suivre le système (%1$s actuellement)</string>
     <string name="set_bank_current">Banque actuelle v%1$d</string>
@@ -328,4 +329,10 @@
     <string name="fb_ok">Bien reçu, merci !</string>
     <string name="fb_fail">L\'envoi a échoué. Vérifiez votre connexion et réessayez.</string>
     <string name="fb_mail_alt">Envoyer par e-mail</string>
+    <!-- 3D badge stage -->
+    <string name="badge_stage_real3d">3D réel</string>
+    <string name="badge_stage_image3d">3D image</string>
+    <string name="badge_stage_no_asset">Pas encore d\'illustration pour ce succès</string>
+    <string name="badge_stage_bg_light">Clair</string>
+    <string name="badge_stage_bg_dark">Sombre</string>
 </resources>

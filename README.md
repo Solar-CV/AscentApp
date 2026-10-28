@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.20.5 (versionCode 112). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: twenty-eight achievements now render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 38 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it.
+Current version v0.20.11 (versionCode 118). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: twenty-eight achievements now render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 38 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 ## Install
 
@@ -217,6 +217,20 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+**v0.20.11: badge stage lighting and backdrop**
+
+- The badge view used two lights, so the metal only ever had one curved highlight and the relief sat flat. It now has five directional lights — key, top, front fill, rim and a weak bounce from below — with the total illumination kept where it was, so the metal gains depth without washing out
+- A second, darker backdrop (a synthwave sunset blurred down to colour fields) suits dark mode. The pill at the top right switches between light and dark, defaults to the system setting, and remembers your choice; only this screen is affected
+
+**v0.20.8 – v0.20.10: launch screen**
+
+- The launch screen is now clay: a white puck with tight, crisp-edged shading, the single-peak mark, and one random quotation from a mountaineer — Mallory, Whymper, Muir, Boukreev, Viesturs, Tabei, Messner, Lowe or Bonatti — in place of the old tagline. It fades out after about 1.7 s, and is all but skipped when reduced motion is on. Nothing else in the app changed In v0.20.9 the system splash shows no logo at all any more — the launch theme is just the same background colour, so the clay screen starts on a blank white (or near-black) field. Each line is quoted in its original language
+
+**v0.20.6 – v0.20.7: badge rendering quality**
+
+- Bloom runs at high quality by default — 256 px, four levels, MEDIUM. The old auto-downgrade judged from the very first frame, so a few hundred milliseconds of shader compilation was enough to switch bloom off for the rest of the session. It now waits 2.5 s, tolerates 50 ms frames (20 fps) across three consecutive windows, and steps full → low → off instead of cutting it outright. The debug string shows which stage is active
+- 4x MSAA is on where the driver supports it, checked before the swap chain is built; a failed attempt falls back to no MSAA and is remembered, so a badge never fails to draw because of an antialiasing flag
 
 **v0.20.4 – v0.20.5: small fixes**
 

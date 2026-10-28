@@ -6,7 +6,7 @@ Une application Android pour celles et ceux qui débutent en alpinisme d’altit
 
 Deux parcours se changent librement. La **haute montagne** compte six unités et 68 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 21 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.20.5 (versionCode 112). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : 28 succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 38 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée.
+Version actuelle v0.20.11 (versionCode 118). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : 28 succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 38 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
 
 ## Installation
 
@@ -217,6 +217,20 @@ Pour publier une nouvelle banque : modifier le contenu → incrémenter `BUNDLED
 Les anciennes versions de l’application ne cassent pas face à une banque plus récente. `minAppVersion` dans `manifest.json` bloque les clients trop anciens, les champs inconnus sont ignorés et une question mal formée est sautée plutôt que fatale.
 
 ## Changements récents
+
+**v0.20.11 : éclairage et fond de la vue 3D des badges**
+
+- La vue du badge n'avait que deux lumières : le métal ne recevait qu'un seul reflet courbe et le relief restait plat. Elle en a maintenant cinq — clé, zénith, remplissage frontal, contre-jour et un léger rebond par le bas — à éclairage total constant : plus de relief, sans délavage
+- Un second fond plus sombre (un coucher de soleil synthwave flouté jusqu'à n'être plus que des aplats) accompagne le mode sombre. La pastille en haut à droite bascule clair / sombre, suit le réglage système par défaut et retient le choix ; seul cet écran est concerné
+
+**v0.20.8 – v0.20.10 : écran de lancement**
+
+- L'écran de lancement passe à l'argile : un disque blanc au modelé resserré et aux bords nets, la marque du sommet, et à la place de l'ancien slogan une citation tirée au hasard chez un alpiniste — Mallory, Whymper, Muir, Boukreev, Viesturs, Tabei, Messner, Lowe ou Bonatti. Il s'efface au bout d'environ 1,7 s, et passe presque inaperçu si les animations sont réduites. Le reste de l'app ne change pas Depuis la v0.20.9, le splash système n'affiche plus aucun logo : le thème de lancement n'est que la même couleur de fond, si bien que l'écran d'argile démarre sur un fond blanc (ou presque noir). Chaque citation est donnée dans sa langue d'origine
+
+**v0.20.6 – v0.20.7 : qualité de rendu des badges**
+
+- Le bloom tourne par défaut en qualité maximale — 256 px, quatre niveaux, MEDIUM. L’ancien déclassement automatique jugeait dès la première image : quelques centaines de millisecondes de compilation de shaders suffisaient à l’éteindre pour toute la session. Il attend désormais 2,5 s, tolère des images à 50 ms (20 fps) sur trois fenêtres consécutives et descend en deux paliers : complet → réduit → coupé
+- Le MSAA 4x est actif là où le pilote le permet, la capacité étant vérifiée avant la création de la swap chain ; en cas d’échec, le rendu repasse sans MSAA et l’échec est mémorisé — un réglage d’anticrénelage ne doit jamais empêcher un badge de s’afficher
 
 **v0.20.4 – v0.20.5 : petites corrections**
 

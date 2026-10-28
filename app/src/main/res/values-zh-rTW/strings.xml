@@ -308,7 +308,8 @@
     <string name="cap_m5i">5000 入門</string>
     <string name="cap_m5a">5000 進階</string>
     <string name="cap_m6">6000 公尺</string>
-    <string name="cap_m7">7000 公尺</string>
+    <string name="cap_m7">7000 公尺 · C3</string>
+    <string name="cap_m7h">7000 公尺 · C4</string>
     <string name="cap_m8">8000 公尺</string>
     <string name="set_theme_system_current">跟隨系統（目前%1$s）</string>
     <string name="set_bank_current">目前題庫 v%1$d</string>
@@ -350,4 +351,10 @@
     <string name="fb_ok">已收到，謝謝！</string>
     <string name="fb_fail">傳送失敗，請檢查網路後再試。</string>
     <string name="fb_mail_alt">改用郵件傳送</string>
+    <!-- 3D badge stage -->
+    <string name="badge_stage_real3d">真實 3D</string>
+    <string name="badge_stage_image3d">圖片 3D</string>
+    <string name="badge_stage_no_asset">該成就暫無圖形資源</string>
+    <string name="badge_stage_bg_light">亮底</string>
+    <string name="badge_stage_bg_dark">暗底</string>
 </resources>

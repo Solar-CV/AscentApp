@@ -6,7 +6,7 @@ Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. 
 
 Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 68 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 21 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
 
-Versión actual v0.20.5 (versionCode 112). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: 28 logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 38 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste.
+Versión actual v0.20.11 (versionCode 118). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: 28 logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 38 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
 
 ## Instalación
 
@@ -217,6 +217,20 @@ Para publicar un banco nuevo: cambia el contenido → sube `BUNDLED_VERSION` →
 Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVersion` en `manifest.json` bloquea clientes demasiado viejos, los campos desconocidos se ignoran y una pregunta mal formada se salta en vez de ser fatal.
 
 ## Cambios recientes
+
+**v0.20.11: iluminación y fondo de la vista 3D de insignias**
+
+- La vista del emblema usaba dos luces, así que el metal solo tenía un brillo curvo y el relieve quedaba plano. Ahora son cinco luces direccionales — clave, superior, relleno frontal, contorno y un rebote tenue desde abajo — con la iluminación total sin cambios: gana profundidad sin lavarse
+- Un segundo fondo más oscuro (un atardecer synthwave desenfocado hasta dejar solo manchas de color) va con el modo oscuro. La píldora de arriba a la derecha alterna claro y oscuro, sigue el ajuste del sistema por defecto y recuerda la elección; solo afecta a esta pantalla
+
+**v0.20.8 – v0.20.10: pantalla de inicio**
+
+- La pantalla de inicio pasa a arcilla: un disco blanco con sombreado ceñido y de borde nítido, la marca del pico y, en lugar del eslogan anterior, una cita al azar de un montañero — Mallory, Whymper, Muir, Boukreev, Viesturs, Tabei, Messner, Lowe o Bonatti. Se desvanece a los 1,7 s y con movimiento reducido apenas aparece. Nada más de la app ha cambiado Desde la v0.20.9 el splash del sistema ya no muestra ningún logo: el tema de arranque es solo el mismo color de fondo, así que la pantalla de arcilla empieza sobre un campo blanco (o casi negro). Cada cita va en su idioma original
+
+**v0.20.6 – v0.20.7: calidad de dibujado de las insignias**
+
+- El bloom va por defecto a máxima calidad: 256 px, cuatro niveles, MEDIUM. La rebaja automática antigua juzgaba desde el primer fotograma, así que unos cientos de milisegundos compilando shaders bastaban para apagarlo el resto de la sesión. Ahora espera 2,5 s, tolera fotogramas de 50 ms (20 fps) durante tres ventanas seguidas y baja en dos pasos: completo → reducido → apagado
+- 4x MSAA se activa donde el controlador lo admite, comprobando la capacidad antes de crear la swap chain; si el intento falla, se vuelve a dibujar sin MSAA y se recuerda el fallo, para que una insignia nunca deje de verse por un ajuste de antialiasing
 
 **v0.20.4 – v0.20.5: correcciones pequeñas**
 

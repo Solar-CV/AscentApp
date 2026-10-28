@@ -6,7 +6,7 @@ Un'app Android per chi comincia con l'alpinismo d'alta quota e l'arrampicata su 
 
 Due percorsi si cambiano liberamente. **Alta montagna** ha sei unità e 68 lezioni, dall'introduzione a 5.000 m fino a 8.000 m — da 3.200 m a 8.848 m da un capo all'altro. **Escursionismo** ha quattro unità e 21 lezioni, dalla camminata di un giorno ai percorsi lunghi — da 200 m a 5.630 m. Ogni percorso tiene per sé progressi, badge e coda di ripasso.
 
-Versione attuale v0.20.5 (versionCode 112). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.554 / 10.554). La v0.20 riguarda i badge: 28 obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 38 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata.
+Versione attuale v0.20.11 (versionCode 118). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.554 / 10.554). La v0.20 riguarda i badge: 28 obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 38 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
 
 ## Installazione
 
@@ -217,6 +217,20 @@ Per pubblicare un questionario nuovo: cambia i contenuti → alza `BUNDLED_VERSI
 Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `minAppVersion` in `manifest.json` blocca i client troppo vecchi, i campi sconosciuti vengono ignorati e una domanda malformata viene saltata invece che essere fatale.
 
 ## Cambi recenti
+
+**v0.20.11: illuminazione e sfondo della vista 3D dei badge**
+
+- La vista del badge aveva due sole luci: il metallo mostrava un solo riflesso curvo e il rilievo restava piatto. Ora sono cinque luci direzionali — chiave, zenitale, riempimento frontale, controluce e un debole rimbalzo dal basso — con l'illuminazione totale invariata: più profondità senza slavare
+- Un secondo sfondo più scuro (un tramonto synthwave sfocato fino a lasciare solo campi di colore) accompagna il tema scuro. La pillola in alto a destra alterna chiaro e scuro, segue l'impostazione di sistema per impostazione predefinita e ricorda la scelta; riguarda solo questa schermata
+
+**v0.20.8 – v0.20.10: schermata di avvio**
+
+- La schermata di avvio diventa in argilla: un disco bianco con ombreggio stretto e bordi netti, il segno della vetta e, al posto del vecchio slogan, una citazione casuale di un alpinista — Mallory, Whymper, Muir, Boukreev, Viesturs, Tabei, Messner, Lowe o Bonatti. Sfuma dopo circa 1,7 s e con le animazioni ridotte quasi non compare. Nient'altro nell'app è cambiato Dalla v0.20.9 lo splash di sistema non mostra più alcun logo: il tema di avvio è solo lo stesso colore di sfondo, quindi la schermata di argilla parte su un campo bianco (o quasi nero). Ogni citazione è nella lingua originale
+
+**v0.20.6 – v0.20.7: qualità di rendering dei badge**
+
+- Il bloom gira per impostazione predefinita alla qualità massima: 256 px, quattro livelli, MEDIUM. Il vecchio declassamento automatico giudicava fin dal primo fotogramma, quindi qualche centinaio di millisecondi di compilazione degli shader bastava a spegnerlo per tutta la sessione. Ora aspetta 2,5 s, tollera fotogrammi da 50 ms (20 fps) per tre finestre consecutive e scende in due passi: completo → ridotto → spento
+- Il MSAA 4x è attivo dove il driver lo consente, con la capacità verificata prima di creare la swap chain; se il tentativo fallisce si torna a disegnare senza MSAA e il fallimento viene ricordato, perché un'impostazione di antialiasing non deve mai impedire a un badge di comparire
 
 **v0.20.4 – v0.20.5: piccole correzioni**
 

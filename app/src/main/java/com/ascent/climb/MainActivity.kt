@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -33,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import com.ascent.climb.data.ALL_UNITS
 import com.ascent.climb.data.Diagnostics
@@ -51,6 +53,7 @@ import com.ascent.climb.ui.AchievementUnlockOverlay
 import com.ascent.climb.ui.Ascent
 import com.ascent.climb.ui.AscentTheme
 import com.ascent.climb.ui.CapsuleTabBar
+import com.ascent.climb.ui.ClaySplashOverlay
 import com.ascent.climb.ui.HandbookScreen
 import com.ascent.climb.ui.LessonScreen
 import com.ascent.climb.ui.PathScreen
@@ -61,6 +64,9 @@ import com.ascent.climb.ui.TrainingScreen
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 启动瞬间用 Theme.Ascent.Launch（整屏开屏底色 + 透明图标），
+        // 这里立刻换回正常主题，之后的窗口/状态栏颜色与以前一致。
+        setTheme(R.style.Theme_Ascent)
 
         // 题库必须在 setContent 之前完成载入：缓存副本 → 内置题库
         BankRepository.init(applicationContext)
@@ -118,19 +124,40 @@ class MainActivity : ComponentActivity() {
 
             CompositionLocalProvider(LocalContext provides localized) {
                 AscentTheme(darkTheme = dark) {
-                    AscentRoot(
-                        store = store,
-                        themeMode = themeMode,
-                        onThemeModeChange = {
-                            store.themeMode = it
-                            themeMode = it
-                        },
-                        languageMode = languageMode,
-                        onLanguageModeChange = {
-                            store.languageMode = it
-                            languageMode = it
+                    // 开屏只盖在根界面之上，不改任何既有页面；序列走完自行淡出。
+                    // rememberSaveable：旋转/重建不重播。
+                    var splashDone by rememberSaveable { mutableStateOf(false) }
+                    // 开屏这 1.7 秒里让系统栏也是开屏底色，否则顶部会多出一条灰带
+                    LaunchedEffect(splashDone) {
+                        val act = view.context as? Activity ?: return@LaunchedEffect
+                        val bar = ContextCompat.getColor(
+                            act,
+                            if (splashDone) (if (dark) R.color.ascent_bg else R.color.ascent_bg_light)
+                            else (if (dark) R.color.splash_bg_dark else R.color.splash_bg_light)
+                        )
+                        @Suppress("DEPRECATION")
+                        act.window.statusBarColor = bar
+                        @Suppress("DEPRECATION")
+                        act.window.navigationBarColor = bar
+                    }
+                    Box(Modifier.fillMaxSize()) {
+                        AscentRoot(
+                            store = store,
+                            themeMode = themeMode,
+                            onThemeModeChange = {
+                                store.themeMode = it
+                                themeMode = it
+                            },
+                            languageMode = languageMode,
+                            onLanguageModeChange = {
+                                store.languageMode = it
+                                languageMode = it
+                            }
+                        )
+                        if (!splashDone) {
+                            ClaySplashOverlay(dark = dark) { splashDone = true }
                         }
-                    )
+                    }
                 }
             }
         }

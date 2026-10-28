@@ -29,19 +29,39 @@ PACK_DIR = os.path.join(ROOT, "app/src/main/java/com/ascent/climb/data/i18n")
 DATA = os.path.join(ROOT, "app/src/main/java/com/ascent/climb/data")
 BANK = os.path.join(ROOT, "bank/bank.json")
 
-LANGS = [
-    ("en", ["PackEn", "PackEnBrief", "PackEnHandbook", "PackEnQuiz", "PackEnQuiz2"]),
-    ("zh-TW", ["PackZhTw", "PackZhTwBrief", "PackZhTwEntry", "PackZhTwHandbook", "PackZhTwQuiz"]),
-    ("ja", ["PackJa", "PackJaBrief", "PackJaEntry", "PackJaHandbook", "PackJaQuiz"]),
-    ("ru", ["PackRu", "PackRuBrief", "PackRuEntry", "PackRuHandbook", "PackRuQuiz"]),
-    ("fr", ["PackFr", "PackFrBrief", "PackFrEntry", "PackFrHandbook", "PackFrQuiz"]),
-    ("sv", ["PackSv", "PackSvBrief", "PackSvEntry", "PackSvHandbook", "PackSvQuiz"]),
-    ("de", ["PackDe", "PackDeBrief", "PackDeEntry", "PackDeHandbook", "PackDeQuiz"]),
-    ("es", ["PackEs", "PackEsBrief", "PackEsEntry", "PackEsHandbook", "PackEsQuiz"]),
-    ("it", ["PackIt", "PackItBrief", "PackItEntry", "PackItHandbook", "PackItQuiz"]),
+ENTRY = re.compile(r'"([^"]+)" to "((?:[^"\\]|\\.)*)"')
+
+# 语言 → 包前缀。题库按语言拆成 Pack<X>Quiz / Quiz2 / Quiz3…（单文件约 2,500 条
+# 会让 Kotlin 编译守护进程崩），所以题库那几支按目录实际文件自动展开，不要写死文件名。
+_LANG_PREFIX = [
+    ("en", "PackEn"),
+    ("zh-TW", "PackZhTw"),
+    ("ja", "PackJa"),
+    ("ru", "PackRu"),
+    ("fr", "PackFr"),
+    ("sv", "PackSv"),
+    ("de", "PackDe"),
+    ("es", "PackEs"),
+    ("it", "PackIt"),
 ]
 
-ENTRY = re.compile(r'"([^"]+)" to "((?:[^"\\]|\\.)*)"')
+
+def _quiz_part_no(name):
+    """PackEnQuiz → 0、PackEnQuiz2 → 2、PackEnQuiz10 → 10（自然序，别按字符串排）。"""
+    tail = name.split("Quiz", 1)[-1]
+    return int(tail) if tail.isdigit() else 0
+
+
+def pack_names(prefix):
+    names = [prefix, f"{prefix}Brief", f"{prefix}Entry", f"{prefix}Handbook"]
+    quiz = sorted(
+        (os.path.basename(p)[:-3] for p in glob.glob(os.path.join(PACK_DIR, f"{prefix}Quiz*.kt"))),
+        key=_quiz_part_no,
+    )
+    return names + quiz
+
+
+LANGS = [(code, pack_names(prefix)) for code, prefix in _LANG_PREFIX]
 
 
 def read_pack(names):

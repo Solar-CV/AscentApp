@@ -80,6 +80,10 @@ private fun unitLabelOf(unitId: String, fallback: String): String = when (unitId
     "m5i" -> stringResource(R.string.cap_m5i)
     "m5a" -> stringResource(R.string.cap_m5a)
     "m6" -> stringResource(R.string.cap_m6)
+    // 7000 米在 v0.19 拆成 C3 技术营与 C4 高营两个单元，这里当初漏了分支，
+    // 结果英文界面直接显示中文单元名（fallback 是 Curriculum 里的中文标题）
+    "m7" -> stringResource(R.string.cap_m7)
+    "m7h" -> stringResource(R.string.cap_m7h)
     "m8" -> stringResource(R.string.cap_m8)
     "t1" -> stringResource(R.string.cap_t1)
     "t2" -> stringResource(R.string.cap_t2)

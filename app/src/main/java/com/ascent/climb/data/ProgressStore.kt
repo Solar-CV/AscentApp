@@ -307,6 +307,14 @@ class ProgressStore(context: Context) {
         set(value) = prefs.edit().putString("themeMode", value).apply()
 
     /**
+     * 3D 徽章展示页的背景："auto"（跟随系统明暗）/ "light" / "dark"。
+     * 只影响那一个全屏页，不动 App 主题；手动切换后记住，下次进来沿用。
+     */
+    var badgeStageBg: String
+        get() = prefs.getString("badgeStageBg", "auto") ?: "auto"
+        set(value) = prefs.edit().putString("badgeStageBg", value).apply()
+
+    /**
      * 语言模式："auto"（跟随系统）或 BCP-47 语言标签（如 "zh-CN" / "en"）。
      *
      * 默认 "auto"，因此已安装的用户升级后行为不变、不会莫名丢偏好。

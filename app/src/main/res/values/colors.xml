@@ -3,4 +3,7 @@
     <color name="ascent_bg">#FF070D16</color>
     <color name="ascent_bg_light">#FFF1F6FA</color>
     <color name="ic_launcher_background">#FF0B1522</color>
+    <!-- 开屏（黏土版）底色：与 ui/ClaySplash.kt 的白 / 深底一致 -->
+    <color name="splash_bg_light">#FFFFFFFF</color>
+    <color name="splash_bg_dark">#FF0B0B0D</color>
 </resources>

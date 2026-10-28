@@ -11,4 +11,17 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_mark</item>
         <item name="android:windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
     </style>
+
+    <!-- Android 12+ 启动画面：背景与黏土开屏同色、图标全透明、不播图标动画。
+         系统不允许关闭启动窗口，这样处理后视觉上等于「没有系统开屏」。 -->
+    <style name="Theme.Ascent.Launch" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/splash_bg_light</item>
+        <item name="android:statusBarColor">@color/splash_bg_light</item>
+        <item name="android:navigationBarColor">@color/splash_bg_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowSplashScreenBackground">@color/splash_bg_light</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_blank</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+        <item name="android:windowSplashScreenAnimationDuration">0</item>
+    </style>
 </resources>

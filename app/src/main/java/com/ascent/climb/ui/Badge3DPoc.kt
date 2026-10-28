@@ -1,10 +1,12 @@
 package com.ascent.climb.ui
 
+import android.app.Activity
 import android.content.Context
 import android.view.Choreographer
 import android.view.MotionEvent
 import android.view.TextureView
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -37,6 +39,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,16 +49,20 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.filament.Camera
 import com.ascent.climb.R
+import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.achievementById
 import com.google.android.filament.Engine
 import com.google.android.filament.EntityManager
@@ -153,6 +161,37 @@ private const val BLOOM_STRENGTH = 0.05f
 private const val WARMUP_MS = 2500L
 private const val SLOW_FRAME_MS = 50.0
 private const val SLOW_WINDOWS = 3
+
+/** 一盏方向光：颜色（线性）、照度（lux）、传播方向（光从反方向打来）。 */
+private class DirectionalSpec(
+    val r: Float, val g: Float, val b: Float,
+    val lux: Float,
+    val dx: Float, val dy: Float, val dz: Float
+)
+
+/**
+ * 五点布光。原来只有一盏主光（66,000 lux）加一盏轮廓光（26,000 lux）：
+ * 金属只有一道弧面高光，正面浮雕贴平、顶面与底缘没有交代，
+ * 转到侧面时整枚徽章会突然塌成一块深色。
+ *
+ * 现在拆成五个职责分明的方向：
+ *   KEY    左上暖白主光 —— 高光与此前一致，负责"金属感"
+ *   TOP    正上方中性 —— 给顶面一条从亮到暗的梯度，边缘立起来
+ *   FRONT  正前方柔光 —— 抬亮浮雕与珐琅的正面，最暗处不糊成一片
+ *   RIM    右后冷光 —— 把外框从背景里挑出来（深色背景下尤其关键）
+ *   BOUNCE 底部暖光 —— 模拟台面反弹，底缘不至于死黑
+ *
+ * 总照度 90,500 lux，几乎与原来的 92,000 相同：只换分布，不加曝光。
+ * 正面柔光刻意压得低（7,000）：它一高，浮雕与顶面就被推平，看着反而更"塑料"。
+ * 徽章的观感不应该随背景明暗变化，因此这组参数只有一份。
+ */
+private val LIGHT_RIG = listOf(
+    DirectionalSpec(1.00f, 0.96f, 0.90f, 38000f, -0.38f, -0.70f, -0.60f), // KEY
+    DirectionalSpec(0.98f, 0.99f, 1.00f, 20000f, 0.04f, -0.97f, -0.22f),  // TOP
+    DirectionalSpec(0.90f, 0.94f, 1.00f, 6000f, 0.06f, -0.05f, -1.00f),   // FRONT
+    DirectionalSpec(0.62f, 0.78f, 1.00f, 22000f, 0.58f, -0.16f, 0.80f),   // RIM
+    DirectionalSpec(1.00f, 0.84f, 0.66f, 4500f, 0.10f, 0.62f, -0.78f),    // BOUNCE
+)
 
 /** 棚拍环境的 3 波段辐照度 SH（由 tools/poc3d/gen_studio_ibl.py 算出，linear）。 */
 private val STUDIO_SH = floatArrayOf(
@@ -553,25 +592,18 @@ private class Badge3DRenderer(
         ibl?.let { scene.indirectLight = it }
         Badge3D.markStage(app, if (ibl != null) "4 IBL 已建" else "4 IBL 跳过")
 
-        // 主光：左上前方的暖白，负责金属高光
-        val key = EntityManager.get().create()
-        LightManager.Builder(LightManager.Type.DIRECTIONAL)
-            .color(1.0f, 0.96f, 0.90f)
-            .intensity(66000f)
-            .direction(-0.38f, -0.72f, -0.58f)
-            .castShadows(false)
-            .build(engine, key)
-        scene.addEntity(key)
-
-        // 轮廓光：右后方冷光，把外框边缘从背景里挑出来
-        val rim = EntityManager.get().create()
-        LightManager.Builder(LightManager.Type.DIRECTIONAL)
-            .color(0.62f, 0.78f, 1.0f)
-            .intensity(26000f)
-            .direction(0.55f, -0.15f, 0.82f)
-            .castShadows(false)
-            .build(engine, rim)
-        scene.addEntity(rim)
+        // 布光：见文件末尾的 LIGHT_RIG。单盏主光只能给出金属的一道弧面高光，
+        // 顶面、正面浮雕、底缘全是平的；拆成五点后每个朝向都有交代。
+        LIGHT_RIG.forEach { spec ->
+            val e = EntityManager.get().create()
+            LightManager.Builder(LightManager.Type.DIRECTIONAL)
+                .color(spec.r, spec.g, spec.b)
+                .intensity(spec.lux)
+                .direction(spec.dx, spec.dy, spec.dz)
+                .castShadows(false)
+                .build(engine, e)
+            scene.addEntity(e)
+        }
 
         // 归一化 + 姿态修正：
         // Blender 是 Z-up，glTF 导出后模型躺在 XZ 平面（正面朝 +Y），
@@ -945,8 +977,11 @@ fun Badge3DAuto(
 /**
  * 3D 徽章展示页：同一个入口既服务「已有 glb 的成就」，也服务「只有定稿图的成就」。
  *
- * 背景是重模糊的亮色风景（res/drawable-nodpi/badge_bg.jpg），
- * 3D 视图用透明 TextureView 叠在上面，因此背景与徽章是两层独立合成。
+ * 背景两张重模糊风景，都是 1080×1920：
+ *   badge_bg.jpg       亮色，清晨山脊（`gen_badge_bg.py`）
+ *   badge_bg_dark.jpg  暗色，合成波落日（`gen_badge_bg.py --dark`）
+ * 默认跟随系统明暗，右上角可手动切换，选择记在 [ProgressStore.badgeStageBg]。
+ * 3D 视图是透明 TextureView，与背景两层独立合成，因此换背景不影响渲染。
  */
 @Composable
 fun Badge3DStageScreen(
@@ -957,6 +992,57 @@ fun Badge3DStageScreen(
     val modelPath = MODEL_OF_ACHIEVEMENT[achievementId]
     var stats by remember { mutableStateOf("") }
 
+    val context = LocalContext.current
+    val store = remember { ProgressStore(context) }
+    val systemDark = isSystemInDarkTheme()
+    var bgMode by remember { mutableStateOf(store.badgeStageBg) }
+    val dark = when (bgMode) {
+        "dark" -> true
+        "light" -> false
+        else -> systemDark
+    }
+    // 交叉淡入：两张底图叠着，避免切换时中间闪一帧
+    val darkAlpha by animateFloatAsState(
+        targetValue = if (dark) 1f else 0f,
+        animationSpec = tween(240),
+        label = "stageBg"
+    )
+
+    val ink = if (dark) Color(0xFFF2F5F8) else INK
+    val ink2 = if (dark) Color(0xFFC2CBD5) else INK2
+
+    // 状态栏 / 导航栏跟着背景走，否则深色底下会顶出一条浅灰带。
+    // 进入时记住原值，离开这一页再原样还回去——不能只靠上层主题刷新，
+    // 那边只在开屏结束时设一次色。
+    val view = LocalView.current
+    val window = (view.context as? Activity)?.window
+    DisposableEffect(Unit) {
+        val prevStatus = window?.statusBarColor
+        val prevNav = window?.navigationBarColor
+        val controller = window?.let { WindowCompat.getInsetsController(it, view) }
+        val prevLightStatus = controller?.isAppearanceLightStatusBars
+        val prevLightNav = controller?.isAppearanceLightNavigationBars
+        onDispose {
+            if (window != null) {
+                prevStatus?.let { window.statusBarColor = it }
+                prevNav?.let { window.navigationBarColor = it }
+            }
+            prevLightStatus?.let { controller.isAppearanceLightStatusBars = it }
+            prevLightNav?.let { controller.isAppearanceLightNavigationBars = it }
+        }
+    }
+    LaunchedEffect(dark) {
+        if (window == null) return@LaunchedEffect
+        val bar = if (dark) 0xFF0E0718.toInt() else 0xFFFFFFFF.toInt()
+        @Suppress("DEPRECATION")
+        window.statusBarColor = bar
+        @Suppress("DEPRECATION")
+        window.navigationBarColor = bar
+        val controller = WindowCompat.getInsetsController(window, view)
+        controller.isAppearanceLightStatusBars = !dark
+        controller.isAppearanceLightNavigationBars = !dark
+    }
+
     BackHandler { onBack() }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -966,8 +1052,21 @@ fun Badge3DStageScreen(
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
-        // 极淡白纱：让暗色金属与深色文字都压得住
-        Box(modifier = Modifier.fillMaxSize().background(Color(0x12FFFFFF)))
+        Image(
+            painter = painterResource(R.drawable.badge_bg_dark),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer { alpha = darkAlpha }
+        )
+        // 亮色垫一层极淡白纱，让暗色金属压得住；
+        // 暗色只加一点深色，别把落日那圈暖光糊掉
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(if (dark) Color(0x14000000) else Color(0x12FFFFFF))
+        )
 
         Column(modifier = Modifier.fillMaxSize()) {
             Row(
@@ -977,8 +1076,8 @@ fun Badge3DStageScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "← 返回",
-                    color = INK2,
+                    text = "← " + stringResource(R.string.common_back),
+                    color = ink2,
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier
@@ -987,8 +1086,25 @@ fun Badge3DStageScreen(
                         .padding(horizontal = 8.dp, vertical = 10.dp)
                 )
                 Spacer(Modifier.weight(1f))
+                // 背景明暗开关：只作用于这一页，不动 App 主题
                 SoftTag(
-                    text = if (modelPath != null) "真实 3D" else "图片 3D",
+                    text = stringResource(
+                        if (dark) R.string.badge_stage_bg_dark else R.string.badge_stage_bg_light
+                    ),
+                    foreground = if (dark) Color(0xFFE7EDF3) else Color(0xFF4A5560),
+                    background = if (dark) Color(0x1FFFFFFF) else Color(0x1A142028),
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .clickable {
+                            val next = if (dark) "light" else "dark"
+                            bgMode = next
+                            store.badgeStageBg = next
+                        }
+                )
+                SoftTag(
+                    text = stringResource(
+                        if (modelPath != null) R.string.badge_stage_real3d else R.string.badge_stage_image3d
+                    ),
                     foreground = if (modelPath != null) Color(0xFF17603F) else Color(0xFF4A5560),
                     background = if (modelPath != null) Color(0x2E1D9E75) else Color(0x24142028)
                 )
@@ -1016,7 +1132,11 @@ fun Badge3DStageScreen(
                                 .padding(horizontal = 36.dp, vertical = 24.dp)
                         )
                     } else {
-                        Text("该成就暂无图形资源", color = INK2, fontSize = 13.sp)
+                        Text(
+                            text = stringResource(R.string.badge_stage_no_asset),
+                            color = ink2,
+                            fontSize = 13.sp
+                        )
                     }
                 }
             }
@@ -1028,7 +1148,7 @@ fun Badge3DStageScreen(
             ) {
                 Text(
                     text = ach?.let { achievementTitle(it.id, it.title) } ?: achievementId,
-                    color = INK,
+                    color = ink,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -1042,19 +1162,19 @@ fun Badge3DStageScreen(
                                 .background(rarityColors(ach.rarity).face)
                         )
                         Spacer(Modifier.width(6.dp))
-                        Text(rarityName(ach.rarity), color = INK2, fontSize = 12.sp)
+                        Text(rarityName(ach.rarity), color = ink2, fontSize = 12.sp)
                     }
                     Spacer(Modifier.height(8.dp))
                     Text(
                         text = ach.conditionText,
-                        color = INK2,
+                        color = ink2,
                         fontSize = 12.sp,
                         lineHeight = 18.sp
                     )
                 }
                 if (modelPath != null && stats.isNotEmpty()) {
                     Spacer(Modifier.height(8.dp))
-                    Text(stats, color = INK2, fontSize = 10.sp)
+                    Text(stats, color = ink2, fontSize = 10.sp)
                 }
             }
         }

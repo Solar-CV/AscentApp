@@ -6,7 +6,7 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 68 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 21 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.20.5 (versionCode 112). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: 28 prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 38 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den.
+Aktuell version v0.20.11 (versionCode 118). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: 28 prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 38 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 ## Installation
 
@@ -217,6 +217,20 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
 ## Senaste ändringar
+
+**v0.20.11: ljus och bakgrund i 3D-emblemvyn**
+
+- Emblemvyn hade två ljus, så metallen fick bara en enda böjd glans och reliefen låg platt. Nu är det fem riktade ljus — huvud, topp, frontfyllnad, kant och ett svagt studs underifrån — med samma totala belysning: mer djup utan att blekas ur
+- En andra, mörkare bakgrund (en synthwave-solnedgång kraftigt suddad till enbart färgfält) passar mörkt läge. Pillret uppe till höger växlar mellan ljust och mörkt, följer systeminställningen som standard och minns valet; bara den här skärmen påverkas
+
+**v0.20.8 – v0.20.10: startskärm**
+
+- Startskärmen är nu i lera: en vit skiva med åtstramad skuggning och skarpa kanter, toppmärket och i stället för den gamla raden ett slumpvis citat av en bergsbestigare — Mallory, Whymper, Muir, Boukreev, Viesturs, Tabei, Messner, Lowe eller Bonatti. Den tonar ut efter cirka 1,7 s och hoppas nästan över med reducerad rörelse. Inget annat i appen har ändrats Från v0.20.9 visar systemets startskärm ingen logotyp alls — starttemat är bara samma bakgrundsfärg, så ler-skärmen börjar på ett tomt vitt (eller nästan svart) fält. Varje citat står på originalspråket
+
+**v0.20.6 – v0.20.7: renderingskvalitet för emblemen**
+
+- Bloom körs som standard i högsta kvalitet — 256 px, fyra nivåer, MEDIUM. Den gamla automatiska nedväxlingen dömde från allra första bildrutan, så några hundra millisekunder av shaderkompilering räckte för att stänga av den resten av passet. Nu väntar den 2,5 s, tillåter bildrutor på 50 ms (20 fps) under tre fönster i rad och trappar ned i två steg: full → låg → av
+- 4x MSAA är på där drivrutinen tillåter det, med kapaciteten kontrollerad innan swap chain skapas; misslyckas försöket ritas det utan MSAA och misslyckandet kommer ihåg — en antialiasinställning ska aldrig göra att ett emblem inte syns
 
 **v0.20.4 – v0.20.5: små rättelser**
 

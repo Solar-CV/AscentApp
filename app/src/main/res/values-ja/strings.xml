@@ -308,7 +308,8 @@
     <string name="cap_m5i">5000 入門</string>
     <string name="cap_m5a">5000 応用</string>
     <string name="cap_m6">6000 m</string>
-    <string name="cap_m7">7000 m</string>
+    <string name="cap_m7">7000 m · C3</string>
+    <string name="cap_m7h">7000 m · C4</string>
     <string name="cap_m8">8000 m</string>
     <string name="set_theme_system_current">システムに従う（現在%1$s）</string>
     <string name="set_bank_current">現在の題庫 v%1$d</string>
@@ -350,4 +351,10 @@
     <string name="fb_ok">受け取りました。ありがとうございます！</string>
     <string name="fb_fail">送信できませんでした。通信状況を確認して再試行してください。</string>
     <string name="fb_mail_alt">メールで送る</string>
+    <!-- 3D badge stage -->
+    <string name="badge_stage_real3d">リアル 3D</string>
+    <string name="badge_stage_image3d">画像 3D</string>
+    <string name="badge_stage_no_asset">この実績のグラフィックはまだありません</string>
+    <string name="badge_stage_bg_light">ライト</string>
+    <string name="badge_stage_bg_dark">ダーク</string>
 </resources>

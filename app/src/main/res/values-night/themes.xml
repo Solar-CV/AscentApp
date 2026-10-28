@@ -7,4 +7,12 @@
         <item name="android:navigationBarColor">@color/ascent_bg</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
+
+    <!-- 仅用于「启动瞬间」：整屏 #0B0B0D（与黏土开屏深色版同色），无图标。 -->
+    <style name="Theme.Ascent.Launch" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/splash_bg_dark</item>
+        <item name="android:statusBarColor">@color/splash_bg_dark</item>
+        <item name="android:navigationBarColor">@color/splash_bg_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

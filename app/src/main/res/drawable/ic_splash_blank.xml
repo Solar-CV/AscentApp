@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  系统启动画面的「空图标」。
+  Android 12 起系统一定会画一层启动画面，不能关闭；把图标换成全透明，
+  中央就不会先闪一下旧的雪山标记，画面直接由 App 内的黏土开屏接手。
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@android:color/transparent" />
+    <size android:width="108dp" android:height="108dp" />
+</shape>
