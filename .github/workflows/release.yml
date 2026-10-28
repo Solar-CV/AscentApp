@@ -25,6 +25,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # 需要全部 tag：正文脚本靠 tag 判断哪些章节此前没发过版
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -68,12 +71,23 @@ jobs:
           cp app/build/outputs/apk/debug/app-debug.apk "out/ascent-${GITHUB_REF_NAME}-debug.apk"
           ls -lh out
 
+      # Release 正文：只发当前 tag 的章节 + 此前未单独发版的旧版本要点，
+      # 不再把整份 RELEASE_NOTES.md 贴上去（否则历史章节每版重复累积）。
+      - name: Compose release body
+        run: |
+          python3 .github/scripts/release_body.py \
+            --tag "${GITHUB_REF_NAME}" \
+            --notes .github/RELEASE_NOTES.md \
+            --out out/release_body.md
+          echo '--- 正文预览 ---'
+          head -30 out/release_body.md
+
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
-          body_path: .github/RELEASE_NOTES.md
+          body_path: out/release_body.md
           files: out/ascent-*-debug.apk
           draft: false
           prerelease: false
