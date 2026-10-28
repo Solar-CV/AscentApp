@@ -135,6 +135,24 @@ private const val MODEL_PATH = "badges/first_steps.glb"
 private const val PUNCTUAL_LIGHT_GAIN = 5f
 private const val IBL_PATH = "env/studio_ibl.ktx"
 
+/**
+ * 泛光默认画质：256 px、MEDIUM、4 级。原来压到 180 / LOW / 3 级是照低端 GPU 猜的，
+ * 实测 60–120 fps 的机器完全吃得下；真跑不动会自动降档（见 [adaptQuality]）。
+ */
+private const val BLOOM_RES = 256
+private const val BLOOM_LEVELS_HIGH = 4
+private const val BLOOM_STRENGTH = 0.05f
+
+/**
+ * 帧时间自适应。首帧后先跳过 [WARMUP_MS] 的预热期 —— 首帧要编译 shader、上传纹理，
+ * 那一段动辄上百毫秒，按它判定会在刚打开就把泛光砍掉，而机器其实稳定跑 60/120 fps。
+ * 预热之后，平均帧时间连续 [SLOW_WINDOWS] 个统计窗口（约 1.5 s）超过 [SLOW_FRAME_MS]
+ * 才降一档：完整 → 低配泛光 → 关泛光。
+ */
+private const val WARMUP_MS = 2500L
+private const val SLOW_FRAME_MS = 50.0
+private const val SLOW_WINDOWS = 3
+
 /** 棚拍环境的 3 波段辐照度 SH（由 tools/poc3d/gen_studio_ibl.py 算出，linear）。 */
 private val STUDIO_SH = floatArrayOf(
     2.088282f, 2.282543f, 2.600507f,
@@ -372,8 +390,9 @@ private class Badge3DRenderer(
 
     // 统计
     private var firstFrameMs = -1.0
-    private var slowFrames = 0
-    private var bloomDropped = false
+    private var firstFrameAtMs = 0L          // 首帧的墙钟时间：预热期从这一刻开始算
+    private var slowWindows = 0              // 连续超时窗口数
+    private var bloomStage = 0               // 0 完整泛光 / 1 低配泛光 / 2 关泛光
     private var lastFrameNanos = 0L
     private var prevReportNanos = 0L
     private var frameAccum = 0.0
@@ -457,16 +476,7 @@ private class Badge3DRenderer(
         view.scene = scene
         view.camera = camera
         // 泛光：自发光（灯笼 / 星点 / 镜片）才真正"发光"，否则只是一块亮色
-        view.bloomOptions = View.BloomOptions().apply {
-            enabled = true
-            // 泛光只用来让自发光（灯笼 / 星点 / 镜片）溢出成光晕，
-            // 层级与分辨率都压到最低：低端 GPU 上这是最贵的一步
-            strength = 0.05f
-            threshold = true
-            levels = 3
-            resolution = 180
-            quality = View.QualityLevel.LOW
-        }
+        applyBloomOptions()
         camera.setProjection(32.0, 1.0, 0.05, 50.0, Camera.Fov.VERTICAL)
         applyCamera()
 
@@ -595,6 +605,7 @@ private class Badge3DRenderer(
             renderer.endFrame()
             if (firstFrameMs < 0.0) {
                 firstFrameMs = (System.nanoTime() - startNanos) / 1e6
+                firstFrameAtMs = System.currentTimeMillis()
                 onReady()
                 Badge3D.markStage(
                     textureView.context.applicationContext,
@@ -643,26 +654,73 @@ private class Badge3DRenderer(
 
         val ms = frameAccum / frameCount
         val fps = if (ms > 0.0) 1000.0 / ms else 0.0
-        // 低端机兜底：帧时间持续拉垮就先砍泛光（它是这条链路里最贵的一步），
-        // 宁可少一层光晕，也不要为了光晕掉到 30fps 以下。
-        if (!bloomDropped && ms > 28.0) {
-            slowFrames++
-            if (slowFrames >= 2) {
-                bloomDropped = true
-                view.bloomOptions = View.BloomOptions().apply { enabled = false }
-                android.util.Log.i("POC3D", "bloom disabled for perf, ${ms}ms/frame")
-            }
-        } else if (ms <= 28.0) {
-            slowFrames = 0
-        }
+        adaptQuality(nowMs, ms)
         onStats(
-            "%.1f fps · %.1f ms/帧 · 首帧 %.0f ms · %s".format(
-                fps, ms, firstFrameMs.coerceAtLeast(0.0), Badge3D.backendName()
+            "%.1f fps · %.1f ms/帧 · 首帧 %.0f ms · %s · %s".format(
+                fps, ms, firstFrameMs.coerceAtLeast(0.0), bloomLabel, Badge3D.backendName()
             )
         )
         frameAccum = 0.0
         frameCount = 0
         reportedAt = nowMs
+    }
+
+    private val bloomLabel: String
+        get() = when (bloomStage) {
+            0 -> "泛光高"
+            1 -> "泛光低"
+            else -> "泛光关"
+        }
+
+    /**
+     * 帧时间自适应，只在真的撑不住时降档，平时保持最高画质：
+     * 完整（256 px / MEDIUM / 4 级）→ 低配（180 px / LOW / 3 级）→ 关闭。
+     *
+     * 两个刻意的宽松处理：
+     * 1) 首帧后 [WARMUP_MS] 内不判定 —— 首帧与紧接着的几帧包含 shader 编译和纹理上传，
+     *    麒麟 985 这类机器会先慢一拍再稳定跑到 60 fps，按预热期判会白砍泛光。
+     * 2) 阈值 50 ms（20 fps）且要连续 [SLOW_WINDOWS] 个窗口，偶发掉帧不降档。
+     */
+    private fun adaptQuality(nowMs: Long, ms: Double) {
+        if (firstFrameAtMs == 0L || nowMs - firstFrameAtMs < WARMUP_MS) return
+        if (ms <= SLOW_FRAME_MS) {
+            slowWindows = 0
+            return
+        }
+        slowWindows++
+        if (slowWindows < SLOW_WINDOWS) return
+        slowWindows = 0
+        when (bloomStage) {
+            0 -> {
+                bloomStage = 1
+                applyBloomOptions()
+                android.util.Log.i("POC3D", "bloom -> low, ${ms}ms/frame")
+            }
+            1 -> {
+                bloomStage = 2
+                applyBloomOptions()
+                android.util.Log.i("POC3D", "bloom off, ${ms}ms/frame")
+            }
+        }
+    }
+
+    /** 按当前档位重建泛光参数。Camera / View 是可复用的，改选项不需要重建场景。 */
+    private fun applyBloomOptions() {
+        view.bloomOptions = View.BloomOptions().apply {
+            enabled = bloomStage < 2
+            // 泛光只让自发光（灯笼 / 星点 / 镜片）溢出成光晕，不需要很强的强度
+            strength = BLOOM_STRENGTH
+            threshold = true
+            if (bloomStage == 0) {
+                quality = View.QualityLevel.MEDIUM
+                resolution = BLOOM_RES
+                levels = BLOOM_LEVELS_HIGH
+            } else {
+                quality = View.QualityLevel.LOW
+                resolution = 180
+                levels = 3
+            }
+        }
     }
 
     fun onTouch(event: MotionEvent): Boolean {
