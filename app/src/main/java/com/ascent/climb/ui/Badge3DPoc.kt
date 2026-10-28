@@ -381,7 +381,7 @@ private class Badge3DRenderer(
      * 徽章轮廓在高分屏上原本是硬锯齿轮廓，4x 之后边缘平滑一档。
      * 先过 Filament 的能力查询，历史上失败过就直接不试。
      */
-    private val msaaOn: Boolean = runCatching {
+    private var msaaOn: Boolean = runCatching {
         val ctx = textureView.context.applicationContext
         !Badge3D.msaaFailed(ctx) && SwapChain.isMSAASwapChainSupported(engine, 4)
     }.getOrDefault(false)
@@ -443,6 +443,7 @@ private class Badge3DRenderer(
                     if (msaaOn) engine.createSwapChain(surface, SwapChainFlags.CONFIG_MSAA_4_SAMPLES)
                     else engine.createSwapChain(surface)
                 }.getOrElse { err ->
+                    msaaOn = false                    // 本视图也改回无 MSAA，状态串才不会谎报
                     Badge3D.markMsaaFailed(app)
                     Badge3D.markStage(app, "X MSAA 失败（${err.javaClass.simpleName}），回退无 MSAA")
                     engine.createSwapChain(surface)
