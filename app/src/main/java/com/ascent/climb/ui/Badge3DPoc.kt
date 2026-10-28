@@ -64,6 +64,7 @@ import com.google.android.filament.LightManager
 import com.google.android.filament.Renderer
 import com.google.android.filament.Scene
 import com.google.android.filament.SwapChain
+import com.google.android.filament.SwapChainFlags
 import com.google.android.filament.View
 import com.google.android.filament.Viewport
 import com.google.android.filament.android.UiHelper
@@ -182,6 +183,14 @@ private object Badge3D {
     fun useIbl(context: Context) = prefs(context).getBoolean("use_ibl", true)
     fun setUseIbl(context: Context, value: Boolean) =
         prefs(context).edit().putBoolean("use_ibl", value).apply()
+
+    /**
+     * MSAA 4x 创建失败过的标记。某些驱动（尤其部分 Mali）对多重采样窗口支持不稳，
+     * 失败一次就记住，之后的视图直接走无 MSAA，避免每开一个徽章都失败一次。
+     */
+    fun msaaFailed(context: Context) = prefs(context).getBoolean("msaa_failed", false)
+    fun markMsaaFailed(context: Context) =
+        prefs(context).edit().putBoolean("msaa_failed", true).apply()
 
     /**
      * 阶段埋点。原生 abort（SIGABRT/SIGSEGV）拿不到 Java 栈，
@@ -367,6 +376,16 @@ private class Badge3DRenderer(
     private val view: View = engine.createView()
     private val camera: Camera = engine.createCamera(EntityManager.get().create())
 
+    /**
+     * 本次视图是否用 4x MSAA。
+     * 徽章轮廓在高分屏上原本是硬锯齿轮廓，4x 之后边缘平滑一档。
+     * 先过 Filament 的能力查询，历史上失败过就直接不试。
+     */
+    private val msaaOn: Boolean = runCatching {
+        val ctx = textureView.context.applicationContext
+        !Badge3D.msaaFailed(ctx) && SwapChain.isMSAASwapChainSupported(engine, 4)
+    }.getOrDefault(false)
+
     private var swapChain: SwapChain? = null
     private var running = false
     private var rootInstance = 0
@@ -417,8 +436,21 @@ private class Badge3DRenderer(
             override fun onNativeWindowChanged(surface: android.view.Surface) {
                 Badge3D.markStage(app, "6 拿到 Surface")
                 swapChain?.let { engine.destroySwapChain(it) }
-                swapChain = engine.createSwapChain(surface)
-                Badge3D.markStage(app, "7 SwapChain 已建")
+                // MSAA 4x：只影响描边与金属边缘的锯齿，画面内容不变。
+                // 万一驱动不接受带标志的交换链，就退回无 MSAA 并把失败记下来，
+                // 不能因为一个抗锯齿参数让整个徽章渲染不出来。
+                swapChain = runCatching {
+                    if (msaaOn) engine.createSwapChain(surface, SwapChainFlags.CONFIG_MSAA_4_SAMPLES)
+                    else engine.createSwapChain(surface)
+                }.getOrElse { err ->
+                    Badge3D.markMsaaFailed(app)
+                    Badge3D.markStage(app, "X MSAA 失败（${err.javaClass.simpleName}），回退无 MSAA")
+                    engine.createSwapChain(surface)
+                }
+                Badge3D.markStage(
+                    app,
+                    if (msaaOn) "7 SwapChain 已建（MSAA 4x）" else "7 SwapChain 已建（无 MSAA）"
+                )
             }
 
             override fun onDetachedFromSurface() {
@@ -656,8 +688,8 @@ private class Badge3DRenderer(
         val fps = if (ms > 0.0) 1000.0 / ms else 0.0
         adaptQuality(nowMs, ms)
         onStats(
-            "%.1f fps · %.1f ms/帧 · 首帧 %.0f ms · %s · %s".format(
-                fps, ms, firstFrameMs.coerceAtLeast(0.0), bloomLabel, Badge3D.backendName()
+            "%.1f fps · %.1f ms/帧 · 首帧 %.0f ms · %s · %s · %s".format(
+                fps, ms, firstFrameMs.coerceAtLeast(0.0), bloomLabel, aaLabel, Badge3D.backendName()
             )
         )
         frameAccum = 0.0
@@ -671,6 +703,9 @@ private class Badge3DRenderer(
             1 -> "泛光低"
             else -> "泛光关"
         }
+
+    private val aaLabel: String
+        get() = if (msaaOn) "MSAA 4x" else "无 MSAA"
 
     /**
      * 帧时间自适应，只在真的撑不住时降档，平时保持最高画质：
