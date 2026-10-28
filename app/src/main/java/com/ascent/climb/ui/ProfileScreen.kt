@@ -116,7 +116,8 @@ fun ProfileScreen(
     onResetBank: () -> Unit,
     onBankUrlChange: (String) -> Unit,
     onReset: () -> Unit,
-    onAchChanged: () -> Unit
+    onAchChanged: () -> Unit,
+    onOpenBadge: (String) -> Unit = {}
 ) {
     val context = LocalContext.current
     val auth = remember { MockAuthApi(context) }
@@ -141,7 +142,8 @@ fun ProfileScreen(
             BadgeWallScreen(
                 store = store,
                 achRevision = achRevision,
-                onBack = { showBadgeWall = false }
+                onBack = { showBadgeWall = false },
+                onOpenBadge = onOpenBadge
             )
         }
     } else if (showProfileHome) {
@@ -153,7 +155,8 @@ fun ProfileScreen(
                 completed = completed,
                 achRevision = achRevision,
                 onBack = { showProfileHome = false },
-                onOpenAllBadges = { showBadgeWall = true }
+                onOpenAllBadges = { showBadgeWall = true },
+                onOpenBadge = onOpenBadge
             )
         }
     // 注意分支顺序：成就测试页是从设置页里点开的，必须排在 showSettings 之前判断。
@@ -164,7 +167,8 @@ fun ProfileScreen(
             AchievementsDevScreen(
                 store = store,
                 onBack = { showAchievements = false },
-                onChanged = onAchChanged
+                onChanged = onAchChanged,
+                onOpenBadge = onOpenBadge
             )
         }
     } else if (showFeedback) {

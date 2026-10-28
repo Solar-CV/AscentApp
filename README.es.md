@@ -6,7 +6,7 @@ Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. 
 
 Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 68 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 21 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
 
-Versión actual v0.20.13 (versionCode 120). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: 34 logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 39 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
+Versión actual v0.20.14 (versionCode 121). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: 34 logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 39 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
 
 ## Instalación
 
@@ -217,6 +217,11 @@ Para publicar un banco nuevo: cambia el contenido → sube `BUNDLED_VERSION` →
 Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVersion` en `manifest.json` bloquea clientes demasiado viejos, los campos desconocidos se ignoran y una pregunta mal formada se salta en vez de ser fatal.
 
 ## Cambios recientes
+
+**v0.20.14: las insignias se abren en cualquier sitio**
+
+- Ya no hace falta entrar en la zona de pruebas de desarrollo: toca cualquier insignia desbloqueada en «Mi perfil» o en el muro y se abre a pantalla completa. La vista se superpone a la app en vez de sustituir la página, así que al volver sigues donde estabas —con la posición de la lista— y la barra inferior queda tapada
+- «Trail Finish» seguía mostrando el icono de reserva compartido aunque su modelo ya estaba; ahora apunta al icono renderizado. «Two Tracks» aún no tiene modelo y conserva el de reserva
 
 **v0.20.13: seis modelos de insignia más**
 

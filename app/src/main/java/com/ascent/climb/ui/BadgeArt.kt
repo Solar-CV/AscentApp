@@ -46,13 +46,14 @@ fun badgeRes(id: String): Int? = when (id) {
     "streak_7" -> R.drawable.badge_streak_7
     "tech_grad" -> R.drawable.badge_tech_grad
 
-    // v0.19.27 新增的徒步线成就：徽章还没画，先共用一张占位图。
-    // 定稿后把下面几行换成各自的 badge_<id>.webp 即可，业务定义不用动。
+    // v0.19.27 新增的徒步线成就。四枚有模型后图标已由模型正面渲染替换；
+    // two_tracks 还没有模型，用 tools/poc3d/gen_two_tracks_icon.py 画的中性占位图
+    //（原来是共用一张真人照片，2026-10-28 换掉）。
     "trail_first" -> R.drawable.badge_trail_first
     "trail_camp" -> R.drawable.badge_trail_camp
     "trail_high" -> R.drawable.badge_trail_high
-    "trail_finish" -> R.drawable.badge_placeholder_agi
-    "two_tracks" -> R.drawable.badge_placeholder_agi
+    "trail_finish" -> R.drawable.badge_trail_finish
+    "two_tracks" -> R.drawable.badge_two_tracks
 
     else -> null
 }

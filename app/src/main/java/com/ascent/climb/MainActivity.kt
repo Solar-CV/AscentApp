@@ -52,6 +52,7 @@ import com.ascent.climb.data.lessonById
 import com.ascent.climb.ui.AchievementUnlockOverlay
 import com.ascent.climb.ui.Ascent
 import com.ascent.climb.ui.AscentTheme
+import com.ascent.climb.ui.Badge3DStageScreen
 import com.ascent.climb.ui.CapsuleTabBar
 import com.ascent.climb.ui.ClaySplashOverlay
 import com.ascent.climb.ui.HandbookScreen
@@ -191,6 +192,9 @@ fun AscentRoot(
     // 切 tab 或进课程再退出来，列表停在原来的位置，而不是弹回顶部。
     val tabStates = rememberSaveableStateHolder()
     var openLessonId by remember { mutableStateOf<String?>(null) }
+    // 徽章 3D 展示页：从个人主页、徽章墙、成就测试区都能打开。
+    // 放在最外层（和课程同一层）渲染，底部导航栏才不会压在这一页上面。
+    var badgeStageId by remember { mutableStateOf<String?>(null) }
     var devUnlocked by remember { mutableStateOf(store.devUnlocked) }
     var devUnlockAll by remember { mutableStateOf(store.devUnlockAll) }
     var devShowAnswers by remember { mutableStateOf(store.devShowAnswers) }
@@ -385,13 +389,22 @@ fun AscentRoot(
                                 onAchChanged = {
                                     pendingAchievements = store.pendingAchievements.toList()
                                     achRevision += 1
-                                }
+                                },
+                                onOpenBadge = { badgeStageId = it }
                             )
                         }
                     }
                 }
             }
         }
+    }
+
+    // 徽章 3D 展示页：**盖在整棵树之上**而不是替换它。
+    // 替换的话，个人主页/徽章墙会离开组合，showProfileHome 这类 remember 状态全丢，
+    // 返回时会跳到「我的」根页面。盖一层就没有这个问题，也能盖住底部导航栏。
+    val badgeStage = badgeStageId
+    if (badgeStage != null) {
+        Badge3DStageScreen(achievementId = badgeStage, onBack = { badgeStageId = null })
     }
 
     // 成就解锁弹窗：每次一条，关闭后播下一条（队列持久化，重启不丢）

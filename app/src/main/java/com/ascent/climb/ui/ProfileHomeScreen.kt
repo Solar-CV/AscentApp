@@ -51,7 +51,8 @@ fun ProfileHomeScreen(
     completed: Set<String>,
     achRevision: Int,
     onBack: () -> Unit,
-    onOpenAllBadges: () -> Unit
+    onOpenAllBadges: () -> Unit,
+    onOpenBadge: (String) -> Unit = {}
 ) {
     val unlocked = remember(achRevision) { store.unlockedAchievements.toSet() }
     val stats = remember(achRevision) { store.achievementStats() }
@@ -181,7 +182,7 @@ fun ProfileHomeScreen(
                             onClick = onOpenAllBadges
                         )
                     } else {
-                        BadgeGrid(items = shown)
+                        BadgeGrid(items = shown, onOpen = onOpenBadge)
                         if (earned.size > shown.size) {
                             PillButton(
                                 text = stringResource(R.string.home_view_all_badges, ACHIEVEMENTS.size),
@@ -197,9 +198,12 @@ fun ProfileHomeScreen(
     }
 }
 
-/** 徽章网格（每行 4 枚）。 */
+/** 徽章网格（每行 4 枚）。点开看 3D 展示。 */
 @Composable
-fun BadgeGrid(items: List<com.ascent.climb.data.Achievement>) {
+fun BadgeGrid(
+    items: List<com.ascent.climb.data.Achievement>,
+    onOpen: (String) -> Unit = {}
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
         modifier = Modifier
@@ -210,7 +214,13 @@ fun BadgeGrid(items: List<com.ascent.climb.data.Achievement>) {
         userScrollEnabled = false
     ) {
         items(items, key = { it.id }) { a ->
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(14.dp))
+                    .clickable { onOpen(a.id) }
+                    .padding(vertical = 4.dp)
+            ) {
                 AchievementBadge(id = a.id, unlocked = true, size = 56.dp)
                 Spacer(Modifier.height(5.dp))
                 Text(

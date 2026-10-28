@@ -6,7 +6,7 @@ Un'app Android per chi comincia con l'alpinismo d'alta quota e l'arrampicata su 
 
 Due percorsi si cambiano liberamente. **Alta montagna** ha sei unità e 68 lezioni, dall'introduzione a 5.000 m fino a 8.000 m — da 3.200 m a 8.848 m da un capo all'altro. **Escursionismo** ha quattro unità e 21 lezioni, dalla camminata di un giorno ai percorsi lunghi — da 200 m a 5.630 m. Ogni percorso tiene per sé progressi, badge e coda di ripasso.
 
-Versione attuale v0.20.13 (versionCode 120). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.554 / 10.554). La v0.20 riguarda i badge: 34 obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 39 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
+Versione attuale v0.20.14 (versionCode 121). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.554 / 10.554). La v0.20 riguarda i badge: 34 obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 39 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
 
 ## Installazione
 
@@ -217,6 +217,11 @@ Per pubblicare un questionario nuovo: cambia i contenuti → alza `BUNDLED_VERSI
 Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `minAppVersion` in `manifest.json` blocca i client troppo vecchi, i campi sconosciuti vengono ignorati e una domanda malformata viene saltata invece che essere fatale.
 
 ## Cambi recenti
+
+**v0.20.14: i badge si aprono ovunque**
+
+- Non serve più passare dall'area di test sviluppatore: tocca un badge sbloccato in «Il mio profilo» o nella bacheca e si apre a schermo intero. La vista si sovrappone all'app invece di sostituire la pagina, quindi tornando indietro resti dov'eri — posizione della lista compresa — e la barra in basso resta coperta
+- «Trail Finish» mostrava ancora l'icona segnaposto condivisa anche se il modello era già arrivato; ora la mappatura punta all'icona renderizzata. «Two Tracks» non ha ancora un modello e mantiene il segnaposto
 
 **v0.20.13: sei modelli di badge in più**
 

@@ -51,7 +51,8 @@ import com.ascent.climb.data.validateAchievements
 fun AchievementsDevScreen(
     store: ProgressStore,
     onBack: () -> Unit,
-    onChanged: () -> Unit
+    onChanged: () -> Unit,
+    onOpenBadge: (String) -> Unit = {}
 ) {
     var revision by remember { mutableIntStateOf(0) }
     // 预览队列：队首即当前弹窗项，关闭 = 弹出队首。
@@ -59,17 +60,9 @@ fun AchievementsDevScreen(
     // 会永远算出同一项而卡死（表现为「收下」无反应）。
     var previewQueue by remember { mutableStateOf<List<Achievement>>(emptyList()) }
     var confirmResetAll by remember { mutableStateOf(false) }
-    // 3D 展示：null 表示不在展示页。成就测试区是唯一入口（设置页的旧入口已移除）。
-    var stageId by remember { mutableStateOf<String?>(null) }
-
-    // 必须放在 stageId 的提前返回之前：进 3D 展示页时下面这层列表会离开组合，
-    // 状态留在这里才不会跟着丢，返回时还停在原来滑到的地方。
+    // 3D 展示页由上层（MainActivity）全屏接管，这里只发请求：
+    // 放在本地渲染的话，底部导航栏会压在这一页上面。
     val listState = rememberLazyListState()
-
-    stageId?.let { id ->
-        Badge3DStageScreen(achievementId = id, onBack = { stageId = null })
-        return
-    }
 
     val unlocked = remember(revision) { store.unlockedAchievements.toSet() }
     val stats = remember(revision) { store.achievementStats() }
@@ -226,7 +219,7 @@ fun AchievementsDevScreen(
                             Box(
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(12.dp))
-                                    .clickable { stageId = a.id }
+                                    .clickable { onOpenBadge(a.id) }
                             ) {
                                 AchievementBadge(
                                     id = a.id,
@@ -285,7 +278,8 @@ fun AchievementsDevScreen(
                                 PillButton(
                                     text = stringResource(R.string.dev_preview),
                                     style = BtnStyle.Secondary,
-                                    height = 36,
+                                    height = 38,
+                                    fontSize = 12.sp,
                                     onClick = { previewQueue = listOf(a) }
                                 )
                             }
@@ -293,8 +287,9 @@ fun AchievementsDevScreen(
                                 PillButton(
                                     text = "3D",
                                     style = BtnStyle.Secondary,
-                                    height = 36,
-                                    onClick = { stageId = a.id }
+                                    height = 38,
+                                    fontSize = 12.sp,
+                                    onClick = { onOpenBadge(a.id) }
                                 )
                             }
                             Box(modifier = Modifier.weight(1f)) {
@@ -302,7 +297,8 @@ fun AchievementsDevScreen(
                                     PillButton(
                                         text = stringResource(R.string.dev_reset_item),
                                         style = BtnStyle.Secondary,
-                                        height = 36,
+                                        height = 38,
+                                        fontSize = 12.sp,
                                         onClick = {
                                             store.resetAchievement(a.id)
                                             changed()
@@ -312,7 +308,8 @@ fun AchievementsDevScreen(
                                     PillButton(
                                         text = stringResource(R.string.dev_force_unlock),
                                         style = BtnStyle.Primary,
-                                        height = 36,
+                                        height = 38,
+                                        fontSize = 12.sp,
                                         onClick = {
                                             store.forceUnlockAchievement(a.id)
                                             changed()

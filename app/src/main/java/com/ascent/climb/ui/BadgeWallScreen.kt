@@ -34,14 +34,15 @@ import com.ascent.climb.data.Achievement
 import com.ascent.climb.data.ProgressStore
 
 /**
- * 全部徽章墙：35 枚全量展示，**未解锁以灰度呈现**（可预览，但不是已获得状态）。
+ * 全部徽章墙：40 枚全量展示，**未解锁以灰度呈现**（可预览，但不是已获得状态）。
  * 隐藏成就在未解锁时不显示形象，只显示「?」占位。
  */
 @Composable
 fun BadgeWallScreen(
     store: ProgressStore,
     achRevision: Int,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onOpenBadge: (String) -> Unit = {}
 ) {
     val unlocked = remember(achRevision) { store.unlockedAchievements.toSet() }
 
@@ -94,7 +95,11 @@ fun BadgeWallScreen(
                             ) {
                                 row.forEach { a ->
                                     Box(modifier = Modifier.weight(1f)) {
-                                        BadgeWallItem(a = a, unlocked = a.id in unlocked)
+                                        BadgeWallItem(
+                                            a = a,
+                                            unlocked = a.id in unlocked,
+                                            onClick = { onOpenBadge(a.id) }
+                                        )
                                     }
                                 }
                                 repeat(4 - row.size) { Spacer(Modifier.weight(1f)) }
@@ -108,10 +113,25 @@ fun BadgeWallScreen(
     }
 }
 
+/**
+ * 徽章墙的一格。**只有已解锁的能点**——未解锁的本身是灰度预览，点开看 3D
+ * 等于提前泄露形象；隐藏成就更不该给入口。
+ */
 @Composable
-private fun BadgeWallItem(a: Achievement, unlocked: Boolean) {
+private fun BadgeWallItem(a: Achievement, unlocked: Boolean, onClick: () -> Unit) {
     val concealed = a.hidden && !unlocked
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .then(
+                if (unlocked) {
+                    Modifier
+                        .clip(RoundedCornerShape(14.dp))
+                        .clickable(onClick = onClick)
+                        .padding(vertical = 4.dp)
+                } else Modifier
+            )
+    ) {
         AchievementBadge(
             id = a.id,
             unlocked = unlocked,

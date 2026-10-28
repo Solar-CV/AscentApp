@@ -40,6 +40,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -264,6 +265,8 @@ fun PillButton(
     icon: ImageVector? = null,
     height: Int = 54,
     enabled: Boolean = true,
+    // 一行挤三个按钮时（开发者测试区）需要缩小字号，否则 "Preview popup" 会折行被裁掉
+    fontSize: TextUnit = 15.sp,
     onClick: () -> Unit
 ) {
     val shape = RoundedCornerShape(999.dp)
@@ -295,12 +298,12 @@ fun PillButton(
         Text(
             text = text,
             color = fg,
-            fontSize = 15.sp,
+            fontSize = fontSize,
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Center,
             maxLines = 2,
-            lineHeight = 19.sp,
-            modifier = Modifier.padding(horizontal = 14.dp)
+            lineHeight = (fontSize.value * 1.26f).sp,
+            modifier = Modifier.padding(horizontal = 10.dp)
         )
         if (icon != null) {
             Spacer(Modifier.width(8.dp))
