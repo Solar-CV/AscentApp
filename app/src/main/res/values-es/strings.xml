@@ -49,8 +49,6 @@
     <string name="set_bank_url">URL del banco en línea</string>
     <string name="set_bank_save_check">Guardar y comprobar</string>
     <string name="set_section_dev">Modo desarrollador</string>
-    <string name="set_dev_locked">Desactivado · toca 7 veces el número de versión de abajo</string>
-    <string name="set_dev_hint">El modo desarrollador es solo para pruebas: desbloquear todas las lecciones, mostrar respuestas, abrir el área de pruebas de logros.</string>
     <string name="set_dev_on">Modo desarrollador activado</string>
     <string name="set_dev_on_desc">Solo para pruebas, no afecta al progreso real</string>
     <string name="set_dev_unlock_all">Desbloquear todas las lecciones</string>
@@ -59,7 +57,6 @@
     <string name="set_dev_show_answers_desc">Marcar la opción correcta con KEY antes de responder</string>
     <string name="set_dev_achievements">Área de pruebas de logros (%1$d)</string>
     <string name="set_dev_exit">Salir del modo desarrollador</string>
-    <string name="set_dev_tap_hint">Toca %1$d veces más para activar el modo desarrollador</string>
     <string name="set_section_data">Datos</string>
     <string name="set_reset">Restablecer el progreso</string>
     <string name="set_reset_desc">Borra lecciones completadas, estrellas, altitud y estadísticas; los logros también se borran. No se puede deshacer.</string>
@@ -290,7 +287,6 @@
     <string name="cap_m6">6000 m</string>
     <string name="cap_m7">7000 m</string>
     <string name="cap_m8">8000 m</string>
-    <string name="dev_tap_hint">Toca %1$d veces más para desbloquear el modo desarrollador</string>
     <string name="set_theme_system_current">Seguir el sistema (ahora %1$s)</string>
     <string name="set_bank_current">Banco actual v%1$d</string>
     <string name="set_version">Versión v%1$s (%2$d)</string>

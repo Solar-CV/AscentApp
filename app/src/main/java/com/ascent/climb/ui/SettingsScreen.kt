@@ -292,23 +292,12 @@ fun SettingsScreen(
             }
 
             // ---------------- 开发者模式 ----------------
-            item(key = "lbDev") { MonoLabel(stringResource(R.string.set_section_dev), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
-            item(key = "dev") {
-                OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
-                    if (!devUnlocked) {
-                        Text(
-                            stringResource(R.string.set_dev_locked),
-                            color = Ascent.Fg,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Text(
-                            text = stringResource(R.string.set_dev_hint),
-                            color = Ascent.Fg3,
-                            fontSize = 11.sp,
-                            lineHeight = 17.sp
-                        )
-                    } else {
+            // 未解锁时整块不渲染（连标题一起藏）：这个分区只对已解锁的人有意义，
+            // 留着「未开启 / 连点版本号 7 次」等于把隐藏入口写在明面上。
+            if (devUnlocked) {
+                item(key = "lbDev") { MonoLabel(stringResource(R.string.set_section_dev), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
+                item(key = "dev") {
+                    OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
                         Text(stringResource(R.string.set_dev_on), color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                         Text(stringResource(R.string.set_dev_on_desc), color = Ascent.Fg3, fontSize = 11.sp)
                         SettingsToggle(
@@ -404,13 +393,6 @@ fun SettingsScreen(
                             }
                         }
                     )
-                    if (!devUnlocked && tapCount >= 3) {
-                        Text(
-                            text = stringResource(R.string.dev_tap_hint, 7 - tapCount),
-                            color = Ascent.Accent,
-                            fontSize = 11.sp
-                        )
-                    }
                 }
             }
         }

@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -61,6 +62,10 @@ fun AchievementsDevScreen(
     // 3D 展示：null 表示不在展示页。成就测试区是唯一入口（设置页的旧入口已移除）。
     var stageId by remember { mutableStateOf<String?>(null) }
 
+    // 必须放在 stageId 的提前返回之前：进 3D 展示页时下面这层列表会离开组合，
+    // 状态留在这里才不会跟着丢，返回时还停在原来滑到的地方。
+    val listState = rememberLazyListState()
+
     stageId?.let { id ->
         Badge3DStageScreen(achievementId = id, onBack = { stageId = null })
         return
@@ -86,6 +91,7 @@ fun AchievementsDevScreen(
 
     Box(modifier = Modifier.fillMaxSize().background(Ascent.Bg)) {
         LazyColumn(
+            state = listState,
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 28.dp)
         ) {

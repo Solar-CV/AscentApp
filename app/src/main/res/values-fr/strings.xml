@@ -49,8 +49,6 @@
     <string name="set_bank_url">URL de la banque en ligne</string>
     <string name="set_bank_save_check">Enregistrer et vérifier</string>
     <string name="set_section_dev">Mode développeur</string>
-    <string name="set_dev_locked">Désactivé · touchez 7 fois le numéro de version ci-dessous</string>
-    <string name="set_dev_hint">Le mode développeur sert aux tests : déverrouiller toutes les leçons, afficher les réponses, ouvrir la zone de test des succès.</string>
     <string name="set_dev_on">Mode développeur activé</string>
     <string name="set_dev_on_desc">Tests uniquement, la progression réelle n’est pas modifiée</string>
     <string name="set_dev_unlock_all">Déverrouiller toutes les leçons</string>
@@ -59,7 +57,6 @@
     <string name="set_dev_show_answers_desc">Marquer l’option correcte avec KEY avant de répondre</string>
     <string name="set_dev_achievements">Zone de test des succès (%1$d)</string>
     <string name="set_dev_exit">Quitter le mode développeur</string>
-    <string name="set_dev_tap_hint">Encore %1$d toucher(s) pour activer le mode développeur</string>
     <string name="set_section_data">Données</string>
     <string name="set_reset">Réinitialiser la progression</string>
     <string name="set_reset_desc">Efface les leçons terminées, les étoiles, l’altitude et les statistiques ; les succès sont aussi effacés. Action irréversible.</string>
@@ -290,7 +287,6 @@
     <string name="cap_m6">6000 m</string>
     <string name="cap_m7">7000 m</string>
     <string name="cap_m8">8000 m</string>
-    <string name="dev_tap_hint">Encore %1$d appuis pour débloquer le mode développeur</string>
     <string name="set_theme_system_current">Suivre le système (%1$s actuellement)</string>
     <string name="set_bank_current">Banque actuelle v%1$d</string>
     <string name="set_version">Version v%1$s (%2$d)</string>

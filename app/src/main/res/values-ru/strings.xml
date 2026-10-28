@@ -57,8 +57,6 @@
     <string name="set_bank_save_check">Сохранить и проверить</string>
 
     <string name="set_section_dev">Режим разработчика</string>
-    <string name="set_dev_locked">Выкл. · нажмите номер версии ниже 7 раз</string>
-    <string name="set_dev_hint">Режим разработчика только для тестов: открыть все уроки, показывать ответы, войти в тест достижений.</string>
     <string name="set_dev_on">Режим разработчика включён</string>
     <string name="set_dev_on_desc">Только для тестов, реальный прогресс не меняется</string>
     <string name="set_dev_unlock_all">Открыть все уроки</string>
@@ -67,7 +65,6 @@
     <string name="set_dev_show_answers_desc">Помечать верный вариант знаком KEY до ответа</string>
     <string name="set_dev_achievements">Тест достижений (%1$d)</string>
     <string name="set_dev_exit">Выйти из режима разработчика</string>
-    <string name="set_dev_tap_hint">Нажмите ещё %1$d раз, чтобы включить режим разработчика</string>
 
     <string name="set_section_data">Данные</string>
     <string name="set_reset">Сбросить прогресс</string>
@@ -312,7 +309,6 @@
     <string name="cap_m6">6000 м</string>
     <string name="cap_m7">7000 м</string>
     <string name="cap_m8">8000 м</string>
-    <string name="dev_tap_hint">Нажмите ещё %1$d раз, чтобы открыть режим разработчика</string>
     <string name="set_theme_system_current">Как в системе (сейчас %1$s)</string>
     <string name="set_bank_current">Текущий банк v%1$d</string>
     <string name="set_version">Версия v%1$s (%2$d)</string>

@@ -61,8 +61,6 @@
     <string name="set_bank_save_check">Save &amp; check</string>
 
     <string name="set_section_dev">Developer mode</string>
-    <string name="set_dev_locked">Off · tap the version number below 7 times to enable</string>
-    <string name="set_dev_hint">Developer mode is for testing only: unlock all lessons, show answers, open the achievement test area.</string>
     <string name="set_dev_on">Developer mode is on</string>
     <string name="set_dev_on_desc">For testing only; real progress is unaffected</string>
     <string name="set_dev_unlock_all">Unlock all lessons</string>
@@ -71,7 +69,6 @@
     <string name="set_dev_show_answers_desc">Mark the correct option with KEY before answering</string>
     <string name="set_dev_achievements">Achievement test area (%1$d)</string>
     <string name="set_dev_exit">Exit developer mode</string>
-    <string name="set_dev_tap_hint">Tap %1$d more times to enable developer mode</string>
 
     <string name="set_section_data">Data</string>
     <string name="set_reset">Reset learning progress</string>
@@ -328,7 +325,6 @@
     <string name="cap_m6">6000 m</string>
     <string name="cap_m7">7000 m</string>
     <string name="cap_m8">8000 m</string>
-    <string name="dev_tap_hint">Tap %1$d more times to unlock developer mode</string>
     <string name="set_theme_system_current">Follow system (currently %1$s)</string>
     <string name="set_bank_current">Current bank v%1$d</string>
     <string name="set_version">Version v%1$s (%2$d)</string>

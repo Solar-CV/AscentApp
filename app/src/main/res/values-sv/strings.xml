@@ -49,8 +49,6 @@
     <string name="set_bank_url">URL för onlinebank</string>
     <string name="set_bank_save_check">Spara och kontrollera</string>
     <string name="set_section_dev">Utvecklarläge</string>
-    <string name="set_dev_locked">Av · tryck 7 gånger på versionsnumret nedan</string>
-    <string name="set_dev_hint">Utvecklarläget är bara för test: lås upp alla lektioner, visa svar, öppna testytan för prestationer.</string>
     <string name="set_dev_on">Utvecklarläget är på</string>
     <string name="set_dev_on_desc">Endast test, påverkar inte riktig progress</string>
     <string name="set_dev_unlock_all">Lås upp alla lektioner</string>
@@ -59,7 +57,6 @@
     <string name="set_dev_show_answers_desc">Markera rätt alternativ med KEY före svar</string>
     <string name="set_dev_achievements">Testyta för prestationer (%1$d)</string>
     <string name="set_dev_exit">Lämna utvecklarläget</string>
-    <string name="set_dev_tap_hint">Tryck %1$d gånger till för att aktivera utvecklarläget</string>
     <string name="set_section_data">Data</string>
     <string name="set_reset">Återställ inlärningen</string>
     <string name="set_reset_desc">Rensar avklarade lektioner, stjärnor, höjd och statistik; prestationer rensas också. Går inte att ångra.</string>
@@ -290,7 +287,6 @@
     <string name="cap_m6">6000 m</string>
     <string name="cap_m7">7000 m</string>
     <string name="cap_m8">8000 m</string>
-    <string name="dev_tap_hint">Tryck %1$d gånger till för att låsa upp utvecklarläget</string>
     <string name="set_theme_system_current">Följ systemet (nu %1$s)</string>
     <string name="set_bank_current">Aktuell frågebank v%1$d</string>
     <string name="set_version">Version v%1$s (%2$d)</string>

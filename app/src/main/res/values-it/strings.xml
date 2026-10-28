@@ -49,8 +49,6 @@
     <string name="set_bank_url">URL banca online</string>
     <string name="set_bank_save_check">Salva e controlla</string>
     <string name="set_section_dev">Modalità sviluppatore</string>
-    <string name="set_dev_locked">Off · tocca 7 volte il numero di versione qui sotto</string>
-    <string name="set_dev_hint">La modalità sviluppatore serve solo ai test: sblocca tutte le lezioni, mostra le risposte, apre l’area test obiettivi.</string>
     <string name="set_dev_on">Modalità sviluppatore attiva</string>
     <string name="set_dev_on_desc">Solo per test, il progresso reale non cambia</string>
     <string name="set_dev_unlock_all">Sblocca tutte le lezioni</string>
@@ -59,7 +57,6 @@
     <string name="set_dev_show_answers_desc">Segna l’opzione corretta con KEY prima di rispondere</string>
     <string name="set_dev_achievements">Area test obiettivi (%1$d)</string>
     <string name="set_dev_exit">Esci dalla modalità sviluppatore</string>
-    <string name="set_dev_tap_hint">Tocca ancora %1$d volte per attivare la modalità sviluppatore</string>
     <string name="set_section_data">Dati</string>
     <string name="set_reset">Reimposta i progressi</string>
     <string name="set_reset_desc">Cancella lezioni completate, stelle, quota e statistiche; anche gli obiettivi vengono cancellati. Irreversibile.</string>
@@ -290,7 +287,6 @@
     <string name="cap_m6">6000 m</string>
     <string name="cap_m7">7000 m</string>
     <string name="cap_m8">8000 m</string>
-    <string name="dev_tap_hint">Tocca ancora %1$d volte per sbloccare la modalità sviluppatore</string>
     <string name="set_theme_system_current">Segui il sistema (ora %1$s)</string>
     <string name="set_bank_current">Banca attuale v%1$d</string>
     <string name="set_version">Versione v%1$s (%2$d)</string>

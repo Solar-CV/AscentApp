@@ -49,8 +49,6 @@
     <string name="set_bank_url">URL des Online-Pools</string>
     <string name="set_bank_save_check">Speichern und prüfen</string>
     <string name="set_section_dev">Entwicklermodus</string>
-    <string name="set_dev_locked">Aus · Versionsnummer unten 7-mal tippen</string>
-    <string name="set_dev_hint">Der Entwicklermodus ist nur zum Testen: alle Lektionen freischalten, Antworten zeigen, Erfolgs-Testbereich öffnen.</string>
     <string name="set_dev_on">Entwicklermodus aktiv</string>
     <string name="set_dev_on_desc">Nur zum Testen, echter Fortschritt bleibt unberührt</string>
     <string name="set_dev_unlock_all">Alle Lektionen freischalten</string>
@@ -59,7 +57,6 @@
     <string name="set_dev_show_answers_desc">Richtige Option vor dem Antworten mit KEY markieren</string>
     <string name="set_dev_achievements">Erfolgs-Testbereich (%1$d)</string>
     <string name="set_dev_exit">Entwicklermodus beenden</string>
-    <string name="set_dev_tap_hint">Noch %1$d-mal tippen, um den Entwicklermodus zu aktivieren</string>
     <string name="set_section_data">Daten</string>
     <string name="set_reset">Lernfortschritt zurücksetzen</string>
     <string name="set_reset_desc">Löscht abgeschlossene Lektionen, Sterne, Höhe und Lernstatistik; Erfolge werden ebenfalls gelöscht. Nicht umkehrbar.</string>
@@ -290,7 +287,6 @@
     <string name="cap_m6">6000 m</string>
     <string name="cap_m7">7000 m</string>
     <string name="cap_m8">8000 m</string>
-    <string name="dev_tap_hint">Noch %1$d Mal tippen, um den Entwicklermodus freizuschalten</string>
     <string name="set_theme_system_current">System folgen (aktuell %1$s)</string>
     <string name="set_bank_current">Aktuelle Fragenbank v%1$d</string>
     <string name="set_version">Version v%1$s (%2$d)</string>

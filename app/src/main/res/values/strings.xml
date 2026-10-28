@@ -62,8 +62,6 @@
     <string name="set_bank_save_check">保存并检查</string>
 
     <string name="set_section_dev">开发者模式</string>
-    <string name="set_dev_locked">未开启 · 连点下方版本号 7 次开启</string>
-    <string name="set_dev_hint">开发者模式仅用于测试：可解锁全部关卡、显示答案、进入成就测试区。</string>
     <string name="set_dev_on">开发者模式已开启</string>
     <string name="set_dev_on_desc">仅用于测试，不影响正式进度记录</string>
     <string name="set_dev_unlock_all">解锁全部关卡</string>
@@ -72,7 +70,6 @@
     <string name="set_dev_show_answers_desc">答题前在正确选项旁标记 KEY</string>
     <string name="set_dev_achievements">成就测试区（%1$d 项）</string>
     <string name="set_dev_exit">退出开发者模式</string>
-    <string name="set_dev_tap_hint">再点击 %1$d 次解锁开发者模式</string>
 
     <string name="set_section_data">数据</string>
     <string name="set_reset">重置学习进度</string>
@@ -327,7 +324,6 @@
     <string name="cap_m6">6000 米</string>
     <string name="cap_m7">7000 米</string>
     <string name="cap_m8">8000 米</string>
-    <string name="dev_tap_hint">再点击 %1$d 次解锁开发者模式</string>
     <string name="set_theme_system_current">跟随系统（当前%1$s）</string>
     <string name="set_bank_current">当前题库 v%1$d</string>
     <string name="set_version">版本 v%1$s（%2$d）</string>

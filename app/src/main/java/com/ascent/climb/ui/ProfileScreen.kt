@@ -156,36 +156,42 @@ fun ProfileScreen(
     // 否则 showSettings 仍为 true，先命中设置页，点了按钮界面纹丝不动
     //（曾经就是这个顺序导致「成就测试点不进去」）。
     } else if (showAchievements) {
-        AchievementsDevScreen(
-            store = store,
-            onBack = { showAchievements = false },
-            onChanged = onAchChanged
-        )
+        branchStates.SaveableStateProvider("achievements") {
+            AchievementsDevScreen(
+                store = store,
+                onBack = { showAchievements = false },
+                onChanged = onAchChanged
+            )
+        }
     } else if (showFeedback) {
-        FeedbackScreen(store = store, onBack = { showFeedback = false })
+        branchStates.SaveableStateProvider("feedback") {
+            FeedbackScreen(store = store, onBack = { showFeedback = false })
+        }
     } else if (showSettings) {
-        SettingsScreen(
-            store = store,
-            themeMode = themeMode,
-            onThemeModeChange = onThemeModeChange,
-            languageMode = languageMode,
-            onLanguageModeChange = onLanguageModeChange,
-            devUnlocked = devUnlocked,
-            devUnlockAll = devUnlockAll,
-            devShowAnswers = devShowAnswers,
-            onDevUnlocked = onDevUnlocked,
-            onDevExit = onDevExit,
-            onDevUnlockAllChange = onDevUnlockAllChange,
-            onDevShowAnswersChange = onDevShowAnswersChange,
-            onOpenAchievements = { showAchievements = true },
-            bankChecking = bankChecking,
-            bankMessage = bankMessage,
-            onCheckBank = onCheckBank,
-            onResetBank = onResetBank,
-            onBankUrlChange = onBankUrlChange,
-            onReset = onReset,
-            onBack = { showSettings = false }
-        )
+        branchStates.SaveableStateProvider("settings") {
+            SettingsScreen(
+                store = store,
+                themeMode = themeMode,
+                onThemeModeChange = onThemeModeChange,
+                languageMode = languageMode,
+                onLanguageModeChange = onLanguageModeChange,
+                devUnlocked = devUnlocked,
+                devUnlockAll = devUnlockAll,
+                devShowAnswers = devShowAnswers,
+                onDevUnlocked = onDevUnlocked,
+                onDevExit = onDevExit,
+                onDevUnlockAllChange = onDevUnlockAllChange,
+                onDevShowAnswersChange = onDevShowAnswersChange,
+                onOpenAchievements = { showAchievements = true },
+                bankChecking = bankChecking,
+                bankMessage = bankMessage,
+                onCheckBank = onCheckBank,
+                onResetBank = onResetBank,
+                onBankUrlChange = onBankUrlChange,
+                onReset = onReset,
+                onBack = { showSettings = false }
+            )
+        }
     } else if (showAuth) {
         AuthScreen(
             auth = auth,
@@ -260,14 +266,10 @@ private fun ProfileBody(
     onReset: () -> Unit
 ) {
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
-    // 隐藏入口：连点版本号 7 次
+    // 隐藏入口：连点版本号 7 次。不显示任何提示文案 —— 连点本身就是约定俗成的入口，
+    // 提示会把它暴露给所有用户。
     var tapCount by remember { mutableStateOf(0) }
     var lastTapAt by remember { mutableStateOf(0L) }
-    val tapHint = if (!devUnlocked && tapCount >= 3) {
-        stringResource(R.string.dev_tap_hint, 7 - tapCount)
-    } else {
-        null
-    }
     val onVersionTap: () -> Unit = {
         if (!devUnlocked) {
             val now = System.currentTimeMillis()
@@ -595,10 +597,6 @@ private fun ProfileBody(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(stringResource(R.string.prof_version, BuildConfig.VERSION_NAME), color = Ascent.Fg3, fontSize = 11.sp)
-                if (tapHint != null) {
-                    Spacer(Modifier.height(8.dp))
-                    Text(tapHint, color = Ascent.Warning, fontSize = 11.sp, fontWeight = FontWeight.Medium)
-                }
             }
         }
     }
