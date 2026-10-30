@@ -54,6 +54,16 @@ import com.ascent.climb.data.activeTrackId
 import com.ascent.climb.data.articlesOfTrack
 import com.ascent.climb.data.handbookCategories
 
+/**
+ * 「全部分类」的哨兵值。
+ *
+ * 空串不会与任何真实分类名冲突（分类名来自 [HandbookArticle.category]，都是中文原名），
+ * 也**不随界面语言变化** —— 这点很关键：筛选状态是用 rememberSaveable 存的，
+ * 若把本地化文案当值存进去，切换语言后旧值既不等于新的「全部」，
+ * 也不等于任何分类名，列表会被过滤成空。
+ */
+private const val ALL_CATEGORIES = ""
+
 /** 分类 → 线性图标（替代 emoji）。 */
 private fun categoryIcon(category: String): ImageVector = when {
     category.contains("装备") -> Ic.Backpack
@@ -118,8 +128,11 @@ fun HandbookScreen() {
 private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
     var query by rememberSaveable { mutableStateOf("") }
     val allLabel = stringResource(R.string.hb_filter_all)
-    // 语言切换时 allLabel 会变，用 key 重建状态，避免筛选值停留在旧语言
-    var cat by rememberSaveable(allLabel, trackId) { mutableStateOf(allLabel) }
+    // 「全部」的判定值必须与语言无关。
+    // 原来存的是 allLabel（stringResource），切语言后 cat 里留着旧语言的文案，
+    // 既不等于新语言的 allLabel，也不等于文章的中文分类名 —— 列表被过滤成空。
+    // 改用空串当哨兵，再用 cat == ALL 判断；分类仍存中文原名（[a.category]）。
+    var cat by rememberSaveable(trackId) { mutableStateOf(ALL_CATEGORIES) }
     val articles = remember(trackId) { articlesOfTrack(trackId) }
     val categories = remember(trackId) { handbookCategories(trackId) }
 
@@ -127,7 +140,7 @@ private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
     val filtered = articles.filter { a ->
         val title = localized(ctx, "hb.${a.id}.title", a.title)
         val summary = localized(ctx, "hb.${a.id}.summary", a.summary)
-        (cat == allLabel || a.category == cat) &&
+        (cat == ALL_CATEGORIES || a.category == cat) &&
             (query.isBlank() || title.contains(query, true) || summary.contains(query, true))
     }
 
@@ -183,7 +196,7 @@ private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
                     .padding(top = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                CategoryChip(allLabel, cat == allLabel) { cat = allLabel }
+                CategoryChip(allLabel, cat == ALL_CATEGORIES) { cat = ALL_CATEGORIES }
                 categories.forEach { c ->
                     CategoryChip(categoryName(c), cat == c) { cat = c }
                 }
