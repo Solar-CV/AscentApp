@@ -24,6 +24,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -575,6 +580,39 @@ fun ascentTabs(): List<TabItem> = listOf(
     TabItem(Ic.User, stringResource(R.string.nav_profile))
 )
 
+/**
+ * 底栏标签的字号：五个标签**共用同一个字号**，取最宽那个放得下的值。
+ *
+ * 为什么需要：法语 `Entraînement`、西语 `Entrenamiento`、德语 `Wiederholung`
+ * 都是 12–13 个字符，在 360dp 宽的手机上每个槽位只有约 64dp，10sp 放不下。
+ * 原来标签既不换行也不裁剪，直接画到相邻项上，再被槽位的 [clip] 切掉 ——
+ * 表现就是「文字太长，边角被遮罩挡住」，西语还会因为行高吃掉垂直空间显得更高。
+ *
+ * 按最宽的那一项整体缩放（而不是每项各缩各的），一排字号才整齐；
+ * 下限 8sp，再放不下就交给 ellipsis 兜底，任何语言都不会溢出槽位。
+ */
+@Composable
+private fun rememberTabLabelSize(tabs: List<TabItem>, slotPx: Float): TextUnit {
+    val measurer = rememberTextMeasurer()
+    return remember(tabs, slotPx) {
+        // 留 12% 余量：measure() 与实际绘制用的字体回退不一定完全一致，
+        // 卡在边界上会被 ellipsis 截掉半个词（法语 Entraînement 就这样被截过）
+        val usable = (slotPx * 0.85f).coerceAtLeast(1f)
+        fun widestAt(size: TextUnit): Int = tabs.maxOf { t ->
+            measurer.measure(
+                text = AnnotatedString(t.label),
+                // 选中态是 Bold，比未选中更宽，按它量才是上界
+                style = TextStyle(fontSize = size, fontWeight = FontWeight.Bold),
+                maxLines = 1,
+                softWrap = false
+            ).size.width
+        }
+        var sp = 10f
+        while (sp > 8f && widestAt(sp.sp) > usable) sp -= 0.25f
+        sp.sp
+    }
+}
+
 /** 浮起胶囊底栏（V2：当前项为绿色实心胶囊）。 */
 @Composable
 fun CapsuleTabBar(
@@ -582,9 +620,10 @@ fun CapsuleTabBar(
     onSelect: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val tabs = ascentTabs()
     Box(modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp)) {
         val shape = RoundedCornerShape(36.dp)
-        Row(
+        BoxWithConstraints(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(62.dp)
@@ -592,35 +631,54 @@ fun CapsuleTabBar(
                 .clip(shape)
                 .background(Ascent.Surface)
                 .border(1.dp, Ascent.DuoBorder, shape)
-                .padding(horizontal = 4.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
         ) {
-            ascentTabs().forEachIndexed { i, tab ->
-                val on = i == selected
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(54.dp)
-                        .clip(RoundedCornerShape(26.dp))
-                        .background(if (on) Ascent.UGreen else Color.Transparent)
-                        .clickable { onSelect(i) },
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Icon(
-                        tab.icon,
-                        contentDescription = tab.label,
-                        tint = if (on) Color.White else Ascent.DuoFg3,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(Modifier.height(3.dp))
-                    Text(
-                        text = tab.label,
-                        color = if (on) Color.White else Ascent.DuoFg3,
-                        fontSize = 10.sp,
-                        fontWeight = if (on) FontWeight.Bold else FontWeight.Medium
-                    )
+            // 槽位宽 = （栏宽 − 左右内边距）/ 项数；这里没有 padding 修饰符，
+            // constraints 就是栏内宽，直接把 4dp×2 减掉即可
+            val padPx = with(LocalDensity.current) { 8.dp.toPx() }
+            val slotPx = (constraints.maxWidth - padPx) / tabs.size
+            val labelSize = rememberTabLabelSize(tabs, slotPx)
+
+            Row(
+                modifier = Modifier.fillMaxSize().padding(horizontal = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                tabs.forEachIndexed { i, tab ->
+                    val on = i == selected
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(54.dp)
+                            // 圆角 16dp，不是 26dp：槽位只有约 64dp 宽，26dp 圆角在
+                            // 54dp 高里几乎是正圆，文字所在的水平高度上弦宽只剩 53dp，
+                            // 西语 Entrenamiento（约 61dp）会顶出圆外被形状裁掉。
+                            // 16dp 时同一高度弦宽约 62dp，配合下面的自适应字号才放得下。
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(if (on) Ascent.UGreen else Color.Transparent)
+                            .clickable { onSelect(i) },
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            tab.icon,
+                            contentDescription = tab.label,
+                            tint = if (on) Color.White else Ascent.DuoFg3,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.height(3.dp))
+                        Text(
+                            text = tab.label,
+                            color = if (on) Color.White else Ascent.DuoFg3,
+                            fontSize = labelSize,
+                            fontWeight = if (on) FontWeight.Bold else FontWeight.Medium,
+                            maxLines = 1,
+                            softWrap = false,
+                            overflow = TextOverflow.Ellipsis,
+                            textAlign = TextAlign.Center,
+                            // 两侧各留 2dp，避免字贴到圆角弧线上
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 2.dp)
+                        )
+                    }
                 }
             }
         }
