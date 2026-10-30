@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.20.17 (versionCode 124). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+Current version v0.20.18 (versionCode 125). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 ## Install
 
@@ -217,6 +217,11 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+**v0.20.18: a re-exported Everest diorama**
+
+- The Climbing Grand Slam model was rebuilt around its details: prayer flags grew to 0.42 × 0.26 mm (they were invisible on a phone), their cords are lifted onto twin cairn stones and every flag is checked against the snow so none sinks in, and small parts sample the terrain mesh directly instead of ray-casting the whole scene
+- The icon comes from the new hero render; pose and framing are unchanged
 
 **v0.20.17: no more accidental spin**
 

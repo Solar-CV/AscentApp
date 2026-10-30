@@ -6,7 +6,7 @@ Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist
 
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 68 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 21 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.20.17 (versionCode 124). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.20.18 (versionCode 125). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 ## Installation
 
@@ -217,6 +217,11 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 Ältere App-Versionen gehen an einem neueren Pool nicht kaputt. `minAppVersion` in `manifest.json` blockt zu alte Clients, unbekannte Felder werden ignoriert, eine fehlerhafte Frage wird übersprungen statt tödlich zu sein.
 
 ## Letzte Änderungen
+
+**v0.20.18: neu exportiertes Everest-Diorama**
+
+- Das Modell für „Climbing Grand Slam" wurde rund um die Details neu gebaut: Gebetsfahnen sind jetzt 0,42 × 0,26 mm groß (vorher auf dem Handy unsichtbar), ihre Schnüre liegen auf doppelten Steinhaufen und jede Fahne wird gegen den Schnee geprüft, kleine Teile tasten direkt das Terrain-Mesh ab statt die ganze Szene per Raycast
+- Das Icon stammt aus dem neuen Hero-Render; Pose und Bildausschnitt sind unverändert
 
 **v0.20.17: kein versehentliches Wegdrehen mehr**
 
