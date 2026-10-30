@@ -182,6 +182,18 @@ private const val ZOOM_MAX = 2.6f
 /** 双指拖动位移与间距变化到这个比例以内，视为「平移查看局部」而不是缩放。 */
 private const val PINCH_PAN_RATIO = 0.02f
 
+// 一次触摸手势所处的阶段。分开记状态，而不是靠 pointerCount 现算：
+// 双指松开一根手指时 pointerCount 会掉到 1，若按「单指」处理，剩余那根手指
+// 的位置和上次的双指中心差一大截，yaw 会瞬间跳一大步、并且带出高速惯性。
+private const val GESTURE_NONE = 0
+private const val GESTURE_ROTATE = 1
+private const val GESTURE_PINCH = 2
+/** 双指手势有一根手指抬起后，本次手势剩余阶段冻结（既不转也不缩放）。 */
+private const val GESTURE_LOCKED = 3
+
+/** 惯性速度上限（度/帧，60fps 下约 720°/s），避免一次快速拖动把模型甩飞。 */
+private const val MAX_SPIN = 12f
+
 /** 提升 glTF 自带点/聚光灯的强度，使其在当前场景曝光下可见。 */
 private const val PUNCTUAL_LIGHT_GAIN = 5f
 private const val IBL_PATH = "env/studio_ibl.ktx"
@@ -492,7 +504,9 @@ private class Badge3DRenderer(
     private var lastX = 0f
     private var lastY = 0f
     private var dragging = false
-    private var multiTouch = false
+    private var gesture = GESTURE_NONE
+    /** 本次手势是否发生过双指操作：是则抬起时不留惯性。 */
+    private var pinched = false
 
     // 统计
     private var firstFrameMs = -1.0
@@ -751,11 +765,17 @@ private class Badge3DRenderer(
             if (abs(spinVelocity) > 0.02f) {
                 yaw += spinVelocity * dt * 60f
                 spinVelocity *= 0.92f
-            } else if (autoSpin && now - lastTouchAt > 3000L) {
+            } else if (autoSpin && zoom > 0.92f && now - lastTouchAt > 3000L) {
+                // 放大查看时不自动摆：用户正盯着某处小字，画面自己动起来会很难受
                 // 自动展示只在正面 ±22° 摆动：模型背面是一块素板，转过去不好看；
                 // 手动拖动仍可看完整 360°。
+                //
+                // 从用户停下的角度「平滑」走回摆动区间：直接赋值会让模型从任意角度
+                // 瞬间跳到 18°，看起来就是「突然高速转一下」。
                 spinPhase += dt
-                yaw = 18f + sin(spinPhase * 0.9f) * 22f
+                val target = 18f + sin(spinPhase * 0.9f) * 22f
+                val delta = ((target - yaw + 540f) % 360f) - 180f
+                yaw += delta * min(1f, dt * 3.5f)
                 spinVelocity = 0f
             }
         }
@@ -855,7 +875,8 @@ private class Badge3DRenderer(
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 dragging = true
-                multiTouch = false
+                gesture = GESTURE_ROTATE
+                pinched = false
                 lastX = event.x
                 lastY = event.y
                 pinchBase = distanceOf(event)
@@ -873,7 +894,9 @@ private class Badge3DRenderer(
             }
 
             MotionEvent.ACTION_POINTER_DOWN -> {
-                multiTouch = true
+                gesture = GESTURE_PINCH
+                pinched = true
+                spinVelocity = 0f
                 pinchBase = distanceOf(event)
                 if (event.pointerCount >= 2) {
                     lastX = (event.getX(0) + event.getX(1)) * 0.5f
@@ -883,39 +906,58 @@ private class Badge3DRenderer(
 
             MotionEvent.ACTION_MOVE -> {
                 lastTouchAt = System.currentTimeMillis()
-                if (multiTouch && event.pointerCount >= 2) {
-                    val d = distanceOf(event)
-                    val cx = (event.getX(0) + event.getX(1)) * 0.5f
-                    val cy = (event.getY(0) + event.getY(1)) * 0.5f
-                    val ratio = if (pinchBase > 0f) abs(1f - d / pinchBase) else 0f
-                    if (pinchBase > 0f && d > 0f && ratio > PINCH_PAN_RATIO) {
-                        zoom = (zoom * (pinchBase / d)).coerceIn(ZOOM_MIN, ZOOM_MAX)
-                        pinchBase = d
-                    } else {
-                        // 两指间距基本没变 → 平移查看局部
-                        val worldPerPx = worldPerPixel()
-                        panX -= (cx - lastX) * worldPerPx
-                        panY += (cy - lastY) * worldPerPx
-                        clampPan()
+                when (gesture) {
+                    GESTURE_PINCH -> {
+                        if (event.pointerCount < 2) return true
+                        val d = distanceOf(event)
+                        val cx = (event.getX(0) + event.getX(1)) * 0.5f
+                        val cy = (event.getY(0) + event.getY(1)) * 0.5f
+                        val ratio = if (pinchBase > 0f) abs(1f - d / pinchBase) else 0f
+                        if (pinchBase > 0f && d > 0f && ratio > PINCH_PAN_RATIO) {
+                            zoom = (zoom * (pinchBase / d)).coerceIn(ZOOM_MIN, ZOOM_MAX)
+                            pinchBase = d
+                        } else {
+                            // 两指间距基本没变 → 平移查看局部
+                            val worldPerPx = worldPerPixel()
+                            panX -= (cx - lastX) * worldPerPx
+                            panY += (cy - lastY) * worldPerPx
+                            clampPan()
+                        }
+                        lastX = cx
+                        lastY = cy
+                        applyCamera()
                     }
-                    lastX = cx
-                    lastY = cy
-                    applyCamera()
-                } else {
-                    val dx = event.x - lastX
-                    val dy = event.y - lastY
-                    // 反向手感：向右/向下拖动，徽章朝同方向转
-                    yaw += dx * 0.42f
-                    pitch = (pitch + dy * 0.26f).coerceIn(-26f, 26f)
-                    spinVelocity = dx * 0.42f
-                    lastX = event.x
-                    lastY = event.y
+
+                    GESTURE_ROTATE -> {
+                        val dx = event.x - lastX
+                        val dy = event.y - lastY
+                        // 反向手感：向右/向下拖动，徽章朝同方向转
+                        yaw += dx * 0.42f
+                        pitch = (pitch + dy * 0.26f).coerceIn(-26f, 26f)
+                        // 只记速度，不在这里判方向；异常大的位移（例如跨手势跳变）不当作惯性
+                        spinVelocity = if (abs(dx) < 80f) {
+                            (dx * 0.42f).coerceIn(-MAX_SPIN, MAX_SPIN)
+                        } else 0f
+                        lastX = event.x
+                        lastY = event.y
+                    }
+
+                    // GESTURE_LOCKED：双指刚松开一根，剩下那根不再驱动旋转
+                    else -> Unit
                 }
+            }
+
+            MotionEvent.ACTION_POINTER_UP -> {
+                // 关键：不要在剩余手指上继续当单指旋转，直接冻结到全部抬起为止
+                gesture = GESTURE_LOCKED
+                spinVelocity = 0f
             }
 
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 dragging = false
-                multiTouch = false
+                gesture = GESTURE_NONE
+                if (pinched) spinVelocity = 0f   // 缩放/平移过的手势不留惯性
+                pinched = false
                 lastTouchAt = System.currentTimeMillis()
             }
         }
