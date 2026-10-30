@@ -622,7 +622,12 @@ fun CapsuleTabBar(
 ) {
     val tabs = ascentTabs()
     Box(modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp)) {
-        val shape = RoundedCornerShape(36.dp)
+        // 外框圆角必须 ≤ 内边距 + 内块圆角（22 ≤ 6 + 16），否则最左/最右的选中块
+        // 会在上下两个角伸出弧形边界之外，被外框裁掉。
+        // 原来外框是 36dp（62dp 高，等于胶囊），内块 16dp、内边距 4dp，
+        // 36 > 20 → 选第一项或最后一项时边角被吃掉。
+        // 22dp 仍是很圆的圆角块，且与内块同心，任何一项都不会被裁。
+        val shape = RoundedCornerShape(22.dp)
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxWidth()
@@ -634,12 +639,12 @@ fun CapsuleTabBar(
         ) {
             // 槽位宽 = （栏宽 − 左右内边距）/ 项数；这里没有 padding 修饰符，
             // constraints 就是栏内宽，直接把 4dp×2 减掉即可
-            val padPx = with(LocalDensity.current) { 8.dp.toPx() }
+            val padPx = with(LocalDensity.current) { 12.dp.toPx() }
             val slotPx = (constraints.maxWidth - padPx) / tabs.size
             val labelSize = rememberTabLabelSize(tabs, slotPx)
 
             Row(
-                modifier = Modifier.fillMaxSize().padding(horizontal = 4.dp),
+                modifier = Modifier.fillMaxSize().padding(horizontal = 6.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
