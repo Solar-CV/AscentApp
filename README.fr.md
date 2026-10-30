@@ -6,7 +6,7 @@ Une application Android pour celles et ceux qui débutent en alpinisme d’altit
 
 Deux parcours se changent librement. La **haute montagne** compte six unités et 68 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 21 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.20.14 (versionCode 121). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : 34 succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 39 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+Version actuelle v0.20.15 (versionCode 122). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Le plus simple est l’APK debug déjà compilé des [Releases](https://github.c
 
 - Paquet : `com.ascent.climb`
 - Minimum : Android 8.0 (API 26), **arm64-v8a uniquement** — les téléphones uniquement 32 bits ne peuvent pas installer cette version
-- Taille : environ 39 Mo (32 Mo de modèles non compressés, environ 9 Mo après empaquetage)
+- Taille : environ 41 Mo (37 Mo de modèles non compressés, environ 10 Mo après empaquetage)
 - Autorisations : réseau et état du réseau — pour vérifier les mises à jour de la banque de questions et envoyer un retour. Tout fonctionne hors ligne ; la banque embarquée est toujours là
 
 Transférez l’APK sur le téléphone, autorisez l’installation de sources inconnues, appuyez sur installer. Aucune connexion au premier lancement.
@@ -47,7 +47,7 @@ L’entraînement donne un pourcentage de préparation et l’altitude du sommet
 
 Le profil n’affiche que les badges débloqués. Les 40 sont sur le mur de badges, les verrouillés en aperçu gris, les succès cachés sous un « ? ».
 
-La plupart existent aussi en vrai modèle 3D — cadres métalliques, émaux, relief. Ouvrez la zone de test des succès et touchez un badge pour le voir tourner : glisser pour pivoter, pincer pour zoomer, et il oscille doucement de lui-même quand vous lâchez. Leurs icônes viennent des modèles eux-mêmes : le mur et la vue 3D montrent le même objet ; les anciennes illustrations par IA ont été retirées. Les douze autres, sans modèle, gardent leur dessin à la main et s’affichent en carte inclinée en perspective. Débloquer un succès n’importe où dans l’application affiche le même badge 3D, sur un socle clair, avec des rubans qui entrent depuis les deux bords de l’écran.
+La plupart existent aussi en vrai modèle 3D — cadres métalliques, émaux, relief. Ouvrez la zone de test des succès et touchez un badge pour le voir tourner : glisser pour pivoter, pincer pour zoomer, et il oscille doucement de lui-même quand vous lâchez. Leurs icônes viennent des modèles eux-mêmes : le mur et la vue 3D montrent le même objet ; les anciennes illustrations par IA ont été retirées. Les quarante ont désormais un modèle ; le dessin à la main reste le repli des badges ajoutés plus tard. Débloquer un succès n’importe où dans l’application affiche le même badge 3D, sur un socle clair, avec des rubans qui entrent depuis les deux bords de l’écran.
 
 ### Réglages
 
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Textes d’interface pour 10 langues
     ├── assets/
-    │   ├── badges/*.glb         34 modèles de badge
+    │   ├── badges/*.glb         40 modèles de badge
     │   └── env/studio_ibl.ktx   Environnement IBL généré par code
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,13 @@ Les anciennes versions de l’application ne cassent pas face à une banque plus
 
 ## Changements récents
 
+**v0.20.15 : les quarante badges sont en 3D**
+
+- Les six derniers arrivent : Eight K Grad (toque), Final Exam (médaille de sommet avec drapeau), Five Zones (plaque semelle de course), Fourteen Peaks (panorama 2,5:1 des quatorze 8 000), Two Tracks (plateau à deux rails) et Full Route (un bloc de terrain de l’Everest, la seule pièce qui n’est pas une médaille)
+- L’icône de chaque badge est désormais le rendu du modèle lui-même : les illustrations dessinées quittent le mur
+- Full Route demande sa propre pose : il repose sur son socle, donc on saute la rotation de 90° des médailles plates et on tourne la plaque vers l’objectif ; son rendu est sur gris et non sur noir, le détourage se fait donc contre ce gris
+- Modèles 34 → 40 ; paquet 39,4 → 40,6 Mo
+
 **v0.20.14 : les badges s’ouvrent partout**
 
 - Plus besoin de passer par la zone de test développeur : touchez n’importe quel badge débloqué dans « Mon profil » ou sur le mur des badges, il s’ouvre en plein écran. La vue se superpose à l’app au lieu de remplacer la page : au retour vous retrouvez l’écran quitté, position de liste comprise, et la barre du bas est masquée
@@ -252,7 +259,7 @@ Les anciennes versions de l’application ne cassent pas face à une banque plus
 **v0.20.0 – v0.20.3 : badges 3D**
 
 - 34 succès sont rendus en 3D temps réel (Filament 1.75, glTF, métal et émail PBR). Glisser pour pivoter, pincer pour zoomer, une légère oscillation au repos ; le mouvement automatique reste sur la face avant, car le revers d’une médaille est une plaque lisse
-- Les six autres gardent leur illustration fixe, inclinée en perspective avec coins arrondis et ombre — une carte de collection, pas une image plate. Ils passent en 3D dès qu’un modèle arrive
+- Depuis la v0.20.15, les quarante ont un modèle ; la carte inclinée reste le repli des futurs badges
 - Les fenêtres de déblocage et d’aperçu passent par le même moteur, avec un socle clair derrière le modèle (un modèle sombre sur une carte sombre disparaît) et 56 rubans depuis les deux bords. « Réduire les animations » coupe les rubans
 - La page de présentation repose sur un paysage très flou, généré par code (27 Ko) : ciel, quatre crêtes, brume, aucune licence photo à gérer
 - Sens de glissement inversés après retour ; la scène éclaircie puis légèrement reprise pour que les parties émissives gardent leur contraste

@@ -6,7 +6,7 @@ Un'app Android per chi comincia con l'alpinismo d'alta quota e l'arrampicata su 
 
 Due percorsi si cambiano liberamente. **Alta montagna** ha sei unità e 68 lezioni, dall'introduzione a 5.000 m fino a 8.000 m — da 3.200 m a 8.848 m da un capo all'altro. **Escursionismo** ha quattro unità e 21 lezioni, dalla camminata di un giorno ai percorsi lunghi — da 200 m a 5.630 m. Ogni percorso tiene per sé progressi, badge e coda di ripasso.
 
-Versione attuale v0.20.14 (versionCode 121). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.554 / 10.554). La v0.20 riguarda i badge: 34 obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 39 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
+Versione attuale v0.20.15 (versionCode 122). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.554 / 10.554). La v0.20 riguarda i badge: i quaranta obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 41 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
 
 ## Installazione
 
@@ -14,7 +14,7 @@ La via più semplice è l'APK debug già compilato nelle [Releases](https://gith
 
 - Pacchetto: `com.ascent.climb`
 - Minimo: Android 8.0 (API 26), **solo arm64-v8a** — i telefoni solo a 32 bit non possono installarlo
-- Dimensione: circa 39 MB (32 MB di modelli non compressi, circa 9 MB dopo il confezionamento)
+- Dimensione: circa 41 MB (37 MB di modelli non compressi, circa 10 MB dopo il confezionamento)
 - Permessi: rete e stato della rete — per controllare gli aggiornamenti del questionario e inviare feedback. Tutto funziona offline; il questionario incluso c'è sempre
 
 Trasferisci l'APK sul telefono, consenti l'installazione da origini sconosciute, tocca installa. Al primo avvio non serve accedere.
@@ -47,7 +47,7 @@ L'allenamento dà una percentuale di preparazione e la quota della vetta obietti
 
 Il profilo mostra solo i badge sbloccati. Tutti e 40 stanno nella parete dei badge, quelli bloccati come anteprima grigia, gli obiettivi nascosti come «?».
 
-La maggior parte esiste anche come vero modello 3D — cornici in metallo, smalti, rilievo. Apri l'area di test degli obiettivi e tocca un badge per vederlo girare: trascina per ruotare, pizzica per ingrandire, e quando lasci si dondola piano da solo. Le icone vengono dai modelli stessi, quindi parete e vista 3D mostrano lo stesso oggetto; le vecchie illustrazioni IA sono state ritirate. Gli altri dodici senza modello tengono il disegno a mano e compaiono come scheda inclinata in prospettiva. Sbloccare un obiettivo in qualsiasi punto dell'app mostra lo stesso badge 3D, su un piedistallo chiaro, con i nastri che entrano dai due bordi.
+La maggior parte esiste anche come vero modello 3D — cornici in metallo, smalti, rilievo. Apri l'area di test degli obiettivi e tocca un badge per vederlo girare: trascina per ruotare, pizzica per ingrandire, e quando lasci si dondola piano da solo. Le icone vengono dai modelli stessi, quindi parete e vista 3D mostrano lo stesso oggetto; le vecchie illustrazioni IA sono state ritirate. Tutte e quaranta hanno ora un modello; il disegno a mano resta come ripiego per le insegne future. Sbloccare un obiettivo in qualsiasi punto dell'app mostra lo stesso badge 3D, su un piedistallo chiaro, con i nastri che entrano dai due bordi.
 
 ### Impostazioni
 
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Testi dell'interfaccia per 10 lingue
     ├── assets/
-    │   ├── badges/*.glb         34 modelli di badge
+    │   ├── badges/*.glb         40 modelli di badge
     │   └── env/studio_ibl.ktx   Ambiente IBL generato via codice
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,13 @@ Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `min
 
 ## Cambi recenti
 
+**v0.20.15: tutte e quaranta le insegne sono in 3D**
+
+- Arrivano le ultime sei: Eight K Grad (tocco), Final Exam (medaglia di vetta con bandiera), Five Zones (placca suola da corsa), Fourteen Peaks (panoramica 2,5:1 dei quattordici ottomila), Two Tracks (vassoio a due binari) e Full Route (un blocco di terreno dell'Everest, l'unico pezzo che non è una medaglia)
+- L'icona di ogni insegna è ora il render del modello stesso: le illustrazioni disegnate spariscono dalla bacheca
+- Full Route vuole una posa sua: poggia sulla base, quindi salta la rotazione di 90° delle medaglie piatte e la targa viene girata verso l'obiettivo; il suo render è su grigio e non su nero, quindi il ritaglio avviene su quel grigio
+- Modelli 34 → 40; pacchetto 39,4 → 40,6 MB
+
 **v0.20.14: i badge si aprono ovunque**
 
 - Non serve più passare dall'area di test sviluppatore: tocca un badge sbloccato in «Il mio profilo» o nella bacheca e si apre a schermo intero. La vista si sovrappone all'app invece di sostituire la pagina, quindi tornando indietro resti dov'eri — posizione della lista compresa — e la barra in basso resta coperta
@@ -252,7 +259,7 @@ Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `min
 **v0.20.0 – v0.20.3: badge 3D**
 
 - 34 obiettivi sono resi in 3D in tempo reale (Filament 1.75, glTF, metallo e smalto PBR). Trascina per ruotare, pizzica per ingrandire, oscilla piano quando lasci; il movimento automatico resta sulla faccia frontale perché il retro di una medaglia è una lastra liscia
-- Gli altri sei tengono l'illustrazione ferma, inclinata in prospettiva con angoli arrotondati e ombra: una carta da collezione, non un'immagine piatta. Passano al 3D appena arriva un modello
+- Dalla v0.20.15 tutte e quaranta hanno un modello; la scheda inclinata resta il ripiego per le prossime insegne
 - Le finestre di sblocco e anteprima passano dallo stesso motore, con un piedistallo chiaro dietro il modello (un modello scuro su una scheda scura sparisce) e 56 nastri dai due bordi. «Riduci movimento» spegne i nastri
 - La pagina di esposizione poggia su un paesaggio molto sfocato, generato via codice (27 KB): cielo, quattro creste, foschia, nessuna licenza fotografica da gestire
 - Direzioni di trascinamento invertite dopo il feedback; la scena è stata schiarita e poi ripresa un po' perché le parti emissive conservino contrasto

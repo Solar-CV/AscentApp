@@ -103,8 +103,8 @@ import kotlin.math.tan
  */
 
 /**
- * 成就 id → glb 资源。没有登记的成就自动回退「图片假 3D」。
- * 当前 34 枚有模型，其余 6 枚仍用成就图标。
+ * 成就 id → glb 资源。40 枚成就全部有模型（2026-10-30 收官），
+ * 因此不再有「图片假 3D」的成就；保留这条回退逻辑是为了将来新增成就时先用定稿图顶上。
  */
 private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
     "altitude_6000" to "badges/altitude_6000.glb",
@@ -116,7 +116,12 @@ private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
     "curious_dev" to "badges/curious_dev.glb",
     "days_21" to "badges/days_21.glb",
     "days_7" to "badges/days_7.glb",
+    "eight_k_grad" to "badges/eight_k_grad.glb",
+    "final_exam" to "badges/final_exam.glb",
     "first_steps" to "badges/first_steps.glb",
+    "five_zones" to "badges/five_zones.glb",
+    "fourteen_peaks" to "badges/fourteen_peaks.glb",
+    "full_route" to "badges/full_route.glb",
     "knot_tied" to "badges/knot_tied.glb",
     "peak_scout" to "badges/peak_scout.glb",
     "perfect_1" to "badges/perfect_1.glb",
@@ -141,6 +146,27 @@ private val MODEL_OF_ACHIEVEMENT: Map<String, String> = mapOf(
     "trail_finish" to "badges/trail_finish.glb",
     "trail_first" to "badges/trail_first.glb",
     "trail_high" to "badges/trail_high.glb",
+    "two_tracks" to "badges/two_tracks.glb",
+)
+
+/**
+ * 少数模型不是「扁平徽章」，姿态规则不一样，按成就 id 覆盖默认的绕 X +90°。
+ *
+ * `full_route`（攀登大满贯）是一块珠峰地形摆件：底座躺在 XZ 平面、峰顶朝 +Y、
+ * 铭牌朝世界 −X。套徽章那条 X+90° 会把峰顶怼向屏幕、底座立成一堵竖直的墙。
+ * 这里跳过 X 轴旋转，改成绕 Y +90° 把 −X 的铭牌转到 +Z 正对镜头。
+ */
+private data class ModelPose(
+    /** 姿态修正，"x+" 是扁平徽章的默认值。 */
+    val fix: String = "x+",
+    /** 取景距离倍数。非扁平件在包围盒归一化后仍会顶出画面，需要拉远。 */
+    val fitScale: Float = 1f,
+)
+
+private val POSE_OVERRIDE: Map<String, ModelPose> = mapOf(
+    "full_route" to ModelPose(fix = "y", fitScale = 1.35f),
+    // 45° 菱形帽板对角线最长，包围盒归一化后仍会蹭到左右边，取景放大一点
+    "eight_k_grad" to ModelPose(fitScale = 1.18f),
 )
 
 /** 默认模型（POC Activity / 调试直连时用）。 */
@@ -444,6 +470,8 @@ private class Badge3DRenderer(
     private var autoSpin = true
     private var spinPhase = 0f
     private var zoom = 1f
+    /** 非扁平件（地形摆件）取景拉远倍数，见 [POSE_OVERRIDE]。 */
+    private var frameScale = 1f
     private var lastAspect = 1f
     private var pinchBase = 1f
     private var lastTouchAt = System.currentTimeMillis()
@@ -624,15 +652,18 @@ private class Badge3DRenderer(
             "POC3D",
             "bbox center=${center.toList()} half=${half.toList()} scale=$scale"
         )
-        val fix = runCatching {
-            ((textureView.context as? android.app.Activity)?.intent?.getStringExtra("fix")) ?: "x+"
-        }.getOrDefault("x+")
+        val intentFix = runCatching {
+            (textureView.context as? android.app.Activity)?.intent?.getStringExtra("fix")
+        }.getOrNull()
+        val badgeId = modelPath.substringAfterLast('/').substringBeforeLast('.')
+        val pose = POSE_OVERRIDE[badgeId]
+        frameScale = pose?.fitScale ?: 1f
+        val fix = intentFix ?: pose?.fix ?: "x+"
         val fixMatrix = when (fix) {
             "none" -> identity()
             "x-" -> rotationX(-90f)
             "y" -> rotationY(90f)
             "z" -> rotationZ(90f)
-            "x-" -> rotationX(-90f)
             else -> rotationX(90f)
         }
         android.util.Log.i("POC3D", "fix=$fix")
@@ -656,7 +687,7 @@ private class Badge3DRenderer(
         val aspect = lastAspect.coerceIn(0.2f, 5f)
         val fitY = 0.5f / halfTan
         val fitX = 0.5f / (halfTan * aspect)
-        val dist = max(fitY, fitX) * 1.18f * zoom
+        val dist = max(fitY, fitX) * 1.18f * zoom * frameScale
         camera.setModelMatrix(translation(0f, 0f, dist))
     }
 

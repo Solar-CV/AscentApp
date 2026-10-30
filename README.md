@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.20.14 (versionCode 121). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: thirty-four achievements now render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 39 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+Current version v0.20.15 (versionCode 122). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 ## Install
 
@@ -14,7 +14,7 @@ The easiest route is the prebuilt debug APK from [Releases](https://github.com/S
 
 - Package: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
-- Size: about 39 MB (32 MB of uncompressed badge models, ~9 MB after packaging)
+- Size: about 41 MB (37 MB of uncompressed badge models, ~10 MB after packaging)
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
 Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
@@ -47,7 +47,7 @@ Training gives a readiness percentage and the target peak's altitude. Review put
 
 The profile shows unlocked badges only. All 40 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
 
-Most of them also exist as real 3D models — metal frames, enamel insets, relief. Open the achievements test screen and tap a badge to see it spin: drag to rotate, pinch to zoom, and it sways gently on its own when you stop. Their icons are rendered from the models themselves, so the wall and the 3D view show the same object; the old AI illustrations were retired. The remaining six without a model keep hand-drawn art and fall back to a perspective-tilted card. Unlocking an achievement anywhere in the app shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges of the screen.
+Most of them also exist as real 3D models — metal frames, enamel insets, relief. Open the achievements test screen and tap a badge to see it spin: drag to rotate, pinch to zoom, and it sways gently on its own when you stop. Their icons are rendered from the models themselves, so the wall and the 3D view show the same object; the old AI illustrations were retired. All forty now have a model; the still-art fallback stays in place for any badge added later. Unlocking an achievement anywhere in the app shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges of the screen.
 
 ### Settings
 
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Interface strings for 10 languages
     ├── assets/
-    │   ├── badges/*.glb         34 badge models
+    │   ├── badges/*.glb         40 badge models
     │   └── env/studio_ibl.ktx   Procedurally generated IBL environment
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,13 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 
 ## Recent changes
 
+**v0.20.15: all forty badges are 3D**
+
+- The last six land: Eight K Grad (a mortarboard), Final Exam (a summit medal with a flag), Five Zones (a running-sole plate), Fourteen Peaks (a 2.5:1 panorama of all fourteen 8,000ers), Two Tracks (a two-rail tray) and Full Route (a Mount Everest terrain block — the only piece in the set that is not a medal)
+- Every badge icon is now the model's own render, so the hand-drawn backups are gone from the wall
+- Full Route needs its own pose: it stands on its base, so the 90° flip used for flat medals is skipped and the plaque is turned to face the camera; its render sits on grey rather than black, so the icon is knocked out against that grey
+- Models 34 → 40; package 39.4 → 40.6 MB
+
 **v0.20.14: badges open anywhere**
 
 - Badges are no longer reachable only from the developer test area: tap any unlocked badge on My profile or on the badge wall and it opens full screen. The view is laid over the app rather than replacing the page, so going back returns you where you were — list position included — and the bottom bar stays out of the way
@@ -252,7 +259,7 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 **v0.20.0 – v0.20.3: 3D badges**
 
 - Thirty-four achievements render as real-time 3D (Filament 1.75, glTF, PBR metal and enamel). Drag to rotate, pinch to zoom, gentle sway when idle; the automatic motion stays on the front face because the back of a medal is a plain plate
-- The remaining six keep their still art, tilted in perspective with rounded corners and a shadow — a collectible card, not a flat image. They switch to 3D automatically once a model lands
+- All forty have models as of v0.20.15; the tilted-card fallback stays for any badge added before its model exists
 - Unlock and preview dialogs go through the same renderer, with a light pedestal behind the model (a dark model on a dark card disappears) and a 56-ribbon burst from both edges. Reduce-motion disables the ribbons
 - Display page sits on a heavily blurred landscape, generated procedurally (27 KB) — sky, four ridges, mist, no photo licensing to worry about
 - Drag directions inverted per feedback; the whole scene brightened, then pulled back slightly so emissive parts keep their contrast

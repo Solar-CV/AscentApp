@@ -6,7 +6,7 @@ Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist
 
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 68 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 21 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.20.14 (versionCode 121). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: 34 Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 39 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.20.15 (versionCode 122). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Am einfachsten über das fertige Debug-APK aus den [Releases](https://github.com
 
 - Paket: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26), **nur arm64-v8a** — reine 32-Bit-Geräte können diese Version nicht installieren
-- Größe: etwa 39 MB (32 MB unkomprimierte Abzeichenmodelle, rund 9 MB nach dem Paketieren)
+- Größe: etwa 41 MB (37 MB unkomprimierte Abzeichenmodelle, rund 10 MB nach dem Paketieren)
 - Berechtigungen: Netzwerk und Netzwerkstatus — für die Prüfung auf Fragenpool-Updates und für Feedback. Alles funktioniert offline, der mitgelieferte Pool ist immer da
 
 APK aufs Telefon übertragen, Installation aus unbekannten Quellen erlauben, tippen. Beim ersten Start ist keine Anmeldung nötig.
@@ -47,7 +47,7 @@ Training liefert einen Bereitschafts-Prozentsatz und die Höhe des Zielgipfels. 
 
 Das Profil zeigt nur freigeschaltete Abzeichen. Alle 40 stehen an der Abzeichenwand, gesperrte als graue Vorschau, versteckte Erfolge als „?".
 
-Die meisten gibt es zusätzlich als echtes 3D-Modell — Metallrahmen, Emaille-Einlagen, Relief. Im Erfolgs-Testbereich antippen und ein Abzeichen dreht sich: ziehen zum Drehen, mit zwei Fingern zoomen, und es wiegt sich von selbst leicht, sobald man loslässt. Die Icons stammen aus den Modellen selbst, Wand und 3D-Ansicht zeigen also dasselbe Objekt; die alten KI-Illustrationen sind ausgemustert. Die übrigen zwölf ohne Modell behalten ihre handgezeichnete Grafik und erscheinen als perspektivisch gekippte Karte. Wird ein Erfolg irgendwo in der App freigeschaltet, zeigt der Dialog dasselbe 3D-Abzeichen, auf einem hellen Sockel, während von beiden Bildschirmrändern Bänder hereinfliegen.
+Die meisten gibt es zusätzlich als echtes 3D-Modell — Metallrahmen, Emaille-Einlagen, Relief. Im Erfolgs-Testbereich antippen und ein Abzeichen dreht sich: ziehen zum Drehen, mit zwei Fingern zoomen, und es wiegt sich von selbst leicht, sobald man loslässt. Die Icons stammen aus den Modellen selbst, Wand und 3D-Ansicht zeigen also dasselbe Objekt; die alten KI-Illustrationen sind ausgemustert. Alle vierzig haben jetzt ein Modell; der Rückfall auf die stehende Grafik bleibt für Abzeichen, die später dazukommen. Wird ein Erfolg irgendwo in der App freigeschaltet, zeigt der Dialog dasselbe 3D-Abzeichen, auf einem hellen Sockel, während von beiden Bildschirmrändern Bänder hereinfliegen.
 
 ### Einstellungen
 
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Oberflächentexte für 10 Sprachen
     ├── assets/
-    │   ├── badges/*.glb         34 Abzeichenmodelle
+    │   ├── badges/*.glb         40 Abzeichenmodelle
     │   └── env/studio_ibl.ktx   Prozedural erzeugte IBL-Umgebung
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,13 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 
 ## Letzte Änderungen
 
+**v0.20.15: alle vierzig Abzeichen in 3D**
+
+- Die letzten sechs sind da: Eight K Grad (Doktorhut), Final Exam (Gipfelmedaille mit Fahne), Five Zones (Laufsohlen-Platte), Fourteen Peaks (2,5:1-Panorama aller vierzehn Achttausender), Two Tracks (Zweischienen-Tablett) und Full Route (ein Everest-Geländemodell — das einzige Stück, das keine Medaille ist)
+- Jedes Abzeichen-Icon ist jetzt der eigene Render des Modells; die handgezeichneten Ersatzbilder verschwinden von der Wand
+- Full Route braucht eine eigene Pose: es steht auf seinem Sockel, also entfällt die 90°-Drehung der flachen Medaillen, und die Plakette wird zum Objektiv gedreht; sein Render liegt auf Grau statt Schwarz, entsprechend wird gegen Grau freigestellt
+- Modelle 34 → 40; Paket 39,4 → 40,6 MB
+
 **v0.20.14: Abzeichen überall öffnen**
 
 - Abzeichen sind nicht mehr nur im Entwickler-Testbereich erreichbar: Tippe in „Mein Profil“ oder auf der Abzeichenwand ein freigeschaltetes Abzeichen an, und es öffnet sich im Vollbild. Die Ansicht liegt über der App, statt die Seite zu ersetzen — zurück geht es dorthin, wo du warst, inklusive Scrollposition, und die untere Leiste ist verdeckt
@@ -252,7 +259,7 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 **v0.20.0 – v0.20.3: 3D-Abzeichen**
 
 - 34 Erfolge werden in Echtzeit 3D gerendert (Filament 1.75, glTF, PBR-Metall und Emaille). Ziehen dreht, zwei Finger zoomen, in Ruhe wiegt sich das Objekt leicht; die automatische Bewegung bleibt an der Vorderseite, weil die Rückseite einer Medaille eine glatte Platte ist
-- Die übrigen sechs behalten ihre stehende Grafik, perspektivisch gekippt, mit runden Ecken und Schatten — eine Sammelkarte, kein flaches Bild. Sobald ein Modell vorliegt, wechseln sie automatisch auf 3D
+- Seit v0.20.15 haben alle vierzig ein Modell; der Rückfall auf die gekippte Karte bleibt für künftige Abzeichen auf 3D
 - Freischalt- und Vorschau-Dialoge laufen über denselben Renderer, mit hellem Sockel hinter dem Modell (ein dunkles Modell auf dunkler Karte verschwindet) und 56 Bändern aus beiden Richtungen. „Bewegung reduzieren" schaltet die Bänder ab
 - Die Anzeigeseite sitzt auf einer stark unscharfen Landschaft, prozedural erzeugt (27 KB) — Himmel, vier Grate, Nebel, keine Fotolizenz nötig
 - Ziehrichtungen nach Feedback umgedreht; die Szene insgesamt aufgehellt und dann leicht zurückgenommen, damit emittierende Teile Kontrast behalten

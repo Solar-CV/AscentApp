@@ -31,6 +31,14 @@ ICONS = Path("app/src/main/res/drawable-nodpi")
 ICON_SIZE = 256
 BG_TOLERANCE = 26
 
+# 个别成就不用默认的 renders/top.png 做图标：full_route 是地形摆件，
+# 俯视只是一块雪原，只有 hero 角度能同时读出山体和铭牌。
+RENDER_OVERRIDE = {"full_route": "hero.png"}
+
+# 背景容差按图调：徽章是纯黑棚拍，26 刚好；full_route 的中性灰底（85–90）
+# 与底座石墨色只差 40 上下，容差放大会把底座啃掉，压到 12 才干净。
+TOLERANCE_OVERRIDE = {"full_route": 12}
+
 # 目录名去掉 _vN 后仍与成就 id 不一致的
 ALIAS = {
     "first_step": "first_steps",
@@ -48,10 +56,13 @@ def achievement_id(badge_id: str) -> str:
     return ALIAS.get(base, base)
 
 
-def knockout(src: Path, dst: Path) -> tuple[int, int]:
-    """把纯黑背景抠成透明，裁到内容框后居中放到方形画布上。
+def knockout(src: Path, dst: Path, tol: int = BG_TOLERANCE) -> tuple[int, int]:
+    """把纯色背景抠成透明，裁到内容框后居中放到方形画布上。
 
-    做法：缩到 1/4 后从画布边缘做四邻域 flood fill，只吃掉与边缘连通的黑色，
+    背景色不写死成黑：取四角像素的中位数为参考（徽章是纯黑棚拍，珠峰地形块
+    full_route 是中性灰 0.80 的世界底色），再把「与参考色的通道差 ≤ 容差」判为背景。
+
+    做法：缩到 1/4 后从画布边缘做四邻域 flood fill，只吃掉与边缘连通的背景色，
     徽章内部的深色区域不会被打孔；再把蒙版放大回去，边缘羽化一点点。
 
     第二轮处理「被边框围住的背景」：卡扣（safety_first）的中心孔、冲孔卡片
@@ -63,7 +74,10 @@ def knockout(src: Path, dst: Path) -> tuple[int, int]:
     w, h = im.size
     small = im.resize((w // 4, h // 4), Image.LANCZOS)
     arr = np.asarray(small, dtype=np.uint8)
-    dark = arr.max(axis=2) <= BG_TOLERANCE
+    corner = np.array([arr[2, 2], arr[2, -3], arr[-3, 2], arr[-3, -3]], dtype=np.int16)
+    bg0 = np.median(corner, axis=0)
+    dist = np.abs(arr.astype(np.int16) - bg0).max(axis=2)
+    dark = dist <= tol
     sw, sh = small.size
 
     seen = np.zeros((sh, sw), dtype=bool)
@@ -82,8 +96,8 @@ def knockout(src: Path, dst: Path) -> tuple[int, int]:
         if y + 1 < sh: queue.append((x, y + 1))
         if y: queue.append((x, y - 1))
 
-    bg = arr[2, 2].astype(np.int16)
-    near = np.abs(arr.astype(np.int16) - bg).max(axis=2) <= 6
+    bg = bg0
+    near = dist <= 6
     visited = np.zeros((sh, sw), dtype=bool)
     for y0 in range(sh):
         for x0 in range(sw):
@@ -154,8 +168,14 @@ def main():
     ASSETS.mkdir(parents=True, exist_ok=True)
     ICONS.mkdir(parents=True, exist_ok=True)
 
+    only = set()
+    if "--only" in sys.argv:
+        only = set(sys.argv[sys.argv.index("--only") + 1].split(","))
+
     rows = []
     for aid, folder in collect():
+        if only and aid not in only:
+            continue
         glb = next(folder.glob("*.glb"))
         target = ASSETS / f"{aid}.glb"
         state = "新增" if not target.exists() else "更新"
@@ -179,14 +199,14 @@ def main():
         finally:
             tmp_path.unlink(missing_ok=True)
 
-        top = folder / "renders" / "top.png"
+        top = folder / "renders" / RENDER_OVERRIDE.get(aid, "top.png")
         icon_kb = 0
         dst = ICONS / f"badge_{aid}.webp"
         stale = not dst.exists() or top.stat().st_mtime > dst.stat().st_mtime
         if not top.exists():
             print(f"  !! {aid} 缺少 renders/top.png，图标未生成")
         elif stale or "--force" in sys.argv:
-            knockout(top, dst)
+            knockout(top, dst, TOLERANCE_OVERRIDE.get(aid, BG_TOLERANCE))
             icon_kb = dst.stat().st_size // 1024
         else:
             icon_kb = -1  # 未重生成，沿用既有图标

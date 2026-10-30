@@ -6,7 +6,7 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 68 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 21 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.20.14 (versionCode 121). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: 34 prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 39 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.20.15 (versionCode 122). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Enklaste vägen är det färdigbyggda debug-APK:t från [Releases](https://githu
 
 - Paket: `com.ascent.climb`
 - Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen
-- Storlek: cirka 39 MB (32 MB okomprimerade emblemmodeller, ungefär 9 MB efter paketering)
+- Storlek: cirka 41 MB (37 MB okomprimerade emblemmodeller, ungefär 10 MB efter paketering)
 - Behörigheter: nätverk och nätverksstatus — för att söka efter uppdateringar av frågebanken och skicka feedback. Allt fungerar offline; den medföljande banken finns alltid där
 
 Flytta över APK:n till telefonen, tillåt installation från okända källor och tryck på installera. Ingen inloggning vid första starten.
@@ -47,7 +47,7 @@ Träningen ger en beredskapsprocent och måltoppens höjd. Repetitionen sätter 
 
 Profilen visar bara upplåsta emblem. Alla 40 finns på emblemväggen, låsta som grå förhandsvisning, dolda prestationer som ett "?".
 
-De flesta finns också som riktiga 3D-modeller — metallramar, emalj, relief. Öppna testytan för prestationer och tryck på ett emblem för att se det snurra: dra för att rotera, nyp för att zooma, och det gungar sakta av sig själv när du släpper. Ikonerna kommer från modellerna själva, så väggen och 3D-vyn visar samma föremål; de gamla AI-illustrationerna är pensionerade. De tolv utan modell behåller sin tecknade bild och visas som ett kort lutat i perspektiv. När en prestation låses upp någonstans i appen visar dialogen samma 3D-emblem, på en ljus piedestal, medan band far in från båda skärmkanterna.
+De flesta finns också som riktiga 3D-modeller — metallramar, emalj, relief. Öppna testytan för prestationer och tryck på ett emblem för att se det snurra: dra för att rotera, nyp för att zooma, och det gungar sakta av sig själv när du släpper. Ikonerna kommer från modellerna själva, så väggen och 3D-vyn visar samma föremål; de gamla AI-illustrationerna är pensionerade. Alla fyrtio har nu en modell; den tecknade bilden finns kvar som reserv för emblem som läggs till senare. När en prestation låses upp någonstans i appen visar dialogen samma 3D-emblem, på en ljus piedestal, medan band far in från båda skärmkanterna.
 
 ### Inställningar
 
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Gränssnittstexter för 10 språk
     ├── assets/
-    │   ├── badges/*.glb         34 emblemmodeller
+    │   ├── badges/*.glb         40 emblemmodeller
     │   └── env/studio_ibl.ktx   Procedurellt genererad IBL-miljö
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,13 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 
 ## Senaste ändringar
 
+**v0.20.15: alla fyrtio emblem är i 3D**
+
+- De sista sex anländer: Eight K Grad (studentmössa), Final Exam (toppmässing med flagga), Five Zones (platta formad som en löparsula), Fourteen Peaks (2,5:1-panorama över alla fjorton åttatusenmeterstoppar), Two Tracks (bricka med två räls) och Full Route (ett terrängblock av Everest — den enda pjäsen som inte är en medalj)
+- Varje emblems ikon är nu modellens egen rendering, så de tecknade reservbilderna lämnar väggen
+- Full Route behöver egen pose: den står på sin sockel, så 90°-vridningen för platta medaljer hoppas över och plaketten vrids mot kameran; renderingen ligger på grått i stället för svart, så urklippningen görs mot det grå
+- Modeller 34 → 40; paketet 39,4 → 40,6 MB
+
 **v0.20.14: emblemen öppnas överallt**
 
 - Du behöver inte längre gå via utvecklartestytan: tryck på ett upplåst emblem i ”Min profil” eller på emblemväggen så öppnas det i fullskärm. Vyn läggs ovanpå appen i stället för att ersätta sidan, så du kommer tillbaka till samma skärm — inklusive listans position — och den nedre listen döljs
@@ -252,7 +259,7 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 **v0.20.0 – v0.20.3: 3D-emblem**
 
 - 34 prestationer renderas i 3D i realtid (Filament 1.75, glTF, metall och emalj i PBR). Dra för att rotera, nyp för att zooma, det gungar sakta när du släpper; den automatiska rörelsen stannar på framsidan eftersom baksidan av en medalj är en slät platta
-- De övriga sex behåller sin stillbild, lutad i perspektiv med rundade hörn och skugga: ett samlarkort, inte en platt bild. De byter till 3D så snart en modell finns
+- Sedan v0.20.15 har alla fyrtio en modell; det lutande kortet är reserv för framtida emblem
 - Upplåsnings- och förhandsvisningsdialoger går genom samma renderare, med en ljus piedestal bakom modellen (en mörk modell på ett mörkt kort försvinner) och 56 band från båda kanterna. "Minska rörelse" stänger av banden
 - Visningssidan vilar på ett kraftigt suddigt landskap, procedurellt genererat (27 kB): himmel, fyra åsar, dimma, inga fotolicenser att tänka på
 - Dragriktningarna inverterade efter feedback; hela scenen ljusades upp och drogs sedan tillbaka lite så att emittersande delar behåller kontrasten

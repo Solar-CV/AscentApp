@@ -6,7 +6,7 @@ Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. 
 
 Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 68 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 21 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
 
-Versión actual v0.20.14 (versionCode 121). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: 34 logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 39 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
+Versión actual v0.20.15 (versionCode 122). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
 
 ## Instalación
 
@@ -14,7 +14,7 @@ Lo más fácil es el APK debug ya compilado de [Releases](https://github.com/Sol
 
 - Paquete: `com.ascent.climb`
 - Mínimo: Android 8.0 (API 26), **solo arm64-v8a** — los móviles de solo 32 bits no pueden instalarlo
-- Tamaño: unos 39 MB (32 MB de modelos sin comprimir, unos 9 MB tras empaquetar)
+- Tamaño: unos 41 MB (37 MB de modelos sin comprimir, unos 10 MB tras empaquetar)
 - Permisos: red y estado de red — para comprobar actualizaciones del banco de preguntas y enviar comentarios. Todo funciona sin conexión; el banco incluido siempre está ahí
 
 Pasa el APK al móvil, permite instalar desde orígenes desconocidos y toca instalar. En el primer arranque no hay que iniciar sesión.
@@ -47,7 +47,7 @@ Entrenamiento da un porcentaje de preparación y la altitud del pico objetivo. R
 
 El perfil solo muestra las insignias desbloqueadas. Las 40 están en el muro de insignias, las bloqueadas como vista previa en gris y los logros ocultos como «?».
 
-La mayoría existe también como modelo 3D real: marcos metálicos, esmalte, relieve. Abre la zona de pruebas de logros y toca una insignia para verla girar: arrastra para rotar, pellizca para acercar, y se mece sola despacio cuando sueltas. Sus iconos salen de los propios modelos, así que el muro y la vista 3D muestran el mismo objeto; las ilustraciones de IA se retiraron. Las otras doce sin modelo conservan el dibujo a mano y se muestran como tarjeta inclinada en perspectiva. Al desbloquear un logro en cualquier punto de la app, el diálogo muestra la misma insignia 3D, sobre un pedestal claro, con cintas entrando desde los dos bordes.
+La mayoría existe también como modelo 3D real: marcos metálicos, esmalte, relieve. Abre la zona de pruebas de logros y toca una insignia para verla girar: arrastra para rotar, pellizca para acercar, y se mece sola despacio cuando sueltas. Sus iconos salen de los propios modelos, así que el muro y la vista 3D muestran el mismo objeto; las ilustraciones de IA se retiraron. Las cuarenta tienen ya modelo; el dibujo a mano queda como reserva para insignias que se añadan después. Al desbloquear un logro en cualquier punto de la app, el diálogo muestra la misma insignia 3D, sobre un pedestal claro, con cintas entrando desde los dos bordes.
 
 ### Ajustes
 
@@ -177,7 +177,7 @@ AscentApp/
 └── app/src/main/
     ├── res/values*/             Textos de interfaz en 10 idiomas
     ├── assets/
-    │   ├── badges/*.glb         34 modelos de insignia
+    │   ├── badges/*.glb         40 modelos de insignia
     │   └── env/studio_ibl.ktx   Entorno IBL generado por código
     └── java/com/ascent/climb/
         ├── data/
@@ -218,6 +218,13 @@ Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVe
 
 ## Cambios recientes
 
+**v0.20.15: las cuarenta insignias ya son 3D**
+
+- Llegan las seis últimas: Eight K Grad (birrete), Final Exam (medalla de cumbre con bandera), Five Zones (placa con suela de zapatilla), Fourteen Peaks (panorámica 2,5:1 de los catorce ochomiles), Two Tracks (bandeja de dos vías) y Full Route (un bloque de terreno del Everest, la única pieza que no es medalla)
+- El icono de cada insignia es ahora el render del propio modelo, así que las ilustraciones dibujadas desaparecen del muro
+- Full Route necesita su propia pose: se apoya en su base, así que se salta el giro de 90° de las medallas planas y se gira la placa hacia la cámara; su render está sobre gris, no negro, y el recorte se hace contra ese gris
+- Modelos 34 → 40; paquete 39,4 → 40,6 MB
+
 **v0.20.14: las insignias se abren en cualquier sitio**
 
 - Ya no hace falta entrar en la zona de pruebas de desarrollo: toca cualquier insignia desbloqueada en «Mi perfil» o en el muro y se abre a pantalla completa. La vista se superpone a la app en vez de sustituir la página, así que al volver sigues donde estabas —con la posición de la lista— y la barra inferior queda tapada
@@ -252,7 +259,7 @@ Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVe
 **v0.20.0 – v0.20.3: insignias 3D**
 
 - 34 logros se dibujan en 3D en tiempo real (Filament 1.75, glTF, metal y esmalte PBR). Arrastra para girar, pellizca para acercar, se mece despacio al soltar; el movimiento automático se queda en la cara frontal porque el reverso de una medalla es una placa lisa
-- Los otros seis conservan su ilustración fija, inclinada en perspectiva con esquinas redondeadas y sombra: una tarjeta de colección, no una imagen plana. Pasan a 3D en cuanto llega un modelo
+- Desde la v0.20.15 las cuarenta tienen modelo; la tarjeta inclinada queda como recurso para futuras insignias
 - Los diálogos de desbloqueo y vista previa usan el mismo motor, con un pedestal claro detrás del modelo (un modelo oscuro sobre tarjeta oscura desaparece) y 56 cintas desde los dos bordes. «Reducir movimiento» desactiva las cintas
 - La página de exhibición se apoya en un paisaje muy desenfocado, generado por código (27 KB): cielo, cuatro crestas, niebla, sin licencias de fotos
 - Direcciones de arrastre invertidas según los comentarios; la escena se aclaró y luego se replegó un poco para que las partes emisivas conserven contraste
