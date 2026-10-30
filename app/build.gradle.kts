@@ -1,7 +1,37 @@
+import java.io.File
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+}
+
+/**
+ * 发布签名：密钥**不在仓库里**。
+ *
+ * 读取顺序：
+ *   1. 环境变量 `ASCENT_KEYSTORE_PROPS` 指向的属性文件（CI 用，值从 secrets 落地到临时路径）
+ *   2. `$HOME/AscentBackUp/keystore/keystore.properties`（本机默认）
+ *
+ * 找不到就跳过签名、打一行警告，release 构建会产出未签名包 ——
+ * 目的是让「没有密钥的机器」（比如 CI 上只跑 debug 的场景）也能正常构建，不会因为签名缺失直接失败。
+ */
+val keystorePropsFile: File = System.getenv("ASCENT_KEYSTORE_PROPS")
+    ?.takeIf { it.isNotBlank() }
+    ?.let { File(it) }
+    ?: File(System.getProperty("user.home"), "AscentBackUp/keystore/keystore.properties")
+
+val keystoreProps = Properties().apply {
+    if (keystorePropsFile.isFile) keystorePropsFile.inputStream().use { load(it) }
+}
+
+val releaseStoreFile: File? =
+    keystoreProps.getProperty("storeFile")?.let { File(it) }?.takeIf { it.isFile }
+
+val hasReleaseKey = releaseStoreFile != null
+if (!hasReleaseKey) {
+    logger.warn("[ascent] 未找到发布签名：${keystorePropsFile.absolutePath}（release 将产出未签名包）")
 }
 
 android {
@@ -26,16 +56,33 @@ android {
         }
     }
 
+    signingConfigs {
+        if (hasReleaseKey) {
+            create("release") {
+                storeFile = releaseStoreFile
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
         }
         release {
-            isMinifyEnabled = false
+            // 正式包开 R8 + 资源压缩。Filament / gltfio 走 JNI 按名查找，
+            // 保留规则见 proguard-rules.pro。
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            if (hasReleaseKey) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
