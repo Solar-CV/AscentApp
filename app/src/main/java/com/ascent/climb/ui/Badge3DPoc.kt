@@ -35,6 +35,7 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -1009,23 +1010,27 @@ private fun Badge3DView(
         onDispose { renderer?.stop() }
     }
 
-    AndroidView(
-        modifier = modifier,
-        factory = { ctx ->
-            val app = ctx.applicationContext
-            // 埋点要在 Engine 创建（渲染器构造）之前落盘
-            Badge3D.markStage(app, "1 开始创建渲染器")
-            TextureView(ctx).apply {
-                isOpaque = false
-                val t0 = System.nanoTime()
-                val r = Badge3DRenderer(this, modelPath, t0, onStats, onReady)
-                renderer = r
-                setOnTouchListener { _, event -> r.onTouch(event) }
-                r.start()
-            }
-        },
-        onRelease = { renderer?.stop() }
-    )
+    // 换模型必须重建 TextureView：渲染器在构造时就把 modelPath 固化成场景了，
+    // 只换参数的话旧模型会一直留在画面里（连续播解锁弹窗时表现为两个徽章叠着）。
+    key(modelPath) {
+        AndroidView(
+            modifier = modifier,
+            factory = { ctx ->
+                val app = ctx.applicationContext
+                // 埋点要在 Engine 创建（渲染器构造）之前落盘
+                Badge3D.markStage(app, "1 开始创建渲染器")
+                TextureView(ctx).apply {
+                    isOpaque = false
+                    val t0 = System.nanoTime()
+                    val r = Badge3DRenderer(this, modelPath, t0, onStats, onReady)
+                    renderer = r
+                    setOnTouchListener { _, event -> r.onTouch(event) }
+                    r.start()
+                }
+            },
+            onRelease = { renderer?.stop() }
+        )
+    }
 }
 
 /**
@@ -1094,13 +1099,16 @@ private fun FakeBadge3D(res: Int, modifier: Modifier = Modifier) {
     }
 }
 
-/**
- * 统一的徽章展示入口：有 glb 走实时 3D，没有则用定稿图做假 3D。
- * 解锁弹窗、成就测试页、展示页都走这一个函数，避免三处各写一套。
- */
 /** 该成就是否已有 3D 模型（决定要不要垫浅色底盘）。 */
 fun badgeHasModel(achievementId: String): Boolean = MODEL_OF_ACHIEVEMENT.containsKey(achievementId)
 
+/**
+ * 统一的徽章展示入口：有 glb 走实时 3D，没有则用定稿图做假 3D。
+ * 解锁弹窗、成就测试页、展示页都走这一个函数，避免三处各写一套。
+ *
+ * 按 achievementId 做 key：同一个组合位置换成就时必须整棵重建。否则上一条的
+ * 3D 视图（渲染器已固化模型）与这一条的占位图会同时出现，看起来是两个徽章叠着。
+ */
 @Composable
 fun Badge3DAuto(
     achievementId: String,
@@ -1108,14 +1116,18 @@ fun Badge3DAuto(
     onStats: (String) -> Unit = {},
     onReady: () -> Unit = {}
 ) {
-    val modelPath = MODEL_OF_ACHIEVEMENT[achievementId]
-    if (modelPath != null) {
-        Badge3DView(modelPath, modifier, onStats, onReady)
-        return
+    key(achievementId) {
+        val modelPath = MODEL_OF_ACHIEVEMENT[achievementId]
+        if (modelPath != null) {
+            Badge3DView(modelPath, modifier, onStats, onReady)
+        } else {
+            val res = badgeRes(achievementId)
+            if (res != null) {
+                LaunchedEffect(Unit) { onReady() }
+                FakeBadge3D(res, modifier)
+            }
+        }
     }
-    val res = badgeRes(achievementId) ?: return
-    LaunchedEffect(Unit) { onReady() }
-    FakeBadge3D(res, modifier)
 }
 
 /**

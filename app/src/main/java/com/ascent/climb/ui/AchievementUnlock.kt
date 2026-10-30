@@ -32,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.withFrameNanos
@@ -72,9 +73,30 @@ private fun reduceMotion(): Boolean {
 /**
  * 成就解锁弹窗（单条）。队列由调用方维护：每次只展示一条，关闭后播下一条。
  * 动画：卡片淡入上移 + 徽章弹性放大；传说级附加金色光环脉冲。
+ *
+ * **必须按 achievement.id 重建整棵子树。** 队列连续播多条时，调用点是同一个
+ * `if (current != null) { AchievementUnlockOverlay(...) }`，换成就只是换参数、
+ * 组合槽不变，于是：
+ *   - 3D 视图（AndroidView → TextureView）不会重建，渲染器还拿着**上一条**的
+ *     glb 在画，画面里始终是前一个徽章；
+ *   - 而"首帧前占位图"的 `badgeReady` 是按成就 id 记忆的，换成就后重置为 false，
+ *     于是新成就的定稿图又被画出来，压在那个没换掉的 3D 视图上。
+ * 两者叠在一起，就是"后出的徽章盖在前一个上面、但没盖全"。
+ * `key(id)` 让整棵树连同渲染器、彩带、入场动画一起重建，也顺带修好了
+ * 第二条弹窗不播入场动画、不喷彩带的问题。
  */
 @Composable
 fun AchievementUnlockOverlay(
+    achievement: Achievement,
+    onDismiss: () -> Unit
+) {
+    key(achievement.id) {
+        UnlockOverlayContent(achievement = achievement, onDismiss = onDismiss)
+    }
+}
+
+@Composable
+private fun UnlockOverlayContent(
     achievement: Achievement,
     onDismiss: () -> Unit
 ) {
@@ -125,7 +147,9 @@ fun AchievementUnlockOverlay(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.55f * cardAlpha))
+            // 遮罩不跟着入场动画淡入：队列连播时整棵子树会随 key 重建，
+            // 若遮罩也从头淡入，两条弹窗之间会闪一帧毫无遮暗的主界面。
+            .background(Color.Black.copy(alpha = 0.55f))
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
