@@ -14,7 +14,7 @@ Am einfachsten über das fertige Debug-APK aus den [Releases](https://github.com
 
 - Paket: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26), **nur arm64-v8a** — reine 32-Bit-Geräte können diese Version nicht installieren
-- Größe: etwa 41 MB (37 MB unkomprimierte Abzeichenmodelle, rund 10 MB nach dem Paketieren)
+- Größe: etwa 41 MB (38 MB unkomprimierte Abzeichenmodelle, rund 11 MB nach dem Paketieren)
 - Berechtigungen: Netzwerk und Netzwerkstatus — für die Prüfung auf Fragenpool-Updates und für Feedback. Alles funktioniert offline, der mitgelieferte Pool ist immer da
 
 APK aufs Telefon übertragen, Installation aus unbekannten Quellen erlauben, tippen. Beim ersten Start ist keine Anmeldung nötig.
@@ -47,7 +47,7 @@ Training liefert einen Bereitschafts-Prozentsatz und die Höhe des Zielgipfels. 
 
 Das Profil zeigt nur freigeschaltete Abzeichen. Alle 40 stehen an der Abzeichenwand, gesperrte als graue Vorschau, versteckte Erfolge als „?".
 
-Die meisten gibt es zusätzlich als echtes 3D-Modell — Metallrahmen, Emaille-Einlagen, Relief. Im Erfolgs-Testbereich antippen und ein Abzeichen dreht sich: ziehen zum Drehen, mit zwei Fingern zoomen, und es wiegt sich von selbst leicht, sobald man loslässt. Die Icons stammen aus den Modellen selbst, Wand und 3D-Ansicht zeigen also dasselbe Objekt; die alten KI-Illustrationen sind ausgemustert. Alle vierzig haben jetzt ein Modell; der Rückfall auf die stehende Grafik bleibt für Abzeichen, die später dazukommen. Wird ein Erfolg irgendwo in der App freigeschaltet, zeigt der Dialog dasselbe 3D-Abzeichen, auf einem hellen Sockel, während von beiden Bildschirmrändern Bänder hereinfliegen.
+Abzeichen sind echte 3D-Objekte — Metallrahmen, Emaille-Einlagen, Relief. Ein entsperrtes Abzeichen im Profil oder an der Wand antippen und es öffnet sich im Vollbild: ziehen zum Drehen, mit zwei Fingern bis etwa 5,5× zoomen, mit zwei Fingern über das Relief schieben, Doppeltipp setzt zurück, und beim Loslassen wiegt es sich leicht. Die Icons stammen aus den Modellen selbst, Wand und 3D-Ansicht zeigen also dasselbe Objekt. Alle vierzig haben jetzt ein Modell; der Rückfall auf die stehende Grafik bleibt für Abzeichen, die später dazukommen. Wird ein Erfolg irgendwo freigeschaltet, zeigt der Dialog dasselbe 3D-Abzeichen, auf einem hellen Sockel, während von beiden Bildschirmrändern Bänder hereinfliegen.
 
 ### Einstellungen
 

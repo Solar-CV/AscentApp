@@ -14,7 +14,7 @@ Lo más fácil es el APK debug ya compilado de [Releases](https://github.com/Sol
 
 - Paquete: `com.ascent.climb`
 - Mínimo: Android 8.0 (API 26), **solo arm64-v8a** — los móviles de solo 32 bits no pueden instalarlo
-- Tamaño: unos 41 MB (37 MB de modelos sin comprimir, unos 10 MB tras empaquetar)
+- Tamaño: unos 41 MB (38 MB de modelos sin comprimir, unos 11 MB tras empaquetar)
 - Permisos: red y estado de red — para comprobar actualizaciones del banco de preguntas y enviar comentarios. Todo funciona sin conexión; el banco incluido siempre está ahí
 
 Pasa el APK al móvil, permite instalar desde orígenes desconocidos y toca instalar. En el primer arranque no hay que iniciar sesión.
@@ -47,7 +47,7 @@ Entrenamiento da un porcentaje de preparación y la altitud del pico objetivo. R
 
 El perfil solo muestra las insignias desbloqueadas. Las 40 están en el muro de insignias, las bloqueadas como vista previa en gris y los logros ocultos como «?».
 
-La mayoría existe también como modelo 3D real: marcos metálicos, esmalte, relieve. Abre la zona de pruebas de logros y toca una insignia para verla girar: arrastra para rotar, pellizca para acercar, y se mece sola despacio cuando sueltas. Sus iconos salen de los propios modelos, así que el muro y la vista 3D muestran el mismo objeto; las ilustraciones de IA se retiraron. Las cuarenta tienen ya modelo; el dibujo a mano queda como reserva para insignias que se añadan después. Al desbloquear un logro en cualquier punto de la app, el diálogo muestra la misma insignia 3D, sobre un pedestal claro, con cintas entrando desde los dos bordes.
+Las insignias son objetos 3D reales: marcos metálicos, esmalte, relieve. Toca cualquier insignia desbloqueada en el perfil o en el muro y se abre a pantalla completa: arrastra para rotar, pellizca para acercar hasta unas 5,5×, con dos dedos desplazas la vista sobre el relieve, el doble toque restablece, y se mece sola despacio cuando sueltas. Los iconos salen de los propios modelos, así que el muro y la vista 3D muestran el mismo objeto. Las cuarenta tienen ya modelo; el dibujo a mano queda como reserva para insignias que se añadan después. Al desbloquear un logro en cualquier punto, el diálogo muestra la misma insignia 3D, sobre un pedestal claro, con cintas entrando desde los dos bordes.
 
 ### Ajustes
 

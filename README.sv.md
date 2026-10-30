@@ -14,7 +14,7 @@ Enklaste vägen är det färdigbyggda debug-APK:t från [Releases](https://githu
 
 - Paket: `com.ascent.climb`
 - Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen
-- Storlek: cirka 41 MB (37 MB okomprimerade emblemmodeller, ungefär 10 MB efter paketering)
+- Storlek: cirka 41 MB (38 MB okomprimerade emblemmodeller, ungefär 11 MB efter paketering)
 - Behörigheter: nätverk och nätverksstatus — för att söka efter uppdateringar av frågebanken och skicka feedback. Allt fungerar offline; den medföljande banken finns alltid där
 
 Flytta över APK:n till telefonen, tillåt installation från okända källor och tryck på installera. Ingen inloggning vid första starten.
@@ -47,7 +47,7 @@ Träningen ger en beredskapsprocent och måltoppens höjd. Repetitionen sätter 
 
 Profilen visar bara upplåsta emblem. Alla 40 finns på emblemväggen, låsta som grå förhandsvisning, dolda prestationer som ett "?".
 
-De flesta finns också som riktiga 3D-modeller — metallramar, emalj, relief. Öppna testytan för prestationer och tryck på ett emblem för att se det snurra: dra för att rotera, nyp för att zooma, och det gungar sakta av sig själv när du släpper. Ikonerna kommer från modellerna själva, så väggen och 3D-vyn visar samma föremål; de gamla AI-illustrationerna är pensionerade. Alla fyrtio har nu en modell; den tecknade bilden finns kvar som reserv för emblem som läggs till senare. När en prestation låses upp någonstans i appen visar dialogen samma 3D-emblem, på en ljus piedestal, medan band far in från båda skärmkanterna.
+Emblemen är riktiga 3D-objekt — metallramar, emalj, relief. Tryck på ett upplåst emblem i profilen eller på väggen så öppnas det i fullskärm: dra för att rotera, nyp för att zooma upp till cirka 5,5×, två fingrar flyttar vyn över reliefen, dubbeltryck återställer, och när du släpper gungar det sakta av sig självt. Ikonerna kommer från modellerna själva, så väggen och 3D-vyn visar samma föremål. Alla fyrtio har nu en modell; den tecknade bilden finns kvar som reserv för emblem som läggs till senare. När en prestation låses upp någonstans visar dialogen samma 3D-emblem, på en ljus piedestal, medan band far in från båda skärmkanterna.
 
 ### Inställningar
 

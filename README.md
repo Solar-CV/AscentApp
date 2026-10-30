@@ -14,7 +14,7 @@ The easiest route is the prebuilt debug APK from [Releases](https://github.com/S
 
 - Package: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
-- Size: about 41 MB (37 MB of uncompressed badge models, ~10 MB after packaging)
+- Size: about 41 MB (38 MB of uncompressed badge models, ~11 MB after packaging)
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
 Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
@@ -47,7 +47,7 @@ Training gives a readiness percentage and the target peak's altitude. Review put
 
 The profile shows unlocked badges only. All 40 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
 
-Most of them also exist as real 3D models — metal frames, enamel insets, relief. Open the achievements test screen and tap a badge to see it spin: drag to rotate, pinch to zoom, and it sways gently on its own when you stop. Their icons are rendered from the models themselves, so the wall and the 3D view show the same object; the old AI illustrations were retired. All forty now have a model; the still-art fallback stays in place for any badge added later. Unlocking an achievement anywhere in the app shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges of the screen.
+Badges are real 3D objects — metal frames, enamel insets, relief. Tap any unlocked badge on the profile page or on the wall and it opens full screen: drag to rotate, pinch to zoom up to about 5.5×, two fingers to pan across the relief, double-tap to reset, and it sways gently on its own when you stop. Icons are rendered from the models themselves, so the wall and the 3D view show the same object; all forty now have a model, and the still-art fallback stays for any badge added later. Unlocking an achievement anywhere shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges.
 
 ### Settings
 

@@ -14,7 +14,7 @@ Le plus simple est l’APK debug déjà compilé des [Releases](https://github.c
 
 - Paquet : `com.ascent.climb`
 - Minimum : Android 8.0 (API 26), **arm64-v8a uniquement** — les téléphones uniquement 32 bits ne peuvent pas installer cette version
-- Taille : environ 41 Mo (37 Mo de modèles non compressés, environ 10 Mo après empaquetage)
+- Taille : environ 41 Mo (38 Mo de modèles non compressés, environ 11 Mo après empaquetage)
 - Autorisations : réseau et état du réseau — pour vérifier les mises à jour de la banque de questions et envoyer un retour. Tout fonctionne hors ligne ; la banque embarquée est toujours là
 
 Transférez l’APK sur le téléphone, autorisez l’installation de sources inconnues, appuyez sur installer. Aucune connexion au premier lancement.
@@ -47,7 +47,7 @@ L’entraînement donne un pourcentage de préparation et l’altitude du sommet
 
 Le profil n’affiche que les badges débloqués. Les 40 sont sur le mur de badges, les verrouillés en aperçu gris, les succès cachés sous un « ? ».
 
-La plupart existent aussi en vrai modèle 3D — cadres métalliques, émaux, relief. Ouvrez la zone de test des succès et touchez un badge pour le voir tourner : glisser pour pivoter, pincer pour zoomer, et il oscille doucement de lui-même quand vous lâchez. Leurs icônes viennent des modèles eux-mêmes : le mur et la vue 3D montrent le même objet ; les anciennes illustrations par IA ont été retirées. Les quarante ont désormais un modèle ; le dessin à la main reste le repli des badges ajoutés plus tard. Débloquer un succès n’importe où dans l’application affiche le même badge 3D, sur un socle clair, avec des rubans qui entrent depuis les deux bords de l’écran.
+Les badges sont de vrais objets 3D — cadres métalliques, émaux, relief. Touchez un badge débloqué dans le profil ou sur le mur : il s’ouvre en plein écran. Glisser pour pivoter, pincer pour zoomer jusqu’à environ 5,5×, deux doigts pour déplacer la vue sur le relief, double toucher pour réinitialiser, et il oscille doucement quand vous lâchez. Les icônes viennent des modèles eux-mêmes : le mur et la vue 3D montrent le même objet. Les quarante ont désormais un modèle ; le dessin à la main reste le repli des badges ajoutés plus tard. Débloquer un succès n’importe où affiche le même badge 3D, sur un socle clair, avec des rubans qui entrent depuis les deux bords.
 
 ### Réglages
 

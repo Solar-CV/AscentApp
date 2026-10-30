@@ -14,7 +14,7 @@ La via più semplice è l'APK debug già compilato nelle [Releases](https://gith
 
 - Pacchetto: `com.ascent.climb`
 - Minimo: Android 8.0 (API 26), **solo arm64-v8a** — i telefoni solo a 32 bit non possono installarlo
-- Dimensione: circa 41 MB (37 MB di modelli non compressi, circa 10 MB dopo il confezionamento)
+- Dimensione: circa 41 MB (38 MB di modelli non compressi, circa 11 MB dopo il confezionamento)
 - Permessi: rete e stato della rete — per controllare gli aggiornamenti del questionario e inviare feedback. Tutto funziona offline; il questionario incluso c'è sempre
 
 Trasferisci l'APK sul telefono, consenti l'installazione da origini sconosciute, tocca installa. Al primo avvio non serve accedere.
@@ -47,7 +47,7 @@ L'allenamento dà una percentuale di preparazione e la quota della vetta obietti
 
 Il profilo mostra solo i badge sbloccati. Tutti e 40 stanno nella parete dei badge, quelli bloccati come anteprima grigia, gli obiettivi nascosti come «?».
 
-La maggior parte esiste anche come vero modello 3D — cornici in metallo, smalti, rilievo. Apri l'area di test degli obiettivi e tocca un badge per vederlo girare: trascina per ruotare, pizzica per ingrandire, e quando lasci si dondola piano da solo. Le icone vengono dai modelli stessi, quindi parete e vista 3D mostrano lo stesso oggetto; le vecchie illustrazioni IA sono state ritirate. Tutte e quaranta hanno ora un modello; il disegno a mano resta come ripiego per le insegne future. Sbloccare un obiettivo in qualsiasi punto dell'app mostra lo stesso badge 3D, su un piedistallo chiaro, con i nastri che entrano dai due bordi.
+I badge sono veri oggetti 3D — cornici in metallo, smalti, rilievo. Tocca un badge sbloccato nel profilo o nella parete e si apre a tutto schermo: trascina per ruotare, pizzica per ingrandire fino a circa 5,5×, con due dita sposti la vista sul rilievo, il doppio tocco ripristina, e quando lasci si dondola piano da solo. Le icone vengono dai modelli stessi, quindi parete e vista 3D mostrano lo stesso oggetto. Tutte e quaranta hanno ora un modello; il disegno a mano resta come ripiego per le insegne future. Sbloccare un obiettivo in qualsiasi punto mostra lo stesso badge 3D, su un piedistallo chiaro, con i nastri che entrano dai due bordi.
 
 ### Impostazioni
 
