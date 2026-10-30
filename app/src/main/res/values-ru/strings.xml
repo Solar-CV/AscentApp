@@ -358,4 +358,11 @@
     <string name="badge_stage_bg_light">Светлый</string>
     <string name="badge_stage_bg_dark">Тёмный</string>
     <string name="badge_stage_gesture_hint">Потяните для поворота · Щипок — масштаб, два пальца — сдвиг · Двойное касание — сброс</string>
+    <!-- 天数：英文 / 德 / 西 / 意 / 瑞典 / 俄 有单复数，中日只需 other -->
+    <plurals name="common_days">
+        <item quantity="one">%1$d день</item>
+        <item quantity="few">%1$d дня</item>
+        <item quantity="many">%1$d дней</item>
+        <item quantity="other">%1$d дня</item>
+    </plurals>
 </resources>

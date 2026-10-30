@@ -358,4 +358,8 @@
     <string name="badge_stage_bg_light">ライト</string>
     <string name="badge_stage_bg_dark">ダーク</string>
     <string name="badge_stage_gesture_hint">ドラッグで回転 · ピンチで拡大・二本指で移動 · ダブルタップでリセット</string>
+    <!-- 天数：英文 / 德 / 西 / 意 / 瑞典 / 俄 有单复数，中日只需 other -->
+    <plurals name="common_days">
+        <item quantity="other">%1$d 日</item>
+    </plurals>
 </resources>

@@ -228,7 +228,7 @@
     <string name="rev_due_today">Due today</string>
     <string name="rev_safety_n">%1$d safety-critical</string>
     <string name="rev_queue_meta">Queue %1$d · mastery %2$d%%</string>
-    <string name="rev_all_done">Today’s review is done</string>
+    <string name="rev_all_done">Today\'s review is done</string>
     <string name="rev_pending_n">%1$d questions are still queued; they will appear here when due.</string>
     <string name="rev_schedule_note">Missed questions join the queue automatically and are scheduled by spaced repetition (1 / 3 / 7 / 16 / 35 days).</string>
     <string name="rev_start">Start review · %1$d questions</string>
@@ -374,4 +374,9 @@
     <string name="badge_stage_bg_light">Light</string>
     <string name="badge_stage_bg_dark">Dark</string>
     <string name="badge_stage_gesture_hint">Drag to rotate · Pinch to zoom, two fingers to pan · Double-tap to reset</string>
+    <!-- 天数：英文 / 德 / 西 / 意 / 瑞典 / 俄 有单复数，中日只需 other -->
+    <plurals name="common_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
 </resources>

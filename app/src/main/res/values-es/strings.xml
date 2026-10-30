@@ -336,4 +336,9 @@
     <string name="badge_stage_bg_light">Claro</string>
     <string name="badge_stage_bg_dark">Oscuro</string>
     <string name="badge_stage_gesture_hint">Arrastra para girar · Pellizca para acercar, dos dedos para desplazar · Doble toque para restablecer</string>
+    <!-- 天数：英文 / 德 / 西 / 意 / 瑞典 / 俄 有单复数，中日只需 other -->
+    <plurals name="common_days">
+        <item quantity="one">%1$d día</item>
+        <item quantity="other">%1$d días</item>
+    </plurals>
 </resources>

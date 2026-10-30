@@ -34,6 +34,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -352,23 +353,26 @@ private fun copyToClipboard(context: Context, text: String) {
 /** 反馈入口卡（「我的」页账号下方）。 */
 @Composable
 fun FeedbackEntryCard(onOpen: () -> Unit, modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(20.dp)
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .background(Ascent.Surface)
-            .clickable { onOpen() }
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+    val a = clayAccents()
+    ClaySurface(
+        modifier = modifier.fillMaxWidth().clickable { onOpen() },
+        radius = 20.dp,
+        elevation = 7.dp
     ) {
-        IconBadge(Ic.MessageSquare, Ascent.Fg2, Ascent.Surface2, diameter = 46, iconSize = 22)
-        Spacer(Modifier.width(14.dp))
-        Column(modifier = Modifier.weight(1f)) {
-            Text(stringResource(R.string.fb_title), color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
-            Spacer(Modifier.height(3.dp))
-            Text(stringResource(R.string.fb_entry_sub), color = Ascent.Fg3, fontSize = 12.sp)
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            ClayChip(color = Color(0xFF2F6FD0), size = 42.dp, radius = 14.dp) {
+                Icon(Ic.MessageSquare, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
+            }
+            Spacer(Modifier.width(14.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(stringResource(R.string.fb_title), color = a.value, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                Spacer(Modifier.height(3.dp))
+                Text(stringResource(R.string.fb_entry_sub), color = a.sub, fontSize = 12.sp)
+            }
+            Icon(Ic.ChevronRight, contentDescription = null, tint = a.sub, modifier = Modifier.size(16.dp))
         }
-        Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
     }
 }

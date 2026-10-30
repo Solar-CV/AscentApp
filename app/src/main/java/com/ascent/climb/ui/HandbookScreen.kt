@@ -44,6 +44,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,6 +63,31 @@ private fun categoryIcon(category: String): ImageVector = when {
     category.contains("决策") || category.contains("判断") -> Ic.Brain
     category.contains("安全") || category.contains("风险") -> Ic.ShieldAlert
     else -> Ic.BookOpen
+}
+
+/** 同色系调暗/调亮，用于描边与文字：不引入第二种颜色。 */
+private fun shade(c: Color, f: Float): Color =
+    Color(c.red * f, c.green * f, c.blue * f, c.alpha)
+
+/**
+ * 分类 → 色块颜色。按语义分组，和 [categoryIcon] 用同一套前缀匹配，
+ * 这样图标与颜色永远指向同一个分类，不会出现「红色背包」这种错位。
+ *
+ * 色相刻意拉开（蓝 / 青 / 红 / 琥珀 / 绿 / 紫），明度都压在同一档，
+ * 一屏扫下来是"分类索引"而不是彩虹。
+ */
+private fun categoryTint(category: String): Color = when {
+    // 先匹配细分：绳索与冰雪/攀冰都含「技术」，若先判「技术」两者会同色，
+    // 一屏里就会看到半列相同的青块——这正是这次要解决的问题
+    category.contains("绳索") -> Color(0xFF16808D)
+    category.contains("冰雪") || category.contains("攀冰") -> Color(0xFF4F5BD5)
+    category.contains("救援") -> Color(0xFFD9484D)
+    category.contains("医学") || category.contains("健康") -> Color(0xFFD9484D)
+    category.contains("装备") -> Color(0xFF2F6FD0)
+    category.contains("风险") || category.contains("判断") || category.contains("安全") -> Color(0xFFC77A16)
+    category.contains("行前") || category.contains("行程") -> Color(0xFF2E8B62)
+    category.contains("领导力") -> Color(0xFFA6498C)
+    else -> Color(0xFF5B6B80)
 }
 
 private fun readingMinutes(a: HandbookArticle): Int {
@@ -111,21 +137,20 @@ private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
     ) {
         item(key = "title") {
             Column(modifier = Modifier.padding(bottom = 14.dp)) {
-                Text(stringResource(R.string.hb_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.hb_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
                 Spacer(Modifier.height(4.dp))
                 MonoLabel(stringResource(R.string.hb_subtitle, articles.size))
             }
         }
 
         item(key = "search") {
-            val shape = RoundedCornerShape(12.dp)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(44.dp)
-                    .clip(shape)
-                    .background(Ascent.Surface)
-                    .border(1.dp, Ascent.Border, shape)
+                    .height(46.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Ascent.Surface2)
+                    .clayInset(radius = 16.dp)
                     .padding(horizontal = 14.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -188,15 +213,14 @@ private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
 
         item(key = "disc") {
             Spacer(Modifier.height(16.dp))
-            val shape = RoundedCornerShape(16.dp)
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(shape)
-                    .background(Ascent.WarningSoft)
-                    .border(1.dp, Ascent.Border, shape)
-                    .padding(16.dp)
+            ClaySurface(
+                modifier = Modifier.fillMaxWidth(),
+                radius = 20.dp,
+                elevation = 7.dp,
+                fill = Brush.verticalGradient(listOf(Color(0xFFFBF4E6), Color(0xFFF7EEDD))),
+                rim = Color(0xFFF0E3C9)
             ) {
+            Row(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                 Icon(Ic.TriangleAlert, contentDescription = null, tint = Ascent.Warning, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(12.dp))
                 Text(
@@ -207,6 +231,7 @@ private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
                     lineHeight = 18.sp
                 )
             }
+            }
         }
     }
 }
@@ -214,62 +239,83 @@ private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
 @Composable
 private fun CategoryChip(label: String, selected: Boolean, onClick: () -> Unit) {
     val shape = RoundedCornerShape(999.dp)
-    Box(
-        modifier = Modifier
-            .clip(shape)
-            .background(if (selected) Ascent.Fg else Ascent.Surface)
-            .then(if (selected) Modifier else Modifier.border(1.dp, Ascent.Border, shape))
-            .clickable { onClick() }
-            .padding(horizontal = 13.dp, vertical = 6.dp)
-    ) {
-        Text(
-            text = label,
-            color = if (selected) Ascent.Bg else Ascent.Fg2,
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Medium
-        )
+    if (selected) {
+        Box(
+            modifier = Modifier
+                .clip(shape)
+                .background(if (Ascent.IsDark) Color(0xFF3A4149) else Color(0xFF1B2430))
+                .clickable { onClick() }
+                .padding(horizontal = 13.dp, vertical = 6.dp)
+        ) {
+            Text(
+                text = label,
+                color = Color.White,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+    } else {
+        ClaySurface(
+            modifier = Modifier.clip(shape).clickable { onClick() },
+            radius = 16.dp,
+            elevation = 4.dp
+        ) {
+            Text(
+                text = label,
+                color = Ascent.Fg2,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier.padding(horizontal = 13.dp, vertical = 6.dp)
+            )
+        }
     }
 }
 
 @Composable
 private fun ArticleCard(a: HandbookArticle, onClick: () -> Unit) {
-    val shape = RoundedCornerShape(16.dp)
-    Row(
+    ClaySurface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 5.dp)
-            .clip(shape)
-            .background(Ascent.Surface)
-            .border(1.dp, Ascent.Border, shape)
-            .clickable { onClick() }
+            .clickable { onClick() },
+        radius = 20.dp,
+        elevation = 7.dp
+    ) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Box(
-            modifier = Modifier
-                .size(52.dp)
-                .clip(RoundedCornerShape(14.dp))
-                .background(Ascent.AccentSoft),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(categoryIcon(a.category), contentDescription = null, tint = Ascent.Accent, modifier = Modifier.size(24.dp))
+        ClayChip(color = categoryTint(a.category), size = 52.dp, radius = 17.dp) {
+            Icon(categoryIcon(a.category), contentDescription = null, tint = Color.White, modifier = Modifier.size(24.dp))
         }
         Spacer(Modifier.width(12.dp))
+        val a2 = clayAccents()
         Column(modifier = Modifier.weight(1f)) {
-            Text(articleTitle(a.id, a.title), color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+            Text(articleTitle(a.id, a.title), color = a2.value, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
             Spacer(Modifier.height(4.dp))
             Text(
                 text = stringResource(R.string.hb_meta, categoryName(a.category), readingMinutes(a)),
-                color = Ascent.Fg3,
+                color = a2.sub,
                 fontSize = 10.sp,
                 fontFamily = MonoNumbers,
                 letterSpacing = 0.3.sp
             )
             Spacer(Modifier.height(5.dp))
-            Text(articleSummary(a.id, a.summary), color = Ascent.Fg2, fontSize = 12.sp, lineHeight = 17.sp, maxLines = 2)
+            // maxLines = 2 但没给 overflow，超出的句子会被硬切在半个词上
+            Text(
+                articleSummary(a.id, a.summary),
+                color = a2.label,
+                fontSize = 12.sp,
+                lineHeight = 17.sp,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
         }
         Spacer(Modifier.width(8.dp))
-        Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
+        Icon(Ic.ChevronRight, contentDescription = null, tint = a2.sub, modifier = Modifier.size(16.dp))
+    }
     }
 }
 
@@ -306,21 +352,34 @@ private fun ArticleDetail(article: HandbookArticle, onBack: () -> Unit) {
 
         Spacer(Modifier.height(12.dp))
 
-        // 封面
-        Box(
+        // 封面：跟列表同色、同样平涂——从列表点进来颜色不变，才不会觉得换了篇文章
+        val tint = categoryTint(article.category)
+        ClaySurface(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(150.dp)
-                .clip(RoundedCornerShape(20.dp))
-                .background(Brush.linearGradient(listOf(Color(0xFF3AA3FF), Color(0xFF0267CE)))),
-            contentAlignment = Alignment.Center
+                .height(150.dp),
+            radius = 24.dp,
+            elevation = 10.dp,
+            fill = SolidColor(tint),
+            rim = shade(tint, 0.86f)
         ) {
-            Icon(categoryIcon(article.category), contentDescription = null, tint = Color.White, modifier = Modifier.size(56.dp))
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Icon(
+                    categoryIcon(article.category),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(56.dp)
+                )
+            }
         }
 
         Spacer(Modifier.height(14.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
-            SoftTag(categoryName(article.category), Ascent.Warning, Ascent.WarningSoft)
+            SoftTag(
+                categoryName(article.category),
+                shade(tint, 0.82f),
+                tint.copy(alpha = if (Ascent.IsDark) 0.26f else 0.13f)
+            )
             Spacer(Modifier.width(10.dp))
             MonoLabel(stringResource(R.string.hb_read_minutes, readingMinutes(article)))
         }

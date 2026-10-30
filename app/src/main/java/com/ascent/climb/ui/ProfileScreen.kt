@@ -39,6 +39,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -46,6 +48,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ascent.climb.BuildConfig
@@ -313,46 +316,49 @@ private fun ProfileBody(
     ) {
         // ---------------- 档案头 ----------------
         item(key = "head") {
+            val a = clayAccents()
             Row(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(999.dp))
-                        .clickable { onOpenProfileHome() }
+                ClayChip(
+                    color = Ascent.Accent,
+                    size = 56.dp,
+                    radius = 20.dp,
+                    modifier = Modifier.clickable { onOpenProfileHome() }
                 ) {
-                    IconBadge(
-                        icon = Ic.UserRound,
-                        tint = Ascent.Accent,
-                        background = Ascent.AccentSoft,
-                        diameter = 56,
-                        iconSize = 28
-                    )
+                    Icon(Ic.UserRound, contentDescription = null, tint = Color.White, modifier = Modifier.size(26.dp))
                 }
                 Spacer(Modifier.width(14.dp))
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = account?.nickname ?: stringResource(R.string.prof_not_logged_in),
-                        color = Ascent.Fg,
+                        color = a.value,
                         fontSize = 19.sp,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(Modifier.height(3.dp))
                     Text(
                         text = stringResource(R.string.prof_route_meta, doneHere, ALL_LESSONS.size),
-                        color = Ascent.Fg3,
+                        color = a.sub,
                         fontSize = 12.sp
                     )
                 }
-                Box(
+                ClaySurface(
                     modifier = Modifier
-                        .size(34.dp)
-                        .clip(RoundedCornerShape(999.dp))
+                        .size(42.dp)
                         .clickable { onOpenSettings() },
-                    contentAlignment = Alignment.Center
+                    radius = 14.dp,
+                    elevation = 5.dp
                 ) {
-                    Icon(Ic.Settings, contentDescription = stringResource(R.string.prof_settings), tint = Ascent.Fg2, modifier = Modifier.size(20.dp))
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Icon(
+                            Ic.Settings,
+                            contentDescription = stringResource(R.string.prof_settings),
+                            tint = a.label,
+                            modifier = Modifier.size(19.dp)
+                        )
+                    }
                 }
             }
         }
@@ -361,52 +367,77 @@ private fun ProfileBody(
         item(key = "alt") {
             // 目标刻度跟着当前大类走：攀登 8,000，徒步用自己路线的最高点
             val summitAlt = displaySummitOf(activeTrackId())
-            val frac = if (summitAlt == 0) 0f else altitude.toFloat() / summitAlt.toFloat()
-            OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
+            val frac = if (summitAlt == 0) 0f else (altitude.toFloat() / summitAlt.toFloat()).coerceIn(0f, 1f)
+            val a = clayAccents()
+            ClayColumn(
+                modifier = Modifier.padding(bottom = 14.dp),
+                radius = 24.dp,
+                elevation = 9.dp,
+                padding = 18.dp,
+                gap = 12.dp,
+                dark = true
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.Bottom,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Column {
-                        Text(stringResource(R.string.prof_current_altitude), color = Ascent.Fg3, fontSize = 12.sp)
-                        Spacer(Modifier.height(4.dp))
+                        Text(stringResource(R.string.prof_current_altitude), color = a.heroText2, fontSize = 12.sp)
+                        Spacer(Modifier.height(2.dp))
                         Row(verticalAlignment = Alignment.Bottom) {
                             Text(
                                 text = formatMeters(altitude),
-                                color = Ascent.Fg,
-                                fontSize = 30.sp,
-                                fontWeight = FontWeight.SemiBold,
+                                color = a.heroText,
+                                fontSize = 32.sp,
+                                fontWeight = FontWeight.Bold,
                                 fontFamily = MonoNumbers
                             )
                             Text(
                                 text = "M / ${formatMeters(summitAlt)}",
-                                color = Ascent.Fg3,
+                                color = a.heroText2,
                                 fontSize = 13.sp,
                                 fontFamily = MonoNumbers,
-                                modifier = Modifier.padding(start = 5.dp, bottom = 4.dp)
+                                modifier = Modifier.padding(start = 5.dp, bottom = 5.dp)
                             )
                         }
                     }
                     Text(
                         text = stringResource(R.string.path_to_summit, formatMeters((summitAlt - altitude).coerceAtLeast(0))),
-                        color = Ascent.Fg2,
-                        fontSize = 12.sp
+                        color = a.heroText2,
+                        fontSize = 12.sp,
+                        modifier = Modifier.padding(bottom = 6.dp)
                     )
                 }
-                AscentBar(fraction = frac, height = 8, fill = Ascent.Accent)
+                ClayProgress(
+                    ratio = frac,
+                    color = a.lessons,
+                    track = Color(0x33FFFFFF),
+                    height = 8.dp
+                )
             }
         }
 
         // ---------------- 能力概览 ----------------
+        // 每个单元一行：名称 — 细条 — 百分比。原先每条占两行（标签行 + 条），
+        // 十条堆下来把这张卡撑到近 400dp，且和上面五行统计的节奏冲突。
+        item(key = "lbCaps") {
+            ClaySectionLabel(
+                stringResource(R.string.prof_abilities),
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
+        }
         item(key = "caps") {
-            OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
-                Text(stringResource(R.string.prof_abilities), color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
-                capsByTrack.forEachIndexed { trackIndex, (track, bars) ->
-                    Column(
-                        modifier = Modifier.padding(top = if (trackIndex == 0) 0.dp else 4.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
+            val a = clayAccents()
+            ClayColumn(
+                modifier = Modifier.padding(bottom = 14.dp),
+                radius = 22.dp,
+                elevation = 8.dp,
+                padding = 16.dp,
+                gap = 14.dp
+            ) {
+                capsByTrack.forEach { (track, bars) ->
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         // 大类小标题：说明下面这几条属于哪套课程
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -415,126 +446,114 @@ private fun ProfileBody(
                         ) {
                             Text(
                                 text = trackLabelOf(track.id),
-                                color = Ascent.Accent,
+                                color = a.lessons,
                                 fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.4.sp
                             )
                             val tTotal = track.units.sumOf { it.lessons.size }
                             val tDone = track.units.sumOf { u -> u.lessons.count { it.id in completed } }
                             Text(
                                 text = "${if (tTotal == 0) 0 else tDone * 100 / tTotal}% · $tDone/$tTotal",
-                                color = Ascent.Fg3,
+                                color = a.sub,
                                 fontSize = 10.sp,
                                 fontFamily = MonoNumbers
                             )
                         }
-                        bars.forEach { (label, v) ->
-                            Column {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween
-                                ) {
-                                    Text(label, color = Ascent.Fg2, fontSize = 12.sp)
-                                    Text(
-                                        text = "${(v * 100).toInt()}%",
-                                        color = Ascent.Fg3,
-                                        fontSize = 11.sp,
-                                        fontFamily = MonoNumbers
-                                    )
-                                }
-                                Spacer(Modifier.height(6.dp))
-                                AscentBar(fraction = v, height = 6, fill = Ascent.Accent)
-                            }
-                        }
+                        bars.forEach { (label, v) -> UnitProgressRow(label, v, a) }
                     }
                 }
                 Text(
                     text = stringResource(R.string.prof_ability_note),
-                    color = Ascent.Fg3,
-                    fontSize = 10.sp
+                    color = a.sub,
+                    fontSize = 10.sp,
+                    lineHeight = 15.sp
                 )
             }
         }
 
         // ---------------- 成就徽章（紧凑入口；详情在个人主页 / 全部徽章） --------
         item(key = "badges") {
-            val shape = RoundedCornerShape(16.dp)
-            Row(
+            val a = clayAccents()
+            ClaySurface(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 14.dp)
-                    .clip(shape)
-                    .background(Ascent.Surface)
-                    .border(1.dp, Ascent.Border, shape)
-                    .clickable { onOpenProfileHome() }
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .clickable { onOpenProfileHome() },
+                radius = 20.dp,
+                elevation = 7.dp
             ) {
-                IconBadge(Ic.Award, Ascent.Accent, Ascent.AccentSoft, diameter = 40, iconSize = 20)
-                Spacer(Modifier.width(14.dp))
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        stringResource(R.string.prof_badges_meta, ACHIEVEMENTS.count { it.id in unlockedAch }, ACHIEVEMENTS.size),
-                        color = Ascent.Fg,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                    Spacer(Modifier.height(3.dp))
-                    Text(stringResource(R.string.prof_badges_hint), color = Ascent.Fg3, fontSize = 11.sp)
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    ClayChip(color = a.badges, size = 42.dp, radius = 14.dp) {
+                        Icon(Ic.Award, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
+                    }
+                    Spacer(Modifier.width(14.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            stringResource(R.string.prof_badges_meta, ACHIEVEMENTS.count { it.id in unlockedAch }, ACHIEVEMENTS.size),
+                            color = a.value,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                    Icon(Ic.ChevronRight, contentDescription = null, tint = a.sub, modifier = Modifier.size(16.dp))
                 }
-                Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
             }
         }
 
         // ---------------- 账号 ----------------
         item(key = "account") {
-            MonoLabel(stringResource(R.string.prof_section_account), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp))
+            ClaySectionLabel(
+                stringResource(R.string.prof_section_account),
+                modifier = Modifier.padding(top = 6.dp, bottom = 10.dp)
+            )
         }
         item(key = "accountCard") {
+            val a = clayAccents()
             if (account == null) {
-                val shape = RoundedCornerShape(20.dp)
-                Row(
+                ClaySurface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(shape)
-                        .background(Ascent.Surface)
-                        .border(1.dp, Ascent.Border, shape)
-                        .clickable { onLoginClick() }
-                        .padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(bottom = 14.dp)
+                        .clickable { onLoginClick() },
+                    radius = 20.dp,
+                    elevation = 7.dp
                 ) {
-                    IconBadge(Ic.UserRound, Ascent.Fg2, Ascent.Surface2, diameter = 46, iconSize = 22)
-                    Spacer(Modifier.width(14.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(stringResource(R.string.prof_not_logged_in), color = Ascent.Fg, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
-                        Spacer(Modifier.height(3.dp))
-                        Text(stringResource(R.string.prof_login_mock), color = Ascent.Fg3, fontSize = 12.sp)
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        ClayChip(color = Color(0xFF8B8B93), size = 42.dp, radius = 14.dp) {
+                            Icon(Ic.UserRound, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
+                        }
+                        Spacer(Modifier.width(14.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(stringResource(R.string.prof_not_logged_in), color = a.value, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                            Spacer(Modifier.height(3.dp))
+                            Text(stringResource(R.string.prof_login_mock), color = a.sub, fontSize = 12.sp)
+                        }
+                        SoftTag(stringResource(R.string.prof_login_register), Ascent.OnAccent, Ascent.Accent)
                     }
-                    SoftTag(stringResource(R.string.prof_login_register), Ascent.OnAccent, Ascent.Accent)
                 }
-                Spacer(Modifier.height(14.dp))
             } else {
-                OutlineCard(gap = 14, modifier = Modifier.padding(bottom = 14.dp)) {
+                ClayColumn(gap = 14.dp, padding = 16.dp, modifier = Modifier.padding(bottom = 14.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Box(
-                            modifier = Modifier
-                                .size(46.dp)
-                                .clip(RoundedCornerShape(999.dp))
-                                .background(Ascent.Accent),
-                            contentAlignment = Alignment.Center
-                        ) {
+                        ClayChip(color = Ascent.Accent, size = 46.dp, radius = 16.dp) {
                             Text(
                                 text = account.nickname.take(1).uppercase(),
-                                color = Ascent.OnAccent,
-                                fontSize = 20.sp,
+                                color = Color.White,
+                                fontSize = 19.sp,
                                 fontWeight = FontWeight.Bold
                             )
                         }
                         Spacer(Modifier.width(14.dp))
                         Column(modifier = Modifier.weight(1f)) {
-                            Text(account.nickname, color = Ascent.Fg, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                            Text(account.nickname, color = a.value, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                             Spacer(Modifier.height(3.dp))
-                            Text(account.email, color = Ascent.Fg3, fontSize = 12.sp)
+                            Text(account.email, color = a.sub, fontSize = 12.sp)
                         }
                     }
                     PillButton(text = stringResource(R.string.prof_logout), style = BtnStyle.Secondary, height = 44, onClick = onLogout)
@@ -553,27 +572,36 @@ private fun ProfileBody(
 
         // ---------------- 声明 ----------------
         item(key = "disc") {
-            val shape = RoundedCornerShape(16.dp)
-            Row(
+            ClaySurface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 14.dp)
-                    .clip(shape)
-                    .background(Ascent.WarningSoft)
-                    .border(1.dp, Ascent.Border, shape)
-                    .padding(16.dp)
+                    .padding(bottom = 14.dp),
+                radius = 20.dp,
+                elevation = 7.dp,
+                fill = Brush.verticalGradient(listOf(Color(0xFFFBF4E6), Color(0xFFF7EEDD))),
+                rim = Color(0xFFF0E3C9)
             ) {
-                Icon(Ic.TriangleAlert, contentDescription = null, tint = Ascent.Warning, modifier = Modifier.size(18.dp))
-                Spacer(Modifier.width(12.dp))
-                Column {
-                    Text(stringResource(R.string.prof_disclaimer_title), color = Ascent.Warning, fontSize = 13.sp, fontWeight = FontWeight.Bold)
-                    Spacer(Modifier.height(7.dp))
-                    Text(
-                        text = stringResource(R.string.prof_disclaimer_body),
-                        color = Ascent.Fg2,
-                        fontSize = 12.sp,
-                        lineHeight = 19.sp
-                    )
+                Row(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                    Box(
+                        modifier = Modifier
+                            .size(22.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color(0xFFF5A524)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(Ic.TriangleAlert, contentDescription = null, tint = Color.White, modifier = Modifier.size(13.dp))
+                    }
+                    Spacer(Modifier.width(11.dp))
+                    Column {
+                        Text(stringResource(R.string.prof_disclaimer_title), color = Color(0xFF8A5A00), fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                        Spacer(Modifier.height(7.dp))
+                        Text(
+                            text = stringResource(R.string.prof_disclaimer_body),
+                            color = Color(0xFF8C7351),
+                            fontSize = 12.sp,
+                            lineHeight = 19.sp
+                        )
+                    }
                 }
             }
         }
@@ -581,17 +609,21 @@ private fun ProfileBody(
         // ---------------- 重置 + 版本 ----------------
         item(key = "reset") {
             Spacer(Modifier.height(8.dp))
-            val shape = RoundedCornerShape(999.dp)
-            Box(
+            ClaySurface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(shape)
-                    .background(Ascent.DangerSoft)
-                    .clickable { onReset() }
-                    .padding(vertical = 15.dp),
-                contentAlignment = Alignment.Center
+                    .clickable { onReset() },
+                radius = 18.dp,
+                elevation = 5.dp,
+                fill = Brush.verticalGradient(listOf(Color(0xFFFDF1F2), Color(0xFFFAE7E9))),
+                rim = Color(0xFFF4D9DC)
             ) {
-                Text(stringResource(R.string.prof_reset_all), color = Ascent.Danger, fontSize = 13.sp, fontWeight = FontWeight.Medium)
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 15.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(stringResource(R.string.prof_reset_all), color = clayAccents().danger, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+                }
             }
         }
 
@@ -604,9 +636,42 @@ private fun ProfileBody(
                     .padding(vertical = 18.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(stringResource(R.string.prof_version, BuildConfig.VERSION_NAME), color = Ascent.Fg3, fontSize = 11.sp)
+                Text(stringResource(R.string.prof_version, BuildConfig.VERSION_NAME), color = clayAccents().sub, fontSize = 11.sp)
             }
         }
+    }
+}
+
+/**
+ * 单元进度：一行内「名称 — 细条 — 百分比」。
+ * 原来标签和条分两行（12sp 标签 + 6dp 条 + 间距），十条叠起来近 400dp，
+ * 而且和「我的主页」那五行统计的节奏打架。压成一行后整块只有原来的一半高。
+ */
+@Composable
+private fun UnitProgressRow(label: String, value: Float, a: ClayAccents) {
+    Row(
+        modifier = Modifier.fillMaxWidth().height(20.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = label,
+            color = a.label,
+            fontSize = 11.5.sp,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.width(104.dp)
+        )
+        Box(modifier = Modifier.weight(1f).padding(end = 10.dp)) {
+            ClayProgress(ratio = value, color = a.lessons, height = 5.dp)
+        }
+        Text(
+            text = "${(value * 100).toInt()}%",
+            color = a.sub,
+            fontSize = 10.sp,
+            fontFamily = MonoNumbers,
+            textAlign = TextAlign.End,
+            modifier = Modifier.width(32.dp)
+        )
     }
 }
 

@@ -336,4 +336,9 @@
     <string name="badge_stage_bg_light">Ljus</string>
     <string name="badge_stage_bg_dark">Mörk</string>
     <string name="badge_stage_gesture_hint">Dra för att rotera · Nyp för att zooma, två fingrar för att panorera · Dubbeltryck för att återställa</string>
+    <!-- 天数：英文 / 德 / 西 / 意 / 瑞典 / 俄 有单复数，中日只需 other -->
+    <plurals name="common_days">
+        <item quantity="one">%1$d dag</item>
+        <item quantity="other">%1$d dagar</item>
+    </plurals>
 </resources>

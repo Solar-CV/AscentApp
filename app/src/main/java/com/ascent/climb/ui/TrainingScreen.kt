@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -55,7 +56,7 @@ fun TrainingScreen(
     ) {
         item(key = "title") {
             Column(modifier = Modifier.padding(bottom = 14.dp)) {
-                Text(stringResource(R.string.tr_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.tr_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
                 Spacer(Modifier.height(4.dp))
                 MonoLabel(stringResource(R.string.tr_subtitle))
             }
@@ -63,14 +64,17 @@ fun TrainingScreen(
 
         // ---- 今日推荐 ----
         item(key = "today") {
-            val shape = RoundedCornerShape(20.dp)
+            ClaySurface(
+                modifier = Modifier.fillMaxWidth(),
+                radius = 24.dp,
+                elevation = 9.dp,
+                // 平涂：顶部大块不再做上下渐变，一块实色 + 原色描边
+                fill = SolidColor(Color(0xFF0F86F5)),
+                rim = Color(0xFF0B6FCB)
+            ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(shape)
-                    .background(
-                        Brush.linearGradient(listOf(Color(0xFF3AA3FF), Color(0xFF0267CE)))
-                    )
                     .padding(18.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -111,10 +115,11 @@ fun TrainingScreen(
                     Icon(Ic.Play, contentDescription = null, tint = Color.White, modifier = Modifier.size(18.dp))
                 }
             }
+            }
         }
 
         item(key = "label") {
-            MonoLabel(stringResource(R.string.tr_recommend), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
+            ClaySectionLabel(stringResource(R.string.tr_recommend), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
         }
 
         items(drills.size, key = { "d$it" }) { i ->
@@ -125,15 +130,14 @@ fun TrainingScreen(
         // ---- 安全边界 ----
         item(key = "safety") {
             Spacer(Modifier.height(18.dp))
-            val shape = RoundedCornerShape(16.dp)
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(shape)
-                    .background(Ascent.WarningSoft)
-                    .border(1.dp, Ascent.Border, shape)
-                    .padding(16.dp)
+            ClaySurface(
+                modifier = Modifier.fillMaxWidth(),
+                radius = 20.dp,
+                elevation = 7.dp,
+                fill = Brush.verticalGradient(listOf(Color(0xFFFFF8EC), Color(0xFFFDF2DF))),
+                rim = Color(0xFFF2E2C4)
             ) {
+            Row(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                 Icon(Ic.TriangleAlert, contentDescription = null, tint = Ascent.Warning, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(12.dp))
                 Column {
@@ -147,25 +151,30 @@ fun TrainingScreen(
                     )
                 }
             }
+            }
         }
     }
 }
 
 @Composable
 private fun DrillRow(icon: ImageVector, title: String, reason: String) {
-    val shape = RoundedCornerShape(16.dp)
-    Row(
+    ClaySurface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 5.dp)
-            .clip(shape)
-            .background(Ascent.Surface)
-            .border(1.dp, Ascent.Border, shape)
-            .clickable { }
+            .clickable { },
+        radius = 20.dp,
+        elevation = 7.dp
+    ) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(horizontal = 14.dp, vertical = 13.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconBadge(icon, Ascent.Accent, Ascent.AccentSoft, diameter = 36, iconSize = 18)
+        ClayChip(color = Ascent.Accent, size = 36.dp, radius = 13.dp) {
+            Icon(icon, contentDescription = null, tint = Color.White, modifier = Modifier.size(18.dp))
+        }
         Spacer(Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(title, color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
@@ -173,5 +182,6 @@ private fun DrillRow(icon: ImageVector, title: String, reason: String) {
             Text(reason, color = Ascent.Fg3, fontSize = 12.sp)
         }
         Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
+    }
     }
 }

@@ -6,7 +6,9 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 68 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 21 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.20.18 (versionCode 125). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.21.0 (versionCode 129). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+
+v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
 
 ## Installation
 
@@ -217,6 +219,13 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
 ## Senaste ändringar
+
+**v0.20.19 – v0.21.0: lerytor**
+
+- Korten är av lera: fyra lager per kort — yttre skugga, kantljus, en kort högdager upptill och en inre avskuggning. Skuggan ritas med `BlurMaskFilter` utanför skärmen och cachas per storlek och radie. `Modifier.blur()` kräver API 31 och projektet går från 26; `Modifier.shadow()` klarar inte en färgad tvålagersskugga
+- Fem skärmar gjordes om: profil, repetition, träning och handbok, därefter sidan ”Mitt”. Högdagern drogs tillbaka till en 20 dp läpp, konturen gick från 1 fysisk pixel till dp och skuggan delades i volym plus kontakt — innan dess såg korten halvtransparenta ut eftersom högdagern åt upp kanterna
+- Varje handbokskategori har egen färg (utrustning stålblå, rep turkos, snö och is indigo, medicin röd, bedömning bärnsten, planering grön, ledarskap magenta); rutorna är platt fyllda utan gradient och detaljsidans omslag tar kategorifärgen
+- Flera upplåsta prestationer i följd lägger sig inte längre över varandra: 3D-vyn byggs om per prestations-id och bakgrunden är ogenomskinlig mellan dialogerna
 
 **v0.20.18: nytt Everest-diorama**
 

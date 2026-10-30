@@ -70,7 +70,7 @@ fun ReviewScreen(
         // ---- 标题 ----
         item(key = "title") {
             Column(modifier = Modifier.padding(bottom = 14.dp)) {
-                Text(stringResource(R.string.rev_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.rev_title), color = Ascent.Fg, fontSize = 26.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
                 Spacer(Modifier.height(4.dp))
                 MonoLabel(stringResource(R.string.rev_subtitle))
             }
@@ -78,7 +78,8 @@ fun ReviewScreen(
 
         // ---- 队列 ----
         item(key = "queue") {
-            OutlineCard(gap = 14) {
+            val heroA = clayAccents()
+            ClayColumn(gap = 14.dp, padding = 18.dp, radius = 24.dp, elevation = 9.dp, dark = true) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -87,14 +88,14 @@ fun ReviewScreen(
                     Row(verticalAlignment = Alignment.Bottom) {
                         Text(
                             text = "${dueKeys.size}",
-                            color = Ascent.Fg,
+                            color = heroA.heroText,
                             fontSize = 42.sp,
                             fontWeight = FontWeight.SemiBold,
                             fontFamily = MonoNumbers
                         )
                         Text(
                             text = stringResource(R.string.rev_due_today),
-                            color = Ascent.Fg2,
+                            color = heroA.heroText2,
                             fontSize = 13.sp,
                             modifier = Modifier.padding(start = 8.dp, bottom = 6.dp)
                         )
@@ -109,7 +110,10 @@ fun ReviewScreen(
                             )
                         }
                         Spacer(Modifier.height(6.dp))
-                        MonoLabel(stringResource(R.string.rev_queue_meta, reviewTotal, accuracy))
+                        MonoLabel(
+                            stringResource(R.string.rev_queue_meta, reviewTotal, accuracy),
+                            color = heroA.heroText2
+                        )
                     }
                 }
                 val cells = 8
@@ -124,7 +128,7 @@ fun ReviewScreen(
                                 .weight(1f)
                                 .height(6.dp)
                                 .clip(RoundedCornerShape(999.dp))
-                                .background(if (i < filled) Ascent.Accent else Ascent.Track)
+                                .background(if (i < filled) heroA.lessons else heroA.track)
                         )
                     }
                 }
@@ -135,7 +139,7 @@ fun ReviewScreen(
         if (dueKeys.isEmpty()) {
             item(key = "empty") {
                 Spacer(Modifier.height(14.dp))
-                OutlineCard(gap = 10) {
+                ClayColumn(gap = 10.dp, padding = 16.dp) {
                     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
                             IconBadge(Ic.CircleCheck, Ascent.Fg3, Ascent.Surface2, diameter = 56, iconSize = 26)
@@ -170,7 +174,7 @@ fun ReviewScreen(
         // ---- 安全关键 ----
         if (safetyCriticalMisses.isNotEmpty()) {
             item(key = "sec_safety") {
-                MonoLabel(stringResource(R.string.rev_queue_safety), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
+                ClaySectionLabel(stringResource(R.string.rev_queue_safety), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
             }
             items(safetyCriticalMisses.size, key = { "sf_$it" }) { i ->
                 val (_, lesson) = safetyCriticalMisses[i]
@@ -188,7 +192,7 @@ fun ReviewScreen(
         // ---- 其他错题 ----
         if (otherMisses.isNotEmpty()) {
             item(key = "sec_other") {
-                MonoLabel(stringResource(R.string.rev_others), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
+                ClaySectionLabel(stringResource(R.string.rev_others), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
             }
             items(otherMisses.size, key = { "ot_$it" }) { i ->
                 val (_, lesson) = otherMisses[i]
@@ -206,7 +210,7 @@ fun ReviewScreen(
         // ---- 待教练评估 ----
         if (pendingCoach.isNotEmpty()) {
             item(key = "sec_coach") {
-                MonoLabel(stringResource(R.string.rev_coach_pending), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
+                ClaySectionLabel(stringResource(R.string.rev_coach_pending), modifier = Modifier.padding(top = 20.dp, bottom = 10.dp))
             }
             items(pendingCoach.size, key = { "co_$it" }) { i ->
                 val lesson = pendingCoach[i]
@@ -232,19 +236,23 @@ private fun ReviewRow(
     bg: Color,
     onClick: () -> Unit
 ) {
-    val shape = RoundedCornerShape(16.dp)
-    Row(
+    ClaySurface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
-            .clip(shape)
-            .background(Ascent.Surface)
-            .border(1.dp, Ascent.Border, shape)
-            .clickable { onClick() }
+            .clickable { onClick() },
+        radius = 18.dp,
+        elevation = 6.dp
+    ) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconBadge(icon, tint, bg, diameter = 30, iconSize = 15)
+        ClayChip(color = tint, size = 30.dp, radius = 11.dp) {
+            Icon(icon, contentDescription = null, tint = Color.White, modifier = Modifier.size(15.dp))
+        }
         Spacer(Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(lessonTitle(lesson.id, lesson.title), color = Ascent.Fg, fontSize = 14.sp, fontWeight = FontWeight.Medium)
@@ -252,5 +260,6 @@ private fun ReviewRow(
             Text(sub, color = Ascent.Fg3, fontSize = 10.sp, fontFamily = MonoNumbers, letterSpacing = 0.3.sp)
         }
         Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
+    }
     }
 }

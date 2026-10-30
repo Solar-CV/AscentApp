@@ -373,4 +373,8 @@
     <string name="badge_stage_bg_light">亮底</string>
     <string name="badge_stage_bg_dark">暗底</string>
     <string name="badge_stage_gesture_hint">拖动旋转 · 双指缩放/平移 · 双击复位</string>
+    <!-- 天数：英文 / 德 / 西 / 意 / 瑞典 / 俄 有单复数，中日只需 other -->
+    <plurals name="common_days">
+        <item quantity="other">%1$d 天</item>
+    </plurals>
 </resources>

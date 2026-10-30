@@ -6,7 +6,9 @@ Une application Android pour celles et ceux qui débutent en alpinisme d’altit
 
 Deux parcours se changent librement. La **haute montagne** compte six unités et 68 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 21 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.20.18 (versionCode 125). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+Version actuelle v0.21.0 (versionCode 129). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+
+Les v0.20.19 – v0.21.0 ont habillé toute l’interface en argile : ombres doubles douces dessinées hors écran et mises en cache, pastilles de couleur mates, couleurs par catégorie dans le manuel, et blocs de couleur dont le relief vient d’une ombre de contact plutôt que d’un dégradé.
 
 ## Installation
 
@@ -217,6 +219,13 @@ Pour publier une nouvelle banque : modifier le contenu → incrémenter `BUNDLED
 Les anciennes versions de l’application ne cassent pas face à une banque plus récente. `minAppVersion` dans `manifest.json` bloque les clients trop anciens, les champs inconnus sont ignorés et une question mal formée est sautée plutôt que fatale.
 
 ## Changements récents
+
+**v0.20.19 – v0.21.0 : surfaces d’argile**
+
+- Les cartes sont en argile : quatre couches chacune — ombre externe, lumière de bord, un court reflet en haut et un ombrage interne. L’ombre est dessinée hors écran avec `BlurMaskFilter` et mise en cache par taille et rayon. `Modifier.blur()` exige l’API 31 alors que le projet démarre à 26 ; `Modifier.shadow()` ne sait pas faire une ombre colorée à deux couches
+- Cinq écrans refaits : profil, révision, entraînement et manuel, puis la page « Moi ». Le reflet a été ramené à une lèvre de 20 dp, le contour est passé de 1 pixel physique au dp, et l’ombre a été scindée en volume et contact — avant, les cartes paraissaient semi-transparentes parce que le reflet mangeait leurs bords
+- Chaque catégorie du manuel a sa couleur (équipement bleu acier, cordes turquoise, neige et glace indigo, médecine rouge, jugement ambre, préparation vert, leadership magenta) ; les pastilles sont mates, sans dégradé, et la couverture du détail reprend la couleur de la catégorie
+- Plusieurs succès débloqués d’affilée ne se superposent plus : la vue 3D est reconstruite par identifiant, et le fond reste opaque entre les fenêtres
 
 **v0.20.18 : nouveau diorama de l’Everest**
 

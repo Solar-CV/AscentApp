@@ -1,6 +1,7 @@
 package com.ascent.climb.ui
 
 import com.ascent.climb.R
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -28,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -92,14 +94,12 @@ fun ProfileHomeScreen(
             // ---------------- 档案头 ----------------
             item(key = "id") {
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(bottom = 16.dp)) {
-                    Box(
-                        modifier = Modifier
-                            .size(60.dp)
-                            .clip(RoundedCornerShape(999.dp))
-                            .background(Ascent.Accent),
-                        contentAlignment = Alignment.Center
+                    ClayChip(
+                        color = Ascent.Accent,
+                        size = 60.dp,
+                        radius = 30.dp
                     ) {
-                        Icon(Ic.UserRound, contentDescription = null, tint = Ascent.OnAccent, modifier = Modifier.size(30.dp))
+                        Icon(Ic.UserRound, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
                     }
                     Spacer(Modifier.width(14.dp))
                     Column(modifier = Modifier.weight(1f)) {
@@ -115,30 +115,55 @@ fun ProfileHomeScreen(
             }
 
             // ---------------- 学习概览 ----------------
-            item(key = "lbStat") { MonoLabel(stringResource(R.string.home_overview), modifier = Modifier.padding(bottom = 8.dp)) }
+            // 原先 2×2 四宫格 + 两条进度。现在每项一行：图标色块给索引，数字同色加深，
+            // 海拔那行翻成墨黑作为页面的重量锥（总进度已并进"完成课程"，同一个数）。
+            item(key = "lbStat") {
+                ClaySectionLabel(
+                    stringResource(R.string.home_overview),
+                    modifier = Modifier.padding(bottom = 10.dp)
+                )
+            }
             item(key = "stat") {
-                OutlineCard(gap = 12, modifier = Modifier.padding(bottom = 14.dp)) {
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = stringResource(R.string.common_days_n, streak), label = stringResource(R.string.home_streak))
-                        }
-                        Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = stringResource(R.string.common_days_n, stats.activeDays), label = stringResource(R.string.home_active_days))
-                        }
-                    }
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = "$doneHere / ${ALL_LESSONS.size}", label = stringResource(R.string.home_lessons_done))
-                        }
-                        Box(modifier = Modifier.weight(1f)) {
-                            StatTile(value = "${earned.size} / ${ACHIEVEMENTS.size}", label = stringResource(R.string.home_badges))
-                        }
-                    }
-                    Spacer(Modifier.height(4.dp))
-                    MiniProgressRow(label = stringResource(R.string.home_progress_total), frac = overall)
-                    Spacer(Modifier.height(8.dp))
-                    MiniProgressRow(label = stringResource(R.string.home_progress_altitude), frac = altFrac)
+                val a = clayAccents()
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    ClayStatRow(
+                        label = stringResource(R.string.home_streak),
+                        value = pluralStringResource(R.plurals.common_days, streak, streak),
+                        icon = Ic.Flame,
+                        tint = a.streak
+                    )
+                    ClayStatRow(
+                        label = stringResource(R.string.home_active_days),
+                        value = pluralStringResource(R.plurals.common_days, stats.activeDays, stats.activeDays),
+                        icon = Ic.Calendar,
+                        tint = a.days
+                    )
+                    ClayStatRow(
+                        label = stringResource(R.string.home_lessons_done),
+                        value = "$doneHere / ${ALL_LESSONS.size}",
+                        icon = Ic.CircleCheck,
+                        tint = a.lessons,
+                        ratio = overall
+                    )
+                    ClayStatRow(
+                        label = stringResource(R.string.home_badges),
+                        value = "${earned.size} / ${ACHIEVEMENTS.size}",
+                        icon = Ic.Award,
+                        tint = a.badges,
+                        ratio = if (ACHIEVEMENTS.isEmpty()) 0f
+                        else earned.size.toFloat() / ACHIEVEMENTS.size
+                    )
+                    ClayStatRow(
+                        label = stringResource(R.string.home_progress_altitude),
+                        value = "${formatMeters(altitude)} / ${formatMeters(summitAlt)}",
+                        icon = Ic.MountainSnow,
+                        tint = a.lessons,
+                        ratio = altFrac,
+                        barColor = a.lessons,
+                        emphasize = true
+                    )
                 }
+                Spacer(Modifier.height(18.dp))
             }
 
             // ---------------- 已解锁徽章 ----------------
@@ -166,7 +191,19 @@ fun ProfileHomeScreen(
                 }
             }
             item(key = "badges") {
-                OutlineCard(gap = 10, modifier = Modifier.padding(bottom = 14.dp)) {
+                ClaySurface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 14.dp),
+                    radius = 22.dp,
+                    elevation = 8.dp
+                ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
                     if (earned.isEmpty()) {
                         Text(
                             text = stringResource(R.string.home_no_badges),
@@ -192,6 +229,7 @@ fun ProfileHomeScreen(
                             )
                         }
                     }
+                }
                 }
             }
         }
@@ -231,37 +269,6 @@ fun BadgeGrid(
                     textAlign = androidx.compose.ui.text.style.TextAlign.Center
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun MiniProgressRow(label: String, frac: Float) {
-    Column {
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Text(label, color = Ascent.Fg2, fontSize = 12.sp, modifier = Modifier.weight(1f))
-            Text(
-                "${(frac * 100).toInt()}%",
-                color = Ascent.Fg3,
-                fontSize = 11.sp,
-                fontFamily = MonoNumbers
-            )
-        }
-        Spacer(Modifier.height(5.dp))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(6.dp)
-                .clip(RoundedCornerShape(999.dp))
-                .background(Ascent.Track)
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(frac.coerceIn(0f, 1f))
-                    .height(6.dp)
-                    .clip(RoundedCornerShape(999.dp))
-                    .background(Ascent.Accent)
-            )
         }
     }
 }

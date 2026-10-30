@@ -336,4 +336,9 @@
     <string name="badge_stage_bg_light">Hell</string>
     <string name="badge_stage_bg_dark">Dunkel</string>
     <string name="badge_stage_gesture_hint">Ziehen dreht · Pinch zum Zoomen, zwei Finger schwenken · Doppeltipp setzt zurück</string>
+    <!-- 天数：英文 / 德 / 西 / 意 / 瑞典 / 俄 有单复数，中日只需 other -->
+    <plurals name="common_days">
+        <item quantity="one">%1$d Tag</item>
+        <item quantity="other">%1$d Tage</item>
+    </plurals>
 </resources>
