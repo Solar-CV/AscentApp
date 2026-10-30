@@ -335,4 +335,5 @@
     <string name="badge_stage_no_asset">Det finns ännu ingen grafik för denna utmärkelse</string>
     <string name="badge_stage_bg_light">Ljus</string>
     <string name="badge_stage_bg_dark">Mörk</string>
+    <string name="badge_stage_gesture_hint">Dra för att rotera · Nyp för att zooma, två fingrar för att panorera · Dubbeltryck för att återställa</string>
 </resources>

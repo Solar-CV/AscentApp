@@ -335,4 +335,5 @@
     <string name="badge_stage_no_asset">Pas encore d\'illustration pour ce succès</string>
     <string name="badge_stage_bg_light">Clair</string>
     <string name="badge_stage_bg_dark">Sombre</string>
+    <string name="badge_stage_gesture_hint">Glissez pour pivoter · Pincez pour zoomer, deux doigts pour déplacer · Double-tapez pour réinitialiser</string>
 </resources>

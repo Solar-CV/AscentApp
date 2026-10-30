@@ -172,6 +172,16 @@ private val POSE_OVERRIDE: Map<String, ModelPose> = mapOf(
 /** 默认模型（POC Activity / 调试直连时用）。 */
 private const val MODEL_PATH = "badges/first_steps.glb"
 
+/**
+ * 缩放范围：zoom 是「相机距离倍数」，越小越近、越放大。
+ * 0.18 相当于约 5.5 倍放大，2.6 是最远（缩到原来的 0.38 倍）。
+ * 之前锁在 0.8–1.8，最多只能放大 1.25 倍，真机上牌面小字根本看不清。
+ */
+private const val ZOOM_MIN = 0.18f
+private const val ZOOM_MAX = 2.6f
+/** 双指拖动位移与间距变化到这个比例以内，视为「平移查看局部」而不是缩放。 */
+private const val PINCH_PAN_RATIO = 0.02f
+
 /** 提升 glTF 自带点/聚光灯的强度，使其在当前场景曝光下可见。 */
 private const val PUNCTUAL_LIGHT_GAIN = 5f
 private const val IBL_PATH = "env/studio_ibl.ktx"
@@ -474,6 +484,10 @@ private class Badge3DRenderer(
     private var frameScale = 1f
     private var lastAspect = 1f
     private var pinchBase = 1f
+    // 平移（放大后看局部）：相机在观察平面内的偏移，单位与世界坐标一致
+    private var panX = 0f
+    private var panY = 0f
+    private var lastTapAt = 0L
     private var lastTouchAt = System.currentTimeMillis()
     private var lastX = 0f
     private var lastY = 0f
@@ -655,6 +669,13 @@ private class Badge3DRenderer(
         val intentFix = runCatching {
             (textureView.context as? android.app.Activity)?.intent?.getStringExtra("fix")
         }.getOrNull()
+        runCatching {
+            (textureView.context as? android.app.Activity)?.intent?.getFloatExtra("zoom", 1f)
+        }.getOrNull()?.let { zoom = it.coerceIn(ZOOM_MIN, ZOOM_MAX) }
+        // 调试平移：--ef panx 0.1 --ef pany -0.05（世界单位）
+        val act = textureView.context as? android.app.Activity
+        panX = act?.intent?.getFloatExtra("panx", 0f) ?: 0f
+        panY = act?.intent?.getFloatExtra("pany", 0f) ?: 0f
         val badgeId = modelPath.substringAfterLast('/').substringBeforeLast('.')
         val pose = POSE_OVERRIDE[badgeId]
         frameScale = pose?.fitScale ?: 1f
@@ -688,7 +709,8 @@ private class Badge3DRenderer(
         val fitY = 0.5f / halfTan
         val fitX = 0.5f / (halfTan * aspect)
         val dist = max(fitY, fitX) * 1.18f * zoom * frameScale
-        camera.setModelMatrix(translation(0f, 0f, dist))
+        // 相机在观察平面内平移：拖动时让画面跟着手指走，从而查看放大后的局部
+        camera.setModelMatrix(translation(panX, panY, dist))
     }
 
     private fun applyTransform() {
@@ -758,8 +780,9 @@ private class Badge3DRenderer(
         val fps = if (ms > 0.0) 1000.0 / ms else 0.0
         adaptQuality(nowMs, ms)
         onStats(
-            "%.1f fps · %.1f ms/帧 · 首帧 %.0f ms · %s · %s · %s".format(
-                fps, ms, firstFrameMs.coerceAtLeast(0.0), bloomLabel, aaLabel, Badge3D.backendName()
+            "%.1f fps · %.1f ms/帧 · 首帧 %.0f ms · %s · %s · %s · 放大 ×%.1f".format(
+                fps, ms, firstFrameMs.coerceAtLeast(0.0), bloomLabel, aaLabel,
+                Badge3D.backendName(), 1f / zoom
             )
         )
         frameAccum = 0.0
@@ -838,21 +861,46 @@ private class Badge3DRenderer(
                 pinchBase = distanceOf(event)
                 lastTouchAt = System.currentTimeMillis()
                 spinVelocity = 0f
+                // 双击复位：回到默认取景（缩放和平移都归零）
+                val now = System.currentTimeMillis()
+                if (now - lastTapAt < 280L) {
+                    zoom = 1f
+                    panX = 0f
+                    panY = 0f
+                    applyCamera()
+                }
+                lastTapAt = now
             }
 
             MotionEvent.ACTION_POINTER_DOWN -> {
                 multiTouch = true
                 pinchBase = distanceOf(event)
+                if (event.pointerCount >= 2) {
+                    lastX = (event.getX(0) + event.getX(1)) * 0.5f
+                    lastY = (event.getY(0) + event.getY(1)) * 0.5f
+                }
             }
 
             MotionEvent.ACTION_MOVE -> {
                 lastTouchAt = System.currentTimeMillis()
                 if (multiTouch && event.pointerCount >= 2) {
                     val d = distanceOf(event)
-                    if (pinchBase > 0f && d > 0f) {
-                        zoom = (zoom * (pinchBase / d)).coerceIn(0.8f, 1.8f)
+                    val cx = (event.getX(0) + event.getX(1)) * 0.5f
+                    val cy = (event.getY(0) + event.getY(1)) * 0.5f
+                    val ratio = if (pinchBase > 0f) abs(1f - d / pinchBase) else 0f
+                    if (pinchBase > 0f && d > 0f && ratio > PINCH_PAN_RATIO) {
+                        zoom = (zoom * (pinchBase / d)).coerceIn(ZOOM_MIN, ZOOM_MAX)
                         pinchBase = d
+                    } else {
+                        // 两指间距基本没变 → 平移查看局部
+                        val worldPerPx = worldPerPixel()
+                        panX -= (cx - lastX) * worldPerPx
+                        panY += (cy - lastY) * worldPerPx
+                        clampPan()
                     }
+                    lastX = cx
+                    lastY = cy
+                    applyCamera()
                 } else {
                     val dx = event.x - lastX
                     val dy = event.y - lastY
@@ -877,6 +925,23 @@ private class Badge3DRenderer(
     private fun distanceOf(event: MotionEvent): Float {
         if (event.pointerCount < 2) return 0f
         return hypot(event.getX(1) - event.getX(0), event.getY(1) - event.getY(0))
+    }
+
+    /** 当前取景下，一个屏幕像素对应多少世界单位（供平移换算）。 */
+    private fun worldPerPixel(): Float {
+        // 与 applyCamera 用同一套距离公式，否则竖屏下平移会比手指慢
+        val halfTan = tan(Math.toRadians(32.0 / 2.0)).toFloat()
+        val aspect = lastAspect.coerceIn(0.2f, 5f)
+        val dist = max(0.5f / halfTan, 0.5f / (halfTan * aspect)) * 1.18f * zoom * frameScale
+        val h = textureView.height.coerceAtLeast(1)
+        return (2f * dist * halfTan) / h
+    }
+
+    /** 平移限位：别把物件拖出视野，拖太远就再也找不回来了。 */
+    private fun clampPan() {
+        val limit = 1.1f * zoom + 0.15f
+        panX = panX.coerceIn(-limit, limit)
+        panY = panY.coerceIn(-limit, limit)
     }
 }
 
@@ -1210,6 +1275,15 @@ fun Badge3DStageScreen(
                         color = ink2,
                         fontSize = 12.sp,
                         lineHeight = 18.sp
+                    )
+                }
+                if (modelPath != null) {
+                    // 放大/平移是这一版才加的手势，用户未必会自己试出来，写一行提示
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        text = stringResource(R.string.badge_stage_gesture_hint),
+                        color = ink2,
+                        fontSize = 10.sp
                     )
                 }
                 if (modelPath != null && stats.isNotEmpty()) {

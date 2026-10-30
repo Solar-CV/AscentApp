@@ -357,4 +357,5 @@
     <string name="badge_stage_no_asset">この実績のグラフィックはまだありません</string>
     <string name="badge_stage_bg_light">ライト</string>
     <string name="badge_stage_bg_dark">ダーク</string>
+    <string name="badge_stage_gesture_hint">ドラッグで回転 · ピンチで拡大・二本指で移動 · ダブルタップでリセット</string>
 </resources>

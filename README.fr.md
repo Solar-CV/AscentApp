@@ -6,7 +6,7 @@ Une application Android pour celles et ceux qui débutent en alpinisme d’altit
 
 Deux parcours se changent librement. La **haute montagne** compte six unités et 68 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 21 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.20.15 (versionCode 122). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+Version actuelle v0.20.16 (versionCode 123). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
 
 ## Installation
 
@@ -217,6 +217,11 @@ Pour publier une nouvelle banque : modifier le contenu → incrémenter `BUNDLED
 Les anciennes versions de l’application ne cassent pas face à une banque plus récente. `minAppVersion` dans `manifest.json` bloque les clients trop anciens, les champs inconnus sont ignorés et une question mal formée est sautée plutôt que fatale.
 
 ## Changements récents
+
+**v0.20.16 : zoom sur les détails**
+
+- Le pincement plafonnait à 1,25×, d’où des noms de sommets et des altitudes illisibles sur téléphone. Il va maintenant jusqu’à 5,5×
+- Deux doigts à distance constante : le glissement déplace la vue jusqu’aux coins ; un seul doigt fait toujours pivoter. Un double-tap réinitialise zoom et déplacement, et une courte indication des gestes figure sous le titre du badge
 
 **v0.20.15 : les quarante badges sont en 3D**
 

@@ -357,4 +357,5 @@
     <string name="badge_stage_no_asset">Для этого достижения пока нет графики</string>
     <string name="badge_stage_bg_light">Светлый</string>
     <string name="badge_stage_bg_dark">Тёмный</string>
+    <string name="badge_stage_gesture_hint">Потяните для поворота · Щипок — масштаб, два пальца — сдвиг · Двойное касание — сброс</string>
 </resources>

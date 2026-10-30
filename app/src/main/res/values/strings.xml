@@ -372,4 +372,5 @@
     <string name="badge_stage_no_asset">该成就暂无图形资源</string>
     <string name="badge_stage_bg_light">亮底</string>
     <string name="badge_stage_bg_dark">暗底</string>
+    <string name="badge_stage_gesture_hint">拖动旋转 · 双指缩放/平移 · 双击复位</string>
 </resources>
