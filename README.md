@@ -6,17 +6,18 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.21.1 (versionCode 130). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+Current version v0.21.2 (versionCode 131). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 v0.20.19 – v0.21.0 restyled the whole interface in clay: soft double shadows drawn offscreen and cached, flat colour chips, category colours in the handbook, and hero blocks that take their depth from a contact shadow instead of a gradient.
 
 ## Install
 
-The easiest route is the prebuilt debug APK from [Releases](https://github.com/Solar-CV/AscentApp/releases). Pushing a `v*` tag makes GitHub Actions build and attach a fresh APK.
+The easiest route is the prebuilt APK from [Releases](https://github.com/Solar-CV/AscentApp/releases). Pushing a `v*` tag makes GitHub Actions build and attach a fresh APK.
 
 - Package: `com.ascent.climb`
 - Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
-- Size: about 41 MB (38 MB of uncompressed badge models, ~11 MB after packaging)
+- Size: about 30 MB (38 MB of uncompressed badge models, ~10 MB after packaging)
+- Signing: release-signed since v0.21.2. It will not install over an older debug build — uninstall first, and that clears local progress, badges and settings
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
 Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
@@ -219,6 +220,8 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+**v0.21.2: release-signed builds** — the APK attached to Releases is now release-signed and R8-minified: 30 MB instead of 41 MB. Installing it over an older debug build means uninstalling first, which clears local data.
 
 **v0.21.1: three fixes**
 

@@ -6,17 +6,18 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 68 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 21 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.21.1 (versionCode 130). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.21.2 (versionCode 131). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
 
 ## Installation
 
-Enklaste vägen är det färdigbyggda debug-APK:t från [Releases](https://github.com/Solar-CV/AscentApp/releases). En push av en `v*`-tagg låter GitHub Actions bygga och bifoga ett nytt APK.
+Enklaste vägen är det färdigbyggda APK:t från [Releases](https://github.com/Solar-CV/AscentApp/releases). En push av en `v*`-tagg låter GitHub Actions bygga och bifoga ett nytt APK.
 
 - Paket: `com.ascent.climb`
 - Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen
-- Storlek: cirka 41 MB (38 MB okomprimerade emblemmodeller, ungefär 11 MB efter paketering)
+- Storlek: cirka 30 MB (38 MB okomprimerade emblemmodeller, ungefär 10 MB efter paketering)
+- Signatur: release-signerat från v0.21.2. Det går inte att installera över en äldre debug-build — avinstallera först, vilket raderar framsteg, emblem och inställningar
 - Behörigheter: nätverk och nätverksstatus — för att söka efter uppdateringar av frågebanken och skicka feedback. Allt fungerar offline; den medföljande banken finns alltid där
 
 Flytta över APK:n till telefonen, tillåt installation från okända källor och tryck på installera. Ingen inloggning vid första starten.
@@ -219,6 +220,8 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
 ## Senaste ändringar
+
+**v0.21.2: release-signerade byggen** — APK:n i Releases är nu release-signerat och R8-minifierat: 30 MB i stället för 41 MB. På en enhet med äldre debug-build måste appen avinstalleras först, vilket raderar lokal data.
 
 **v0.21.1: tre rättelser**
 
