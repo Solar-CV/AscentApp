@@ -1,7 +1,13 @@
 name: Build & Release APK
 
-# 推送 v* 标签即自动构建 debug APK 并发布 Release。
-# 使用 Actions 内置的 GITHUB_TOKEN，无需任何 Personal Access Token。
+# 推送 v* 标签即自动构建并发布 Release。
+# 配置了签名 secrets 就出 release 包（R8 + 正式签名），没有则回退 debug 包并在日志里警告。
+# 也支持手动触发（workflow_dispatch）：只构建 + 上传 artifact，不创建 Release，用来先验签名。
+#
+# 需要的 secrets（Settings → Secrets and variables → Actions）：
+#   KEYSTORE_BASE64     keystore 的 base64（单行，不要换行）
+#   KEYSTORE_PASSWORD   keystore 口令（PKCS12 里 key 口令与库口令相同）
+# 没有这两个 secret 时流水线不会失败，只是产 debug 包。
 #
 # Android SDK 使用 GitHub-hosted runner 镜像自带的（/usr/local/lib/android/sdk），
 # 不额外安装：镜像已含 platforms;android-34 与 build-tools;34.0.0。
@@ -9,18 +15,21 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
+env:
+  ANDROID_HOME: /usr/local/lib/android/sdk
+  ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+  KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+  KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+
 jobs:
   release:
-    name: Build debug APK and publish release
+    name: Build APK and publish release
     runs-on: ubuntu-latest
-
-    env:
-      ANDROID_HOME: /usr/local/lib/android/sdk
-      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
 
     steps:
       - name: Checkout
@@ -62,18 +71,75 @@ jobs:
       - name: Grant execute permission
         run: chmod +x gradlew
 
-      - name: Assemble debug APK
-        run: ./gradlew assembleDebug --stacktrace
+      # 密钥只落在 runner 的临时目录，构建结束（无论成败）都会删除。
+      # app/build.gradle.kts 通过 ASCENT_KEYSTORE_PROPS 找这份属性文件。
+      - name: Prepare signing
+        id: signing
+        run: |
+          set -euo pipefail
+          if [ -n "${KEYSTORE_BASE64}" ] && [ -n "${KEYSTORE_PASSWORD}" ]; then
+            KEYDIR="$RUNNER_TEMP/keys"
+            mkdir -p "$KEYDIR"
+            printf '%s' "$KEYSTORE_BASE64" | base64 -d > "$KEYDIR/ascent-release.jks"
+            {
+              echo "storeFile=$KEYDIR/ascent-release.jks"
+              echo "storePassword=$KEYSTORE_PASSWORD"
+              echo "keyAlias=ascent"
+              echo "keyPassword=$KEYSTORE_PASSWORD"
+            } > "$KEYDIR/keystore.properties"
+            chmod 600 "$KEYDIR/keystore.properties" "$KEYDIR/ascent-release.jks"
+            echo "ASCENT_KEYSTORE_PROPS=$KEYDIR/keystore.properties" >> "$GITHUB_ENV"
+            echo "variant=release" >> "$GITHUB_OUTPUT"
+            echo "签名：已从 secrets 还原 → 构建 release 包"
+          else
+            echo "variant=debug" >> "$GITHUB_OUTPUT"
+            echo "::warning::未配置 KEYSTORE_BASE64 / KEYSTORE_PASSWORD，本次回退为 debug 构建"
+          fi
+
+      - name: Assemble APK
+        run: |
+          if [ "${{ steps.signing.outputs.variant }}" = "release" ]; then
+            ./gradlew assembleRelease --stacktrace
+          else
+            ./gradlew assembleDebug --stacktrace
+          fi
 
       - name: Prepare artifact
         run: |
+          set -euo pipefail
           mkdir -p out
-          cp app/build/outputs/apk/debug/app-debug.apk "out/ascent-${GITHUB_REF_NAME}-debug.apk"
+          V="${{ steps.signing.outputs.variant }}"
+          if [ "$V" = "release" ]; then
+            SRC=app/build/outputs/apk/release/app-release.apk
+          else
+            SRC=app/build/outputs/apk/debug/app-debug.apk
+          fi
+          OUT="out/ascent-${GITHUB_REF_NAME}-${V}.apk"
+          cp "$SRC" "$OUT"
           ls -lh out
+
+      # 签名必须可验证。release 包若指纹对不上（解错密钥、落到 debug 签名），
+      # 直接让流水线红掉，而不是把一个装不上的包发出去。
+      - name: Verify signature
+        if: steps.signing.outputs.variant == 'release'
+        run: |
+          set -euo pipefail
+          APKSIGNER="$ANDROID_HOME/build-tools/34.0.0/apksigner"
+          APK="out/ascent-${GITHUB_REF_NAME}-release.apk"
+          "$APKSIGNER" verify --print-certs "$APK"
+          # 期望的证书 SHA-256（2026-10-30 生成的 ascent-release.jks）
+          EXPECTED="ae6cb0966256a849647b8372c24fc5edc6be876998db4eb9eef65d67a280957c"
+          ACTUAL=$("$APKSIGNER" verify --print-certs "$APK" | grep -m1 "SHA-256 digest" | awk '{print $NF}')
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "::error::签名指纹不符：期望 $EXPECTED，实际 $ACTUAL"
+            exit 1
+          fi
+          echo "签名指纹校验通过：$ACTUAL"
 
       # Release 正文：只发当前 tag 的章节 + 此前未单独发版的旧版本要点，
       # 不再把整份 RELEASE_NOTES.md 贴上去（否则历史章节每版重复累积）。
       - name: Compose release body
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
           python3 .github/scripts/release_body.py \
             --tag "${GITHUB_REF_NAME}" \
@@ -83,13 +149,27 @@ jobs:
           head -30 out/release_body.md
 
       - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
           body_path: out/release_body.md
-          files: out/ascent-*-debug.apk
+          files: out/ascent-*.apk
           draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 手动触发时不发版，只把包挂到这次运行的 artifact 上，先把签名验完。
+      - name: Upload artifact (manual run)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ascent-apk
+          path: out/ascent-*.apk
+          retention-days: 7
+
+      - name: Remove keystore
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/keys" || true
