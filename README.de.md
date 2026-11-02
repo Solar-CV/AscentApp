@@ -4,9 +4,9 @@
 
 Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist nach Höhe geordnet: mit jeder bestandenen Lektion geht es ein Stück höher.
 
-Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 68 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 21 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
+Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 69 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 22 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.22.0 (versionCode 132). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.23.3 (versionCode 138). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.757 / 10.757). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 v0.20.19 – v0.21.0 haben die Oberfläche durchgehend auf Ton (Clay) umgestellt: weiche zweilagige Schatten, offscreen gezeichnet und zwischengespeichert, flache Farbchips, Kategoriefarben im Handbuch und große Farbflächen, deren Tiefe aus einem Kontaktschatten statt aus einem Verlauf kommt.
 
@@ -34,7 +34,7 @@ Fortschritt ist keine gespeicherte Zahl. Er wird aus den abgeschlossenen Lektion
 
 ### Fragenpool
 
-1.533 reguläre Fragen plus 154 automatisch eingefügte Wiederholungskopien, zusammen 1.687 Anzeigeposten. Die Menge steigt mit der Höhe: rund 15 Fragen pro Lektion in der Einführung auf 5.000 m, 30 in den technischen Einheiten auf 7.000 m, 8 im Trekking.
+1.563 reguläre Fragen plus 158 automatisch eingefügte Wiederholungskopien, zusammen 1.721 Anzeigeposten. Die Menge steigt mit der Höhe: rund 15 Fragen pro Lektion in der Einführung auf 5.000 m, 30 in den technischen Einheiten auf 7.000 m, 8 im Trekking.
 
 Acht Fragetypen: Einfachwahl, Mehrfachwahl, Reihenfolge, Zuordnung, Lückentext, Rechnung, Hotspot (einen Punkt im Bild antippen) und Szenario (ein Stamm, in mehreren Schritten beantwortet).
 
@@ -46,7 +46,7 @@ Nach einer Lektion geht es direkt in die Wiederholung der falsch beantworteten F
 
 ### Training, Wiederholung, Profil
 
-Das Training empfiehlt die nächste Lektion und bietet zwei zeitgesteuerte Übungen: einen fünfminütigen 4-4-Atemtakt und vier 30-Sekunden-Sätze Steigeisen-Schrittrhythmus. Die Wiederholung stellt die heute fälligen Fragen und sicherheitskritische Fehler nach vorn. Das Profil enthält Kopfbereich, aktuelle Höhe, Fähigkeitsübersicht, Abzeichen-Einstieg, Kontobereich und einen Feedback-Einstieg. Das Zahnrad öffnet die Einstellungen, der Avatar die Profilseite.
+Das Training empfiehlt die nächste Lektion und bietet vier Übungen: einen fünfminütigen 4-4-Atemtakt, vier 30-Sekunden-Sätze Steigeisen-Schrittrhythmus, ein Ausrüstungsquiz und ein Wolkenquiz. Die beiden Quizze ziehen Einfachauswahlfragen aus vorhandenen Lektionen, mischen die Antworten jede Runde neu und zeigen die Erklärung sofort nach jeder Antwort. Die Wiederholung stellt die heute fälligen Fragen und sicherheitskritische Fehler nach vorn. Das Profil enthält Kopfbereich, aktuelle Höhe, Fähigkeitsübersicht, Abzeichen-Einstieg, Kontobereich und einen Feedback-Einstieg. Das Zahnrad öffnet die Einstellungen, der Avatar die Profilseite.
 
 Das Profil zeigt nur freigeschaltete Abzeichen. Alle 40 stehen an der Abzeichenwand, gesperrte als graue Vorschau, versteckte Erfolge als „?".
 
@@ -68,7 +68,7 @@ Oberflächentexte und Kursinhalte gibt es in:
 
 简体中文 (Quelle), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Alle zehn Sprachen sind vollständig. Jede hat ihre eigene Einstiegsebene, Lektionskerntexte, Handbuchtexte und einen Fragenpool, und jeder Schlüsselsatz stimmt Eintrag für Eintrag mit dem Englischen überein — **10.554 / 10.554**, nichts fehlt, nichts doppelt, keine verwaisten Schlüssel.
+Alle zehn Sprachen sind vollständig. Jede hat ihre eigene Einstiegsebene, Lektionskerntexte, Handbuchtexte und einen Fragenpool, und jeder Schlüsselsatz stimmt Eintrag für Eintrag mit dem Englischen überein — **10.757 / 10.757**, nichts fehlt, nichts doppelt, keine verwaisten Schlüssel.
 
 | Ebene | Einträge | Alle 9 übersetzten Sprachen |
 |---|---|---|
@@ -95,7 +95,7 @@ Fehlt ein Eintrag in der gewählten Sprache, lautet die Reihenfolge: gewählte S
 |---|---|---|---|---|
 | 5000M · Einführung | 5.000 m | 16 | 249 | 16 |
 | 5000M · Aufbau | 5.300 m | 12 | 221 | 18 |
-| 6000M | 6.000 m | 14 | 316 | 22 |
+| 6000M | 6.000 m | 15 | 336 | 22 |
 | 7000M · C3 Techniklager | 7.000 m | 6 | 185 | 31 |
 | 7000M · C4 Hochlager | 7.500 m | 10 | 279 | 28 |
 | 8000M | 8.000 m | 10 | 248 | 24 |
@@ -105,7 +105,7 @@ Fehlt ein Eintrag in der gewählten Sprache, lautet die Reihenfolge: gewählte S
 | Einheit | Höhe | Lektionen | Fragen | Pro Lektion |
 |---|---|---|---|---|
 | Tageswanderungen | 1.200 m | 5 | 40 | 8 |
-| Mehrtagestouren und Lager | 2.500 m | 8 | 79 | 10 |
+| Mehrtagestouren und Lager | 2.500 m | 9 | 93 | 10 |
 | Höhentrekking | 3.800 m | 5 | 44 | 8 |
 | Fernwege und Notfälle | 4.500 m | 3 | 26 | 8 |
 
@@ -220,6 +220,18 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 Ältere App-Versionen gehen an einem neueren Pool nicht kaputt. `minAppVersion` in `manifest.json` blockt zu alte Clients, unbekannte Felder werden ignoriert, eine fehlerhafte Frage wird übersprungen statt tödlich zu sein.
 
 ## Letzte Änderungen
+
+**v0.23.3: die Wolkenlektion wächst**
+
+- Klettern 6 → 18 Fragen, Trekking 5 → 12, jede Frage mit einem anderen Foto; die Bildsammlung wuchs von 7 auf 31 (NOAA NESDIS plus öffentliche NWS-Wolkenbilder)
+- Cirrocumulus, Altostratus, Stratocumulus, Cumulus congestus, Fallstreak Holes, Fractus, Shelf Clouds, Wall Clouds, Tal-Radiationnebel und Kondensstreifen sind dabei; jede Wolkenart hat zwei oder drei Fotos und fragt erst erkennen, dann Entwicklung, dann was zu tun ist
+- Der Wetter-Übungspool wuchs von 63 auf 68. Nach dem Antworten bleibt die Ansicht am Kopf der Erklärung stehen, damit ein hohes Foto nicht aus dem Bild geschoben wird
+
+**v0.23.0 – v0.23.2: Ersteinrichtung und Wolkenlektion**
+
+- Beim ersten Start werden nur zwei Dinge gefragt: Klettern oder Trekking und die Sprache — live angezeigt, gespeichert beim Tippen auf Weiter
+- Hochformat gesperrt; der Entwickler-Schalter „Antwort anzeigen" gilt jetzt auch für die Übungen
+- Zwei Lektionen zum Wolkenlesen; die Übungsansicht zeigt Fragebilder und öffnet sie im Vollbild
 
 **v0.22.0: Das Training trainiert jetzt wirklich**
 

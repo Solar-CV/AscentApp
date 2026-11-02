@@ -2,7 +2,8 @@
 <resources>
     <color name="ascent_bg">#FF070D16</color>
     <color name="ascent_bg_light">#FFF1F6FA</color>
-    <color name="ic_launcher_background">#FF0B1522</color>
+    <!-- 桌面图标底色：白色，与开屏亮色版的白色圆盘一致（v0.22.2 起） -->
+    <color name="ic_launcher_background">#FFFFFFFF</color>
     <!-- 开屏（黏土版）底色：与 ui/ClaySplash.kt 的白 / 深底一致 -->
     <color name="splash_bg_light">#FFFFFFFF</color>
     <color name="splash_bg_dark">#FF0B0B0D</color>

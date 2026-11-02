@@ -248,7 +248,6 @@
     <!-- ========== 训练页（v0.22）========== -->
     <string name="drill_pause">一時停止</string>
     <string name="drill_finish">終了</string>
-    <string name="drill_soon">近日公開</string>
     <string name="drill_inhale">吸う</string>
     <string name="drill_exhale">吐く</string>
     <string name="drill_left">左足</string>
@@ -260,6 +259,20 @@
     <string name="drill_done_step">%1$d セット・%2$d 歩</string>
     <string name="drill_history">%1$d 回実施 · 合計 %2$d 分</string>
     <string name="drill_recorded">記録しました</string>
+    <string name="drill_quiz_intro">資料を見ずに記憶で答えます。誤答はすぐに解説が出ます。</string>
+    <string name="drill_quiz_pool">出題プール %1$d 問 · ランダムに %2$d 問</string>
+    <string name="drill_quiz_start">開始 · %1$d 問</string>
+    <string name="drill_quiz_progress">%1$d / %2$d 問目</string>
+    <string name="drill_quiz_next">次の問題</string>
+    <string name="drill_quiz_see">結果を見る</string>
+    <string name="drill_quiz_score">%2$d 問中 %1$d 問正解</string>
+    <string name="drill_quiz_best">ベスト %1$d%%</string>
+    <string name="drill_quiz_explain">解説</string>
+    <string name="drill_quiz_from">出典 · %1$s</string>
+    <string name="drill_quiz_right">正解</string>
+    <string name="drill_quiz_wrong">不正解</string>
+    <string name="drill_quiz_again">もう一度セットで</string>
+    <string name="drill_history_short">%1$d セット実施</string>
 
     <string name="path_camp_base">ベースキャンプ</string>
     <string name="path_camp_c1">キャンプ 1</string>
@@ -378,4 +391,16 @@
     <plurals name="common_days">
         <item quantity="other">%1$d 日</item>
     </plurals>
+    <!-- 首次启动偏好引导 -->
+    <string name="ob_title">まずルートを選ぶ</string>
+    <string name="ob_sub">あとから変更できます。選んだルートがホームの経路・問題バンク・バッジの進捗を決めます。</string>
+    <string name="ob_climb_meta">CLIMB · %1$d レッスン · 5,000 → 8,000 m</string>
+    <string name="ob_trek_meta">TREK · %1$d レッスン · 日帰り → 高所</string>
+    <string name="ob_climb_note">メインルート</string>
+    <string name="ob_trek_note">もう一つのライン · いつでも切替可</string>
+    <string name="ob_lang_sub">画面の文言と解説</string>
+    <string name="ob_lang_sheet_sub">既定はシステムに追従。切り替えると画面と問題バンクが同時に変わります</string>
+    <string name="ob_hint">どちらも「プロフィール · 設定」で変更できます</string>
+    <string name="ob_continue">次へ</string>
+    <string name="ob_follow_desc">システム言語に従います</string>
 </resources>

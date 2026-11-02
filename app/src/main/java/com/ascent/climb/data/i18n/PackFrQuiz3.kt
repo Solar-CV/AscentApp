@@ -1974,4 +1974,41 @@ internal val PACK_FR_QUIZ_C: Map<String, String> = mapOf(
     "q.l41#27.o2" to "Seulement un budget d'amende",
     "q.l41#27.o3" to "Rien à prévoir",
     "q.l41#27.e" to "Au retour, l'équipe est la plus fatiguée et la plus pressée par le temps, alors que les déchets sont le plus lourd. L'intégrer au plan de transport évite que la situation échappe le dernier jour.",
+    // ---------- m26 Lire les nuages ----------
+
+
+
+
+
+
+    // ---------- t22 Lire les nuages en randonnée ----------,
+
+
+
+
+    // ---------- m26 Lire les nuages (suite) ----------
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---------- t22 Lire les nuages en randonnée ----------
+
+
+
+
+
+
+
+
+
+
+
 )

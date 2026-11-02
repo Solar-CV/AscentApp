@@ -332,4 +332,7 @@ internal val PACK_EN: Map<String, String> = mapOf(
     "unit.t2.title" to "Multi-day & Camping",
     "unit.t3.title" to "Altitude Trekking",
     "unit.t4.title" to "Long Trails & Emergency",
+    "lesson.m26.title" to "Reading clouds · six types and what they warn",
+    "lesson.t22.title" to "Reading clouds · for hikers",
+    "lesson.m26.title" to "Reading clouds · how to judge a sky",
 )

@@ -229,7 +229,6 @@
     <!-- ========== 训练页（v0.22）========== -->
     <string name="drill_pause">Paus</string>
     <string name="drill_finish">Avsluta</string>
-    <string name="drill_soon">Kommer snart</string>
     <string name="drill_inhale">Andas in</string>
     <string name="drill_exhale">Andas ut</string>
     <string name="drill_left">Vänster fot</string>
@@ -241,6 +240,20 @@
     <string name="drill_done_step">%1$d set · %2$d steg</string>
     <string name="drill_history">%1$d gånger · %2$d min totalt</string>
     <string name="drill_recorded">Sparat</string>
+    <string name="drill_quiz_intro">Svara ur minnet, utan att titta. Förklaringen kommer direkt.</string>
+    <string name="drill_quiz_pool">%1$d frågor i poolen · %2$d per set</string>
+    <string name="drill_quiz_start">Börja · %1$d frågor</string>
+    <string name="drill_quiz_progress">Fråga %1$d av %2$d</string>
+    <string name="drill_quiz_next">Nästa</string>
+    <string name="drill_quiz_see">Se resultat</string>
+    <string name="drill_quiz_score">%1$d av %2$d rätt</string>
+    <string name="drill_quiz_best">Bäst %1$d%%</string>
+    <string name="drill_quiz_explain">Förklaring</string>
+    <string name="drill_quiz_from">Från · %1$s</string>
+    <string name="drill_quiz_right">Rätt</string>
+    <string name="drill_quiz_wrong">Fel</string>
+    <string name="drill_quiz_again">Nytt set</string>
+    <string name="drill_history_short">%1$d set gjorda</string>
     <string name="path_camp_base">Basläger</string>
     <string name="path_camp_c1">Läger 1</string>
     <string name="path_camp_c2">Läger 2</string>
@@ -357,4 +370,16 @@
         <item quantity="one">%1$d dag</item>
         <item quantity="other">%1$d dagar</item>
     </plurals>
+    <!-- 首次启动偏好引导 -->
+    <string name="ob_title">Välj din väg</string>
+    <string name="ob_sub">Går att ändra när som helst. Valet styr rutten på startsidan, frågebanken och emblemprogressionen.</string>
+    <string name="ob_climb_meta">CLIMB · %1$d lektioner · 5 000 → 8 000 m</string>
+    <string name="ob_trek_meta">TREK · %1$d lektioner · Dagstur → höjd</string>
+    <string name="ob_climb_note">Huvudrutten</string>
+    <string name="ob_trek_note">Den andra linjen · byt när som helst</string>
+    <string name="ob_lang_sub">Texter och förklaringar</string>
+    <string name="ob_lang_sheet_sub">Följer systemet som standard; gränssnitt och bank byts tillsammans</string>
+    <string name="ob_hint">Båda kan ändras i ”Profil · Inställningar”</string>
+    <string name="ob_continue">Fortsätt</string>
+    <string name="ob_follow_desc">Styrs av systemets språk</string>
 </resources>

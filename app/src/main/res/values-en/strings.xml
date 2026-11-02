@@ -261,7 +261,6 @@
     <!-- ========== 训练页（v0.22）========== -->
     <string name="drill_pause">Pause</string>
     <string name="drill_finish">Finish</string>
-    <string name="drill_soon">Coming soon</string>
     <string name="drill_inhale">Breathe in</string>
     <string name="drill_exhale">Breathe out</string>
     <string name="drill_left">Left foot</string>
@@ -273,6 +272,20 @@
     <string name="drill_done_step">%1$d sets · %2$d steps</string>
     <string name="drill_history">Trained %1$d× · %2$d min total</string>
     <string name="drill_recorded">Saved</string>
+    <string name="drill_quiz_intro">Answer from memory, no references. Explanations come immediately.</string>
+    <string name="drill_quiz_pool">%1$d in the pool · %2$d per set</string>
+    <string name="drill_quiz_start">Start · %1$d questions</string>
+    <string name="drill_quiz_progress">Question %1$d of %2$d</string>
+    <string name="drill_quiz_next">Next</string>
+    <string name="drill_quiz_see">See results</string>
+    <string name="drill_quiz_score">%1$d of %2$d correct</string>
+    <string name="drill_quiz_best">Best %1$d%%</string>
+    <string name="drill_quiz_explain">Explanation</string>
+    <string name="drill_quiz_from">From · %1$s</string>
+    <string name="drill_quiz_right">Correct</string>
+    <string name="drill_quiz_wrong">Wrong</string>
+    <string name="drill_quiz_again">Another set</string>
+    <string name="drill_history_short">%1$d sets done</string>
 
     <!-- Path -->
     <string name="path_camp_base">Base Camp</string>
@@ -395,4 +408,16 @@
         <item quantity="one">%1$d day</item>
         <item quantity="other">%1$d days</item>
     </plurals>
+    <!-- 首次启动偏好引导 -->
+    <string name="ob_title">Choose your path</string>
+    <string name="ob_sub">You can change this anytime. Your choice sets the home route, the question bank and badge progress.</string>
+    <string name="ob_climb_meta">CLIMB · %1$d lessons · 5,000 → 8,000 m</string>
+    <string name="ob_trek_meta">TREK · %1$d lessons · Day hike → altitude</string>
+    <string name="ob_climb_note">Main route</string>
+    <string name="ob_trek_note">The other line · switch anytime</string>
+    <string name="ob_lang_sub">UI text and question notes</string>
+    <string name="ob_lang_sheet_sub">Follows the system by default; the UI and the bank switch together</string>
+    <string name="ob_hint">Both can be changed later in Profile · Settings</string>
+    <string name="ob_continue">Continue</string>
+    <string name="ob_follow_desc">Decided by your system language</string>
 </resources>

@@ -1,20 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  桌面图标前景：开屏「黏土拟态」那枚单峰雪山。
+
+  几何直接照搬 ui/ClaySplash.kt 的 120 单位网格（MountainMark）：
+    山体 (22,104)-(58,36)-(94,104)，侧面暗部、两瓣雪帽、旗杆与方块旗。
+  整枚图形按 0.49 缩放后在 108 视口里居中：内容高约 43、宽约 35（占可见 72 区的 60%），
+  比首版小 20%——72 区里留出更宽的呼吸，山脚到中心仅 28.1，任何遮罩都切不到。
+
+  底色是纯白，与开屏亮色版一致：开屏是白底圆盘，图标就是白底盘 + 这枚山。
+-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:pathData="M54,38 L78,78 L30,78 Z"
-        android:fillColor="#6FD3F2" />
-    <path
-        android:pathData="M54,38 L63.5,53 L54,49 L45,53 Z"
-        android:fillColor="#EAF6FC" />
-    <path
-        android:pathData="M54,38 L54,26"
-        android:strokeColor="#F5B942"
-        android:strokeWidth="3.2"
-        android:strokeLineCap="round" />
-    <path
-        android:pathData="M54,26 L65,30.5 L54,35 Z"
-        android:fillColor="#F5B942" />
+
+    <group
+        android:scaleX="0.49"
+        android:scaleY="0.49"
+        android:translateX="25.58"
+        android:translateY="24.6">
+
+        <!-- 山体正面：与开屏同一组渐变（顶亮 / 中调 / 底部压深） -->
+        <path android:pathData="M22,104 L58,36 L94,104 Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="30"
+                    android:startY="36"
+                    android:endX="70"
+                    android:endY="104">
+                    <item android:offset="0" android:color="#FF3FA2FF" />
+                    <item android:offset="0.5" android:color="#FF0F86F5" />
+                    <item android:offset="1" android:color="#FF0B6AD1" />
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- 右侧暗面：一个明确的三角，读成受光 / 背光两个面 -->
+        <path
+            android:pathData="M58,36 L94,104 L58,104 Z"
+            android:fillColor="#400B5DBD" />
+
+        <!-- 雪帽：两瓣、中间上凹，小尺寸不糊 -->
+        <path
+            android:pathData="M58,36 L71,64 L58,56 L45,64 Z"
+            android:fillColor="#FFFFFFFF" />
+
+        <!-- 旗杆（圆头线，等效原 roundRect 的 1.6 圆角） -->
+        <path
+            android:pathData="M57.6,18.2 L57.6,34.8"
+            android:strokeColor="#FFF5B942"
+            android:strokeWidth="4.4"
+            android:strokeLineCap="round" />
+
+        <!-- 方块旗 -->
+        <path
+            android:pathData="M59.8,16 L79,22.5 L59.8,29 Z"
+            android:fillColor="#FFFFC800" />
+    </group>
 </vector>

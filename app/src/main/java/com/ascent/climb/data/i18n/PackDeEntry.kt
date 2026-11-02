@@ -182,4 +182,7 @@ internal val PACK_DE_ENTRY: Map<String, String> = mapOf(
     "lesson.t19.title" to "Formation und Sturzbehandlung",
     "lesson.t20.title" to "Ausrüstungspflege und Reparatur",
     "lesson.t21.title" to "Nachtmarsch und Gewitter",
+    "lesson.m26.title" to "Wolken lesen · sechs Typen und was sie ankündigen",
+    "lesson.t22.title" to "Wolken lesen · für Wanderer",
+    "lesson.m26.title" to "Wolken lesen · den Himmel beurteilen",
 )

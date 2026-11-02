@@ -3922,4 +3922,41 @@ internal val PACK_DE_QUIZ_C: Map<String, String> = mapOf(
     "q.t20#7.o2" to "Erst ersetzen, wenn es kaputt ist",
     "q.t20#7.o3" to "Je älter, desto verlässlicher",
     "q.t20#7.e" to "Bei gleichem Teil unterscheidet sich die Lebensdauer stark mit der Nutzungshäufigkeit. Auf Verschleiss zu schauen – Sohle, Verschlüsse, Beschichtung – ist verlässlicher als auf das Datum.",
+    // ---------- m26 Wolken lesen ----------
+
+
+
+
+
+
+    // ---------- t22 Wolken lesen für Wanderer ----------,
+
+
+
+
+    // ---------- m26 Wolken lesen (Fortsetzung) ----------
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---------- t22 Wolken lesen auf Wanderung ----------
+
+
+
+
+
+
+
+
+
+
+
 )

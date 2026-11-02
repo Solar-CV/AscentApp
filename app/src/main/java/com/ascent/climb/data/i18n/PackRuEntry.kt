@@ -173,4 +173,7 @@ internal val PACK_RU_ENTRY: Map<String, String> = mapOf(
     "peak.EBC 珠峰大本营" to "EBC (базовый лагерь Эвереста)",
     "peak.冈仁波齐转山" to "Кора вокруг Кайласа",
     "peak.EBC + 三条垭口" to "EBC и три перевала",
+    "lesson.m26.title" to "Читаем облака · шесть типов и о чём они предупреждают",
+    "lesson.t22.title" to "Читаем облака · для походов",
+    "lesson.m26.title" to "Читаем облака · как оценивать небо",
 )

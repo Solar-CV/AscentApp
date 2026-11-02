@@ -3044,4 +3044,41 @@ internal val PACK_SV_QUIZ_C: Map<String, String> = mapOf(
     "q.t15#7.o2" to "Mycket folk betyder alltid säkert",
     "q.t15#7.o3" to "Det räcker att fråga någon",
     "q.t15#7.e" to "«Strömmen av folk» vid ett vägskäl är ofta en helt annan led. En kontroll på kartan kostar tio sekunder.",
+    // ---------- m26 Läsa moln ----------
+
+
+
+
+
+
+    // ---------- t22 Läsa moln på vandring ----------,
+
+
+
+
+    // ---------- m26 Läsa moln (fortsättning) ----------
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---------- t22 Läsa moln på vandring ----------
+
+
+
+
+
+
+
+
+
+
+
 )

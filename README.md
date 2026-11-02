@@ -4,9 +4,9 @@
 
 An Android app for people starting out in high-altitude mountaineering and ice climbing. The curriculum is organised by altitude: every lesson you pass moves you a little higher.
 
-Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
+Two course tracks switch freely. **Alpine climbing** runs six units and 69 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 22 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.22.0 (versionCode 132). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+Current version v0.23.3 (versionCode 138). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,757 / 10,757). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 v0.20.19 – v0.21.0 restyled the whole interface in clay: soft double shadows drawn offscreen and cached, flat colour chips, category colours in the handbook, and hero blocks that take their depth from a contact shadow instead of a gradient.
 
@@ -34,7 +34,7 @@ Progress is not a stored number. It is recomputed from the lessons you have comp
 
 ### Question bank
 
-1,533 formal questions plus 154 auto-inserted review copies, 1,687 display items in total. Volume rises with altitude: about 15 questions per lesson in the 5,000 m introduction, 30 in the 7,000 m technical units, and 8 across trekking.
+1,563 formal questions plus 158 auto-inserted review copies, 1,721 display items in total. Volume rises with altitude: about 15 questions per lesson in the 5,000 m introduction, 30 in the 7,000 m technical units, and 8 across trekking.
 
 Eight question types: single choice, multiple choice, ordering, matching, fill-in, calculation, hotspot (tap a point on an image), and scenario (one stem answered in several steps).
 
@@ -46,7 +46,7 @@ Finishing a lesson drops you straight into redoing the ones you got wrong. Quest
 
 ### Training, review, profile
 
-Training recommends the next lesson and runs two timed drills — a five-minute 4-4 breathing pacer and four 30-second crampon step-cadence sets. Review puts today's due questions and safety-critical misses first. Profile holds the header, current altitude, ability overview, badge entry, account area and a feedback entry. The gear icon opens settings, the avatar opens the profile page.
+Training recommends the next lesson and runs four drills: a five-minute 4-4 breathing pacer, four 30-second crampon step-cadence sets, a gear-list recall quiz and a cloud-reading quiz. Both quizzes draw single-choice questions from existing lessons, shuffle the choices every round and show the explanation straight after each answer. Review puts today's due questions and safety-critical misses first. Profile holds the header, current altitude, ability overview, badge entry, account area and a feedback entry. The gear icon opens settings, the avatar opens the profile page.
 
 The profile shows unlocked badges only. All 40 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
 
@@ -68,7 +68,7 @@ Interface strings and course content are available in:
 
 简体中文 (source), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-All ten languages are complete. Every language has its own entry layer, lesson briefs, handbook body and question bank, and each key set matches the English one entry for entry — **10,554 / 10,554**, with nothing missing, nothing duplicated and no orphan keys.
+All ten languages are complete. Every language has its own entry layer, lesson briefs, handbook body and question bank, and each key set matches the English one entry for entry — **10,757 / 10,757**, with nothing missing, nothing duplicated and no orphan keys.
 
 | Layer | Items | All 9 translated languages |
 |---|---|---|
@@ -95,7 +95,7 @@ If an item ever is missing in the selected language, the fallback order is: sele
 |---|---|---|---|---|
 | 5000M · Introduction | 5,000 m | 16 | 249 | 16 |
 | 5000M · Progression | 5,300 m | 12 | 221 | 18 |
-| 6000M | 6,000 m | 14 | 316 | 22 |
+| 6000M | 6,000 m | 15 | 336 | 22 |
 | 7000M · C3 technical camp | 7,000 m | 6 | 185 | 31 |
 | 7000M · C4 high camp | 7,500 m | 10 | 279 | 28 |
 | 8000M | 8,000 m | 10 | 248 | 24 |
@@ -105,7 +105,7 @@ If an item ever is missing in the selected language, the fallback order is: sele
 | Unit | Altitude | Lessons | Questions | Per lesson |
 |---|---|---|---|---|
 | Day hikes | 1,200 m | 5 | 40 | 8 |
-| Multi-day and camping | 2,500 m | 8 | 79 | 10 |
+| Multi-day and camping | 2,500 m | 9 | 93 | 10 |
 | High-altitude trekking | 3,800 m | 5 | 44 | 8 |
 | Long trails and emergency | 4,500 m | 3 | 26 | 8 |
 
@@ -220,6 +220,18 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+**v0.23.3: the cloud lesson grows up**
+
+- Climbing 6 → 18 questions, trekking 5 → 12, every question on a different photograph; the image library went from 7 to 31 (NOAA NESDIS plus public NWS cloud galleries)
+- Cirrocumulus, altostratus, stratocumulus, towering cumulus, fallstreak holes, fractus, shelf clouds, wall clouds, valley radiation fog and contrails are in; each cloud type now carries two or three photos and asks recognition, then trend, then what to do
+- Weather-drill pool 63 → 68. Answering now rests at the top of the explanation card, so a tall photo is no longer pushed off screen
+
+**v0.23.0 – v0.23.2: first-launch setup and the cloud lesson**
+
+- First launch asks two things only: climbing or trekking, and interface language — previewed live, saved when you tap continue
+- Portrait locked; the developer "show answer key" switch now covers the training drills too
+- Two cloud-reading lessons (one climbing, one trekking); the drill screen renders question images and opens them full screen
 
 **v0.22.0: the training page actually trains**
 

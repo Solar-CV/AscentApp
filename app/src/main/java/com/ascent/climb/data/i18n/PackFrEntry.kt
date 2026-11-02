@@ -178,4 +178,7 @@ internal val PACK_FR_ENTRY: Map<String, String> = mapOf(
     "peak.EBC 珠峰大本营" to "EBC, camp de base de l'Everest",
     "peak.冈仁波齐转山" to "Kora du mont Kailash",
     "peak.EBC + 三条垭口" to "EBC + les trois cols",
+    "lesson.m26.title" to "Lire les nuages · six types et ce qu\'ils annoncent",
+    "lesson.t22.title" to "Lire les nuages · version randonnée",
+    "lesson.m26.title" to "Lire les nuages · juger le ciel",
 )

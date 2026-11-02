@@ -4,9 +4,9 @@
 
 Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. El temario está ordenado por altitud: cada lección superada te sube un poco más arriba.
 
-Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 68 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 21 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
+Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 69 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 22 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
 
-Versión actual v0.22.0 (versionCode 132). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.554 / 10.554). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
+Versión actual v0.23.3 (versionCode 138). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.757 / 10.757). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
 
 v0.20.19 – v0.21.0 renovaron toda la interfaz con acabado de arcilla: sombras dobles suaves dibujadas fuera de pantalla y cacheadas, fichas de color planas, colores por categoría en el manual y bloques de color cuya profundidad viene de una sombra de contacto, no de un degradado.
 
@@ -34,7 +34,7 @@ El progreso no es un número guardado. Se recalcula a partir de las lecciones co
 
 ### Banco de preguntas
 
-1.533 preguntas formales más 154 copias de repaso insertadas automáticamente, 1.687 elementos en pantalla. El volumen sube con la altitud: unas 15 preguntas por lección en la introducción de 5.000 m, 30 en las unidades técnicas de 7.000 m y 8 en senderismo.
+1.563 preguntas formales más 158 copias de repaso insertadas automáticamente, 1.721 elementos en pantalla. El volumen sube con la altitud: unas 15 preguntas por lección en la introducción de 5.000 m, 30 en las unidades técnicas de 7.000 m y 8 en senderismo.
 
 Ocho tipos de pregunta: elección única, elección múltiple, ordenación, emparejamiento, rellenar huecos, cálculo, punto caliente (tocar un punto de la imagen) y escenario (un enunciado que se responde en varios pasos).
 
@@ -46,7 +46,7 @@ Al terminar una lección entras directamente a rehacer las que fallaste. Las que
 
 ### Entrenamiento, repaso, perfil
 
-Entrenamiento da un porcentaje de preparación y la altitud del pico objetivo. Repaso pone delante las preguntas que vencen hoy y los fallos críticos de seguridad. El perfil reúne la cabecera, la altitud actual, el resumen de capacidades, la entrada a las insignias, el área de cuenta y una entrada de comentarios. El engranaje abre los ajustes, el avatar la página de perfil.
+Entrenamiento recomienda la lección siguiente y ofrece cuatro ejercicios: un ritmo respiratorio 4-4 de cinco minutos, cuatro series de 30 segundos de cadencia de paso con crampones, un cuestionario de lista de material y otro de lectura de nubes. Los dos cuestionarios sacan preguntas de opción única de lecciones existentes, barajan las opciones en cada ronda y muestran la explicación justo después de responder. Repaso pone delante las preguntas que vencen hoy y los fallos críticos de seguridad. El perfil reúne la cabecera, la altitud actual, el resumen de capacidades, la entrada a las insignias, el área de cuenta y una entrada de comentarios. El engranaje abre los ajustes, el avatar la página de perfil.
 
 El perfil solo muestra las insignias desbloqueadas. Las 40 están en el muro de insignias, las bloqueadas como vista previa en gris y los logros ocultos como «?».
 
@@ -68,7 +68,7 @@ Los textos de interfaz y el contenido del curso están en:
 
 简体中文 (origen), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Las diez lenguas están completas. Cada una tiene su capa de entrada, los resúmenes de lección, el cuerpo del manual y el banco de preguntas, y su conjunto de claves coincide con el inglés entrada por entrada — **10.554 / 10.554**, sin faltar, sin duplicar y sin claves huérfanas.
+Las diez lenguas están completas. Cada una tiene su capa de entrada, los resúmenes de lección, el cuerpo del manual y el banco de preguntas, y su conjunto de claves coincide con el inglés entrada por entrada — **10.757 / 10.757**, sin faltar, sin duplicar y sin claves huérfanas.
 
 | Capa | Elementos | Las 9 lenguas traducidas |
 |---|---|---|
@@ -95,7 +95,7 @@ Si algún elemento falta en el idioma elegido, el orden es: idioma elegido → i
 |---|---|---|---|---|
 | 5000M · Introducción | 5.000 m | 16 | 249 | 16 |
 | 5000M · Progresión | 5.300 m | 12 | 221 | 18 |
-| 6000M | 6.000 m | 14 | 316 | 22 |
+| 6000M | 6.000 m | 15 | 336 | 22 |
 | 7000M · Campamento técnico C3 | 7.000 m | 6 | 185 | 31 |
 | 7000M · Campamento alto C4 | 7.500 m | 10 | 279 | 28 |
 | 8000M | 8.000 m | 10 | 248 | 24 |
@@ -105,7 +105,7 @@ Si algún elemento falta en el idioma elegido, el orden es: idioma elegido → i
 | Unidad | Altitud | Lecciones | Preguntas | Por lección |
 |---|---|---|---|---|
 | Caminatas de un día | 1.200 m | 5 | 40 | 8 |
-| Varios días y acampada | 2.500 m | 8 | 79 | 10 |
+| Varios días y acampada | 2.500 m | 9 | 93 | 10 |
 | Senderismo de altura | 3.800 m | 5 | 44 | 8 |
 | Rutas largas y emergencias | 4.500 m | 3 | 26 | 8 |
 
@@ -220,6 +220,18 @@ Para publicar un banco nuevo: cambia el contenido → sube `BUNDLED_VERSION` →
 Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVersion` en `manifest.json` bloquea clientes demasiado viejos, los campos desconocidos se ignoran y una pregunta mal formada se salta en vez de ser fatal.
 
 ## Cambios recientes
+
+**v0.23.3: la lección de nubes crece**
+
+- Montaña 6 → 18 preguntas, senderismo 5 → 12, cada pregunta con una foto distinta; la galería pasó de 7 a 31 imágenes (NOAA NESDIS y galerías públicas del NWS)
+- Entran cirrocúmulos, altostratos, estratocúmulos, cúmulos congestus, agujeros con estela, fractus, arcus, nubes de pared, niebla de radiación en el valle y estelas de condensación; cada tipo lleva dos o tres fotos y pregunta primero el reconocimiento, luego la tendencia y por último qué hacer
+- El fondo del ejercicio de tiempo pasa de 63 a 68. Al responder, la vista se detiene en la cabecera de la explicación, así una foto alta ya no sale de pantalla
+
+**v0.23.0 – v0.23.2: ajuste inicial y lección de nubes**
+
+- En el primer arranque solo se preguntan dos cosas: montaña o senderismo, y el idioma —se previsualiza al momento y se guarda al pulsar continuar
+- Bloqueo en vertical; el interruptor «mostrar respuesta» del modo desarrollador cubre también los ejercicios
+- Dos lecciones de lectura de nubes; la pantalla de ejercicios muestra las imágenes y las abre a pantalla completa
 
 **v0.22.0: la pantalla de entrenamiento ya entrena**
 

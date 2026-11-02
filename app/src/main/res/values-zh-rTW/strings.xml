@@ -248,7 +248,6 @@
     <!-- ========== 训练页（v0.22）========== -->
     <string name="drill_pause">暫停</string>
     <string name="drill_finish">結束</string>
-    <string name="drill_soon">即將推出</string>
     <string name="drill_inhale">吸氣</string>
     <string name="drill_exhale">呼氣</string>
     <string name="drill_left">左腳</string>
@@ -260,6 +259,20 @@
     <string name="drill_done_step">完成 %1$d 組 · %2$d 步</string>
     <string name="drill_history">已練 %1$d 次 · 累計 %2$d 分鐘</string>
     <string name="drill_recorded">已記錄</string>
+    <string name="drill_quiz_intro">不看資料，憑記憶作答。答錯立刻給解析。</string>
+    <string name="drill_quiz_pool">題池 %1$d 題 · 隨機抽 %2$d 題</string>
+    <string name="drill_quiz_start">開始 · %1$d 題</string>
+    <string name="drill_quiz_progress">第 %1$d / %2$d 題</string>
+    <string name="drill_quiz_next">下一題</string>
+    <string name="drill_quiz_see">看結果</string>
+    <string name="drill_quiz_score">答對 %1$d / %2$d</string>
+    <string name="drill_quiz_best">最好 %1$d%%</string>
+    <string name="drill_quiz_explain">解析</string>
+    <string name="drill_quiz_from">出自 · %1$s</string>
+    <string name="drill_quiz_right">正確</string>
+    <string name="drill_quiz_wrong">錯誤</string>
+    <string name="drill_quiz_again">再來一組</string>
+    <string name="drill_history_short">已練 %1$d 次</string>
 
     <string name="path_camp_base">大本營 BASECAMP</string>
     <string name="path_camp_c1">C1 營地</string>
@@ -378,4 +391,16 @@
     <plurals name="common_days">
         <item quantity="other">%1$d 天</item>
     </plurals>
+    <!-- 首次启动偏好引导 -->
+    <string name="ob_title">先選一條路</string>
+    <string name="ob_sub">之後隨時能改。選的那條決定首頁的路徑、題庫與徽章進度。</string>
+    <string name="ob_climb_meta">CLIMB · %1$d 課 · 5,000 → 8,000 m</string>
+    <string name="ob_trek_meta">TREK · %1$d 課 · 一日 → 高原</string>
+    <string name="ob_climb_note">主力路線</string>
+    <string name="ob_trek_note">另一條線 · 可隨時切換</string>
+    <string name="ob_lang_sub">介面文案與題庫解析</string>
+    <string name="ob_lang_sheet_sub">預設跟隨系統；切換後介面與題庫一起變</string>
+    <string name="ob_hint">兩項之後都能在「我的 · 設定」裡改</string>
+    <string name="ob_continue">繼續</string>
+    <string name="ob_follow_desc">由系統語言決定</string>
 </resources>

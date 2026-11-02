@@ -229,7 +229,6 @@
     <!-- ========== 训练页（v0.22）========== -->
     <string name="drill_pause">Pausa</string>
     <string name="drill_finish">Termina</string>
-    <string name="drill_soon">In arrivo</string>
     <string name="drill_inhale">Inspira</string>
     <string name="drill_exhale">Espira</string>
     <string name="drill_left">Piede sinistro</string>
@@ -241,6 +240,20 @@
     <string name="drill_done_step">%1$d serie · %2$d passi</string>
     <string name="drill_history">%1$d volte · %2$d min in totale</string>
     <string name="drill_recorded">Salvato</string>
+    <string name="drill_quiz_intro">Rispondi a memoria, senza consultare. La spiegazione arriva subito.</string>
+    <string name="drill_quiz_pool">%1$d domande nel pool · %2$d per serie</string>
+    <string name="drill_quiz_start">Inizia · %1$d domande</string>
+    <string name="drill_quiz_progress">Domanda %1$d di %2$d</string>
+    <string name="drill_quiz_next">Avanti</string>
+    <string name="drill_quiz_see">Vedi risultato</string>
+    <string name="drill_quiz_score">%1$d corrette su %2$d</string>
+    <string name="drill_quiz_best">Migliore %1$d%%</string>
+    <string name="drill_quiz_explain">Spiegazione</string>
+    <string name="drill_quiz_from">Da · %1$s</string>
+    <string name="drill_quiz_right">Corretto</string>
+    <string name="drill_quiz_wrong">Sbagliato</string>
+    <string name="drill_quiz_again">Altra serie</string>
+    <string name="drill_history_short">%1$d serie svolte</string>
     <string name="path_camp_base">Campo base</string>
     <string name="path_camp_c1">Campo 1</string>
     <string name="path_camp_c2">Campo 2</string>
@@ -357,4 +370,16 @@
         <item quantity="one">%1$d giorno</item>
         <item quantity="other">%1$d giorni</item>
     </plurals>
+    <!-- 首次启动偏好引导 -->
+    <string name="ob_title">Scegli il tuo percorso</string>
+    <string name="ob_sub">Modificabile in qualsiasi momento. La scelta definisce il percorso iniziale, il database domande e i progressi dei badge.</string>
+    <string name="ob_climb_meta">CLIMB · %1$d lezioni · 5.000 → 8.000 m</string>
+    <string name="ob_trek_meta">TREK · %1$d lezioni · Giornata → quota</string>
+    <string name="ob_climb_note">Percorso principale</string>
+    <string name="ob_trek_note">L\'altra linea · modificabile in qualsiasi momento</string>
+    <string name="ob_lang_sub">Testi e spiegazioni</string>
+    <string name="ob_lang_sheet_sub">Per impostazione predefinita segue il sistema; interfaccia e archivio cambiano insieme</string>
+    <string name="ob_hint">Entrambi si modificano in «Profilo · Impostazioni»</string>
+    <string name="ob_continue">Continua</string>
+    <string name="ob_follow_desc">In base alla lingua di sistema</string>
 </resources>

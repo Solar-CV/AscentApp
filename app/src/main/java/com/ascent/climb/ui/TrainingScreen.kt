@@ -5,6 +5,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.Color
@@ -34,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
@@ -46,7 +50,11 @@ fun TrainingScreen(
     altitude: Int,
     completed: Set<String>,
     store: ProgressStore,
-    devUnlockAll: Boolean = false
+    devUnlockAll: Boolean = false,
+    // 开发者模式「显示正确答案」：题库型训练（装备 / 天气）也认这条开关，
+    // 否则开发者只能在一课一课的测验里看到答案，练题时看不到
+    devShowAnswers: Boolean = false,
+    onOpenLesson: (String) -> Unit = {}
 ) {
     // 打开的是哪个训练项；null 表示停在列表
     var openDrill by rememberSaveable { mutableStateOf<String?>(null) }
@@ -54,17 +62,23 @@ fun TrainingScreen(
     val pageStates = rememberSaveableStateHolder()
 
     if (openDrill != null) {
-        DrillScreen(drillId = openDrill!!, store = store, onBack = { openDrill = null })
+        DrillScreen(
+            drillId = openDrill!!,
+            store = store,
+            onBack = { openDrill = null },
+            devShowAnswers = devShowAnswers
+        )
         return
     }
 
     val nextLesson = ALL_LESSONS.firstOrNull { it.id !in completed && isUnlocked(it.id, completed, devUnlockAll) }
 
+    // 四项训练全部可进：前两条是计时节奏训练，后两条从题库抽单选默写
     val drills = listOf(
-        Triple(Ic.Footprints, stringResource(R.string.tr_item1_title), stringResource(R.string.tr_item1_desc)),
-        Triple(Ic.Wind, stringResource(R.string.tr_item2_title), stringResource(R.string.tr_item2_desc)),
-        Triple(Ic.Backpack, stringResource(R.string.tr_item3_title), stringResource(R.string.tr_item3_desc)),
-        Triple(Ic.CloudSnow, stringResource(R.string.tr_item4_title), stringResource(R.string.tr_item4_desc))
+        DrillEntry(Drill.STEP, Ic.Footprints, stringResource(R.string.tr_item1_title), stringResource(R.string.tr_item1_desc)),
+        DrillEntry(Drill.BREATH, Ic.Wind, stringResource(R.string.tr_item2_title), stringResource(R.string.tr_item2_desc)),
+        DrillEntry(Drill.GEAR, Ic.Backpack, stringResource(R.string.tr_item3_title), stringResource(R.string.tr_item3_desc)),
+        DrillEntry(Drill.WEATHER, Ic.CloudSnow, stringResource(R.string.tr_item4_title), stringResource(R.string.tr_item4_desc))
     )
 
     pageStates.SaveableStateProvider("tr-list") {
@@ -81,9 +95,23 @@ fun TrainingScreen(
         }
 
         // ---- 今日推荐 ----
+        // 这张卡指向路线上的下一课，所以整块可点：跳路径页并直接打开那课。
+        // 全部通关时下面的文案换成「绳结速度训练」，那个还没有内页，保持不可点。
         item(key = "today") {
+            // 整块可点，但不用默认水波纹：ClaySurface 的圆角是画出来的、
+            // 没有 clip（clip 会把外扩的投影一起裁掉），矩形水波纹会在四角露出直角。
+            // 改成按下微缩，反馈足够，也不破坏黏土质感。
+            val press = remember { MutableInteractionSource() }
+            val pressed by press.collectIsPressedAsState()
             ClaySurface(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .scale(if (pressed) 0.98f else 1f)
+                    .clickable(
+                        enabled = nextLesson != null,
+                        interactionSource = press,
+                        indication = null
+                    ) { nextLesson?.let { onOpenLesson(it.id) } },
                 radius = 24.dp,
                 elevation = 9.dp,
                 // 平涂：顶部大块不再做上下渐变，一块实色 + 原色描边
@@ -141,19 +169,12 @@ fun TrainingScreen(
         }
 
         items(drills.size, key = { "d$it" }) { i ->
-            val (icon, title, reason) = drills[i]
-            // 前两条本次已实现；后两条（装备默写 / 天气判读）留到下一版，先标「即将上线」
-            val drillId = when (i) {
-                0 -> Drill.STEP
-                1 -> Drill.BREATH
-                else -> null
-            }
+            val d = drills[i]
             DrillRow(
-                icon = icon,
-                title = title,
-                reason = reason,
-                available = drillId != null,
-                onClick = { drillId?.let { openDrill = it } }
+                icon = d.icon,
+                title = d.title,
+                reason = d.reason,
+                onClick = { openDrill = d.id }
             )
         }
 
@@ -192,14 +213,13 @@ private fun DrillRow(
     icon: ImageVector,
     title: String,
     reason: String,
-    available: Boolean,
     onClick: () -> Unit
 ) {
     ClaySurface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 5.dp)
-            .clickable(enabled = available) { onClick() },
+            .clickable { onClick() },
         radius = 20.dp,
         elevation = 7.dp
     ) {
@@ -218,15 +238,15 @@ private fun DrillRow(
             Spacer(Modifier.height(3.dp))
             Text(reason, color = Ascent.Fg3, fontSize = 12.sp)
         }
-        if (available) {
-            Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
-        } else {
-            Text(
-                stringResource(R.string.drill_soon),
-                color = Ascent.Fg3.copy(alpha = 0.7f),
-                fontSize = 10.sp
-            )
-        }
+        Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
     }
     }
 }
+
+/** 训练列表的一项。[id] 是写进存档的稳定字符串，见 [Drill]。 */
+private data class DrillEntry(
+    val id: String,
+    val icon: ImageVector,
+    val title: String,
+    val reason: String
+)

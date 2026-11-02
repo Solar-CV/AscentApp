@@ -178,6 +178,7 @@ val CLIMB_CURRICULUM: List<UnitSpec> = listOf(
             "l12", // 冰裂缝与结组行进
             "l18", // 雪崩基础与识别
             "m10", // 山地气象与天气窗口
+            "m26", // 看云识天气：六种云与预兆（看图）
             "m11", // 目标山峰：6000 米四座
             "l43"  // 营地生活与个人护理
         )
@@ -278,7 +279,7 @@ val TREK_CURRICULUM: List<UnitSpec> = listOf(
         title = "多日与露营", altitude = 2500,
         subtitle = "从一天变成几天：行程怎么排、营地怎么选、饭怎么做，天气变了怎么办。",
         peaks = ROUTES_MULTI,
-        lessonIds = listOf("t05", "t06", "t07", "t08", "t16", "t18", "t19", "t21")
+        lessonIds = listOf("t05", "t06", "t07", "t08", "t22", "t16", "t18", "t19", "t21")
     ),
     UnitSpec(
         id = "t3", index = 3, code = "TREK · 高原",

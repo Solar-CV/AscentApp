@@ -180,4 +180,7 @@ internal val PACK_IT_ENTRY: Map<String, String> = mapOf(
     "lesson.t19.title" to "Formazioni e gestione della caduta",
     "lesson.t20.title" to "Manutenzione e riparazione dell'attrezzatura",
     "lesson.t21.title" to "Marcia notturna e temporali",
+    "lesson.m26.title" to "Leggere le nuvole · sei tipi e cosa annunciano",
+    "lesson.t22.title" to "Leggere le nuvole · per escursionisti",
+    "lesson.m26.title" to "Leggere le nuvole · giudicare il cielo",
 )

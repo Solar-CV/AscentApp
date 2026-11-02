@@ -41,6 +41,8 @@ private val LESSON_POOL: Map<String, Lesson> = buildMap {
     NEW_LESSONS_C4C.forEach { put(it.id, it) }
     NEW_LESSONS_U6B.forEach { put(it.id, it) }
     NEW_LESSONS_U1B.forEach { put(it.id, it) }
+    // 云图课（看图识云）：攀登 m26 / 徒步 t22，题图来自 NOAA 公有领域照片
+    CLOUD_LESSONS.forEach { put(it.id, it) }
 }
 
 /** 把扩充包 / 实体书里追加的题目并进课程。 */

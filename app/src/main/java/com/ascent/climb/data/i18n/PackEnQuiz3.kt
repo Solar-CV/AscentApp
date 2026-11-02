@@ -4570,4 +4570,41 @@ internal val PACK_EN_QUIZ_C: Map<String, String> = mapOf(
     "q.t21#7.o2" to "It helps with insurance claims",
     "q.t21#7.o3" to "Nothing",
     "q.t21#7.e" to "Night and bad weather leave the least margin for error. An itinerary is the precondition for someone coming to look for you if things go wrong.",
+    // ---------- m26 Reading clouds ----------
+
+
+
+
+
+
+    // ---------- t22 Reading clouds for hikers ----------,
+
+
+
+
+    // ---------- m26 cloud reading (new set) ----------
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---------- t22 cloud watching on foot ----------
+
+
+
+
+
+
+
+
+
+
+
 )

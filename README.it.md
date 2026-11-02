@@ -4,9 +4,9 @@
 
 Un'app Android per chi comincia con l'alpinismo d'alta quota e l'arrampicata su ghiaccio. Il programma è ordinato per quota: ogni lezione superata ti porta un po' più in alto.
 
-Due percorsi si cambiano liberamente. **Alta montagna** ha sei unità e 68 lezioni, dall'introduzione a 5.000 m fino a 8.000 m — da 3.200 m a 8.848 m da un capo all'altro. **Escursionismo** ha quattro unità e 21 lezioni, dalla camminata di un giorno ai percorsi lunghi — da 200 m a 5.630 m. Ogni percorso tiene per sé progressi, badge e coda di ripasso.
+Due percorsi si cambiano liberamente. **Alta montagna** ha sei unità e 69 lezioni, dall'introduzione a 5.000 m fino a 8.000 m — da 3.200 m a 8.848 m da un capo all'altro. **Escursionismo** ha quattro unità e 22 lezioni, dalla camminata di un giorno ai percorsi lunghi — da 200 m a 5.630 m. Ogni percorso tiene per sé progressi, badge e coda di ripasso.
 
-Versione attuale v0.22.0 (versionCode 132). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.554 / 10.554). La v0.20 riguarda i badge: i quaranta obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 41 MB; la build di release è di circa 30 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
+Versione attuale v0.23.3 (versionCode 138). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.757 / 10.757). La v0.20 riguarda i badge: i quaranta obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 41 MB; la build di release è di circa 30 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
 
 Le v0.20.19 – v0.21.0 hanno rivestito tutta l'interfaccia di argilla: ombre doppie morbide disegnate fuori schermo e messe in cache, tessere di colore piatte, colori per categoria nel manuale e blocchi di colore la cui profondità viene da un'ombra di contatto invece che da un gradiente.
 
@@ -34,7 +34,7 @@ Il progresso non è un numero salvato. Si ricalcola dalle lezioni completate, co
 
 ### Questionario
 
-1.533 domande ufficiali più 154 copie di ripasso inserite automaticamente, 1.687 elementi mostrati. Il volume cresce con la quota: circa 15 domande per lezione nell'introduzione a 5.000 m, 30 nelle unità tecniche a 7.000 m, 8 nell'escursionismo.
+1.563 domande ufficiali più 158 copie di ripasso inserite automaticamente, 1.721 elementi mostrati. Il volume cresce con la quota: circa 15 domande per lezione nell'introduzione a 5.000 m, 30 nelle unità tecniche a 7.000 m, 8 nell'escursionismo.
 
 Otto tipi di domanda: scelta singola, scelta multipla, ordinamento, abbinamento, completamento, calcolo, punto caldo (toccare un punto dell'immagine) e scenario (un testo affrontato in più passaggi).
 
@@ -46,7 +46,7 @@ Finita una lezione si passa subito a rifare quelle sbagliate. Quelle poi corrett
 
 ### Allenamento, ripasso, profilo
 
-L'allenamento consiglia la lezione successiva e offre due esercizi a tempo: un ritmo respiratorio 4-4 di cinque minuti e quattro serie da 30 secondi di cadenza del passo con i ramponi. Il ripasso mette davanti le domande in scadenza oggi e gli errori critici di sicurezza. Il profilo raccoglie l'intestazione, la quota attuale, il quadro delle capacità, l'accesso ai badge, l'area account e una voce di feedback. L'ingranaggio apre le impostazioni, l'avatar la pagina del profilo.
+L'allenamento consiglia la lezione successiva e offre quattro esercizi: un ritmo respiratorio 4-4 di cinque minuti, quattro serie da 30 secondi di cadenza del passo con i ramponi, un quiz sull'elenco dell'attrezzatura e un quiz di lettura delle nuvole. I due quiz prendono domande a scelta singola dalle lezioni esistenti, mescolano le opzioni a ogni serie e mostrano la spiegazione subito dopo la risposta. Il ripasso mette davanti le domande in scadenza oggi e gli errori critici di sicurezza. Il profilo raccoglie l'intestazione, la quota attuale, il quadro delle capacità, l'accesso ai badge, l'area account e una voce di feedback. L'ingranaggio apre le impostazioni, l'avatar la pagina del profilo.
 
 Il profilo mostra solo i badge sbloccati. Tutti e 40 stanno nella parete dei badge, quelli bloccati come anteprima grigia, gli obiettivi nascosti come «?».
 
@@ -68,7 +68,7 @@ I testi dell'interfaccia e i contenuti del corso sono disponibili in:
 
 简体中文 (originale), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Tutte e dieci le lingue sono complete. Ognuna ha il proprio strato d'ingresso, i riassunti delle lezioni, il corpo del manuale e il questionario, e ogni insieme di chiavi corrisponde all'inglese voce per voce — **10.554 / 10.554**, niente manca, niente è duplicato, nessuna chiave orfana.
+Tutte e dieci le lingue sono complete. Ognuna ha il proprio strato d'ingresso, i riassunti delle lezioni, il corpo del manuale e il questionario, e ogni insieme di chiavi corrisponde all'inglese voce per voce — **10.757 / 10.757**, niente manca, niente è duplicato, nessuna chiave orfana.
 
 | Strato | Voci | Le 9 lingue tradotte |
 |---|---|---|
@@ -95,7 +95,7 @@ Se una voce manca nella lingua scelta, l'ordine è: lingua scelta → inglese �
 |---|---|---|---|---|
 | 5000M · Introduzione | 5.000 m | 16 | 249 | 16 |
 | 5000M · Progressione | 5.300 m | 12 | 221 | 18 |
-| 6000M | 6.000 m | 14 | 316 | 22 |
+| 6000M | 6.000 m | 15 | 336 | 22 |
 | 7000M · Campo tecnico C3 | 7.000 m | 6 | 185 | 31 |
 | 7000M · Campo alto C4 | 7.500 m | 10 | 279 | 28 |
 | 8000M | 8.000 m | 10 | 248 | 24 |
@@ -105,7 +105,7 @@ Se una voce manca nella lingua scelta, l'ordine è: lingua scelta → inglese �
 | Unità | Quota | Lezioni | Domande | Per lezione |
 |---|---|---|---|---|
 | Camminate di un giorno | 1.200 m | 5 | 40 | 8 |
-| Più giorni e campeggio | 2.500 m | 8 | 79 | 10 |
+| Più giorni e campeggio | 2.500 m | 9 | 93 | 10 |
 | Escursionismo d'alta quota | 3.800 m | 5 | 44 | 8 |
 | Percorsi lunghi ed emergenze | 4.500 m | 3 | 26 | 8 |
 
@@ -220,6 +220,18 @@ Per pubblicare un questionario nuovo: cambia i contenuti → alza `BUNDLED_VERSI
 Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `minAppVersion` in `manifest.json` blocca i client troppo vecchi, i campi sconosciuti vengono ignorati e una domanda malformata viene saltata invece che essere fatale.
 
 ## Cambi recenti
+
+**v0.23.3: la lezione sulle nuvole cresce**
+
+- Alpinismo 6 → 18 domande, escursionismo 5 → 12, ogni domanda su una foto diversa; la raccolta passa da 7 a 31 immagini (NOAA NESDIS e gallerie pubbliche del NWS)
+- Entrano cirrocumuli, altostrati, stratocumuli, cumuli congesti, buchi con virgola, fractus, arcus, nubi a muro, nebbia da irraggiamento in valle e scie di condensazione; ogni tipo ha due o tre foto e chiede prima il riconoscimento, poi la tendenza, poi cosa fare
+- Il bacino dell'esercizio meteo passa da 63 a 68. Dopo la risposta la vista si ferma in cima alla scheda di spiegazione: una foto alta non viene più spinta fuori schermo
+
+**v0.23.0 – v0.23.2: configurazione iniziale e lezione sulle nuvole**
+
+- Al primo avvio si chiedono solo due cose: alpinismo o escursionismo, e la lingua — anteprima immediata, salvataggio al tocco su continua
+- Blocco in verticale; l'opzione «mostra risposta» della modalità sviluppatore copre anche gli esercizi
+- Due lezioni sulla lettura delle nuvole; la schermata degli esercizi mostra le immagini e le apre a tutto schermo
 
 **v0.22.0: l'allenamento allena davvero**
 

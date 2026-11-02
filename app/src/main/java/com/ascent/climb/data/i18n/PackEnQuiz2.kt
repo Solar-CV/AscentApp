@@ -2490,4 +2490,4 @@ internal val PACK_EN_QUIZ_B: Map<String, String> = mapOf(
     "q.m03#10.o3" to "As close as possible",
 )
 
-internal val PACK_EN_QUIZ: Map<String, String> = PACK_EN_QUIZ_A + PACK_EN_QUIZ_B + PACK_EN_QUIZ_C
+internal val PACK_EN_QUIZ: Map<String, String> = PACK_EN_QUIZ_A + PACK_EN_QUIZ_B + PACK_EN_QUIZ_C + PACK_EN_QUIZ_CLOUD

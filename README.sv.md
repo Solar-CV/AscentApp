@@ -4,9 +4,9 @@
 
 En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kursen är ordnad efter höjd: varje avklarad lektion flyttar dig en bit högre upp.
 
-Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 68 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 21 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
+Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 69 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 22 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.22.0 (versionCode 132). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.23.3 (versionCode 138). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 757 / 10 757). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
 
@@ -34,7 +34,7 @@ Progress är inte ett sparat tal. Det räknas om från de lektioner du klarat, s
 
 ### Frågebank
 
-1 533 ordinarie frågor plus 154 automatiskt insatta repetitionskopior, 1 687 poster totalt. Mängden ökar med höjden: omkring 15 frågor per lektion i introduktionen på 5 000 m, 30 i de tekniska enheterna på 7 000 m och 8 i vandringen.
+1 563 ordinarie frågor plus 158 automatiskt insatta repetitionskopior, 1 721 poster totalt. Mängden ökar med höjden: omkring 15 frågor per lektion i introduktionen på 5 000 m, 30 i de tekniska enheterna på 7 000 m och 8 i vandringen.
 
 Åtta frågetyper: enkelval, flerval, ordningsföljd, matchning, lucktext, beräkning, hotspot (tryck på en punkt i bilden) och scenario (en frågestam som besvaras i flera steg).
 
@@ -46,7 +46,7 @@ När en lektion är klar går du direkt in och gör om dem du missade. Rättade 
 
 ### Träning, repetition, profil
 
-Träningen föreslår nästa lektion och erbjuder två tidsstyrda övningar: en femminuters 4-4-andningstakt och fyra set om 30 sekunder stegrytm med stegjärn. Repetitionen sätter dagens förfallna frågor och säkerhetskritiska misstag först. Profilen rymmer huvud, aktuell höjd, förmågeöversikt, emblemets ingång, kontoområde och en feedback-ingång. Kugghjulet öppnar inställningarna, avataren profilsidan.
+Träningen föreslår nästa lektion och erbjuder fyra övningar: en femminuters 4-4-andningstakt, fyra set om 30 sekunder stegrytm med stegjärn, ett utrustningsquiz och ett molnquiz. De två quizzen tar envalsfrågor från befintliga lektioner, blandar svaren varje omgång och visar förklaringen direkt efter varje svar. Repetitionen sätter dagens förfallna frågor och säkerhetskritiska misstag först. Profilen rymmer huvud, aktuell höjd, förmågeöversikt, emblemets ingång, kontoområde och en feedback-ingång. Kugghjulet öppnar inställningarna, avataren profilsidan.
 
 Profilen visar bara upplåsta emblem. Alla 40 finns på emblemväggen, låsta som grå förhandsvisning, dolda prestationer som ett "?".
 
@@ -68,7 +68,7 @@ Gränssnittstexter och kursinnehåll finns på:
 
 简体中文 (källa), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Alla tio språk är kompletta. Varje språk har sitt eget ingångslager, lektionssammanfattningar, handbokstext och frågebank, och varje nyckeluppsättning matchar engelskan post för post — **10 554 / 10 554**, inget saknas, inget dubbelt, inga föräldralösa nycklar.
+Alla tio språk är kompletta. Varje språk har sitt eget ingångslager, lektionssammanfattningar, handbokstext och frågebank, och varje nyckeluppsättning matchar engelskan post för post — **10 757 / 10 757**, inget saknas, inget dubbelt, inga föräldralösa nycklar.
 
 | Lager | Poster | Alla 9 översatta språk |
 |---|---|---|
@@ -105,7 +105,7 @@ Om en post saknas på det valda språket är ordningen: valt språk → engelska
 | Enhet | Höjd | Lektioner | Frågor | Per lektion |
 |---|---|---|---|---|
 | Dagsvandringar | 1 200 m | 5 | 40 | 8 |
-| Flerdygn och läger | 2 500 m | 8 | 79 | 10 |
+| Flerdygn och läger | 2 500 m | 9 | 93 | 10 |
 | Höghöjdsvandring | 3 800 m | 5 | 44 | 8 |
 | Långleder och nödlägen | 4 500 m | 3 | 26 | 8 |
 
@@ -220,6 +220,18 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
 ## Senaste ändringar
+
+**v0.23.3: molnlektionen växer**
+
+- Klättring 6 → 18 frågor, vandring 5 → 12, varje fråga på ett eget foto; bildbanken gick från 7 till 31 (NOAA NESDIS och öppna NWS-molnbilder)
+- Cirrocumulus, altostratus, stratocumulus, tornande cumulus, fallstreak-hål, fractus, hyllmoln, molnväggar, strålningsdimma i dalen och kondensstreck är med; varje molntyp har två eller tre foton och frågar först om igenkänning, sedan om trend, sedan om vad man ska göra
+- Övningspoolen för väder gick från 63 till 68. Efter svaret stannar vyn vid rubriken på förklaringen, så ett högt foto inte längre trycks ut ur bild
+
+**v0.23.0 – v0.23.2: första starten och molnlektionen**
+
+- Vid första starten frågas bara två saker: klättring eller vandring, och gränssnittsspråk — förhandsvisas direkt och sparas när du trycker fortsätt
+- Låst i stående läge; utvecklarlägets «visa rätt svar» gäller nu även träningen
+- Två lektioner om att läsa moln; övningsskärmen visar frågebilder och öppnar dem i fullskärm
 
 **v0.22.0: träningen tränar faktiskt**
 

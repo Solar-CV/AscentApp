@@ -1154,7 +1154,7 @@ private fun OptionRow(
 
 /** 加载 assets/bank/img/ 下的题图；null 表示缺失。 */
 @Composable
-private fun rememberAssetBitmap(name: String): ImageBitmap? {
+internal fun rememberAssetBitmap(name: String): ImageBitmap? {
     val context = LocalContext.current
     return remember(name) {
         runCatching {
@@ -1437,7 +1437,7 @@ private fun isSummitSpotting(q: Question): Boolean =
  * 用于需要「看图辨识」的题目（气象截图、等高线等）。
  */
 @Composable
-private fun ImageViewerDialog(image: String, onClose: () -> Unit) {
+internal fun ImageViewerDialog(image: String, onClose: () -> Unit) {
     val bmp = rememberAssetBitmap(image)
     var scale by remember(image) { mutableStateOf(1f) }
     var offset by remember(image) { mutableStateOf(Offset.Zero) }

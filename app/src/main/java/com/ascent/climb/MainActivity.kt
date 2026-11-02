@@ -59,6 +59,7 @@ import com.ascent.climb.ui.HandbookScreen
 import com.ascent.climb.ui.LessonScreen
 import com.ascent.climb.ui.PathScreen
 import com.ascent.climb.ui.ProfileScreen
+import com.ascent.climb.ui.OnboardingOverlay
 import com.ascent.climb.ui.ReviewScreen
 import com.ascent.climb.ui.TrainingScreen
 
@@ -104,23 +105,6 @@ class MainActivity : ComponentActivity() {
             val baseContext = LocalContext.current
             val localized = remember(locale) {
                 AppLocale.localizedContext(baseContext, locale)
-            }
-
-            // Android 13+：同步到系统「应用语言」设置，保证系统设置页与本 App 一致。
-            // 「跟随系统」时清空，交还给系统。
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                LaunchedEffect(languageMode) {
-                    val lm = applicationContext.getSystemService(LocaleManager::class.java)
-                        ?: return@LaunchedEffect
-                    val target = if (languageMode == AppLocale.AUTO) {
-                        LocaleList.getEmptyLocaleList()
-                    } else {
-                        LocaleList.forLanguageTags(languageMode)
-                    }
-                    if (lm.applicationLocales != target) {
-                        runCatching { lm.applicationLocales = target }
-                    }
-                }
             }
 
             CompositionLocalProvider(LocalContext provides localized) {
@@ -178,6 +162,27 @@ fun AscentRoot(
     val context = LocalContext.current
 
     var trackId by remember { mutableStateOf(store.trackId) }
+    // 首启引导：只在「真·新装」时出现；老用户升级上来直接跳过（ProgressStore.needsOnboarding）
+    // rememberSaveable：换语言会触发系统重建（见下面的 LocaleManager 同步），状态不能丢
+    var onboardingDone by rememberSaveable { mutableStateOf(!store.needsOnboarding) }
+
+    // Android 13+：把「应用语言」同步给系统设置页。
+    // 只在引导**完成后**才同步——引导途中同步会立刻触发 Activity 重建（黑屏一下），
+    // 用户正在选语言时被打断，体验很差。
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        LaunchedEffect(languageMode, onboardingDone) {
+            if (!onboardingDone) return@LaunchedEffect
+            val lm = context.getSystemService(LocaleManager::class.java) ?: return@LaunchedEffect
+            val target = if (languageMode == AppLocale.AUTO) {
+                LocaleList.getEmptyLocaleList()
+            } else {
+                LocaleList.forLanguageTags(languageMode)
+            }
+            if (lm.applicationLocales != target) {
+                runCatching { lm.applicationLocales = target }
+            }
+        }
+    }
     // 聚合数据（ALL_UNITS / ALL_LESSONS）跟随当前大类，供训练页与我的页使用；
     // 成就判定不用它们，走 ProgressStore 内部的全轨道统计
     setActiveTrack(trackId)
@@ -314,7 +319,15 @@ fun AscentRoot(
                                 altitude = altitude,
                                 completed = completed,
                                 store = store,
-                                devUnlockAll = devUnlockAll
+                                devUnlockAll = devUnlockAll,
+                                devShowAnswers = devShowAnswers,
+                                // 「今日推荐」指向路线上的下一课：跳到路径页并直接把那课打开。
+                                // 先切 tab 再置 id —— 顺序无所谓（同一次快照），但 tab 必须是 0，
+                                // 否则关闭课程后会回到训练页，跟用户「跳过去」的预期不符。
+                                onOpenLesson = { id ->
+                                    tab = 0
+                                    openLessonId = id
+                                }
                             )
                             3 -> ReviewScreen(
                                 completed = completed,
@@ -406,6 +419,30 @@ fun AscentRoot(
     val badgeStage = badgeStageId
     if (badgeStage != null) {
         Badge3DStageScreen(achievementId = badgeStage, onBack = { badgeStageId = null })
+    }
+
+    // 首次启动偏好：整屏盖在最上层，选完才进入主界面
+    if (!onboardingDone) {
+        OnboardingOverlay(
+            initialTrack = trackId,
+            language = languageMode,
+            onLanguageChange = { mode ->
+                // 语言即时生效：整棵树（含引导页自身）立刻切换，用户按下继续前就能确认
+                onLanguageModeChange(mode)
+            },
+            onConfirm = { picked ->
+                if (picked != trackId) {
+                    trackId = picked
+                    store.trackId = picked
+                    setActiveTrack(picked)
+                    altitude = store.altitudeOn(picked)
+                }
+                // 轨道变更会改变题库/技能书/徽章的可见集合，刷一次让各页重算
+                achRevision += 1
+                store.onboardingDone = true
+                onboardingDone = true
+            }
+        )
     }
 
     // 成就解锁弹窗：每次一条，关闭后播下一条（队列持久化，重启不丢）

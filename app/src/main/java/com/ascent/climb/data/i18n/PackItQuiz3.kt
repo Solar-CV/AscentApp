@@ -3604,4 +3604,41 @@ internal val PACK_IT_QUIZ_C: Map<String, String> = mapOf(
     "q.t21#7.o2" to "Al rimborso assicurativo",
     "q.t21#7.o3" to "A niente",
     "q.t21#7.e" to "Di notte e con maltempo il margine di errore è minimo. Il foglio di itinerario è la premessa perché «se succede qualcosa, qualcuno venga a cercarti».",
+    // ---------- m26 Leggere le nuvole ----------
+
+
+
+
+
+
+    // ---------- t22 Leggere le nuvole in escursione ----------,
+
+
+
+
+    // ---------- m26 Leggere le nuvole (seguito) ----------
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---------- t22 Leggere le nuvole a piedi ----------
+
+
+
+
+
+
+
+
+
+
+
 )

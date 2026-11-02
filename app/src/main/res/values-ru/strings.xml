@@ -248,7 +248,6 @@
     <!-- ========== 训练页（v0.22）========== -->
     <string name="drill_pause">Пауза</string>
     <string name="drill_finish">Завершить</string>
-    <string name="drill_soon">Скоро</string>
     <string name="drill_inhale">Вдох</string>
     <string name="drill_exhale">Выдох</string>
     <string name="drill_left">Левая нога</string>
@@ -258,8 +257,22 @@
     <string name="drill_set">Подход %1$d из %2$d</string>
     <string name="drill_done_breath">%1$d циклов</string>
     <string name="drill_done_step">%1$d подхода · %2$d шагов</string>
-    <string name="drill_history">%1$d раз · %2$d мин всего</string>
+    <string name="drill_history">Тренировок: %1$d · %2$d мин</string>
     <string name="drill_recorded">Сохранено</string>
+    <string name="drill_quiz_intro">Отвечайте по памяти, без подсказок. Разбор появится сразу.</string>
+    <string name="drill_quiz_pool">В подборке %1$d · в наборе %2$d</string>
+    <string name="drill_quiz_start">Начать · %1$d вопросов</string>
+    <string name="drill_quiz_progress">Вопрос %1$d из %2$d</string>
+    <string name="drill_quiz_next">Далее</string>
+    <string name="drill_quiz_see">Результат</string>
+    <string name="drill_quiz_score">Верно %1$d из %2$d</string>
+    <string name="drill_quiz_best">Лучший %1$d%%</string>
+    <string name="drill_quiz_explain">Разбор</string>
+    <string name="drill_quiz_from">Источник · %1$s</string>
+    <string name="drill_quiz_right">Верно</string>
+    <string name="drill_quiz_wrong">Неверно</string>
+    <string name="drill_quiz_again">Ещё набор</string>
+    <string name="drill_history_short">Наборов пройдено: %1$d</string>
 
     <string name="path_camp_base">Базовый лагерь</string>
     <string name="path_camp_c1">Лагерь 1</string>
@@ -381,4 +394,16 @@
         <item quantity="many">%1$d дней</item>
         <item quantity="other">%1$d дня</item>
     </plurals>
+    <!-- 首次启动偏好引导 -->
+    <string name="ob_title">Выберите маршрут</string>
+    <string name="ob_sub">Можно изменить в любой момент. Выбор задаёт маршрут на главной, банк вопросов и прогресс значков.</string>
+    <string name="ob_climb_meta">CLIMB · %1$d уроков · 5 000 → 8 000 м</string>
+    <string name="ob_trek_meta">TREK · %1$d уроков · Дневной выход → высота</string>
+    <string name="ob_climb_note">Основной маршрут</string>
+    <string name="ob_trek_note">Вторая линия · можно переключить</string>
+    <string name="ob_lang_sub">Тексты и разборы</string>
+    <string name="ob_lang_sheet_sub">По умолчанию как в системе; интерфейс и банк меняются вместе</string>
+    <string name="ob_hint">Оба пункта можно изменить в «Профиль · Настройки»</string>
+    <string name="ob_continue">Продолжить</string>
+    <string name="ob_follow_desc">По системному языку</string>
 </resources>

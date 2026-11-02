@@ -319,6 +319,32 @@ class ProgressStore(context: Context) {
         set(value) = prefs.edit().putString("badgeStageBg", value).apply()
 
     /**
+     * 首次启动的偏好引导是否已完成。
+     *
+     * 只在「真·新装」时弹；老用户升级上来时 SharedPreferences 里早有 streak / lastDay，
+     * 再问一遍「你要攀登还是徒步」是冒犯。
+     */
+    var onboardingDone: Boolean
+        get() = prefs.getBoolean("onboardingDone", false)
+        set(value) = prefs.edit().putBoolean("onboardingDone", value).apply()
+
+    init {
+        // 首次运行就把结论落盘，而不是每次靠"prefs 是否为空"去猜：
+        // App 一启动就会写 streak / lastDay，那个判据只成立一瞬间，
+        // 用户中途杀掉进程就再也见不到引导了。
+        if (!prefs.contains("onboardingDone")) {
+            val returning = prefs.contains("lastDay") ||
+                prefs.getInt("streak", 0) > 0 ||
+                prefs.contains("completed")
+            prefs.edit().putBoolean("onboardingDone", returning).apply()
+        }
+    }
+
+    /** 是否需要弹首启引导。 */
+    val needsOnboarding: Boolean
+        get() = !onboardingDone
+
+    /**
      * 语言模式："auto"（跟随系统）或 BCP-47 语言标签（如 "zh-CN" / "en"）。
      *
      * 默认 "auto"，因此已安装的用户升级后行为不变、不会莫名丢偏好。
@@ -357,6 +383,28 @@ class ProgressStore(context: Context) {
     fun drillCount(id: String): Int = prefs.getInt("drill_${id}_count", 0)
 
     fun drillTotalSeconds(id: String): Int = prefs.getInt("drill_${id}_seconds", 0)
+
+    /**
+     * 记一组题库型训练（装备默写 / 天气判读）：次数 +1、累计秒数增加、刷新最好成绩。
+     *
+     * 最好成绩存百分比而不是「答对数」：以后调整每组题量（10 → 12）时，
+     * 旧记录不会因为分母变了而失真。
+     */
+    fun recordDrillScore(id: String, seconds: Int, correct: Int, total: Int) {
+        val pct = if (total > 0) (correct * 100 / total).coerceIn(0, 100) else 0
+        val c = drillCount(id) + 1
+        val s = drillTotalSeconds(id) + seconds.coerceAtLeast(0)
+        val best = maxOf(drillBest(id), pct)
+        prefs.edit()
+            .putInt("drill_${id}_count", c)
+            .putInt("drill_${id}_seconds", s)
+            .putInt("drill_${id}_best", best)
+            .putLong("drill_${id}_last", LocalDate.now().toEpochDay())
+            .apply()
+    }
+
+    /** 最好成绩（百分比 0..100）；0 表示还没练过或全错。 */
+    fun drillBest(id: String): Int = prefs.getInt("drill_${id}_best", 0)
 
     /** 最近一次训练的 epochDay；0 表示没练过。 */
     fun drillLastDay(id: String): Long = prefs.getLong("drill_${id}_last", 0L)

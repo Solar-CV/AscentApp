@@ -1024,4 +1024,8 @@ val TREK_UNIT_4: List<Lesson> = listOf(
 /** 徒步轨道全部课程（按单元顺序）。 */
 val TREK_LESSONS: List<Lesson> =
     TREK_UNIT_1 + TREK_UNIT_2 + TREK_UNIT_3 + TREK_UNIT_4 +
-        TREK_NEW_1 + TREK_NEW_2 + TREK_NEW_3
+        TREK_NEW_1 + TREK_NEW_2 + TREK_NEW_3 +
+        // 云图课（t22 看云识天气）：与攀登的 m26 同一批，内容定义在 CloudLessons.kt
+        CLOUD_LESSONS.filter { it.id.startsWith("t") } +
+        // 云图课（t22 看云识天气）：与攀登的 m26 同一批，内容定义在 CloudLessons.kt
+        CLOUD_LESSONS.filter { it.id.startsWith("t") }

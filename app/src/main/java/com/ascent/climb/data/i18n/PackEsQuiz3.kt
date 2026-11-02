@@ -1758,4 +1758,41 @@ internal val PACK_ES_QUIZ_C: Map<String, String> = mapOf(
     "q.m25#12.o2" to "Atribuirlo a la suerte",
     "q.m25#12.o3" to "No volver a mencionarlo",
     "q.m25#12.e" to "La revisión no busca culpables, sino convertir «la próxima vez lo veré antes» en experiencia concreta. Escribir la línea de tiempo sirve más que escribir sensaciones.",
+    // ---------- m26 Leer las nubes ----------
+
+
+
+
+
+
+    // ---------- t22 Leer las nubes para senderistas ----------,
+
+
+
+
+    // ---------- m26 Leer las nubes (continuación) ----------
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---------- t22 Leer las nubes a pie ----------
+
+
+
+
+
+
+
+
+
+
+
 )

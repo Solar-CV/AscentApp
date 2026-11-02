@@ -182,4 +182,7 @@ internal val PACK_SV_ENTRY: Map<String, String> = mapOf(
     "lesson.t19.title" to "Formationer och hantering av fall",
     "lesson.t20.title" to "Utrustningsvård och reparation",
     "lesson.t21.title" to "Nattvandring och åskväder",
+    "lesson.m26.title" to "Läsa moln · sex typer och vad de varslar",
+    "lesson.t22.title" to "Läsa moln · för vandrare",
+    "lesson.m26.title" to "Läsa moln · bedöma himlen",
 )

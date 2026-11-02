@@ -4,9 +4,9 @@
 
 Une application Android pour celles et ceux qui débutent en alpinisme d’altitude et en cascade de glace. Le programme est organisé par altitude : chaque leçon passée fait monter d’un cran.
 
-Deux parcours se changent librement. La **haute montagne** compte six unités et 68 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 21 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
+Deux parcours se changent librement. La **haute montagne** compte six unités et 69 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 22 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.22.0 (versionCode 132). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo ; la version release fait environ 30 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+Version actuelle v0.23.3 (versionCode 138). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 757 / 10 757). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo ; la version release fait environ 30 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
 
 Les v0.20.19 – v0.21.0 ont habillé toute l’interface en argile : ombres doubles douces dessinées hors écran et mises en cache, pastilles de couleur mates, couleurs par catégorie dans le manuel, et blocs de couleur dont le relief vient d’une ombre de contact plutôt que d’un dégradé.
 
@@ -34,7 +34,7 @@ La progression n’est pas un nombre stocké. Elle est recalculée à partir des
 
 ### Banque de questions
 
-1 533 questions officielles plus 154 copies de révision insérées automatiquement, soit 1 687 éléments affichés. Le volume monte avec l’altitude : une quinzaine de questions par leçon dans l’initiation à 5 000 m, 30 dans les unités techniques à 7 000 m, 8 en randonnée.
+1 563 questions officielles plus 158 copies de révision insérées automatiquement, soit 1 721 éléments affichés. Le volume monte avec l’altitude : une quinzaine de questions par leçon dans l’initiation à 5 000 m, 30 dans les unités techniques à 7 000 m, 8 en randonnée.
 
 Huit types de questions : choix unique, choix multiple, ordonnancement, appariement, texte à trous, calcul, point chaud (appuyer sur un point de l’image) et scénario (un énoncé traité en plusieurs étapes).
 
@@ -46,7 +46,7 @@ Huit types de questions : choix unique, choix multiple, ordonnancement, appariem
 
 ### Entraînement, révision, profil
 
-L’entraînement recommande la leçon suivante et propose deux exercices chronométrés : un rythme respiratoire 4-4 de cinq minutes et quatre séries de 30 secondes de cadence de pas en crampons. La révision place devant les questions échues du jour et les erreurs critiques de sécurité. Le profil réunit l’en-tête, l’altitude actuelle, l’aperçu des capacités, l’accès aux badges, la zone de compte et une entrée de retour. L’engrenage ouvre les réglages, l’avatar la page de profil.
+L’entraînement recommande la leçon suivante et propose quatre exercices : un rythme respiratoire 4-4 de cinq minutes, quatre séries de 30 secondes de cadence de pas en crampons, un quiz de liste de matériel et un quiz de lecture des nuages. Les deux quiz tirent des questions à choix unique des leçons existantes, mélangent les réponses à chaque série et affichent l’explication juste après la réponse. La révision place devant les questions échues du jour et les erreurs critiques de sécurité. Le profil réunit l’en-tête, l’altitude actuelle, l’aperçu des capacités, l’accès aux badges, la zone de compte et une entrée de retour. L’engrenage ouvre les réglages, l’avatar la page de profil.
 
 Le profil n’affiche que les badges débloqués. Les 40 sont sur le mur de badges, les verrouillés en aperçu gris, les succès cachés sous un « ? ».
 
@@ -68,7 +68,7 @@ Les textes d’interface et le contenu des cours sont disponibles en :
 
 简体中文 (source), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Les dix langues sont complètes. Chacune a sa couche d’entrée, ses résumés de leçon, le corps du manuel et une banque de questions, et chaque jeu de clés correspond à l’anglais entrée par entrée — **10 554 / 10 554**, rien ne manque, rien n’est dupliqué, aucune clé orpheline.
+Les dix langues sont complètes. Chacune a sa couche d’entrée, ses résumés de leçon, le corps du manuel et une banque de questions, et chaque jeu de clés correspond à l’anglais entrée par entrée — **10 757 / 10 757**, rien ne manque, rien n’est dupliqué, aucune clé orpheline.
 
 | Couche | Éléments | Les 9 langues traduites |
 |---|---|---|
@@ -105,7 +105,7 @@ Si un élément manque dans la langue choisie, l’ordre est : langue choisie �
 | Unité | Altitude | Leçons | Questions | Par leçon |
 |---|---|---|---|---|
 | Sorties à la journée | 1 200 m | 5 | 40 | 8 |
-| Plusieurs jours et bivouac | 2 500 m | 8 | 79 | 10 |
+| Plusieurs jours et bivouac | 2 500 m | 9 | 93 | 10 |
 | Randonnée d’altitude | 3 800 m | 5 | 44 | 8 |
 | Itinéraires longs et urgence | 4 500 m | 3 | 26 | 8 |
 
@@ -220,6 +220,18 @@ Pour publier une nouvelle banque : modifier le contenu → incrémenter `BUNDLED
 Les anciennes versions de l’application ne cassent pas face à une banque plus récente. `minAppVersion` dans `manifest.json` bloque les clients trop anciens, les champs inconnus sont ignorés et une question mal formée est sautée plutôt que fatale.
 
 ## Changements récents
+
+**v0.23.3 : la leçon des nuages grandit**
+
+- Alpinisme 6 → 18 questions, randonnée 5 → 12, chaque question sur une photo différente ; la banque d’images passe de 7 à 31 (NOAA NESDIS et galeries publiques du NWS)
+- Cirrocumulus, altostratus, stratocumulus, cumulus congestus, trouées avec virga, fractus, arcus, nuages-murs, brouillard de rayonnement en vallée et traînées de condensation ; chaque type porte deux ou trois photos et demande d’abord de reconnaître, puis la tendance, puis quoi faire
+- Le vivier de l’exercice météo passe de 63 à 68. Après la réponse, la vue s’arrête en haut de la carte d’explication : une photo haute n’est plus chassée de l’écran
+
+**v0.23.0 – v0.23.2 : premier lancement et leçon des nuages**
+
+- Au premier lancement, deux questions seulement : alpinisme ou randonnée, et la langue — aperçu immédiat, enregistré au moment de continuer
+- Verrouillage en portrait ; l’option « afficher la réponse » du mode développeur couvre aussi les exercices
+- Deux leçons de lecture des nuages ; l’écran d’exercice affiche les images et les ouvre en plein écran
 
 **v0.22.0 : l’entraînement entraîne vraiment**
 

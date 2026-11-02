@@ -173,4 +173,7 @@ internal val PACK_JA_ENTRY: Map<String, String> = mapOf(
     "peak.EBC 珠峰大本营" to "EBC（エベレスト・ベースキャンプ）",
     "peak.冈仁波齐转山" to "カイラス巡礼（岡仁波斉）",
     "peak.EBC + 三条垭口" to "EBC + 三つの峠",
+    "lesson.m26.title" to "雲を読む · 六つの雲とその前兆",
+    "lesson.t22.title" to "雲を読む · トレッキング編",
+    "lesson.m26.title" to "雲を読む · 雲図の判読",
 )
