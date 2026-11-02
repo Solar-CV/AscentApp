@@ -305,6 +305,7 @@
     <string name="dev_locked">未解除</string>
     <string name="dev_preview">プレビュー</string>
     <string name="dev_reset_item">これをリセット</string>
+    <string name="dev_reset_confirm">これをリセットしますか？</string>
     <string name="dev_force_unlock">強制解除</string>
     <string name="dev_stats_detail">maxStreak %1$d · 累計活動 %2$d 日 · 挑戦回数 %3$d · 復習正解 %4$d · キュー %5$d · 標高 %6$d</string>
 

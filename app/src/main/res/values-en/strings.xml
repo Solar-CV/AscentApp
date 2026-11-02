@@ -320,6 +320,7 @@
     <string name="dev_locked">Locked</string>
     <string name="dev_preview">Preview popup</string>
     <string name="dev_reset_item">Reset this</string>
+    <string name="dev_reset_confirm">Reset this badge?</string>
     <string name="dev_force_unlock">Force unlock</string>
     <string name="dev_stats_detail">maxStreak %1$d · active %2$d days · runs %3$d · reviews correct %4$d · queue %5$d · altitude %6$d</string>
 

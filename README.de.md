@@ -229,6 +229,9 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 - 16 KB-Speicherseiten: geprüft, keine Änderung nötig. Alle vier nativen Bibliotheken (Filament, gltfio, filament-utils, androidx.graphics.path) richten jedes `PT_LOAD`-Segment auf 0x4000 aus, und das APK speichert sie unkomprimiert und 16 KB ausgerichtet
 - `targetSdk` 34 → 36, `compileSdk` ebenso; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Ab API 35 erzwingt das System edge-to-edge, deshalb ruft die App jetzt `enableEdgeToEdge()` auf und reserviert im Wurzel-Layout `safeDrawing`-Abstände, statt sich auf die alten Statusleisten-Farben zu verlassen
 - `tools/check_16k.py` plus eine CI-Prüfung: ein Build, der eine der Prüfungen nicht besteht oder unter 35 zielt, wird nicht mehr veröffentlicht
+- Die 3D-Badge-Ansicht zeigt fps-, Backend- und Bloom-Infos nur im Entwicklermodus — normale Nutzer sehen diese Zeile nicht mehr
+- Das Zurücksetzen einzelner Erfolge im Testbereich fragt jetzt nach (nach 4 s automatisch zurück), ein Fehltipp löscht kein Abzeichen mehr
+- Der Debug-Build hat eine eigene Package-ID (`com.ascent.climb.debug`) und lässt sich neben der Release-Version installieren
 
 **v0.23.3: die Wolkenlektion wächst**
 

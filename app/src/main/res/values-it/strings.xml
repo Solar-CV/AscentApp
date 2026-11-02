@@ -284,6 +284,7 @@
     <string name="dev_locked">Bloccato</string>
     <string name="dev_preview">Anteprima</string>
     <string name="dev_reset_item">Reimposta questo</string>
+    <string name="dev_reset_confirm">Reimpostare questo obiettivo?</string>
     <string name="dev_force_unlock">Forza sblocco</string>
     <string name="dev_stats_detail">maxStreak %1$d · %2$d giorni attivi · %3$d tentativi · %4$d ripassi corretti · coda %5$d · quota %6$d</string>
     <string name="bank_bundled">Banca integrata</string>

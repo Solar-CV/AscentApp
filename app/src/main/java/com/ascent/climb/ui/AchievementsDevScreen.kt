@@ -26,6 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import kotlinx.coroutines.delay
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -60,6 +62,10 @@ fun AchievementsDevScreen(
     // 会永远算出同一项而卡死（表现为「收下」无反应）。
     var previewQueue by remember { mutableStateOf<List<Achievement>>(emptyList()) }
     var confirmResetAll by remember { mutableStateOf(false) }
+    // 单项重置的待确认 id。这一行的「重置」紧挨着成就条件文字，
+    // 误触一次就把徽章清掉；隐藏成就（好奇心）被清后还会立刻变成「？？？」，
+    // 看起来就像「点一下徽章就不见了」。所以这里也要二次确认。
+    var pendingReset by remember { mutableStateOf<String?>(null) }
     // 3D 展示页由上层（MainActivity）全屏接管，这里只发请求：
     // 放在本地渲染的话，底部导航栏会压在这一页上面。
     val listState = rememberLazyListState()
@@ -77,6 +83,14 @@ fun AchievementsDevScreen(
     fun changed() {
         revision += 1
         onChanged()
+    }
+
+    // 待确认状态挂太久会让人以为按钮坏了，4 秒后自己撤回
+    LaunchedEffect(pendingReset) {
+        if (pendingReset != null) {
+            delay(4000)
+            pendingReset = null
+        }
     }
 
     // 系统返回 / 全面屏侧滑手势：回到设置页，而不是退出 App
@@ -294,14 +308,23 @@ fun AchievementsDevScreen(
                             }
                             Box(modifier = Modifier.weight(1f)) {
                                 if (isUnlocked) {
+                                    val confirming = pendingReset == a.id
                                     PillButton(
-                                        text = stringResource(R.string.dev_reset_item),
+                                        text = stringResource(
+                                            if (confirming) R.string.dev_reset_confirm
+                                            else R.string.dev_reset_item
+                                        ),
                                         style = BtnStyle.Secondary,
                                         height = 38,
                                         fontSize = 12.sp,
                                         onClick = {
-                                            store.resetAchievement(a.id)
-                                            changed()
+                                            if (confirming) {
+                                                store.resetAchievement(a.id)
+                                                pendingReset = null
+                                                changed()
+                                            } else {
+                                                pendingReset = a.id
+                                            }
                                         }
                                     )
                                 } else {

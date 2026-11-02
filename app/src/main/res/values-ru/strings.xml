@@ -305,6 +305,7 @@
     <string name="dev_locked">Не получено</string>
     <string name="dev_preview">Просмотр</string>
     <string name="dev_reset_item">Сбросить это</string>
+    <string name="dev_reset_confirm">Сбросить это достижение?</string>
     <string name="dev_force_unlock">Выдать принудительно</string>
     <string name="dev_stats_detail">maxStreak %1$d · активных дней %2$d · попыток %3$d · верных повторов %4$d · очередь %5$d · высота %6$d</string>
 

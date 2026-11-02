@@ -305,6 +305,7 @@
     <string name="dev_locked">未解鎖</string>
     <string name="dev_preview">預覽彈窗</string>
     <string name="dev_reset_item">重設此項</string>
+    <string name="dev_reset_confirm">確認重設此項？</string>
     <string name="dev_force_unlock">強制解鎖</string>
     <string name="dev_stats_detail">maxStreak %1$d · 累計活躍 %2$d 天 · 課次 %3$d · 複習答對 %4$d · 佇列 %5$d · 海拔 %6$d</string>
 

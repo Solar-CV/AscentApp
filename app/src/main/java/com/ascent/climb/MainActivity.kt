@@ -121,41 +121,39 @@ class MainActivity : ComponentActivity() {
                     // 开屏只盖在根界面之上，不改任何既有页面；序列走完自行淡出。
                     // rememberSaveable：旋转/重建不重播。
                     var splashDone by rememberSaveable { mutableStateOf(false) }
-                    // 开屏这 1.7 秒里让系统栏也是开屏底色，否则顶部会多出一条灰带
-                    LaunchedEffect(splashDone) {
+                    // 系统栏一律透明，让界面自己决定那两条区域长什么样。
+                    //
+                    // 原来这里按开屏进度给状态栏/导航栏刷不透明色。targetSdk 35+ 强制
+                    // edge-to-edge 之后这两个属性已经是 no-op；但在旧系统上它们仍然生效，
+                    // 会把「故意画到系统栏下面」的内容挡出一条边 —— 表现是成就弹窗的暗色
+                    // 遮罩上下各露一条白边、3D 徽章页的背景图顶部被切成直角。
+                    // 开屏那 1.7 秒也不受影响：ClaySplashOverlay 自己铺满整屏。
+                    LaunchedEffect(Unit) {
                         val act = view.context as? Activity ?: return@LaunchedEffect
-                        val bar = ContextCompat.getColor(
-                            act,
-                            if (splashDone) (if (dark) R.color.ascent_bg else R.color.ascent_bg_light)
-                            else (if (dark) R.color.splash_bg_dark else R.color.splash_bg_light)
-                        )
                         @Suppress("DEPRECATION")
-                        act.window.statusBarColor = bar
+                        act.window.statusBarColor = android.graphics.Color.TRANSPARENT
                         @Suppress("DEPRECATION")
-                        act.window.navigationBarColor = bar
+                        act.window.navigationBarColor = android.graphics.Color.TRANSPARENT
                     }
                     Box(Modifier.fillMaxSize()) {
-                        // 底色铺满整屏（含状态栏与导航栏区域），内容另外留出安全区
+                        // 底色铺满整屏（含状态栏与导航栏区域）。
+                        // 安全区不在这里加：AscentRoot 里还有几层要**故意画到系统栏下面**
+                        // （成就弹窗的暗色遮罩、3D 徽章页的背景图），在外层统一收边会把它们裁短，
+                        // 上下露出两条底色。所以 insets 下沉到 AscentRoot 内部按层处理。
                         Box(Modifier.fillMaxSize().background(Ascent.Bg))
-                        Box(
-                            Modifier
-                                .fillMaxSize()
-                                .windowInsetsPadding(WindowInsets.safeDrawing)
-                        ) {
-                            AscentRoot(
-                                store = store,
-                                themeMode = themeMode,
-                                onThemeModeChange = {
-                                    store.themeMode = it
-                                    themeMode = it
-                                },
-                                languageMode = languageMode,
-                                onLanguageModeChange = {
-                                    store.languageMode = it
-                                    languageMode = it
-                                }
-                            )
-                        }
+                        AscentRoot(
+                            store = store,
+                            themeMode = themeMode,
+                            onThemeModeChange = {
+                                store.themeMode = it
+                                themeMode = it
+                            },
+                            languageMode = languageMode,
+                            onLanguageModeChange = {
+                                store.languageMode = it
+                                languageMode = it
+                            }
+                        )
                         if (!splashDone) {
                             ClaySplashOverlay(dark = dark) { splashDone = true }
                         }
@@ -269,6 +267,11 @@ fun AscentRoot(
     val openLesson = openLessonId?.let { lessonById(it) }
 
     Box(modifier = Modifier.fillMaxSize()) {
+    // ── 内容层 ──
+    // 这一层只负责避让系统栏。缩进故意不跟着加：整块原本就写在一个 Box 里，
+    // 外层再套一层是为了让**下面那几个全屏层**（3D 徽章背景、成就遮罩）能画到状态栏
+    // 和手势条下面去；若在更外层统一收边，它们的背景会被裁短、上下露出底色。
+    Box(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
     if (openLesson != null) {
         BackHandler { openLessonId = null }
         Box(modifier = Modifier.fillMaxSize().background(Ascent.Bg)) {
@@ -430,6 +433,8 @@ fun AscentRoot(
         }
     }
 
+    }
+
     // 徽章 3D 展示页：**盖在整棵树之上**而不是替换它。
     // 替换的话，个人主页/徽章墙会离开组合，showProfileHome 这类 remember 状态全丢，
     // 返回时会跳到「我的」根页面。盖一层就没有这个问题，也能盖住底部导航栏。
@@ -440,6 +445,7 @@ fun AscentRoot(
 
     // 首次启动偏好：整屏盖在最上层，选完才进入主界面
     if (!onboardingDone) {
+        Box(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
         OnboardingOverlay(
             initialTrack = trackId,
             language = languageMode,
@@ -460,6 +466,7 @@ fun AscentRoot(
                 onboardingDone = true
             }
         )
+        }
     }
 
     // 成就解锁弹窗：每次一条，关闭后播下一条（队列持久化，重启不丢）

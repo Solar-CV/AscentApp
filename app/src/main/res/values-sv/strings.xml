@@ -284,6 +284,7 @@
     <string name="dev_locked">Låst</string>
     <string name="dev_preview">Förhandsvisning</string>
     <string name="dev_reset_item">Återställ denna</string>
+    <string name="dev_reset_confirm">Återställa denna prestation?</string>
     <string name="dev_force_unlock">Tvinga upplåsning</string>
     <string name="dev_stats_detail">maxStreak %1$d · %2$d aktiva dagar · %3$d pass · %4$d rätta repetitioner · kö %5$d · höjd %6$d</string>
     <string name="bank_bundled">Inbyggd bank</string>

@@ -229,6 +229,9 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 - 16 KB memory pages: checked, nothing to change. All four native libraries (Filament, gltfio, filament-utils, androidx.graphics.path) already align every `PT_LOAD` segment to 0x4000, and the APK stores them uncompressed and 16 KB aligned
 - `targetSdk` 34 → 36, `compileSdk` likewise; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. API 35 forces edge-to-edge, so the app now calls `enableEdgeToEdge()` and reserves `safeDrawing` insets in the root layout instead of relying on the old status-bar colour attributes
 - `tools/check_16k.py` plus a CI gate: a build that fails either check, or targets below 35, no longer reaches a release
+- The 3D badge stage only shows fps/backend info in developer mode — ordinary users no longer see frame timings
+- Single-badge reset in the achievement test area now asks for confirmation, so a stray tap no longer clears a badge
+- The debug build has its own package id (`com.ascent.climb.debug`) and can sit next to the release build on one phone
 
 **v0.23.3: the cloud lesson grows up**
 

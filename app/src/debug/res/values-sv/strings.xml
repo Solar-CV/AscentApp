@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- debug 变体专用：应用名加 Debug 后缀，便于与 release 版区分 -->
+<resources>
+    <string name="app_name">ASCENT dev</string>
+</resources>

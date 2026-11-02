@@ -229,6 +229,9 @@ Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVe
 - Páginas de memoria de 16 KB: comprobado, no hay que cambiar nada. Las cuatro bibliotecas nativas (Filament, gltfio, filament-utils, androidx.graphics.path) alinean cada segmento `PT_LOAD` a 0x4000, y el APK las guarda sin comprimir y alineadas a 16 KB
 - `targetSdk` 34 → 36 y `compileSdk` igual; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Desde API 35 el sistema impone edge-to-edge, así que la app llama a `enableEdgeToEdge()` y reserva los márgenes `safeDrawing` en el layout raíz en vez de confiar en los atributos de color de la barra de estado
 - `tools/check_16k.py` y una comprobación en CI: una compilación que falle cualquiera de las dos, o que apunte por debajo de 35, ya no llega a publicarse
+- La vista 3D solo muestra la información de fps, backend y bloom en modo desarrollador; los usuarios normales ya no ven esa línea
+- Restablecer una insignia en el área de pruebas ahora pide confirmación (se retira a los 4 s), así un toque accidental ya no la borra
+- La compilación debug usa su propio package id (`com.ascent.climb.debug`) y puede convivir con la versión release en el mismo teléfono
 
 **v0.23.3: la lección de nubes crece**
 

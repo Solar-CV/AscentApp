@@ -229,6 +229,9 @@ python3 tools/i18ncheck.py
 - 16 KB メモリページ：調べた結果、変更不要。四つのネイティブライブラリ（Filament、gltfio、filament-utils、androidx.graphics.path）はいずれも各 `PT_LOAD` セグメントが 0x4000 で整列しており、APK 内でも非圧縮かつ 16 KB 整列です
 - `targetSdk` 34 → 36、`compileSdk` も同じく。AGP 8.5.2 → 8.9.2、Gradle 8.9 → 8.11.1。API 35 からシステムが edge-to-edge を強制するため、`enableEdgeToEdge()` を明示し、ルートで `safeDrawing` の余白を確保する形に変えました（ステータスバーの色指定はもう効きません）
 - `tools/check_16k.py` と CI の検査を追加。16 KB 非対応、または targetSdk が 35 未満ならリリースしません
+- 3D バッジ表示ページの fps・バックエンド・ブルーム段階は開発者モードでのみ表示され、通常のユーザーには見えません
+- 実績テストエリアの個別リセットは確認を挟むようにし（4 秒で自動的に戻る）、誤タップでバッジが消えないようにしました
+- debug ビルドは独自のパッケージ ID（`com.ascent.climb.debug`）になり、リリース版と同じ端末に共存できます
 
 **v0.23.3：雲の課を 18 / 12 問に増強**
 

@@ -284,6 +284,7 @@
     <string name="dev_locked">Gesperrt</string>
     <string name="dev_preview">Vorschau</string>
     <string name="dev_reset_item">Dies zurücksetzen</string>
+    <string name="dev_reset_confirm">Diesen Erfolg zurücksetzen?</string>
     <string name="dev_force_unlock">Erzwingen</string>
     <string name="dev_stats_detail">maxStreak %1$d · %2$d aktive Tage · %3$d Durchläufe · %4$d richtig wiederholt · Warteschlange %5$d · Höhe %6$d</string>
     <string name="bank_bundled">Interner Pool</string>

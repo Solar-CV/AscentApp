@@ -229,6 +229,9 @@ Les anciennes versions de l’application ne cassent pas face à une banque plus
 - Pages mémoire de 16 Ko : vérifié, rien à changer. Les quatre bibliothèques natives (Filament, gltfio, filament-utils, androidx.graphics.path) alignent chaque segment `PT_LOAD` sur 0x4000, et l’APK les stocke non compressées et alignées sur 16 Ko
 - `targetSdk` 34 → 36, `compileSdk` également ; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Depuis l’API 35 le système impose edge-to-edge : l’application appelle donc `enableEdgeToEdge()` et réserve les marges `safeDrawing` à la racine, au lieu de compter sur les couleurs de barre d’état
 - `tools/check_16k.py` et un contrôle en CI : une compilation qui échoue à l’un des deux, ou qui cible moins de 35, n’est plus publiée
+- La vue 3D n'affiche les infos fps, backend et bloom qu'en mode développeur ; les utilisateurs normaux ne voient plus cette ligne
+- La réinitialisation d'un badge dans la zone de test demande désormais confirmation (annulée après 4 s) : un appui accidentel ne l'efface plus
+- La compilation debug a son propre package id (`com.ascent.climb.debug`) et peut cohabiter avec la version release sur le même téléphone
 
 **v0.23.3 : la leçon des nuages grandit**
 

@@ -284,6 +284,7 @@
     <string name="dev_locked">Verrouillé</string>
     <string name="dev_preview">Aperçu</string>
     <string name="dev_reset_item">Réinitialiser</string>
+    <string name="dev_reset_confirm">Réinitialiser ce badge ?</string>
     <string name="dev_force_unlock">Forcer le déblocage</string>
     <string name="dev_stats_detail">maxStreak %1$d · %2$d jours actifs · %3$d sessions · %4$d révisions justes · file %5$d · altitude %6$d</string>
     <string name="bank_bundled">Banque intégrée</string>

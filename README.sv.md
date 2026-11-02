@@ -229,6 +229,9 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 - 16 KB-minnessidor: kontrollerat, inget behöver ändras. Alla fyra nativa bibliotek (Filament, gltfio, filament-utils, androidx.graphics.path) justerar varje `PT_LOAD`-segment till 0x4000, och APK:n lagrar dem okomprimerade och 16 KB-justerade
 - `targetSdk` 34 → 36, `compileSdk` likaså; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Från API 35 tvingar systemet edge-to-edge, så appen anropar `enableEdgeToEdge()` och reserverar `safeDrawing`-marginaler i rotlayouten i stället för att lita på statusfältets färgattribut
 - `tools/check_16k.py` plus en CI-kontroll: ett bygge som fallerar någon av dem, eller siktar under 35, publiceras inte längre
+- 3D-vyn visar fps-, backend- och bloominfo endast i utvecklarläge — vanliga användare ser inte längre den raden
+- Återställning av en enskild prestation i testområdet frågar nu först (försvinner efter 4 s), så en feltryckning inte längre raderar märket
+- Debugbygget har eget package id (`com.ascent.climb.debug`) och kan ligga sida vid sida med releaseversionen på samma telefon
 
 **v0.23.3: molnlektionen växer**
 

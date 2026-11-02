@@ -284,6 +284,7 @@
     <string name="dev_locked">Bloqueado</string>
     <string name="dev_preview">Vista previa</string>
     <string name="dev_reset_item">Restablecer esto</string>
+    <string name="dev_reset_confirm">¿Restablecer esta insignia?</string>
     <string name="dev_force_unlock">Forzar desbloqueo</string>
     <string name="dev_stats_detail">maxStreak %1$d · %2$d días activos · %3$d intentos · %4$d repasos correctos · cola %5$d · altitud %6$d</string>
     <string name="bank_bundled">Banco integrado</string>

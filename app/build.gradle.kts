@@ -70,6 +70,13 @@ android {
     buildTypes {
         debug {
             isMinifyEnabled = false
+            // 与 release 版共存：同一 applicationId 在设备上只能装一个，
+            // 加后缀后变成独立应用（独立的 prefs / 数据目录 / 桌面图标）。
+            // 副作用：debug 与 release 的学习进度不互通，这是预期行为。
+            applicationIdSuffix = ".debug"
+            // 设置页与反馈邮件里显示 0.24.0-debug，便于区分是哪一路包在跑。
+            // 本工程没有解析 VERSION_NAME 的逻辑，所以后缀不影响任何比较。
+            versionNameSuffix = "-debug"
         }
         release {
             // 正式包开 R8 + 资源压缩。Filament / gltfio 走 JNI 按名查找，

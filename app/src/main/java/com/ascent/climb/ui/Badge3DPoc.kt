@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.aspectRatio
@@ -1150,6 +1152,9 @@ fun Badge3DStageScreen(
 
     val context = LocalContext.current
     val store = remember { ProgressStore(context) }
+    // 帧率、后端、泛光档位那行是调试信息，普通用户看了只会困惑；
+    // 只在开发者模式下显示。进页面时读一次即可（这一页停留时间短，不必响应变化）。
+    val devMode = remember { store.devUnlocked }
     var bgMode by remember { mutableStateOf(store.badgeStageBg) }
     // 暗色是默认；只有明确选过 "light" 才走亮色。
     // 旧版本存的 "auto"（跟随系统）按暗色处理，见 ProgressStore.badgeStageBg 注释。
@@ -1186,11 +1191,13 @@ fun Badge3DStageScreen(
     }
     LaunchedEffect(dark) {
         if (window == null) return@LaunchedEffect
-        val bar = if (dark) 0xFF0E0718.toInt() else 0xFFFFFFFF.toInt()
+        // targetSdk 35+ 强制 edge-to-edge 后这两个属性是 no-op；旧系统上若留不透明色，
+        // 会把这一页的背景图在顶部/底部切成一条直边。统一透明，让背景铺到系统栏下面，
+        // 只靠 isAppearanceLight* 控制图标明暗（暗底配白图标，亮底配深图标）。
         @Suppress("DEPRECATION")
-        window.statusBarColor = bar
+        window.statusBarColor = android.graphics.Color.TRANSPARENT
         @Suppress("DEPRECATION")
-        window.navigationBarColor = bar
+        window.navigationBarColor = android.graphics.Color.TRANSPARENT
         val controller = WindowCompat.getInsetsController(window, view)
         controller.isAppearanceLightStatusBars = !dark
         controller.isAppearanceLightNavigationBars = !dark
@@ -1221,7 +1228,9 @@ fun Badge3DStageScreen(
                 .background(if (dark) Color(0x14000000) else Color(0x12FFFFFF))
         )
 
-        Column(modifier = Modifier.fillMaxSize()) {
+        // 背景图铺满整屏（含状态栏/手势条），内容自己避开系统栏。
+        // 这一页现在画在 safeDrawing 之外，就是为了让 badge_bg 不上下露出底色。
+        Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -1303,6 +1312,7 @@ fun Badge3DStageScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .navigationBarsPadding()
                     .padding(start = 24.dp, end = 24.dp, bottom = 26.dp)
             ) {
                 Text(
@@ -1340,7 +1350,7 @@ fun Badge3DStageScreen(
                         fontSize = 10.sp
                     )
                 }
-                if (modelPath != null && stats.isNotEmpty()) {
+                if (modelPath != null && stats.isNotEmpty() && devMode) {
                     Spacer(Modifier.height(8.dp))
                     Text(stats, color = ink2, fontSize = 10.sp)
                 }

@@ -229,6 +229,9 @@ Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `min
 - Pagine di memoria da 16 KB: verificato, non serve cambiare nulla. Le quattro librerie native (Filament, gltfio, filament-utils, androidx.graphics.path) allineano ogni segmento `PT_LOAD` a 0x4000, e l'APK le impacchetta non compresse e allineate a 16 KB
 - `targetSdk` 34 → 36 e `compileSdk` idem; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Da API 35 il sistema impone edge-to-edge, quindi l'app chiama `enableEdgeToEdge()` e riserva i margini `safeDrawing` nel layout radice invece di affidarsi ai colori della barra di stato
 - `tools/check_16k.py` più un controllo in CI: una build che fallisce una delle due verifiche, o che punta sotto 35, non viene più pubblicata
+- La vista 3D mostra le informazioni su fps, backend e bloom solo in modalità sviluppatore: gli utenti normali non vedono più quella riga
+- Il ripristino di un singolo obiettivo nell'area di test ora chiede conferma (si annulla dopo 4 s), così un tocco accidentale non cancella più il badge
+- La build debug usa un package id proprio (`com.ascent.climb.debug`) e può convivere con la versione release sullo stesso telefono
 
 **v0.23.3: la lezione sulle nuvole cresce**
 

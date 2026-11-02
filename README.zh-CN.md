@@ -229,6 +229,9 @@ python3 tools/i18ncheck.py
 - 16 KB 内存页：查过了，不用改。四个原生库（Filament、gltfio、filament-utils、androidx.graphics.path）的每个 `PT_LOAD` 段都已按 0x4000 对齐，APK 里也是未压缩 + 16 KB 对齐
 - `targetSdk` 34 → 36，`compileSdk` 同步；AGP 8.5.2 → 8.9.2，Gradle 8.9 → 8.11.1。API 35 起系统强制 edge-to-edge，所以改成显式 `enableEdgeToEdge()` + 根布局留出 `safeDrawing` 安全区，不再依赖状态栏配色属性
 - 新增 `tools/check_16k.py` 与 CI 校验：16 KB 不通过、或 targetSdk 低于 35，直接不发版
+- 3D 徽章展示页的帧率、后端、泛光档位只在开发者模式下显示，普通用户不会再看到那一行调试信息
+- 成就测试区的单项重置改为二次确认（4 秒内不确认自动撤回），误触不会再清掉徽章
+- debug 包改用独立包名（`com.ascent.climb.debug`），可以与正式版装在同一台手机上共存
 
 **v0.23.3：云图课补到 18 / 12 题**
 
