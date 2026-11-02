@@ -55,6 +55,21 @@ jobs:
           ls "$ANDROID_HOME/platforms" 2>/dev/null || echo "(no platforms dir)"
           ls "$ANDROID_HOME/build-tools" 2>/dev/null || echo "(no build-tools dir)"
 
+      - name: Accept Android licenses
+        run: |
+          SM=""
+          for c in "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+                   "$ANDROID_HOME/cmdline-tools/bin/sdkmanager" \
+                   "$ANDROID_HOME/tools/bin/sdkmanager"; do
+            [ -f "$c" ] && SM="$c" && break
+          done
+          if [ -n "$SM" ]; then
+            echo "sdkmanager: $SM"
+            yes 2>/dev/null | "$SM" --licenses >/dev/null 2>&1 || true
+          else
+            echo "sdkmanager not found; relying on pre-accepted licenses"
+          fi
+
       - name: Ensure SDK components
         run: |
           set -euo pipefail
@@ -79,21 +94,6 @@ jobs:
           fi
           ls "$ANDROID_HOME/platforms"
           ls "$ANDROID_HOME/build-tools"
-
-      - name: Accept Android licenses
-        run: |
-          SM=""
-          for c in "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
-                   "$ANDROID_HOME/cmdline-tools/bin/sdkmanager" \
-                   "$ANDROID_HOME/tools/bin/sdkmanager"; do
-            [ -f "$c" ] && SM="$c" && break
-          done
-          if [ -n "$SM" ]; then
-            echo "sdkmanager: $SM"
-            yes 2>/dev/null | "$SM" --licenses >/dev/null 2>&1 || true
-          else
-            echo "sdkmanager not found; relying on pre-accepted licenses"
-          fi
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
