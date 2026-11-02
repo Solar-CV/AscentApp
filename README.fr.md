@@ -145,8 +145,8 @@ Les leçons marquées comme nécessitant un formateur le disent clairement une f
 Toute la chaîne d’outils peut vivre dans le dossier personnel — sans Homebrew, sans Android Studio. Ce que cette machine utilise :
 
 - `~/android-toolchain/jdk` : Temurin OpenJDK 17
-- `~/android-toolchain/sdk` : Android SDK avec platforms;android-34, build-tools;34.0.0, platform-tools
-- `~/android-toolchain/gradle-8.9` : Gradle 8.9
+- `~/android-toolchain/sdk` : Android SDK avec platforms;android-36, build-tools;36.1.0, platform-tools
+- `~/android-toolchain/gradle-8.11.1` : Gradle 8.11.1
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -154,10 +154,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
 cd AscentApp
-"$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
+"$HOME/android-toolchain/gradle-8.11.1/bin/gradle" assembleDebug
 ```
 
-Le dépôt fournit aussi le wrapper Gradle 8.9, donc une machine sans Gradle fonctionne également :
+Le dépôt fournit aussi le wrapper Gradle 8.11.1, donc une machine sans Gradle fonctionne également :
 
 ```bash
 cd AscentApp
@@ -165,6 +165,8 @@ cd AscentApp
 ```
 
 Le résultat atterrit dans `app/build/outputs/apk/debug/app-debug.apk`.
+
+Pour Google Play, construisez l’App Bundle : `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. Un AAB ne s’installe pas directement sur un téléphone ; le chargement manuel passe toujours par l’APK.
 
 ## Structure du projet
 
@@ -220,6 +222,13 @@ Pour publier une nouvelle banque : modifier le contenu → incrémenter `BUNDLED
 Les anciennes versions de l’application ne cassent pas face à une banque plus récente. `minAppVersion` dans `manifest.json` bloque les clients trop anciens, les champs inconnus sont ignorés et une question mal formée est sautée plutôt que fatale.
 
 ## Changements récents
+
+**v0.24.0 : prêt pour Google Play**
+
+- Chaque Release contient désormais deux fichiers : l’APK pour l’installation manuelle et `ascent-<tag>-release.aab` pour Google Play
+- Pages mémoire de 16 Ko : vérifié, rien à changer. Les quatre bibliothèques natives (Filament, gltfio, filament-utils, androidx.graphics.path) alignent chaque segment `PT_LOAD` sur 0x4000, et l’APK les stocke non compressées et alignées sur 16 Ko
+- `targetSdk` 34 → 36, `compileSdk` également ; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Depuis l’API 35 le système impose edge-to-edge : l’application appelle donc `enableEdgeToEdge()` et réserve les marges `safeDrawing` à la racine, au lieu de compter sur les couleurs de barre d’état
+- `tools/check_16k.py` et un contrôle en CI : une compilation qui échoue à l’un des deux, ou qui cible moins de 35, n’est plus publiée
 
 **v0.23.3 : la leçon des nuages grandit**
 

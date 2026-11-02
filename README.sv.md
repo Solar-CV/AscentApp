@@ -145,8 +145,8 @@ Lektioner som kräver instruktör säger det uttryckligen när teorin är klar.
 Hela verktygskedjan kan ligga i hemkatalogen — ingen Homebrew, ingen Android Studio. Det här använder maskinen:
 
 - `~/android-toolchain/jdk`: Temurin OpenJDK 17
-- `~/android-toolchain/sdk`: Android SDK med platforms;android-34, build-tools;34.0.0, platform-tools
-- `~/android-toolchain/gradle-8.9`: Gradle 8.9
+- `~/android-toolchain/sdk`: Android SDK med platforms;android-36, build-tools;36.1.0, platform-tools
+- `~/android-toolchain/gradle-8.11.1`: Gradle 8.11.1
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -154,10 +154,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
 cd AscentApp
-"$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
+"$HOME/android-toolchain/gradle-8.11.1/bin/gradle" assembleDebug
 ```
 
-Repot innehåller också Gradle 8.9-wrappern, så en maskin utan Gradle fungerar också:
+Repot innehåller också Gradle 8.11.1-wrappern, så en maskin utan Gradle fungerar också:
 
 ```bash
 cd AscentApp
@@ -165,6 +165,8 @@ cd AscentApp
 ```
 
 Resultatet hamnar i `app/build/outputs/apk/debug/app-debug.apk`.
+
+För Google Play bygger du App Bundle: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. En AAB kan inte installeras direkt på telefonen; för sidoladdning gäller fortfarande APK.
 
 ## Projektstruktur
 
@@ -220,6 +222,13 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
 ## Senaste ändringar
+
+**v0.24.0: redo för Google Play**
+
+- Varje release innehåller nu två filer: APK för sidoladdning och `ascent-<tag>-release.aab` för Google Play
+- 16 KB-minnessidor: kontrollerat, inget behöver ändras. Alla fyra nativa bibliotek (Filament, gltfio, filament-utils, androidx.graphics.path) justerar varje `PT_LOAD`-segment till 0x4000, och APK:n lagrar dem okomprimerade och 16 KB-justerade
+- `targetSdk` 34 → 36, `compileSdk` likaså; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Från API 35 tvingar systemet edge-to-edge, så appen anropar `enableEdgeToEdge()` och reserverar `safeDrawing`-marginaler i rotlayouten i stället för att lita på statusfältets färgattribut
+- `tools/check_16k.py` plus en CI-kontroll: ett bygge som fallerar någon av dem, eller siktar under 35, publiceras inte längre
 
 **v0.23.3: molnlektionen växer**
 

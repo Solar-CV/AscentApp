@@ -145,8 +145,8 @@ Lektionen, die eine Begleitung erfordern, sagen das ausdrücklich, sobald die Th
 Die ganze Toolchain kann im Home-Verzeichnis liegen — kein Homebrew, kein Android Studio. Was diese Maschine nutzt:
 
 - `~/android-toolchain/jdk`: Temurin OpenJDK 17
-- `~/android-toolchain/sdk`: Android SDK mit platforms;android-34, build-tools;34.0.0, platform-tools
-- `~/android-toolchain/gradle-8.9`: Gradle 8.9
+- `~/android-toolchain/sdk`: Android SDK mit platforms;android-36, build-tools;36.1.0, platform-tools
+- `~/android-toolchain/gradle-8.11.1`: Gradle 8.11.1
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -154,7 +154,7 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
 cd AscentApp
-"$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
+"$HOME/android-toolchain/gradle-8.11.1/bin/gradle" assembleDebug
 ```
 
 Das Repository bringt außerdem den Gradle-8.9-Wrapper mit, ein Rechner ohne Gradle funktioniert also auch:
@@ -165,6 +165,8 @@ cd AscentApp
 ```
 
 Das Ergebnis liegt in `app/build/outputs/apk/debug/app-debug.apk`.
+
+Für Google Play das App Bundle bauen: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. Ein AAB lässt sich nicht direkt auf ein Telefon installieren; zum Sideloading dient weiterhin das APK.
 
 ## Projektaufbau
 
@@ -220,6 +222,13 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 Ältere App-Versionen gehen an einem neueren Pool nicht kaputt. `minAppVersion` in `manifest.json` blockt zu alte Clients, unbekannte Felder werden ignoriert, eine fehlerhafte Frage wird übersprungen statt tödlich zu sein.
 
 ## Letzte Änderungen
+
+**v0.24.0: bereit für Google Play**
+
+- Jedes Release hat jetzt zwei Anhänge: das APK zum Sideloaden und `ascent-<tag>-release.aab` für Google Play
+- 16 KB-Speicherseiten: geprüft, keine Änderung nötig. Alle vier nativen Bibliotheken (Filament, gltfio, filament-utils, androidx.graphics.path) richten jedes `PT_LOAD`-Segment auf 0x4000 aus, und das APK speichert sie unkomprimiert und 16 KB ausgerichtet
+- `targetSdk` 34 → 36, `compileSdk` ebenso; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Ab API 35 erzwingt das System edge-to-edge, deshalb ruft die App jetzt `enableEdgeToEdge()` auf und reserviert im Wurzel-Layout `safeDrawing`-Abstände, statt sich auf die alten Statusleisten-Farben zu verlassen
+- `tools/check_16k.py` plus eine CI-Prüfung: ein Build, der eine der Prüfungen nicht besteht oder unter 35 zielt, wird nicht mehr veröffentlicht
 
 **v0.23.3: die Wolkenlektion wächst**
 

@@ -145,8 +145,8 @@ Lessons marked as needing an instructor say so explicitly once the theory is don
 The whole toolchain can live in your home directory — no Homebrew, no Android Studio. What this machine uses:
 
 - `~/android-toolchain/jdk`: Temurin OpenJDK 17
-- `~/android-toolchain/sdk`: Android SDK with platforms;android-34, build-tools;34.0.0, platform-tools
-- `~/android-toolchain/gradle-8.9`: Gradle 8.9
+- `~/android-toolchain/sdk`: Android SDK with platforms;android-36, build-tools;36.1.0, platform-tools
+- `~/android-toolchain/gradle-8.11.1`: Gradle 8.11.1
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -154,10 +154,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
 cd AscentApp
-"$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
+"$HOME/android-toolchain/gradle-8.11.1/bin/gradle" assembleDebug
 ```
 
-The repo also ships the Gradle 8.9 wrapper, so a machine without Gradle works too:
+The repo also ships the Gradle 8.11.1 wrapper, so a machine without Gradle works too:
 
 ```bash
 cd AscentApp
@@ -165,6 +165,8 @@ cd AscentApp
 ```
 
 Output lands in `app/build/outputs/apk/debug/app-debug.apk`.
+
+For Google Play, build the App Bundle instead: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. An AAB cannot be installed on a phone; side-loading still uses the APK.
 
 ## Project layout
 
@@ -220,6 +222,13 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+**v0.24.0: Play-ready builds**
+
+- Each Release now ships two files: the APK for side-loading and `ascent-<tag>-release.aab` for Google Play
+- 16 KB memory pages: checked, nothing to change. All four native libraries (Filament, gltfio, filament-utils, androidx.graphics.path) already align every `PT_LOAD` segment to 0x4000, and the APK stores them uncompressed and 16 KB aligned
+- `targetSdk` 34 → 36, `compileSdk` likewise; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. API 35 forces edge-to-edge, so the app now calls `enableEdgeToEdge()` and reserves `safeDrawing` insets in the root layout instead of relying on the old status-bar colour attributes
+- `tools/check_16k.py` plus a CI gate: a build that fails either check, or targets below 35, no longer reaches a release
 
 **v0.23.3: the cloud lesson grows up**
 

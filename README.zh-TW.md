@@ -145,8 +145,8 @@ SEVEN SUMMIT TREKS 的三份嚮導資料是另一條主線：高原病、裝備�
 工具鏈可以全部裝在使用者目錄，不需要 Homebrew 或 Android Studio。本機現在用的是：
 
 - `~/android-toolchain/jdk`：Temurin OpenJDK 17
-- `~/android-toolchain/sdk`：Android SDK，platforms;android-34、build-tools;34.0.0、platform-tools
-- `~/android-toolchain/gradle-8.9`：Gradle 8.9
+- `~/android-toolchain/sdk`：Android SDK，platforms;android-36、build-tools;36.1.0、platform-tools
+- `~/android-toolchain/gradle-8.11.1`：Gradle 8.11.1
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -154,7 +154,7 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
 cd AscentApp
-"$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
+"$HOME/android-toolchain/gradle-8.11.1/bin/gradle" assembleDebug
 ```
 
 倉庫裡也帶了 Gradle Wrapper 8.9，本機沒裝 Gradle 也能直接用：
@@ -165,6 +165,8 @@ cd AscentApp
 ```
 
 產物在 `app/build/outputs/apk/debug/app-debug.apk`。
+
+要傳 Google Play 就建置 App Bundle：`./gradlew bundleRelease`，產物在 `app/build/outputs/bundle/release/app-release.aab`。AAB 不能直接裝到手機，側載仍然用 APK。
 
 ## 專案結構
 
@@ -220,6 +222,13 @@ python3 tools/i18ncheck.py
 舊版 App 不會被新題庫搞崩。`manifest.json` 裡的 `minAppVersion` 會攔住版本不夠的客戶端，未知欄位直接忽略，單條題目格式錯誤只跳過那一條。
 
 ## 最近改了什麼
+
+**v0.24.0：為上架 Play 做準備**
+
+- 每個 Release 現在附兩個檔案：側載用的 APK，和傳 Google Play 用的 `ascent-<tag>-release.aab`
+- 16 KB 記憶體頁：查過了，不用改。四個原生庫（Filament、gltfio、filament-utils、androidx.graphics.path）的每個 `PT_LOAD` 段都已按 0x4000 對齊，APK 裡也是未壓縮 + 16 KB 對齊
+- `targetSdk` 34 → 36，`compileSdk` 同步；AGP 8.5.2 → 8.9.2，Gradle 8.9 → 8.11.1。API 35 起系統強制 edge-to-edge，所以改成顯式 `enableEdgeToEdge()` + 根佈局留出 `safeDrawing` 安全區，不再依賴狀態列配色屬性
+- 新增 `tools/check_16k.py` 與 CI 校驗：16 KB 不通過、或 targetSdk 低於 35，直接不發版
 
 **v0.23.3：雲圖課補到 18 / 12 題**
 

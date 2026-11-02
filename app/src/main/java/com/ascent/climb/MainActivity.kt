@@ -9,6 +9,10 @@ import android.os.LocaleList
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -70,6 +74,11 @@ class MainActivity : ComponentActivity() {
         // 这里立刻换回正常主题，之后的窗口/状态栏颜色与以前一致。
         setTheme(R.style.Theme_Ascent)
 
+        // targetSdk 35+ 起系统强制 edge-to-edge，`android:statusBarColor` 那套全部失效。
+        // 与其让老系统和新系统走两条不同的布局路径，不如统一显式开启，
+        // 再由根布局按 `safeDrawing` 留出系统栏高度（否则顶部「3,200 M」会被状态栏压住）。
+        enableEdgeToEdge()
+
         // 题库必须在 setContent 之前完成载入：缓存副本 → 内置题库
         BankRepository.init(applicationContext)
 
@@ -126,19 +135,27 @@ class MainActivity : ComponentActivity() {
                         act.window.navigationBarColor = bar
                     }
                     Box(Modifier.fillMaxSize()) {
-                        AscentRoot(
-                            store = store,
-                            themeMode = themeMode,
-                            onThemeModeChange = {
-                                store.themeMode = it
-                                themeMode = it
-                            },
-                            languageMode = languageMode,
-                            onLanguageModeChange = {
-                                store.languageMode = it
-                                languageMode = it
-                            }
-                        )
+                        // 底色铺满整屏（含状态栏与导航栏区域），内容另外留出安全区
+                        Box(Modifier.fillMaxSize().background(Ascent.Bg))
+                        Box(
+                            Modifier
+                                .fillMaxSize()
+                                .windowInsetsPadding(WindowInsets.safeDrawing)
+                        ) {
+                            AscentRoot(
+                                store = store,
+                                themeMode = themeMode,
+                                onThemeModeChange = {
+                                    store.themeMode = it
+                                    themeMode = it
+                                },
+                                languageMode = languageMode,
+                                onLanguageModeChange = {
+                                    store.languageMode = it
+                                    languageMode = it
+                                }
+                            )
+                        }
                         if (!splashDone) {
                             ClaySplashOverlay(dark = dark) { splashDone = true }
                         }

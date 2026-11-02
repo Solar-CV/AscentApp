@@ -145,8 +145,8 @@ Android-приложение для тех, кто начинает занима
 Весь инструментарий может жить в домашнем каталоге — без Homebrew и Android Studio. Вот что использует эта машина:
 
 - `~/android-toolchain/jdk`: Temurin OpenJDK 17
-- `~/android-toolchain/sdk`: Android SDK с platforms;android-34, build-tools;34.0.0, platform-tools
-- `~/android-toolchain/gradle-8.9`: Gradle 8.9
+- `~/android-toolchain/sdk`: Android SDK с platforms;android-36, build-tools;36.1.0, platform-tools
+- `~/android-toolchain/gradle-8.11.1`: Gradle 8.11.1
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -154,10 +154,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
 cd AscentApp
-"$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
+"$HOME/android-toolchain/gradle-8.11.1/bin/gradle" assembleDebug
 ```
 
-В репозитории есть и wrapper Gradle 8.9, поэтому машина без Gradle тоже подойдёт:
+В репозитории есть и wrapper Gradle 8.11.1, поэтому машина без Gradle тоже подойдёт:
 
 ```bash
 cd AscentApp
@@ -165,6 +165,8 @@ cd AscentApp
 ```
 
 Результат появляется в `app/build/outputs/apk/debug/app-debug.apk`.
+
+Для Google Play собирается App Bundle: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. AAB нельзя установить на телефон напрямую — для ручной установки остаётся APK.
 
 ## Структура проекта
 
@@ -220,6 +222,13 @@ python3 tools/i18ncheck.py
 Старые версии приложения не ломаются от нового банка. `minAppVersion` в `manifest.json` блокирует слишком старые клиенты, неизвестные поля игнорируются, а некорректный вопрос пропускается, а не роняет всё.
 
 ## Последние изменения
+
+**v0.24.0: готово к Google Play**
+
+- В каждом релизе теперь два файла: APK для ручной установки и `ascent-<tag>-release.aab` для Google Play
+- Страницы памяти 16 КБ: проверено, менять ничего не нужно. Все четыре нативные библиотеки (Filament, gltfio, filament-utils, androidx.graphics.path) выравнивают каждый сегмент `PT_LOAD` по 0x4000, а APK хранит их без сжатия и с выравниванием 16 КБ
+- `targetSdk` 34 → 36, `compileSdk` тоже; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Начиная с API 35 система принудительно включает edge-to-edge, поэтому приложение вызывает `enableEdgeToEdge()` и резервирует отступы `safeDrawing` в корневом макете вместо старых атрибутов цвета статус-бара
+- `tools/check_16k.py` и проверка в CI: сборка, не прошедшая любую из них или нацеленная ниже 35, больше не публикуется
 
 **v0.23.3: урок про облака вырос**
 

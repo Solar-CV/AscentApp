@@ -145,8 +145,8 @@ Le lezioni segnate come «serve un istruttore» lo dicono apertamente una volta 
 L'intera toolchain può stare nella cartella personale — niente Homebrew, niente Android Studio. Quello che usa questa macchina:
 
 - `~/android-toolchain/jdk`: Temurin OpenJDK 17
-- `~/android-toolchain/sdk`: Android SDK con platforms;android-34, build-tools;34.0.0, platform-tools
-- `~/android-toolchain/gradle-8.9`: Gradle 8.9
+- `~/android-toolchain/sdk`: Android SDK con platforms;android-36, build-tools;36.1.0, platform-tools
+- `~/android-toolchain/gradle-8.11.1`: Gradle 8.11.1
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -154,10 +154,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
 cd AscentApp
-"$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
+"$HOME/android-toolchain/gradle-8.11.1/bin/gradle" assembleDebug
 ```
 
-Il repository include anche il wrapper di Gradle 8.9, quindi una macchina senza Gradle funziona lo stesso:
+Il repository include anche il wrapper di Gradle 8.11.1, quindi una macchina senza Gradle funziona lo stesso:
 
 ```bash
 cd AscentApp
@@ -165,6 +165,8 @@ cd AscentApp
 ```
 
 Il risultato finisce in `app/build/outputs/apk/debug/app-debug.apk`.
+
+Per Google Play si compila l'App Bundle: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. Un AAB non si installa direttamente sul telefono; per il sideload resta l'APK.
 
 ## Struttura del progetto
 
@@ -220,6 +222,13 @@ Per pubblicare un questionario nuovo: cambia i contenuti → alza `BUNDLED_VERSI
 Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `minAppVersion` in `manifest.json` blocca i client troppo vecchi, i campi sconosciuti vengono ignorati e una domanda malformata viene saltata invece che essere fatale.
 
 ## Cambi recenti
+
+**v0.24.0: pronto per Google Play**
+
+- Ogni Release contiene ora due file: l'APK per l'installazione manuale e `ascent-<tag>-release.aab` per Google Play
+- Pagine di memoria da 16 KB: verificato, non serve cambiare nulla. Le quattro librerie native (Filament, gltfio, filament-utils, androidx.graphics.path) allineano ogni segmento `PT_LOAD` a 0x4000, e l'APK le impacchetta non compresse e allineate a 16 KB
+- `targetSdk` 34 → 36 e `compileSdk` idem; AGP 8.5.2 → 8.9.2, Gradle 8.9 → 8.11.1. Da API 35 il sistema impone edge-to-edge, quindi l'app chiama `enableEdgeToEdge()` e riserva i margini `safeDrawing` nel layout radice invece di affidarsi ai colori della barra di stato
+- `tools/check_16k.py` più un controllo in CI: una build che fallisce una delle due verifiche, o che punta sotto 35, non viene più pubblicata
 
 **v0.23.3: la lezione sulle nuvole cresce**
 

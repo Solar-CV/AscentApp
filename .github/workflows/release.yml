@@ -1,4 +1,4 @@
-name: Build & Release APK
+name: Build & Release APK + AAB
 
 # 推送 v* 标签即自动构建并发布 Release。
 # 配置了签名 secrets 就出 release 包（R8 + 正式签名），没有则回退 debug 包并在日志里警告。
@@ -9,8 +9,13 @@ name: Build & Release APK
 #   KEYSTORE_PASSWORD   keystore 口令（PKCS12 里 key 口令与库口令相同）
 # 没有这两个 secret 时流水线不会失败，只是产 debug 包。
 #
-# Android SDK 使用 GitHub-hosted runner 镜像自带的（/usr/local/lib/android/sdk），
-# 不额外安装：镜像已含 platforms;android-34 与 build-tools;34.0.0。
+# Android SDK 用 GitHub-hosted runner 镜像自带的（/usr/local/lib/android/sdk）。
+# 镜像不一定带我们要的版本，所以有一道「缺什么装什么」：compileSdk 36 需要
+# platforms;android-36；16 KB 对齐校验需要 build-tools 35+（zipalign 的 -P 参数）。
+#
+# 产物两份：
+#   ascent-<tag>-release.apk  侧载用（GitHub Release 附件）
+#   ascent-<tag>-release.aab  Google Play 上传用（AAB 不能直接安装）
 on:
   push:
     tags:
@@ -28,7 +33,7 @@ env:
 
 jobs:
   release:
-    name: Build APK and publish release
+    name: Build APK + AAB and publish release
     runs-on: ubuntu-latest
 
     steps:
@@ -49,6 +54,31 @@ jobs:
           echo "ANDROID_HOME=$ANDROID_HOME"
           ls "$ANDROID_HOME/platforms" 2>/dev/null || echo "(no platforms dir)"
           ls "$ANDROID_HOME/build-tools" 2>/dev/null || echo "(no build-tools dir)"
+
+      - name: Ensure SDK components
+        run: |
+          set -euo pipefail
+          SM=""
+          for c in "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+                   "$ANDROID_HOME/cmdline-tools/bin/sdkmanager" \
+                   "$ANDROID_HOME/tools/bin/sdkmanager"; do
+            [ -f "$c" ] && SM="$c" && break
+          done
+          need=()
+          [ -d "$ANDROID_HOME/platforms/android-36" ] || need+=("platforms;android-36")
+          # zipalign 的 -P（16 KB 对齐）是 build-tools 35 才有的
+          ls "$ANDROID_HOME/build-tools" 2>/dev/null | grep -qE '^(3[5-9]|[4-9][0-9])\.' \
+            || need+=("build-tools;36.1.0")
+          if [ ${#need[@]} -gt 0 ]; then
+            if [ -z "$SM" ]; then
+              echo "::error::缺 SDK 组件但找不到 sdkmanager：${need[*]}"
+              exit 1
+            fi
+            echo "安装：${need[*]}"
+            yes 2>/dev/null | "$SM" --install "${need[@]}"
+          fi
+          ls "$ANDROID_HOME/platforms"
+          ls "$ANDROID_HOME/build-tools"
 
       - name: Accept Android licenses
         run: |
@@ -96,10 +126,12 @@ jobs:
             echo "::warning::未配置 KEYSTORE_BASE64 / KEYSTORE_PASSWORD，本次回退为 debug 构建"
           fi
 
-      - name: Assemble APK
+      # Google Play 只收 AAB，所以 release 变体两个一起出：
+      # AAB 给商店，APK 继续挂在 Release 上方便直接侧载。
+      - name: Build APK and AAB
         run: |
           if [ "${{ steps.signing.outputs.variant }}" = "release" ]; then
-            ./gradlew assembleRelease --stacktrace
+            ./gradlew assembleRelease bundleRelease --stacktrace
           else
             ./gradlew assembleDebug --stacktrace
           fi
@@ -116,6 +148,10 @@ jobs:
           fi
           OUT="out/ascent-${GITHUB_REF_NAME}-${V}.apk"
           cp "$SRC" "$OUT"
+          if [ "$V" = "release" ]; then
+            cp app/build/outputs/bundle/release/app-release.aab \
+               "out/ascent-${GITHUB_REF_NAME}-release.aab"
+          fi
           ls -lh out
 
       # 签名必须可验证。release 包若指纹对不上（解错密钥、落到 debug 签名），
@@ -124,7 +160,8 @@ jobs:
         if: steps.signing.outputs.variant == 'release'
         run: |
           set -euo pipefail
-          APKSIGNER="$ANDROID_HOME/build-tools/34.0.0/apksigner"
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          APKSIGNER="$BT/apksigner"
           APK="out/ascent-${GITHUB_REF_NAME}-release.apk"
           "$APKSIGNER" verify --print-certs "$APK"
           # 期望的证书 SHA-256（2026-10-30 生成的 ascent-release.jks）
@@ -135,6 +172,32 @@ jobs:
             exit 1
           fi
           echo "签名指纹校验通过：$ACTUAL"
+
+      # Play 上架的两条硬要求，放在发版前而不是被商店退回之后再补：
+      #   1. targetSdk 必须足够新（2026-08-31 起新应用与更新要求 API 36）
+      #   2. 64 位原生库要能跑在 16 KB 页设备上（2027-02-01 起不兼容的更新无法发布）
+      # 第二条同时查 ELF 的 p_align 和 APK 里的未压缩对齐，Filament / gltfio 是主要风险点。
+      - name: Verify Play compliance (targetSdk, 16 KB pages)
+        if: steps.signing.outputs.variant == 'release'
+        run: |
+          set -euo pipefail
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          APK="out/ascent-${GITHUB_REF_NAME}-release.apk"
+          AAB="out/ascent-${GITHUB_REF_NAME}-release.aab"
+
+          echo "--- badging ---"
+          "$BT/aapt2" dump badging "$APK" | grep -E "^(package|sdkVersion|targetSdkVersion)" || true
+
+          TARGET=$("$BT/aapt2" dump badging "$APK" | sed -n "s/^targetSdkVersion:'\\([0-9]*\\)'.*/\\1/p" | head -1)
+          echo "targetSdk=$TARGET"
+          if [ "${TARGET:-0}" -lt 35 ]; then
+            echo "::error::targetSdk $TARGET 低于 35，Play 会拒收（2026-08-31 起要求 36）"
+            exit 1
+          fi
+
+          echo "--- 16 KB page compatibility ---"
+          python3 tools/check_16k.py "$APK" "$AAB"
+          "$BT/zipalign" -c -P 16 -v 4 "$APK" | tail -5
 
       # Release 正文：只发当前 tag 的章节 + 此前未单独发版的旧版本要点，
       # 不再把整份 RELEASE_NOTES.md 贴上去（否则历史章节每版重复累积）。
@@ -155,7 +218,9 @@ jobs:
           name: ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
           body_path: out/release_body.md
-          files: out/ascent-*.apk
+          files: |
+            out/ascent-*.apk
+            out/ascent-*.aab
           draft: false
           prerelease: false
         env:
@@ -167,7 +232,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ascent-apk
-          path: out/ascent-*.apk
+          path: |
+            out/ascent-*.apk
+            out/ascent-*.aab
           retention-days: 7
 
       - name: Remove keystore

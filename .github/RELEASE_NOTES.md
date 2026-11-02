@@ -8,6 +8,46 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ---
 
+## v0.24.0 要点
+
+这一版没有新功能，全部是为了能上 Google Play：换 AAB 产物、核 16 KB 页兼容、把 targetSdk 从 34 提到 36。
+
+### 附件多了 AAB
+
+Play 只收 App Bundle，所以每个 Release 现在附两个文件：
+
+- `ascent-<tag>-release.apk` —— 侧载用，签名与之前一致
+- `ascent-<tag>-release.aab` —— 传 Play 用；AAB 不能直接装到手机上
+
+两者同一次构建产出，内容等价。
+
+### 16 KB 内存页：查完是「本来就合规」
+
+Android 15 起 64 位设备可以用 16 KB 内存页，跑不起来的应用会被逐步挡在 Play 外面。
+Filament / gltfio 是最大的不确定项，实测结论是**不用改**：
+
+- 四个原生库的每个 `PT_LOAD` 段都按 16 KB 对齐（`p_align = 0x4000`），这是链接期定死的
+- APK 里 `.so` 未压缩、数据偏移 16 KB 对齐，`zipalign -c -P 16` 通过
+
+顺手加了 `tools/check_16k.py` 与 CI 步骤，以后再动依赖或打包配置，会在发版前就红掉，而不是等商店退回。
+
+### targetSdk 34 → 36
+
+升这个值真正的代价不是编译，而是 **API 35 起系统强制 edge-to-edge**：状态栏 / 导航栏颜色那套属性全部失效，
+原来没有任何 insets 处理的界面会被系统栏压住。改法是统一走一条路——显式 `enableEdgeToEdge()`，
+根布局底层铺满底色、上层留出 `safeDrawing` 安全区，老系统与 35+ 行为一致。
+
+工具链也随之升级：AGP 8.5.2 → 8.9.2、Gradle 8.9 → 8.11.1、SDK 34 → 36。
+
+### 流水线
+
+- 缺什么 SDK 组件就装什么（runner 镜像不一定带 API 36）
+- release 变体同时构建 APK 与 AAB
+- 发版前跑一道合规检查：targetSdk 低于 35 直接失败、16 KB 页跑 `check_16k.py` + `zipalign -c -P 16`
+- `apksigner` 不再写死 build-tools 版本
+
+---
+
 ## v0.23.3 要点
 
 这一版跨了三件事：训练页从两条练到四条、首次安装有了引导、云图课从零做到 31 张图 30 道题。

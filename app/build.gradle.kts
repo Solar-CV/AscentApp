@@ -36,14 +36,14 @@ if (!hasReleaseKey) {
 
 android {
     namespace = "com.ascent.climb"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.ascent.climb"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 138
-        versionName = "0.23.3"
+        targetSdk = 36
+        versionCode = 139
+        versionName = "0.24.0"
         // 支持 10 种语言：简中（values 默认）+ 繁中 + 英日俄法瑞德西意。
         // 只打包这里列出的语言资源，避免把依赖库的其余语言一起带进来。
         resourceConfigurations += listOf(
@@ -104,6 +104,13 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+        // 16 KB 页兼容：`useLegacyPackaging = true`（旧默认）会按 4 KB 对齐 .so，
+        // 在 16 KB 页设备上 dlopen 直接失败。显式关掉，让 AGP 走未压缩 + 16 KB 对齐
+        // 的打包路径；Filament / gltfio 的 ELF 本身已经是 p_align=0x4000（链接期定死，
+        // 打包期改不了），所以只差这一步。用 `tools/check_16k.py` 回归。
+        jniLibs {
+            useLegacyPackaging = false
+        }
     }
 }
 
@@ -118,9 +125,10 @@ dependencies {
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material3:material3")
 
-    // 3D 徽章 POC：Filament（渲染）+ gltfio（glb 加载）+ utils（KTX 环境光加载）
-    // 锁 1.75.0：1.76.0 起 AAR 声明 minCompileSdk=37，本工程 compileSdk 34 + AGP 8.5.2 装不下。
-    // 要升级 Filament 必须同时升 compileSdk/AGP，属于独立议题，不在 POC 范围内。
+    // 3D 徽章：Filament（渲染）+ gltfio（glb 加载）+ utils（KTX 环境光加载）
+    // 锁 1.75.0：1.76.0 起 AAR 声明 minCompileSdk=37，本工程 compileSdk 36 仍差一档
+    //（要上 1.76 得先升到 API 37 + AGP 8.13+）。1.75.0 的四个 .so 已经是 16 KB 页对齐
+    //（p_align=0x4000，见 tools/check_16k.py），所以这条依赖不阻塞 Play 的 16 KB 要求。
     val filament = "1.75.0"
     implementation("com.google.android.filament:filament-android:$filament")
     implementation("com.google.android.filament:gltfio-android:$filament")

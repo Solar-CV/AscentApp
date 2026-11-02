@@ -145,8 +145,8 @@ UI の文言とコース内容は次の言語で提供しています。
 ツールチェーンはすべてホームディレクトリに置けます。Homebrew も Android Studio も不要です。この環境で使っているのは次の通りです。
 
 - `~/android-toolchain/jdk`：Temurin OpenJDK 17
-- `~/android-toolchain/sdk`：Android SDK（platforms;android-34、build-tools;34.0.0、platform-tools）
-- `~/android-toolchain/gradle-8.9`：Gradle 8.9
+- `~/android-toolchain/sdk`：Android SDK（platforms;android-36、build-tools;36.1.0、platform-tools）
+- `~/android-toolchain/gradle-8.11.1`：Gradle 8.11.1
 
 ```bash
 export JAVA_HOME="$HOME/android-toolchain/jdk/Contents/Home"
@@ -154,10 +154,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME="$HOME/android-toolchain/sdk"
 
 cd AscentApp
-"$HOME/android-toolchain/gradle-8.9/bin/gradle" assembleDebug
+"$HOME/android-toolchain/gradle-8.11.1/bin/gradle" assembleDebug
 ```
 
-Gradle 8.9 のラッパーも同梱しているので、Gradle の入っていない環境でも大丈夫です。
+Gradle 8.11.1 のラッパーも同梱しているので、Gradle の入っていない環境でも大丈夫です。
 
 ```bash
 cd AscentApp
@@ -165,6 +165,8 @@ cd AscentApp
 ```
 
 成果物は `app/build/outputs/apk/debug/app-debug.apk` に出ます。
+
+Google Play に出す場合は App Bundle を作ります：`./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`。AAB は端末に直接インストールできないので、側載は APK のままです。
 
 ## プロジェクト構成
 
@@ -220,6 +222,13 @@ python3 tools/i18ncheck.py
 古いアプリが新しい問題集で壊れることはありません。`manifest.json` の `minAppVersion` が古すぎるクライアントを止め、未知のフィールドは無視され、壊れた問題はその 1 問だけ飛ばします。
 
 ## 最近の変更
+
+**v0.24.0：Play 公開に備える**
+
+- Release の添付が二つになりました。サイドロード用の APK と、Google Play に上げる `ascent-<tag>-release.aab` です
+- 16 KB メモリページ：調べた結果、変更不要。四つのネイティブライブラリ（Filament、gltfio、filament-utils、androidx.graphics.path）はいずれも各 `PT_LOAD` セグメントが 0x4000 で整列しており、APK 内でも非圧縮かつ 16 KB 整列です
+- `targetSdk` 34 → 36、`compileSdk` も同じく。AGP 8.5.2 → 8.9.2、Gradle 8.9 → 8.11.1。API 35 からシステムが edge-to-edge を強制するため、`enableEdgeToEdge()` を明示し、ルートで `safeDrawing` の余白を確保する形に変えました（ステータスバーの色指定はもう効きません）
+- `tools/check_16k.py` と CI の検査を追加。16 KB 非対応、または targetSdk が 35 未満ならリリースしません
 
 **v0.23.3：雲の課を 18 / 12 問に増強**
 
