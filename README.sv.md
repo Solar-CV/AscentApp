@@ -6,7 +6,7 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 69 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 22 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.23.3 (versionCode 138). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 757 / 10 757). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.23.3 (versionCode 138). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 727 / 10 727). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
 
@@ -68,14 +68,14 @@ Gränssnittstexter och kursinnehåll finns på:
 
 简体中文 (källa), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Alla tio språk är kompletta. Varje språk har sitt eget ingångslager, lektionssammanfattningar, handbokstext och frågebank, och varje nyckeluppsättning matchar engelskan post för post — **10 757 / 10 757**, inget saknas, inget dubbelt, inga föräldralösa nycklar.
+Alla tio språk är kompletta. Varje språk har sitt eget ingångslager, lektionssammanfattningar, handbokstext och frågebank, och varje nyckeluppsättning matchar engelskan post för post — **10 727 / 10 727**, inget saknas, inget dubbelt, inga föräldralösa nycklar.
 
 | Lager | Poster | Alla 9 översatta språk |
 |---|---|---|
-| Ingång (lektioner, enheter, handboksrubriker, toppar) | 117 | 100 % |
-| Lektionernas huvudpunkter | 443 | 100 % |
+| Ingång (lektioner, enheter, handboksrubriker, toppar) | 296 | 100 % |
+| Lektionernas huvudpunkter | 451 | 100 % |
 | Handbokstext | 378 | 100 % |
-| Frågebank (fråga, alternativ, förklaring) | 9 422 | 100 % |
+| Frågebank (fråga, alternativ, förklaring) | 9 602 | 100 % |
 
 Terminologin följer varje språks eget bergsbruk i stället för ordagrann översättning: svenska stegjärn / isyxa / standplats, tyska Steigeisen / Pickel, ryska кошки / ледоруб, italienska corda fissa / bloccante / sosta. Medicinska doser, lavinnivåer, sluttningar och temperaturer förs över oförändrade — bara sifferformatet anpassas, och de tre konventionerna hålls medvetet åtskilda:
 

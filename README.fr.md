@@ -6,7 +6,7 @@ Une application Android pour celles et ceux qui débutent en alpinisme d’altit
 
 Deux parcours se changent librement. La **haute montagne** compte six unités et 69 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 22 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.23.3 (versionCode 138). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 757 / 10 757). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo ; la version release fait environ 30 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+Version actuelle v0.23.3 (versionCode 138). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 727 / 10 727). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo ; la version release fait environ 30 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
 
 Les v0.20.19 – v0.21.0 ont habillé toute l’interface en argile : ombres doubles douces dessinées hors écran et mises en cache, pastilles de couleur mates, couleurs par catégorie dans le manuel, et blocs de couleur dont le relief vient d’une ombre de contact plutôt que d’un dégradé.
 
@@ -68,14 +68,14 @@ Les textes d’interface et le contenu des cours sont disponibles en :
 
 简体中文 (source), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Les dix langues sont complètes. Chacune a sa couche d’entrée, ses résumés de leçon, le corps du manuel et une banque de questions, et chaque jeu de clés correspond à l’anglais entrée par entrée — **10 757 / 10 757**, rien ne manque, rien n’est dupliqué, aucune clé orpheline.
+Les dix langues sont complètes. Chacune a sa couche d’entrée, ses résumés de leçon, le corps du manuel et une banque de questions, et chaque jeu de clés correspond à l’anglais entrée par entrée — **10 727 / 10 727**, rien ne manque, rien n’est dupliqué, aucune clé orpheline.
 
 | Couche | Éléments | Les 9 langues traduites |
 |---|---|---|
-| Entrée (leçons, unités, titres du manuel, sommets) | 117 | 100 % |
-| Points clés des leçons | 443 | 100 % |
+| Entrée (leçons, unités, titres du manuel, sommets) | 296 | 100 % |
+| Points clés des leçons | 451 | 100 % |
 | Corps du manuel | 378 | 100 % |
-| Banque de questions (énoncé, options, explication) | 9 422 | 100 % |
+| Banque de questions (énoncé, options, explication) | 9 602 | 100 % |
 
 La terminologie suit l’usage montagnard de chaque langue plutôt qu’une traduction littérale : suédois stegjärn / isyxa / standplats, allemand Steigeisen / Pickel, russe кошки / ледоруб, italien corda fissa / bloccante / sosta. Les doses médicales, les niveaux d’avalanche, les pentes et les températures sont transposés tels quels — seul le format des nombres s’adapte, et les trois conventions restent volontairement séparées :
 

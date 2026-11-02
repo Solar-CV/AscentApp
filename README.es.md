@@ -6,7 +6,7 @@ Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. 
 
 Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 69 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 22 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
 
-Versión actual v0.23.3 (versionCode 138). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.757 / 10.757). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
+Versión actual v0.23.3 (versionCode 138). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.727 / 10.727). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
 
 v0.20.19 – v0.21.0 renovaron toda la interfaz con acabado de arcilla: sombras dobles suaves dibujadas fuera de pantalla y cacheadas, fichas de color planas, colores por categoría en el manual y bloques de color cuya profundidad viene de una sombra de contacto, no de un degradado.
 
@@ -68,14 +68,14 @@ Los textos de interfaz y el contenido del curso están en:
 
 简体中文 (origen), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Las diez lenguas están completas. Cada una tiene su capa de entrada, los resúmenes de lección, el cuerpo del manual y el banco de preguntas, y su conjunto de claves coincide con el inglés entrada por entrada — **10.757 / 10.757**, sin faltar, sin duplicar y sin claves huérfanas.
+Las diez lenguas están completas. Cada una tiene su capa de entrada, los resúmenes de lección, el cuerpo del manual y el banco de preguntas, y su conjunto de claves coincide con el inglés entrada por entrada — **10.727 / 10.727**, sin faltar, sin duplicar y sin claves huérfanas.
 
 | Capa | Elementos | Las 9 lenguas traducidas |
 |---|---|---|
-| Entrada (lecciones, unidades, títulos del manual, picos) | 117 | 100 % |
-| Puntos clave de las lecciones | 443 | 100 % |
+| Entrada (lecciones, unidades, títulos del manual, picos) | 296 | 100 % |
+| Puntos clave de las lecciones | 451 | 100 % |
 | Cuerpo del manual | 378 | 100 % |
-| Banco de preguntas (enunciado, opciones, explicación) | 9.422 | 100 % |
+| Banco de preguntas (enunciado, opciones, explicación) | 9.602 | 100 % |
 
 La terminología sigue el uso montañero de cada lengua en vez de traducir literalmente: sueco stegjärn / isyxa / standplats, alemán Steigeisen / Pickel, ruso кошки / ледоруб, italiano corda fissa / bloccante / sosta. Las dosis médicas, los niveles de alud, las pendientes y las temperaturas se trasladan sin cambios — solo se adapta el formato numérico, y las tres convenciones se mantienen separadas a propósito:
 

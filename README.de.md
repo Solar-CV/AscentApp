@@ -6,7 +6,7 @@ Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist
 
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 69 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 22 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.23.3 (versionCode 138). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.757 / 10.757). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.23.3 (versionCode 138). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.727 / 10.727). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 v0.20.19 – v0.21.0 haben die Oberfläche durchgehend auf Ton (Clay) umgestellt: weiche zweilagige Schatten, offscreen gezeichnet und zwischengespeichert, flache Farbchips, Kategoriefarben im Handbuch und große Farbflächen, deren Tiefe aus einem Kontaktschatten statt aus einem Verlauf kommt.
 
@@ -68,14 +68,14 @@ Oberflächentexte und Kursinhalte gibt es in:
 
 简体中文 (Quelle), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-Alle zehn Sprachen sind vollständig. Jede hat ihre eigene Einstiegsebene, Lektionskerntexte, Handbuchtexte und einen Fragenpool, und jeder Schlüsselsatz stimmt Eintrag für Eintrag mit dem Englischen überein — **10.757 / 10.757**, nichts fehlt, nichts doppelt, keine verwaisten Schlüssel.
+Alle zehn Sprachen sind vollständig. Jede hat ihre eigene Einstiegsebene, Lektionskerntexte, Handbuchtexte und einen Fragenpool, und jeder Schlüsselsatz stimmt Eintrag für Eintrag mit dem Englischen überein — **10.727 / 10.727**, nichts fehlt, nichts doppelt, keine verwaisten Schlüssel.
 
 | Ebene | Einträge | Alle 9 übersetzten Sprachen |
 |---|---|---|
-| Einstieg (Lektionen, Einheiten, Handbuchtitel, Gipfel) | 117 | 100 % |
-| Lektionskerntexte | 443 | 100 % |
+| Einstieg (Lektionen, Einheiten, Handbuchtitel, Gipfel) | 296 | 100 % |
+| Lektionskerntexte | 451 | 100 % |
 | Handbuchtexte | 378 | 100 % |
-| Fragenpool (Stamm, Optionen, Erklärung) | 9.422 | 100 % |
+| Fragenpool (Stamm, Optionen, Erklärung) | 9.602 | 100 % |
 
 Die Terminologie folgt dem Sprachgebrauch der jeweiligen Bergsteigerszene statt wörtlicher Übersetzung: schwedisch stegjärn / isyxa / standplats, deutsch Steigeisen / Pickel, russisch кошки / ледоруб, italienisch corda fissa / bloccante / sosta. Medizinische Dosierungen, Lawinenstufen, Hangneigungen und Temperaturen bleiben unverändert — angepasst wird nur das Zahlenformat, und die drei Konventionen bleiben bewusst getrennt:
 
