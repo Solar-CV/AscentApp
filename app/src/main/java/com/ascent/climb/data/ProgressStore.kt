@@ -336,6 +336,31 @@ class ProgressStore(context: Context) {
         get() = prefs.getString("trackId", CLIMB_TRACK) ?: CLIMB_TRACK
         set(value) = prefs.edit().putString("trackId", value).apply()
 
+    // ---------------- 训练记录 ----------------
+    //
+    // 两步走：v0.22 先把「练过几次、累计多久」存下来，v0.23 的头衔要用它；
+    // 所以这里不是单纯为了页面显示，读的时候别删。
+    // 键名 drill_<id>_<field>，id 用稳定字符串（breath44 / step），
+    // **不要用资源 id 或下标** —— 语言切换、顺序调整都会变。
+
+    /** 记一次完成的训练：次数 +1、累计秒数增加、记下当天。 */
+    fun recordDrill(id: String, seconds: Int) {
+        val c = drillCount(id) + 1
+        val s = drillTotalSeconds(id) + seconds.coerceAtLeast(0)
+        prefs.edit()
+            .putInt("drill_${id}_count", c)
+            .putInt("drill_${id}_seconds", s)
+            .putLong("drill_${id}_last", LocalDate.now().toEpochDay())
+            .apply()
+    }
+
+    fun drillCount(id: String): Int = prefs.getInt("drill_${id}_count", 0)
+
+    fun drillTotalSeconds(id: String): Int = prefs.getInt("drill_${id}_seconds", 0)
+
+    /** 最近一次训练的 epochDay；0 表示没练过。 */
+    fun drillLastDay(id: String): Long = prefs.getLong("drill_${id}_last", 0L)
+
     /** 开发者模式：清空待播弹窗队列（解卡用，不影响已解锁记录）。 */
     fun clearPendingAchievements() {
         if (pendingAchievements.isNotEmpty()) pendingAchievements = mutableListOf()

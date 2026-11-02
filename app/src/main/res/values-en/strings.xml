@@ -258,6 +258,22 @@
     <string name="tr_item4_title">Weather reading · cloud identification</string>
     <string name="tr_item4_desc">Recognise cumulonimbus and fronts</string>
 
+    <!-- ========== 训练页（v0.22）========== -->
+    <string name="drill_pause">Pause</string>
+    <string name="drill_finish">Finish</string>
+    <string name="drill_soon">Coming soon</string>
+    <string name="drill_inhale">Breathe in</string>
+    <string name="drill_exhale">Breathe out</string>
+    <string name="drill_left">Left foot</string>
+    <string name="drill_right">Right foot</string>
+    <string name="drill_tech_flat">Flat-footed</string>
+    <string name="drill_tech_front">Front-point</string>
+    <string name="drill_set">Set %1$d of %2$d</string>
+    <string name="drill_done_breath">%1$d breath cycles</string>
+    <string name="drill_done_step">%1$d sets · %2$d steps</string>
+    <string name="drill_history">Trained %1$d× · %2$d min total</string>
+    <string name="drill_recorded">Saved</string>
+
     <!-- Path -->
     <string name="path_camp_base">Base Camp</string>
     <string name="path_camp_c1">Camp 1</string>

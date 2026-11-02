@@ -225,6 +225,22 @@
     <string name="tr_item3_desc">La routine fissa prima di partire</string>
     <string name="tr_item4_title">Leggere il tempo · le nuvole</string>
     <string name="tr_item4_desc">Riconoscere cumulonembi e fronti</string>
+
+    <!-- ========== 训练页（v0.22）========== -->
+    <string name="drill_pause">Pausa</string>
+    <string name="drill_finish">Termina</string>
+    <string name="drill_soon">In arrivo</string>
+    <string name="drill_inhale">Inspira</string>
+    <string name="drill_exhale">Espira</string>
+    <string name="drill_left">Piede sinistro</string>
+    <string name="drill_right">Piede destro</string>
+    <string name="drill_tech_flat">Piatto</string>
+    <string name="drill_tech_front">Punta</string>
+    <string name="drill_set">Serie %1$d di %2$d</string>
+    <string name="drill_done_breath">%1$d cicli</string>
+    <string name="drill_done_step">%1$d serie · %2$d passi</string>
+    <string name="drill_history">%1$d volte · %2$d min in totale</string>
+    <string name="drill_recorded">Salvato</string>
     <string name="path_camp_base">Campo base</string>
     <string name="path_camp_c1">Campo 1</string>
     <string name="path_camp_c2">Campo 2</string>

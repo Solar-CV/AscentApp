@@ -225,6 +225,22 @@
     <string name="tr_item3_desc">Den fasta rutinen före avfärd</string>
     <string name="tr_item4_title">Läsa vädret · tolka moln</string>
     <string name="tr_item4_desc">Känna igen bymoln och fronter</string>
+
+    <!-- ========== 训练页（v0.22）========== -->
+    <string name="drill_pause">Paus</string>
+    <string name="drill_finish">Avsluta</string>
+    <string name="drill_soon">Kommer snart</string>
+    <string name="drill_inhale">Andas in</string>
+    <string name="drill_exhale">Andas ut</string>
+    <string name="drill_left">Vänster fot</string>
+    <string name="drill_right">Höger fot</string>
+    <string name="drill_tech_flat">Platt</string>
+    <string name="drill_tech_front">Framtå</string>
+    <string name="drill_set">Set %1$d av %2$d</string>
+    <string name="drill_done_breath">%1$d andetag</string>
+    <string name="drill_done_step">%1$d set · %2$d steg</string>
+    <string name="drill_history">%1$d gånger · %2$d min totalt</string>
+    <string name="drill_recorded">Sparat</string>
     <string name="path_camp_base">Basläger</string>
     <string name="path_camp_c1">Läger 1</string>
     <string name="path_camp_c2">Läger 2</string>

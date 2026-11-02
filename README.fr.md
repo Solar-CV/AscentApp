@@ -6,7 +6,7 @@ Une application Android pour celles et ceux qui débutent en alpinisme d’altit
 
 Deux parcours se changent librement. La **haute montagne** compte six unités et 68 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 21 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.21.2 (versionCode 131). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo ; la version release fait environ 30 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+Version actuelle v0.22.0 (versionCode 132). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 554 / 10 554). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo ; la version release fait environ 30 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
 
 Les v0.20.19 – v0.21.0 ont habillé toute l’interface en argile : ombres doubles douces dessinées hors écran et mises en cache, pastilles de couleur mates, couleurs par catégorie dans le manuel, et blocs de couleur dont le relief vient d’une ombre de contact plutôt que d’un dégradé.
 
@@ -46,7 +46,7 @@ Huit types de questions : choix unique, choix multiple, ordonnancement, appariem
 
 ### Entraînement, révision, profil
 
-L’entraînement donne un pourcentage de préparation et l’altitude du sommet visé. La révision place devant les questions échues du jour et les erreurs critiques de sécurité. Le profil réunit l’en-tête, l’altitude actuelle, l’aperçu des capacités, l’accès aux badges, la zone de compte et une entrée de retour. L’engrenage ouvre les réglages, l’avatar la page de profil.
+L’entraînement recommande la leçon suivante et propose deux exercices chronométrés : un rythme respiratoire 4-4 de cinq minutes et quatre séries de 30 secondes de cadence de pas en crampons. La révision place devant les questions échues du jour et les erreurs critiques de sécurité. Le profil réunit l’en-tête, l’altitude actuelle, l’aperçu des capacités, l’accès aux badges, la zone de compte et une entrée de retour. L’engrenage ouvre les réglages, l’avatar la page de profil.
 
 Le profil n’affiche que les badges débloqués. Les 40 sont sur le mur de badges, les verrouillés en aperçu gris, les succès cachés sous un « ? ».
 
@@ -220,6 +220,12 @@ Pour publier une nouvelle banque : modifier le contenu → incrémenter `BUNDLED
 Les anciennes versions de l’application ne cassent pas face à une banque plus récente. `minAppVersion` dans `manifest.json` bloque les clients trop anciens, les champs inconnus sont ignorés et une question mal formée est sautée plutôt que fatale.
 
 ## Changements récents
+
+**v0.22.0 : l’entraînement entraîne vraiment**
+
+- Deux exercices actifs : un rythme respiratoire 4-4 de cinq minutes (cycle de 8 secondes, lissage en cosinus) et quatre séries de 30 secondes de cadence de pas en crampons (un pas toutes les 1,2 s, pieds alternés)
+- Les deux enregistrent la durée **réelle** : arrêter plus tôt sauvegarde le temps pratiqué, pas la durée complète ; moins de 15 secondes n’est pas compté
+- Matériel et météo sont marqués « bientôt » au lieu d’être des lignes inertes
 
 **v0.21.2 : builds signés en release** — l’APK des Releases est désormais signé en release et minifié par R8 : 30 Mo au lieu de 41 Mo. Sur un appareil déjà en version debug, il faut désinstaller d’abord, ce qui efface les données locales.
 

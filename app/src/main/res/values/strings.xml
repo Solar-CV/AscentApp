@@ -257,6 +257,22 @@
     <string name="tr_item4_title">天气判读 · 看图识云</string>
     <string name="tr_item4_desc">识别积雨云与锋面</string>
 
+    <!-- ========== 训练页（v0.22）========== -->
+    <string name="drill_pause">暂停</string>
+    <string name="drill_finish">结束</string>
+    <string name="drill_soon">即将上线</string>
+    <string name="drill_inhale">吸气</string>
+    <string name="drill_exhale">呼气</string>
+    <string name="drill_left">左脚</string>
+    <string name="drill_right">右脚</string>
+    <string name="drill_tech_flat">法式 · 全脚掌</string>
+    <string name="drill_tech_front">德式 · 前齿</string>
+    <string name="drill_set">第 %1$d / %2$d 组</string>
+    <string name="drill_done_breath">完成 %1$d 次循环</string>
+    <string name="drill_done_step">完成 %1$d 组 · %2$d 步</string>
+    <string name="drill_history">已练 %1$d 次 · 累计 %2$d 分钟</string>
+    <string name="drill_recorded">已记录</string>
+
     <!-- ========== 路径 ========== -->
     <string name="path_camp_base">大本营 BASECAMP</string>
     <string name="path_camp_c1">C1 营地</string>

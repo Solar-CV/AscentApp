@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 68 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 21 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.21.2 (versionCode 131). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+Current version v0.22.0 (versionCode 132). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,554 / 10,554). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 v0.20.19 – v0.21.0 restyled the whole interface in clay: soft double shadows drawn offscreen and cached, flat colour chips, category colours in the handbook, and hero blocks that take their depth from a contact shadow instead of a gradient.
 
@@ -46,7 +46,7 @@ Finishing a lesson drops you straight into redoing the ones you got wrong. Quest
 
 ### Training, review, profile
 
-Training gives a readiness percentage and the target peak's altitude. Review puts today's due questions and safety-critical misses first. Profile holds the header, current altitude, ability overview, badge entry, account area and a feedback entry. The gear icon opens settings, the avatar opens the profile page.
+Training recommends the next lesson and runs two timed drills — a five-minute 4-4 breathing pacer and four 30-second crampon step-cadence sets. Review puts today's due questions and safety-critical misses first. Profile holds the header, current altitude, ability overview, badge entry, account area and a feedback entry. The gear icon opens settings, the avatar opens the profile page.
 
 The profile shows unlocked badges only. All 40 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
 
@@ -220,6 +220,12 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+**v0.22.0: the training page actually trains**
+
+- Two drills are live: a five-minute 4-4 breathing pacer (an 8-second cycle with cosine easing) and four 30-second crampon step-cadence sets, alternating feet at one step every 1.2 s
+- Both record what you actually did — finishing early saves the elapsed time, not the full length, and anything under 15 seconds is not logged at all
+- Gear recall and weather reading are marked "coming soon" instead of being rows that swallow taps
 
 **v0.21.2: release-signed builds** — the APK attached to Releases is now release-signed and R8-minified: 30 MB instead of 41 MB. Installing it over an older debug build means uninstalling first, which clears local data.
 

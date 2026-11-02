@@ -6,7 +6,7 @@ Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist
 
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 68 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 21 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.21.2 (versionCode 131). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.22.0 (versionCode 132). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.554 / 10.554). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 v0.20.19 – v0.21.0 haben die Oberfläche durchgehend auf Ton (Clay) umgestellt: weiche zweilagige Schatten, offscreen gezeichnet und zwischengespeichert, flache Farbchips, Kategoriefarben im Handbuch und große Farbflächen, deren Tiefe aus einem Kontaktschatten statt aus einem Verlauf kommt.
 
@@ -46,7 +46,7 @@ Nach einer Lektion geht es direkt in die Wiederholung der falsch beantworteten F
 
 ### Training, Wiederholung, Profil
 
-Training liefert einen Bereitschafts-Prozentsatz und die Höhe des Zielgipfels. Die Wiederholung stellt die heute fälligen Fragen und sicherheitskritische Fehler nach vorn. Das Profil enthält Kopfbereich, aktuelle Höhe, Fähigkeitsübersicht, Abzeichen-Einstieg, Kontobereich und einen Feedback-Einstieg. Das Zahnrad öffnet die Einstellungen, der Avatar die Profilseite.
+Das Training empfiehlt die nächste Lektion und bietet zwei zeitgesteuerte Übungen: einen fünfminütigen 4-4-Atemtakt und vier 30-Sekunden-Sätze Steigeisen-Schrittrhythmus. Die Wiederholung stellt die heute fälligen Fragen und sicherheitskritische Fehler nach vorn. Das Profil enthält Kopfbereich, aktuelle Höhe, Fähigkeitsübersicht, Abzeichen-Einstieg, Kontobereich und einen Feedback-Einstieg. Das Zahnrad öffnet die Einstellungen, der Avatar die Profilseite.
 
 Das Profil zeigt nur freigeschaltete Abzeichen. Alle 40 stehen an der Abzeichenwand, gesperrte als graue Vorschau, versteckte Erfolge als „?".
 
@@ -220,6 +220,12 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 Ältere App-Versionen gehen an einem neueren Pool nicht kaputt. `minAppVersion` in `manifest.json` blockt zu alte Clients, unbekannte Felder werden ignoriert, eine fehlerhafte Frage wird übersprungen statt tödlich zu sein.
 
 ## Letzte Änderungen
+
+**v0.22.0: Das Training trainiert jetzt wirklich**
+
+- Zwei Übungen sind aktiv: ein fünfminütiger 4-4-Atemtakt (8-Sekunden-Zyklus, Kosinus-Easing) und vier 30-Sekunden-Sätze Steigeisen-Schrittrhythmus (ein Schritt alle 1,2 s, abwechselnd links/rechts)
+- Beide erfassen die **tatsächliche** Dauer: ein vorzeitiges Beenden speichert die geübte Zeit, nicht die volle Länge; unter 15 Sekunden wird nichts gespeichert
+- Ausrüstungs- und Wetterübungen sind als „bald verfügbar" markiert statt als tote Zeilen
 
 **v0.21.2: Release-signierte Builds** — das APK in den Releases ist jetzt release-signiert und R8-minifiziert: 30 MB statt 41 MB. Auf Geräten mit älterem Debug-Build muss zuerst deinstalliert werden, dabei werden lokale Daten gelöscht.
 

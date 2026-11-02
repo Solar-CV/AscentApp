@@ -225,6 +225,22 @@
     <string name="tr_item3_desc">Der feste Ablauf vor dem Start</string>
     <string name="tr_item4_title">Wetter lesen · Wolken deuten</string>
     <string name="tr_item4_desc">Cumulonimbus und Fronten erkennen</string>
+
+    <!-- ========== 训练页（v0.22）========== -->
+    <string name="drill_pause">Pause</string>
+    <string name="drill_finish">Beenden</string>
+    <string name="drill_soon">Bald verfügbar</string>
+    <string name="drill_inhale">Einatmen</string>
+    <string name="drill_exhale">Ausatmen</string>
+    <string name="drill_left">Linker Fuß</string>
+    <string name="drill_right">Rechter Fuß</string>
+    <string name="drill_tech_flat">Flach</string>
+    <string name="drill_tech_front">Frontzacken</string>
+    <string name="drill_set">Satz %1$d von %2$d</string>
+    <string name="drill_done_breath">%1$d Atemzyklen</string>
+    <string name="drill_done_step">%1$d Sätze · %2$d Schritte</string>
+    <string name="drill_history">%1$d× geübt · %2$d Min. gesamt</string>
+    <string name="drill_recorded">Gespeichert</string>
     <string name="path_camp_base">Basislager</string>
     <string name="path_camp_c1">Lager 1</string>
     <string name="path_camp_c2">Lager 2</string>

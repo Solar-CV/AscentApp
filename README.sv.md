@@ -6,7 +6,7 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 68 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 21 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.21.2 (versionCode 131). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.22.0 (versionCode 132). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 554 / 10 554). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
 
@@ -46,7 +46,7 @@ När en lektion är klar går du direkt in och gör om dem du missade. Rättade 
 
 ### Träning, repetition, profil
 
-Träningen ger en beredskapsprocent och måltoppens höjd. Repetitionen sätter dagens förfallna frågor och säkerhetskritiska misstag först. Profilen rymmer huvud, aktuell höjd, förmågeöversikt, emblemets ingång, kontoområde och en feedback-ingång. Kugghjulet öppnar inställningarna, avataren profilsidan.
+Träningen föreslår nästa lektion och erbjuder två tidsstyrda övningar: en femminuters 4-4-andningstakt och fyra set om 30 sekunder stegrytm med stegjärn. Repetitionen sätter dagens förfallna frågor och säkerhetskritiska misstag först. Profilen rymmer huvud, aktuell höjd, förmågeöversikt, emblemets ingång, kontoområde och en feedback-ingång. Kugghjulet öppnar inställningarna, avataren profilsidan.
 
 Profilen visar bara upplåsta emblem. Alla 40 finns på emblemväggen, låsta som grå förhandsvisning, dolda prestationer som ett "?".
 
@@ -220,6 +220,12 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
 ## Senaste ändringar
+
+**v0.22.0: träningen tränar faktiskt**
+
+- Två övningar är igång: en femminuters 4-4-andningstakt (8-sekunderscykel med cosinus-easing) och fyra set om 30 sekunder stegrytm med stegjärn (ett steg var 1,2 s, växelvis fot)
+- Båda registrerar den **faktiska** tiden: avbryter du tidigare sparas den tränade tiden, inte hela längden; under 15 sekunder registreras inget
+- Utrustning och väder är märkta ”kommer snart” i stället för att vara döda rader
 
 **v0.21.2: release-signerade byggen** — APK:n i Releases är nu release-signerat och R8-minifierat: 30 MB i stället för 41 MB. På en enhet med äldre debug-build måste appen avinstalleras först, vilket raderar lokal data.
 

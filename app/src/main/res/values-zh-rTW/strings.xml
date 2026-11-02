@@ -245,6 +245,22 @@
     <string name="tr_item4_title">天氣判讀 · 看圖識雲</string>
     <string name="tr_item4_desc">辨識積雨雲與鋒面</string>
 
+    <!-- ========== 训练页（v0.22）========== -->
+    <string name="drill_pause">暫停</string>
+    <string name="drill_finish">結束</string>
+    <string name="drill_soon">即將推出</string>
+    <string name="drill_inhale">吸氣</string>
+    <string name="drill_exhale">呼氣</string>
+    <string name="drill_left">左腳</string>
+    <string name="drill_right">右腳</string>
+    <string name="drill_tech_flat">法式 · 全腳掌</string>
+    <string name="drill_tech_front">德式 · 前齒</string>
+    <string name="drill_set">第 %1$d / %2$d 組</string>
+    <string name="drill_done_breath">完成 %1$d 次循環</string>
+    <string name="drill_done_step">完成 %1$d 組 · %2$d 步</string>
+    <string name="drill_history">已練 %1$d 次 · 累計 %2$d 分鐘</string>
+    <string name="drill_recorded">已記錄</string>
+
     <string name="path_camp_base">大本營 BASECAMP</string>
     <string name="path_camp_c1">C1 營地</string>
     <string name="path_camp_c2">C2 營地</string>

@@ -313,6 +313,7 @@ fun AscentRoot(
                             2 -> TrainingScreen(
                                 altitude = altitude,
                                 completed = completed,
+                                store = store,
                                 devUnlockAll = devUnlockAll
                             )
                             3 -> ReviewScreen(

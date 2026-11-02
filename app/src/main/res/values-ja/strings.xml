@@ -245,6 +245,22 @@
     <string name="tr_item4_title">天気の読み方 · 雲を見る</string>
     <string name="tr_item4_desc">積乱雲と前線を識別する</string>
 
+    <!-- ========== 训练页（v0.22）========== -->
+    <string name="drill_pause">一時停止</string>
+    <string name="drill_finish">終了</string>
+    <string name="drill_soon">近日公開</string>
+    <string name="drill_inhale">吸う</string>
+    <string name="drill_exhale">吐く</string>
+    <string name="drill_left">左足</string>
+    <string name="drill_right">右足</string>
+    <string name="drill_tech_flat">フラットフット</string>
+    <string name="drill_tech_front">フロントポイント</string>
+    <string name="drill_set">%2$d セット中 %1$d</string>
+    <string name="drill_done_breath">%1$d 回の呼吸</string>
+    <string name="drill_done_step">%1$d セット・%2$d 歩</string>
+    <string name="drill_history">%1$d 回実施 · 合計 %2$d 分</string>
+    <string name="drill_recorded">記録しました</string>
+
     <string name="path_camp_base">ベースキャンプ</string>
     <string name="path_camp_c1">キャンプ 1</string>
     <string name="path_camp_c2">キャンプ 2</string>

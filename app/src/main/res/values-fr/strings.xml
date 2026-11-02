@@ -225,6 +225,22 @@
     <string name="tr_item3_desc">Le rituel fixe avant le départ</string>
     <string name="tr_item4_title">Lire le temps · identifier les nuages</string>
     <string name="tr_item4_desc">Reconnaître cumulonimbus et fronts</string>
+
+    <!-- ========== 训练页（v0.22）========== -->
+    <string name="drill_pause">Pause</string>
+    <string name="drill_finish">Terminer</string>
+    <string name="drill_soon">Bientôt</string>
+    <string name="drill_inhale">Inspirez</string>
+    <string name="drill_exhale">Expirez</string>
+    <string name="drill_left">Pied gauche</string>
+    <string name="drill_right">Pied droit</string>
+    <string name="drill_tech_flat">À plat</string>
+    <string name="drill_tech_front">Pointes</string>
+    <string name="drill_set">Série %1$d sur %2$d</string>
+    <string name="drill_done_breath">%1$d cycles</string>
+    <string name="drill_done_step">%1$d séries · %2$d pas</string>
+    <string name="drill_history">%1$d fois · %2$d min au total</string>
+    <string name="drill_recorded">Enregistré</string>
     <string name="path_camp_base">Camp de base</string>
     <string name="path_camp_c1">Camp 1</string>
     <string name="path_camp_c2">Camp 2</string>

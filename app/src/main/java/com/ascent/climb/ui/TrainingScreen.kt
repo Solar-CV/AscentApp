@@ -32,15 +32,32 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.runtime.setValue
 import com.ascent.climb.data.ALL_LESSONS
+import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.isUnlocked
 
 @Composable
 fun TrainingScreen(
     altitude: Int,
     completed: Set<String>,
+    store: ProgressStore,
     devUnlockAll: Boolean = false
 ) {
+    // 打开的是哪个训练项；null 表示停在列表
+    var openDrill by rememberSaveable { mutableStateOf<String?>(null) }
+    // 列表与训练页互斥，切走时列表离开组合 —— 用状态槽保住滚动位置
+    val pageStates = rememberSaveableStateHolder()
+
+    if (openDrill != null) {
+        DrillScreen(drillId = openDrill!!, store = store, onBack = { openDrill = null })
+        return
+    }
+
     val nextLesson = ALL_LESSONS.firstOrNull { it.id !in completed && isUnlocked(it.id, completed, devUnlockAll) }
 
     val drills = listOf(
@@ -50,6 +67,7 @@ fun TrainingScreen(
         Triple(Ic.CloudSnow, stringResource(R.string.tr_item4_title), stringResource(R.string.tr_item4_desc))
     )
 
+    pageStates.SaveableStateProvider("tr-list") {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 28.dp)
@@ -124,7 +142,19 @@ fun TrainingScreen(
 
         items(drills.size, key = { "d$it" }) { i ->
             val (icon, title, reason) = drills[i]
-            DrillRow(icon = icon, title = title, reason = reason)
+            // 前两条本次已实现；后两条（装备默写 / 天气判读）留到下一版，先标「即将上线」
+            val drillId = when (i) {
+                0 -> Drill.STEP
+                1 -> Drill.BREATH
+                else -> null
+            }
+            DrillRow(
+                icon = icon,
+                title = title,
+                reason = reason,
+                available = drillId != null,
+                onClick = { drillId?.let { openDrill = it } }
+            )
         }
 
         // ---- 安全边界 ----
@@ -154,15 +184,22 @@ fun TrainingScreen(
             }
         }
     }
+    }
 }
 
 @Composable
-private fun DrillRow(icon: ImageVector, title: String, reason: String) {
+private fun DrillRow(
+    icon: ImageVector,
+    title: String,
+    reason: String,
+    available: Boolean,
+    onClick: () -> Unit
+) {
     ClaySurface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 5.dp)
-            .clickable { },
+            .clickable(enabled = available) { onClick() },
         radius = 20.dp,
         elevation = 7.dp
     ) {
@@ -181,7 +218,15 @@ private fun DrillRow(icon: ImageVector, title: String, reason: String) {
             Spacer(Modifier.height(3.dp))
             Text(reason, color = Ascent.Fg3, fontSize = 12.sp)
         }
-        Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
+        if (available) {
+            Icon(Ic.ChevronRight, contentDescription = null, tint = Ascent.Fg3, modifier = Modifier.size(16.dp))
+        } else {
+            Text(
+                stringResource(R.string.drill_soon),
+                color = Ascent.Fg3.copy(alpha = 0.7f),
+                fontSize = 10.sp
+            )
+        }
     }
     }
 }
