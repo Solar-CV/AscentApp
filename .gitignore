@@ -47,3 +47,6 @@ knowledge/docs/
 
 # ---------- 本地工作数据 ----------
 .workbuddy/
+
+# ---------- 云函数依赖（npm install 生成，别进仓库）----------
+/server/**/node_modules/
