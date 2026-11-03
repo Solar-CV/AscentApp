@@ -70,7 +70,8 @@
     <string name="set_section_data">資料</string>
     <string name="set_reset">重設學習進度</string>
     <string name="set_reset_desc">清除課程完成記錄、星級、海拔與學習統計；成就記錄也會一併清除。此操作無法復原。</string>
-    <string name="set_reset_confirm">確認重設？此操作無法復原</string>
+    <string name="set_reset_title">重設學習進度？</string>
+    <string name="set_reset_action">重設</string>
 
     <string name="set_section_about">關於</string>
     <string name="set_about_name">ASCENT 攀登之路</string>
@@ -100,7 +101,6 @@
     <string name="acc_delete_failed">刪除失敗，請重試</string>
     <string name="prof_disclaimer_title">理論掌握不等於實際操作能力</string>
     <string name="prof_disclaimer_body">本應用程式記錄的是理論學習進度。冰雪、繩索、攀冰、救援等實作技能，必須經持證教練現場評估後，才能在真實環境中使用。涉及藥物與急救的決策須諮詢專業醫師。</string>
-    <string name="prof_reset_all">重設全部學習進度</string>
     <string name="prof_version_line">ASCENT 攀登 · v%1$s</string>
 
     <string name="auth_login_title">登入 ASCENT</string>
@@ -117,6 +117,18 @@
     <string name="auth_register_action">註冊並登入</string>
     <string name="auth_mock_note">目前為本機模擬登入介面（MockAuthApi），不會連網、不上傳任何資料。</string>
     <string name="auth_backend_note">後端就緒後替換 AuthApi 的實作即可，介面無需修改。</string>
+
+    <string name="auth_note_cloud">登入後海拔、徽章與複習紀錄會上傳到雲端，換裝置登入即可恢復。</string>
+    <string name="auth_password_cloud">密碼（至少 8 位）</string>
+    <string name="prof_login_cloud">登入後可在多台裝置間同步</string>
+    <string name="cloud_err_network">連不上伺服器，檢查網路後再試</string>
+    <string name="cloud_err_credentials">電子郵件或密碼不正確</string>
+    <string name="cloud_err_email_taken">這個電子郵件已經註冊過了</string>
+    <string name="cloud_err_too_many">嘗試次數過多，請稍後再試</string>
+    <string name="cloud_err_server">服務暫時無法使用，請稍後再試</string>
+    <string name="cloud_err_email_format">電子郵件格式不正確</string>
+    <string name="cloud_err_password_short">密碼至少 8 位</string>
+    <string name="cloud_err_nickname">暱稱需為 1–16 個字元</string>
 
     <string name="pf_title">編輯資料</string>
     <string name="pf_avatar_change">更換頭像</string>

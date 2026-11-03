@@ -84,7 +84,8 @@ fun SettingsScreen(
     onBack: () -> Unit
 ) {
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
-    var confirmReset by remember { mutableStateOf(false) }
+    // 两个危险操作都走同一个确认弹框组件；重置是同步的，删除要等网络/落盘
+    var showReset by remember { mutableStateOf(false) }
     var confirmBankReset by remember { mutableStateOf(false) }
     // 删除账号：弹确认框，删除中禁掉两个按钮，失败留在框里可重试
     var showDelete by remember { mutableStateOf(false) }
@@ -120,11 +121,27 @@ fun SettingsScreen(
     // 系统返回 / 全面屏侧滑手势：回到上一个界面，而不是退出 App
     BackHandler { onBack() }
 
+    if (showReset) {
+        DangerConfirmDialog(
+            title = stringResource(R.string.set_reset_title),
+            body = stringResource(R.string.set_reset_desc),
+            confirmText = stringResource(R.string.set_reset_action),
+            onCancel = { showReset = false },
+            onConfirm = {
+                showReset = false
+                onReset()
+            }
+        )
+    }
+
     if (showDelete) {
-        DeleteAccountDialog(
-            email = accountEmail,
-            deleting = deleting,
-            failed = deleteFailed,
+        DangerConfirmDialog(
+            title = stringResource(R.string.acc_delete_title),
+            body = stringResource(R.string.acc_delete_body, accountEmail ?: ""),
+            confirmText = stringResource(R.string.acc_delete_action),
+            busy = deleting,
+            busyText = stringResource(R.string.auth_wait),
+            error = if (deleteFailed) stringResource(R.string.acc_delete_failed) else null,
             onCancel = {
                 if (!deleting) {
                     showDelete = false
@@ -381,17 +398,10 @@ fun SettingsScreen(
                         lineHeight = 17.sp
                     )
                     PillButton(
-                        text = if (confirmReset) stringResource(R.string.set_reset_confirm) else stringResource(R.string.set_reset),
+                        text = stringResource(R.string.set_reset),
                         style = BtnStyle.Danger,
                         height = 44,
-                        onClick = {
-                            if (confirmReset) {
-                                onReset()
-                                confirmReset = false
-                            } else {
-                                confirmReset = true
-                            }
-                        }
+                        onClick = { showReset = true }
                     )
                 }
             }
@@ -479,21 +489,27 @@ fun SettingsScreen(
 }
 
 /**
- * 删除账号确认框。
+ * 危险操作确认框（重置进度 / 删除账号共用）。
  *
- * 用 Dialog 而不是行内「点一次变红再点一次」：账号删除不可撤销，必须有一次明确的打断
- * （遮罩 + 两个按钮 + 逐条列出要删什么），也避免误触背后的那一行。
+ * 用 Dialog 而不是行内「点一次变红再点一次」：这两件事都不可撤销，需要一次明确的打断
+ * （遮罩 + 两个按钮 + 逐条列出后果），也避免误触背后的那一行。
+ *
+ * @param busy 执行中：两个按钮禁用，确认键显示 [busyText]
+ * @param error 失败提示（为空不占位）
  */
 @Composable
-private fun DeleteAccountDialog(
-    email: String?,
-    deleting: Boolean,
-    failed: Boolean,
+private fun DangerConfirmDialog(
+    title: String,
+    body: String,
+    confirmText: String,
     onCancel: () -> Unit,
-    onConfirm: () -> Unit
+    onConfirm: () -> Unit,
+    busy: Boolean = false,
+    busyText: String? = null,
+    error: String? = null
 ) {
     Dialog(
-        onDismissRequest = { if (!deleting) onCancel() },
+        onDismissRequest = { if (!busy) onCancel() },
         properties = DialogProperties(dismissOnClickOutside = false)
     ) {
         Column(
@@ -507,7 +523,7 @@ private fun DeleteAccountDialog(
                 IconBadge(Ic.TriangleAlert, Ascent.Danger, Ascent.DangerSoft, diameter = 36, iconSize = 18)
                 Spacer(Modifier.width(12.dp))
                 Text(
-                    stringResource(R.string.acc_delete_title),
+                    title,
                     color = Ascent.Fg,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Bold
@@ -515,18 +531,14 @@ private fun DeleteAccountDialog(
             }
             Spacer(Modifier.height(12.dp))
             Text(
-                text = stringResource(R.string.acc_delete_body, email ?: ""),
+                text = body,
                 color = Ascent.Fg2,
                 fontSize = 13.sp,
                 lineHeight = 20.sp
             )
-            if (failed) {
+            if (error != null) {
                 Spacer(Modifier.height(10.dp))
-                Text(
-                    stringResource(R.string.acc_delete_failed),
-                    color = Ascent.Danger,
-                    fontSize = 12.sp
-                )
+                Text(error, color = Ascent.Danger, fontSize = 12.sp)
             }
             Spacer(Modifier.height(18.dp))
             Row(
@@ -538,17 +550,16 @@ private fun DeleteAccountDialog(
                         text = stringResource(R.string.common_cancel),
                         style = BtnStyle.Secondary,
                         height = 46,
-                        enabled = !deleting,
+                        enabled = !busy,
                         onClick = onCancel
                     )
                 }
                 Box(modifier = Modifier.weight(1f)) {
                     PillButton(
-                        text = if (deleting) stringResource(R.string.auth_wait)
-                        else stringResource(R.string.acc_delete_action),
+                        text = if (busy && busyText != null) busyText else confirmText,
                         style = BtnStyle.Danger,
                         height = 46,
-                        enabled = !deleting,
+                        enabled = !busy,
                         onClick = onConfirm
                     )
                 }

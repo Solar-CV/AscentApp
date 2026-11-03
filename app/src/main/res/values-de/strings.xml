@@ -61,7 +61,8 @@
     <string name="set_section_data">Daten</string>
     <string name="set_reset">Lernfortschritt zurücksetzen</string>
     <string name="set_reset_desc">Löscht abgeschlossene Lektionen, Sterne, Höhe und Lernstatistik; Erfolge werden ebenfalls gelöscht. Nicht umkehrbar.</string>
-    <string name="set_reset_confirm">Zurücksetzen? Nicht umkehrbar</string>
+    <string name="set_reset_title">Lernfortschritt zurücksetzen?</string>
+    <string name="set_reset_action">Zurücksetzen</string>
     <string name="set_section_about">Über</string>
     <string name="set_about_name">ASCENT</string>
     <string name="set_about_desc">Theorie zu Höhenbergsteigen und Eisklettern</string>
@@ -89,7 +90,6 @@
     <string name="acc_delete_failed">Löschen fehlgeschlagen, bitte erneut versuchen</string>
     <string name="prof_disclaimer_title">Theorie zu kennen heißt nicht, es zu können</string>
     <string name="prof_disclaimer_body">Diese App erfasst nur den Theoriefortschritt. Praktische Fähigkeiten — Schnee und Eis, Seiltechnik, Eisklettern, Rettung — müssen vor der Anwendung im realen Gelände von einer zertifizierten Trainerin oder einem zertifizierten Trainer vor Ort bewertet werden. Entscheidungen zu Medikamenten oder Erster Hilfe gehören in ärztliche Hand.</string>
-    <string name="prof_reset_all">Gesamten Fortschritt zurücksetzen</string>
     <string name="prof_version_line">ASCENT · v%1$s</string>
     <string name="auth_login_title">Bei ASCENT anmelden</string>
     <string name="auth_register_title">Konto erstellen</string>
@@ -105,6 +105,18 @@
     <string name="auth_register_action">Registrieren und anmelden</string>
     <string name="auth_mock_note">Derzeit lokale Test-Auth-API (MockAuthApi). Keine Netzwerkverbindung, keine Datenübertragung.</string>
     <string name="auth_backend_note">Sobald das Backend bereit ist, genügt der Austausch der AuthApi-Implementierung; die Oberfläche bleibt unverändert.</string>
+
+    <string name="auth_note_cloud">Nach der Anmeldung werden Höhenmeter, Abzeichen und Wiederholungsverlauf in der Cloud gespeichert – auf einem anderen Gerät einfach anmelden.</string>
+    <string name="auth_password_cloud">Passwort (mindestens 8 Zeichen)</string>
+    <string name="prof_login_cloud">Anmelden, um geräteübergreifend zu synchronisieren</string>
+    <string name="cloud_err_network">Server nicht erreichbar – Verbindung prüfen und erneut versuchen</string>
+    <string name="cloud_err_credentials">E-Mail oder Passwort ist falsch</string>
+    <string name="cloud_err_email_taken">Diese E-Mail-Adresse ist bereits registriert</string>
+    <string name="cloud_err_too_many">Zu viele Versuche – bitte später erneut versuchen</string>
+    <string name="cloud_err_server">Dienst vorübergehend nicht verfügbar – bitte später erneut versuchen</string>
+    <string name="cloud_err_email_format">Das ist keine gültige E-Mail-Adresse</string>
+    <string name="cloud_err_password_short">Das Passwort muss mindestens 8 Zeichen haben</string>
+    <string name="cloud_err_nickname">Der Name muss 1–16 Zeichen lang sein</string>
     <string name="pf_title">Profil bearbeiten</string>
     <string name="pf_avatar_change">Foto ändern</string>
     <string name="pf_avatar_remove">Foto entfernen</string>

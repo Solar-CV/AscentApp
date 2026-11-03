@@ -61,7 +61,8 @@
     <string name="set_section_data">Dati</string>
     <string name="set_reset">Reimposta i progressi</string>
     <string name="set_reset_desc">Cancella lezioni completate, stelle, quota e statistiche; anche gli obiettivi vengono cancellati. Irreversibile.</string>
-    <string name="set_reset_confirm">Reimpostare? Irreversibile</string>
+    <string name="set_reset_title">Azzerare i progressi?</string>
+    <string name="set_reset_action">Azzera</string>
     <string name="set_section_about">Informazioni</string>
     <string name="set_about_name">ASCENT</string>
     <string name="set_about_desc">Teoria di alpinismo e arrampicata su ghiaccio</string>
@@ -89,7 +90,6 @@
     <string name="acc_delete_failed">Eliminazione non riuscita, riprova</string>
     <string name="prof_disclaimer_title">Conoscere la teoria non significa saperla fare</string>
     <string name="prof_disclaimer_body">L’app registra solo il progresso teorico. Le capacità pratiche — neve e ghiaccio, corde, arrampicata su ghiaccio, soccorso — devono essere valutate in loco da un istruttore certificato prima dell’uso in terreno reale. Le decisioni su farmaci o primo soccorso vanno prese con un medico.</string>
-    <string name="prof_reset_all">Reimposta tutti i progressi</string>
     <string name="prof_version_line">ASCENT · v%1$s</string>
     <string name="auth_login_title">Accedi ad ASCENT</string>
     <string name="auth_register_title">Crea account</string>
@@ -105,6 +105,18 @@
     <string name="auth_register_action">Registrati e accedi</string>
     <string name="auth_mock_note">Al momento è un’API di autenticazione locale simulata (MockAuthApi). Non si connette e non invia dati.</string>
     <string name="auth_backend_note">Quando il backend sarà pronto basterà sostituire l’implementazione di AuthApi; l’interfaccia non cambia.</string>
+
+    <string name="auth_note_cloud">Dopo l\'accesso, quota, distintivi e cronologia delle ripetizioni vengono salvati nel cloud e restano disponibili su un altro dispositivo.</string>
+    <string name="auth_password_cloud">Password (almeno 8 caratteri)</string>
+    <string name="prof_login_cloud">Accedi per sincronizzare tra dispositivi</string>
+    <string name="cloud_err_network">Impossibile raggiungere il server. Controlla la connessione e riprova</string>
+    <string name="cloud_err_credentials">Email o password non corretti</string>
+    <string name="cloud_err_email_taken">Questa email è già registrata</string>
+    <string name="cloud_err_too_many">Troppi tentativi. Riprova più tardi</string>
+    <string name="cloud_err_server">Servizio non disponibile. Riprova più tardi</string>
+    <string name="cloud_err_email_format">L\'email non è in un formato valido</string>
+    <string name="cloud_err_password_short">La password deve avere almeno 8 caratteri</string>
+    <string name="cloud_err_nickname">Il nome deve avere da 1 a 16 caratteri</string>
     <string name="pf_title">Modifica profilo</string>
     <string name="pf_avatar_change">Cambia foto</string>
     <string name="pf_avatar_remove">Rimuovi foto</string>

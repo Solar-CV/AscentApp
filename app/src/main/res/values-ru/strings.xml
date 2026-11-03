@@ -70,7 +70,8 @@
     <string name="set_section_data">Данные</string>
     <string name="set_reset">Сбросить прогресс</string>
     <string name="set_reset_desc">Удаляет пройденные уроки, звёзды, высоту и статистику обучения; записи достижений тоже удаляются. Отменить нельзя.</string>
-    <string name="set_reset_confirm">Сбросить? Отменить нельзя</string>
+    <string name="set_reset_title">Сбросить прогресс обучения?</string>
+    <string name="set_reset_action">Сбросить</string>
 
     <string name="set_section_about">О приложении</string>
     <string name="set_about_name">ASCENT</string>
@@ -100,7 +101,6 @@
     <string name="acc_delete_failed">Не удалось удалить. Попробуйте ещё раз</string>
     <string name="prof_disclaimer_title">Знать теорию не значит уметь делать это</string>
     <string name="prof_disclaimer_body">Приложение фиксирует только теоретический прогресс. Практические навыки — снег и лёд, работа с верёвкой, ледолазание, спасение — должны быть оценены сертифицированным инструктором на месте, прежде чем применяться в реальных условиях. Решения о лекарствах и первой помощи принимайте вместе с врачом.</string>
-    <string name="prof_reset_all">Сбросить весь прогресс</string>
     <string name="prof_version_line">ASCENT · v%1$s</string>
 
     <string name="auth_login_title">Вход в ASCENT</string>
@@ -117,6 +117,18 @@
     <string name="auth_register_action">Зарегистрироваться</string>
     <string name="auth_mock_note">Сейчас используется локальный макет AuthApi (MockAuthApi). Он не выходит в сеть и не передаёт данные.</string>
     <string name="auth_backend_note">После готовности сервера достаточно заменить реализацию AuthApi — интерфейс менять не нужно.</string>
+
+    <string name="auth_note_cloud">После входа высота, значки и история повторений сохраняются в облаке и доступны на другом устройстве.</string>
+    <string name="auth_password_cloud">Пароль (не менее 8 символов)</string>
+    <string name="prof_login_cloud">Войдите, чтобы синхронизировать устройства</string>
+    <string name="cloud_err_network">Не удаётся связаться с сервером. Проверьте соединение и повторите попытку</string>
+    <string name="cloud_err_credentials">Неверная почта или пароль</string>
+    <string name="cloud_err_email_taken">Эта почта уже зарегистрирована</string>
+    <string name="cloud_err_too_many">Слишком много попыток. Попробуйте позже</string>
+    <string name="cloud_err_server">Сервис недоступен. Повторите попытку позже</string>
+    <string name="cloud_err_email_format">Похоже, почта указана неверно</string>
+    <string name="cloud_err_password_short">Пароль должен быть не короче 8 символов</string>
+    <string name="cloud_err_nickname">Имя должно содержать от 1 до 16 символов</string>
 
     <string name="pf_title">Изменить профиль</string>
     <string name="pf_avatar_change">Сменить фото</string>

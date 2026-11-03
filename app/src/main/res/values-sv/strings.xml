@@ -61,7 +61,8 @@
     <string name="set_section_data">Data</string>
     <string name="set_reset">Återställ inlärningen</string>
     <string name="set_reset_desc">Rensar avklarade lektioner, stjärnor, höjd och statistik; prestationer rensas också. Går inte att ångra.</string>
-    <string name="set_reset_confirm">Återställa? Går inte att ångra</string>
+    <string name="set_reset_title">Återställ framstegen?</string>
+    <string name="set_reset_action">Återställ</string>
     <string name="set_section_about">Om</string>
     <string name="set_about_name">ASCENT</string>
     <string name="set_about_desc">Teori för högalpinism och isklättring</string>
@@ -89,7 +90,6 @@
     <string name="acc_delete_failed">Det gick inte att ta bort, försök igen</string>
     <string name="prof_disclaimer_title">Att kunna teorin är inte samma sak som att kunna göra det</string>
     <string name="prof_disclaimer_body">Appen registrerar bara teoretisk progress. Praktiska färdigheter — snö och is, rep, isklättring, räddning — måste bedömas på plats av en certifierad instruktör innan de används i verklig terräng. Beslut om läkemedel eller första hjälpen ska tas med läkare.</string>
-    <string name="prof_reset_all">Återställ all inlärning</string>
     <string name="prof_version_line">ASCENT · v%1$s</string>
     <string name="auth_login_title">Logga in på ASCENT</string>
     <string name="auth_register_title">Skapa konto</string>
@@ -105,6 +105,18 @@
     <string name="auth_register_action">Registrera och logga in</string>
     <string name="auth_mock_note">Just nu en lokal test-API för autentisering (MockAuthApi). Ingen nätverksanslutning, inga data skickas.</string>
     <string name="auth_backend_note">När backend är klar räcker det att byta implementation av AuthApi; gränssnittet ändras inte.</string>
+
+    <string name="auth_note_cloud">När du loggar in sparas höjdmeter, märken och repetitionshistorik i molnet och finns kvar på en annan enhet.</string>
+    <string name="auth_password_cloud">Lösenord (minst 8 tecken)</string>
+    <string name="prof_login_cloud">Logga in för att synka mellan enheter</string>
+    <string name="cloud_err_network">Kan inte nå servern – kontrollera anslutningen och försök igen</string>
+    <string name="cloud_err_credentials">Fel e-postadress eller lösenord</string>
+    <string name="cloud_err_email_taken">Den e-postadressen är redan registrerad</string>
+    <string name="cloud_err_too_many">För många försök – försök igen senare</string>
+    <string name="cloud_err_server">Tjänsten är otillgänglig – försök igen senare</string>
+    <string name="cloud_err_email_format">Det ser inte ut som en giltig e-postadress</string>
+    <string name="cloud_err_password_short">Lösenordet måste vara minst 8 tecken</string>
+    <string name="cloud_err_nickname">Namnet måste vara 1–16 tecken</string>
     <string name="pf_title">Redigera profil</string>
     <string name="pf_avatar_change">Byt foto</string>
     <string name="pf_avatar_remove">Ta bort foto</string>

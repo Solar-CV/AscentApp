@@ -28,6 +28,14 @@ sealed interface AuthResult {
  *   POST /auth/logout
  */
 interface AuthApi {
+    /**
+     * 当前已登录账号；未登录返回 null。
+     *
+     * 放进接口是因为界面不该知道自己接的是 Mock 还是云端实现——
+     * 换实现时一行 UI 代码都不用动。
+     */
+    fun currentAccount(): Account?
+
     suspend fun login(email: String, password: String): AuthResult
     suspend fun register(email: String, password: String, nickname: String): AuthResult
     suspend fun logout()
@@ -59,7 +67,7 @@ class MockAuthApi(private val context: Context) : AuthApi {
     }
 
     /** 当前是否已登录。 */
-    fun currentAccount(): Account? {
+    override fun currentAccount(): Account? {
         if (!prefs.getBoolean(KEY_LOGGED_IN, false)) return null
         val email = prefs.getString(KEY_EMAIL, null) ?: return null
         return Account(

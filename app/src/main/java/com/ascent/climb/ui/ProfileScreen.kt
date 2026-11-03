@@ -66,6 +66,9 @@ import com.ascent.climb.data.AuthResult
 import com.ascent.climb.data.CLIMB_TRACK
 import com.ascent.climb.data.TREK_TRACK
 import com.ascent.climb.data.MockAuthApi
+import com.ascent.climb.data.AuthApi
+import com.ascent.climb.data.cloud.CloudAuthApi
+import com.ascent.climb.data.cloud.CloudConfig
 import com.ascent.climb.data.activeTrackId
 import com.ascent.climb.data.displaySummitOf
 import kotlinx.coroutines.launch
@@ -125,7 +128,10 @@ fun ProfileScreen(
     onOpenBadge: (String) -> Unit = {}
 ) {
     val context = LocalContext.current
-    val auth = remember { MockAuthApi(context) }
+    // 配了后端就走真实登录，没配就退回本地模拟 —— 界面不需要知道区别
+    val auth: AuthApi = remember {
+        if (CloudConfig.enabled) CloudAuthApi(context) else MockAuthApi(context)
+    }
     val scope = rememberCoroutineScope()
     var account by remember { mutableStateOf(auth.currentAccount()) }
     var showAuth by remember { mutableStateOf(false) }
@@ -264,8 +270,7 @@ fun ProfileScreen(
             onOpenSettings = { showSettings = true },
             onOpenProfileHome = { showProfileHome = true },
             onOpenFeedback = { showFeedback = true },
-            listState = listState,
-            onReset = onReset
+            listState = listState
         )
     }
 }
@@ -295,8 +300,7 @@ private fun ProfileBody(
     onOpenSettings: () -> Unit,
     onOpenProfileHome: () -> Unit,
     onOpenFeedback: () -> Unit,
-    listState: LazyListState,
-    onReset: () -> Unit
+    listState: LazyListState
 ) {
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
     // 隐藏入口：连点版本号 7 次。不显示任何提示文案 —— 连点本身就是约定俗成的入口，
@@ -557,7 +561,13 @@ private fun ProfileBody(
                         Column(modifier = Modifier.weight(1f)) {
                             Text(stringResource(R.string.prof_not_logged_in), color = a.value, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                             Spacer(Modifier.height(3.dp))
-                            Text(stringResource(R.string.prof_login_mock), color = a.sub, fontSize = 12.sp)
+                            Text(
+                                stringResource(
+                                    if (CloudConfig.enabled) R.string.prof_login_cloud else R.string.prof_login_mock
+                                ),
+                                color = a.sub,
+                                fontSize = 12.sp
+                            )
                         }
                         SoftTag(stringResource(R.string.prof_login_register), Ascent.OnAccent, Ascent.Accent)
                     }
@@ -630,27 +640,9 @@ private fun ProfileBody(
             }
         }
 
-        // ---------------- 重置 + 版本 ----------------
-        item(key = "reset") {
-            Spacer(Modifier.height(8.dp))
-            ClaySurface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onReset() },
-                radius = 18.dp,
-                elevation = 5.dp,
-                fill = Brush.verticalGradient(listOf(Color(0xFFFDF1F2), Color(0xFFFAE7E9))),
-                rim = Color(0xFFF4D9DC)
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 15.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(stringResource(R.string.prof_reset_all), color = clayAccents().danger, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
-                }
-            }
-        }
-
+        // ---------------- 版本 ----------------
+        // 重置学习进度已收进设置页（数据分区，带确认弹框）。这里原来是个一点就清空的
+        // 按钮，误触代价太大，不再保留第二入口。
         item(key = "version") {
             Spacer(Modifier.height(18.dp))
             Column(
@@ -723,7 +715,7 @@ private enum class AuthMode { Login, Register }
 
 @Composable
 private fun AuthScreen(
-    auth: MockAuthApi,
+    auth: AuthApi,
     onBack: () -> Unit,
     onSuccess: (Account) -> Unit
 ) {
@@ -768,7 +760,9 @@ private fun AuthScreen(
         )
         Spacer(Modifier.height(6.dp))
         Text(
-            text = if (mode == AuthMode.Login) {
+            text = if (CloudConfig.enabled) {
+                stringResource(R.string.auth_note_cloud)
+            } else if (mode == AuthMode.Login) {
                 stringResource(R.string.auth_login_note)
             } else {
                 stringResource(R.string.auth_register_note)
@@ -834,7 +828,9 @@ private fun AuthScreen(
         AuthField(
             value = password,
             onChange = { password = it; error = null },
-            label = stringResource(R.string.auth_password),
+            label = stringResource(
+                if (CloudConfig.enabled) R.string.auth_password_cloud else R.string.auth_password
+            ),
             keyboardType = KeyboardType.Password,
             isPassword = true
         )
@@ -880,22 +876,25 @@ private fun AuthScreen(
             }
         )
 
-        Spacer(Modifier.height(18.dp))
-        val shape = RoundedCornerShape(14.dp)
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(shape)
-                .background(Ascent.AccentSoft)
-                .padding(13.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.auth_mock_note) +
-                    stringResource(R.string.auth_backend_note),
-                color = Ascent.Fg2,
-                fontSize = 11.sp,
-                lineHeight = 18.sp
-            )
+        // 模拟登录的说明只在真的没接后端时出现，否则等于自曝「这是假的」
+        if (!CloudConfig.enabled) {
+            Spacer(Modifier.height(18.dp))
+            val shape = RoundedCornerShape(14.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(shape)
+                    .background(Ascent.AccentSoft)
+                    .padding(13.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.auth_mock_note) +
+                        stringResource(R.string.auth_backend_note),
+                    color = Ascent.Fg2,
+                    fontSize = 11.sp,
+                    lineHeight = 18.sp
+                )
+            }
         }
 
         Spacer(Modifier.height(40.dp))

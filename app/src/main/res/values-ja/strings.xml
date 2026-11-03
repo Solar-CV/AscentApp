@@ -70,7 +70,8 @@
     <string name="set_section_data">データ</string>
     <string name="set_reset">学習進捗をリセット</string>
     <string name="set_reset_desc">レッスンの完了記録、星、標高、学習統計を消去します。実績記録も消去されます。この操作は取り消せません。</string>
-    <string name="set_reset_confirm">リセットしますか？取り消せません</string>
+    <string name="set_reset_title">学習進度をリセットしますか？</string>
+    <string name="set_reset_action">リセット</string>
 
     <string name="set_section_about">このアプリについて</string>
     <string name="set_about_name">ASCENT 登攀の道</string>
@@ -100,7 +101,6 @@
     <string name="acc_delete_failed">削除できませんでした。もう一度お試しください</string>
     <string name="prof_disclaimer_title">理論を知ることは、実践できることではありません</string>
     <string name="prof_disclaimer_body">本アプリが記録するのは理論学習の進捗です。雪と氷、ロープワーク、アイスクライミング、救助などの実技は、認定コーチの現場評価を受けたうえで初めて実環境で使用できます。薬剤や応急処置に関わる判断は医師に相談してください。</string>
-    <string name="prof_reset_all">学習進捗をすべてリセット</string>
     <string name="prof_version_line">ASCENT · v%1$s</string>
 
     <string name="auth_login_title">ASCENT にログイン</string>
@@ -117,6 +117,18 @@
     <string name="auth_register_action">登録してログイン</string>
     <string name="auth_mock_note">現在は端末内の模擬認証 API（MockAuthApi）です。通信もデータ送信も行いません。</string>
     <string name="auth_backend_note">バックエンドの準備後、AuthApi の実装を差し替えるだけで UI の変更は不要です。</string>
+
+    <string name="auth_note_cloud">ログインすると、海拔・バッジ・復習の記録がクラウドに保存され、別の端末でも引き継げます。</string>
+    <string name="auth_password_cloud">パスワード（8 文字以上）</string>
+    <string name="prof_login_cloud">ログインすると複数の端末で同期できます</string>
+    <string name="cloud_err_network">サーバーに接続できません。通信状況を確認してからもう一度お試しください</string>
+    <string name="cloud_err_credentials">メールアドレスまたはパスワードが正しくありません</string>
+    <string name="cloud_err_email_taken">このメールアドレスはすでに登録されています</string>
+    <string name="cloud_err_too_many">試行回数が多すぎます。しばらくしてからお試しください</string>
+    <string name="cloud_err_server">サービスが一時的に利用できません。しばらくしてからお試しください</string>
+    <string name="cloud_err_email_format">メールアドレスの形式が正しくありません</string>
+    <string name="cloud_err_password_short">パスワードは 8 文字以上にしてください</string>
+    <string name="cloud_err_nickname">ニックネームは 1〜16 文字で入力してください</string>
 
     <string name="pf_title">プロフィールを編集</string>
     <string name="pf_avatar_change">写真を変更</string>

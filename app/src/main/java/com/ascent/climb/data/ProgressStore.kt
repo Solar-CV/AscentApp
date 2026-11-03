@@ -1,6 +1,8 @@
 package com.ascent.climb.data
 
 import android.content.Context
+import com.ascent.climb.data.cloud.DrillRecord
+import com.ascent.climb.data.cloud.SyncPayload
 import java.time.LocalDate
 
 /** 复习队列中的一项。level 越高，下次间隔越长。 */
@@ -15,6 +17,13 @@ class ProgressStore(context: Context) {
 
     companion object {
         const val MAX_ROPE = 5
+
+        /**
+         * 训练项目的稳定 id。快照按这个列表枚举（prefs 里没法遍历 key），
+         * 所以**新增 drill 时这里必须同步加**，否则它不会被同步。
+         * 用字符串而不是资源 id：换语言、调顺序都不会变。
+         */
+        val DRILL_IDS = listOf("breath44", "step", "gear", "weather")
     }
 
     var completed: MutableSet<String>
@@ -452,15 +461,119 @@ class ProgressStore(context: Context) {
         pendingAchievements = mutableListOf()
     }
 
+    // ---------------- 云端同步（见 CLOUD-PLAN.md） ----------------
+
+    /**
+     * 本机标识。只在快照里用于区分「同一账号下不同设备」，
+     * 不含任何硬件信息，也不能用来定位用户。
+     */
+    val deviceId: String
+        get() {
+            prefs.getString("deviceId", null)?.let { return it }
+            val id = "dev_" + java.util.UUID.randomUUID().toString().replace("-", "").take(12)
+            prefs.edit().putString("deviceId", id).apply()
+            return id
+        }
+
+    /** 上次同步成功的时间（毫秒），0 表示从未同步。 */
+    var lastSyncAt: Long
+        get() = prefs.getLong("lastSyncAt", 0L)
+        set(value) = prefs.edit().putLong("lastSyncAt", value).apply()
+
+    /** 上次同步后服务端的版本号，写入时作为乐观锁的基准。 */
+    var lastSyncRev: Int
+        get() = prefs.getInt("lastSyncRev", 0)
+        set(value) = prefs.edit().putInt("lastSyncRev", value).apply()
+
+    /** 把当前进度打包成可上传 / 可导出的快照。 */
+    fun snapshot(): SyncPayload {
+        val reviews = loadReviews()
+        return SyncPayload(
+            completed = completed,
+            stars = allStars(),
+            reviews = reviews.values.toList(),
+            achievements = unlockedAchievements,
+            lessonRuns = lessonRuns,
+            reviewDone = reviewDone,
+            days = activeDays,
+            streak = streak,
+            maxStreak = maxStreak,
+            streakBroken = streakBroken,
+            lastDay = lastDay,
+            drills = DRILL_IDS.map { id ->
+                DrillRecord(
+                    id = id,
+                    count = drillCount(id),
+                    seconds = drillTotalSeconds(id),
+                    best = drillBest(id),
+                    last = drillLastDay(id)
+                )
+            }
+        )
+    }
+
+    /**
+     * 把合并后的快照写回本机。**整体覆盖，不做二次合并** ——
+     * 合并已经由 SyncPayload.merge 完成，这里再合一次只会让两处规则分叉。
+     */
+    fun applySnapshot(p: SyncPayload) {
+        completed = p.completed.toMutableSet()
+        starEntries = p.stars.map { "${it.key}:${it.value}" }.toMutableSet()
+        saveReviews(p.reviews.associateBy { it.key })
+        unlockedAchievements = p.achievements.toMutableSet()
+        lessonRuns = p.lessonRuns
+        reviewDone = p.reviewDone
+        activeDays = p.days.toMutableSet()
+        streak = p.streak
+        maxStreak = p.maxStreak
+        streakBroken = p.streakBroken
+        if (p.lastDay.isNotEmpty()) lastDay = p.lastDay
+        p.drills.forEach { d ->
+            prefs.edit()
+                .putInt("drill_${d.id}_count", d.count)
+                .putInt("drill_${d.id}_seconds", d.seconds)
+                .putInt("drill_${d.id}_best", d.best)
+                .putLong("drill_${d.id}_last", d.last)
+                .apply()
+        }
+    }
+
+    /**
+     * 重置学习进度。
+     *
+     * 只清学习数据（课程、星级、海拔、连续天数、活跃日、成就、复习队列、训练记录），
+     * 保留：
+     *  - 外观与设备偏好：主题 / 语言 / 首启已完成 / 轨道 / 徽章页底色 / 开发者开关；
+     *  - 身份：本地用户名、头像版本。
+     *
+     * 以前这里是「清空 prefs 再回写开发者开关」，结果重置进度会顺手把用户名、头像、
+     * 主题、界面语言一起清掉（语言会跳回系统语言），跟按钮承诺的「重置学习进度」不符。
+     * 真要把身份也删掉，走「删除账号」（[wipeUserData]）。
+     */
     fun reset() {
-        // 重置学习进度不应关掉开发者模式
+        val theme = themeMode
+        val lang = languageMode
+        val track = trackId
+        val onboarded = onboardingDone
+        val stageBg = badgeStageBg
         val dev = devUnlocked
         val unlock = devUnlockAll
         val answers = devShowAnswers
+        val name = displayName
+        val avatar = avatarVersion
+
         prefs.edit().clear().apply()
+
+        themeMode = theme
+        languageMode = lang
+        trackId = track
+        onboardingDone = onboarded
+        badgeStageBg = stageBg
         devUnlocked = dev
         devUnlockAll = unlock
         devShowAnswers = answers
+        displayName = name
+        avatarVersion = avatar
     }
 
     /**

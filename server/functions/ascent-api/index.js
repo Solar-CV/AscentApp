@@ -103,14 +103,17 @@ function sha256(s) {
   return crypto.createHash("sha256").update(s).digest("hex");
 }
 
-/** scrypt 哈希，格式 scrypt$N$r$p$salt$hash（参数随包写死，方便日后升级）。 */
+/**
+ * scrypt 参数。N=2^17 是 OWASP 现行建议的基线，内存占用约 128 MB，
+ * 因此**云函数内存必须配 512 MB**（见 server/README.md）；留在 256 MB 会 OOM。
+ * 参数写进哈希串里，以后调整不影响老密码的校验。
+ */
+const SCRYPT = { N: 1 << 17, r: 8, p: 1, maxmem: 256 * 1024 * 1024 };
+
 function hashPassword(password) {
   const salt = crypto.randomBytes(16);
-  const N = 16384;
-  const r = 8;
-  const p = 1;
-  const hash = crypto.scryptSync(password, salt, 64, { N, r, p, maxmem: 64 * 1024 * 1024 });
-  return `scrypt$${N}$${r}$${p}$${salt.toString("hex")}$${hash.toString("hex")}`;
+  const hash = crypto.scryptSync(password, salt, 64, SCRYPT);
+  return `scrypt$${SCRYPT.N}$${SCRYPT.r}$${SCRYPT.p}$${salt.toString("hex")}$${hash.toString("hex")}`;
 }
 
 function verifyPassword(password, stored) {
@@ -124,7 +127,7 @@ function verifyPassword(password, stored) {
   const expected = Buffer.from(parts[5], "hex");
   let actual;
   try {
-    actual = crypto.scryptSync(password, salt, expected.length, { N, r, p, maxmem: 64 * 1024 * 1024 });
+    actual = crypto.scryptSync(password, salt, expected.length, { N, r, p, maxmem: SCRYPT.maxmem });
   } catch (e) {
     return false;
   }
