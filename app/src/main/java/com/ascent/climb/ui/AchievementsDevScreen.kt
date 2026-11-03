@@ -262,7 +262,7 @@ fun AchievementsDevScreen(
                                 Text(a.id, color = Ascent.Fg3, fontSize = 10.sp, fontFamily = MonoNumbers)
                                 Spacer(Modifier.height(3.dp))
                                 Text(
-                                    text = if (concealed) stringResource(R.string.badge_hidden) else a.conditionText,
+                                    text = if (concealed) stringResource(R.string.badge_hidden) else achCondition(a.id, a.conditionText),
                                     color = Ascent.Fg3,
                                     fontSize = 11.sp,
                                     lineHeight = 15.sp

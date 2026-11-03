@@ -1335,7 +1335,7 @@ fun Badge3DStageScreen(
                     }
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = ach.conditionText,
+                        text = achCondition(ach.id, ach.conditionText),
                         color = ink2,
                         fontSize = 12.sp,
                         lineHeight = 18.sp

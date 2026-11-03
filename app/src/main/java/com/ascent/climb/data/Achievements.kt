@@ -73,7 +73,7 @@ private fun unitAll(uid: String): (AchievementStats) -> Boolean =
  * 第 1 版（66 课时代）只有攀登一条线，`five_zones` / `full_route` 直接数
  * 「所有单元」，语义是对的。补上徒步之后这个写法就塌了：
  * 徒步只有 4 个单元，数「所有单元」会把徒步也算进攀登的大满贯，
- * 于是徒步走完 21 课就能拿到「理论大满贯」。所以这里把两条线的单元显式列出来，
+ * 于是徒步走完 22 课就能拿到「理论大满贯」。所以这里把两条线的单元显式列出来，
  * 各自的成就只认自己那串 id。
  */
 private val CLIMB_UNITS = listOf("m5i", "m5a", "m6", "m7", "m7h", "m8")
@@ -150,7 +150,7 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
     ),
     Achievement(
         "six_k_grad", "六千米毕业", "6,000 米单元全部完成。",
-        AchCategory.Progress, Rarity.Rare, "mountain", "单元 3（m6）全部 14 课完成",
+        AchCategory.Progress, Rarity.Rare, "mountain", "单元 3（m6）全部 15 课完成",
         target = 14,
         progress = { it.unitProgress["m6"]?.first ?: 0 },
         unlocked = unitAll("m6")
@@ -299,8 +299,8 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = unitAll("m8")
     ),
     Achievement(
-        "full_route", "攀登大满贯", "攀登 68 门课全部完成，理论路线走到终点。",
-        AchCategory.Explore, Rarity.Legendary, "award", "攀登全部 68 课完成（m5i / m5a / m6 / m7 / m7h / m8 六个单元）",
+        "full_route", "攀登大满贯", "攀登 69 门课全部完成，理论路线走到终点。",
+        AchCategory.Explore, Rarity.Legendary, "award", "攀登全部 69 课完成（m5i / m5a / m6 / m7 / m7h / m8 六个单元）",
         target = 68,
         progress = { unitsDone(it, CLIMB_UNITS) },
         unlocked = { unitsAllDone(it, CLIMB_UNITS) }
@@ -329,7 +329,7 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
 
     // ---------------- E · 徒步线（v0.19.27 新增） ----------------
     //
-    // 徒步 21 课此前完全没有成就，走完整条线没有任何反馈。
+    // 徒步 22 课此前完全没有成就，走完整条线没有任何反馈。
     // 这里按「入门 → 两个单元 → 全线 → 跨线」四级铺开，
     // 与攀登的 l1 / 单元 / 大满贯同一套节奏。
     Achievement(
@@ -340,7 +340,7 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
     ),
     Achievement(
         "trail_camp", "扎营一夜", "多日徒步的营地那几件事，都过了一遍。",
-        AchCategory.Progress, Rarity.Rare, "tent", "徒步单元 t2（多日与露营）全部 8 课完成",
+        AchCategory.Progress, Rarity.Rare, "tent", "徒步单元 t2（多日与露营）全部 9 课完成",
         target = 8,
         progress = { it.unitProgress["t2"]?.first ?: 0 },
         unlocked = unitAll("t2")
@@ -353,8 +353,8 @@ val ACHIEVEMENTS: List<Achievement> = listOf(
         unlocked = unitAll("t3")
     ),
     Achievement(
-        "trail_finish", "徒步毕业", "徒步 21 门课全部完成，长线也能自己带。",
-        AchCategory.Progress, Rarity.Epic, "flag", "徒步全部 21 课完成（t1 / t2 / t3 / t4 四个单元）",
+        "trail_finish", "徒步毕业", "徒步 22 门课全部完成，长线也能自己带。",
+        AchCategory.Progress, Rarity.Epic, "flag", "徒步全部 22 课完成（t1 / t2 / t3 / t4 四个单元）",
         target = 21,
         progress = { unitsDone(it, TREK_UNITS) },
         unlocked = { unitsAllDone(it, TREK_UNITS) }

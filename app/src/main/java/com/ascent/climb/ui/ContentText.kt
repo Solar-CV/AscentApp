@@ -47,6 +47,10 @@ fun achievementTitle(id: String, original: String): String = ctext("ach.$id.titl
 @Composable
 fun achievementDesc(id: String, original: String): String = ctext("ach.$id.desc", original)
 
+/** 成就的「条件」一行。开发者成就测试区与 3D 展示页都会显示，必须跟随界面语言。 */
+@Composable
+fun achCondition(id: String, original: String): String = ctext("ach.$id.cond", original)
+
 /** 技能书标题。 */
 @Composable
 fun articleTitle(id: String, original: String): String = ctext("hb.$id.title", original)
