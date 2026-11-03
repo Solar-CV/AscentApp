@@ -132,6 +132,7 @@ fun ProfileScreen(
     var showProfileHome by remember { mutableStateOf(false) }
     var showBadgeWall by remember { mutableStateOf(false) }
     var showFeedback by remember { mutableStateOf(false) }
+    var showEditProfile by remember { mutableStateOf(false) }
 
     // 列表滚动位置提到这里：切到设置/成就/反馈等二级页时，ProfileBody 会离开组合，
     // 状态若留在它内部就会被丢掉，返回时弹回顶部。
@@ -149,6 +150,10 @@ fun ProfileScreen(
                 onOpenBadge = onOpenBadge
             )
         }
+    } else if (showEditProfile) {
+        branchStates.SaveableStateProvider("editProfile") {
+            EditProfileScreen(store = store, onBack = { showEditProfile = false })
+        }
     } else if (showProfileHome) {
         branchStates.SaveableStateProvider("home") {
             ProfileHomeScreen(
@@ -159,7 +164,8 @@ fun ProfileScreen(
                 achRevision = achRevision,
                 onBack = { showProfileHome = false },
                 onOpenAllBadges = { showBadgeWall = true },
-                onOpenBadge = onOpenBadge
+                onOpenBadge = onOpenBadge,
+                onEditProfile = { showEditProfile = true }
             )
         }
     // 注意分支顺序：成就测试页是从设置页里点开的，必须排在 showSettings 之前判断。
@@ -317,22 +323,24 @@ private fun ProfileBody(
         // ---------------- 档案头 ----------------
         item(key = "head") {
             val a = clayAccents()
+            // 显示名优先本地资料，其次账号昵称，都没有才用默认称呼。
+            // 本地资料在「编辑资料」里改，与登录无关（登录还是模拟态，等后端）。
+            val defaultName = stringResource(R.string.pf_default_name)
+            val shownName = store.displayName.ifBlank { account?.nickname ?: defaultName }
             Row(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                ClayChip(
-                    color = Ascent.Accent,
+                UserAvatar(
+                    version = store.avatarVersion,
+                    name = shownName,
                     size = 56.dp,
-                    radius = 20.dp,
                     modifier = Modifier.clickable { onOpenProfileHome() }
-                ) {
-                    Icon(Ic.UserRound, contentDescription = null, tint = Color.White, modifier = Modifier.size(26.dp))
-                }
+                )
                 Spacer(Modifier.width(14.dp))
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = account?.nickname ?: stringResource(R.string.prof_not_logged_in),
+                        text = shownName,
                         color = a.value,
                         fontSize = 19.sp,
                         fontWeight = FontWeight.Bold

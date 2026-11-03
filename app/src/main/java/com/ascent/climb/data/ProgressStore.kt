@@ -355,6 +355,24 @@ class ProgressStore(context: Context) {
         set(value) = prefs.edit().putString("languageMode", value).apply()
 
     /**
+     * 本地用户名。空串表示没设过，界面回退到默认称呼（见 R.string.pf_default_name）。
+     *
+     * 与账号系统（data/Auth.kt）无关：那边是模拟登录、等后端接入，
+     * 这里是纯本地的显示名，卸载前一直有效。
+     */
+    var displayName: String
+        get() = prefs.getString("displayName", "") ?: ""
+        set(value) = prefs.edit().putString("displayName", value.trim().take(16)).apply()
+
+    /**
+     * 头像版本号。头像文件路径固定（filesDir/avatar.jpg），文件名不变的话
+     * Compose 不会重新解码 —— 换头像后靠这个数 +1 触发重读。0 表示没有头像。
+     */
+    var avatarVersion: Int
+        get() = prefs.getInt("avatarVersion", 0)
+        set(value) = prefs.edit().putInt("avatarVersion", value).apply()
+
+    /**
      * 当前课程大类：climb（高山攀登）/ trek（徒步）。
      * 只影响「看哪条路线」，进度本身按课程 id 存，两条轨道互不干扰。
      */

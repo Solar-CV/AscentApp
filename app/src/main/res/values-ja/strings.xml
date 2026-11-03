@@ -109,6 +109,14 @@
     <string name="auth_mock_note">現在は端末内の模擬認証 API（MockAuthApi）です。通信もデータ送信も行いません。</string>
     <string name="auth_backend_note">バックエンドの準備後、AuthApi の実装を差し替えるだけで UI の変更は不要です。</string>
 
+    <string name="pf_title">プロフィールを編集</string>
+    <string name="pf_avatar_change">写真を変更</string>
+    <string name="pf_avatar_remove">写真を削除</string>
+    <string name="pf_name_label">表示名</string>
+    <string name="pf_name_hint">16 文字まで</string>
+    <string name="pf_avatar_failed">この画像は読み込めません。別の画像を試してください</string>
+    <string name="pf_default_name">登山者</string>
+    <string name="pf_done">完了</string>
     <string name="home_title">マイページ</string>
     <string name="home_subtitle">%1$s M · %2$d / %3$d レッスン完了</string>
     <string name="home_overview">学習の概要</string>

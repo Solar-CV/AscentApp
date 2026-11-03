@@ -116,6 +116,14 @@
     <string name="auth_backend_note">Swap the AuthApi implementation once the backend is ready; the UI needs no changes.</string>
 
     <!-- Profile home -->
+    <string name="pf_title">Edit profile</string>
+    <string name="pf_avatar_change">Change photo</string>
+    <string name="pf_avatar_remove">Remove photo</string>
+    <string name="pf_name_label">Display name</string>
+    <string name="pf_name_hint">Up to 16 characters</string>
+    <string name="pf_avatar_failed">Couldn\'t read that image — try another one</string>
+    <string name="pf_default_name">Climber</string>
+    <string name="pf_done">Done</string>
     <string name="home_title">My profile</string>
     <string name="home_subtitle">%1$s m · %2$d / %3$d lessons done</string>
     <string name="home_overview">Learning overview</string>

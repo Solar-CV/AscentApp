@@ -109,6 +109,14 @@
     <string name="auth_mock_note">Сейчас используется локальный макет AuthApi (MockAuthApi). Он не выходит в сеть и не передаёт данные.</string>
     <string name="auth_backend_note">После готовности сервера достаточно заменить реализацию AuthApi — интерфейс менять не нужно.</string>
 
+    <string name="pf_title">Изменить профиль</string>
+    <string name="pf_avatar_change">Сменить фото</string>
+    <string name="pf_avatar_remove">Удалить фото</string>
+    <string name="pf_name_label">Отображаемое имя</string>
+    <string name="pf_name_hint">До 16 символов</string>
+    <string name="pf_avatar_failed">Не удалось прочитать изображение — попробуйте другое</string>
+    <string name="pf_default_name">Альпинист</string>
+    <string name="pf_done">Готово</string>
     <string name="home_title">Мой профиль</string>
     <string name="home_subtitle">%1$s м · %2$d / %3$d уроков</string>
     <string name="home_overview">Обзор обучения</string>

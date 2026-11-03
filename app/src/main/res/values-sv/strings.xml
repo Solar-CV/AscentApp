@@ -96,6 +96,14 @@
     <string name="auth_register_action">Registrera och logga in</string>
     <string name="auth_mock_note">Just nu en lokal test-API för autentisering (MockAuthApi). Ingen nätverksanslutning, inga data skickas.</string>
     <string name="auth_backend_note">När backend är klar räcker det att byta implementation av AuthApi; gränssnittet ändras inte.</string>
+    <string name="pf_title">Redigera profil</string>
+    <string name="pf_avatar_change">Byt foto</string>
+    <string name="pf_avatar_remove">Ta bort foto</string>
+    <string name="pf_name_label">Visningsnamn</string>
+    <string name="pf_name_hint">Upp till 16 tecken</string>
+    <string name="pf_avatar_failed">Bilden kan inte läsas, prova en annan</string>
+    <string name="pf_default_name">Bergsbestigare</string>
+    <string name="pf_done">Klar</string>
     <string name="home_title">Min profil</string>
     <string name="home_subtitle">%1$s m · %2$d / %3$d lektioner</string>
     <string name="home_overview">Lärandeöversikt</string>

@@ -54,7 +54,8 @@ fun ProfileHomeScreen(
     achRevision: Int,
     onBack: () -> Unit,
     onOpenAllBadges: () -> Unit,
-    onOpenBadge: (String) -> Unit = {}
+    onOpenBadge: (String) -> Unit = {},
+    onEditProfile: () -> Unit = {}
 ) {
     val unlocked = remember(achRevision) { store.unlockedAchievements.toSet() }
     val stats = remember(achRevision) { store.achievementStats() }
@@ -93,17 +94,21 @@ fun ProfileHomeScreen(
 
             // ---------------- 档案头 ----------------
             item(key = "id") {
-                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(bottom = 16.dp)) {
-                    ClayChip(
-                        color = Ascent.Accent,
-                        size = 60.dp,
-                        radius = 30.dp
-                    ) {
-                        Icon(Ic.UserRound, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
-                    }
+                // 整块可点：头像是唯一「属于你」的东西，点它就改资料最符合直觉。
+                val shownName = store.displayName.ifBlank { stringResource(R.string.pf_default_name) }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                        .clip(RoundedCornerShape(18.dp))
+                        .clickable { onEditProfile() }
+                        .padding(vertical = 2.dp)
+                ) {
+                    UserAvatar(version = store.avatarVersion, name = shownName, size = 60.dp)
                     Spacer(Modifier.width(14.dp))
                     Column(modifier = Modifier.weight(1f)) {
-                        Text(stringResource(R.string.home_title), color = Ascent.Fg, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                        Text(shownName, color = Ascent.Fg, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                         Spacer(Modifier.height(3.dp))
                         Text(
                             text = stringResource(R.string.home_meta, formatMeters(altitude), doneHere, ALL_LESSONS.size),
@@ -111,6 +116,12 @@ fun ProfileHomeScreen(
                             fontSize = 12.sp
                         )
                     }
+                    Icon(
+                        Ic.ChevronRight,
+                        contentDescription = null,
+                        tint = Ascent.Fg3,
+                        modifier = Modifier.size(16.dp)
+                    )
                 }
             }
 

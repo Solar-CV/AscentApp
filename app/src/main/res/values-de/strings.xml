@@ -96,6 +96,14 @@
     <string name="auth_register_action">Registrieren und anmelden</string>
     <string name="auth_mock_note">Derzeit lokale Test-Auth-API (MockAuthApi). Keine Netzwerkverbindung, keine Datenübertragung.</string>
     <string name="auth_backend_note">Sobald das Backend bereit ist, genügt der Austausch der AuthApi-Implementierung; die Oberfläche bleibt unverändert.</string>
+    <string name="pf_title">Profil bearbeiten</string>
+    <string name="pf_avatar_change">Foto ändern</string>
+    <string name="pf_avatar_remove">Foto entfernen</string>
+    <string name="pf_name_label">Anzeigename</string>
+    <string name="pf_name_hint">Bis zu 16 Zeichen</string>
+    <string name="pf_avatar_failed">Dieses Bild lässt sich nicht lesen – versuch ein anderes</string>
+    <string name="pf_default_name">Bergsteiger</string>
+    <string name="pf_done">Fertig</string>
     <string name="home_title">Mein Profil</string>
     <string name="home_subtitle">%1$s m · %2$d / %3$d Lektionen</string>
     <string name="home_overview">Lernübersicht</string>

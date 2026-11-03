@@ -1,6 +1,9 @@
 package com.ascent.climb.ui
 
 import com.ascent.climb.R
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -688,4 +691,19 @@ fun CapsuleTabBar(
             }
         }
     }
+}
+
+/**
+ * 沿 ContextWrapper 找到宿主 Activity。
+ *
+ * `LocalContext` 在 MainActivity 里被语言包装过（AppLocale.localizedContext），
+ * 直接 `as? ComponentActivity` 拿不到。训练页的常亮 flag 与头像选择都要真 Activity。
+ */
+fun Context.findActivity(): Activity? {
+    var c: Context = this
+    while (c is ContextWrapper) {
+        if (c is Activity) return c
+        c = c.baseContext
+    }
+    return null
 }

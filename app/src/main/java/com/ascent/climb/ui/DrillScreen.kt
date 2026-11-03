@@ -151,15 +151,6 @@ private fun KeepScreenOn() {
     }
 }
 
-/** Compose 的 view.context 在部分场景下是 ContextWrapper 而非 Activity，逐层解开。 */
-private fun android.content.Context.findActivity(): Activity? {
-    var c: android.content.Context? = this
-    while (c is ContextWrapper) {
-        if (c is Activity) return c
-        c = c.baseContext
-    }
-    return null
-}
 
 /**
  * 计时引擎。

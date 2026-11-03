@@ -96,6 +96,14 @@
     <string name="auth_register_action">S’inscrire et se connecter</string>
     <string name="auth_mock_note">API d’authentification locale simulée (MockAuthApi). Aucune connexion réseau, aucune donnée envoyée.</string>
     <string name="auth_backend_note">Il suffira de remplacer l’implémentation d’AuthApi une fois le backend prêt ; l’interface ne change pas.</string>
+    <string name="pf_title">Modifier le profil</string>
+    <string name="pf_avatar_change">Changer la photo</string>
+    <string name="pf_avatar_remove">Retirer la photo</string>
+    <string name="pf_name_label">Nom affiché</string>
+    <string name="pf_name_hint">16 caractères maximum</string>
+    <string name="pf_avatar_failed">Impossible de lire cette image, essaie-en une autre</string>
+    <string name="pf_default_name">Alpiniste</string>
+    <string name="pf_done">Terminé</string>
     <string name="home_title">Mon profil</string>
     <string name="home_subtitle">%1$s m · %2$d / %3$d leçons</string>
     <string name="home_overview">Aperçu de l’apprentissage</string>

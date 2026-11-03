@@ -96,6 +96,14 @@
     <string name="auth_register_action">Registrati e accedi</string>
     <string name="auth_mock_note">Al momento è un’API di autenticazione locale simulata (MockAuthApi). Non si connette e non invia dati.</string>
     <string name="auth_backend_note">Quando il backend sarà pronto basterà sostituire l’implementazione di AuthApi; l’interfaccia non cambia.</string>
+    <string name="pf_title">Modifica profilo</string>
+    <string name="pf_avatar_change">Cambia foto</string>
+    <string name="pf_avatar_remove">Rimuovi foto</string>
+    <string name="pf_name_label">Nome visualizzato</string>
+    <string name="pf_name_hint">Fino a 16 caratteri</string>
+    <string name="pf_avatar_failed">Impossibile leggere questa immagine, provane un\'altra</string>
+    <string name="pf_default_name">Alpinista</string>
+    <string name="pf_done">Fatto</string>
     <string name="home_title">Il mio profilo</string>
     <string name="home_subtitle">%1$s m · %2$d / %3$d lezioni</string>
     <string name="home_overview">Panoramica apprendimento</string>
