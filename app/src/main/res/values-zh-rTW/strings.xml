@@ -4,6 +4,7 @@
 
     <string name="common_back">返回</string>
     <string name="common_close">關閉</string>
+    <string name="common_cancel">取消</string>
     <string name="common_done">完成</string>
     <string name="common_next">下一步</string>
     <string name="common_continue">繼續</string>
@@ -89,6 +90,14 @@
     <string name="prof_login_mock">本機模擬登入，暫不同步資料</string>
     <string name="prof_login_register">登入 / 註冊</string>
     <string name="prof_logout">登出</string>
+
+    <!-- ========== 刪除帳號（Google Play 合規入口，設定頁最底部） ========== -->
+    <string name="set_section_account">帳號</string>
+    <string name="acc_delete">刪除帳號</string>
+    <string name="acc_delete_title">刪除帳號？</string>
+    <string name="acc_delete_body">%1$s 及其在本機的全部資料將被永久刪除：\n\n· 學習進度、海拔與連續天數\n· 成就徽章與複習佇列\n· 頭像與使用者名稱\n\n此操作無法復原。</string>
+    <string name="acc_delete_action">刪除</string>
+    <string name="acc_delete_failed">刪除失敗，請重試</string>
     <string name="prof_disclaimer_title">理論掌握不等於實際操作能力</string>
     <string name="prof_disclaimer_body">本應用程式記錄的是理論學習進度。冰雪、繩索、攀冰、救援等實作技能，必須經持證教練現場評估後，才能在真實環境中使用。涉及藥物與急救的決策須諮詢專業醫師。</string>
     <string name="prof_reset_all">重設全部學習進度</string>

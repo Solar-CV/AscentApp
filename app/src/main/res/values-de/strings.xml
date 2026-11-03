@@ -3,6 +3,7 @@
     <string name="app_name">ASCENT</string>
     <string name="common_back">Zurück</string>
     <string name="common_close">Schließen</string>
+    <string name="common_cancel">Abbrechen</string>
     <string name="common_done">Fertig</string>
     <string name="common_next">Weiter</string>
     <string name="common_continue">Fortfahren</string>
@@ -78,6 +79,14 @@
     <string name="prof_login_mock">Lokale Testanmeldung, Daten werden noch nicht synchronisiert</string>
     <string name="prof_login_register">Anmelden / Registrieren</string>
     <string name="prof_logout">Abmelden</string>
+
+    <!-- ========== Konto löschen (Google-Play-Vorgabe, unten in den Einstellungen) ========== -->
+    <string name="set_section_account">Konto</string>
+    <string name="acc_delete">Konto löschen</string>
+    <string name="acc_delete_title">Konto löschen?</string>
+    <string name="acc_delete_body">%1$s und alle Daten auf diesem Gerät werden endgültig gelöscht:\n\n· Lernfortschritt, Höhe und Serie\n· Abzeichen und Wiederholungsliste\n· Foto und Anzeigename\n\nDas lässt sich nicht rückgängig machen.</string>
+    <string name="acc_delete_action">Löschen</string>
+    <string name="acc_delete_failed">Löschen fehlgeschlagen, bitte erneut versuchen</string>
     <string name="prof_disclaimer_title">Theorie zu kennen heißt nicht, es zu können</string>
     <string name="prof_disclaimer_body">Diese App erfasst nur den Theoriefortschritt. Praktische Fähigkeiten — Schnee und Eis, Seiltechnik, Eisklettern, Rettung — müssen vor der Anwendung im realen Gelände von einer zertifizierten Trainerin oder einem zertifizierten Trainer vor Ort bewertet werden. Entscheidungen zu Medikamenten oder Erster Hilfe gehören in ärztliche Hand.</string>
     <string name="prof_reset_all">Gesamten Fortschritt zurücksetzen</string>

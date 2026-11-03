@@ -3,6 +3,7 @@
     <string name="app_name">ASCENT</string>
     <string name="common_back">Retour</string>
     <string name="common_close">Fermer</string>
+    <string name="common_cancel">Annuler</string>
     <string name="common_done">Terminé</string>
     <string name="common_next">Suivant</string>
     <string name="common_continue">Continuer</string>
@@ -78,6 +79,14 @@
     <string name="prof_login_mock">Connexion locale simulée, données non synchronisées</string>
     <string name="prof_login_register">Connexion / Inscription</string>
     <string name="prof_logout">Se déconnecter</string>
+
+    <!-- ========== Supprimer le compte (exigence Google Play, bas des réglages) ========== -->
+    <string name="set_section_account">Compte</string>
+    <string name="acc_delete">Supprimer le compte</string>
+    <string name="acc_delete_title">Supprimer le compte ?</string>
+    <string name="acc_delete_body">%1$s et toutes ses données sur cet appareil seront définitivement supprimés :\n\n· Progression, altitude et série\n· Badges et file de révision\n· Photo et nom affiché\n\nCette action est irréversible.</string>
+    <string name="acc_delete_action">Supprimer</string>
+    <string name="acc_delete_failed">Échec de la suppression, réessaie</string>
     <string name="prof_disclaimer_title">Connaître la théorie n’est pas savoir faire</string>
     <string name="prof_disclaimer_body">Cette app enregistre uniquement la progression théorique. Les compétences pratiques — neige et glace, cordes, cascade de glace, secours — doivent être évaluées sur place par un encadrant certifié avant tout usage en terrain réel. Les décisions concernant les médicaments ou les premiers secours doivent être prises avec un médecin.</string>
     <string name="prof_reset_all">Réinitialiser toute la progression</string>

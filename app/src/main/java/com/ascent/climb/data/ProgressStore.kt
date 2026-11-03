@@ -462,4 +462,36 @@ class ProgressStore(context: Context) {
         devUnlockAll = unlock
         devShowAnswers = answers
     }
+
+    /**
+     * 删除账号时清本机数据。
+     *
+     * 与 [reset] 的区别：这里要连本地用户名、头像版本一起清掉（它们属于「人」），
+     * 但保留「这台设备怎么用」的偏好 —— 主题、界面语言、首启引导是否已过、当前轨道、
+     * 徽章展示页底色、开发者开关。全清的话，删个账号界面语言会突然跳回系统语言，
+     * 看起来像把 App 一起重置了。
+     *
+     * 真正的账号记录在 `MockAuthApi.deleteAccount()` 里删，不在这。
+     */
+    fun wipeUserData() {
+        val keepTheme = themeMode
+        val keepLang = languageMode
+        val keepTrack = trackId
+        val keepOnboarded = onboardingDone
+        val keepStageBg = badgeStageBg
+        val keepDev = devUnlocked
+        val keepUnlockAll = devUnlockAll
+        val keepAnswers = devShowAnswers
+
+        prefs.edit().clear().apply()
+
+        themeMode = keepTheme
+        languageMode = keepLang
+        trackId = keepTrack
+        onboardingDone = keepOnboarded
+        badgeStageBg = keepStageBg
+        devUnlocked = keepDev
+        devUnlockAll = keepUnlockAll
+        devShowAnswers = keepAnswers
+    }
 }

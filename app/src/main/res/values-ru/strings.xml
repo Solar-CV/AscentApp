@@ -4,6 +4,7 @@
 
     <string name="common_back">Назад</string>
     <string name="common_close">Закрыть</string>
+    <string name="common_cancel">Отмена</string>
     <string name="common_done">Готово</string>
     <string name="common_next">Далее</string>
     <string name="common_continue">Продолжить</string>
@@ -89,6 +90,14 @@
     <string name="prof_login_mock">Локальный вход, данные пока не синхронизируются</string>
     <string name="prof_login_register">Вход / Регистрация</string>
     <string name="prof_logout">Выйти</string>
+
+    <!-- ========== Удаление аккаунта (требование Google Play, низ настроек) ========== -->
+    <string name="set_section_account">Аккаунт</string>
+    <string name="acc_delete">Удалить аккаунт</string>
+    <string name="acc_delete_title">Удалить аккаунт?</string>
+    <string name="acc_delete_body">%1$s и все данные на этом устройстве будут удалены безвозвратно:\n\n· Прогресс занятий, высота и серия дней\n· Значки и очередь повторений\n· Фото и отображаемое имя\n\nОтменить это действие нельзя.</string>
+    <string name="acc_delete_action">Удалить</string>
+    <string name="acc_delete_failed">Не удалось удалить. Попробуйте ещё раз</string>
     <string name="prof_disclaimer_title">Знать теорию не значит уметь делать это</string>
     <string name="prof_disclaimer_body">Приложение фиксирует только теоретический прогресс. Практические навыки — снег и лёд, работа с верёвкой, ледолазание, спасение — должны быть оценены сертифицированным инструктором на месте, прежде чем применяться в реальных условиях. Решения о лекарствах и первой помощи принимайте вместе с врачом.</string>
     <string name="prof_reset_all">Сбросить весь прогресс</string>

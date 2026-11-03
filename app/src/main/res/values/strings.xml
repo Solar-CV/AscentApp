@@ -6,6 +6,7 @@
     <!-- ========== 通用 ========== -->
     <string name="common_back">返回</string>
     <string name="common_close">关闭</string>
+    <string name="common_cancel">取消</string>
     <string name="common_done">完成</string>
     <string name="common_next">下一步</string>
     <string name="common_continue">继续</string>
@@ -95,6 +96,14 @@
     <string name="prof_login_mock">本地模拟登录，暂不同步数据</string>
     <string name="prof_login_register">登录 / 注册</string>
     <string name="prof_logout">退出登录</string>
+
+    <!-- ========== 删除账号（Google Play 合规入口，设置页最底部） ========== -->
+    <string name="set_section_account">账号</string>
+    <string name="acc_delete">删除账号</string>
+    <string name="acc_delete_title">删除账号？</string>
+    <string name="acc_delete_body">%1$s 及其在本机的全部数据将被永久删除：\n\n· 学习进度、海拔与连续天数\n· 成就徽章与复习队列\n· 头像与用户名\n\n此操作无法撤销。</string>
+    <string name="acc_delete_action">删除</string>
+    <string name="acc_delete_failed">删除失败，请重试</string>
     <string name="prof_disclaimer_title">理论掌握不等于实际操作能力</string>
     <string name="prof_disclaimer_body">本应用记录的是理论学习进度。冰雪、绳索、攀冰、救援等实践技能，必须由持证教练现场评估后，才能在真实环境中使用。涉及药物与急救的决策须咨询专业医生。</string>
     <string name="prof_reset_all">重置全部学习进度</string>

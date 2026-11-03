@@ -3,6 +3,7 @@
     <string name="app_name">ASCENT</string>
     <string name="common_back">Tillbaka</string>
     <string name="common_close">Stäng</string>
+    <string name="common_cancel">Avbryt</string>
     <string name="common_done">Klart</string>
     <string name="common_next">Nästa</string>
     <string name="common_continue">Fortsätt</string>
@@ -78,6 +79,14 @@
     <string name="prof_login_mock">Lokal testinloggning, data synkas inte ännu</string>
     <string name="prof_login_register">Logga in / Registrera</string>
     <string name="prof_logout">Logga ut</string>
+
+    <!-- ========== Ta bort konto (Google Play-krav, längst ned i inställningarna) ========== -->
+    <string name="set_section_account">Konto</string>
+    <string name="acc_delete">Ta bort konto</string>
+    <string name="acc_delete_title">Ta bort konto?</string>
+    <string name="acc_delete_body">%1$s och alla dess data på den här enheten tas bort permanent:\n\n· Lektionsframsteg, höjd och streak\n· Märken och repetitionskö\n· Foto och visningsnamn\n\nDet går inte att ångra.</string>
+    <string name="acc_delete_action">Ta bort</string>
+    <string name="acc_delete_failed">Det gick inte att ta bort, försök igen</string>
     <string name="prof_disclaimer_title">Att kunna teorin är inte samma sak som att kunna göra det</string>
     <string name="prof_disclaimer_body">Appen registrerar bara teoretisk progress. Praktiska färdigheter — snö och is, rep, isklättring, räddning — måste bedömas på plats av en certifierad instruktör innan de används i verklig terräng. Beslut om läkemedel eller första hjälpen ska tas med läkare.</string>
     <string name="prof_reset_all">Återställ all inlärning</string>

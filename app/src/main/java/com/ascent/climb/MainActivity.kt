@@ -433,6 +433,18 @@ fun AscentRoot(
                                     pendingAchievements = store.pendingAchievements.toList()
                                     achRevision += 1
                                 },
+                                // 删账号后数据全清，但人还停在「我的」页：
+                                // 只重读状态，不做 onReset 那样的 tab = 0 跳转。
+                                onAccountDeleted = {
+                                    altitude = store.altitudeOn(trackId)
+                                    streak = store.streak
+                                    rope = store.rope
+                                    completed = store.completed.toSet()
+                                    dueKeys = store.dueReviewKeys()
+                                    reviewTotal = store.reviewTotal()
+                                    pendingAchievements = store.pendingAchievements.toList()
+                                    achRevision += 1
+                                },
                                 onOpenBadge = { badgeStageId = it }
                             )
                         }

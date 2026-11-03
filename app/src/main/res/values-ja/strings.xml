@@ -4,6 +4,7 @@
 
     <string name="common_back">戻る</string>
     <string name="common_close">閉じる</string>
+    <string name="common_cancel">キャンセル</string>
     <string name="common_done">完了</string>
     <string name="common_next">次へ</string>
     <string name="common_continue">続ける</string>
@@ -89,6 +90,14 @@
     <string name="prof_login_mock">端末内の模擬ログインです。データはまだ同期されません</string>
     <string name="prof_login_register">ログイン / 登録</string>
     <string name="prof_logout">ログアウト</string>
+
+    <!-- ========== アカウント削除（Google Play 対応、設定の最下部） ========== -->
+    <string name="set_section_account">アカウント</string>
+    <string name="acc_delete">アカウントを削除</string>
+    <string name="acc_delete_title">アカウントを削除しますか？</string>
+    <string name="acc_delete_body">%1$s とこの端末上のすべてのデータが完全に削除されます：\n\n· 学習の進捗・標高・連続日数\n· バッジと復習キュー\n· プロフィール写真と表示名\n\nこの操作は取り消せません。</string>
+    <string name="acc_delete_action">削除</string>
+    <string name="acc_delete_failed">削除できませんでした。もう一度お試しください</string>
     <string name="prof_disclaimer_title">理論を知ることは、実践できることではありません</string>
     <string name="prof_disclaimer_body">本アプリが記録するのは理論学習の進捗です。雪と氷、ロープワーク、アイスクライミング、救助などの実技は、認定コーチの現場評価を受けたうえで初めて実環境で使用できます。薬剤や応急処置に関わる判断は医師に相談してください。</string>
     <string name="prof_reset_all">学習進捗をすべてリセット</string>

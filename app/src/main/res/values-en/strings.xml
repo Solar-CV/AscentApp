@@ -5,6 +5,7 @@
     <!-- Common -->
     <string name="common_back">Back</string>
     <string name="common_close">Close</string>
+    <string name="common_cancel">Cancel</string>
     <string name="common_done">Done</string>
     <string name="common_next">Next</string>
     <string name="common_continue">Continue</string>
@@ -94,6 +95,14 @@
     <string name="prof_login_mock">Local mock sign-in; data is not synced yet</string>
     <string name="prof_login_register">Sign in / Sign up</string>
     <string name="prof_logout">Sign out</string>
+
+    <!-- ========== Delete account (Google Play compliance, bottom of Settings) ========== -->
+    <string name="set_section_account">Account</string>
+    <string name="acc_delete">Delete account</string>
+    <string name="acc_delete_title">Delete account?</string>
+    <string name="acc_delete_body">%1$s and all of its data on this device will be permanently deleted:\n\n· Lesson progress, altitude and streak\n· Badges and review queue\n· Photo and display name\n\nThis can\'t be undone.</string>
+    <string name="acc_delete_action">Delete</string>
+    <string name="acc_delete_failed">Couldn\'t delete, please try again</string>
     <string name="prof_disclaimer_title">Knowing the theory is not the same as being able to do it</string>
     <string name="prof_disclaimer_body">This app records theory progress only. Practical skills — snow and ice, rope work, ice climbing, rescue — must be assessed on site by a certified instructor before use in real terrain. Decisions involving medication or first aid must be made with a physician.</string>
     <string name="prof_reset_all">Reset all learning progress</string>

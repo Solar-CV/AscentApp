@@ -31,6 +31,14 @@ interface AuthApi {
     suspend fun login(email: String, password: String): AuthResult
     suspend fun register(email: String, password: String, nickname: String): AuthResult
     suspend fun logout()
+
+    /**
+     * 删除账号。真实实现对应 `DELETE /auth/account`：**服务端要把该账号的数据一并删掉**，
+     * 不是只清登录态（Google Play 的账号删除要求）。
+     *
+     * @return 是否成功。失败时界面保持原状，让用户重试。
+     */
+    suspend fun deleteAccount(): Boolean
 }
 
 /**
@@ -80,6 +88,16 @@ class MockAuthApi(private val context: Context) : AuthApi {
 
     override suspend fun logout() {
         prefs.edit().clear().apply()
+    }
+
+    /**
+     * 本地实现的删除账号：清掉账号 prefs 即可，没有服务端记录要删。
+     * 学习进度等本机数据不在这里动 —— 那是 ProgressStore 的事，由界面层统一清
+     *（见 ProgressStore.wipeUserData），免得「账号删了、进度还在」。
+     */
+    override suspend fun deleteAccount(): Boolean {
+        delay(450) // 与登录一致，让确认框里的忙碌态可见
+        return runCatching { prefs.edit().clear().commit() }.getOrDefault(false)
     }
 
     private fun validate(email: String, password: String): String? = when {

@@ -120,6 +120,8 @@ fun ProfileScreen(
     onBankUrlChange: (String) -> Unit,
     onReset: () -> Unit,
     onAchChanged: () -> Unit,
+    /** 账号被删除后，让上层重读进度/海拔（但不切 tab，用户还停在「我的」页）。 */
+    onAccountDeleted: () -> Unit = {},
     onOpenBadge: (String) -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -206,6 +208,20 @@ fun ProfileScreen(
                 onResetBank = onResetBank,
                 onBankUrlChange = onBankUrlChange,
                 onReset = onReset,
+                accountEmail = account?.email,
+                onDeleteAccount = {
+                    // 删账号 = 账号记录 + 本机数据一起清（Play 的账号删除要求：
+                    // 只删登录态、把数据留着是不合格的）。头像文件不在 prefs 里，单独删。
+                    val ok = auth.deleteAccount()
+                    if (ok) {
+                        AvatarStore.remove(context)
+                        store.wipeUserData()
+                        account = null
+                        showSettings = false
+                        onAccountDeleted()
+                    }
+                    ok
+                },
                 onBack = { showSettings = false }
             )
         }

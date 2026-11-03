@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +37,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.ascent.climb.BuildConfig
 import com.ascent.climb.R
 import com.ascent.climb.i18n.AppLocale
@@ -45,6 +48,7 @@ import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.TOTAL_QUESTIONS
 import com.ascent.climb.data.bank.BankRepository
 import com.ascent.climb.data.ALL_LESSONS
+import kotlinx.coroutines.launch
 
 /**
  * 设置页（「我的」页右上角齿轮进入）。
@@ -73,13 +77,22 @@ fun SettingsScreen(
     onResetBank: () -> Unit,
     onBankUrlChange: (String) -> Unit,
     onReset: () -> Unit,
+    /** 当前登录账号的邮箱；null 表示未登录，此时不显示账号分区。 */
+    accountEmail: String?,
+    /** 执行删除账号（含本机数据），返回是否成功。 */
+    onDeleteAccount: suspend () -> Boolean,
     onBack: () -> Unit
 ) {
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
     var confirmReset by remember { mutableStateOf(false) }
     var confirmBankReset by remember { mutableStateOf(false) }
+    // 删除账号：弹确认框，删除中禁掉两个按钮，失败留在框里可重试
+    var showDelete by remember { mutableStateOf(false) }
+    var deleting by remember { mutableStateOf(false) }
+    var deleteFailed by remember { mutableStateOf(false) }
     // 语言选择页（独立二级页面）
     var showLanguage by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     // 必须放在 showLanguage 的提前返回之前：进语言页时这一层列表会离开组合，
     // 状态留在这里才不会跟着丢，返回时还在原位。
@@ -106,6 +119,29 @@ fun SettingsScreen(
 
     // 系统返回 / 全面屏侧滑手势：回到上一个界面，而不是退出 App
     BackHandler { onBack() }
+
+    if (showDelete) {
+        DeleteAccountDialog(
+            email = accountEmail,
+            deleting = deleting,
+            failed = deleteFailed,
+            onCancel = {
+                if (!deleting) {
+                    showDelete = false
+                    deleteFailed = false
+                }
+            },
+            onConfirm = {
+                scope.launch {
+                    deleting = true
+                    deleteFailed = false
+                    val ok = onDeleteAccount()
+                    deleting = false
+                    if (ok) showDelete = false else deleteFailed = true
+                }
+            }
+        )
+    }
 
     Box(modifier = Modifier.fillMaxWidth().background(Ascent.Bg)) {
         LazyColumn(
@@ -392,6 +428,128 @@ fun SettingsScreen(
                                 }
                             }
                         }
+                    )
+                }
+            }
+
+            // ---------------- 账号 ----------------
+            // 放最底部：破坏性操作不该在进设置的第一屏就能点到。
+            // 未登录时整块不渲染 —— 没有账号可删，留着只会让人以为要先登录再删。
+            if (accountEmail != null) {
+                item(key = "lbAccount") {
+                    MonoLabel(
+                        stringResource(R.string.set_section_account),
+                        modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)
+                    )
+                }
+                item(key = "account") {
+                    OutlineCard(
+                        gap = 0,
+                        modifier = Modifier.padding(bottom = 14.dp),
+                        onClick = { showDelete = true }
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            IconBadge(Ic.TriangleAlert, Ascent.Danger, Ascent.DangerSoft, diameter = 40, iconSize = 20)
+                            Spacer(Modifier.width(12.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    stringResource(R.string.acc_delete),
+                                    color = Ascent.Danger,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                                Spacer(Modifier.height(3.dp))
+                                Text(accountEmail, color = Ascent.Fg3, fontSize = 11.sp)
+                            }
+                            Icon(
+                                Ic.ChevronRight,
+                                contentDescription = null,
+                                tint = Ascent.Fg3,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * 删除账号确认框。
+ *
+ * 用 Dialog 而不是行内「点一次变红再点一次」：账号删除不可撤销，必须有一次明确的打断
+ * （遮罩 + 两个按钮 + 逐条列出要删什么），也避免误触背后的那一行。
+ */
+@Composable
+private fun DeleteAccountDialog(
+    email: String?,
+    deleting: Boolean,
+    failed: Boolean,
+    onCancel: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    Dialog(
+        onDismissRequest = { if (!deleting) onCancel() },
+        properties = DialogProperties(dismissOnClickOutside = false)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(24.dp))
+                .background(Ascent.Surface)
+                .padding(20.dp)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconBadge(Ic.TriangleAlert, Ascent.Danger, Ascent.DangerSoft, diameter = 36, iconSize = 18)
+                Spacer(Modifier.width(12.dp))
+                Text(
+                    stringResource(R.string.acc_delete_title),
+                    color = Ascent.Fg,
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Spacer(Modifier.height(12.dp))
+            Text(
+                text = stringResource(R.string.acc_delete_body, email ?: ""),
+                color = Ascent.Fg2,
+                fontSize = 13.sp,
+                lineHeight = 20.sp
+            )
+            if (failed) {
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    stringResource(R.string.acc_delete_failed),
+                    color = Ascent.Danger,
+                    fontSize = 12.sp
+                )
+            }
+            Spacer(Modifier.height(18.dp))
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Box(modifier = Modifier.weight(1f)) {
+                    PillButton(
+                        text = stringResource(R.string.common_cancel),
+                        style = BtnStyle.Secondary,
+                        height = 46,
+                        enabled = !deleting,
+                        onClick = onCancel
+                    )
+                }
+                Box(modifier = Modifier.weight(1f)) {
+                    PillButton(
+                        text = if (deleting) stringResource(R.string.auth_wait)
+                        else stringResource(R.string.acc_delete_action),
+                        style = BtnStyle.Danger,
+                        height = 46,
+                        enabled = !deleting,
+                        onClick = onConfirm
                     )
                 }
             }
