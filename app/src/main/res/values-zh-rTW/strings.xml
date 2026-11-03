@@ -115,6 +115,9 @@
     <string name="pf_name_label">使用者名稱</string>
     <string name="pf_name_hint">最多 16 個字元</string>
     <string name="pf_avatar_failed">這張圖讀不出來，換一張試試</string>
+    <string name="pf_crop_title">調整頭像</string>
+    <string name="pf_crop_hint">雙指縮放，拖曳取景</string>
+    <string name="pf_crop_rotate">旋轉</string>
     <string name="pf_default_name">登山者</string>
     <string name="pf_done">完成</string>
     <string name="home_title">我的主頁</string>

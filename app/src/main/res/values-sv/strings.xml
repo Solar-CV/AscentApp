@@ -102,6 +102,9 @@
     <string name="pf_name_label">Visningsnamn</string>
     <string name="pf_name_hint">Upp till 16 tecken</string>
     <string name="pf_avatar_failed">Bilden kan inte läsas, prova en annan</string>
+    <string name="pf_crop_title">Justera foto</string>
+    <string name="pf_crop_hint">Nyp för att zooma, dra för att passa in</string>
+    <string name="pf_crop_rotate">Rotera</string>
     <string name="pf_default_name">Bergsbestigare</string>
     <string name="pf_done">Klar</string>
     <string name="home_title">Min profil</string>

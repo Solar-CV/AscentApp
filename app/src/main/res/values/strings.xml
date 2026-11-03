@@ -123,6 +123,9 @@
     <string name="pf_name_label">用户名</string>
     <string name="pf_name_hint">最多 16 个字符</string>
     <string name="pf_avatar_failed">这张图读不出来，换一张试试</string>
+    <string name="pf_crop_title">调整头像</string>
+    <string name="pf_crop_hint">双指缩放，拖动取景</string>
+    <string name="pf_crop_rotate">旋转</string>
     <string name="pf_default_name">登山者</string>
     <string name="pf_done">完成</string>
     <string name="home_title">我的主页</string>

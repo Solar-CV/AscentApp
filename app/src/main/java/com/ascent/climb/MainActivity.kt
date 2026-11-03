@@ -56,11 +56,14 @@ import com.ascent.climb.data.lessonById
 import com.ascent.climb.ui.AchievementUnlockOverlay
 import com.ascent.climb.ui.Ascent
 import com.ascent.climb.ui.AscentTheme
+import com.ascent.climb.ui.AvatarCropController
+import com.ascent.climb.ui.AvatarCropOverlay
 import com.ascent.climb.ui.Badge3DStageScreen
 import com.ascent.climb.ui.CapsuleTabBar
 import com.ascent.climb.ui.ClaySplashOverlay
 import com.ascent.climb.ui.HandbookScreen
 import com.ascent.climb.ui.LessonScreen
+import com.ascent.climb.ui.LocalAvatarCrop
 import com.ascent.climb.ui.PathScreen
 import com.ascent.climb.ui.ProfileScreen
 import com.ascent.climb.ui.OnboardingOverlay
@@ -121,6 +124,8 @@ class MainActivity : ComponentActivity() {
                     // 开屏只盖在根界面之上，不改任何既有页面；序列走完自行淡出。
                     // rememberSaveable：旋转/重建不重播。
                     var splashDone by rememberSaveable { mutableStateOf(false) }
+                    // 头像裁剪：任意页面发起请求，这里统一渲染在全屏层（见 AvatarCropScreen.kt）
+                    val avatarCrop = remember { AvatarCropController() }
                     // 系统栏一律透明，让界面自己决定那两条区域长什么样。
                     //
                     // 原来这里按开屏进度给状态栏/导航栏刷不透明色。targetSdk 35+ 强制
@@ -135,6 +140,7 @@ class MainActivity : ComponentActivity() {
                         @Suppress("DEPRECATION")
                         act.window.navigationBarColor = android.graphics.Color.TRANSPARENT
                     }
+                    CompositionLocalProvider(LocalAvatarCrop provides avatarCrop) {
                     Box(Modifier.fillMaxSize()) {
                         // 底色铺满整屏（含状态栏与导航栏区域）。
                         // 安全区不在这里加：AscentRoot 里还有几层要**故意画到系统栏下面**
@@ -154,9 +160,12 @@ class MainActivity : ComponentActivity() {
                                 languageMode = it
                             }
                         )
+                        // 头像裁剪页：盖在整棵树之上（含底部导航栏），自己按 safeDrawing 留边
+                        AvatarCropOverlay(avatarCrop)
                         if (!splashDone) {
                             ClaySplashOverlay(dark = dark) { splashDone = true }
                         }
+                    }
                     }
                 }
             }

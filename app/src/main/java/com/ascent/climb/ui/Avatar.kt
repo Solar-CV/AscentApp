@@ -3,6 +3,8 @@ package com.ascent.climb.ui
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,6 +30,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
+import kotlin.math.min
 
 /**
  * 本地头像存取。
@@ -35,6 +38,9 @@ import java.io.FileOutputStream
  * 为什么不存 Uri：相册给的 content:// 授权是临时的，重启后大概率失效；
  * 也不把图片塞 SharedPreferences（Base64 会撑爆）。所以复制一份到应用私有目录，
  * 固定文件名 `avatar.jpg`，路径不进 prefs，只有版本号进（见 ProgressStore.avatarVersion）。
+ *
+ * 流程分两步，中间隔着用户手动裁剪：
+ *   相册 Uri --loadForEdit--> 可编辑位图 --(裁剪页)--> 正方形 --saveCropped--> avatar.jpg
  */
 object AvatarStore {
 
@@ -43,50 +49,70 @@ object AvatarStore {
     /** 输出边长。列表里最大用到 96dp，2.75x 屏 ≈ 264px，512 有富余。 */
     private const val OUTPUT_PX = 512
 
+    /**
+     * 进裁剪页时的解码目标：短边至少这么多像素。
+     *
+     * 裁剪框内的画面会被再次放大（用户可放大到 5×），源头分辨率不够就成了糊图。
+     * 1280 能让 2× 放大时 512 输出仍接近 1:1，同时 4000×3000 的原图只解到 2000×1500
+     *（约 12 MB），低端机不至于 OOM。
+     */
+    private const val EDIT_MIN_SHORT = 1280
+
+    /**
+     * 长边上限。手机全景图能到 20000×1280，只按短边算采样率会解出上亿像素，
+     * 一进裁剪页就 OOM。两条约束同时生效，取满足条件的最小采样率。
+     */
+    private const val EDIT_MAX_LONG = 3072
+
     fun file(context: Context): File = File(context.filesDir, FILE_NAME)
 
     fun exists(context: Context): Boolean = file(context).isFile
 
     /**
-     * 从相册选中的 Uri 复制一份进来。
+     * 解码成「可以交给裁剪页」的位图。
      *
-     * 处理顺序：两次解码（先读尺寸再降采样）→ 居中裁正方形 → 缩到 512 → JPEG。
-     * 直接原图解码在 4000×3000 的照片上会吃掉几十 MB，低端机容易 OOM。
+     * 两次解码：先只读尺寸算采样率，再真正解码。顺序不能反 —— 直接解 4000×3000
+     * 的 ARGB_8888 是 48 MB，低端机必炸。
      *
-     * @return 成功与否。失败时不动旧头像。
+     * 还会按 EXIF 摆正：相机竖拍的照片像素其实是横的，靠 EXIF Orientation 标记旋转，
+     * BitmapFactory 不认这个标记。不摆正的话，进裁剪页看到的是一张躺倒的图，
+     * 用户也没法用 90° 旋转按钮把它掰回来还保持取景。
+     *
+     * @return null 表示读不出来（损坏文件、无权限、非图片）。
      */
-    suspend fun save(context: Context, uri: Uri): Boolean = withContext(Dispatchers.IO) {
+    suspend fun loadForEdit(context: Context, uri: Uri): Bitmap? = withContext(Dispatchers.IO) {
         runCatching {
             val resolver = context.contentResolver
 
             val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
             resolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) }
-            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return@runCatching false
+            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return@runCatching null
 
-            // 先按 2 的幂降采样到「至少 2×512」，之后裁切缩放才有余量
             var sample = 1
-            while (bounds.outWidth / (sample * 2) >= OUTPUT_PX &&
-                bounds.outHeight / (sample * 2) >= OUTPUT_PX
+            while (min(bounds.outWidth, bounds.outHeight) / (sample * 2) >= EDIT_MIN_SHORT ||
+                maxOf(bounds.outWidth, bounds.outHeight) / (sample * 2) >= EDIT_MAX_LONG
             ) {
                 sample *= 2
             }
 
             val opts = BitmapFactory.Options().apply { inSampleSize = sample }
             val decoded = resolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, opts) }
-                ?: return@runCatching false
+                ?: return@runCatching null
 
-            val side = minOf(decoded.width, decoded.height)
-            val square = Bitmap.createBitmap(
-                decoded,
-                (decoded.width - side) / 2,
-                (decoded.height - side) / 2,
-                side,
-                side
-            )
-            val scaled = if (side == OUTPUT_PX) square
+            applyExifOrientation(context, uri, decoded)
+        }.getOrNull()
+    }
+
+    /**
+     * 把裁剪结果写成头像。入参必须是正方形（裁剪页保证），这里只负责缩放与落盘。
+     *
+     * 先写临时文件再改名：中途失败不会留下半张图。失败时不动旧头像。
+     */
+    suspend fun saveCropped(context: Context, square: Bitmap): Boolean = withContext(Dispatchers.IO) {
+        runCatching {
+            val scaled = if (square.width == OUTPUT_PX && square.height == OUTPUT_PX) square
             else Bitmap.createScaledBitmap(square, OUTPUT_PX, OUTPUT_PX, true)
 
-            // 先写临时文件再改名：中途失败不会留下半张图
             val target = file(context)
             val tmp = File(target.parentFile, "$FILE_NAME.tmp")
             FileOutputStream(tmp).use { out ->
@@ -95,9 +121,7 @@ object AvatarStore {
             if (target.exists()) target.delete()
             val ok = tmp.renameTo(target)
 
-            if (square !== decoded) square.recycle()
             if (scaled !== square) scaled.recycle()
-            decoded.recycle()
             ok
         }.getOrDefault(false)
     }
@@ -105,6 +129,46 @@ object AvatarStore {
     /** 删除头像文件。prefs 里的版本号由调用方清。 */
     fun remove(context: Context) {
         runCatching { file(context).delete() }
+    }
+
+    /**
+     * 按 EXIF Orientation 摆正。没有标记或读不出 EXIF 时原样返回。
+     *
+     * 换过方向的旧图会被回收：它只是解码中间产物，还没交给界面。
+     */
+    private fun applyExifOrientation(context: Context, uri: Uri, src: Bitmap): Bitmap {
+        val orientation = runCatching {
+            context.contentResolver.openInputStream(uri)?.use { stream ->
+                ExifInterface(stream).getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL
+                )
+            }
+        }.getOrNull() ?: ExifInterface.ORIENTATION_NORMAL
+
+        val matrix = Matrix()
+        when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90f)
+            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180f)
+            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270f)
+            ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> matrix.postScale(-1f, 1f)
+            ExifInterface.ORIENTATION_FLIP_VERTICAL -> matrix.postScale(1f, -1f)
+            ExifInterface.ORIENTATION_TRANSPOSE -> {
+                matrix.postRotate(90f)
+                matrix.postScale(-1f, 1f)
+            }
+            ExifInterface.ORIENTATION_TRANSVERSE -> {
+                matrix.postRotate(270f)
+                matrix.postScale(-1f, 1f)
+            }
+            else -> return src
+        }
+
+        val out = runCatching {
+            Bitmap.createBitmap(src, 0, 0, src.width, src.height, matrix, true)
+        }.getOrNull() ?: return src
+        if (out !== src) src.recycle()
+        return out
     }
 }
 

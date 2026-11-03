@@ -115,6 +115,9 @@
     <string name="pf_name_label">Отображаемое имя</string>
     <string name="pf_name_hint">До 16 символов</string>
     <string name="pf_avatar_failed">Не удалось прочитать изображение — попробуйте другое</string>
+    <string name="pf_crop_title">Настройка фото</string>
+    <string name="pf_crop_hint">Масштаб двумя пальцами, перетащите кадр</string>
+    <string name="pf_crop_rotate">Повернуть</string>
     <string name="pf_default_name">Альпинист</string>
     <string name="pf_done">Готово</string>
     <string name="home_title">Мой профиль</string>

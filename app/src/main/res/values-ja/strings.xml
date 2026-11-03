@@ -115,6 +115,9 @@
     <string name="pf_name_label">表示名</string>
     <string name="pf_name_hint">16 文字まで</string>
     <string name="pf_avatar_failed">この画像は読み込めません。別の画像を試してください</string>
+    <string name="pf_crop_title">アイコンを調整</string>
+    <string name="pf_crop_hint">ピンチで拡大縮小、ドラッグで位置調整</string>
+    <string name="pf_crop_rotate">回転</string>
     <string name="pf_default_name">登山者</string>
     <string name="pf_done">完了</string>
     <string name="home_title">マイページ</string>

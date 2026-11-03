@@ -122,6 +122,9 @@
     <string name="pf_name_label">Display name</string>
     <string name="pf_name_hint">Up to 16 characters</string>
     <string name="pf_avatar_failed">Couldn\'t read that image — try another one</string>
+    <string name="pf_crop_title">Adjust photo</string>
+    <string name="pf_crop_hint">Pinch to zoom, drag to frame</string>
+    <string name="pf_crop_rotate">Rotate</string>
     <string name="pf_default_name">Climber</string>
     <string name="pf_done">Done</string>
     <string name="home_title">My profile</string>

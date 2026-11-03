@@ -102,6 +102,9 @@
     <string name="pf_name_label">Anzeigename</string>
     <string name="pf_name_hint">Bis zu 16 Zeichen</string>
     <string name="pf_avatar_failed">Dieses Bild lässt sich nicht lesen – versuch ein anderes</string>
+    <string name="pf_crop_title">Foto anpassen</string>
+    <string name="pf_crop_hint">Mit zwei Fingern zoomen, zum Ausrichten ziehen</string>
+    <string name="pf_crop_rotate">Drehen</string>
     <string name="pf_default_name">Bergsteiger</string>
     <string name="pf_done">Fertig</string>
     <string name="home_title">Mein Profil</string>

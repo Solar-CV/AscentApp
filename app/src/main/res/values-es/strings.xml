@@ -102,6 +102,9 @@
     <string name="pf_name_label">Nombre visible</string>
     <string name="pf_name_hint">Hasta 16 caracteres</string>
     <string name="pf_avatar_failed">No se pudo leer esa imagen; prueba con otra</string>
+    <string name="pf_crop_title">Ajustar foto</string>
+    <string name="pf_crop_hint">Pellizca para ampliar, arrastra para encuadrar</string>
+    <string name="pf_crop_rotate">Girar</string>
     <string name="pf_default_name">Montañero</string>
     <string name="pf_done">Listo</string>
     <string name="home_title">Mi perfil</string>

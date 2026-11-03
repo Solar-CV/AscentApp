@@ -87,6 +87,8 @@ private fun EditProfileBody(store: ProgressStore, onBack: () -> Unit) {
     var busy by remember { mutableStateOf(false) }
     var failed by remember { mutableStateOf(false) }
     val defaultName = stringResource(R.string.pf_default_name)
+    // 裁剪页在根层渲染，这里只发起请求并等结果
+    val cropper = LocalAvatarCrop.current
 
     // 返回与「完成」走同一条路：先把名字写进去，再退。否则输入框里的改动会静默丢失。
     fun commitAndBack() {
@@ -99,11 +101,16 @@ private fun EditProfileBody(store: ProgressStore, onBack: () -> Unit) {
         ActivityResultContracts.PickVisualMedia()
     ) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
+        // 选完先进裁剪页（1:1 锁比例）。这里挂起等用户确认，取消就什么都不做，旧头像不受影响。
         scope.launch {
+            val square = cropper?.crop(uri)
+            if (square == null) {
+                if (cropper == null) failed = true
+                return@launch
+            }
             busy = true
             failed = false
-            val ok = AvatarStore.save(context, uri)
-            if (ok) {
+            if (AvatarStore.saveCropped(context, square)) {
                 version += 1
                 store.avatarVersion = version
             } else {
