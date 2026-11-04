@@ -14,8 +14,8 @@ name: Build & Release APK + AAB
 # platforms;android-36；16 KB 对齐校验需要 build-tools 35+（zipalign 的 -P 参数）。
 #
 # 产物两份：
-#   ascent-<tag>-release.apk  侧载用（GitHub Release 附件）
-#   ascent-<tag>-release.aab  Google Play 上传用（AAB 不能直接安装）
+#   ascentroam-<tag>-release.apk  侧载用（GitHub Release 附件）
+#   ascentroam-<tag>-release.aab  Google Play 上传用（AAB 不能直接安装）
 on:
   push:
     tags:
@@ -146,11 +146,11 @@ jobs:
           else
             SRC=app/build/outputs/apk/debug/app-debug.apk
           fi
-          OUT="out/ascent-${GITHUB_REF_NAME}-${V}.apk"
+          OUT="out/ascentroam-${GITHUB_REF_NAME}-${V}.apk"
           cp "$SRC" "$OUT"
           if [ "$V" = "release" ]; then
             cp app/build/outputs/bundle/release/app-release.aab \
-               "out/ascent-${GITHUB_REF_NAME}-release.aab"
+               "out/ascentroam-${GITHUB_REF_NAME}-release.aab"
           fi
           ls -lh out
 
@@ -162,7 +162,7 @@ jobs:
           set -euo pipefail
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
           APKSIGNER="$BT/apksigner"
-          APK="out/ascent-${GITHUB_REF_NAME}-release.apk"
+          APK="out/ascentroam-${GITHUB_REF_NAME}-release.apk"
           "$APKSIGNER" verify --print-certs "$APK"
           # 期望的证书 SHA-256（2026-10-30 生成的 ascent-release.jks）
           EXPECTED="ae6cb0966256a849647b8372c24fc5edc6be876998db4eb9eef65d67a280957c"
@@ -182,8 +182,8 @@ jobs:
         run: |
           set -euo pipefail
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
-          APK="out/ascent-${GITHUB_REF_NAME}-release.apk"
-          AAB="out/ascent-${GITHUB_REF_NAME}-release.aab"
+          APK="out/ascentroam-${GITHUB_REF_NAME}-release.apk"
+          AAB="out/ascentroam-${GITHUB_REF_NAME}-release.aab"
 
           echo "--- badging ---"
           "$BT/aapt2" dump badging "$APK" | grep -E "^(package|sdkVersion|targetSdkVersion)" || true
@@ -219,8 +219,8 @@ jobs:
           tag_name: ${{ github.ref_name }}
           body_path: out/release_body.md
           files: |
-            out/ascent-*.apk
-            out/ascent-*.aab
+            out/ascentroam-*.apk
+            out/ascentroam-*.aab
           draft: false
           prerelease: false
         env:
@@ -231,10 +231,10 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
-          name: ascent-apk
+          name: ascentroam-apk
           path: |
-            out/ascent-*.apk
-            out/ascent-*.aab
+            out/ascentroam-*.apk
+            out/ascentroam-*.aab
           retention-days: 7
 
       - name: Remove keystore
