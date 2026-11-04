@@ -34,6 +34,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
@@ -298,15 +299,19 @@ private fun MountainMark(colors: SplashColors, modifier: Modifier = Modifier) {
         }
         drawPath(cap, color = colors.snow)
 
-        // 旗杆 + 方块旗，杆从峰顶往上，旗贴杆顶
-        drawRoundRect(
+        // 旗杆 + 方块旗，杆从峰顶往上，旗贴杆顶。
+        // 杆改用「圆头线」而不是圆角矩形：桌面图标（ic_launcher_foreground）就是
+        // 57.6,18.2 → 57.6,34.8 / 宽 4.4 / 圆头，两端各多出 2.2 半径。圆角矩形
+        // 只有 1.6 的圆角，顶端偏方，两处并排看会差一条边。
+        drawLine(
             color = colors.pole,
-            topLeft = p(55.4f, 16f),
-            size = Size(4.4f * u, 21f * u),
-            cornerRadius = CornerRadius(1.6f * u)
+            start = p(57.6f, 18.2f),
+            end = p(57.6f, 34.8f),
+            strokeWidth = 4.4f * u,
+            cap = StrokeCap.Round
         )
         val flag = Path().apply {
-            moveTo(59.8f * u, 16f)
+            moveTo(59.8f * u, 16f * u)
             lineTo(79f * u, 22.5f * u)
             lineTo(59.8f * u, 29f * u)
             close()

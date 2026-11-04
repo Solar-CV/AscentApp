@@ -136,6 +136,22 @@
     <string name="auth_reset_done">Lösenordet är återställt – logga in med det nya</string>
     <string name="auth_new_password">Nytt lösenord</string>
     <string name="auth_back_to_login">Tillbaka till inloggning</string>
+
+    <string name="dv_title">Inloggade enheter</string>
+    <string name="dv_intro">De här enheterna har åtkomst till ditt konto. När en enhet återkallas måste den logga in igen.</string>
+    <string name="dv_current">Den här enheten</string>
+    <string name="dv_last_used">Senast %1$s</string>
+    <string name="dv_revoke">Återkalla</string>
+    <string name="dv_revoke_title">Återkalla den här enheten?</string>
+    <string name="dv_revoke_body">Enheten loggas ut direkt och behöver lösenordet igen. Din inlärning påverkas inte.</string>
+    <string name="dv_revoke_self_title">Logga ut den här enheten?</string>
+    <string name="dv_revoke_self_body">Du måste logga in igen. Dina framsteg är redan synkade till molnet och kommer tillbaka vid inloggning.</string>
+    <string name="dv_revoke_failed">Kunde inte återkalla – försök igen senare</string>
+    <string name="dv_empty">Bara den här enheten hittades</string>
+    <string name="dv_error">Kunde inte ladda – försök igen senare</string>
+    <string name="dv_retry">Försök igen</string>
+    <string name="dv_loading">Laddar…</string>
+    <string name="set_devices_hint">Se och hantera inloggade enheter</string>
     <string name="cloud_err_invalid_code">Koden är fel eller har gått ut</string>
     <string name="cloud_err_rate_limited">För många förfrågningar – försök igen senare</string>
     <string name="cloud_err_mail_failed">Kunde inte skicka koden – försök igen senare</string>

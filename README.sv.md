@@ -6,7 +6,7 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 69 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 22 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.26.3 (versionCode 148). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 727 / 10 727). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.26.5 (versionCode 150). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 727 / 10 727). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
 
@@ -222,6 +222,13 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
 ## Senaste ändringar
+
+**v0.26.4 – v0.26.5: inloggade enheter och en splash som matchar ikonen**
+
+- Inställningar → Konto har nu **Inloggade enheter**: plattform, version och senaste användning per session, som kan återkallas en i taget. Även den här enheten kan återkallas — dialogen förklarar att du loggas ut och att framstegen finns kvar
+- Flaggan på toppen i startskärmen blev en hög och smal triangel: sökvägen hade skalfaktor på x men inte på y. Rättat så den matchar launcherikonen punkt för punkt; gamla `ic_splash_mark` ritades om på samma rutnät
+- Långa underrubriker trycker inte längre upp radhöjden i inställningarna: titel och underrubrik begränsas till en rad, och sju språk har fått kortare texter (på italienska kapades själva versionsnumret)
+- Badge-posten är borttagen från fliken "Profil"; märken finns på profilsidan
 
 **v0.25.0 – v0.26.3: konton i molnet och ett nytt namn**
 

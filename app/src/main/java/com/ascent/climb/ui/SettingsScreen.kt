@@ -33,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -79,6 +80,8 @@ fun SettingsScreen(
     onReset: () -> Unit,
     /** 当前登录账号的邮箱；null 表示未登录，此时不显示账号分区。 */
     accountEmail: String?,
+    /** 打开「已登录设备」页。 */
+    onOpenDevices: () -> Unit,
     /** 执行删除账号（含本机数据），返回是否成功。 */
     onDeleteAccount: suspend () -> Boolean,
     onBack: () -> Unit
@@ -452,6 +455,48 @@ fun SettingsScreen(
                         modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)
                     )
                 }
+                item(key = "devices") {
+                    OutlineCard(
+                        gap = 0,
+                        modifier = Modifier.padding(bottom = 10.dp),
+                        onClick = onOpenDevices
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            IconBadge(Ic.Signal, Ascent.Accent, Ascent.AccentSoft, diameter = 40, iconSize = 20)
+                            Spacer(Modifier.width(12.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                // 设备管理这一行的文案在德语 / 俄语 / 西语下比中文长一倍多，
+                                // 不限行会把卡片撑成三四行高，和上下几行完全不在一个节奏上。
+                                // 标题与副标都锁一行、超出省略；同时把几门语言的副标改短（见 strings）。
+                                Text(
+                                    stringResource(R.string.dv_title),
+                                    color = Ascent.Fg,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                                Spacer(Modifier.height(3.dp))
+                                Text(
+                                    stringResource(R.string.set_devices_hint),
+                                    color = Ascent.Fg3,
+                                    fontSize = 11.sp,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                            Icon(
+                                Ic.ChevronRight,
+                                contentDescription = null,
+                                tint = Ascent.Fg3,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                    }
+                }
                 item(key = "account") {
                     OutlineCard(
                         gap = 0,
@@ -498,7 +543,7 @@ fun SettingsScreen(
  * @param error 失败提示（为空不占位）
  */
 @Composable
-private fun DangerConfirmDialog(
+internal fun DangerConfirmDialog(
     title: String,
     body: String,
     confirmText: String,

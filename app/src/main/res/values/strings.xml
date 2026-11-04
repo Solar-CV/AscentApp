@@ -156,6 +156,22 @@
     <string name="auth_reset_done">密码已重置，请用新密码登录</string>
     <string name="auth_new_password">新密码</string>
     <string name="auth_back_to_login">返回登录</string>
+
+    <string name="dv_title">已登录设备</string>
+    <string name="dv_intro">这些设备当前可以访问你的账号。撤销后，该设备需要重新登录。</string>
+    <string name="dv_current">当前设备</string>
+    <string name="dv_last_used">最近使用 %1$s</string>
+    <string name="dv_revoke">撤销</string>
+    <string name="dv_revoke_title">撤销这台设备？</string>
+    <string name="dv_revoke_body">撤销后，该设备上的登录会立即失效，需要重新输入密码。学习进度不会丢失。</string>
+    <string name="dv_revoke_self_title">退出当前设备？</string>
+    <string name="dv_revoke_self_body">撤销后你需要重新登录。学习进度已经同步到云端，登录回来即可恢复。</string>
+    <string name="dv_revoke_failed">撤销失败，请稍后再试</string>
+    <string name="dv_empty">只找到这一台设备</string>
+    <string name="dv_error">加载失败，请稍后再试</string>
+    <string name="dv_retry">重试</string>
+    <string name="dv_loading">正在加载…</string>
+    <string name="set_devices_hint">查看并管理已登录的设备</string>
     <string name="cloud_err_invalid_code">验证码不正确或已失效</string>
     <string name="cloud_err_rate_limited">请求过于频繁，请稍后再试</string>
     <string name="cloud_err_mail_failed">验证码发送失败，请稍后再试</string>

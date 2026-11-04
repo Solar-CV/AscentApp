@@ -6,7 +6,7 @@ Un'app Android per chi comincia con l'alpinismo d'alta quota e l'arrampicata su 
 
 Due percorsi si cambiano liberamente. **Alta montagna** ha sei unità e 69 lezioni, dall'introduzione a 5.000 m fino a 8.000 m — da 3.200 m a 8.848 m da un capo all'altro. **Escursionismo** ha quattro unità e 22 lezioni, dalla camminata di un giorno ai percorsi lunghi — da 200 m a 5.630 m. Ogni percorso tiene per sé progressi, badge e coda di ripasso.
 
-Versione attuale v0.26.3 (versionCode 148). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.727 / 10.727). La v0.20 riguarda i badge: i quaranta obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 41 MB; la build di release è di circa 30 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
+Versione attuale v0.26.5 (versionCode 150). Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.727 / 10.727). La v0.20 riguarda i badge: i quaranta obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 41 MB; la build di release è di circa 30 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
 
 Le v0.20.19 – v0.21.0 hanno rivestito tutta l'interfaccia di argilla: ombre doppie morbide disegnate fuori schermo e messe in cache, tessere di colore piatte, colori per categoria nel manuale e blocchi di colore la cui profondità viene da un'ombra di contatto invece che da un gradiente.
 
@@ -222,6 +222,13 @@ Per pubblicare un questionario nuovo: cambia i contenuti → alza `BUNDLED_VERSI
 Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `minAppVersion` in `manifest.json` blocca i client troppo vecchi, i campi sconosciuti vengono ignorati e una domanda malformata viene saltata invece che essere fatale.
 
 ## Cambi recenti
+
+**v0.26.4 – v0.26.5: dispositivi connessi e uno splash allineato all'icona**
+
+- Impostazioni → Account ora ha **Dispositivi connessi**: piattaforma, versione e ultimo utilizzo di ogni sessione, revocabili singolarmente. Si può revocare anche il dispositivo corrente; la finestra spiega che si verrà disconnessi e che i progressi restano
+- La bandierina in cima allo splash era un triangolo alto e stretto: il tracciato aveva il fattore di scala su x ma non su y. Corretto per coincidere punto per punto con l'icona; il vecchio `ic_splash_mark` è stato ridisegnato sulla stessa griglia
+- I sottotitoli lunghi non alzano più le righe delle impostazioni: titolo e sottotitolo sono limitati a una riga e sette lingue hanno testi più brevi (in italiano veniva troncato il numero di versione)
+- Rimosso l'accesso ai badge dalla scheda «Profilo»; i badge sono nella pagina del profilo
 
 **v0.25.0 – v0.26.3: account nel cloud e un nuovo nome**
 

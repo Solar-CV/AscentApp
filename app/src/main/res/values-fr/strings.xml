@@ -136,6 +136,22 @@
     <string name="auth_reset_done">Mot de passe réinitialisé — connectez-vous avec le nouveau</string>
     <string name="auth_new_password">Nouveau mot de passe</string>
     <string name="auth_back_to_login">Retour à la connexion</string>
+
+    <string name="dv_title">Appareils connectés</string>
+    <string name="dv_intro">Ces appareils ont accès à votre compte. Une fois révoqué, l\'appareil devra se reconnecter.</string>
+    <string name="dv_current">Cet appareil</string>
+    <string name="dv_last_used">Dernier accès %1$s</string>
+    <string name="dv_revoke">Révoquer</string>
+    <string name="dv_revoke_title">Révoquer cet appareil ?</string>
+    <string name="dv_revoke_body">L\'appareil sera déconnecté immédiatement et devra saisir le mot de passe à nouveau. Votre progression n\'est pas affectée.</string>
+    <string name="dv_revoke_self_title">Se déconnecter sur cet appareil ?</string>
+    <string name="dv_revoke_self_body">Vous devrez vous reconnecter. Votre progression est déjà synchronisée dans le cloud et reviendra à la connexion.</string>
+    <string name="dv_revoke_failed">Impossible de révoquer — réessayez plus tard</string>
+    <string name="dv_empty">Seul cet appareil a été trouvé</string>
+    <string name="dv_error">Impossible de charger — réessayez plus tard</string>
+    <string name="dv_retry">Réessayer</string>
+    <string name="dv_loading">Chargement…</string>
+    <string name="set_devices_hint">Voir et gérer les appareils</string>
     <string name="cloud_err_invalid_code">Le code est incorrect ou a expiré</string>
     <string name="cloud_err_rate_limited">Trop de requêtes — réessayez plus tard</string>
     <string name="cloud_err_mail_failed">Impossible d\'envoyer le code — réessayez plus tard</string>

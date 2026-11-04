@@ -148,6 +148,22 @@
     <string name="auth_reset_done">Пароль сброшен — войдите с новым паролем</string>
     <string name="auth_new_password">Новый пароль</string>
     <string name="auth_back_to_login">Вернуться ко входу</string>
+
+    <string name="dv_title">Устройства в аккаунте</string>
+    <string name="dv_intro">Эти устройства имеют доступ к аккаунту. После отзыва устройству потребуется войти снова.</string>
+    <string name="dv_current">Это устройство</string>
+    <string name="dv_last_used">Последний вход %1$s</string>
+    <string name="dv_revoke">Отозвать</string>
+    <string name="dv_revoke_title">Отозвать это устройство?</string>
+    <string name="dv_revoke_body">Устройство будет сразу разлогинено и потребует пароль заново. Прогресс обучения не пострадает.</string>
+    <string name="dv_revoke_self_title">Выйти на этом устройстве?</string>
+    <string name="dv_revoke_self_body">Придётся войти заново. Прогресс уже синхронизирован с облаком и вернётся после входа.</string>
+    <string name="dv_revoke_failed">Не удалось отозвать — попробуйте позже</string>
+    <string name="dv_empty">Найдено только это устройство</string>
+    <string name="dv_error">Не удалось загрузить — попробуйте позже</string>
+    <string name="dv_retry">Повторить</string>
+    <string name="dv_loading">Загрузка…</string>
+    <string name="set_devices_hint">Устройства с активным входом</string>
     <string name="cloud_err_invalid_code">Код неверен или истёк</string>
     <string name="cloud_err_rate_limited">Слишком много запросов — попробуйте позже</string>
     <string name="cloud_err_mail_failed">Не удалось отправить код — попробуйте позже</string>

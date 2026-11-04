@@ -136,6 +136,22 @@
     <string name="auth_reset_done">Password reimpostata: accedi con quella nuova</string>
     <string name="auth_new_password">Nuova password</string>
     <string name="auth_back_to_login">Torna all\'accesso</string>
+
+    <string name="dv_title">Dispositivi connessi</string>
+    <string name="dv_intro">Questi dispositivi possono accedere al tuo account. Una volta revocati, dovranno accedere di nuovo.</string>
+    <string name="dv_current">Questo dispositivo</string>
+    <string name="dv_last_used">Ultimo uso %1$s</string>
+    <string name="dv_revoke">Revoca</string>
+    <string name="dv_revoke_title">Revocare questo dispositivo?</string>
+    <string name="dv_revoke_body">Il dispositivo verrà disconnesso subito e dovrà reinserire la password. I progressi non vengono persi.</string>
+    <string name="dv_revoke_self_title">Disconnettere questo dispositivo?</string>
+    <string name="dv_revoke_self_body">Dovrai accedere di nuovo. I progressi sono già sincronizzati nel cloud e torneranno al login.</string>
+    <string name="dv_revoke_failed">Impossibile revocare: riprova più tardi</string>
+    <string name="dv_empty">Trovato solo questo dispositivo</string>
+    <string name="dv_error">Impossibile caricare: riprova più tardi</string>
+    <string name="dv_retry">Riprova</string>
+    <string name="dv_loading">Caricamento…</string>
+    <string name="set_devices_hint">Gestisci i dispositivi</string>
     <string name="cloud_err_invalid_code">Il codice non è corretto o è scaduto</string>
     <string name="cloud_err_rate_limited">Troppe richieste: riprova più tardi</string>
     <string name="cloud_err_mail_failed">Impossibile inviare il codice: riprova più tardi</string>

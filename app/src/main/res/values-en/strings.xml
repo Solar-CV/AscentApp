@@ -154,6 +154,22 @@
     <string name="auth_reset_done">Password reset — sign in with your new password</string>
     <string name="auth_new_password">New password</string>
     <string name="auth_back_to_login">Back to sign in</string>
+
+    <string name="dv_title">Signed-in devices</string>
+    <string name="dv_intro">These devices can access your account. Once revoked, a device has to sign in again.</string>
+    <string name="dv_current">This device</string>
+    <string name="dv_last_used">Last used %1$s</string>
+    <string name="dv_revoke">Revoke</string>
+    <string name="dv_revoke_title">Revoke this device?</string>
+    <string name="dv_revoke_body">That device will be signed out immediately and will need the password again. Your learning progress is not affected.</string>
+    <string name="dv_revoke_self_title">Sign out this device?</string>
+    <string name="dv_revoke_self_body">You will need to sign in again. Your progress is already synced to the cloud and will come back when you do.</string>
+    <string name="dv_revoke_failed">Couldn\'t revoke that device — try again later</string>
+    <string name="dv_empty">Only this device was found</string>
+    <string name="dv_error">Couldn\'t load — try again later</string>
+    <string name="dv_retry">Retry</string>
+    <string name="dv_loading">Loading…</string>
+    <string name="set_devices_hint">See and manage signed-in devices</string>
     <string name="cloud_err_invalid_code">That code is incorrect or has expired</string>
     <string name="cloud_err_rate_limited">Too many requests — try again later</string>
     <string name="cloud_err_mail_failed">Could not send the code — try again later</string>

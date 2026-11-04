@@ -136,6 +136,22 @@
     <string name="auth_reset_done">Passwort zurückgesetzt – melde dich mit dem neuen Passwort an</string>
     <string name="auth_new_password">Neues Passwort</string>
     <string name="auth_back_to_login">Zurück zur Anmeldung</string>
+
+    <string name="dv_title">Angemeldete Geräte</string>
+    <string name="dv_intro">Diese Geräte haben Zugriff auf dein Konto. Nach dem Widerruf muss sich das Gerät neu anmelden.</string>
+    <string name="dv_current">Dieses Gerät</string>
+    <string name="dv_last_used">Zuletzt %1$s</string>
+    <string name="dv_revoke">Widerrufen</string>
+    <string name="dv_revoke_title">Dieses Gerät widerrufen?</string>
+    <string name="dv_revoke_body">Das Gerät wird sofort abgemeldet und braucht das Passwort erneut. Dein Lernfortschritt bleibt erhalten.</string>
+    <string name="dv_revoke_self_title">Auf diesem Gerät abmelden?</string>
+    <string name="dv_revoke_self_body">Du musst dich neu anmelden. Dein Fortschritt ist bereits in der Cloud und kommt beim nächsten Login zurück.</string>
+    <string name="dv_revoke_failed">Widerruf fehlgeschlagen – versuche es später erneut</string>
+    <string name="dv_empty">Nur dieses Gerät gefunden</string>
+    <string name="dv_error">Laden fehlgeschlagen – versuche es später erneut</string>
+    <string name="dv_retry">Erneut versuchen</string>
+    <string name="dv_loading">Wird geladen…</string>
+    <string name="set_devices_hint">Geräte ansehen und verwalten</string>
     <string name="cloud_err_invalid_code">Der Code ist falsch oder abgelaufen</string>
     <string name="cloud_err_rate_limited">Zu viele Anfragen – versuche es später erneut</string>
     <string name="cloud_err_mail_failed">Code konnte nicht gesendet werden – versuche es später erneut</string>

@@ -148,6 +148,22 @@
     <string name="auth_reset_done">パスワードを再設定しました。新しいパスワードでログインしてください</string>
     <string name="auth_new_password">新しいパスワード</string>
     <string name="auth_back_to_login">ログインに戻る</string>
+
+    <string name="dv_title">ログイン中の端末</string>
+    <string name="dv_intro">これらの端末は現在アカウントにアクセスできます。取り消すと、その端末は再ログインが必要になります。</string>
+    <string name="dv_current">この端末</string>
+    <string name="dv_last_used">最終使用 %1$s</string>
+    <string name="dv_revoke">取り消す</string>
+    <string name="dv_revoke_title">この端末を取り消しますか？</string>
+    <string name="dv_revoke_body">その端末はすぐにログアウトされ、パスワードの再入力が必要になります。学習の進捗は失われません。</string>
+    <string name="dv_revoke_self_title">この端末からログアウトしますか？</string>
+    <string name="dv_revoke_self_body">ログインし直す必要があります。進捗はクラウドに同期済みなので、ログインすれば復元されます。</string>
+    <string name="dv_revoke_failed">取り消せませんでした。しばらくしてからお試しください</string>
+    <string name="dv_empty">この端末だけが見つかりました</string>
+    <string name="dv_error">読み込めませんでした。しばらくしてからお試しください</string>
+    <string name="dv_retry">再試行</string>
+    <string name="dv_loading">読み込み中…</string>
+    <string name="set_devices_hint">ログイン中の端末を確認・管理します</string>
     <string name="cloud_err_invalid_code">確認コードが正しくないか、有効期限が切れています</string>
     <string name="cloud_err_rate_limited">リクエストが多すぎます。しばらくしてからお試しください</string>
     <string name="cloud_err_mail_failed">確認コードを送信できませんでした。しばらくしてからお試しください</string>

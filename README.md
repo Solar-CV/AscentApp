@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 69 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 22 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.26.3 (versionCode 148). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,727 / 10,727). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+Current version v0.26.5 (versionCode 150). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,727 / 10,727). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 v0.20.19 – v0.21.0 restyled the whole interface in clay: soft double shadows drawn offscreen and cached, flat colour chips, category colours in the handbook, and hero blocks that take their depth from a contact shadow instead of a gradient.
 
@@ -222,6 +222,13 @@ To publish a new bank: change content → bump `BUNDLED_VERSION` → run `conten
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
 ## Recent changes
+
+**v0.26.4 – v0.26.5: signed-in devices, and a splash that matches the icon**
+
+- Settings → Account now has **Signed-in devices**: platform, version and last use for each session, with a revoke button. You can revoke the current device too — the dialog explains that you will be signed out and progress is kept
+- The splash mark's summit flag was rendered tall and narrow: the flag path had a scale factor on x but not on y. Fixed so it matches the launcher icon point for point; the legacy `ic_splash_mark` vector was redrawn on the same grid
+- Long subtitles no longer stretch rows in Settings — titles and subtitles are clamped to one line, and seven languages got shorter copy (the Italian row used to truncate the version number itself)
+- The badges entry was removed from the Profile tab; badges live on the profile home
 
 **v0.25.0 – v0.26.3: accounts in the cloud, and a new name**
 

@@ -136,6 +136,22 @@
     <string name="auth_reset_done">Contraseña restablecida: inicia sesión con la nueva</string>
     <string name="auth_new_password">Contraseña nueva</string>
     <string name="auth_back_to_login">Volver al inicio de sesión</string>
+
+    <string name="dv_title">Dispositivos conectados</string>
+    <string name="dv_intro">Estos dispositivos pueden acceder a tu cuenta. Al revocarlos, tendrán que iniciar sesión de nuevo.</string>
+    <string name="dv_current">Este dispositivo</string>
+    <string name="dv_last_used">Último uso %1$s</string>
+    <string name="dv_revoke">Revocar</string>
+    <string name="dv_revoke_title">¿Revocar este dispositivo?</string>
+    <string name="dv_revoke_body">Ese dispositivo se cerrará de inmediato y necesitará la contraseña otra vez. Tu progreso no se pierde.</string>
+    <string name="dv_revoke_self_title">¿Cerrar sesión en este dispositivo?</string>
+    <string name="dv_revoke_self_body">Tendrás que iniciar sesión de nuevo. Tu progreso ya está sincronizado en la nube y volverá al entrar.</string>
+    <string name="dv_revoke_failed">No se pudo revocar: inténtalo más tarde</string>
+    <string name="dv_empty">Solo se encontró este dispositivo</string>
+    <string name="dv_error">No se pudo cargar: inténtalo más tarde</string>
+    <string name="dv_retry">Reintentar</string>
+    <string name="dv_loading">Cargando…</string>
+    <string name="set_devices_hint">Ver y gestionar dispositivos</string>
     <string name="cloud_err_invalid_code">El código no es correcto o ha caducado</string>
     <string name="cloud_err_rate_limited">Demasiadas solicitudes: inténtalo más tarde</string>
     <string name="cloud_err_mail_failed">No se pudo enviar el código: inténtalo más tarde</string>

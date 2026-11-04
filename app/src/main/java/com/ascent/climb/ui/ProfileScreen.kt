@@ -54,7 +54,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ascent.climb.BuildConfig
-import com.ascent.climb.data.ACHIEVEMENTS
 import com.ascent.climb.data.AchCategory
 import com.ascent.climb.data.Account
 import com.ascent.climb.data.BANK_VERSION
@@ -148,6 +147,7 @@ fun ProfileScreen(
     var showAuth by remember { mutableStateOf(false) }
     var showAchievements by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
+    var showDevices by remember { mutableStateOf(false) }
     var showProfileHome by remember { mutableStateOf(false) }
     var showBadgeWall by remember { mutableStateOf(false) }
     var showFeedback by remember { mutableStateOf(false) }
@@ -298,6 +298,23 @@ fun ProfileScreen(
         branchStates.SaveableStateProvider("feedback") {
             FeedbackScreen(store = store, onBack = { showFeedback = false })
         }
+    } else if (showDevices) {
+        branchStates.SaveableStateProvider("devices") {
+            DevicesScreen(
+                onBack = { showDevices = false },
+                onSignedOut = {
+                    // 撤销的是当前设备：服务端已把 access/refresh 一起作废，
+                    // 本地必须跟着退出，否则下一次请求只会收到 401。
+                    scope.launch {
+                        runCatching { auth.logout() }
+                        account = null
+                        showDevices = false
+                        showSettings = false
+                        onStoreReloaded()
+                    }
+                }
+            )
+        }
     } else if (showSettings) {
         branchStates.SaveableStateProvider("settings") {
             SettingsScreen(
@@ -321,6 +338,7 @@ fun ProfileScreen(
                 onBankUrlChange = onBankUrlChange,
                 onReset = onReset,
                 accountEmail = account?.email,
+                onOpenDevices = { showDevices = true },
                 onDeleteAccount = {
                     // 删账号 = 账号记录 + 本机数据一起清（Play 的账号删除要求：
                     // 只删登录态、把数据留着是不合格的）。头像文件不在 prefs 里，单独删。
@@ -421,7 +439,6 @@ private fun ProfileBody(
         }
     }
 
-    val unlockedAch = remember(achRevision) { store.unlockedAchievements.toSet() }
 
     LazyColumn(
         state = listState,
@@ -585,38 +602,6 @@ private fun ProfileBody(
                     fontSize = 10.sp,
                     lineHeight = 15.sp
                 )
-            }
-        }
-
-        // ---------------- 成就徽章（紧凑入口；详情在个人主页 / 全部徽章） --------
-        item(key = "badges") {
-            val a = clayAccents()
-            ClaySurface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 14.dp)
-                    .clickable { onOpenProfileHome() },
-                radius = 20.dp,
-                elevation = 7.dp
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    ClayChip(color = a.badges, size = 42.dp, radius = 14.dp) {
-                        Icon(Ic.Award, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
-                    }
-                    Spacer(Modifier.width(14.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            stringResource(R.string.prof_badges_meta, ACHIEVEMENTS.count { it.id in unlockedAch }, ACHIEVEMENTS.size),
-                            color = a.value,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                    Icon(Ic.ChevronRight, contentDescription = null, tint = a.sub, modifier = Modifier.size(16.dp))
-                }
             }
         }
 

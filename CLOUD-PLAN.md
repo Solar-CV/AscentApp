@@ -1,6 +1,6 @@
 # AscentRoam 云端服务方案（账号 · 进度同步 · 题库托管）
 
-> 内部文档，仅本地保留（同 HANDOFF）。建立于 2026-11-03，对应代码基线 v0.26.3 / versionCode 148（云端已上线，首个带云端的正式版）。
+> 内部文档，仅本地保留（同 HANDOFF）。建立于 2026-11-03，对应代码基线 v0.26.5 / versionCode 150（云端已上线，设备管理界面已落地）。
 > 本文是云端的**契约层**：API 形状、数据模型、合并规则。实现可以换宿主，契约不换。
 > 工程现状见 `HANDOFF.md` 头部；本文只记录云端相关。
 
@@ -102,11 +102,14 @@ CloudBase HTTP 云函数  ascent-api（Node 18，单进程标准 http 服务，:
 `unauthorized` 表示这个会话彻底不认了，必须重新登录。客户端只对前者自动重试一次。
 
 ### 3.1.1 设备管理
-
 | 方法 | 路径 | 成功 |
 |---|---|---|
 | GET | `/me/devices` | 200 `{devices:[{id, device_id, platform, app_version, created_at, last_used_at, current}]}` |
 | DELETE | `/me/devices/{id}` | 200 `{revoked:true, self:boolean}`；撤销自己那台时 `self=true`，客户端应清本地登录态 |
+
+界面已落地（`ui/DevicesScreen.kt`，2026-11-04）：设置 → 账号 → 已登录设备。
+列出平台/版本/最近使用，当前设备带「当前设备」标记；**当前设备也允许撤销**，
+确认框会说明后果（需要重新登录、进度不丢），撤销成功后本机立即退出登录。
 
 ### 3.2 进度
 
@@ -326,7 +329,7 @@ M3 与 M2 共用 `SyncPayload`，实现成本很低，且让「不注册也能�
 >
 > **状态（2026-11-03）**：A1–A6 已落地 —— 服务端 `server/functions/ascent-api/index.js`
 > （冒烟 66 条全过），客户端 `data/cloud/`（`CloudApi` 自动刷新、`TokenStore` 双 token）。
-> A7 备份演练要等环境开出来才能做。设备管理目前只有接口与数据，界面在下一批。
+> A7 备份演练要等环境开出来才能做。设备管理的接口、数据与界面均已完成（2026-11-04）。
 
 ### 10.2 采纳但排到二期
 
@@ -495,6 +498,39 @@ qq.com / 163.com 的到达率只要半天。如果实测进垃圾箱，那时再
 
 **模板语言**：10 种界面语言不可能各写一封。建议**只做中 / 英两版**，其余语言回退英文，
 邮件里明确写出「验证码 10 分钟内有效」，数字用半角。
+
+### 11.2.1 域名与邮件（已上线，2026-11-04）
+
+域 `ascentroam.com`，注册与解析都在 **DNSPod**（NS `cap/plover.dnspod.net`）。
+下面这张表是**完整的记录清单**，加任何新服务前先看它，别造出第二条 SPF。
+
+| 类型 | 主机记录 | 记录值 | 归属 | 作用 |
+|---|---|---|---|---|
+| TXT | `resend._domainkey` | `p=MIGf…IDAQAB` | Resend | DKIM 签名 |
+| CNAME | `rsend` | `rsend-apne1.forge.rmta.net` | Resend | 退信/SPF 对齐 |
+| CNAME | `send` | `send.forge.rmta.net` | Resend | 发信 SPF（Return-Path） |
+| TXT | `_dmarc` | `v=DMARC1; p=none;` | 公共 | 暂只观察，不拦截 |
+| MX | `@` | `mx1.improvmx.com`（10） | ImprovMX | 收信 |
+| MX | `@` | `mx2.improvmx.com`（20） | ImprovMX | 收信备用 |
+| TXT | `@` | `v=spf1 include:spf.improvmx.com ~all` | ImprovMX | 根域发信声明 |
+
+**两条系统各管一端，互不影响**：`no-reply@` 走 Resend（SPF/DKIM 都在 `send` 子域与
+`resend._domainkey`），`support@` 走 ImprovMX 转发到 `sakikodesu@126.com`。
+根域的 MX 只决定「别人发给 @ascentroam.com 的信投到哪」，不参与发信。
+
+**红线**：根域**只能有一条 SPF**。将来若让根域也用别的服务发信，必须把 include 合并进同一条
+TXT，加第二条会让两条同时失效。同理，MX 换服务商时要先删旧的，否则邮件会随机走错服务器。
+
+**踩过的坑**：`send.forge.rmta.net` / `rsend-apne1.forge.rmta.net` **没有 A 记录是正常的**，
+它们只挂 TXT。查 A 为空不等于配错，要查 TXT。另外本机 DoH（`cloudflare-dns.com`）不通，
+别拿它当判据，直接用 `dig @8.8.8.8`。
+
+**ImprovMX 免费版**：1 域名 / 25 别名 / 500 封每天 / 7 天日志。**不含发信**（SMTP 额度 0），
+所以回信要从 126 邮箱发，别在页面上写「回复此邮件」。
+
+**邮箱地址的用途划分**：`support@` 是对外唯一联系入口（隐私政策、删号页、Play 控制台）；
+`no-reply@` 只发不收。
+
 
 
 ### 11.3 验证码设施（注册与找回共用）

@@ -6,7 +6,7 @@ Une application Android pour celles et ceux qui débutent en alpinisme d’altit
 
 Deux parcours se changent librement. La **haute montagne** compte six unités et 69 leçons, de l’initiation à 5 000 m jusqu’à 8 000 m — de 3 200 m à 8 848 m d’un bout à l’autre. La **randonnée** compte quatre unités et 22 leçons, de la sortie à la journée aux itinéraires longs — de 200 m à 5 630 m. Chaque parcours garde sa progression, ses badges et sa file de révision.
 
-Version actuelle v0.26.3 (versionCode 148). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 727 / 10 727). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo ; la version release fait environ 30 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
+Version actuelle v0.26.5 (versionCode 150). Le travail sur les langues s’est achevé avec la v0.19.24 — les neuf langues traduites correspondent à l’anglais entrée par entrée (10 727 / 10 727). La v0.20 concerne les badges : les quarante succès sont désormais rendus en 3D temps réel au lieu d’images plates, et leurs icônes proviennent des mêmes modèles — les anciennes illustrations générées par IA ont disparu. La fenêtre de déblocage utilise le même moteur et projette des confettis depuis les deux bords de l’écran. Les modèles voyagent dans l’APK : le paquet est passé de 21 Mo à environ 41 Mo ; la version release fait environ 30 Mo. La v0.20.3 corrige une vieille gêne : on descendait dans une liste, on ouvrait un écran secondaire, on revenait, et la liste sautait en haut — elle reste maintenant là où vous l’avez laissée. Les v0.20.6–v0.20.7 poussent le rendu des badges en qualité maximale par défaut : bloom plus fin qui ne s’éteint plus à cause des premières images lentes, déclassement en deux paliers et MSAA 4x avec vérification de capacité et repli silencieux.
 
 Les v0.20.19 – v0.21.0 ont habillé toute l’interface en argile : ombres doubles douces dessinées hors écran et mises en cache, pastilles de couleur mates, couleurs par catégorie dans le manuel, et blocs de couleur dont le relief vient d’une ombre de contact plutôt que d’un dégradé.
 
@@ -222,6 +222,13 @@ Pour publier une nouvelle banque : modifier le contenu → incrémenter `BUNDLED
 Les anciennes versions de l’application ne cassent pas face à une banque plus récente. `minAppVersion` dans `manifest.json` bloque les clients trop anciens, les champs inconnus sont ignorés et une question mal formée est sautée plutôt que fatale.
 
 ## Changements récents
+
+**v0.26.4 – v0.26.5 : appareils connectés et un splash aligné sur l'icône**
+
+- Réglages → Compte propose désormais **Appareils connectés** : plateforme, version et dernière utilisation de chaque session, révocables une par une. L'appareil courant peut aussi être révoqué ; la boîte de dialogue précise que la session sera fermée et que la progression est conservée
+- Le drapeau au sommet, sur l'écran de démarrage, sortait en triangle haut et étroit : le tracé avait un facteur d'échelle sur x mais pas sur y. Corrigé pour correspondre point par point à l'icône ; l'ancien `ic_splash_mark` a été redessiné sur la même grille
+- Les sous-titres longs n'étirent plus les lignes des réglages : titre et sous-titre sont limités à une ligne, et sept langues ont reçu un texte plus court (en italien, c'était le numéro de version qui était coupé)
+- L'entrée des badges a été retirée de l'onglet « Profil » ; les badges sont sur la page de profil
 
 **v0.25.0 – v0.26.3 : les comptes passent au cloud, et un nouveau nom**
 
