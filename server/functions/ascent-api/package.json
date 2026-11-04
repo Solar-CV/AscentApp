@@ -1,10 +1,7 @@
 {
   "name": "ascent-api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "ASCENT 云端 API：账号、进度同步、头像",
-  "main": "index.js",
-  "dependencies": {
-    "@cloudbase/node-sdk": "^2.9.0"
-  }
+  "description": "ASCENT 云端 API：账号、进度同步、头像（零依赖，直连 CloudBase PG REST 网关）",
+  "main": "index.js"
 }

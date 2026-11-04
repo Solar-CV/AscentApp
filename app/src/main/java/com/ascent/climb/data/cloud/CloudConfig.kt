@@ -9,8 +9,8 @@ package com.ascent.climb.data.cloud
  */
 object CloudConfig {
 
-    /** 例如 "https://xxxx.service.tcloudbase.com/ascent"。末尾不要带斜杠。 */
-    const val BASE_URL = ""
+    /** CloudBase 网关默认域名（上海 / 个人版 / ascent-app 环境）。末尾不要带斜杠。 */
+    const val BASE_URL = "https://ascent-app-d1g4gt73867789064-1503487069.ap-shanghai.app.tcloudbase.com"
 
     val enabled: Boolean get() = BASE_URL.isNotBlank()
 
@@ -20,6 +20,9 @@ object CloudConfig {
     const val MAX_STATE_BYTES = 512 * 1024
     const val MAX_AVATAR_BYTES = 512 * 1024
 
-    /** 自动同步的最小间隔：太频繁既费电也没意义。 */
-    const val AUTO_SYNC_INTERVAL_MS = 5 * 60 * 1000L
+    /**
+     * 自动同步间隔：启动时先跑一次，之后每小时一次。
+     * 太频繁既费电也没意义（进度是「练一课」级别的变化，不是秒级）。
+     */
+    const val AUTO_SYNC_INTERVAL_MS = 60 * 60 * 1000L
 }

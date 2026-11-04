@@ -11,7 +11,7 @@ sealed interface SyncOutcome {
     /** 成功，服务端版本号推进到 [rev]。 */
     data class Synced(val rev: Int) : SyncOutcome
 
-    /** 没登录，静默跳过。 */
+    /** 没登录或会话已失效，静默跳过。 */
     object NotLoggedIn : SyncOutcome
 
     /** 网络不可用。不是错误，恢复网络后下次接着来。 */
@@ -30,25 +30,27 @@ sealed interface SyncOutcome {
  *
  * 因为 merge 是幂等且单调的，重试一定收敛；三次还不成就放弃，
  * 本地数据不动，下次再同步 —— **绝不用服务端覆盖本地未合并的内容**。
+ *
+ * access 过期不在这里处理：交给 [CloudApi] 自动刷新，这里只看业务结果。
  */
 class SyncEngine(
     private val context: Context,
     private val store: ProgressStore
 ) {
 
-    private val http = CloudHttp(CloudConfig.BASE_URL)
+    private val api = CloudApi(context)
 
     /** 手动同步：登录态下总是执行。 */
     suspend fun sync(): SyncOutcome = withContext(Dispatchers.IO) {
         if (!CloudConfig.enabled) return@withContext SyncOutcome.NotLoggedIn
-        val token = TokenStore.load(context) ?: return@withContext SyncOutcome.NotLoggedIn
+        if (!api.hasSession()) return@withContext SyncOutcome.NotLoggedIn
         try {
             var rev = 0
             var remote: SyncPayload? = null
 
             repeat(MAX_ATTEMPTS) { attempt ->
                 if (attempt == 0) {
-                    val state = http.call("GET", "/state", token)
+                    val state = api.json("GET", "/state")
                     rev = state?.optInt("rev", 0) ?: 0
                     remote = state?.optJSONObject("payload")?.let { SyncPayload.fromJson(it) }
                 }
@@ -63,8 +65,8 @@ class SyncEngine(
                 }
 
                 try {
-                    val res = http.call(
-                        "PUT", "/state", token,
+                    val res = api.json(
+                        "PUT", "/state",
                         JSONObject().put("rev", rev).put("payload", merged.toJson())
                     )
                     val newRev = res?.optInt("rev", rev + 1) ?: (rev + 1)
@@ -79,7 +81,11 @@ class SyncEngine(
             }
             SyncOutcome.Failed("conflict")
         } catch (e: CloudException) {
-            if (e.isNetwork) SyncOutcome.Offline else SyncOutcome.Failed(e.code)
+            when {
+                e.isNetwork -> SyncOutcome.Offline
+                e.code == "unauthorized" || e.code == "invalid_token" -> SyncOutcome.NotLoggedIn
+                else -> SyncOutcome.Failed(e.code)
+            }
         }
     }
 
@@ -89,7 +95,7 @@ class SyncEngine(
      */
     suspend fun syncIfDue(): SyncOutcome? {
         if (!CloudConfig.enabled) return null
-        if (TokenStore.load(context) == null) return null
+        if (!api.hasSession()) return null
         if (System.currentTimeMillis() - store.lastSyncAt < CloudConfig.AUTO_SYNC_INTERVAL_MS) return null
         return sync()
     }

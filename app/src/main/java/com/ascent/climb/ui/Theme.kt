@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import com.ascent.climb.R
 
 /**
- * ASCENT 视觉语言 · 方向 E（HeroUI × 攀登）。
+ * ASCENTROAM 视觉语言 · 方向 E（HeroUI × 攀登）。
  *
  * 中性灰底 + 冰川蓝强调，全平面、1dp 细描边、12/16/20/24/999 圆角。
  * 新 token（Accent/Surface/Border/Fg…）为推荐名；旧 token（Ice/Panel/Line/Txt…）

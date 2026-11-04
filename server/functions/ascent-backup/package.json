@@ -1,0 +1,7 @@
+{
+  "name": "ascent-backup",
+  "version": "1.1.0",
+  "private": true,
+  "description": "ASCENT 每日加密备份（零依赖）",
+  "main": "index.js"
+}

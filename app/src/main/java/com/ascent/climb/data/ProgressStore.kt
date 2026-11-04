@@ -382,6 +382,36 @@ class ProgressStore(context: Context) {
         set(value) = prefs.edit().putInt("avatarVersion", value).apply()
 
     /**
+     * 已经落到本机的云端头像版本。
+     *
+     * 云端的 `avatarVersion` 比它大，说明别的设备换过头像，才需要重新下载；
+     * 否则每次同步都白拉一次 40 KB 的 JPEG。
+     */
+    var cloudAvatarVersion: Int
+        get() = prefs.getInt("cloudAvatarVersion", 0)
+        set(value) = prefs.edit().putInt("cloudAvatarVersion", value).apply()
+
+    /**
+     * 本机头像改动还没推上去。上传成功后清掉。
+     *
+     * 为什么不用「avatarVersion > cloudAvatarVersion」判断：下载时也要 +1 触发重新解码，
+     * 两个计数器必然错位，会变成「刚下载完就以为本地更新、又推一次」的来回打架。
+     */
+    var avatarDirty: Boolean
+        get() = prefs.getBoolean("avatarDirty", false)
+        set(value) = prefs.edit().putBoolean("avatarDirty", value).apply()
+
+    /**
+     * 上一次从账号同步下来的昵称。
+     *
+     * 用来判断「本地这个名字是不是用户刚改、还没推上去」：只有 `displayName` 与它相同，
+     * 才说明本地没有未上传的改动，可以安全地接受账号里的新名字（别的设备改的）。
+     */
+    var syncedNickname: String
+        get() = prefs.getString("syncedNickname", "") ?: ""
+        set(value) = prefs.edit().putString("syncedNickname", value.trim().take(16)).apply()
+
+    /**
      * 当前课程大类：climb（高山攀登）/ trek（徒步）。
      * 只影响「看哪条路线」，进度本身按课程 id 存，两条轨道互不干扰。
      */

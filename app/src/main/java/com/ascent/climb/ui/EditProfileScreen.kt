@@ -51,12 +51,20 @@ import kotlinx.coroutines.launch
 /**
  * 编辑个人资料：头像 + 用户名。
  *
- * 两者都只存本地（头像文件在 filesDir，名字在 prefs），与 data/Auth.kt 的模拟登录无关。
+ * 头像文件存 filesDir、名字存 prefs；**登录状态下名字还会推一份到账号**（[onNameCommitted]），
+ * 否则换设备登录会看到旧昵称。
  * 头像选中即生效（文件已复制），用户名在按「完成」或返回时才落库 ——
  * 不给「保存」按钮之外的第三种状态，避免用户以为改了其实没存。
  */
 @Composable
-fun EditProfileScreen(store: ProgressStore, onBack: () -> Unit) {
+fun EditProfileScreen(
+    store: ProgressStore,
+    onBack: () -> Unit,
+    /** 名字落库后回调，由上层负责推到云端（上层的协程作用域活得更久）。 */
+    onNameCommitted: (String) -> Unit = {},
+    /** 头像换了或删了：true=有新图，false=已移除。上层据此推云端。 */
+    onAvatarChanged: (Boolean) -> Unit = {}
+) {
     // 这个工程里 LocalActivityResultRegistryOwner 一直是 null（MainActivity 的 LocalContext
     // 被语言包装过，Compose 那条 ViewTree 注入没走通），直接调 rememberLauncherForActivityResult
     // 会抛 "No ActivityResultRegistryOwner was provided"。
@@ -70,15 +78,20 @@ fun EditProfileScreen(store: ProgressStore, onBack: () -> Unit) {
     val owner = remember(view) { view.context.findActivity() as? ActivityResultRegistryOwner }
     if (owner != null) {
         CompositionLocalProvider(LocalActivityResultRegistryOwner provides owner) {
-            EditProfileBody(store = store, onBack = onBack)
+            EditProfileBody(store = store, onBack = onBack, onNameCommitted = onNameCommitted, onAvatarChanged = onAvatarChanged)
         }
     } else {
-        EditProfileBody(store = store, onBack = onBack)
+        EditProfileBody(store = store, onBack = onBack, onNameCommitted = onNameCommitted, onAvatarChanged = onAvatarChanged)
     }
 }
 
 @Composable
-private fun EditProfileBody(store: ProgressStore, onBack: () -> Unit) {
+private fun EditProfileBody(
+    store: ProgressStore,
+    onBack: () -> Unit,
+    onNameCommitted: (String) -> Unit = {},
+    onAvatarChanged: (Boolean) -> Unit = {}
+) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -93,6 +106,7 @@ private fun EditProfileBody(store: ProgressStore, onBack: () -> Unit) {
     // 返回与「完成」走同一条路：先把名字写进去，再退。否则输入框里的改动会静默丢失。
     fun commitAndBack() {
         store.displayName = name
+        onNameCommitted(name.trim())
         onBack()
     }
     BackHandler { commitAndBack() }
@@ -113,6 +127,7 @@ private fun EditProfileBody(store: ProgressStore, onBack: () -> Unit) {
             if (AvatarStore.saveCropped(context, square)) {
                 version += 1
                 store.avatarVersion = version
+                onAvatarChanged(true)
             } else {
                 failed = true
             }
@@ -209,6 +224,7 @@ private fun EditProfileBody(store: ProgressStore, onBack: () -> Unit) {
                                 store.avatarVersion = 0
                                 version = 0
                                 failed = false
+                                onAvatarChanged(false)
                             }
                         )
                     }

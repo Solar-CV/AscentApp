@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ASCENT</string>
+    <string name="app_name">AscentRoam</string>
     <string name="common_back">Volver</string>
     <string name="common_close">Cerrar</string>
     <string name="common_cancel">Cancelar</string>
@@ -64,7 +64,7 @@
     <string name="set_reset_title">¿Restablecer el progreso?</string>
     <string name="set_reset_action">Restablecer</string>
     <string name="set_section_about">Acerca de</string>
-    <string name="set_about_name">ASCENT</string>
+    <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Teoría de alpinismo y escalada en hielo</string>
     <string name="set_about_version">Versión v%1$s (%2$d)</string>
     <string name="prof_not_logged_in">Sin sesión</string>
@@ -77,7 +77,6 @@
     <string name="prof_badges">Insignias de logro · %1$d / %2$d</string>
     <string name="prof_badges_hint">Toca el avatar para ver las insignias desbloqueadas en tu perfil</string>
     <string name="prof_section_account">Cuenta</string>
-    <string name="prof_login_mock">Inicio de sesión local simulado; los datos aún no se sincronizan</string>
     <string name="prof_login_register">Entrar / Registrarse</string>
     <string name="prof_logout">Cerrar sesión</string>
 
@@ -85,16 +84,14 @@
     <string name="set_section_account">Cuenta</string>
     <string name="acc_delete">Eliminar cuenta</string>
     <string name="acc_delete_title">¿Eliminar cuenta?</string>
-    <string name="acc_delete_body">%1$s y todos sus datos en este dispositivo se eliminarán de forma permanente:\n\n· Progreso, altitud y racha\n· Insignias y cola de repaso\n· Foto y nombre visible\n\nEsta acción no se puede deshacer.</string>
+    <string name="acc_delete_body">%1$s y todos sus datos (en la nube y en este dispositivo) se eliminarán de forma permanente:\n\n· Progreso, altitud y racha\n· Insignias y cola de repaso\n· Foto y nombre visible\n\nEsta acción no se puede deshacer.</string>
     <string name="acc_delete_action">Eliminar</string>
     <string name="acc_delete_failed">No se pudo eliminar; inténtalo de nuevo</string>
     <string name="prof_disclaimer_title">Saber la teoría no es lo mismo que saber hacerlo</string>
     <string name="prof_disclaimer_body">Esta app registra solo el progreso teórico. Las capacidades prácticas — nieve y hielo, cuerdas, escalada en hielo, rescate — deben ser evaluadas presencialmente por un instructor certificado antes de usarse en terreno real. Las decisiones sobre medicación o primeros auxilios deben consultarse con un médico.</string>
-    <string name="prof_version_line">ASCENT · v%1$s</string>
-    <string name="auth_login_title">Entrar en ASCENT</string>
+    <string name="prof_version_line">AscentRoam · v%1$s</string>
+    <string name="auth_login_title">Entrar en AscentRoam</string>
     <string name="auth_register_title">Crear cuenta</string>
-    <string name="auth_login_note">Inicio de sesión local simulado; altitud e insignias se quedan en este dispositivo</string>
-    <string name="auth_register_note">Las cuentas se guardan localmente hasta conectar el backend</string>
     <string name="auth_login">Entrar</string>
     <string name="auth_register">Registrarse</string>
     <string name="auth_nickname">Apodo</string>
@@ -103,8 +100,6 @@
     <string name="auth_wait">Espera un momento…</string>
     <string name="auth_login_action">Entrar</string>
     <string name="auth_register_action">Registrarse y entrar</string>
-    <string name="auth_mock_note">Ahora se usa una API de autenticación local simulada (MockAuthApi). No se conecta ni envía datos.</string>
-    <string name="auth_backend_note">Cuando el backend esté listo basta con cambiar la implementación de AuthApi; la interfaz no cambia.</string>
 
     <string name="auth_note_cloud">Al iniciar sesión, tu altitud, tus insignias y tu historial de repaso se guardan en la nube y puedes recuperarlos en otro dispositivo.</string>
     <string name="auth_password_cloud">Contraseña (mínimo 8 caracteres)</string>
@@ -117,6 +112,33 @@
     <string name="cloud_err_email_format">El correo no tiene un formato válido</string>
     <string name="cloud_err_password_short">La contraseña debe tener al menos 8 caracteres</string>
     <string name="cloud_err_nickname">El nombre debe tener entre 1 y 16 caracteres</string>
+
+    <string name="sync_now">Sincronizar ahora</string>
+    <string name="sync_running">Sincronizando…</string>
+    <string name="sync_last">Última sincronización %1$s</string>
+    <string name="sync_never">Aún no se ha sincronizado</string>
+    <string name="sync_failed">Error al sincronizar. Inténtalo más tarde</string>
+    <string name="sync_offline">Sin conexión: se sincronizará automáticamente</string>
+
+    <string name="cloud_err_identity_conflict">Ese correo ya está registrado de otra forma. Inicia sesión y vincula Google desde Ajustes</string>
+    <string name="cloud_err_identity_taken">Esa cuenta de Google ya está vinculada a otra cuenta</string>
+    <string name="cloud_err_locked">Esta cuenta está desactivada</string>
+    <string name="cloud_err_session_expired">La sesión ha caducado. Inicia sesión de nuevo</string>
+
+    <string name="auth_code">Código de verificación</string>
+    <string name="auth_send_code">Enviar código</string>
+    <string name="auth_resend_in">Reenviar en %1$d s</string>
+    <string name="auth_code_sent">Código enviado: revisa tu correo (y la carpeta de spam)</string>
+    <string name="auth_forgot">¿Olvidaste tu contraseña?</string>
+    <string name="auth_reset_title">Restablecer contraseña</string>
+    <string name="auth_reset_note">Introduce el código que te enviamos y elige una contraseña nueva. Después tendrás que iniciar sesión de nuevo.</string>
+    <string name="auth_reset_action">Restablecer contraseña</string>
+    <string name="auth_reset_done">Contraseña restablecida: inicia sesión con la nueva</string>
+    <string name="auth_new_password">Contraseña nueva</string>
+    <string name="auth_back_to_login">Volver al inicio de sesión</string>
+    <string name="cloud_err_invalid_code">El código no es correcto o ha caducado</string>
+    <string name="cloud_err_rate_limited">Demasiadas solicitudes: inténtalo más tarde</string>
+    <string name="cloud_err_mail_failed">No se pudo enviar el código: inténtalo más tarde</string>
     <string name="pf_title">Editar perfil</string>
     <string name="pf_avatar_change">Cambiar foto</string>
     <string name="pf_avatar_remove">Quitar foto</string>
@@ -344,7 +366,7 @@
     <string name="home_badges_unlocked">Insignias desbloqueadas · %1$d</string>
     <string name="prof_route_meta">Ruta teórica · %1$d / %2$d lecciones</string>
     <string name="prof_badges_meta">Insignias de logro · %1$d / %2$d</string>
-    <string name="prof_version">ASCENT · v%1$s</string>
+    <string name="prof_version">AscentRoam · v%1$s</string>
     <string name="cap_m5i">5000 inicial</string>
     <string name="cap_m5a">5000 avanzado</string>
     <string name="cap_m6">6000 m</string>

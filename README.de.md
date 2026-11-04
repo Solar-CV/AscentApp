@@ -1,4 +1,4 @@
-# ASCENT
+# AscentRoam
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · **[Deutsch](README.de.md)** · [Español](README.es.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Русский](README.ru.md) · [Svenska](README.sv.md)
 
@@ -6,7 +6,7 @@ Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist
 
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 69 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 22 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.23.3 (versionCode 138). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.727 / 10.727). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.26.3 (versionCode 148). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.727 / 10.727). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 v0.20.19 – v0.21.0 haben die Oberfläche durchgehend auf Ton (Clay) umgestellt: weiche zweilagige Schatten, offscreen gezeichnet und zwischengespeichert, flache Farbchips, Kategoriefarben im Handbuch und große Farbflächen, deren Tiefe aus einem Kontaktschatten statt aus einem Verlauf kommt.
 
@@ -14,7 +14,7 @@ v0.20.19 – v0.21.0 haben die Oberfläche durchgehend auf Ton (Clay) umgestellt
 
 Am einfachsten über das fertige APK aus den [Releases](https://github.com/Solar-CV/AscentApp/releases). Ein `v*`-Tag lässt GitHub Actions bauen und das APK anhängen.
 
-- Paket: `com.ascent.climb`
+- Paket: `com.ascentroam.app` (der Quellcode-Paketname bleibt `com.ascent.climb`)
 - Minimum: Android 8.0 (API 26), **nur arm64-v8a** — reine 32-Bit-Geräte können diese Version nicht installieren
 - Größe: etwa 30 MB (38 MB unkomprimierte Abzeichenmodelle, rund 10 MB nach dem Paketieren)
 - Signatur: seit v0.21.2 mit Release-Zertifikat signiert. Über einen älteren Debug-Build lässt es sich nicht installieren – erst deinstallieren, dabei werden Fortschritt, Abzeichen und Einstellungen gelöscht
@@ -223,6 +223,13 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 
 ## Letzte Änderungen
 
+**v0.25.0 – v0.26.3: Konten in der Cloud und ein neuer Name**
+
+- Konten sind jetzt echt: Registrierung und Anmeldung per E-Mail gegen ein gehostetes Backend, Sync von Fortschritt und Avatar, „auf einem anderen Gerät anmelden und alles ist wieder da". Weiterhin optional — die App funktioniert ohne Konto und offline vollständig
+- Lokales Profil: Avatar über eine 1:1-Zuschnittseite wählen (Zoomen, Verschieben, Drehen), Anzeigename änderbar; die EXIF-Ausrichtung wird beachtet, Hochformatfotos liegen nicht mehr quer
+- Konto löschen unter Einstellungen → Konto, mit einem Bestätigungsdialog: was gelöscht wird (Serverdatensatz, Fortschritt, Abzeichen, Avatar, Name) und was bleibt (Design, Sprache, Track)
+- „Lernfortschritt zurücksetzen" liegt jetzt in den Einstellungen und fragt nach; Name, Avatar und Sprache werden nicht mehr mitgelöscht
+- Umbenannt von ASCENT zu **AscentRoam** (ascentroam.com); die Package-ID ist jetzt `com.ascentroam.app` — läuft neben der alten Version, ist auf dem Gerät aber eine eigene App
 **v0.24.0: bereit für Google Play**
 
 - Jedes Release hat jetzt zwei Anhänge: das APK zum Sideloaden und `ascent-<tag>-release.aab` für Google Play

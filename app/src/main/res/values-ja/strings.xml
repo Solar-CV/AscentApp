@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ASCENT 登攀</string>
+    <string name="app_name">AscentRoam</string>
 
     <string name="common_back">戻る</string>
     <string name="common_close">閉じる</string>
@@ -74,7 +74,7 @@
     <string name="set_reset_action">リセット</string>
 
     <string name="set_section_about">このアプリについて</string>
-    <string name="set_about_name">ASCENT 登攀の道</string>
+    <string name="set_about_name">AscentRoam 登攀の道</string>
     <string name="set_about_desc">高所登山 / アイスクライミングの理論学習</string>
     <string name="set_about_version">バージョン v%1$s（%2$d）</string>
 
@@ -88,7 +88,6 @@
     <string name="prof_badges">実績バッジ · %1$d / %2$d</string>
     <string name="prof_badges_hint">アバターをタップするとマイページで解除済みバッジを確認できます</string>
     <string name="prof_section_account">アカウント</string>
-    <string name="prof_login_mock">端末内の模擬ログインです。データはまだ同期されません</string>
     <string name="prof_login_register">ログイン / 登録</string>
     <string name="prof_logout">ログアウト</string>
 
@@ -96,17 +95,15 @@
     <string name="set_section_account">アカウント</string>
     <string name="acc_delete">アカウントを削除</string>
     <string name="acc_delete_title">アカウントを削除しますか？</string>
-    <string name="acc_delete_body">%1$s とこの端末上のすべてのデータが完全に削除されます：\n\n· 学習の進捗・標高・連続日数\n· バッジと復習キュー\n· プロフィール写真と表示名\n\nこの操作は取り消せません。</string>
+    <string name="acc_delete_body">%1$s とそのすべてのデータ（クラウドとこの端末）が完全に削除されます：\n\n· 学習の進捗・標高・連続日数\n· バッジと復習キュー\n· プロフィール写真と表示名\n\nこの操作は取り消せません。</string>
     <string name="acc_delete_action">削除</string>
     <string name="acc_delete_failed">削除できませんでした。もう一度お試しください</string>
     <string name="prof_disclaimer_title">理論を知ることは、実践できることではありません</string>
     <string name="prof_disclaimer_body">本アプリが記録するのは理論学習の進捗です。雪と氷、ロープワーク、アイスクライミング、救助などの実技は、認定コーチの現場評価を受けたうえで初めて実環境で使用できます。薬剤や応急処置に関わる判断は医師に相談してください。</string>
-    <string name="prof_version_line">ASCENT · v%1$s</string>
+    <string name="prof_version_line">AscentRoam · v%1$s</string>
 
-    <string name="auth_login_title">ASCENT にログイン</string>
+    <string name="auth_login_title">AscentRoam にログイン</string>
     <string name="auth_register_title">アカウント作成</string>
-    <string name="auth_login_note">端末内の模擬ログインです。標高とバッジはこの端末に保存されます</string>
-    <string name="auth_register_note">登録内容もまず端末内に保存され、バックエンド接続後に同期します</string>
     <string name="auth_login">ログイン</string>
     <string name="auth_register">登録</string>
     <string name="auth_nickname">ニックネーム</string>
@@ -115,8 +112,6 @@
     <string name="auth_wait">少々お待ちください…</string>
     <string name="auth_login_action">ログイン</string>
     <string name="auth_register_action">登録してログイン</string>
-    <string name="auth_mock_note">現在は端末内の模擬認証 API（MockAuthApi）です。通信もデータ送信も行いません。</string>
-    <string name="auth_backend_note">バックエンドの準備後、AuthApi の実装を差し替えるだけで UI の変更は不要です。</string>
 
     <string name="auth_note_cloud">ログインすると、海拔・バッジ・復習の記録がクラウドに保存され、別の端末でも引き継げます。</string>
     <string name="auth_password_cloud">パスワード（8 文字以上）</string>
@@ -129,6 +124,33 @@
     <string name="cloud_err_email_format">メールアドレスの形式が正しくありません</string>
     <string name="cloud_err_password_short">パスワードは 8 文字以上にしてください</string>
     <string name="cloud_err_nickname">ニックネームは 1〜16 文字で入力してください</string>
+
+    <string name="sync_now">今すぐ同期</string>
+    <string name="sync_running">同期中…</string>
+    <string name="sync_last">最終同期 %1$s</string>
+    <string name="sync_never">まだ同期していません</string>
+    <string name="sync_failed">同期に失敗しました。後でもう一度お試しください</string>
+    <string name="sync_offline">オフラインです。接続後に自動同期します</string>
+
+    <string name="cloud_err_identity_conflict">このメールアドレスは別の方法で登録されています。ログイン後、設定から Google を連携してください</string>
+    <string name="cloud_err_identity_taken">この Google アカウントはすでに別のアカウントに連携されています</string>
+    <string name="cloud_err_locked">このアカウントは無効化されています</string>
+    <string name="cloud_err_session_expired">ログインの有効期限が切れました。もう一度ログインしてください</string>
+
+    <string name="auth_code">確認コード</string>
+    <string name="auth_send_code">コードを送信</string>
+    <string name="auth_resend_in">%1$d 秒後に再送</string>
+    <string name="auth_code_sent">確認コードを送信しました。メール（迷惑メールフォルダも）をご確認ください</string>
+    <string name="auth_forgot">パスワードをお忘れですか？</string>
+    <string name="auth_reset_title">パスワードの再設定</string>
+    <string name="auth_reset_note">メールに届いた確認コードを入力し、新しいパスワードを設定してください。再設定後は新しいパスワードでログインし直す必要があります。</string>
+    <string name="auth_reset_action">パスワードを再設定</string>
+    <string name="auth_reset_done">パスワードを再設定しました。新しいパスワードでログインしてください</string>
+    <string name="auth_new_password">新しいパスワード</string>
+    <string name="auth_back_to_login">ログインに戻る</string>
+    <string name="cloud_err_invalid_code">確認コードが正しくないか、有効期限が切れています</string>
+    <string name="cloud_err_rate_limited">リクエストが多すぎます。しばらくしてからお試しください</string>
+    <string name="cloud_err_mail_failed">確認コードを送信できませんでした。しばらくしてからお試しください</string>
 
     <string name="pf_title">プロフィールを編集</string>
     <string name="pf_avatar_change">写真を変更</string>
@@ -366,7 +388,7 @@
     <string name="home_badges_unlocked">解除済みバッジ · %1$d</string>
     <string name="prof_route_meta">理論ルート · %1$d / %2$d レッスン</string>
     <string name="prof_badges_meta">実績バッジ · %1$d / %2$d</string>
-    <string name="prof_version">ASCENT · v%1$s</string>
+    <string name="prof_version">AscentRoam · v%1$s</string>
     <string name="cap_m5i">5000 入門</string>
     <string name="cap_m5a">5000 応用</string>
     <string name="cap_m6">6000 m</string>

@@ -3,6 +3,7 @@ package com.ascent.climb.data.cloud
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 /**
  * 头像的云端往返。
@@ -12,29 +13,36 @@ import kotlinx.coroutines.withContext
  */
 class CloudProfile(private val context: Context) {
 
-    private val http = CloudHttp(CloudConfig.BASE_URL)
+    private val api = CloudApi(context)
+
+    /** 当前账号的公开资料（昵称、头像版本）。未登录或失败返回 null。 */
+    suspend fun me(): JSONObject? = withContext(Dispatchers.IO) {
+        if (!CloudConfig.enabled) return@withContext null
+        if (!api.hasSession()) return@withContext null
+        runCatching { api.json("GET", "/auth/me")?.optJSONObject("user") }.getOrNull()
+    }
 
     /** 上传成功返回新版本号；未登录或失败返回 null。 */
     suspend fun uploadAvatar(jpeg: ByteArray): Int? = withContext(Dispatchers.IO) {
         if (!CloudConfig.enabled) return@withContext null
         if (jpeg.isEmpty() || jpeg.size > CloudConfig.MAX_AVATAR_BYTES) return@withContext null
-        val token = TokenStore.load(context) ?: return@withContext null
+        if (!api.hasSession()) return@withContext null
         runCatching {
-            http.uploadJpeg("/avatar", token, jpeg)?.optInt("version", 0)
+            api.uploadJpeg("/avatar", jpeg)?.optInt("version", 0)
         }.getOrNull()?.takeIf { it > 0 }
     }
 
     /** 拉取云端头像；没有或失败返回 null。 */
     suspend fun downloadAvatar(): ByteArray? = withContext(Dispatchers.IO) {
         if (!CloudConfig.enabled) return@withContext null
-        val token = TokenStore.load(context) ?: return@withContext null
-        runCatching { http.download("/avatar", token) }.getOrNull()
+        if (!api.hasSession()) return@withContext null
+        runCatching { api.download("/avatar") }.getOrNull()
     }
 
     /** 删除云端头像。 */
     suspend fun deleteAvatar(): Boolean = withContext(Dispatchers.IO) {
         if (!CloudConfig.enabled) return@withContext false
-        val token = TokenStore.load(context) ?: return@withContext false
-        runCatching { http.call("DELETE", "/avatar", token) }.isSuccess
+        if (!api.hasSession()) return@withContext false
+        runCatching { api.json("DELETE", "/avatar") }.isSuccess
     }
 }

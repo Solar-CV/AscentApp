@@ -1,4 +1,4 @@
-# ASCENT
+# AscentRoam
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Русский](README.ru.md) · **[Svenska](README.sv.md)**
 
@@ -6,7 +6,7 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 69 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 22 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.23.3 (versionCode 138). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 727 / 10 727). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.26.3 (versionCode 148). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 727 / 10 727). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
 
@@ -14,7 +14,7 @@ v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor s
 
 Enklaste vägen är det färdigbyggda APK:t från [Releases](https://github.com/Solar-CV/AscentApp/releases). En push av en `v*`-tagg låter GitHub Actions bygga och bifoga ett nytt APK.
 
-- Paket: `com.ascent.climb`
+- Paket: `com.ascentroam.app` (källkodens package förblir `com.ascent.climb`)
 - Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen
 - Storlek: cirka 30 MB (38 MB okomprimerade emblemmodeller, ungefär 10 MB efter paketering)
 - Signatur: release-signerat från v0.21.2. Det går inte att installera över en äldre debug-build — avinstallera först, vilket raderar framsteg, emblem och inställningar
@@ -223,6 +223,13 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 
 ## Senaste ändringar
 
+**v0.25.0 – v0.26.3: konton i molnet och ett nytt namn**
+
+- Konton är nu riktiga: registrering och inloggning med e-post mot en hostad backend, synk av framsteg och avatar, "logga in på en annan enhet och få tillbaka allt". Fortfarande valfritt: appen fungerar fullt ut utan konto och offline
+- Lokal profil: avatar med 1:1-beskärning (zoom, dra, rotera) och namnbyte; EXIF-rotation respekteras, så stående foton ligger inte längre ner
+- Radera konto i Inställningar → Konto, med en bekräftelsedialog som anger vad som försvinner (posten på servern, framsteg, märken, avatar, namn) och vad som blir kvar (tema, språk, spår)
+- "Återställ framstegen" flyttade till inställningarna och frågar nu först; namn, avatar och språk raderas inte längre på köpet
+- Från ASCENT till **AscentRoam** (ascentroam.com); package id är nu `com.ascentroam.app` — kan ligga bredvid den gamla versionen, men är två separata appar på telefonen
 **v0.24.0: redo för Google Play**
 
 - Varje release innehåller nu två filer: APK för sidoladdning och `ascent-<tag>-release.aab` för Google Play

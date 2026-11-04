@@ -16,6 +16,9 @@ sealed interface AuthResult {
     data class Failure(val message: String) : AuthResult
 }
 
+/** 验证码用途。注册与找回密码共用同一条通道，靠它区分。 */
+enum class CodePurpose(val wire: String) { Register("register"), Reset("reset") }
+
 /**
  * 登录接口（Auth API）。
  *
@@ -24,7 +27,7 @@ sealed interface AuthResult {
  *
  * 真实实现时的建议签名保持不变，仅在内部改为网络请求：
  *   POST /auth/login    { email, password } -> { token, user }
- *   POST /auth/register { email, password, nickname } -> { token, user }
+ *   POST /auth/register { email, password, nickname, code } -> { token, user }
  *   POST /auth/logout
  */
 interface AuthApi {
@@ -37,8 +40,25 @@ interface AuthApi {
     fun currentAccount(): Account?
 
     suspend fun login(email: String, password: String): AuthResult
-    suspend fun register(email: String, password: String, nickname: String): AuthResult
+
+    /**
+     * 注册。[code] 是邮箱验证码；服务端 `REQUIRE_EMAIL_CODE=false` 时可以不填。
+     * 默认值让「还没接发信」的环境（Mock）不必跟着改调用点。
+     */
+    suspend fun register(email: String, password: String, nickname: String, code: String = ""): AuthResult
+
     suspend fun logout()
+
+    /**
+     * 发送验证码。**返回 null 表示已发出**，否则是可展示的错误文案。
+     *
+     * 用 `String?` 而不是 `AuthResult`：发码不产生登录态，不该被误当成一次成功登录。
+     * 与服务端一致：无论邮箱是否已注册都会返回成功，避免这个接口变成注册状态查询器。
+     */
+    suspend fun sendCode(email: String, purpose: CodePurpose = CodePurpose.Register): String?
+
+    /** 用验证码重置密码。返回 null 表示成功。成功后会踢掉该账号所有会话，需要重新登录。 */
+    suspend fun resetPassword(email: String, code: String, newPassword: String): String?
 
     /**
      * 删除账号。真实实现对应 `DELETE /auth/account`：**服务端要把该账号的数据一并删掉**，
@@ -84,7 +104,7 @@ class MockAuthApi(private val context: Context) : AuthApi {
         return save(e, e.substringBefore("@"))
     }
 
-    override suspend fun register(email: String, password: String, nickname: String): AuthResult {
+    override suspend fun register(email: String, password: String, nickname: String, code: String): AuthResult {
         delay(750)
         val e = email.trim()
         val n = nickname.trim()
@@ -92,6 +112,22 @@ class MockAuthApi(private val context: Context) : AuthApi {
         if (n.isEmpty()) return AuthResult.Failure("请填写昵称")
         if (n.length > 16) return AuthResult.Failure("昵称不能超过 16 个字符")
         return save(e, n)
+    }
+
+    /** 本地没有发信通道：假装发成功，让界面的倒计时与错误态仍然可测。 */
+    override suspend fun sendCode(email: String, purpose: CodePurpose): String? {
+        delay(400)
+        if (!EMAIL_REGEX.matches(email.trim())) return "邮箱格式不正确"
+        return null
+    }
+
+    /** 本地重置：只校验格式，不真的改密码（没有云端就没有密码）。 */
+    override suspend fun resetPassword(email: String, code: String, newPassword: String): String? {
+        delay(500)
+        if (!EMAIL_REGEX.matches(email.trim())) return "邮箱格式不正确"
+        if (!Regex("^\\d{6}$").matches(code.trim())) return "验证码不正确或已失效"
+        if (newPassword.length < 6) return "密码至少 6 位"
+        return null
     }
 
     override suspend fun logout() {

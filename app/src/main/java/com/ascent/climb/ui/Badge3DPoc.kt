@@ -94,7 +94,7 @@ import kotlin.math.sin
 import kotlin.math.tan
 
 /**
- * ASCENT 3D 徽章 POC。
+ * ASCENTROAM 3D 徽章 POC。
  *
  * 只为一件事存在：在真机上回答四个问题 ——
  *   1. 这枚 glb 在 Filament 下观感如何（金属 + 珐琅是否成立）

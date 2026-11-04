@@ -1,4 +1,4 @@
-# ASCENT
+# AscentRoam
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · **[Español](README.es.md)** · [Français](README.fr.md) · [Italiano](README.it.md) · [Русский](README.ru.md) · [Svenska](README.sv.md)
 
@@ -6,7 +6,7 @@ Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. 
 
 Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 69 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 22 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
 
-Versión actual v0.23.3 (versionCode 138). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.727 / 10.727). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
+Versión actual v0.26.3 (versionCode 148). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.727 / 10.727). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
 
 v0.20.19 – v0.21.0 renovaron toda la interfaz con acabado de arcilla: sombras dobles suaves dibujadas fuera de pantalla y cacheadas, fichas de color planas, colores por categoría en el manual y bloques de color cuya profundidad viene de una sombra de contacto, no de un degradado.
 
@@ -14,7 +14,7 @@ v0.20.19 – v0.21.0 renovaron toda la interfaz con acabado de arcilla: sombras 
 
 Lo más fácil es el APK ya compilado de [Releases](https://github.com/Solar-CV/AscentApp/releases). Al empujar una etiqueta `v*`, GitHub Actions compila y adjunta un APK nuevo.
 
-- Paquete: `com.ascent.climb`
+- Paquete: `com.ascentroam.app` (el paquete del código sigue siendo `com.ascent.climb`)
 - Mínimo: Android 8.0 (API 26), **solo arm64-v8a** — los móviles de solo 32 bits no pueden instalarlo
 - Tamaño: unos 30 MB (38 MB de modelos sin comprimir, unos 10 MB tras empaquetar)
 - Firma: firmado con certificado de release desde la v0.21.2. No se instala sobre una compilación debug anterior: hay que desinstalar, y eso borra el progreso, las insignias y los ajustes
@@ -223,6 +223,13 @@ Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVe
 
 ## Cambios recientes
 
+**v0.25.0 – v0.26.3: cuentas en la nube y un nombre nuevo**
+
+- Las cuentas ya son reales: registro e inicio de sesión por correo contra un backend alojado, sincronización de progreso y avatar, y «entra en otro dispositivo y lo recuperas». Sigue siendo opcional: la app funciona entera sin cuenta y sin conexión
+- Perfil local: avatar con recorte 1:1 (zoom, arrastre, rotación) y nombre editable; se respeta la orientación EXIF, así que las fotos verticales ya no salen tumbadas
+- Eliminar cuenta en Ajustes → Cuenta, con un diálogo que detalla qué se borra (registro en el servidor, progreso, insignias, avatar, nombre) y qué se conserva (tema, idioma, ruta)
+- «Restablecer el progreso» pasa a Ajustes y pide confirmación; ya no borra de paso el nombre, el avatar ni el idioma
+- De ASCENT a **AscentRoam** (ascentroam.com); el package id ahora es `com.ascentroam.app` — convive con la versión antigua, pero en el teléfono son dos apps distintas
 **v0.24.0: listo para Google Play**
 
 - Cada Release incluye ahora dos archivos: el APK para instalar a mano y `ascent-<tag>-release.aab` para Google Play

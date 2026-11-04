@@ -1,0 +1,232 @@
+/* AscentRoam 站点样式。与 App 同一套暗色 + 冰蓝配色（ui/Theme.kt）。 */
+:root {
+  --bg: #060607;
+  --panel: #141416;
+  --panel2: #1f1f23;
+  --line: #2a2a2e;
+  --ice: #0485f7;
+  --ice-soft: #6fb6fb;
+  --fg: #fafafa;
+  --mut: #a1a1aa;
+  --mut2: #71717a;
+  --body: #d4d4d8;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--body);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  /* 顶部一层极淡的冰蓝光，呼应 App 的等高线质感 */
+  background-image: radial-gradient(
+    900px 420px at 50% -160px,
+    rgba(4, 133, 247, 0.16),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 22px 96px;
+}
+
+/* ---------- 顶栏 ---------- */
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: 13px;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.brand svg { display: block; }
+
+.langBtn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--mut);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.langBtn:hover { color: var(--fg); border-color: var(--mut2); }
+
+/* ---------- 排版 ---------- */
+
+h1 {
+  font-size: 34px;
+  line-height: 1.25;
+  margin: 44px 0 12px;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 19px;
+  margin: 40px 0 10px;
+  color: var(--fg);
+}
+
+h3 {
+  font-size: 16px;
+  margin: 26px 0 6px;
+  color: var(--fg);
+}
+
+p { margin: 0 0 14px; }
+
+.lead { color: var(--mut); font-size: 17px; }
+
+a { color: var(--ice-soft); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+ul { padding-left: 20px; margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+
+code {
+  background: var(--panel2);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 14px;
+  color: var(--fg);
+}
+
+/* ---------- 组件 ---------- */
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px 24px;
+  margin: 22px 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--ice);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.btn:hover { text-decoration: none; filter: brightness(1.08); }
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--fg);
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0 8px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.tile {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+
+.tile .k { color: var(--fg); font-weight: 600; font-size: 15px; }
+.tile .v { color: var(--mut); font-size: 13px; margin-top: 2px; }
+
+.steps { counter-reset: s; list-style: none; padding: 0; }
+
+.steps li {
+  counter-increment: s;
+  position: relative;
+  padding-left: 38px;
+  margin-bottom: 14px;
+}
+
+.steps li::before {
+  content: counter(s);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  color: var(--ice-soft);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note {
+  border-left: 3px solid var(--ice);
+  background: rgba(4, 133, 247, 0.07);
+  border-radius: 0 12px 12px 0;
+  padding: 14px 18px;
+  margin: 20px 0;
+  font-size: 14px;
+  color: var(--mut);
+}
+
+.meta { color: var(--mut2); font-size: 13px; }
+
+footer {
+  margin-top: 64px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--mut2);
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+footer a { color: var(--mut); }
+
+/* ---------- 语言切换 ---------- */
+
+body[data-lang="zh"] .lang-en,
+body[data-lang="en"] .lang-zh { display: none; }
+
+@media (max-width: 520px) {
+  h1 { font-size: 28px; margin-top: 32px; }
+  .wrap { padding: 0 18px 72px; }
+}

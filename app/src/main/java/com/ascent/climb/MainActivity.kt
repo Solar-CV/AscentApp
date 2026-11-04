@@ -43,6 +43,11 @@ import androidx.core.view.WindowCompat
 import com.ascent.climb.data.ALL_UNITS
 import com.ascent.climb.data.Diagnostics
 import com.ascent.climb.data.ProgressStore
+import com.ascent.climb.ui.AvatarSync
+import kotlinx.coroutines.delay
+import com.ascent.climb.data.cloud.CloudConfig
+import com.ascent.climb.data.cloud.SyncEngine
+import com.ascent.climb.data.cloud.SyncOutcome
 import com.ascent.climb.data.achievementById
 import com.ascent.climb.data.bank.BankRepository
 import com.ascent.climb.ui.bankMsgOf
@@ -235,6 +240,32 @@ fun AscentRoot(
         store.grantAchievements()
         pendingAchievements = store.pendingAchievements.toList()
         achRevision += 1
+    }
+
+    /** 把本地存档重新读进界面状态。云同步拉回新数据后也走这一遍。 */
+    fun reloadFromStore() {
+        altitude = store.altitudeOn(trackId)
+        streak = store.streak
+        rope = store.rope
+        completed = store.completed.toSet()
+        dueKeys = store.dueReviewKeys()
+        reviewTotal = store.reviewTotal()
+        pendingAchievements = store.pendingAchievements.toList()
+        achRevision += 1
+    }
+
+    // 云同步：启动时跑一次，之后每小时一次。未登录 / 离线 / 距上次不足间隔都会立刻返回，
+    // 有结果才刷新界面。放在独立 effect 里，是为了不让一次网络请求挡住首帧。
+    LaunchedEffect(Unit) {
+        if (!CloudConfig.enabled) return@LaunchedEffect
+        while (true) {
+            val outcome = runCatching { SyncEngine(context, store).syncIfDue() }.getOrNull()
+            if (outcome is SyncOutcome.Synced) {
+                AvatarSync.reconcile(context, store)
+                reloadFromStore()
+            }
+            delay(CloudConfig.AUTO_SYNC_INTERVAL_MS)
+        }
     }
 
     // 题库状态
@@ -435,7 +466,7 @@ fun AscentRoot(
                                 },
                                 // 删账号后数据全清，但人还停在「我的」页：
                                 // 只重读状态，不做 onReset 那样的 tab = 0 跳转。
-                                onAccountDeleted = {
+                                onStoreReloaded = {
                                     altitude = store.altitudeOn(trackId)
                                     streak = store.streak
                                     rope = store.rope

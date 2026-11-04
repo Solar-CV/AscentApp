@@ -1,4 +1,4 @@
-# ASCENT
+# AscentRoam
 
 **[English](README.md)** · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Русский](README.ru.md) · [Svenska](README.sv.md)
 
@@ -6,7 +6,7 @@ An Android app for people starting out in high-altitude mountaineering and ice c
 
 Two course tracks switch freely. **Alpine climbing** runs six units and 69 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 22 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.23.3 (versionCode 138). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,727 / 10,727). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+Current version v0.26.3 (versionCode 148). The language work closed with v0.19.24 — all nine translated languages match English key for key (10,727 / 10,727). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
 
 v0.20.19 – v0.21.0 restyled the whole interface in clay: soft double shadows drawn offscreen and cached, flat colour chips, category colours in the handbook, and hero blocks that take their depth from a contact shadow instead of a gradient.
 
@@ -14,7 +14,7 @@ v0.20.19 – v0.21.0 restyled the whole interface in clay: soft double shadows d
 
 The easiest route is the prebuilt APK from [Releases](https://github.com/Solar-CV/AscentApp/releases). Pushing a `v*` tag makes GitHub Actions build and attach a fresh APK.
 
-- Package: `com.ascent.climb`
+- Package: `com.ascentroam.app` (the source package stays `com.ascent.climb`)
 - Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
 - Size: about 30 MB (38 MB of uncompressed badge models, ~10 MB after packaging)
 - Signing: release-signed since v0.21.2. It will not install over an older debug build — uninstall first, and that clears local progress, badges and settings
@@ -223,6 +223,13 @@ Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.
 
 ## Recent changes
 
+**v0.25.0 – v0.26.3: accounts in the cloud, and a new name**
+
+- Accounts are real now: email sign-up and sign-in against a hosted backend, progress and avatar sync, "sign in on another device and it comes back". Still optional — the app works fully offline and without an account
+- Local profile: pick an avatar through a 1:1 crop page (pinch, drag, rotate) and change your display name; EXIF orientation is honoured, so portrait photos no longer arrive sideways
+- Delete account under Settings → Account, with a confirmation dialog that lists what goes (server record, progress, badges, avatar, name) and what stays (theme, language, track)
+- "Reset learning progress" moved into Settings and now asks for confirmation; it no longer wipes your name, avatar or interface language along the way
+- Renamed from ASCENT to **AscentRoam** (`ascentroam.com`); the package id is now `com.ascentroam.app`, which sits next to the old build but is a separate app on the phone
 **v0.24.0: Play-ready builds**
 
 - Each Release now ships two files: the APK for side-loading and `ascent-<tag>-release.aab` for Google Play

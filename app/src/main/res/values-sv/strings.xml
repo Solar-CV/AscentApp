@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ASCENT</string>
+    <string name="app_name">AscentRoam</string>
     <string name="common_back">Tillbaka</string>
     <string name="common_close">Stäng</string>
     <string name="common_cancel">Avbryt</string>
@@ -64,7 +64,7 @@
     <string name="set_reset_title">Återställ framstegen?</string>
     <string name="set_reset_action">Återställ</string>
     <string name="set_section_about">Om</string>
-    <string name="set_about_name">ASCENT</string>
+    <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Teori för högalpinism och isklättring</string>
     <string name="set_about_version">Version v%1$s (%2$d)</string>
     <string name="prof_not_logged_in">Inte inloggad</string>
@@ -77,7 +77,6 @@
     <string name="prof_badges">Prestationsmärken · %1$d / %2$d</string>
     <string name="prof_badges_hint">Tryck på avataren för att se upplåsta märken i profilen</string>
     <string name="prof_section_account">Konto</string>
-    <string name="prof_login_mock">Lokal testinloggning, data synkas inte ännu</string>
     <string name="prof_login_register">Logga in / Registrera</string>
     <string name="prof_logout">Logga ut</string>
 
@@ -85,16 +84,14 @@
     <string name="set_section_account">Konto</string>
     <string name="acc_delete">Ta bort konto</string>
     <string name="acc_delete_title">Ta bort konto?</string>
-    <string name="acc_delete_body">%1$s och alla dess data på den här enheten tas bort permanent:\n\n· Lektionsframsteg, höjd och streak\n· Märken och repetitionskö\n· Foto och visningsnamn\n\nDet går inte att ångra.</string>
+    <string name="acc_delete_body">%1$s och alla dess data (moln och den här enheten) tas bort permanent:\n\n· Lektionsframsteg, höjd och streak\n· Märken och repetitionskö\n· Foto och visningsnamn\n\nDet går inte att ångra.</string>
     <string name="acc_delete_action">Ta bort</string>
     <string name="acc_delete_failed">Det gick inte att ta bort, försök igen</string>
     <string name="prof_disclaimer_title">Att kunna teorin är inte samma sak som att kunna göra det</string>
     <string name="prof_disclaimer_body">Appen registrerar bara teoretisk progress. Praktiska färdigheter — snö och is, rep, isklättring, räddning — måste bedömas på plats av en certifierad instruktör innan de används i verklig terräng. Beslut om läkemedel eller första hjälpen ska tas med läkare.</string>
-    <string name="prof_version_line">ASCENT · v%1$s</string>
-    <string name="auth_login_title">Logga in på ASCENT</string>
+    <string name="prof_version_line">AscentRoam · v%1$s</string>
+    <string name="auth_login_title">Logga in på AscentRoam</string>
     <string name="auth_register_title">Skapa konto</string>
-    <string name="auth_login_note">Lokal testinloggning: höjd och märken stannar på den här enheten</string>
-    <string name="auth_register_note">Konton sparas lokalt tills backend är ansluten</string>
     <string name="auth_login">Logga in</string>
     <string name="auth_register">Registrera</string>
     <string name="auth_nickname">Smeknamn</string>
@@ -103,8 +100,6 @@
     <string name="auth_wait">Vänta…</string>
     <string name="auth_login_action">Logga in</string>
     <string name="auth_register_action">Registrera och logga in</string>
-    <string name="auth_mock_note">Just nu en lokal test-API för autentisering (MockAuthApi). Ingen nätverksanslutning, inga data skickas.</string>
-    <string name="auth_backend_note">När backend är klar räcker det att byta implementation av AuthApi; gränssnittet ändras inte.</string>
 
     <string name="auth_note_cloud">När du loggar in sparas höjdmeter, märken och repetitionshistorik i molnet och finns kvar på en annan enhet.</string>
     <string name="auth_password_cloud">Lösenord (minst 8 tecken)</string>
@@ -117,6 +112,33 @@
     <string name="cloud_err_email_format">Det ser inte ut som en giltig e-postadress</string>
     <string name="cloud_err_password_short">Lösenordet måste vara minst 8 tecken</string>
     <string name="cloud_err_nickname">Namnet måste vara 1–16 tecken</string>
+
+    <string name="sync_now">Synka nu</string>
+    <string name="sync_running">Synkar…</string>
+    <string name="sync_last">Senast synkad %1$s</string>
+    <string name="sync_never">Inte synkad än</string>
+    <string name="sync_failed">Synkningen misslyckades – försök igen senare</string>
+    <string name="sync_offline">Offline – synkas automatiskt</string>
+
+    <string name="cloud_err_identity_conflict">Den e-postadressen är redan registrerad på annat sätt. Logga in och länka Google i inställningarna</string>
+    <string name="cloud_err_identity_taken">Det Google-kontot är redan länkat till ett annat konto</string>
+    <string name="cloud_err_locked">Kontot har inaktiverats</string>
+    <string name="cloud_err_session_expired">Sessionen har gått ut – logga in igen</string>
+
+    <string name="auth_code">Verifieringskod</string>
+    <string name="auth_send_code">Skicka kod</string>
+    <string name="auth_resend_in">Skicka igen om %1$d s</string>
+    <string name="auth_code_sent">Koden är skickad – kolla inkorgen (och skräpposten)</string>
+    <string name="auth_forgot">Glömt lösenordet?</string>
+    <string name="auth_reset_title">Återställ lösenord</string>
+    <string name="auth_reset_note">Ange koden från mejlet och välj ett nytt lösenord. Du måste logga in igen efteråt.</string>
+    <string name="auth_reset_action">Återställ lösenord</string>
+    <string name="auth_reset_done">Lösenordet är återställt – logga in med det nya</string>
+    <string name="auth_new_password">Nytt lösenord</string>
+    <string name="auth_back_to_login">Tillbaka till inloggning</string>
+    <string name="cloud_err_invalid_code">Koden är fel eller har gått ut</string>
+    <string name="cloud_err_rate_limited">För många förfrågningar – försök igen senare</string>
+    <string name="cloud_err_mail_failed">Kunde inte skicka koden – försök igen senare</string>
     <string name="pf_title">Redigera profil</string>
     <string name="pf_avatar_change">Byt foto</string>
     <string name="pf_avatar_remove">Ta bort foto</string>
@@ -344,7 +366,7 @@
     <string name="home_badges_unlocked">Upplåsta märken · %1$d</string>
     <string name="prof_route_meta">Teoretisk rutt · %1$d / %2$d lektioner</string>
     <string name="prof_badges_meta">Prestationsmärken · %1$d / %2$d</string>
-    <string name="prof_version">ASCENT · v%1$s</string>
+    <string name="prof_version">AscentRoam · v%1$s</string>
     <string name="cap_m5i">5000 nybörjare</string>
     <string name="cap_m5a">5000 avancerad</string>
     <string name="cap_m6">6000 m</string>

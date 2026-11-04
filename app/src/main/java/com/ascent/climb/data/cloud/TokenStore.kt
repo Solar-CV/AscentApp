@@ -11,41 +11,62 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
 /**
- * 登录 token 的本地保管。
+ * 登录凭证的本地保管。
+ *
+ * 两种 token（CLOUD-PLAN.md §10.1 A4）：
+ *  - access  1 小时，随每个请求带上；
+ *  - refresh 90 天，只在换 access 时用。
+ * 分开存是为了「access 过期」能自动续，而不是把用户踢回登录页。
  *
  * 不用明文存 SharedPreferences：token 等同于账号，root 过的机器能直接读 XML。
  * 这里用 Android Keystore 生成一把**不可导出**的 AES 密钥，加密后把
  * IV + 密文一起存 prefs。密钥在硬件里，拷走文件也解不开。
  *
  * 刻意不引 androidx.security-crypto：工程一直零第三方运行时依赖，
- * 这点代码不到 80 行，没必要为它加一个库。
+ * 这点代码不到 90 行，没必要为它加一个库。
  */
 object TokenStore {
 
     private const val PREFS = "ascent_auth"
-    private const val KEY_CIPHER = "token_cipher"
+    private const val KEY_ACCESS = "access_cipher"
+    private const val KEY_REFRESH = "refresh_cipher"
+    private const val KEY_LEGACY = "token_cipher"
     private const val KEY_ALIAS = "ascent_token_key"
     private const val ANDROID_KEYSTORE = "AndroidKeyStore"
     private const val TRANSFORMATION = "AES/GCM/NoPadding"
     private const val TAG_BITS = 128
 
-    fun save(context: Context, token: String) {
-        val encrypted = runCatching { encrypt(token) }.getOrNull() ?: return
+    fun save(context: Context, access: String, refresh: String) {
+        val a = runCatching { encrypt(access) }.getOrNull() ?: return
+        val r = runCatching { encrypt(refresh) }.getOrNull() ?: return
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .edit().putString(KEY_CIPHER, encrypted).apply()
+            .edit()
+            .putString(KEY_ACCESS, a)
+            .putString(KEY_REFRESH, r)
+            // 单 token 时代的残留，留着只会让「是否已登录」判断出错
+            .remove(KEY_LEGACY)
+            .apply()
     }
 
-    fun load(context: Context): String? {
-        val stored = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .getString(KEY_CIPHER, null) ?: return null
-        val token = runCatching { decrypt(stored) }.getOrNull()
-        // 解不开（换机、清过 Keystore、密钥被系统作废）就当没登录，让用户重新登
-        if (token == null) clear(context)
-        return token
-    }
+    fun access(context: Context): String? = read(context, KEY_ACCESS)
+
+    fun refresh(context: Context): String? = read(context, KEY_REFRESH)
+
+    /** 只要还有 refresh 就算「登录着」：access 过期是常态，不该让界面闪成未登录。 */
+    fun hasSession(context: Context): Boolean = refresh(context) != null
 
     fun clear(context: Context) {
-        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().remove(KEY_CIPHER).apply()
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+            .edit().remove(KEY_ACCESS).remove(KEY_REFRESH).remove(KEY_LEGACY).apply()
+    }
+
+    private fun read(context: Context, key: String): String? {
+        val stored = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+            .getString(key, null) ?: return null
+        val plain = runCatching { decrypt(stored) }.getOrNull()
+        // 解不开（换机、清过 Keystore、密钥被系统作废）就当没登录，让用户重新登
+        if (plain == null) clear(context)
+        return plain
     }
 
     private fun secretKey(): SecretKey {

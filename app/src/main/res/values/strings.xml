@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 默认资源 = 简体中文。其余语言见 values-en / values-zh-rTW / values-ja ... -->
-    <string name="app_name">ASCENT 攀登</string>
+    <string name="app_name">AscentRoam</string>
 
     <!-- ========== 通用 ========== -->
     <string name="common_back">返回</string>
@@ -79,7 +79,7 @@
     <string name="set_reset_action">重置</string>
 
     <string name="set_section_about">关于</string>
-    <string name="set_about_name">ASCENT 攀登之路</string>
+    <string name="set_about_name">AscentRoam 登攀之路</string>
     <string name="set_about_desc">高海拔攀登 / 攀冰理论学习</string>
     <string name="set_about_version">版本 v%1$s（%2$d）</string>
 
@@ -94,7 +94,6 @@
     <string name="prof_badges">成就徽章 · %1$d / %2$d</string>
     <string name="prof_badges_hint">点头像进入个人主页查看已解锁徽章</string>
     <string name="prof_section_account">账号</string>
-    <string name="prof_login_mock">本地模拟登录，暂不同步数据</string>
     <string name="prof_login_register">登录 / 注册</string>
     <string name="prof_logout">退出登录</string>
 
@@ -102,18 +101,16 @@
     <string name="set_section_account">账号</string>
     <string name="acc_delete">删除账号</string>
     <string name="acc_delete_title">删除账号？</string>
-    <string name="acc_delete_body">%1$s 及其在本机的全部数据将被永久删除：\n\n· 学习进度、海拔与连续天数\n· 成就徽章与复习队列\n· 头像与用户名\n\n此操作无法撤销。</string>
+    <string name="acc_delete_body">%1$s 及其全部数据（云端与本机）将被永久删除：\n\n· 学习进度、海拔与连续天数\n· 成就徽章与复习队列\n· 头像与用户名\n\n此操作无法撤销。</string>
     <string name="acc_delete_action">删除</string>
     <string name="acc_delete_failed">删除失败，请重试</string>
     <string name="prof_disclaimer_title">理论掌握不等于实际操作能力</string>
     <string name="prof_disclaimer_body">本应用记录的是理论学习进度。冰雪、绳索、攀冰、救援等实践技能，必须由持证教练现场评估后，才能在真实环境中使用。涉及药物与急救的决策须咨询专业医生。</string>
-    <string name="prof_version_line">ASCENT 攀登 · v%1$s</string>
+    <string name="prof_version_line">AscentRoam 登攀 · v%1$s</string>
 
     <!-- 登录 / 注册 -->
-    <string name="auth_login_title">登录 ASCENT</string>
+    <string name="auth_login_title">登录 AscentRoam</string>
     <string name="auth_register_title">创建账号</string>
-    <string name="auth_login_note">本地模拟登录，海拔和徽章仍存在这台设备上</string>
-    <string name="auth_register_note">注册后也先存在本机，等后端接上再同步</string>
     <string name="auth_login">登录</string>
     <string name="auth_register">注册</string>
     <string name="auth_nickname">昵称</string>
@@ -122,8 +119,6 @@
     <string name="auth_wait">请稍候…</string>
     <string name="auth_login_action">登录</string>
     <string name="auth_register_action">注册并登录</string>
-    <string name="auth_mock_note">当前为本地模拟登录接口（MockAuthApi），不会联网、不上传任何数据。</string>
-    <string name="auth_backend_note">后端就绪后替换 AuthApi 的实现即可，界面无需改动。</string>
 
     <!-- 云端账号（CLOUD-PLAN.md；仅当 CloudConfig.BASE_URL 非空时显示） -->
     <string name="auth_note_cloud">登录后海拔、徽章与复习记录会上传到云端，换设备登录即可恢复。</string>
@@ -137,6 +132,33 @@
     <string name="cloud_err_email_format">邮箱格式不正确</string>
     <string name="cloud_err_password_short">密码至少 8 位</string>
     <string name="cloud_err_nickname">昵称需为 1–16 个字符</string>
+
+    <string name="sync_now">立即同步</string>
+    <string name="sync_running">同步中…</string>
+    <string name="sync_last">上次同步 %1$s</string>
+    <string name="sync_never">还没同步过</string>
+    <string name="sync_failed">同步失败，稍后再试</string>
+    <string name="sync_offline">离线，联网后自动同步</string>
+
+    <string name="cloud_err_identity_conflict">该邮箱已用其他方式注册，请先登录后在设置里绑定 Google</string>
+    <string name="cloud_err_identity_taken">这个 Google 账号已绑定其他账号</string>
+    <string name="cloud_err_locked">账号已被停用</string>
+    <string name="cloud_err_session_expired">登录已过期，请重新登录</string>
+
+    <string name="auth_code">验证码</string>
+    <string name="auth_send_code">获取验证码</string>
+    <string name="auth_resend_in">%1$d 秒后重发</string>
+    <string name="auth_code_sent">验证码已发送，请检查邮箱（含垃圾邮件）</string>
+    <string name="auth_forgot">忘记密码？</string>
+    <string name="auth_reset_title">重置密码</string>
+    <string name="auth_reset_note">输入邮箱收到的验证码，设置新密码。重置后需要用新密码重新登录。</string>
+    <string name="auth_reset_action">重置密码</string>
+    <string name="auth_reset_done">密码已重置，请用新密码登录</string>
+    <string name="auth_new_password">新密码</string>
+    <string name="auth_back_to_login">返回登录</string>
+    <string name="cloud_err_invalid_code">验证码不正确或已失效</string>
+    <string name="cloud_err_rate_limited">请求过于频繁，请稍后再试</string>
+    <string name="cloud_err_mail_failed">验证码发送失败，请稍后再试</string>
 
     <!-- ========== 个人主页 ========== -->
     <string name="pf_title">编辑资料</string>
@@ -382,7 +404,7 @@
     <string name="home_badges_unlocked">已解锁徽章 · %1$d</string>
     <string name="prof_route_meta">理论路线 · %1$d / %2$d 课完成</string>
     <string name="prof_badges_meta">成就徽章 · %1$d / %2$d</string>
-    <string name="prof_version">ASCENT 攀登 · v%1$s</string>
+    <string name="prof_version">AscentRoam 登攀 · v%1$s</string>
     <string name="cap_m5i">5000 入门</string>
     <string name="cap_m5a">5000 进阶</string>
     <string name="cap_m6">6000 米</string>

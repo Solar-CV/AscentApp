@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ASCENT</string>
+    <string name="app_name">AscentRoam</string>
     <string name="common_back">Indietro</string>
     <string name="common_close">Chiudi</string>
     <string name="common_cancel">Annulla</string>
@@ -64,7 +64,7 @@
     <string name="set_reset_title">Azzerare i progressi?</string>
     <string name="set_reset_action">Azzera</string>
     <string name="set_section_about">Informazioni</string>
-    <string name="set_about_name">ASCENT</string>
+    <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Teoria di alpinismo e arrampicata su ghiaccio</string>
     <string name="set_about_version">Versione v%1$s (%2$d)</string>
     <string name="prof_not_logged_in">Non connesso</string>
@@ -77,7 +77,6 @@
     <string name="prof_badges">Distintivi obiettivo · %1$d / %2$d</string>
     <string name="prof_badges_hint">Tocca l’avatar per vedere i distintivi sbloccati nel profilo</string>
     <string name="prof_section_account">Account</string>
-    <string name="prof_login_mock">Accesso locale simulato, dati non ancora sincronizzati</string>
     <string name="prof_login_register">Accedi / Registrati</string>
     <string name="prof_logout">Esci</string>
 
@@ -85,16 +84,14 @@
     <string name="set_section_account">Account</string>
     <string name="acc_delete">Elimina account</string>
     <string name="acc_delete_title">Eliminare l\'account?</string>
-    <string name="acc_delete_body">%1$s e tutti i suoi dati su questo dispositivo verranno eliminati definitivamente:\n\n· Progressi, altitudine e serie\n· Badge e coda di ripasso\n· Foto e nome visualizzato\n\nQuesta azione non può essere annullata.</string>
+    <string name="acc_delete_body">%1$s e tutti i suoi dati (cloud e questo dispositivo) verranno eliminati definitivamente:\n\n· Progressi, altitudine e serie\n· Badge e coda di ripasso\n· Foto e nome visualizzato\n\nQuesta azione non può essere annullata.</string>
     <string name="acc_delete_action">Elimina</string>
     <string name="acc_delete_failed">Eliminazione non riuscita, riprova</string>
     <string name="prof_disclaimer_title">Conoscere la teoria non significa saperla fare</string>
     <string name="prof_disclaimer_body">L’app registra solo il progresso teorico. Le capacità pratiche — neve e ghiaccio, corde, arrampicata su ghiaccio, soccorso — devono essere valutate in loco da un istruttore certificato prima dell’uso in terreno reale. Le decisioni su farmaci o primo soccorso vanno prese con un medico.</string>
-    <string name="prof_version_line">ASCENT · v%1$s</string>
-    <string name="auth_login_title">Accedi ad ASCENT</string>
+    <string name="prof_version_line">AscentRoam · v%1$s</string>
+    <string name="auth_login_title">Accedi ad AscentRoam</string>
     <string name="auth_register_title">Crea account</string>
-    <string name="auth_login_note">Accesso locale simulato: quota e distintivi restano su questo dispositivo</string>
-    <string name="auth_register_note">Gli account restano locali finché il backend non è collegato</string>
     <string name="auth_login">Accedi</string>
     <string name="auth_register">Registrati</string>
     <string name="auth_nickname">Nickname</string>
@@ -103,8 +100,6 @@
     <string name="auth_wait">Attendi…</string>
     <string name="auth_login_action">Accedi</string>
     <string name="auth_register_action">Registrati e accedi</string>
-    <string name="auth_mock_note">Al momento è un’API di autenticazione locale simulata (MockAuthApi). Non si connette e non invia dati.</string>
-    <string name="auth_backend_note">Quando il backend sarà pronto basterà sostituire l’implementazione di AuthApi; l’interfaccia non cambia.</string>
 
     <string name="auth_note_cloud">Dopo l\'accesso, quota, distintivi e cronologia delle ripetizioni vengono salvati nel cloud e restano disponibili su un altro dispositivo.</string>
     <string name="auth_password_cloud">Password (almeno 8 caratteri)</string>
@@ -117,6 +112,33 @@
     <string name="cloud_err_email_format">L\'email non è in un formato valido</string>
     <string name="cloud_err_password_short">La password deve avere almeno 8 caratteri</string>
     <string name="cloud_err_nickname">Il nome deve avere da 1 a 16 caratteri</string>
+
+    <string name="sync_now">Sincronizza ora</string>
+    <string name="sync_running">Sincronizzazione…</string>
+    <string name="sync_last">Ultima sincronizzazione %1$s</string>
+    <string name="sync_never">Non ancora sincronizzato</string>
+    <string name="sync_failed">Sincronizzazione non riuscita. Riprova più tardi</string>
+    <string name="sync_offline">Offline: sincronizzazione automatica</string>
+
+    <string name="cloud_err_identity_conflict">Questa email è già registrata in un altro modo. Accedi e collega Google dalle impostazioni</string>
+    <string name="cloud_err_identity_taken">Quell\'account Google è già collegato a un altro account</string>
+    <string name="cloud_err_locked">Questo account è stato disattivato</string>
+    <string name="cloud_err_session_expired">La sessione è scaduta. Accedi di nuovo</string>
+
+    <string name="auth_code">Codice di verifica</string>
+    <string name="auth_send_code">Invia codice</string>
+    <string name="auth_resend_in">Reinvia tra %1$d s</string>
+    <string name="auth_code_sent">Codice inviato: controlla la posta (anche lo spam)</string>
+    <string name="auth_forgot">Password dimenticata?</string>
+    <string name="auth_reset_title">Reimposta password</string>
+    <string name="auth_reset_note">Inserisci il codice ricevuto via email e scegli una nuova password. Dopo dovrai accedere di nuovo.</string>
+    <string name="auth_reset_action">Reimposta password</string>
+    <string name="auth_reset_done">Password reimpostata: accedi con quella nuova</string>
+    <string name="auth_new_password">Nuova password</string>
+    <string name="auth_back_to_login">Torna all\'accesso</string>
+    <string name="cloud_err_invalid_code">Il codice non è corretto o è scaduto</string>
+    <string name="cloud_err_rate_limited">Troppe richieste: riprova più tardi</string>
+    <string name="cloud_err_mail_failed">Impossibile inviare il codice: riprova più tardi</string>
     <string name="pf_title">Modifica profilo</string>
     <string name="pf_avatar_change">Cambia foto</string>
     <string name="pf_avatar_remove">Rimuovi foto</string>
@@ -344,7 +366,7 @@
     <string name="home_badges_unlocked">Distintivi sbloccati · %1$d</string>
     <string name="prof_route_meta">Percorso teorico · %1$d / %2$d lezioni</string>
     <string name="prof_badges_meta">Distintivi obiettivo · %1$d / %2$d</string>
-    <string name="prof_version">ASCENT · v%1$s</string>
+    <string name="prof_version">AscentRoam · v%1$s</string>
     <string name="cap_m5i">5000 base</string>
     <string name="cap_m5a">5000 avanzato</string>
     <string name="cap_m6">6000 m</string>

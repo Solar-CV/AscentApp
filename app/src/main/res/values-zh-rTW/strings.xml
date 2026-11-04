@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ASCENT 攀登</string>
+    <string name="app_name">AscentRoam</string>
 
     <string name="common_back">返回</string>
     <string name="common_close">關閉</string>
@@ -74,7 +74,7 @@
     <string name="set_reset_action">重設</string>
 
     <string name="set_section_about">關於</string>
-    <string name="set_about_name">ASCENT 攀登之路</string>
+    <string name="set_about_name">AscentRoam 登攀之路</string>
     <string name="set_about_desc">高海拔攀登 / 攀冰理論學習</string>
     <string name="set_about_version">版本 v%1$s（%2$d）</string>
 
@@ -88,7 +88,6 @@
     <string name="prof_badges">成就徽章 · %1$d / %2$d</string>
     <string name="prof_badges_hint">點擊頭像進入個人主頁查看已解鎖徽章</string>
     <string name="prof_section_account">帳號</string>
-    <string name="prof_login_mock">本機模擬登入，暫不同步資料</string>
     <string name="prof_login_register">登入 / 註冊</string>
     <string name="prof_logout">登出</string>
 
@@ -96,17 +95,15 @@
     <string name="set_section_account">帳號</string>
     <string name="acc_delete">刪除帳號</string>
     <string name="acc_delete_title">刪除帳號？</string>
-    <string name="acc_delete_body">%1$s 及其在本機的全部資料將被永久刪除：\n\n· 學習進度、海拔與連續天數\n· 成就徽章與複習佇列\n· 頭像與使用者名稱\n\n此操作無法復原。</string>
+    <string name="acc_delete_body">%1$s 及其全部資料（雲端與本機）將被永久刪除：\n\n· 學習進度、海拔與連續天數\n· 成就徽章與複習佇列\n· 頭像與使用者名稱\n\n此操作無法復原。</string>
     <string name="acc_delete_action">刪除</string>
     <string name="acc_delete_failed">刪除失敗，請重試</string>
     <string name="prof_disclaimer_title">理論掌握不等於實際操作能力</string>
     <string name="prof_disclaimer_body">本應用程式記錄的是理論學習進度。冰雪、繩索、攀冰、救援等實作技能，必須經持證教練現場評估後，才能在真實環境中使用。涉及藥物與急救的決策須諮詢專業醫師。</string>
-    <string name="prof_version_line">ASCENT 攀登 · v%1$s</string>
+    <string name="prof_version_line">AscentRoam 登攀 · v%1$s</string>
 
-    <string name="auth_login_title">登入 ASCENT</string>
+    <string name="auth_login_title">登入 AscentRoam</string>
     <string name="auth_register_title">建立帳號</string>
-    <string name="auth_login_note">本機模擬登入，海拔與徽章仍存在這台裝置上</string>
-    <string name="auth_register_note">註冊後也先存在本機，等後端接上再同步</string>
     <string name="auth_login">登入</string>
     <string name="auth_register">註冊</string>
     <string name="auth_nickname">暱稱</string>
@@ -115,8 +112,6 @@
     <string name="auth_wait">請稍候…</string>
     <string name="auth_login_action">登入</string>
     <string name="auth_register_action">註冊並登入</string>
-    <string name="auth_mock_note">目前為本機模擬登入介面（MockAuthApi），不會連網、不上傳任何資料。</string>
-    <string name="auth_backend_note">後端就緒後替換 AuthApi 的實作即可，介面無需修改。</string>
 
     <string name="auth_note_cloud">登入後海拔、徽章與複習紀錄會上傳到雲端，換裝置登入即可恢復。</string>
     <string name="auth_password_cloud">密碼（至少 8 位）</string>
@@ -129,6 +124,33 @@
     <string name="cloud_err_email_format">電子郵件格式不正確</string>
     <string name="cloud_err_password_short">密碼至少 8 位</string>
     <string name="cloud_err_nickname">暱稱需為 1–16 個字元</string>
+
+    <string name="sync_now">立即同步</string>
+    <string name="sync_running">同步中…</string>
+    <string name="sync_last">上次同步 %1$s</string>
+    <string name="sync_never">還沒同步過</string>
+    <string name="sync_failed">同步失敗，稍後再試</string>
+    <string name="sync_offline">離線，連網後自動同步</string>
+
+    <string name="cloud_err_identity_conflict">這個電子郵件已用其他方式註冊，請先登入後在設定裡綁定 Google</string>
+    <string name="cloud_err_identity_taken">這個 Google 帳號已綁定其他帳號</string>
+    <string name="cloud_err_locked">帳號已被停用</string>
+    <string name="cloud_err_session_expired">登入已過期，請重新登入</string>
+
+    <string name="auth_code">驗證碼</string>
+    <string name="auth_send_code">取得驗證碼</string>
+    <string name="auth_resend_in">%1$d 秒後重發</string>
+    <string name="auth_code_sent">驗證碼已寄出，請檢查信箱（含垃圾郵件）</string>
+    <string name="auth_forgot">忘記密碼？</string>
+    <string name="auth_reset_title">重設密碼</string>
+    <string name="auth_reset_note">輸入信箱收到的驗證碼，設定新密碼。重設後需要用新密碼重新登入。</string>
+    <string name="auth_reset_action">重設密碼</string>
+    <string name="auth_reset_done">密碼已重設，請用新密碼登入</string>
+    <string name="auth_new_password">新密碼</string>
+    <string name="auth_back_to_login">返回登入</string>
+    <string name="cloud_err_invalid_code">驗證碼不正確或已失效</string>
+    <string name="cloud_err_rate_limited">請求過於頻繁，請稍後再試</string>
+    <string name="cloud_err_mail_failed">驗證碼寄送失敗，請稍後再試</string>
 
     <string name="pf_title">編輯資料</string>
     <string name="pf_avatar_change">更換頭像</string>
@@ -366,7 +388,7 @@
     <string name="home_badges_unlocked">已解鎖徽章 · %1$d</string>
     <string name="prof_route_meta">理論路線 · %1$d / %2$d 課完成</string>
     <string name="prof_badges_meta">成就徽章 · %1$d / %2$d</string>
-    <string name="prof_version">ASCENT 攀登 · v%1$s</string>
+    <string name="prof_version">AscentRoam 登攀 · v%1$s</string>
     <string name="cap_m5i">5000 入門</string>
     <string name="cap_m5a">5000 進階</string>
     <string name="cap_m6">6000 公尺</string>

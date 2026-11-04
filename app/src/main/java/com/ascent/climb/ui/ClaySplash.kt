@@ -114,11 +114,12 @@ fun ClaySplashOverlay(dark: Boolean, onFinish: () -> Unit) {
             Spacer(Modifier.height(30.dp))
 
             Text(
-                text = "ASCENT",
+                text = "ASCENTROAM",
                 color = c.ink,
-                fontSize = 33.sp,
+                // 字数从 6 变 10：字号 33→28、字距 7→3.5，不然一行放不下
+                fontSize = 28.sp,
                 fontWeight = FontWeight.ExtraBold,
-                letterSpacing = 7.sp,
+                letterSpacing = 3.5.sp,
                 modifier = Modifier.graphicsLayer {
                     alpha = wordIn
                     translationY = (1f - wordIn) * 14f

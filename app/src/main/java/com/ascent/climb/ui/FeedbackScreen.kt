@@ -130,8 +130,8 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
         val payload = linkedMapOf(
             "type" to context.getString(FEEDBACK_TYPES[typeIndex]),
             "message" to message.trim(),
-            "app" to "ASCENT ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
-            "_subject" to "${context.getString(FEEDBACK_TYPES[typeIndex])} · ASCENT ${BuildConfig.VERSION_NAME}"
+            "app" to "AscentRoam ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+            "_subject" to "${context.getString(FEEDBACK_TYPES[typeIndex])} · AscentRoam ${BuildConfig.VERSION_NAME}"
         )
         if (contact.isNotBlank()) payload["email"] = contact.trim()
         if (attachDiag) payload["diagnostics"] = diagnosticsText()
@@ -162,7 +162,7 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
                 appendLine(diagnosticsText())
             }
         }
-        val subject = "${context.getString(FEEDBACK_TYPES[typeIndex])} · ASCENT ${BuildConfig.VERSION_NAME}"
+        val subject = "${context.getString(FEEDBACK_TYPES[typeIndex])} · AscentRoam ${BuildConfig.VERSION_NAME}"
         val uri = Uri.parse(if (FALLBACK_EMAIL.isNotBlank()) "mailto:$FALLBACK_EMAIL" else "mailto:")
         val opened = runCatching {
             val intent = Intent(Intent.ACTION_SENDTO, uri).apply {
@@ -346,7 +346,7 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
 private fun copyToClipboard(context: Context, text: String) {
     runCatching {
         val cm = context.getSystemService(ClipboardManager::class.java)
-        cm?.setPrimaryClip(ClipData.newPlainText("ASCENT feedback", text))
+        cm?.setPrimaryClip(ClipData.newPlainText("AscentRoam feedback", text))
     }
 }
 

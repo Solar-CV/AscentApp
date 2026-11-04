@@ -68,6 +68,25 @@ object AvatarStore {
 
     fun exists(context: Context): Boolean = file(context).isFile
 
+    /** 读出当前头像的原始 JPEG 字节；没有文件返回 null。上传云端用。 */
+    fun readBytes(context: Context): ByteArray? = runCatching {
+        val f = file(context)
+        if (f.isFile) f.readBytes() else null
+    }.getOrNull()
+
+    /**
+     * 把云端下载的 JPEG 落盘。先写 `.tmp` 再 rename —— 中途失败不会留下半张图，
+     * 和 [saveCropped] 是同一套写法。
+     */
+    fun writeBytes(context: Context, bytes: ByteArray): Boolean = runCatching {
+        if (bytes.size < 4) return false
+        val target = file(context)
+        val tmp = File(target.parentFile, "$FILE_NAME.tmp")
+        FileOutputStream(tmp).use { it.write(bytes) }
+        if (target.exists()) target.delete()
+        tmp.renameTo(target)
+    }.getOrDefault(false)
+
     /**
      * 解码成「可以交给裁剪页」的位图。
      *

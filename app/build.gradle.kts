@@ -39,11 +39,14 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.ascent.climb"
+        // 品牌更名（ascentroam.com）后的安装身份。namespace（代码包名 com.ascent.climb）
+        // 保持不动：applicationId 只决定装在设备上的包名，两者分离就是为了让这种改名
+        // 不用大规模挪包。上 Google Play 前这是唯一一次改它的机会。
+        applicationId = "com.ascentroam.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 144
-        versionName = "0.25.3"
+        versionCode = 148
+        versionName = "0.26.3"
         // 支持 10 种语言：简中（values 默认）+ 繁中 + 英日俄法瑞德西意。
         // 只打包这里列出的语言资源，避免把依赖库的其余语言一起带进来。
         resourceConfigurations += listOf(

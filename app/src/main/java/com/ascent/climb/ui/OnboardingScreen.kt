@@ -94,12 +94,12 @@ fun OnboardingOverlay(
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
-                    text = "ASCENT",
+                    text = "ASCENTROAM",
                     color = a.label,
                     fontSize = 10.sp,
                     fontFamily = MonoNumbers,
                     fontWeight = FontWeight.Bold,
-                    letterSpacing = 2.4.sp
+                    letterSpacing = 1.8.sp
                 )
             }
 

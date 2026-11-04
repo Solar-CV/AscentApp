@@ -31,6 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ascent.climb.data.ACHIEVEMENTS
@@ -38,6 +40,7 @@ import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.activeTrackId
 import com.ascent.climb.data.displaySummitOf
 import com.ascent.climb.data.ALL_LESSONS
+import com.ascent.climb.data.Account
 
 /**
  * 个人主页（「我的」页点头像进入）。
@@ -55,7 +58,17 @@ fun ProfileHomeScreen(
     onBack: () -> Unit,
     onOpenAllBadges: () -> Unit,
     onOpenBadge: (String) -> Unit = {},
-    onEditProfile: () -> Unit = {}
+    onEditProfile: () -> Unit = {},
+    /** 本地没设过用户名时用它兜底：登录了就是账号昵称，没登录才落到「登山者」。 */
+    fallbackName: String = "",
+    // ---------------- 账号（v0.26.0 从「我的」搬过来，与编辑资料合并成一张卡） ----------------
+    account: Account? = null,
+    /** 上次同步时间 / 同步中 / 失败原因，由上层算好传进来。 */
+    syncLine: String = "",
+    syncing: Boolean = false,
+    onLogin: () -> Unit = {},
+    onLogout: () -> Unit = {},
+    onSyncNow: () -> Unit = {}
 ) {
     val unlocked = remember(achRevision) { store.unlockedAchievements.toSet() }
     val stats = remember(achRevision) { store.achievementStats() }
@@ -92,36 +105,124 @@ fun ProfileHomeScreen(
                 Spacer(Modifier.height(10.dp))
             }
 
-            // ---------------- 档案头 ----------------
+            // ---------------- 档案 + 账号 ----------------
+            // 原来「我的」页单独有一张账号卡，身份信息在两处各说一遍。
+            // 现在合成一张：上半是身份（点进编辑资料），下半是账号状态与动作。
             item(key = "id") {
-                // 整块可点：头像是唯一「属于你」的东西，点它就改资料最符合直觉。
-                val shownName = store.displayName.ifBlank { stringResource(R.string.pf_default_name) }
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp)
-                        .clip(RoundedCornerShape(18.dp))
-                        .clickable { onEditProfile() }
-                        .padding(vertical = 2.dp)
+                val a = clayAccents()
+                val acc = account
+                val loggedIn = acc != null
+                val shownName = store.displayName.ifBlank {
+                    fallbackName.ifBlank { stringResource(R.string.pf_default_name) }
+                }
+                ClayColumn(
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    radius = 24.dp,
+                    elevation = 9.dp,
+                    padding = 16.dp,
+                    gap = 12.dp
                 ) {
-                    UserAvatar(version = store.avatarVersion, name = shownName, size = 60.dp)
-                    Spacer(Modifier.width(14.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(shownName, color = Ascent.Fg, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                        Spacer(Modifier.height(3.dp))
-                        Text(
-                            text = stringResource(R.string.home_meta, formatMeters(altitude), doneHere, ALL_LESSONS.size),
-                            color = Ascent.Fg3,
-                            fontSize = 12.sp
-                        )
+                    // 身份行：整块可点，进「编辑资料」
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(16.dp))
+                            .clickable { onEditProfile() },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        UserAvatar(version = store.avatarVersion, name = shownName, size = 60.dp)
+                        Spacer(Modifier.width(14.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(shownName, color = a.value, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                                if (!loggedIn) {
+                                    Spacer(Modifier.width(6.dp))
+                                    SoftTag(stringResource(R.string.prof_not_logged_in), a.sub, Ascent.Surface2)
+                                }
+                            }
+                            Spacer(Modifier.height(3.dp))
+                            // 登录了显示邮箱，没登录直接说清楚「登录能得到什么」
+                            Text(
+                                text = acc?.email ?: stringResource(R.string.prof_login_cloud),
+                                color = a.sub,
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            Spacer(Modifier.height(3.dp))
+                            Text(
+                                text = stringResource(
+                                    R.string.home_meta,
+                                    formatMeters(altitude),
+                                    doneHere,
+                                    ALL_LESSONS.size
+                                ),
+                                color = a.sub,
+                                fontSize = 11.sp
+                            )
+                        }
+                        Icon(Ic.ChevronRight, contentDescription = null, tint = a.sub, modifier = Modifier.size(16.dp))
                     }
-                    Icon(
-                        Ic.ChevronRight,
-                        contentDescription = null,
-                        tint = Ascent.Fg3,
-                        modifier = Modifier.size(16.dp)
-                    )
+
+                    // 同步状态只在登录后才有意义
+                    if (loggedIn) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(Ic.Cloud, contentDescription = null, tint = a.sub, modifier = Modifier.size(15.dp))
+                            Spacer(Modifier.width(7.dp))
+                            Text(
+                                text = syncLine,
+                                color = a.sub,
+                                fontSize = 11.sp,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.weight(1f)
+                            )
+                            SoftTag(
+                                text = stringResource(if (syncing) R.string.sync_running else R.string.sync_now),
+                                foreground = Ascent.OnAccent,
+                                background = if (syncing) Ascent.Surface2 else Ascent.Accent,
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(999.dp))
+                                    .clickable(enabled = !syncing) { onSyncNow() },
+                                icon = if (syncing) null else Ic.RefreshCw
+                            )
+                        }
+                    }
+
+                    // 动作：未登录时把「登录 / 注册」放在最显眼的位置
+                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        if (!loggedIn) {
+                            PillButton(
+                                text = stringResource(R.string.prof_login_register),
+                                modifier = Modifier.weight(1.15f),
+                                style = BtnStyle.Primary,
+                                height = 44,
+                                fontSize = 13.sp,
+                                onClick = onLogin
+                            )
+                        }
+                        PillButton(
+                            text = stringResource(R.string.pf_title),
+                            modifier = Modifier.weight(1f),
+                            style = BtnStyle.Secondary,
+                            height = 44,
+                            fontSize = 13.sp,
+                            onClick = onEditProfile
+                        )
+                        if (loggedIn) {
+                            PillButton(
+                                text = stringResource(R.string.prof_logout),
+                                modifier = Modifier.weight(1f),
+                                style = BtnStyle.Secondary,
+                                height = 44,
+                                fontSize = 13.sp,
+                                onClick = onLogout
+                            )
+                        }
+                    }
                 }
             }
 
@@ -243,7 +344,58 @@ fun ProfileHomeScreen(
                 }
                 }
             }
+
+            // ---------------- 品牌尾标 ----------------
+            // 固定英文，**不进多语言体系**：它是字标（logotype）+ 品牌口号，
+            // 逐语言翻译会把语气打散（比如「探索更远。攀登更高。」读起来像说明书）。
+            item(key = "brand") {
+                BrandFooter()
+            }
         }
+    }
+}
+
+/**
+ * 页脚品牌块：字标 / 口号 / 一句话定位，三段居中等宽字距。
+ *
+ * 只在「我的 · 个人主页」最下方出现；颜色全部取自黏土令牌，深色模式自动换。
+ */
+@Composable
+private fun BrandFooter() {
+    val a = clayAccents()
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 28.dp, bottom = 10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "ASCENTROAM",
+            color = a.value,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.ExtraBold,
+            // 全大写字标：字号压到 22，字距放到 2.2，九个字符才不挤在一起
+            letterSpacing = 2.2.sp
+        )
+        Spacer(Modifier.height(9.dp))
+        Text(
+            text = "EXPLORE FURTHER. CLIMB HIGHER.",
+            color = a.label,
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Medium,
+            letterSpacing = 1.1.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(7.dp))
+        Text(
+            text = "MOUNTAIN LEARNING & TRAINING",
+            color = a.sub,
+            fontSize = 10.sp,
+            letterSpacing = 1.5.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
