@@ -45,8 +45,8 @@ android {
         applicationId = "com.ascentroam.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 150
-        versionName = "0.26.5"
+        versionCode = 151
+        versionName = "0.26.6"
         // 支持 10 种语言：简中（values 默认）+ 繁中 + 英日俄法瑞德西意。
         // 只打包这里列出的语言资源，避免把依赖库的其余语言一起带进来。
         resourceConfigurations += listOf(

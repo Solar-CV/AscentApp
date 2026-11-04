@@ -477,4 +477,11 @@
     <string name="ob_hint">Оба пункта можно изменить в «Профиль · Настройки»</string>
     <string name="ob_continue">Продолжить</string>
     <string name="ob_follow_desc">По системному языку</string>
+
+    <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_privacy">Политика конфиденциальности</string>
+    <string name="auth_privacy_agree">Я прочитал(а) и принимаю Политику конфиденциальности</string>
+    <string name="auth_privacy_view">Открыть</string>
+    <string name="auth_privacy_required">Перед регистрацией нужно принять Политику конфиденциальности</string>
+    <string name="privacy_in_app_note">Версия условий %1$s　·　совпадает с ascentroam.com/privacy</string>
 </resources>

@@ -453,4 +453,11 @@
     <string name="ob_hint">Entrambi si modificano in «Profilo · Impostazioni»</string>
     <string name="ob_continue">Continua</string>
     <string name="ob_follow_desc">In base alla lingua di sistema</string>
+
+    <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_privacy">Informativa sulla privacy</string>
+    <string name="auth_privacy_agree">Ho letto e accetto l\'informativa sulla privacy</string>
+    <string name="auth_privacy_view">Apri</string>
+    <string name="auth_privacy_required">Devi accettare l\'informativa sulla privacy prima di creare un account</string>
+    <string name="privacy_in_app_note">Versione %1$s　·　coerente con ascentroam.com/privacy</string>
 </resources>

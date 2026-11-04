@@ -25,6 +25,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
@@ -57,6 +59,7 @@ import com.ascent.climb.BuildConfig
 import com.ascent.climb.data.AchCategory
 import com.ascent.climb.data.Account
 import com.ascent.climb.data.BANK_VERSION
+import com.ascent.climb.data.PrivacyPolicy
 import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.TOTAL_QUESTIONS
 import com.ascent.climb.data.bank.BankRepository
@@ -70,6 +73,7 @@ import com.ascent.climb.data.TREK_TRACK
 import com.ascent.climb.data.MockAuthApi
 import com.ascent.climb.data.AuthApi
 import com.ascent.climb.data.cloud.CloudAuthApi
+import com.ascent.climb.i18n.AppLocale
 import com.ascent.climb.data.cloud.CloudConfig
 import com.ascent.climb.data.cloud.SyncEngine
 import com.ascent.climb.data.cloud.SyncOutcome
@@ -145,6 +149,7 @@ fun ProfileScreen(
     val scope = rememberCoroutineScope()
     var account by remember { mutableStateOf(auth.currentAccount()) }
     var showAuth by remember { mutableStateOf(false) }
+    var showPrivacy by remember { mutableStateOf(false) }
     var showAchievements by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
     var showDevices by remember { mutableStateOf(false) }
@@ -197,189 +202,201 @@ fun ProfileScreen(
     // 个人主页 ↔ 全部徽章墙 也是互斥分支，回来时同样要保住列表位置
     val branchStates = rememberSaveableStateHolder()
 
-    // 登录页放在最前：它可能从「我的」「个人主页」等任意分支里被唤起，
-    // 若排在 showProfileHome 之后就会被那一层挡住（点「登录」页面纹丝不动）。
-    if (showAuth) {
-        AuthScreen(
-            auth = auth,
-            onBack = { showAuth = false },
-            onSuccess = { newAccount, _ ->
-                account = newAccount
-                showAuth = false
-                // 账号名是权威：登录/注册后都覆盖本地显示名，避免「账号 Solar、界面 NewName」。
-                store.displayName = newAccount.nickname
-                store.syncedNickname = newAccount.nickname
-                // 登录成功立刻同步一次：本机进度推上去，云端已有的拉回来。
-                // 走 runSyncNow 是为了顺带清掉上一次的「同步失败」提示，并刷「上次同步」时间。
-                runSyncNow()
-            }
-        )
-    } else if (showBadgeWall) {
-        branchStates.SaveableStateProvider("badgeWall") {
-            BadgeWallScreen(
-                store = store,
-                achRevision = achRevision,
-                onBack = { showBadgeWall = false },
-                onOpenBadge = onOpenBadge
+    // 隐私政策做成覆盖层而不是 else-if 分支：分支切换会把登录页从组合里摘掉，
+    // 用户点「查看」再返回时，已填的邮箱/密码和勾选状态会全部丢失。
+    Box(modifier = Modifier.fillMaxSize()) {
+        if (showAuth) {
+            AuthScreen(
+                auth = auth,
+                onBack = { showAuth = false },
+                onOpenPrivacy = { showPrivacy = true },
+                onSuccess = { newAccount, _ ->
+                    account = newAccount
+                    showAuth = false
+                    // 账号名是权威：登录/注册后都覆盖本地显示名，避免「账号 Solar、界面 NewName」。
+                    store.displayName = newAccount.nickname
+                    store.syncedNickname = newAccount.nickname
+                    // 登录成功立刻同步一次：本机进度推上去，云端已有的拉回来。
+                    // 走 runSyncNow 是为了顺带清掉上一次的「同步失败」提示，并刷「上次同步」时间。
+                    runSyncNow()
+                }
             )
-        }
-    } else if (showEditProfile) {
-        branchStates.SaveableStateProvider("editProfile") {
-            EditProfileScreen(
-                store = store,
-                onBack = { showEditProfile = false },
-                // 登录状态下把名字推到账号；这里发起是因为 ProfileScreen 的 scope 活得更久，
-                // 编辑页一退就会被回收，放在那边发请求会被取消。
-                onNameCommitted = { name ->
-                    if (CloudConfig.enabled && TokenStore.hasSession(context)) {
-                        scope.launch {
-                            // 服务端返回新的 user，顺手刷新账号卡上的显示名
-                            CloudAuthApi(context).updateNickname(name)?.let {
-                                account = it
-                                store.syncedNickname = it.nickname
+        } else if (showBadgeWall) {
+            branchStates.SaveableStateProvider("badgeWall") {
+                BadgeWallScreen(
+                    store = store,
+                    achRevision = achRevision,
+                    onBack = { showBadgeWall = false },
+                    onOpenBadge = onOpenBadge
+                )
+            }
+        } else if (showEditProfile) {
+            branchStates.SaveableStateProvider("editProfile") {
+                EditProfileScreen(
+                    store = store,
+                    onBack = { showEditProfile = false },
+                    // 登录状态下把名字推到账号；这里发起是因为 ProfileScreen 的 scope 活得更久，
+                    // 编辑页一退就会被回收，放在那边发请求会被取消。
+                    onNameCommitted = { name ->
+                        if (CloudConfig.enabled && TokenStore.hasSession(context)) {
+                            scope.launch {
+                                // 服务端返回新的 user，顺手刷新账号卡上的显示名
+                                CloudAuthApi(context).updateNickname(name)?.let {
+                                    account = it
+                                    store.syncedNickname = it.nickname
+                                }
+                            }
+                        }
+                    },
+                    onAvatarChanged = { hasAvatar ->
+                        if (hasAvatar) {
+                            // 先记脏再推：没网也不会丢，下次同步补上
+                            store.avatarDirty = true
+                            scope.launch { AvatarSync.reconcile(context, store) }
+                        } else {
+                            scope.launch {
+                                AvatarSync.removeRemote(context, store)
+                                store.avatarDirty = false
                             }
                         }
                     }
-                },
-                onAvatarChanged = { hasAvatar ->
-                    if (hasAvatar) {
-                        // 先记脏再推：没网也不会丢，下次同步补上
-                        store.avatarDirty = true
-                        scope.launch { AvatarSync.reconcile(context, store) }
-                    } else {
+                )
+            }
+        } else if (showProfileHome) {
+            branchStates.SaveableStateProvider("home") {
+                ProfileHomeScreen(
+                    store = store,
+                    altitude = altitude,
+                    streak = streak,
+                    completed = completed,
+                    achRevision = achRevision,
+                    onBack = { showProfileHome = false },
+                    onOpenAllBadges = { showBadgeWall = true },
+                    onOpenBadge = onOpenBadge,
+                    onEditProfile = { showEditProfile = true },
+                    fallbackName = account?.nickname ?: "",
+                    // 账号已整块搬到这一页：登录态、同步状态与动作都从这里下发
+                    account = account,
+                    syncLine = syncLine,
+                    syncing = syncing,
+                    onLogin = { showAuth = true },
+                    onLogout = {
                         scope.launch {
-                            AvatarSync.removeRemote(context, store)
-                            store.avatarDirty = false
+                            auth.logout()
+                            account = null
+                        }
+                    },
+                    onSyncNow = { runSyncNow() }
+                )
+            }
+        // 注意分支顺序：成就测试页是从设置页里点开的，必须排在 showSettings 之前判断。
+        // 否则 showSettings 仍为 true，先命中设置页，点了按钮界面纹丝不动
+        //（曾经就是这个顺序导致「成就测试点不进去」）。
+        } else if (showAchievements) {
+            branchStates.SaveableStateProvider("achievements") {
+                AchievementsDevScreen(
+                    store = store,
+                    onBack = { showAchievements = false },
+                    onChanged = onAchChanged,
+                    onOpenBadge = onOpenBadge
+                )
+            }
+        } else if (showFeedback) {
+            branchStates.SaveableStateProvider("feedback") {
+                FeedbackScreen(store = store, onBack = { showFeedback = false })
+            }
+        } else if (showDevices) {
+            branchStates.SaveableStateProvider("devices") {
+                DevicesScreen(
+                    onBack = { showDevices = false },
+                    onSignedOut = {
+                        // 撤销的是当前设备：服务端已把 access/refresh 一起作废，
+                        // 本地必须跟着退出，否则下一次请求只会收到 401。
+                        scope.launch {
+                            runCatching { auth.logout() }
+                            account = null
+                            showDevices = false
+                            showSettings = false
+                            onStoreReloaded()
                         }
                     }
-                }
-            )
-        }
-    } else if (showProfileHome) {
-        branchStates.SaveableStateProvider("home") {
-            ProfileHomeScreen(
-                store = store,
+                )
+            }
+        } else if (showSettings) {
+            branchStates.SaveableStateProvider("settings") {
+                SettingsScreen(
+                    store = store,
+                    themeMode = themeMode,
+                    onThemeModeChange = onThemeModeChange,
+                    languageMode = languageMode,
+                    onLanguageModeChange = onLanguageModeChange,
+                    devUnlocked = devUnlocked,
+                    devUnlockAll = devUnlockAll,
+                    devShowAnswers = devShowAnswers,
+                    onDevUnlocked = onDevUnlocked,
+                    onDevExit = onDevExit,
+                    onDevUnlockAllChange = onDevUnlockAllChange,
+                    onDevShowAnswersChange = onDevShowAnswersChange,
+                    onOpenAchievements = { showAchievements = true },
+                    bankChecking = bankChecking,
+                    bankMessage = bankMessage,
+                    onCheckBank = onCheckBank,
+                    onResetBank = onResetBank,
+                    onBankUrlChange = onBankUrlChange,
+                    onReset = onReset,
+                    accountEmail = account?.email,
+                    onOpenPrivacy = { showPrivacy = true },
+                    onOpenDevices = { showDevices = true },
+                    onDeleteAccount = {
+                        // 删账号 = 账号记录 + 本机数据一起清（Play 的账号删除要求：
+                        // 只删登录态、把数据留着是不合格的）。头像文件不在 prefs 里，单独删。
+                        val ok = auth.deleteAccount()
+                        if (ok) {
+                            AvatarStore.remove(context)
+                            store.wipeUserData()
+                            account = null
+                            showSettings = false
+                            onStoreReloaded()
+                        }
+                        ok
+                    },
+                    onBack = { showSettings = false }
+                )
+            }
+        } else {
+            ProfileBody(
                 altitude = altitude,
                 streak = streak,
                 completed = completed,
-                achRevision = achRevision,
-                onBack = { showProfileHome = false },
-                onOpenAllBadges = { showBadgeWall = true },
-                onOpenBadge = onOpenBadge,
-                onEditProfile = { showEditProfile = true },
-                fallbackName = account?.nickname ?: "",
-                // 账号已整块搬到这一页：登录态、同步状态与动作都从这里下发
                 account = account,
-                syncLine = syncLine,
-                syncing = syncing,
-                onLogin = { showAuth = true },
-                onLogout = {
-                    scope.launch {
-                        auth.logout()
-                        account = null
-                    }
-                },
-                onSyncNow = { runSyncNow() }
-            )
-        }
-    // 注意分支顺序：成就测试页是从设置页里点开的，必须排在 showSettings 之前判断。
-    // 否则 showSettings 仍为 true，先命中设置页，点了按钮界面纹丝不动
-    //（曾经就是这个顺序导致「成就测试点不进去」）。
-    } else if (showAchievements) {
-        branchStates.SaveableStateProvider("achievements") {
-            AchievementsDevScreen(
                 store = store,
-                onBack = { showAchievements = false },
-                onChanged = onAchChanged,
-                onOpenBadge = onOpenBadge
-            )
-        }
-    } else if (showFeedback) {
-        branchStates.SaveableStateProvider("feedback") {
-            FeedbackScreen(store = store, onBack = { showFeedback = false })
-        }
-    } else if (showDevices) {
-        branchStates.SaveableStateProvider("devices") {
-            DevicesScreen(
-                onBack = { showDevices = false },
-                onSignedOut = {
-                    // 撤销的是当前设备：服务端已把 access/refresh 一起作废，
-                    // 本地必须跟着退出，否则下一次请求只会收到 401。
-                    scope.launch {
-                        runCatching { auth.logout() }
-                        account = null
-                        showDevices = false
-                        showSettings = false
-                        onStoreReloaded()
-                    }
-                }
-            )
-        }
-    } else if (showSettings) {
-        branchStates.SaveableStateProvider("settings") {
-            SettingsScreen(
-                store = store,
-                themeMode = themeMode,
-                onThemeModeChange = onThemeModeChange,
-                languageMode = languageMode,
-                onLanguageModeChange = onLanguageModeChange,
+                achRevision = achRevision,
                 devUnlocked = devUnlocked,
                 devUnlockAll = devUnlockAll,
                 devShowAnswers = devShowAnswers,
                 onDevUnlocked = onDevUnlocked,
-                onDevExit = onDevExit,
                 onDevUnlockAllChange = onDevUnlockAllChange,
                 onDevShowAnswersChange = onDevShowAnswersChange,
-                onOpenAchievements = { showAchievements = true },
+                onDevExit = onDevExit,
                 bankChecking = bankChecking,
                 bankMessage = bankMessage,
                 onCheckBank = onCheckBank,
                 onResetBank = onResetBank,
                 onBankUrlChange = onBankUrlChange,
-                onReset = onReset,
-                accountEmail = account?.email,
-                onOpenDevices = { showDevices = true },
-                onDeleteAccount = {
-                    // 删账号 = 账号记录 + 本机数据一起清（Play 的账号删除要求：
-                    // 只删登录态、把数据留着是不合格的）。头像文件不在 prefs 里，单独删。
-                    val ok = auth.deleteAccount()
-                    if (ok) {
-                        AvatarStore.remove(context)
-                        store.wipeUserData()
-                        account = null
-                        showSettings = false
-                        onStoreReloaded()
-                    }
-                    ok
-                },
-                onBack = { showSettings = false }
+                onOpenSettings = { showSettings = true },
+                onOpenProfileHome = { showProfileHome = true },
+                onOpenFeedback = { showFeedback = true },
+                listState = listState
             )
         }
-    } else {
-        ProfileBody(
-            altitude = altitude,
-            streak = streak,
-            completed = completed,
-            account = account,
-            store = store,
-            achRevision = achRevision,
-            devUnlocked = devUnlocked,
-            devUnlockAll = devUnlockAll,
-            devShowAnswers = devShowAnswers,
-            onDevUnlocked = onDevUnlocked,
-            onDevUnlockAllChange = onDevUnlockAllChange,
-            onDevShowAnswersChange = onDevShowAnswersChange,
-            onDevExit = onDevExit,
-            bankChecking = bankChecking,
-            bankMessage = bankMessage,
-            onCheckBank = onCheckBank,
-            onResetBank = onResetBank,
-            onBankUrlChange = onBankUrlChange,
-            onOpenSettings = { showSettings = true },
-            onOpenProfileHome = { showProfileHome = true },
-            onOpenFeedback = { showFeedback = true },
-            listState = listState
-        )
+
+        // 隐私政策：盖在任何一层之上；底层页面保持组合，返回后输入与勾选都还在
+        if (showPrivacy) {
+            PrivacyScreen(
+                doc = PrivacyPolicy.of(AppLocale.resolve(languageMode).toLanguageTag()),
+                onBack = { showPrivacy = false }
+            )
+        }
     }
 }
 
@@ -727,6 +744,7 @@ private enum class AuthMode { Login, Register, Reset }
 private fun AuthScreen(
     auth: AuthApi,
     onBack: () -> Unit,
+    onOpenPrivacy: () -> Unit,
     /** [isRegister] 为 true 表示刚注册：此时昵称是用户当场输入的，应当覆盖本地旧名。 */
     onSuccess: (Account, Boolean) -> Unit
 ) {
@@ -739,10 +757,18 @@ private fun AuthScreen(
     // 成功提示与错误分开：验证码发出去了要告诉用户，但那不是错误
     var notice by remember { mutableStateOf<String?>(null) }
     var loading by remember { mutableStateOf(false) }
+    // 注册前置：必须勾选同意隐私政策（登录 / 找回密码不拦）
+    var agreedPrivacy by remember { mutableStateOf(false) }
+    val authScroll = rememberScrollState()
     var sending by remember { mutableStateOf(false) }
     var countdown by remember { mutableIntStateOf(0) }
     val scope = rememberCoroutineScope()
     val ctx = LocalContext.current
+
+    // 报错时把页面滚到底：错误框与主按钮都在下方，不滚用户只看到输入框没反应
+    LaunchedEffect(error) {
+        if (error != null) authScroll.animateScrollTo(authScroll.maxValue)
+    }
 
     // 重发倒计时。countdown 变化会重启这个 effect，减到 0 自然停下，不会空转。
     LaunchedEffect(countdown) {
@@ -776,7 +802,7 @@ private fun AuthScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(authScroll)
             .padding(horizontal = 24.dp)
     ) {
         Spacer(Modifier.height(10.dp))
@@ -963,6 +989,52 @@ private fun AuthScreen(
             )
         }
 
+        if (mode == AuthMode.Register) {
+            Spacer(Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Checkbox(
+                    checked = agreedPrivacy,
+                    onCheckedChange = {
+                        agreedPrivacy = it
+                        if (it) error = null
+                    },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Ascent.Accent,
+                        uncheckedColor = Ascent.Fg3,
+                        checkmarkColor = Ascent.OnAccent
+                    ),
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(Modifier.width(10.dp))
+                Text(
+                    text = stringResource(R.string.auth_privacy_agree),
+                    color = Ascent.Fg2,
+                    fontSize = 12.5.sp,
+                    lineHeight = 18.sp,
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable {
+                            agreedPrivacy = !agreedPrivacy
+                            if (agreedPrivacy) error = null
+                        }
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text = stringResource(R.string.auth_privacy_view),
+                    color = Ascent.Accent,
+                    fontSize = 12.5.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(999.dp))
+                        .clickable { onOpenPrivacy() }
+                        .padding(horizontal = 6.dp, vertical = 4.dp)
+                )
+            }
+        }
+
         if (notice != null) {
             Spacer(Modifier.height(14.dp))
             Box(
@@ -1001,6 +1073,10 @@ private fun AuthScreen(
             enabled = !loading,
             onClick = {
                 if (loading) return@PillButton
+                if (mode == AuthMode.Register && !agreedPrivacy) {
+                    error = ctx.getString(R.string.auth_privacy_required)
+                    return@PillButton
+                }
                 loading = true
                 error = null
                 notice = null

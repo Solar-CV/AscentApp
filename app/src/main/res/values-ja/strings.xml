@@ -474,4 +474,11 @@
     <string name="ob_hint">どちらも「プロフィール · 設定」で変更できます</string>
     <string name="ob_continue">次へ</string>
     <string name="ob_follow_desc">システム言語に従います</string>
+
+    <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_privacy">プライバシーポリシー</string>
+    <string name="auth_privacy_agree">プライバシーポリシーを読み、同意します</string>
+    <string name="auth_privacy_view">全文</string>
+    <string name="auth_privacy_required">登録の前にプライバシーポリシーへの同意が必要です</string>
+    <string name="privacy_in_app_note">規約バージョン %1$s　·　ascentroam.com/privacy と同一</string>
 </resources>

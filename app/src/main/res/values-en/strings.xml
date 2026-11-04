@@ -491,4 +491,11 @@
     <string name="ob_hint">Both can be changed later in Profile · Settings</string>
     <string name="ob_continue">Continue</string>
     <string name="ob_follow_desc">Decided by your system language</string>
+
+    <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_privacy">Privacy policy</string>
+    <string name="auth_privacy_agree">I have read and agree to the Privacy Policy</string>
+    <string name="auth_privacy_view">View</string>
+    <string name="auth_privacy_required">Please agree to the Privacy Policy before creating an account</string>
+    <string name="privacy_in_app_note">Terms version %1$s　·　matches ascentroam.com/privacy</string>
 </resources>

@@ -453,4 +453,11 @@
     <string name="ob_hint">Båda kan ändras i ”Profil · Inställningar”</string>
     <string name="ob_continue">Fortsätt</string>
     <string name="ob_follow_desc">Styrs av systemets språk</string>
+
+    <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_privacy">Integritetspolicy</string>
+    <string name="auth_privacy_agree">Jag har läst och godkänner integritetspolicyn</string>
+    <string name="auth_privacy_view">Visa</string>
+    <string name="auth_privacy_required">Du måste godkänna integritetspolicyn innan du skapar ett konto</string>
+    <string name="privacy_in_app_note">Version %1$s　·　samma som ascentroam.com/privacy</string>
 </resources>

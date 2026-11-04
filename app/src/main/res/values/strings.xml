@@ -490,4 +490,11 @@
     <string name="ob_hint">两项之后都能在「我的 · 设置」里改</string>
     <string name="ob_continue">继续</string>
     <string name="ob_follow_desc">由系统语言决定</string>
+
+    <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_privacy">隐私政策</string>
+    <string name="auth_privacy_agree">我已阅读并同意《隐私政策》</string>
+    <string name="auth_privacy_view">查看</string>
+    <string name="auth_privacy_required">注册前需要先同意隐私政策</string>
+    <string name="privacy_in_app_note">条款版本 %1$s　·　与官网 ascentroam.com/privacy 一致</string>
 </resources>

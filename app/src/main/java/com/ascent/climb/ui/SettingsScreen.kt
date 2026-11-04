@@ -80,6 +80,8 @@ fun SettingsScreen(
     onReset: () -> Unit,
     /** 当前登录账号的邮箱；null 表示未登录，此时不显示账号分区。 */
     accountEmail: String?,
+    /** 打开应用内隐私政策。 */
+    onOpenPrivacy: () -> Unit,
     /** 打开「已登录设备」页。 */
     onOpenDevices: () -> Unit,
     /** 执行删除账号（含本机数据），返回是否成功。 */
@@ -424,7 +426,28 @@ fun SettingsScreen(
                         color = Ascent.Fg3,
                         fontSize = 11.sp
                     )
-                    Spacer(Modifier.height(6.dp))
+                    Spacer(Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(10.dp))
+                            .clickable { onOpenPrivacy() }
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.set_privacy),
+                            color = Ascent.Fg2,
+                            fontSize = 12.sp,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Icon(
+                            Ic.ChevronRight,
+                            contentDescription = null,
+                            tint = Ascent.Fg3,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
                     Text(
                         text = stringResource(R.string.set_version, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE),
                         color = Ascent.Fg2,
