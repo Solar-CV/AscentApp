@@ -579,7 +579,9 @@ fun ascentTabs(): List<TabItem> = listOf(
     TabItem(Ic.Mountain, stringResource(R.string.nav_path)),
     TabItem(Ic.BookOpen, stringResource(R.string.hb_title)),
     TabItem(Ic.Dumbbell, stringResource(R.string.tr_title)),
-    TabItem(Ic.RotateCcw, stringResource(R.string.rev_title)),
+    // 底栏用 nav_review 而不是 rev_title：页面标题可以长（德语 Wiederholung），
+    // 但底栏槽位只有约 62dp，德语那 12 个字符会把最后一个字母顶出圆角裁掉。
+    TabItem(Ic.RotateCcw, stringResource(R.string.nav_review)),
     TabItem(Ic.User, stringResource(R.string.nav_profile))
 )
 

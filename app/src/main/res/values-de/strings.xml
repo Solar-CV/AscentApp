@@ -18,7 +18,7 @@
     <string name="nav_path">Route</string>
     <string name="nav_handbook">Handbuch</string>
     <string name="nav_training">Training</string>
-    <string name="nav_review">Wiederholung</string>
+    <string name="nav_review">Üben</string>
     <string name="nav_profile">Profil</string>
     <string name="lang_title">Sprache</string>
     <string name="lang_section">Anzeigesprache</string>
