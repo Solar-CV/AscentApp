@@ -266,8 +266,11 @@ Google 登录只信服务端验证过的 `sub`：验 `aud` / `iss` / `exp`，不
 - **登录限流**：同邮箱 15 分钟内失败 10 次 → 429，计数存 `ascent_users` 旁挂文档。
 - **删除账号级联**：user + tokens + state + avatar 一起删（Play 政策要求，且 `/auth/account`
   必须真的删服务端数据，不能只清登录态）。
-- **隐私政策与 Play 数据安全表单**需同步更新：新增「邮箱、昵称、头像、学习进度」四项，
-  声明可删除、可导出、不用于广告。
+- **隐私政策与 Play 数据安全表单**：条款版本 **2026-11-05**（v0.26.7）已在第 2 节补「App 内反馈」、
+  第 7 节补 Formspree，App 与官网 `ascentroam.com/privacy` 同源。数据安全表单据此声明：
+  邮箱 / 名称 / 用户 ID / 照片 / 应用互动 / 其他用户生成内容 / 设备或其他 ID / 崩溃日志，
+  全部为**收集不共享、可选、HTTPS 传输**；第三方（Resend / ImprovMX / Formspree / CloudBase）
+  属受托处理者，不计入「共享」。
 - **GDPR**：`/auth/account` 删除 + SyncPayload 导出即满足访问权与删除权。
 - 日志里不写邮箱、token、payload 全文；只记 `userId` 与状态码。
 
