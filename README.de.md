@@ -6,7 +6,7 @@ Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist
 
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 69 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 22 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.26.6 (versionCode 151). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.727 / 10.727). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.26.8 (versionCode 153). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.727 / 10.727). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 v0.20.19 – v0.21.0 haben die Oberfläche durchgehend auf Ton (Clay) umgestellt: weiche zweilagige Schatten, offscreen gezeichnet und zwischengespeichert, flache Farbchips, Kategoriefarben im Handbuch und große Farbflächen, deren Tiefe aus einem Kontaktschatten statt aus einem Verlauf kommt.
 
@@ -222,6 +222,13 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 Ältere App-Versionen gehen an einem neueren Pool nicht kaputt. `minAppVersion` in `manifest.json` blockt zu alte Clients, unbekannte Felder werden ignoriert, eine fehlerhafte Frage wird übersprungen statt tödlich zu sein.
 
 ## Letzte Änderungen
+
+**v0.26.7 – v0.26.8: Die Erklärung holt auf, die Daten bekommen einen Besitzer**
+
+- Die Datenschutzerklärung beschreibt jetzt das Feedback in der App: gesendet werden dein Text, eine E-Mail-Adresse, falls du eine angibst, und — **nur wenn du das Häkchen setzt** — Diagnosedaten (App-Version, Android-Version, Gerätemodell, Oberflächensprache, letzter Absturzbericht). Fassung 2026-11-05, keine erneute Zustimmung nötig
+- Avatare gehören zum Konto: Beim Abmelden verschwindet das Bild sofort, und ein anderes Konto zeigt sein eigenes (ohne eigenes Bild einen Buchstaben-Platzhalter), nie das vorherige
+- Ein stiller Fehler ist behoben: Nach Löschen und erneutem Hochladen begann die Cloud-Revision wieder bei 1, sodass andere Geräte den neuen Avatar nie erhielten
+- Auch der Fortschritt kennt seinen Besitzer: Abmelden behält den lokalen Fortschritt, Offline-Lernen bleibt möglich; dasselbe Konto wird wie bisher zusammengeführt, ein anderes Konto ersetzt die lokalen Daten durch seine Cloud-Daten, statt den alten Fortschritt mitzunehmen
 
 **v0.26.6: Datenschutz vor der Registrierung**
 
