@@ -375,6 +375,10 @@ async function main() {
   check("非 JPEG 415", r.status === 415 && r.json.error === "unsupported_media");
   r = await call("DELETE", "/avatar", { token: access3 });
   check("删除头像 204", r.status === 204);
+  r = await call("GET", "/auth/me", { token: access3 });
+  check("删除后账号头像版本归 0", r.status === 200 && r.json.user.avatarVersion === 0);
+  r = await call("PUT", "/avatar", { token: access3, raw: jpeg });
+  check("删后再传版本继续递增（不回退到 1）", r.status === 200 && r.json.version === 2);
 
   console.log("\n[路径前缀兼容]");
   r = await call("GET", "/ascent/auth/me", { token: access3 });

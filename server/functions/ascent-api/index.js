@@ -993,7 +993,10 @@ async function handlePutAvatar(req, res, user) {
   if (!(buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff)) {
     return fail(res, 415, "unsupported_media", "只接受 JPEG");
   }
-  const version = Number(user.avatar_version || 0) + 1;
+  // 版本号必须只增不减：删除头像会把 avatar_version 归零，若下次上传从 0+1 开始，
+  // 别的设备（记着更大的 cloudAvatarVersion）就永远不会下载这张新图。
+  // avatar_rev 是永不复位的计数器，avatar_version 只是「当前头像的版本，0 = 没有」。
+  const version = Number(user.avatar_rev || 0) + 1;
   const existing = await findOne(T_AVATARS, { user_id: user.id });
   const t = now();
   const data = buf.toString("base64");
@@ -1002,7 +1005,7 @@ async function handlePutAvatar(req, res, user) {
   } else {
     await insert(T_AVATARS, { user_id: user.id, data, version, updated_at: t });
   }
-  await update(T_USERS, { id: user.id }, { avatar_version: version, updated_at: t });
+  await update(T_USERS, { id: user.id }, { avatar_version: version, avatar_rev: version, updated_at: t });
   send(res, 200, { version, updatedAt: t });
 }
 

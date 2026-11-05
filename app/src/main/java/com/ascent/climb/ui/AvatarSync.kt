@@ -34,6 +34,17 @@ object AvatarSync {
         val profile = CloudProfile(context)
         val me = runCatching { profile.me() }.getOrNull() ?: return@withContext false
 
+        // ---- 归属 ----
+        // 本机头像是不是别人的？退出登录时已经清过一次，这里是安全网：
+        // 会话过期后直接换号、或哪条路径漏清，都能在这里发现并纠正。
+        val accountId = me.optString("id", "")
+        if (accountId.isNotEmpty()) {
+            if (store.avatarOwner.isNotEmpty() && store.avatarOwner != accountId) {
+                forgetLocal(context, store)
+            }
+            store.avatarOwner = accountId
+        }
+
         // ---- 昵称 ----
         val nickname = me.optString("nickname", "").trim()
         if (nickname.isNotEmpty()) {
@@ -60,7 +71,15 @@ object AvatarSync {
         }
 
         val remoteVersion = me.optInt("avatarVersion", 0)
-        if (remoteVersion <= 0) return@withContext false
+        if (remoteVersion <= 0) {
+            // 账号里没有头像：可能是新账号，也可能是别的设备刚把它删了。
+            // 本机如果还留着一张，就是过期的，清掉并 +1 让界面回到占位图。
+            store.cloudAvatarVersion = 0
+            if (!AvatarStore.exists(context)) return@withContext false
+            AvatarStore.remove(context)
+            store.avatarVersion = store.avatarVersion + 1
+            return@withContext true
+        }
         if (remoteVersion <= store.cloudAvatarVersion) return@withContext false
 
         val bytes = runCatching { profile.downloadAvatar() }.getOrNull()
@@ -74,6 +93,21 @@ object AvatarSync {
         store.avatarVersion = store.avatarVersion + 1
         store.cloudAvatarVersion = remoteVersion
         true
+    }
+
+    /**
+     * 丢掉本机头像与所有相关计数。退出登录、撤销当前设备、换账号时调用。
+     *
+     * 版本号 **+1 而不是归零**：它是「重新解码」的开关，必须相对上一次组合可见的值变化。
+     * 归零会让「A 版本 1 → 清空 → B 版本 1」撞回同一个 key，界面停在旧图上 ——
+     * 正是这次要修的那个 bug。文件已删，重新解码的结果自然是占位图。
+     */
+    fun forgetLocal(context: Context, store: ProgressStore) {
+        AvatarStore.remove(context)
+        store.avatarVersion = store.avatarVersion + 1
+        store.cloudAvatarVersion = 0
+        store.avatarDirty = false
+        store.avatarOwner = ""
     }
 
     /** 把本地头像推上去。成功返回云端版本号，未登录/失败返回 null。 */

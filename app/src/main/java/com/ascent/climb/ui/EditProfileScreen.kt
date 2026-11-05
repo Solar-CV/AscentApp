@@ -212,7 +212,9 @@ private fun EditProfileBody(
                         onClick = { if (!busy) launchPicker() }
                     )
                 }
-                if (version > 0) {
+                // 用文件是否存在判断，而不是 version > 0 —— 版本号现在是单调递增的「重新解码开关」，
+                // 退出登录清头像时也会 +1，拿它当「有没有头像」会误显示「移除头像」。
+                if (AvatarStore.exists(context)) {
                     Column(modifier = Modifier.weight(1f)) {
                         PillButton(
                             text = stringResource(R.string.pf_avatar_remove),
@@ -221,8 +223,8 @@ private fun EditProfileBody(
                             fontSize = 13.sp,
                             onClick = {
                                 AvatarStore.remove(context)
-                                store.avatarVersion = 0
-                                version = 0
+                                version += 1
+                                store.avatarVersion = version
                                 failed = false
                                 onAvatarChanged(false)
                             }

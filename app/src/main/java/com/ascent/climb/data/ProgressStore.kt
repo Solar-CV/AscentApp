@@ -402,6 +402,39 @@ class ProgressStore(context: Context) {
         set(value) = prefs.edit().putBoolean("avatarDirty", value).apply()
 
     /**
+     * 本机这张头像属于哪个账号（用户 id）。空串 = 还没归属过任何账号
+     *（离线时自己设的，或从老版本升级上来还没同步过）。
+     *
+     * 头像文件只有一份，但它语义上属于某个账号。没有这个字段就会出现
+     *「A 退出、B 登录后还显示 A 的脸」；更糟的是脏标记还在时，
+     * 会把 A 的头像直接推到 B 的账号上。
+     */
+    var avatarOwner: String
+        get() = prefs.getString("avatarOwner", "") ?: ""
+        set(value) = prefs.edit().putString("avatarOwner", value).apply()
+
+    /**
+     * 本机这份学习进度属于哪个账号。退出登录时**不清**——用来区分
+     *「同一个账号回来」和「换了个人」：
+     *  - 同一个账号：正常合并（退出期间离线学的课要并回去）
+     *  - 换了账号：见 [pendingCloudReplace]
+     */
+    var progressOwner: String
+        get() = prefs.getString("progressOwner", "") ?: ""
+        set(value) = prefs.edit().putString("progressOwner", value).apply()
+
+    /**
+     * 下一次同步用云端覆盖本地（只生效一次）。
+     *
+     * 登录到与 [progressOwner] 不同的账号时置位。不做合并是因为本地这份
+     * 是**上一个账号**的进度，合并等于把别人的学习记录写进新账号。
+     * 成功覆盖后清除；中途离线则保留，下次同步继续尝试。
+     */
+    var pendingCloudReplace: Boolean
+        get() = prefs.getBoolean("pendingCloudReplace", false)
+        set(value) = prefs.edit().putBoolean("pendingCloudReplace", value).apply()
+
+    /**
      * 上一次从账号同步下来的昵称。
      *
      * 用来判断「本地这个名字是不是用户刚改、还没推上去」：只有 `displayName` 与它相同，
@@ -547,6 +580,15 @@ class ProgressStore(context: Context) {
      * 合并已经由 SyncPayload.merge 完成，这里再合一次只会让两处规则分叉。
      */
     fun applySnapshot(p: SyncPayload) {
+        // 训练记录先整体清空再写：换账号覆盖时，上一个账号的记录不能残留
+        prefs.edit().also { e ->
+            DRILL_IDS.forEach { id ->
+                e.remove("drill_${id}_count")
+                e.remove("drill_${id}_seconds")
+                e.remove("drill_${id}_best")
+                e.remove("drill_${id}_last")
+            }
+        }.apply()
         completed = p.completed.toMutableSet()
         starEntries = p.stars.map { "${it.key}:${it.value}" }.toMutableSet()
         saveReviews(p.reviews.associateBy { it.key })
@@ -557,7 +599,7 @@ class ProgressStore(context: Context) {
         streak = p.streak
         maxStreak = p.maxStreak
         streakBroken = p.streakBroken
-        if (p.lastDay.isNotEmpty()) lastDay = p.lastDay
+        lastDay = p.lastDay
         p.drills.forEach { d ->
             prefs.edit()
                 .putInt("drill_${d.id}_count", d.count)

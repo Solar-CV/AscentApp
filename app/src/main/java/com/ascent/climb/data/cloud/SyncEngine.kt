@@ -45,6 +45,10 @@ class SyncEngine(
         if (!CloudConfig.enabled) return@withContext SyncOutcome.NotLoggedIn
         if (!api.hasSession()) return@withContext SyncOutcome.NotLoggedIn
         try {
+            // 换了账号：这一次以云端为准，绝不做合并 —— 本地这份是上一个账号的进度。
+            // 覆盖成功后标记清除，之后恢复正常的 merge 流程。
+            if (store.pendingCloudReplace) return@withContext replaceFromCloud()
+
             var rev = 0
             var remote: SyncPayload? = null
 
@@ -98,6 +102,27 @@ class SyncEngine(
         if (!api.hasSession()) return null
         if (System.currentTimeMillis() - store.lastSyncAt < CloudConfig.AUTO_SYNC_INTERVAL_MS) return null
         return sync()
+    }
+
+    /**
+     * 换账号后的第一次同步：云端是权威，直接覆盖本地。
+     *
+     * **不发 PUT**：云端那份正是要的，写回去只会推进 rev，还会把本地残留的
+     * 上一个账号进度带上云 —— 那正是要避免的事。云端为空（新账号）时，
+     * 本地被清空也是正确结果。
+     */
+    private suspend fun replaceFromCloud(): SyncOutcome {
+        val state = api.json("GET", "/state")
+        val rev = state?.optInt("rev", 0) ?: 0
+        val remote = state?.optJSONObject("payload")?.let { SyncPayload.fromJson(it) } ?: SyncPayload()
+
+        store.applySnapshot(remote)
+        store.lastSyncRev = rev
+        store.lastSyncAt = System.currentTimeMillis()
+        store.pendingCloudReplace = false
+        // 覆盖后可能刚好满足成就条件，入队由界面层播
+        store.grantAchievements()
+        return SyncOutcome.Synced(rev)
     }
 
     private fun commit(merged: SyncPayload, rev: Int) {

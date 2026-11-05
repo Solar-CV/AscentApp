@@ -148,6 +148,12 @@ fun ProfileScreen(
     }
     val scope = rememberCoroutineScope()
     var account by remember { mutableStateOf(auth.currentAccount()) }
+    // 老版本升上来时还没有 progressOwner：用本地账号镜像补一次。
+    // 不补的话，升级后第一次换号会被当成「首次登录」而合并进度，正是要避免的那种串号。
+    LaunchedEffect(Unit) {
+        val signedIn = account ?: return@LaunchedEffect
+        if (store.progressOwner.isEmpty()) store.progressOwner = signedIn.id
+    }
     var showAuth by remember { mutableStateOf(false) }
     var showPrivacy by remember { mutableStateOf(false) }
     var showAchievements by remember { mutableStateOf(false) }
@@ -210,12 +216,28 @@ fun ProfileScreen(
                 auth = auth,
                 onBack = { showAuth = false },
                 onOpenPrivacy = { showPrivacy = true },
-                onSuccess = { newAccount, _ ->
+                onSuccess = { newAccount, fromRegister ->
                     account = newAccount
                     showAuth = false
                     // 账号名是权威：登录/注册后都覆盖本地显示名，避免「账号 Solar、界面 NewName」。
                     store.displayName = newAccount.nickname
                     store.syncedNickname = newAccount.nickname
+                    // 头像也属于账号，但规则不同：
+                    //  - 换号（本机头像记在别的账号名下）→ 直接丢，绝不能让它跟着过去；
+                    //  - 登录既有账号 → 以云端为准，本机那张离线时设的不要顶上去；
+                    //  - 注册 → 是新建身份，本机已有的头像跟着走（下次同步会推上去）。
+                    val ownedByOther = store.avatarOwner.isNotEmpty() && store.avatarOwner != newAccount.id
+                    val localOnly = store.avatarOwner.isEmpty()
+                    if (ownedByOther || (localOnly && !fromRegister)) {
+                        AvatarSync.forgetLocal(context, store)
+                    }
+                    store.avatarOwner = newAccount.id
+                    // 学习进度也属于账号，但规则不同：换人才覆盖。
+                    // 第一次登录（本机还没归属过任何账号）保持合并，老用户升级后不会丢离线进度。
+                    if (store.progressOwner.isNotEmpty() && store.progressOwner != newAccount.id) {
+                        store.pendingCloudReplace = true
+                    }
+                    store.progressOwner = newAccount.id
                     // 登录成功立刻同步一次：本机进度推上去，云端已有的拉回来。
                     // 走 runSyncNow 是为了顺带清掉上一次的「同步失败」提示，并刷「上次同步」时间。
                     runSyncNow()
@@ -283,6 +305,9 @@ fun ProfileScreen(
                     onLogout = {
                         scope.launch {
                             auth.logout()
+                            // 头像属于账号：退出后必须连本机文件一起清掉，
+                            // 否则下一个人打开「我的」看到的是上一个账号的脸。
+                            AvatarSync.forgetLocal(context, store)
                             account = null
                         }
                     },
@@ -314,6 +339,7 @@ fun ProfileScreen(
                         // 本地必须跟着退出，否则下一次请求只会收到 401。
                         scope.launch {
                             runCatching { auth.logout() }
+                            AvatarSync.forgetLocal(context, store)
                             account = null
                             showDevices = false
                             showSettings = false
