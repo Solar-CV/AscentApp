@@ -1,6 +1,6 @@
 # AscentRoam 云端服务方案（账号 · 进度同步 · 题库托管）
 
-> 内部文档。建立于 2026-11-03，对应代码基线 v0.26.9 / versionCode 154（云端已上线：设备管理、头像与学习进度按账号隔离）。
+> 内部文档。建立于 2026-11-03，对应代码基线 v0.27.0 / versionCode 155（云端已上线：设备管理、头像与学习进度按账号隔离）。
 > 注：本文件随仓库提交（不含密钥与凭据）；`HANDOFF.md` 仍只留本地。
 > 本文是云端的**契约层**：API 形状、数据模型、合并规则。实现可以换宿主，契约不换。
 > 工程现状见 `HANDOFF.md` 头部；本文只记录云端相关。
@@ -319,10 +319,52 @@ M3 与 M2 共用 `SyncPayload`，实现成本很低，且让「不注册也能�
 
 ## 9. 待定
 
-- Google 登录需要 Google Cloud OAuth 客户端（Web client ID）与 Play 签名 SHA-1 指纹，
-  服务端 `/auth/google` 的校验骨架已留（验 `aud` / `sub` / `exp`），配置到位即启用。
 - 题库托管域名（GitHub Pages / CloudBase 静态托管 / 自建 CDN）待定，先做 M1/M2。
 - 发信服务选型（SMTP / Resend / 腾讯云邮件推送）—— 邮箱验证与找回密码依赖它，见 §10.2。
+
+### 9.0 Google 登录的三个 client（已实施，2026-11-06）
+
+同一个项目下必须建**三条**，缺一条就登不上，且报错都长得像「代码写错了」：
+
+| 类型 | 包名 / 用途 | 用在哪 |
+|---|---|---|
+| **Web 应用** | 无包名，可不填重定向 URI | 客户端 `serverClientId` + 服务端 `GOOGLE_CLIENT_ID`（验 `aud`）。**只有这一个写进代码** |
+| Android | `com.ascentroam.app` + Play 应用签名 SHA-1 | Play 分发的用户 |
+| Android | `com.ascentroam.app.debug` + 本机 debug keystore SHA-1 | 本地 / 侧载调试 |
+
+三条 ID 形态完全一样（`NNN-xxx.apps.googleusercontent.com`），从字符串看不出类型，别互传。
+
+**踩坑：`[28444] Developer console is not set up correctly`**
+= 客户端配置与请求对不上。定位顺序：
+
+1. `serverClientId` 是不是 **Web 应用**类型的 ID？（把它填成 Android client 会稳定复现 28444，
+   且现象是「账号选择器正常弹出 → 选完立即失败」，很容易误判成账号问题）
+2. Android client 的包名是否带 `.debug`、SHA-1 是否与**运行中这个包**一致
+   （debug 包在 `GoogleSignIn` 里运行时会打印自身签名 SHA-1，直接对照即可，别靠猜）
+3. 新建 client 后最长要等几小时才生效
+
+排查手段：`GoogleSignIn.Result.Failed` 会把异常类型、原始 message、包名、自身 SHA-1、
+GMS 版本一起带出来，**只有 debug 包**显示在界面上，release 只进日志。
+
+**架构约束（2026-11-06 实测）**：上海环境**连不上 `oauth2.googleapis.com`** ——
+`GET /health/google` 返回 `{reachable:false, ms:10270, error:"fetch failed"}`，
+而同函数访问美国 Resend 正常，所以是 Google 被阻断，不是出网故障。
+
+后果：服务端 `verifyGoogleToken` 必然失败，客户端表现为「token 拿到了但服务端拒绝」。
+三条出路，按推荐度：
+
+1. **香港中继**（推荐）：在 ap-hongkong 放一个只做 tokeninfo 转发的小函数（HTTP 触发 +
+   共享密钥），上海的 API 调它。延迟 +100~200 ms，只发生在登录那一次；费用≈0。
+   代码见 `server/functions/google-relay/`。服务端配一个环境变量即可切换：
+   `GOOGLE_RELAY_URL = https://<函数URL>?key=<密钥>`（密钥放 query，省掉第二个变量）；
+   不配则退回直连 —— 本地冒烟与将来搬到境外都不用改代码。`GET /health/google` 会返回
+   `via` 字段说明当前走哪条路。
+2. **离线验签**：把 Google 的 JWKS 缓存到库里，本地用 Node `crypto` 验 RS256，
+   但 JWKS 本身也得从境外拉（需 GitHub Actions 或中继刷新），多一条掉链子的路径。
+3. **整体搬到境外**：国内用户每次请求都变慢，不划算。
+
+在此之前，Google 登录返回 `503 google_unreachable`，客户端显示「Google 登录暂不可用」，
+不影响邮箱登录。
 
 ---
 

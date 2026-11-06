@@ -145,6 +145,30 @@ object AvatarStore {
         }.getOrDefault(false)
     }
 
+    /**
+     * 把一张图片字节裁成正方形存为头像。
+     *
+     * Google 的资料图常是 PNG，而服务端 `/avatar` 只收 JPEG（校验 FFD8FF 魔数），
+     * 所以不能直接把原始字节落盘，必须解码 → 居中裁方 → 重新压 JPEG。
+     */
+    suspend fun saveFromBytes(context: Context, bytes: ByteArray): Boolean {
+        val bmp = withContext(Dispatchers.IO) {
+            runCatching { BitmapFactory.decodeByteArray(bytes, 0, bytes.size) }.getOrNull()
+        } ?: return false
+        val side = min(bmp.width, bmp.height)
+        if (side <= 0) {
+            bmp.recycle()
+            return false
+        }
+        val square = if (side == bmp.width && side == bmp.height) bmp else {
+            Bitmap.createBitmap(bmp, (bmp.width - side) / 2, (bmp.height - side) / 2, side, side)
+        }
+        val ok = saveCropped(context, square)
+        if (square !== bmp) square.recycle()
+        bmp.recycle()
+        return ok
+    }
+
     /** 删除头像文件。prefs 里的版本号由调用方清。 */
     fun remove(context: Context) {
         runCatching { file(context).delete() }

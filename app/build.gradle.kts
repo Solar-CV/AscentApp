@@ -45,8 +45,8 @@ android {
         applicationId = "com.ascentroam.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 154
-        versionName = "0.26.9"
+        versionCode = 155
+        versionName = "0.27.0"
         // 支持 10 种语言：简中（values 默认）+ 繁中 + 英日俄法瑞德西意。
         // 只打包这里列出的语言资源，避免把依赖库的其余语言一起带进来。
         resourceConfigurations += listOf(
@@ -134,6 +134,13 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material3:material3")
+
+    // Google 登录：Credential Manager（AndroidX）拿 ID token。
+    // googleid 负责把凭据解析成 GoogleIdTokenCredential；play-services-auth 那条是
+    // 真正与 Google Play services 通信的实现（没有 GMS 的设备会走不通，本应用只上 Play，可接受）。
+    implementation("androidx.credentials:credentials:1.6.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.6.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
     // 3D 徽章：Filament（渲染）+ gltfio（glb 加载）+ utils（KTX 环境光加载）
     // 锁 1.75.0：1.76.0 起 AAR 声明 minCompileSdk=37，本工程 compileSdk 36 仍差一档

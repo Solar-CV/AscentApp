@@ -14,6 +14,16 @@ object CloudConfig {
 
     val enabled: Boolean get() = BASE_URL.isNotBlank()
 
+    /**
+     * Google 登录的 **Web client ID**（不是 Android client ID）。
+     *
+     * 客户端把它当 `serverClientId` 传进去，拿到的 idToken 里 `aud` 就是它；
+     * 服务端 `GOOGLE_CLIENT_ID` 必须是同一个值，否则验票必然失败。
+     * 这是公开标识，不是密钥，写进代码没有问题。
+     */
+    const val GOOGLE_WEB_CLIENT_ID =
+        "123533249290-8n1l8d0foaph4pbo511n01jd7b1e60rq.apps.googleusercontent.com"
+
     const val TIMEOUT_MS = 15_000
 
     /** 上限与 CLOUD-PLAN.md §3.2 对齐，超出直接判定失败，不浪费流量。 */

@@ -57,6 +57,21 @@ object AvatarSync {
             store.syncedNickname = nickname
         }
 
+        // ---- Google 资料图 ----
+        // 首次用 Google 登录时服务端会把头像地址带回来。下载 → 裁方 → 存本地，
+        // 然后交给下面的「脏标记」分支统一上传，不需要第二套上传逻辑。
+        val pending = store.pendingAvatarUrl
+        if (pending.isNotEmpty()) {
+            store.pendingAvatarUrl = ""
+            if (!AvatarStore.exists(context)) {
+                val bytes = downloadPicture(pending)
+                if (bytes != null && AvatarStore.saveFromBytes(context, bytes)) {
+                    store.avatarVersion = store.avatarVersion + 1
+                    store.avatarDirty = true
+                }
+            }
+        }
+
         // ---- 头像 ----
         if (store.avatarDirty) {
             if (!AvatarStore.exists(context)) {
@@ -108,6 +123,33 @@ object AvatarSync {
         store.cloudAvatarVersion = 0
         store.avatarDirty = false
         store.avatarOwner = ""
+    }
+
+    /**
+     * 下载 Google 资料图。
+     *
+     * 只接受 https 且域名是 googleusercontent.com —— 这个 URL 来自登录响应，
+     * 虽然是服务端从 tokeninfo 抄来的，客户端也不该无脑信任。
+     */
+    private suspend fun downloadPicture(url: String): ByteArray? = withContext(Dispatchers.IO) {
+        val u = runCatching { java.net.URI(url).toURL() }.getOrNull() ?: return@withContext null
+        if (u.protocol != "https" || !u.host.endsWith("googleusercontent.com")) {
+            return@withContext null
+        }
+        runCatching {
+            (u.openConnection() as java.net.HttpURLConnection).apply {
+                connectTimeout = 10_000
+                readTimeout = 10_000
+                instanceFollowRedirects = true
+            }.let { c ->
+                val len = c.contentLengthLong
+                if (len > 512 * 1024) {
+                    c.disconnect()
+                    return@withContext null
+                }
+                c.inputStream.use { it.readBytes() }.also { c.disconnect() }
+            }
+        }.getOrNull()?.takeIf { it.isNotEmpty() && it.size <= 512 * 1024 }
     }
 
     /** 把本地头像推上去。成功返回云端版本号，未登录/失败返回 null。 */

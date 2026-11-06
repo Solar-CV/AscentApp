@@ -1,5 +1,6 @@
 package com.ascent.climb.ui
 
+import android.content.pm.ApplicationInfo
 import com.ascent.climb.R
 import androidx.compose.ui.res.stringResource
 import androidx.activity.compose.BackHandler
@@ -47,6 +48,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -780,6 +782,9 @@ private fun AuthScreen(
     var nickname by remember { mutableStateOf("") }
     var code by remember { mutableStateOf("") }
     var error by remember { mutableStateOf<String?>(null) }
+    // 仅 debug 包展示的现场信息（包名 / 本机签名 / GMS 版本）。
+    // Google 登录的失败原因在 Credential Manager 里高度歧义，这一行能把排查从「猜」变成「看」。
+    var errorDetail by remember { mutableStateOf<String?>(null) }
     // 成功提示与错误分开：验证码发出去了要告诉用户，但那不是错误
     var notice by remember { mutableStateOf<String?>(null) }
     var loading by remember { mutableStateOf(false) }
@@ -790,6 +795,52 @@ private fun AuthScreen(
     var countdown by remember { mutableIntStateOf(0) }
     val scope = rememberCoroutineScope()
     val ctx = LocalContext.current
+    // Credential Manager 要 Activity，而这里的 LocalContext 是 ContextImpl（被替换过），
+    // 拿不到 Activity —— 改用 View 的 context，它挂在 Activity 上（编辑资料页也是这么做的）。
+    val view = LocalView.current
+
+    // Google 登录：一步拿到 ID token 再交给服务端验票。
+    // 「取消」不算错误 —— 用户点了返回不该看到红条。
+    fun startGoogleSignIn() {
+        if (loading) return
+        loading = true
+        error = null
+        errorDetail = null
+        notice = null
+        scope.launch {
+            when (val r = GoogleSignIn.signIn(view.context)) {
+                is GoogleSignIn.Result.Success -> when (val res = auth.loginWithGoogle(r.idToken)) {
+                    is AuthResult.Success -> {
+                        loading = false
+                        onSuccess(res.account, false)
+                    }
+                    is AuthResult.Failure -> {
+                        loading = false
+                        error = res.message
+                        // 走到这里说明 ID token 已经拿到了、是本服务拒绝了它。
+                        // 带上服务端的错误码，才能区分 aud 不匹配 / 连不上 Google / 其它。
+                        errorDetail = "server: " + res.code.ifBlank { "unknown" }
+                    }
+                }
+                GoogleSignIn.Result.Cancelled -> loading = false
+                is GoogleSignIn.Result.NoAccount -> {
+                    loading = false
+                    error = ctx.getString(R.string.cloud_err_google_no_account)
+                    errorDetail = r.detail
+                }
+                is GoogleSignIn.Result.NoPlayServices -> {
+                    loading = false
+                    error = ctx.getString(R.string.cloud_err_google_no_gms)
+                    errorDetail = r.detail
+                }
+                is GoogleSignIn.Result.Failed -> {
+                    loading = false
+                    error = ctx.getString(R.string.cloud_err_google_failed)
+                    errorDetail = r.detail
+                }
+            }
+        }
+    }
 
     // 报错时把页面滚到底：错误框与主按钮都在下方，不滚用户只看到输入框没反应
     LaunchedEffect(error) {
@@ -928,6 +979,39 @@ private fun AuthScreen(
         }
 
         Spacer(Modifier.height(20.dp))
+
+        // Google 登录放在表单之前：它是一步完成，邮箱密码要三步。
+        // 找回密码不需要它，所以只在登录/注册下出现。
+        if (mode != AuthMode.Reset && CloudConfig.enabled) {
+            PillButton(
+                text = stringResource(R.string.auth_google_continue),
+                style = BtnStyle.Secondary,
+                enabled = !loading,
+                onClick = { startGoogleSignIn() }
+            )
+            Spacer(Modifier.height(16.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(1.dp)
+                        .background(Ascent.Line)
+                )
+                Text(
+                    text = stringResource(R.string.auth_or),
+                    color = Ascent.Fg3,
+                    fontSize = 11.sp,
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(1.dp)
+                        .background(Ascent.Line)
+                )
+            }
+            Spacer(Modifier.height(16.dp))
+        }
 
         if (mode == AuthMode.Register) {
             AuthField(
@@ -1084,6 +1168,17 @@ private fun AuthScreen(
                     .padding(13.dp)
             ) {
                 Text(text = error!!, color = Ascent.Danger, fontSize = 12.sp)
+            }
+            // 只有 debug 包会显示：release 里这些信息只进 logcat，不给用户看。
+            val debuggable = (ctx.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
+            if (debuggable && errorDetail != null) {
+                Spacer(Modifier.height(6.dp))
+                Text(
+                    text = errorDetail!!,
+                    color = Ascent.Fg3,
+                    fontSize = 10.sp,
+                    lineHeight = 14.sp
+                )
             }
         }
 

@@ -13,7 +13,12 @@ data class Account(
 /** 登录/注册结果。 */
 sealed interface AuthResult {
     data class Success(val account: Account) : AuthResult
-    data class Failure(val message: String) : AuthResult
+
+    /**
+     * [code] 是服务端返回的机器可读错误码，可能为空（本地校验失败时没有）。
+     * 界面只用 [message]，但 debug 包会把 code 显示出来 —— 同一句话背后可能是完全不同的原因。
+     */
+    data class Failure(val message: String, val code: String = "") : AuthResult
 }
 
 /** 验证码用途。注册与找回密码共用同一条通道，靠它区分。 */
@@ -40,6 +45,14 @@ interface AuthApi {
     fun currentAccount(): Account?
 
     suspend fun login(email: String, password: String): AuthResult
+
+    /**
+     * 用 Google ID token 登录。首次会自动建号（昵称与头像由 Google 资料带入）。
+     *
+     * [idToken] 由 Credential Manager 取得，服务端校验 `aud` / `iss` / `exp` 后才认。
+     * 本地模拟实现没有验票能力，固定返回失败。
+     */
+    suspend fun loginWithGoogle(idToken: String): AuthResult
 
     /**
      * 注册。[code] 是邮箱验证码；服务端 `REQUIRE_EMAIL_CODE=false` 时可以不填。
@@ -97,15 +110,17 @@ class MockAuthApi(private val context: Context) : AuthApi {
         )
     }
 
+    /** 本地模拟没有验票能力：直接告诉用户这条路要走云端。 */
+    override suspend fun loginWithGoogle(idToken: String): AuthResult =
+        AuthResult.Failure("Google 登录需要连接云端")
+
     override suspend fun login(email: String, password: String): AuthResult {
         delay(650) // 模拟网络往返，让加载态可见
         val e = email.trim()
         validate(e, password)?.let { return AuthResult.Failure(it) }
-        return save(e, e.substringBefore("@"))
-    }
+        return save(e, e.substringBefore("@"))    }
 
-    override suspend fun register(email: String, password: String, nickname: String, code: String): AuthResult {
-        delay(750)
+    override suspend fun register(email: String, password: String, nickname: String, code: String): AuthResult {        delay(750)
         val e = email.trim()
         val n = nickname.trim()
         validate(e, password)?.let { return AuthResult.Failure(it) }

@@ -144,6 +144,13 @@
     <string name="cloud_err_identity_taken">这个 Google 账号已绑定其他账号</string>
     <string name="cloud_err_locked">账号已被停用</string>
     <string name="cloud_err_session_expired">登录已过期，请重新登录</string>
+    <string name="auth_google_continue">使用 Google 继续</string>
+    <string name="auth_or">或</string>
+    <string name="cloud_err_google_failed">Google 登录失败，请重试</string>
+    <string name="cloud_err_google_unavailable">Google 登录暂不可用</string>
+    <string name="cloud_err_google_unverified">Google 账号的邮箱尚未验证</string>
+    <string name="cloud_err_google_no_account">没有找到可用的 Google 账号，请确认手机已登录 Google 账号并启用 Google Play 服务</string>
+    <string name="cloud_err_google_no_gms">这台设备没有 Google Play 服务，无法使用 Google 登录</string>
 
     <string name="auth_code">验证码</string>
     <string name="auth_send_code">获取验证码</string>

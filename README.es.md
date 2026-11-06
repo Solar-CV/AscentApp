@@ -6,7 +6,7 @@ Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. 
 
 Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 69 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 22 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
 
-Versión actual v0.26.9 (versionCode 154). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.727 / 10.727). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
+Versión actual v0.27.0 (versionCode 155). El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.727 / 10.727). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
 
 v0.20.19 – v0.21.0 renovaron toda la interfaz con acabado de arcilla: sombras dobles suaves dibujadas fuera de pantalla y cacheadas, fichas de color planas, colores por categoría en el manual y bloques de color cuya profundidad viene de una sombra de contacto, no de un degradado.
 
@@ -222,6 +222,13 @@ Para publicar un banco nuevo: cambia el contenido → sube `BUNDLED_VERSION` →
 Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVersion` en `manifest.json` bloquea clientes demasiado viejos, los campos desconocidos se ignoran y una pregunta mal formada se salta en vez de ser fatal.
 
 ## Cambios recientes
+
+**v0.27.0: inicio de sesión con Google**
+
+- La pantalla de acceso estrena «Continuar con Google»: Credential Manager devuelve un token de ID, el servidor lo verifica y el primer acceso crea la cuenta
+- En ese primer acceso se traen el nombre y la foto de Google: la imagen se descarga, se recorta en cuadrado y se sube por la misma vía que un avatar elegido a mano
+- Google es un atajo, no un requisito: el registro, el acceso y el restablecimiento por correo siguen igual, y la app funciona entera sin cuenta y sin conexión
+- Si el teléfono no tiene servicios de Google Play, o si cancelas el selector de cuentas, verás una frase clara en lugar de un «no se pudo iniciar sesión» genérico
 
 **v0.26.9: la barra inferior alemana ya no recorta texto**
 

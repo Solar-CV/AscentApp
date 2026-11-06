@@ -33,6 +33,16 @@ const API_KEY = process.env.CLOUDBASE_APIKEY || "";
  */
 const googleClientId = () => process.env.GOOGLE_CLIENT_ID || "";
 
+/**
+ * Google 验签中继（香港 SCF，见 server/functions/google-relay）。
+ *
+ * 上海环境访问不到 oauth2.googleapis.com（实测 fetch failed，而同函数访问 Resend 正常），
+ * 所以验签请求必须从境外发出。两个变量都配了才走中继；没配则直连 —— 这样本地跑
+ * 冒烟测试、或者哪天把 API 搬到境外，都不需要改代码。
+ */
+const googleRelayUrl = () => process.env.GOOGLE_RELAY_URL || "";
+const googleRelayKey = () => process.env.GOOGLE_RELAY_KEY || "";
+
 // ---------------------------------------------------------------- 发信与验证码
 
 /**
@@ -743,20 +753,85 @@ function withPicture(payload, info) {
   return payload;
 }
 
-/** 用 Google 的 tokeninfo 端点验证 idToken。返回 payload 或 null。 */async function verifyGoogleToken(idToken) {
-  if (!googleClientId() || !idToken) return null;
-  try {
-    const r = await fetch("https://oauth2.googleapis.com/tokeninfo?id_token=" + encodeURIComponent(idToken));
-    if (!r.ok) return null;
-    const info = await r.json();
-    if (String(info.aud) !== googleClientId()) return null;
-    if (!info.sub) return null;
-    if (info.exp && Number(info.exp) * 1000 < now()) return null;
-    if (info.iss && info.iss !== "https://accounts.google.com" && info.iss !== "accounts.google.com") return null;
-    return info;
-  } catch (e) {
-    return null;
+/**
+ * 发出 tokeninfo 请求。配了中继就走中继（香港），否则直连 Google。
+ * 中继只做透传，状态码与响应体原样返回，校验逻辑仍然只有这里一份。
+ */
+function tokenInfoRequest(idToken) {
+  const relay = googleRelayUrl();
+  if (relay) {
+    const u = new URL(relay);
+    u.searchParams.set("token", idToken);
+    return fetch(u, {
+      headers: { "x-relay-key": googleRelayKey() },
+      signal: AbortSignal.timeout(10_000),
+    });
   }
+  return fetch("https://oauth2.googleapis.com/tokeninfo?id_token=" + encodeURIComponent(idToken), {
+    signal: AbortSignal.timeout(8000),
+  });
+}
+
+/**
+ * 用 Google 的 tokeninfo 端点验证 idToken。
+ *
+ * 返回结构化结果而不是 null —— 因为这里有两种完全不同的失败：
+ *  - unreachable：网络到不了 Google（上海环境直连必然如此，要走中继）
+ *  - aud_mismatch：token 有效，但签给的是另一个 client（两端配置不一致）
+ * 以前两者都变成 401 invalid_google_token，排查只能靠猜。
+ */
+async function verifyGoogleToken(idToken) {
+  const expected = googleClientId();
+  if (!expected || !idToken) return { ok: false, reason: "not_usable" };
+
+  let res;
+  try {
+    res = await tokenInfoRequest(idToken);
+  } catch (e) {
+    return {
+      ok: false,
+      reason: "unreachable",
+      detail: String((e && e.message) || e),
+      via: googleRelayUrl() ? "relay" : "direct",
+    };
+  }
+  if (!res.ok) {
+    // 400 = token 过期/格式不对（正常失败）；其余状态更像 Google 侧或链路问题
+    return { ok: false, reason: res.status === 400 ? "rejected" : "unreachable", status: res.status };
+  }
+
+  const info = await res.json().catch(() => null);
+  if (!info || !info.sub) return { ok: false, reason: "rejected", status: 200 };
+  if (String(info.aud) !== expected) return { ok: false, reason: "aud_mismatch", aud: String(info.aud || "") };
+  if (info.exp && Number(info.exp) * 1000 < now()) return { ok: false, reason: "expired" };
+  if (info.iss && info.iss !== "https://accounts.google.com" && info.iss !== "accounts.google.com") {
+    return { ok: false, reason: "bad_issuer" };
+  }
+  return { ok: true, info };
+}
+
+/**
+ * 探活：函数到 Google 验签端点是否可达。
+ * 不验任何 token，只测网络 —— 上海环境默认没有出境访问，这一项要能单独看。
+ */
+async function handleGoogleHealth(req, res) {
+  const started = now();
+  let status = 0;
+  let error = "";
+  try {
+    const r = await tokenInfoRequest("probe");
+    status = r.status;
+  } catch (e) {
+    error = String((e && e.message) || e);
+  }
+  send(res, 200, {
+    reachable: status > 0,
+    status,
+    ms: now() - started,
+    error,
+    configured: !!googleClientId(),
+    via: googleRelayUrl() ? "relay" : "direct",
+  });
 }
 
 /**
@@ -772,8 +847,21 @@ function withPicture(payload, info) {
 async function handleGoogleLogin(req, res) {
   if (!googleClientId()) return fail(res, 501, "google_not_configured", "Google 登录尚未配置");
   const body = await readJson(req);
-  const info = await verifyGoogleToken(typeof body.idToken === "string" ? body.idToken : "");
-  if (!info) return fail(res, 401, "invalid_google_token", "Google 凭证无效");
+  const verified = await verifyGoogleToken(typeof body.idToken === "string" ? body.idToken : "");
+  if (!verified.ok) {
+    // 把原因写进日志：这两种失败在客户端看起来是同一句话
+    console.log(
+      `[ascent-api] google verify failed: reason=${verified.reason}` +
+        (verified.status ? ` status=${verified.status}` : "") +
+        (verified.aud ? ` aud=${String(verified.aud).slice(0, 24)}…` : "") +
+        (verified.detail ? ` detail=${verified.detail}` : "")
+    );
+    if (verified.reason === "unreachable") {
+      return fail(res, 503, "google_unreachable", "服务器暂时无法连接 Google 验证服务");
+    }
+    return fail(res, 401, "invalid_google_token", "Google 凭证无效");
+  }
+  const info = verified.info;
 
   // 极少见但真实存在：Workspace 域被管理员设成未验证。不能因为「是 Google 就信」。
   if (String(info.email_verified) !== "true") {
@@ -1034,6 +1122,7 @@ function candidates(pathname) {
 
 const ROUTES = [
   { method: "GET", path: "/health", public: true, handler: (req, res) => send(res, 200, { ok: true, version: "2", time: now() }) },
+  { method: "GET", path: "/health/google", public: true, handler: handleGoogleHealth },
   { method: "POST", path: "/auth/register", public: true, handler: handleRegister },
   { method: "POST", path: "/auth/email/code", public: true, handler: (req, res) => handleSendCode(req, res) },
   { method: "POST", path: "/auth/password/forgot", public: true, handler: (req, res) => handleSendCode(req, res, "reset") },

@@ -124,6 +124,13 @@
     <string name="cloud_err_identity_taken">Ce compte Google est déjà lié à un autre compte</string>
     <string name="cloud_err_locked">Ce compte a été désactivé</string>
     <string name="cloud_err_session_expired">Votre session a expiré. Reconnectez-vous</string>
+    <string name="auth_google_continue">Continuer avec Google</string>
+    <string name="auth_or">ou</string>
+    <string name="cloud_err_google_failed">Échec de la connexion Google. Réessayez</string>
+    <string name="cloud_err_google_unavailable">La connexion Google est indisponible pour le moment</string>
+    <string name="cloud_err_google_unverified">L\'adresse e-mail du compte Google n\'est pas encore vérifiée</string>
+    <string name="cloud_err_google_no_account">Aucun compte Google trouvé. Vérifiez que le téléphone est connecté à Google et que les services Google Play sont activés</string>
+    <string name="cloud_err_google_no_gms">Cet appareil n’a pas les services Google Play : la connexion Google n’est pas disponible</string>
 
     <string name="auth_code">Code de vérification</string>
     <string name="auth_send_code">Envoyer le code</string>

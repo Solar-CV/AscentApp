@@ -1,0 +1,7 @@
+{
+  "name": "ascent-google-relay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Google tokeninfo 中继（香港），零依赖",
+  "main": "index.js"
+}

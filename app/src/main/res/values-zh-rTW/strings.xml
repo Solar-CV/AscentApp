@@ -136,6 +136,13 @@
     <string name="cloud_err_identity_taken">這個 Google 帳號已綁定其他帳號</string>
     <string name="cloud_err_locked">帳號已被停用</string>
     <string name="cloud_err_session_expired">登入已過期，請重新登入</string>
+    <string name="auth_google_continue">使用 Google 繼續</string>
+    <string name="auth_or">或</string>
+    <string name="cloud_err_google_failed">Google 登入失敗，請重試</string>
+    <string name="cloud_err_google_unavailable">Google 登入暫時無法使用</string>
+    <string name="cloud_err_google_unverified">Google 帳號的電子郵件尚未驗證</string>
+    <string name="cloud_err_google_no_account">找不到可用的 Google 帳號，請確認手機已登入 Google 帳號並啟用 Google Play 服務</string>
+    <string name="cloud_err_google_no_gms">這台裝置沒有 Google Play 服務，無法使用 Google 登入</string>
 
     <string name="auth_code">驗證碼</string>
     <string name="auth_send_code">取得驗證碼</string>

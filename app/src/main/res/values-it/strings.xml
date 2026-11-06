@@ -124,6 +124,13 @@
     <string name="cloud_err_identity_taken">Quell\'account Google è già collegato a un altro account</string>
     <string name="cloud_err_locked">Questo account è stato disattivato</string>
     <string name="cloud_err_session_expired">La sessione è scaduta. Accedi di nuovo</string>
+    <string name="auth_google_continue">Continua con Google</string>
+    <string name="auth_or">oppure</string>
+    <string name="cloud_err_google_failed">Accesso con Google non riuscito. Riprova</string>
+    <string name="cloud_err_google_unavailable">L\'accesso con Google non è disponibile al momento</string>
+    <string name="cloud_err_google_unverified">L\'email dell\'account Google non è ancora verificata</string>
+    <string name="cloud_err_google_no_account">Nessun account Google trovato. Verifica che il telefono abbia un account Google e che i servizi di Google Play siano attivi</string>
+    <string name="cloud_err_google_no_gms">Questo dispositivo non ha i servizi di Google Play, quindi l’accesso con Google non è disponibile</string>
 
     <string name="auth_code">Codice di verifica</string>
     <string name="auth_send_code">Invia codice</string>

@@ -124,6 +124,13 @@
     <string name="cloud_err_identity_taken">Det Google-kontot är redan länkat till ett annat konto</string>
     <string name="cloud_err_locked">Kontot har inaktiverats</string>
     <string name="cloud_err_session_expired">Sessionen har gått ut – logga in igen</string>
+    <string name="auth_google_continue">Fortsätt med Google</string>
+    <string name="auth_or">eller</string>
+    <string name="cloud_err_google_failed">Google-inloggningen misslyckades – försök igen</string>
+    <string name="cloud_err_google_unavailable">Google-inloggning är inte tillgänglig just nu</string>
+    <string name="cloud_err_google_unverified">Google-kontots e-postadress är inte verifierad än</string>
+    <string name="cloud_err_google_no_account">Inget Google-konto hittades. Kontrollera att telefonen är inloggad på Google och att Google Play-tjänster är aktiverade</string>
+    <string name="cloud_err_google_no_gms">Den här enheten saknar Google Play-tjänster, så Google-inloggning är inte tillgänglig</string>
 
     <string name="auth_code">Verifieringskod</string>
     <string name="auth_send_code">Skicka kod</string>

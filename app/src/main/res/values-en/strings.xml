@@ -142,6 +142,13 @@
     <string name="cloud_err_identity_taken">That Google account is already linked to another account</string>
     <string name="cloud_err_locked">This account has been disabled</string>
     <string name="cloud_err_session_expired">Your session expired — please sign in again</string>
+    <string name="auth_google_continue">Continue with Google</string>
+    <string name="auth_or">or</string>
+    <string name="cloud_err_google_failed">Google sign-in failed — please try again</string>
+    <string name="cloud_err_google_unavailable">Google sign-in is unavailable right now</string>
+    <string name="cloud_err_google_unverified">Your Google account email isn\'t verified yet</string>
+    <string name="cloud_err_google_no_account">No Google account found — check that the phone is signed in to Google and Play services is enabled</string>
+    <string name="cloud_err_google_no_gms">This device has no Google Play services, so Google sign-in isn’t available</string>
 
     <string name="auth_code">Verification code</string>
     <string name="auth_send_code">Send code</string>

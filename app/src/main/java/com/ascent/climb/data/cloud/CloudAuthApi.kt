@@ -58,6 +58,18 @@ class CloudAuthApi(private val context: Context) : AuthApi {
         )
     }
 
+    /**
+     * Google 登录。服务端验票（aud / iss / exp / sub）后建号或直接登录，
+     * 昵称与头像由 Google 资料带入，所以这里不传 nickname。
+     */
+    override suspend fun loginWithGoogle(idToken: String): AuthResult {
+        if (idToken.isBlank()) return AuthResult.Failure(msg(R.string.cloud_err_google_failed))
+        return submit(
+            "/auth/google",
+            JSONObject().put("idToken", idToken).put("device", device())
+        )
+    }
+
     override suspend fun register(email: String, password: String, nickname: String, code: String): AuthResult {
         val e = email.trim()
         val n = nickname.trim()
@@ -133,7 +145,7 @@ class CloudAuthApi(private val context: Context) : AuthApi {
     private suspend fun submit(path: String, body: JSONObject): AuthResult =
         runCatching { http.call("POST", path, body = body) }.fold(
             onSuccess = { if (it == null) AuthResult.Failure(msg(R.string.cloud_err_server)) else save(it) },
-            onFailure = { AuthResult.Failure(message(it)) }
+            onFailure = { AuthResult.Failure(message(it), (it as? CloudException)?.code ?: "") }
         )
 
     private fun save(json: JSONObject): AuthResult {
@@ -144,6 +156,10 @@ class CloudAuthApi(private val context: Context) : AuthApi {
             return AuthResult.Failure(msg(R.string.cloud_err_server))
         }
         TokenStore.save(context, access, refresh)
+        // Google 首次登录会带回资料图地址，交给 UI 层下载成头像（这里不碰文件系统）
+        json.optString("google_picture", "").takeIf { it.startsWith("https://") }?.let {
+            ProgressStore(context).pendingAvatarUrl = it
+        }
         return AuthResult.Success(mirror(user))
     }
 
@@ -193,6 +209,11 @@ class CloudAuthApi(private val context: Context) : AuthApi {
             e.code == "identity_taken" -> msg(R.string.cloud_err_identity_taken)
             e.code == "account_locked" -> msg(R.string.cloud_err_locked)
             e.code == "invalid_code" -> msg(R.string.cloud_err_invalid_code)
+            e.code == "invalid_google_token" -> msg(R.string.cloud_err_google_failed)
+            e.code == "google_not_configured" -> msg(R.string.cloud_err_google_unavailable)
+            // 服务器到不了 Google 的验签端点：不是用户的错，也不该让他反复重试
+            e.code == "google_unreachable" -> msg(R.string.cloud_err_google_unavailable)
+            e.code == "email_unverified" -> msg(R.string.cloud_err_google_unverified)
             e.code == "too_many_requests" -> msg(R.string.cloud_err_rate_limited)
             e.code == "mail_failed" -> msg(R.string.cloud_err_mail_failed)
             e.code == "mail_not_configured" || e.code == "code_not_configured" ->

@@ -8,6 +8,42 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ---
 
+## v0.27.0 要点
+
+Google 一键登录上线。邮箱注册 / 登录 / 找回密码这条路线完全没有改动。
+
+### Google 登录
+
+- 登录页新增「使用 Google 继续」：Credential Manager 取回 ID token，服务端验 `aud` / `iss` / `exp` 后签发会话，
+  **首次登录自动建号**
+- 首次登录会带入 Google 的昵称与头像：头像下载后按 1:1 裁方，走与手动上传同一条同步 / 上传路径
+- 取消选择账号不算错误（不弹红条）；没有 Google Play 服务、没有可用账号各有专门文案，
+  而不是笼统的「登录失败」
+
+### 服务端
+
+- 上海环境**访问不到 `oauth2.googleapis.com`**（同一函数访问 Resend 正常，可确认是 Google 被阻断，
+  不是出网故障）。新增 ap-hongkong 的 tokeninfo 中继，代码留档在 `server/functions/google-relay/`，
+  需手工部署
+- 配 `GOOGLE_RELAY_URL` + `GOOGLE_RELAY_KEY` 走中继，不配则直连 —— 本地冒烟、将来搬到境外都不用改代码
+- `verifyGoogleToken` 改为结构化结果（`ok` / `bad_token` / `unreachable`），据此返回
+  `401 invalid_google_token` 或 `503 google_unreachable`
+- 新增 `GET /health/google`：返回是否可达、耗时、以及当前走 `relay` 还是 `direct`
+
+### 客户端
+
+- `AuthResult.Failure` 增加 `code`（服务端错误码）。界面只显示 message；**debug 包**额外显示错误码、
+  包名、本机签名 SHA-1 与 GMS 版本 —— Google 登录的失败原因在 Credential Manager 里高度歧义，
+  这一行能把排查从「猜」变成「看」
+- 新增 7 条文案 ×10 语言
+
+### 排查记录
+
+`[28444] Developer console is not set up correctly` 的定位顺序记在 `CLOUD-PLAN.md` §9.0：
+先确认 `serverClientId` 是**Web 应用**类型的 ID（填成 Android client 会稳定复现 28444，
+现象是账号选择器正常弹出、选完立即失败），再查 Android client 的包名（`.debug`）与 SHA-1
+是否与运行中这个包一致，最后才考虑新建 client 的生效延迟。
+
 ## v0.26.9 要点
 
 一处底栏裁字修复。

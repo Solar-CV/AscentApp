@@ -435,6 +435,16 @@ class ProgressStore(context: Context) {
         set(value) = prefs.edit().putBoolean("pendingCloudReplace", value).apply()
 
     /**
+     * Google 首次登录时返回的资料图地址，等着被下载成本地头像。
+     *
+     * 为什么不在登录响应里直接下：登录在 data 层，写文件在 UI 层（要 Bitmap）。
+     * 这里只转手一次，由 `AvatarSync.reconcile` 取走并清空。
+     */
+    var pendingAvatarUrl: String
+        get() = prefs.getString("pendingAvatarUrl", "") ?: ""
+        set(value) = prefs.edit().putString("pendingAvatarUrl", value).apply()
+
+    /**
      * 上一次从账号同步下来的昵称。
      *
      * 用来判断「本地这个名字是不是用户刚改、还没推上去」：只有 `displayName` 与它相同，

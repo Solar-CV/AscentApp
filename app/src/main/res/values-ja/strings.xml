@@ -136,6 +136,13 @@
     <string name="cloud_err_identity_taken">この Google アカウントはすでに別のアカウントに連携されています</string>
     <string name="cloud_err_locked">このアカウントは無効化されています</string>
     <string name="cloud_err_session_expired">ログインの有効期限が切れました。もう一度ログインしてください</string>
+    <string name="auth_google_continue">Google で続行</string>
+    <string name="auth_or">または</string>
+    <string name="cloud_err_google_failed">Google ログインに失敗しました。もう一度お試しください</string>
+    <string name="cloud_err_google_unavailable">Google ログインは現在利用できません</string>
+    <string name="cloud_err_google_unverified">Google アカウントのメールアドレスが未確認です</string>
+    <string name="cloud_err_google_no_account">Google アカウントが見つかりません。端末が Google にログインし、Google Play 開発者サービスが有効か確認してください</string>
+    <string name="cloud_err_google_no_gms">この端末には Google Play 開発者サービスがないため、Google ログインを利用できません</string>
 
     <string name="auth_code">確認コード</string>
     <string name="auth_send_code">コードを送信</string>

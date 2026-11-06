@@ -136,6 +136,13 @@
     <string name="cloud_err_identity_taken">Этот аккаунт Google уже привязан к другому аккаунту</string>
     <string name="cloud_err_locked">Аккаунт отключён</string>
     <string name="cloud_err_session_expired">Сеанс истёк. Войдите снова</string>
+    <string name="auth_google_continue">Продолжить с Google</string>
+    <string name="auth_or">или</string>
+    <string name="cloud_err_google_failed">Не удалось войти через Google. Попробуйте ещё раз</string>
+    <string name="cloud_err_google_unavailable">Вход через Google сейчас недоступен</string>
+    <string name="cloud_err_google_unverified">Почта Google-аккаунта не подтверждена</string>
+    <string name="cloud_err_google_no_account">Аккаунт Google не найден. Проверьте, что на телефоне выполнен вход в Google и включены сервисы Google Play</string>
+    <string name="cloud_err_google_no_gms">На этом устройстве нет сервисов Google Play, поэтому вход через Google недоступен</string>
 
     <string name="auth_code">Код подтверждения</string>
     <string name="auth_send_code">Отправить код</string>
