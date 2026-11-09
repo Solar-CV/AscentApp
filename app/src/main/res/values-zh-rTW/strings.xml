@@ -488,4 +488,9 @@
     <string name="auth_privacy_view">檢視</string>
     <string name="auth_privacy_required">註冊前需要先同意隱私政策</string>
     <string name="privacy_in_app_note">條款版本 %1$s　·　與官網 ascentroam.com/privacy 一致</string>
+
+    <!-- 天气背景（设置 → 外观） -->
+    <string name="set_weather_title">天氣背景</string>
+    <string name="set_weather_auto_on">依所在地天氣自動切換</string>
+    <string name="set_weather_auto_off">固定為晴天</string>
 </resources>

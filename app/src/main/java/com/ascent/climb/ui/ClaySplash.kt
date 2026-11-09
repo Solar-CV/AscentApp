@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -179,7 +178,7 @@ private fun ClayPuck(
     markAlpha: Float,
     modifier: Modifier = Modifier
 ) {
-    val shape = RoundedCornerShape(size * 0.293f) // 184 → 54
+    val shape = squircle(size * 0.293f) // 184 → 54
     Box(
         modifier
             .size(size)
@@ -330,7 +329,7 @@ private fun ClayProgress(fraction: Float, colors: SplashColors, modifier: Modifi
         modifier
             .width(132.dp)
             .height(14.dp)
-            .clip(RoundedCornerShape(99.dp))
+            .clip(squircle(99.dp))
             .background(colors.track)
     ) {
         Canvas(Modifier.fillMaxSize()) {
@@ -344,7 +343,7 @@ private fun ClayProgress(fraction: Float, colors: SplashColors, modifier: Modifi
             Modifier
                 .fillMaxWidth(fraction.coerceIn(0f, 1f))
                 .height(14.dp)
-                .clip(RoundedCornerShape(99.dp))
+                .clip(squircle(99.dp))
                 .background(colors.accent)
         )
     }

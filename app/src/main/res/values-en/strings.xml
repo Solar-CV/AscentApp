@@ -505,4 +505,9 @@
     <string name="auth_privacy_view">View</string>
     <string name="auth_privacy_required">Please agree to the Privacy Policy before creating an account</string>
     <string name="privacy_in_app_note">Terms version %1$s　·　matches ascentroam.com/privacy</string>
+
+    <!-- 天气背景（设置 → 外观） -->
+    <string name="set_weather_title">Weather background</string>
+    <string name="set_weather_auto_on">Follows the weather where you are</string>
+    <string name="set_weather_auto_off">Fixed to clear skies</string>
 </resources>

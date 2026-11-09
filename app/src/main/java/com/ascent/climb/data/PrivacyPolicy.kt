@@ -38,7 +38,7 @@ data class PrivacyDoc(
 object PrivacyPolicy {
 
     /** 条款版本（生效日期）。改了条款就换这个值，注册同意记录跟着它走。 */
-    const val VERSION = "2026-11-05"
+    const val VERSION = "2026-11-09"
 
     /** 按界面语言取条款；只有简中 / 繁中 / 英文三份，其余回退英文。 */
     fun of(languageTag: String): PrivacyDoc = when {
@@ -51,7 +51,7 @@ object PrivacyPolicy {
     private val ZH: PrivacyDoc = PrivacyDoc(
         title = "隐私政策。",
         lede = "AscentRoam 默认离线工作。只有你主动注册并开启同步，账号与学习数据才会离开这台设备。这份政策说明我们收集什么、为什么收集，以及你随时可以做什么。",
-        updated = "生效与更新：2026 年 11 月 5 日",
+        updated = "生效与更新：2026 年 11 月 9 日",
         summaryLabel = "一句话版本",
         summary = "默认离线，只有注册并开启同步才会上传账号与学习数据。我们不投放广告、不做用户画像，也不出售数据。",
         intro = "下面是完整条款，共 10 节。你可以从头读，也可以用左侧目录直接跳到关心的部分。",
@@ -75,6 +75,8 @@ object PrivacyPolicy {
                 PrivacyBlock(PrivacyBlockKind.BULLETS, items = listOf("注册邮箱；", "昵称或用户名；", "密码哈希（scrypt，不可逆；我们不保存密码原文）；", "使用 Google 登录时的 Google 账号标识、邮箱与头像链接；", "注册时间、最近登录时间，以及用于区分设备的随机标识。")),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "学习数据"),
                 PrivacyBlock(PrivacyBlockKind.BULLETS, items = listOf("课程与课时的完成状态；", "当前海拔、连续学习天数、成就徽章与复习队列；", "头像文件与本机显示名；", "同步时间戳与冲突处理所需的版本号。")),
+                PrivacyBlock(PrivacyBlockKind.HEADING, text = "天气背景（可选）"),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "只有你在「设置 → 外观」中开启「天气背景 · 自动」时，App 才会读取一次大致位置（约 3 公里精度），用于向天气服务查询当地天气。位置不写入账号、不上传到我们的服务器，我们也不保存位置历史；本机只缓存最近一次天气结果，180 分钟（3 小时）后过期。"),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "App 内反馈"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "你在 App 内提交反馈时，我们会收到你填写的正文、你选择填写的邮箱，以及只有你主动勾选才会附上的诊断信息：应用版本、Android 版本、设备型号、界面语言与最近一次崩溃记录。诊断信息默认不附加。"),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "网站"),
@@ -126,6 +128,7 @@ object PrivacyPolicy {
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "使用 Google 登录时，Google 按其自身隐私政策处理认证信息。我们只接收完成登录所需的账号标识、邮箱与头像链接，不接收你的 Google 密码。"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "账号数据存储在腾讯云 CloudBase；账号邮件由 Resend 发送。它们只在提供相应服务所必需的范围内处理数据。"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "App 内反馈与网页的删除账号表单通过 Formspree 送达我们的支持邮箱；它只负责转发，不会将内容用于其他目的。"),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "天气数据由 Open-Meteo 提供（CC BY 4.0）。开启自动天气时，查询请求会带上大致坐标与你的网络 IP；对方服务器日志最多保留 90 天后删除，不用于广告或画像。"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "本站的图片、字体与界面资源均为自托管，不通过第三方广告或分析脚本加载。站内的 GitHub 等外部链接受其各自隐私政策约束。"),
             )
         ),
@@ -160,7 +163,7 @@ object PrivacyPolicy {
     private val ZH_TW: PrivacyDoc = PrivacyDoc(
         title = "隱私政策。",
         lede = "AscentRoam 預設離線工作。只有你主動註冊並開啟同步，帳號與學習資料才會離開這台裝置。這份政策說明我們收集什麼、為什麼收集，以及你隨時可以做什麼。",
-        updated = "生效與更新：2026 年 11 月 5 日",
+        updated = "生效與更新：2026 年 11 月 9 日",
         summaryLabel = "一句話版本",
         summary = "預設離線，只有註冊並開啟同步才會上傳帳號與學習資料。我們不投放廣告、不做使用者畫像，也不出售資料。",
         intro = "下面是完整條款，共 10 節。你可以從頭讀，也可以用左側目錄直接跳到關心的部分。",
@@ -184,6 +187,8 @@ object PrivacyPolicy {
                 PrivacyBlock(PrivacyBlockKind.BULLETS, items = listOf("註冊電子郵件；", "暱稱或使用者名稱；", "密碼雜湊（scrypt，不可逆；我們不儲存密碼原文）；", "使用 Google 登入時的 Google 帳號標識、電子郵件與頭像連結；", "註冊時間、最近登入時間，以及用於區分裝置的隨機標識。")),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "學習資料"),
                 PrivacyBlock(PrivacyBlockKind.BULLETS, items = listOf("課程與課時的完成狀態；", "當前海拔、連續學習天數、成就徽章與複習佇列；", "頭像檔案與本機顯示名；", "同步時間戳與衝突處理所需的版本號。")),
+                PrivacyBlock(PrivacyBlockKind.HEADING, text = "天氣背景（選用）"),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "只有你在「設定 → 外觀」中開啟「天氣背景 · 自動」時，App 才會讀取一次大致位置（約 3 公里精度），用於向天氣服務查詢當地天氣。位置不寫入帳號、不上傳到我們的伺服器，我們也不保存位置歷史；本機只快取最近一次天氣結果，180 分鐘（3 小時）後過期。"),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "App 內回饋"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "你在 App 內提交回饋時，我們會收到你填寫的內容、你選擇填寫的電子郵件，以及只有你主動勾選才會附上的診斷資訊：應用程式版本、Android 版本、裝置型號、介面語言與最近一次當機記錄。診斷資訊預設不附加。"),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "網站"),
@@ -235,6 +240,7 @@ object PrivacyPolicy {
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "使用 Google 登入時，Google 按其自身隱私政策處理認證資訊。我們只接收完成登入所需的帳號標識、電子郵件與頭像連結，不接收你的 Google 密碼。"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "帳號資料儲存在騰訊雲 CloudBase；帳號郵件由 Resend 傳送。它們只在提供相應服務所必需的範圍內處理資料。"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "App 內回饋與網頁的刪除帳號表單透過 Formspree 送達我們的支援信箱；它只負責轉送，不會將內容用於其他目的。"),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "天氣資料由 Open-Meteo 提供（CC BY 4.0）。開啟自動天氣時，查詢請求會帶上大致座標與你的網路 IP；對方伺服器日誌最多保留 90 天後刪除，不用於廣告或畫像。"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "本站的圖片、字型與介面資源均為自託管，不透過第三方廣告或分析指令碼載入。站內的 GitHub 等外部連結受其各自隱私政策約束。"),
             )
         ),
@@ -269,7 +275,7 @@ object PrivacyPolicy {
     private val EN: PrivacyDoc = PrivacyDoc(
         title = "Privacy policy.",
         lede = "AscentRoam is offline by default. Account and learning data leave this device only if you register and enable sync. This policy explains what we collect, why, and what you can do about it.",
-        updated = "Effective and last updated: 5 November 2026",
+        updated = "Effective and last updated: 9 November 2026",
         summaryLabel = "In one paragraph",
         summary = "Offline by default. Account and learning data are uploaded only if you register and enable sync. No ads, no profiling, no sale of data.",
         intro = "The full terms follow in ten sections. Read from the top, or use the contents to jump to the part you need.",
@@ -293,6 +299,8 @@ object PrivacyPolicy {
                 PrivacyBlock(PrivacyBlockKind.BULLETS, items = listOf("Your email address;", "A nickname or username;", "A password hash (scrypt, irreversible; we never store the password itself);", "If you sign in with Google, your Google account ID, email address and avatar URL;", "Registration and last sign-in times, and a random identifier used to distinguish devices.")),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "Learning data"),
                 PrivacyBlock(PrivacyBlockKind.BULLETS, items = listOf("Lesson and unit completion;", "Current altitude, streak, achievement badges and review queue;", "Avatar file and local display name;", "Sync timestamps and the version numbers needed to resolve conflicts.")),
+                PrivacyBlock(PrivacyBlockKind.HEADING, text = "Weather background (optional)"),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "Only when you turn on \"Weather background · Automatic\" in Settings → Appearance does the app read your approximate location once (about 3 km) to look up local weather. The location is never written to your account, never sent to our servers, and we keep no location history; the device only caches the latest weather result, which expires after 180 minutes (3 hours)."),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "In-app feedback"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "When you send feedback from the app, we receive the message you write, the email address you choose to give, and — only if you tick the box — diagnostic details: app version, Android version, device model, interface language and the most recent crash record. Diagnostics are never attached by default."),
                 PrivacyBlock(PrivacyBlockKind.HEADING, text = "This website"),
@@ -344,6 +352,7 @@ object PrivacyPolicy {
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "When you sign in with Google, Google handles authentication under its own privacy policy. We receive only the account ID, email address and avatar URL needed to complete sign-in — never your Google password."),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "Account data is stored in Tencent Cloud CloudBase and account email is sent through Resend. Each processes data only as needed to provide that service."),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "In-app feedback and the account-deletion form on this site are delivered to our support inbox through Formspree, which forwards the content and does not use it for any other purpose."),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "Weather data is provided by Open-Meteo (CC BY 4.0). When automatic weather is on, the lookup carries your approximate coordinates and your network IP; their server logs are deleted after at most 90 days and are not used for advertising or profiling."),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "Images, fonts and interface assets on this site are self-hosted and are not loaded through third-party advertising or analytics scripts. External links such as GitHub are governed by their own privacy policies."),
             )
         ),

@@ -191,14 +191,14 @@ fun ClayProgress(
         modifier = modifier
             .fillMaxWidth()
             .height(height)
-            .clip(RoundedCornerShape(height / 2))
+            .clip(squircle(height / 2))
             .background(t)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth(ratio.coerceIn(0f, 1f))
                 .fillMaxHeight()
-                .clip(RoundedCornerShape(height / 2))
+                .clip(squircle(height / 2))
                 .background(color)
         )
     }

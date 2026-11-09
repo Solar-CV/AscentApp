@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -382,7 +381,7 @@ private fun StepDrill(store: ProgressStore, onBack: () -> Unit) {
 
 @Composable
 private fun TechChip(text: String, selected: Boolean, onClick: () -> Unit) {
-    val shape = RoundedCornerShape(999.dp)
+    val shape = squircle(999.dp)
     Box(
         modifier = Modifier
             .clip(shape)
@@ -429,15 +428,15 @@ private fun DrillScaffold(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(6.dp)
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 .background(Ascent.Surface2)
-                .border(1.dp, Ascent.DuoBorder, RoundedCornerShape(999.dp))
+                .border(1.dp, Ascent.DuoBorder, squircle(999.dp))
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth(clock.progress)
                     .height(6.dp)
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .background(Ascent.UGreen)
             )
         }
@@ -507,7 +506,7 @@ private fun DrillScaffold(
 private fun DrillTopBar(title: String, subtitle: String, onBack: () -> Unit) {
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(999.dp))
+            .clip(squircle(999.dp))
             .clickable { onBack() }
             .padding(vertical = 8.dp, horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -781,7 +780,7 @@ private fun QuizPlay(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .clickable { onBack() }
                     .padding(vertical = 8.dp, horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -804,14 +803,14 @@ private fun QuizPlay(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(4.dp)
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 .background(Ascent.Surface2)
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth((run.index + if (answered) 1 else 0).toFloat() / run.total)
                     .height(4.dp)
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .background(Ascent.UGreen)
             )
         }
@@ -846,9 +845,9 @@ private fun QuizPlay(
                             .align(Alignment.Center)
                             .width(boxWidth)
                             .height(boxHeight)
-                            .clip(RoundedCornerShape(14.dp))
+                            .clip(squircle(14.dp))
                             .background(Ascent.Surface2)
-                            .border(1.dp, Ascent.Border, RoundedCornerShape(14.dp))
+                            .border(1.dp, Ascent.Border, squircle(14.dp))
                             .clickable { viewer = q.image }
                     ) {
                         if (bmp != null) {
@@ -956,7 +955,7 @@ private fun QuizOptionRow(
     showKey: Boolean = false,
     onClick: () -> Unit
 ) {
-    val shape = RoundedCornerShape(16.dp)
+    val shape = squircle(16.dp)
     val bg = when (state) {
         OptState.Correct -> Ascent.SuccessSoft
         OptState.Wrong -> Ascent.DangerSoft
@@ -985,7 +984,7 @@ private fun QuizOptionRow(
         Box(
             modifier = Modifier
                 .size(24.dp)
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 // 对错时行底色本身就是淡绿 / 淡红，字母再铺同色会糊掉，改用卡面白
                 .background(if (state == OptState.Correct || state == OptState.Wrong) Ascent.Surface else Ascent.Surface2),
             contentAlignment = Alignment.Center

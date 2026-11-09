@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -59,7 +58,7 @@ fun PrivacyScreen(
     ) {
         Row(
             modifier = Modifier
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 .clickable { onBack() }
                 .padding(start = 16.dp, end = 20.dp, top = 14.dp, bottom = 6.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -93,7 +92,7 @@ fun PrivacyScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(14.dp))
+                            .clip(squircle(14.dp))
                             .background(Ascent.AccentSoft)
                             .padding(14.dp)
                     ) {
@@ -202,7 +201,7 @@ private fun Block(block: PrivacyBlock) {
             Box(
                 modifier = Modifier
                     .padding(bottom = 8.dp)
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(squircle(10.dp))
                     .background(Ascent.Surface2)
                     .padding(horizontal = 12.dp, vertical = 8.dp)
             ) {

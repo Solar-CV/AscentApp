@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -342,7 +341,7 @@ private fun LanguageSheet(current: String, onPick: (String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
+            .clip(squircle(28.dp))
             .background(if (dark) Color(0xFF1B1E23) else Color.White)
             .navigationBarsPadding()
             .padding(top = 10.dp, bottom = 14.dp)
@@ -393,7 +392,7 @@ private fun LangRow(label: String, desc: String?, selected: Boolean, onClick: ()
         modifier = Modifier
             .fillMaxWidth()
             .height(46.dp)
-            .clip(RoundedCornerShape(15.dp))
+            .clip(squircle(15.dp))
             .background(if (selected) (if (Ascent.IsDark) Color(0xFF152230) else Color(0xFFEAF3FF)) else Color.Transparent)
             .clickable(onClick = onClick)
             .padding(horizontal = 14.dp),

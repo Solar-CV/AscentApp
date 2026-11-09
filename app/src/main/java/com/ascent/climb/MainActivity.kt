@@ -5,6 +5,7 @@ import android.content.Context
 import android.app.LocaleManager
 import android.os.Build
 import android.os.Bundle
+import android.Manifest
 import android.os.LocaleList
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -32,10 +33,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import com.ascent.climb.BuildConfig
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
@@ -43,6 +49,10 @@ import androidx.core.view.WindowCompat
 import com.ascent.climb.data.ALL_UNITS
 import com.ascent.climb.data.Diagnostics
 import com.ascent.climb.data.ProgressStore
+import com.ascent.climb.ui.WeatherAuto
+import com.ascent.climb.ui.WeatherBackdrop
+import com.ascent.climb.ui.WeatherDebugChip
+import com.ascent.climb.ui.WeatherMood
 import com.ascent.climb.ui.AvatarSync
 import kotlinx.coroutines.delay
 import com.ascent.climb.data.cloud.CloudConfig
@@ -98,6 +108,37 @@ class MainActivity : ComponentActivity() {
         setContent {
             var themeMode by remember { mutableStateOf(store.themeMode) }
             var languageMode by remember { mutableStateOf(store.languageMode) }
+            // 天气背景：自动档读所在地天气，手动档由调试按钮切换。
+            var weatherKey by remember { mutableStateOf(store.weatherOverride) }
+            var weatherAuto by remember { mutableStateOf(store.weatherAuto) }
+            var autoMood by remember { mutableStateOf(WeatherAuto.cached(this) ?: WeatherMood.CLEAR) }
+            var permTick by remember { mutableIntStateOf(0) }
+            // 点调试标签时 +1：绕过 180 分钟缓存重取一次，用来核对真实返回值。
+            var refreshTick by remember { mutableIntStateOf(0) }
+            // 权限只主动要一次。用户拒绝后系统不再弹窗，launch 会立刻回调，
+            // 与 permTick 组成「回调 → 重组 → 再 launch」的空转。
+            var askedPermission by remember { mutableStateOf(false) }
+            val permLauncher = rememberLauncherForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { permTick++ }
+            // 只有开启「自动天气」才会碰定位：一次粗定位 + 一次 Open-Meteo 请求，180 分钟缓存。
+            LaunchedEffect(weatherAuto, permTick, refreshTick) {
+                if (!weatherAuto) return@LaunchedEffect
+                if (!WeatherAuto.hasPermission(this@MainActivity)) {
+                    if (!askedPermission) {
+                        askedPermission = true
+                        permLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+                    }
+                    return@LaunchedEffect
+                }
+                WeatherAuto.refresh(this@MainActivity, force = refreshTick > 0)?.let { autoMood = it }
+            }
+            // 优先级：自动天气 > 调试手动档 > 静态晴天。
+            // 自动开着时标签显示的也是取回来的天气；手动设的那档留在 prefs 里，
+            // 关掉自动就回到它，不会丢。
+            val weatherMood = remember(weatherKey, weatherAuto, autoMood) {
+                if (weatherAuto) autoMood else (WeatherMood.of(weatherKey) ?: WeatherMood.CLEAR)
+            }
 
             val dark = when (themeMode) {
                 "light" -> false
@@ -151,9 +192,16 @@ class MainActivity : ComponentActivity() {
                         // 安全区不在这里加：AscentRoot 里还有几层要**故意画到系统栏下面**
                         // （成就弹窗的暗色遮罩、3D 徽章页的背景图），在外层统一收边会把它们裁短，
                         // 上下露出两条底色。所以 insets 下沉到 AscentRoot 内部按层处理。
-                        Box(Modifier.fillMaxSize().background(Ascent.Bg))
+                        WeatherBackdrop(mood = weatherMood, modifier = Modifier.fillMaxSize())
                         AscentRoot(
                             store = store,
+                            weatherAuto = weatherAuto,
+                            onWeatherAutoChange = {
+                                store.weatherAuto = it
+                                weatherAuto = it
+                                // 重新打开开关时允许再要一次权限（系统只在「不再询问」后才不弹）
+                                if (it) askedPermission = false
+                            },
                             themeMode = themeMode,
                             onThemeModeChange = {
                                 store.themeMode = it
@@ -170,6 +218,32 @@ class MainActivity : ComponentActivity() {
                         if (!splashDone) {
                             ClaySplashOverlay(dark = dark) { splashDone = true }
                         }
+                        // 调试用天气切换：只在 debug 包里出现。
+                        // 自动档下点击 = 立刻重取一次；手动档下点击 = 循环到下一档。
+                        if (BuildConfig.DEBUG) {
+                            WeatherDebugChip(
+                                current = weatherMood,
+                                auto = weatherAuto,
+                                onClick = {
+                                    if (weatherAuto) {
+                                        // 没有权限时点标签等于「再要一次」：重置闸门后靠 effect 弹窗，
+                                        // 用户选「不再询问」会立刻回调，闸门已为 true，不会空转。
+                                        if (!WeatherAuto.hasPermission(this@MainActivity)) {
+                                            askedPermission = false
+                                        }
+                                        refreshTick++
+                                    } else {
+                                        val all = WeatherMood.entries
+                                        val next = all[(all.indexOf(weatherMood) + 1) % all.size]
+                                        store.weatherOverride = next.key
+                                        weatherKey = next.key
+                                    }
+                                },
+                                modifier = Modifier
+                                    .align(Alignment.BottomStart)
+                                    .padding(start = 10.dp, bottom = 96.dp)
+                            )
+                        }
                     }
                     }
                 }
@@ -183,6 +257,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AscentRoot(
     store: ProgressStore,
+    weatherAuto: Boolean,
+    onWeatherAutoChange: (Boolean) -> Unit,
     themeMode: String,
     onThemeModeChange: (String) -> Unit,
     languageMode: String,
@@ -337,7 +413,7 @@ fun AscentRoot(
         }
     } else {
         Scaffold(
-            containerColor = Ascent.Bg,
+            containerColor = androidx.compose.ui.graphics.Color.Transparent,
             bottomBar = {
                 CapsuleTabBar(
                     selected = tab,
@@ -350,7 +426,6 @@ fun AscentRoot(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding)
-                    .background(Ascent.Bg)
             ) {
                 // 题库更新后重建整棵子树，确保各页面读到新数据
                 key(bankRevision) {
@@ -415,6 +490,8 @@ fun AscentRoot(
                                 onThemeModeChange = onThemeModeChange,
                                 languageMode = languageMode,
                                 onLanguageModeChange = onLanguageModeChange,
+                                weatherAuto = weatherAuto,
+                                onWeatherAutoChange = onWeatherAutoChange,
                                 onDevUnlocked = {
                                     store.devUnlocked = true
                                     devUnlocked = true

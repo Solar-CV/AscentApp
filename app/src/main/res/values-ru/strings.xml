@@ -491,4 +491,9 @@
     <string name="auth_privacy_view">Открыть</string>
     <string name="auth_privacy_required">Перед регистрацией нужно принять Политику конфиденциальности</string>
     <string name="privacy_in_app_note">Версия условий %1$s　·　совпадает с ascentroam.com/privacy</string>
+
+    <!-- 天气背景（设置 → 外观） -->
+    <string name="set_weather_title">Погодный фон</string>
+    <string name="set_weather_auto_on">Меняется по погоде в вашем городе</string>
+    <string name="set_weather_auto_off">Всегда ясно</string>
 </resources>

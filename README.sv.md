@@ -6,7 +6,7 @@ En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kur
 
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 69 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 22 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
 
-Aktuell version v0.27.0 (versionCode 155). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 727 / 10 727). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
+Aktuell version v0.27.2 (versionCode 157). Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 727 / 10 727). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
 
 v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
 
@@ -222,6 +222,13 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
 ## Senaste ändringar
+
+**v0.27.1 – v0.27.2: gränssnittet följer vädret**
+
+- Bakgrunden speglar nu himlen: klart, mulet, regn, åska eller snö. Klart och mulet är stilla, regn / åska / snö rör sig; på natten blir solen en måne och paletten går mot mörkt
+- Inställningar → Utseende har en växel "Vädertema": på följer vädret där du är (en enda grov platsförfrågan), av låter himlen vara klar. Av som standard, och inget annat ändras
+- Väderdata kommer från Open-Meteo och cachas i tre timmar på enheten; integritetspolicyn beskriver det nu på två ställen
+- Alla rundade hörn är omritade som squircle (kontinuerlig krökning): chips, kort, bottenrad. Storlekar och färger oförändrade — hörnet "stannar" inte längre där bågen möter den raka kanten
 
 **v0.27.0: logga in med Google**
 

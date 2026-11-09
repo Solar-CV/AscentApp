@@ -6,7 +6,7 @@ Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist
 
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 69 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 22 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
 
-Aktuelle Version v0.27.0 (versionCode 155). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.727 / 10.727). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
+Aktuelle Version v0.27.2 (versionCode 157). Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.727 / 10.727). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
 
 v0.20.19 – v0.21.0 haben die Oberfläche durchgehend auf Ton (Clay) umgestellt: weiche zweilagige Schatten, offscreen gezeichnet und zwischengespeichert, flache Farbchips, Kategoriefarben im Handbuch und große Farbflächen, deren Tiefe aus einem Kontaktschatten statt aus einem Verlauf kommt.
 
@@ -222,6 +222,13 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 Ältere App-Versionen gehen an einem neueren Pool nicht kaputt. `minAppVersion` in `manifest.json` blockt zu alte Clients, unbekannte Felder werden ignoriert, eine fehlerhafte Frage wird übersprungen statt tödlich zu sein.
 
 ## Letzte Änderungen
+
+**v0.27.1 – v0.27.2: Die Oberfläche folgt dem Wetter**
+
+- Der Hintergrund spiegelt jetzt den Himmel: klar, bedeckt, Regen, Gewitter oder Schnee. Klar und bedeckt sind still, Regen / Gewitter / Schnee bewegen sich; nachts wird aus der Sonne ein Mond und die Palette wechselt ins Dunkle
+- Einstellungen → Darstellung hat einen Schalter „Wetterhintergrund": an folgt er dem Wetter vor Ort (eine einmalige grobe Standortabfrage), aus bleibt der Himmel klar. Standard ist aus, und ohne ihn ändert sich nichts
+- Wetterdaten kommen von Open-Meteo und werden drei Stunden lang auf dem Gerät zwischengespeichert; die Datenschutzerklärung beschreibt das jetzt an zwei Stellen
+- Alle Rundungen sind als Squircle neu gezeichnet: Chips, Karten, Tab-Leiste. Größen und Farben unverändert — die Ecke „stockt" an der Naht zur geraden Kante nicht mehr
 
 **v0.27.0: Anmeldung mit Google**
 

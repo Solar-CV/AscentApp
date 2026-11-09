@@ -23,7 +23,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
@@ -128,6 +127,8 @@ fun ProfileScreen(
     onThemeModeChange: (String) -> Unit,
     languageMode: String,
     onLanguageModeChange: (String) -> Unit,
+    weatherAuto: Boolean,
+    onWeatherAutoChange: (Boolean) -> Unit,
     onDevUnlocked: () -> Unit,
     onDevUnlockAllChange: (Boolean) -> Unit,
     onDevShowAnswersChange: (Boolean) -> Unit,
@@ -358,6 +359,8 @@ fun ProfileScreen(
                     onThemeModeChange = onThemeModeChange,
                     languageMode = languageMode,
                     onLanguageModeChange = onLanguageModeChange,
+                    weatherAuto = weatherAuto,
+                    onWeatherAutoChange = onWeatherAutoChange,
                     devUnlocked = devUnlocked,
                     devUnlockAll = devUnlockAll,
                     devShowAnswers = devShowAnswers,
@@ -674,7 +677,7 @@ private fun ProfileBody(
                     Box(
                         modifier = Modifier
                             .size(22.dp)
-                            .clip(RoundedCornerShape(8.dp))
+                            .clip(squircle(8.dp))
                             .background(Color(0xFFF5A524)),
                         contentAlignment = Alignment.Center
                     ) {
@@ -885,7 +888,7 @@ private fun AuthScreen(
         Spacer(Modifier.height(10.dp))
         Row(
             modifier = Modifier
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 .clickable { onBack() }
                 .padding(vertical = 8.dp, horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -928,7 +931,7 @@ private fun AuthScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .background(Ascent.Surface2)
                     .padding(4.dp)
             ) {
@@ -937,7 +940,7 @@ private fun AuthScreen(
                     Box(
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(squircle(999.dp))
                             .background(if (on) Ascent.Surface else Ascent.Surface2)
                             .clickable {
                                 mode = m
@@ -961,7 +964,7 @@ private fun AuthScreen(
             // 重置模式给一条明确回路，免得用户以为退不出去
             Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .clickable {
                         mode = AuthMode.Login
                         error = null
@@ -1087,7 +1090,7 @@ private fun AuthScreen(
                 color = Ascent.Fg2,
                 fontSize = 13.sp,
                 modifier = Modifier
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .clickable {
                         mode = AuthMode.Reset
                         error = null
@@ -1138,7 +1141,7 @@ private fun AuthScreen(
                     fontSize = 12.5.sp,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .clickable { onOpenPrivacy() }
                         .padding(horizontal = 6.dp, vertical = 4.dp)
                 )
@@ -1150,7 +1153,7 @@ private fun AuthScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(squircle(12.dp))
                     .background(Ascent.AccentSoft)
                     .padding(13.dp)
             ) {
@@ -1163,7 +1166,7 @@ private fun AuthScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(squircle(12.dp))
                     .background(Ascent.DangerSoft)
                     .padding(13.dp)
             ) {
@@ -1247,7 +1250,7 @@ private fun AuthField(
         onValueChange = onChange,
         label = { Text(label, fontSize = 13.sp) },
         singleLine = true,
-        shape = RoundedCornerShape(14.dp),
+        shape = squircle(14.dp),
         visualTransformation = if (isPassword) {
             PasswordVisualTransformation()
         } else {

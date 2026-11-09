@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -106,7 +105,7 @@ fun AchievementsDevScreen(
             item(key = "head") {
                 Row(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .clickable { onBack() }
                         .padding(vertical = 8.dp, horizontal = 4.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -232,7 +231,7 @@ fun AchievementsDevScreen(
                             // 点徽章直接看 3D 展示（真实模型或图片假 3D）
                             Box(
                                 modifier = Modifier
-                                    .clip(RoundedCornerShape(12.dp))
+                                    .clip(squircle(12.dp))
                                     .clickable { onOpenBadge(a.id) }
                             ) {
                                 AchievementBadge(

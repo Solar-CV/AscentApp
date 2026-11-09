@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
@@ -190,7 +189,7 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
             item(key = "head") {
                 Row(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .clickable { onBack() }
                         .padding(vertical = 8.dp, horizontal = 4.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -242,7 +241,7 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
                         minLines = 5,
                         maxLines = 10,
                         placeholder = { Text(stringResource(R.string.fb_msg_hint), fontSize = 12.sp) },
-                        shape = RoundedCornerShape(12.dp),
+                        shape = squircle(12.dp),
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -256,7 +255,7 @@ fun FeedbackScreen(store: ProgressStore, onBack: () -> Unit) {
                         onValueChange = { contact = it },
                         singleLine = true,
                         placeholder = { Text(stringResource(R.string.fb_contact_hint), fontSize = 12.sp) },
-                        shape = RoundedCornerShape(12.dp),
+                        shape = squircle(12.dp),
                         modifier = Modifier.fillMaxWidth()
                     )
                 }

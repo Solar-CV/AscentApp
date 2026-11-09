@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -165,9 +164,9 @@ private fun UnlockOverlayContent(
                 .padding(horizontal = 36.dp)
                 .fillMaxWidth()
                 .scale(cardAlpha)
-                .clip(RoundedCornerShape(24.dp))
+                .clip(squircle(24.dp))
                 .background(Ascent.Surface)
-                .border(2.dp, colors.face.copy(alpha = 0.9f), RoundedCornerShape(24.dp))
+                .border(2.dp, colors.face.copy(alpha = 0.9f), squircle(24.dp))
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null
@@ -190,7 +189,7 @@ private fun UnlockOverlayContent(
                         modifier = Modifier
                             .size(112.dp)
                             .scale(legendaryGlow)
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(squircle(999.dp))
                             .background(colors.face.copy(alpha = 0.25f))
                     )
                 }

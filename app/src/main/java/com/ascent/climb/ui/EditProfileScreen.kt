@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -150,7 +149,7 @@ private fun EditProfileBody(
         ) {
             Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .clickable { commitAndBack() }
                     .padding(vertical = 8.dp, horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -186,7 +185,7 @@ private fun EditProfileBody(
                 Box(
                     modifier = Modifier
                         .size(104.dp)
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .clickable(enabled = !busy) { launchPicker() },
                     contentAlignment = Alignment.Center
                 ) {
@@ -263,7 +262,7 @@ private fun EditProfileBody(
                 onValueChange = { if (it.length <= 16) name = it },
                 singleLine = true,
                 placeholder = { Text(defaultName, fontSize = 14.sp) },
-                shape = RoundedCornerShape(14.dp),
+                shape = squircle(14.dp),
                 modifier = Modifier.fillMaxWidth()
             )
 

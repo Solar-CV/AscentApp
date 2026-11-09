@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -265,7 +264,7 @@ private fun CropBody(bitmap: Bitmap, onCancel: () -> Unit, onCrop: (Bitmap) -> U
                 Box(
                     modifier = Modifier
                         .size(side)
-                        .clip(RoundedCornerShape(18.dp))
+                        .clip(squircle(18.dp))
                         .background(Color.Black)
                         .onSizeChanged { state.sidePx = it.width.toFloat() }
                         .pointerInput(state.bitmap, state.sidePx) {
@@ -330,7 +329,7 @@ private fun CropCanvas(state: AvatarCropState, image: ImageBitmap) {
 private fun CropTool(icon: ImageVector, label: String, onClick: () -> Unit) {
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(999.dp))
+            .clip(squircle(999.dp))
             .background(Color(0x14FFFFFF))
             .clickable { onClick() }
             .padding(horizontal = 16.dp, vertical = 9.dp),

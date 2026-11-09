@@ -467,4 +467,9 @@
     <string name="auth_privacy_view">Voir</string>
     <string name="auth_privacy_required">Merci d\'accepter la politique de confidentialité avant de créer un compte</string>
     <string name="privacy_in_app_note">Version %1$s　·　identique à ascentroam.com/privacy</string>
+
+    <!-- 天气背景（设置 → 外观） -->
+    <string name="set_weather_title">Fond météo</string>
+    <string name="set_weather_auto_on">S\'adapte à la météo locale</string>
+    <string name="set_weather_auto_off">Fixé sur ciel clair</string>
 </resources>

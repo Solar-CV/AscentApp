@@ -310,6 +310,19 @@ class ProgressStore(context: Context) {
         if (q.remove(id)) pendingAchievements = q
     }
 
+    /** 天气背景是否自动跟随所在地天气（需要定位权限；默认关闭，只用静态晴天）。 */
+    var weatherAuto: Boolean
+        get() = prefs.getBoolean("weatherAuto", false)
+        set(value) = prefs.edit().putBoolean("weatherAuto", value).apply()
+
+    /**
+     * 天气背景的调试覆盖：空字符串 = 跟随真实天气（尚未接入，暂按晴天处理），
+     * 其余为 clear / overcast / rain / storm / snow。只由 debug 包里的调试按钮写入。
+     */
+    var weatherOverride: String
+        get() = prefs.getString("weatherOverride", "") ?: ""
+        set(value) = prefs.edit().putString("weatherOverride", value).apply()
+
     /** 外观模式："auto"（跟随系统）/ "light" / "dark"。 */
     var themeMode: String
         get() = prefs.getString("themeMode", "auto") ?: "auto"

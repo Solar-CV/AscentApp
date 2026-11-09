@@ -467,4 +467,9 @@
     <string name="auth_privacy_view">Apri</string>
     <string name="auth_privacy_required">Devi accettare l\'informativa sulla privacy prima di creare un account</string>
     <string name="privacy_in_app_note">Versione %1$s　·　coerente con ascentroam.com/privacy</string>
+
+    <!-- 天气背景（设置 → 外观） -->
+    <string name="set_weather_title">Sfondo meteo</string>
+    <string name="set_weather_auto_on">Si adatta al meteo locale</string>
+    <string name="set_weather_auto_off">Fisso sul sereno</string>
 </resources>

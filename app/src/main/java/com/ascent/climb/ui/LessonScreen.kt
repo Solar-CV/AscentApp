@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -226,7 +225,7 @@ fun LessonScreen(
             Box(
                 modifier = Modifier
                     .size(36.dp)
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .clickable { onClose() },
                 contentAlignment = Alignment.Center
             ) {
@@ -358,7 +357,7 @@ fun LessonScreen(
                     .padding(horizontal = 20.dp, vertical = 14.dp)
             ) {
                 if (graded && q.type != QType.Scenario) {
-                    val shape = RoundedCornerShape(16.dp)
+                    val shape = squircle(16.dp)
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -548,9 +547,9 @@ private fun QuizView(
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(imgRatio)
-                    .clip(RoundedCornerShape(16.dp))
+                    .clip(squircle(16.dp))
                     .background(Ascent.Surface2)
-                    .border(1.dp, Ascent.Border, RoundedCornerShape(16.dp))
+                    .border(1.dp, Ascent.Border, squircle(16.dp))
                     .clickable { onOpenImage(q.image) }
             ) {
                 if (imgBmp != null) {
@@ -609,7 +608,7 @@ private fun QuizView(
 
             QType.Order -> orderState.forEachIndexed { pos, optIdx ->
                 val correctHere = graded && q.correctOrder.getOrNull(pos) == optIdx
-                val shape = RoundedCornerShape(14.dp)
+                val shape = squircle(14.dp)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -637,7 +636,7 @@ private fun QuizView(
                     Box(
                         modifier = Modifier
                             .size(26.dp)
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(squircle(999.dp))
                             .background(Ascent.Surface2),
                         contentAlignment = Alignment.Center
                     ) {
@@ -667,7 +666,7 @@ private fun QuizView(
                     enabled = !graded,
                     singleLine = true,
                     placeholder = { Text(stringResource(R.string.lesson_fill_hint), fontSize = 14.sp) },
-                    shape = RoundedCornerShape(14.dp),
+                    shape = squircle(14.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
                 if (graded) {
@@ -687,7 +686,7 @@ private fun QuizView(
                 q.pairsLeft.forEachIndexed { i, _ ->
                     val assigned = matchAssign.getOrElse(i) { -1 }
                     val isRight = graded && assigned == i
-                    val shape = RoundedCornerShape(14.dp)
+                    val shape = squircle(14.dp)
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -738,7 +737,7 @@ private fun QuizView(
                 Spacer(Modifier.height(8.dp))
                 rightOrder.forEach { r ->
                     val used = matchAssign.take(q.pairsLeft.size).contains(r)
-                    val shape = RoundedCornerShape(12.dp)
+                    val shape = squircle(12.dp)
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -771,7 +770,7 @@ private fun QuizView(
                             fontSize = 14.sp
                         )
                     },
-                    shape = RoundedCornerShape(14.dp),
+                    shape = squircle(14.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
                 if (graded) {
@@ -790,9 +789,9 @@ private fun QuizView(
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(ratio)
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(squircle(16.dp))
                         .background(Ascent.Surface2)
-                        .border(1.dp, Ascent.Border, RoundedCornerShape(16.dp))
+                        .border(1.dp, Ascent.Border, squircle(16.dp))
                         .pointerInput(graded, q.prompt) {
                             if (!graded) {
                                 detectTapGestures { off ->
@@ -860,9 +859,9 @@ private fun QuizView(
                     Spacer(Modifier.height(10.dp))
                     Row(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(12.dp))
+                            .clip(squircle(12.dp))
                             .background(Ascent.Surface)
-                            .border(1.dp, Ascent.Border, RoundedCornerShape(12.dp))
+                            .border(1.dp, Ascent.Border, squircle(12.dp))
                             .clickable { onOpenImage(q.image) }
                             .padding(horizontal = 12.dp, vertical = 9.dp),
                         verticalAlignment = Alignment.CenterVertically
@@ -887,7 +886,7 @@ private fun QuizView(
                         Box(
                             modifier = Modifier
                                 .size(if (i == scenarioStep) 24.dp else 20.dp)
-                                .clip(RoundedCornerShape(999.dp))
+                                .clip(squircle(999.dp))
                                 .background(
                                     when {
                                         i < scenarioStep -> Ascent.Success
@@ -925,7 +924,7 @@ private fun QuizView(
 
                     if (graded) {
                         Spacer(Modifier.height(10.dp))
-                        val shape = RoundedCornerShape(16.dp)
+                        val shape = squircle(16.dp)
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -1014,9 +1013,9 @@ private fun ChoiceBlock(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(ratio)
-                .clip(RoundedCornerShape(16.dp))
+                .clip(squircle(16.dp))
                 .background(Ascent.Surface2)
-                .border(1.dp, Ascent.Border, RoundedCornerShape(16.dp))
+                .border(1.dp, Ascent.Border, squircle(16.dp))
                 .clickable { onOpenImage(step.image) }
         ) {
             if (bmp != null) {
@@ -1087,7 +1086,7 @@ private fun OptionRow(
     showKey: Boolean,
     onClick: () -> Unit
 ) {
-    val shape = RoundedCornerShape(16.dp)
+    val shape = squircle(16.dp)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -1118,7 +1117,7 @@ private fun OptionRow(
         Box(
             modifier = Modifier
                 .size(26.dp)
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 .background(
                     when {
                         correct -> Ascent.Success
@@ -1230,7 +1229,7 @@ private fun BriefView(lesson: Lesson, onStart: () -> Unit) {
         }
 
         if (lesson.needsCoach) {
-            val shape = RoundedCornerShape(16.dp)
+            val shape = squircle(16.dp)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -1310,7 +1309,7 @@ private fun DoneView(
     ) {
         Spacer(Modifier.height(18.dp))
 
-        val shape = RoundedCornerShape(999.dp)
+        val shape = squircle(999.dp)
         Box(
             modifier = Modifier
                 .size(88.dp)
@@ -1348,7 +1347,7 @@ private fun DoneView(
 
         if (retried > 0 || shaky) {
             Spacer(Modifier.height(14.dp))
-            val nShape = RoundedCornerShape(16.dp)
+            val nShape = squircle(16.dp)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -1510,7 +1509,7 @@ internal fun ImageViewerDialog(image: String, onClose: () -> Unit) {
             ) {
                 Row(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .background(Color(0x14FFFFFF))
                         .padding(4.dp),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -1519,7 +1518,7 @@ internal fun ImageViewerDialog(image: String, onClose: () -> Unit) {
                         val selected = kotlin.math.abs(scale - z) < 0.3f
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(999.dp))
+                                .clip(squircle(999.dp))
                                 .background(if (selected) Ascent.Accent else Color.Transparent)
                                 .clickable {
                                     scale = z

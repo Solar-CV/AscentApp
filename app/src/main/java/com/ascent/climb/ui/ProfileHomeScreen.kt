@@ -21,7 +21,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -85,7 +84,7 @@ fun ProfileHomeScreen(
     // 系统返回 / 全面屏侧滑手势：回到「我的」，而不是退出 App
     BackHandler { onBack() }
 
-    Box(modifier = Modifier.fillMaxWidth().background(Ascent.Bg)) {
+    Box(modifier = Modifier.fillMaxWidth()) {
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 28.dp)
@@ -93,7 +92,7 @@ fun ProfileHomeScreen(
             item(key = "head") {
                 Row(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .clickable { onBack() }
                         .padding(vertical = 8.dp, horizontal = 4.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -126,7 +125,7 @@ fun ProfileHomeScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(16.dp))
+                            .clip(squircle(16.dp))
                             .clickable { onEditProfile() },
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -185,7 +184,7 @@ fun ProfileHomeScreen(
                                 foreground = Ascent.OnAccent,
                                 background = if (syncing) Ascent.Surface2 else Ascent.Accent,
                                 modifier = Modifier
-                                    .clip(RoundedCornerShape(999.dp))
+                                    .clip(squircle(999.dp))
                                     .clickable(enabled = !syncing) { onSyncNow() },
                                 icon = if (syncing) null else Ic.RefreshCw
                             )
@@ -287,7 +286,7 @@ fun ProfileHomeScreen(
                     MonoLabel(stringResource(R.string.home_badges_unlocked, earned.size), modifier = Modifier.weight(1f))
                     Row(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(squircle(999.dp))
                             .clickable { onOpenAllBadges() }
                             .padding(horizontal = 6.dp, vertical = 4.dp),
                         verticalAlignment = Alignment.CenterVertically
@@ -418,7 +417,7 @@ fun BadgeGrid(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .clip(RoundedCornerShape(14.dp))
+                    .clip(squircle(14.dp))
                     .clickable { onOpen(a.id) }
                     .padding(vertical = 4.dp)
             ) {

@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -64,6 +63,8 @@ fun SettingsScreen(
     onThemeModeChange: (String) -> Unit,
     languageMode: String,
     onLanguageModeChange: (String) -> Unit,
+    weatherAuto: Boolean,
+    onWeatherAutoChange: (Boolean) -> Unit,
     devUnlocked: Boolean,
     devUnlockAll: Boolean,
     devShowAnswers: Boolean,
@@ -175,7 +176,7 @@ fun SettingsScreen(
             item(key = "head") {
                 Row(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .clickable { onBack() }
                         .padding(vertical = 8.dp, horizontal = 4.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -227,6 +228,28 @@ fun SettingsScreen(
                             }
                         }
                     }
+                }
+            }
+
+            // ---------------- 天气背景 ----------------
+            item(key = "weather") {
+                OutlineCard(gap = 10, modifier = Modifier.padding(bottom = 14.dp)) {
+                    SettingsToggle(
+                        title = stringResource(R.string.set_weather_title),
+                        subtitle = if (weatherAuto) {
+                            stringResource(R.string.set_weather_auto_on)
+                        } else {
+                            stringResource(R.string.set_weather_auto_off)
+                        },
+                        checked = weatherAuto,
+                        onChange = onWeatherAutoChange
+                    )
+                    // CC BY 4.0 要求署名，删掉这行就违反了 Open-Meteo 的许可。
+                    Text(
+                        text = "Weather data by Open-Meteo.com",
+                        color = Ascent.Fg3,
+                        fontSize = 10.sp
+                    )
                 }
             }
 
@@ -333,7 +356,7 @@ fun SettingsScreen(
                             onValueChange = { bankUrlDraft = it },
                             singleLine = true,
                             placeholder = { Text("https://…/ascent-bank", fontSize = 12.sp) },
-                            shape = RoundedCornerShape(12.dp),
+                            shape = squircle(12.dp),
                             modifier = Modifier.fillMaxWidth()
                         )
                         PillButton(
@@ -430,7 +453,7 @@ fun SettingsScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(10.dp))
+                            .clip(squircle(10.dp))
                             .clickable { onOpenPrivacy() }
                             .padding(vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
@@ -583,7 +606,7 @@ internal fun DangerConfirmDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(24.dp))
+                .clip(squircle(24.dp))
                 .background(Ascent.Surface)
                 .padding(20.dp)
         ) {

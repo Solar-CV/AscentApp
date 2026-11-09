@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -1090,13 +1089,13 @@ private fun FakeBadge3D(res: Int, modifier: Modifier = Modifier) {
                 .aspectRatio(1f)
                 // 定稿图自带深色底，直接转会像贴了块黑方片；
                 // 圆角 + 投影把它变成一张收藏卡片，和亮背景才不打架。
-                .shadow(20.dp, RoundedCornerShape(26.dp))
+                .shadow(20.dp, squircle(26.dp))
                 .graphicsLayer {
                     rotationY = yaw
                     rotationX = pitch
                     cameraDistance = 6f * density
                 }
-                .clip(RoundedCornerShape(26.dp))
+                .clip(squircle(26.dp))
         )
     }
 }
@@ -1243,7 +1242,7 @@ fun Badge3DStageScreen(
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .clickable { onBack() }
                         .padding(horizontal = 8.dp, vertical = 10.dp)
                 )

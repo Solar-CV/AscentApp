@@ -4,6 +4,8 @@
     <!-- 仅用于拉取在线题库更新；App 在完全离线时功能不受影响 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 天气主题：只在用户主动开启「自动天气」时请求一次粗定位，不上传账号 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"

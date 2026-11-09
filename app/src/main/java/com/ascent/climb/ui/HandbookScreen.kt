@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -161,7 +160,7 @@ private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(46.dp)
-                    .clip(RoundedCornerShape(16.dp))
+                    .clip(squircle(16.dp))
                     .background(Ascent.Surface2)
                     .clayInset(radius = 16.dp)
                     .padding(horizontal = 14.dp),
@@ -251,7 +250,7 @@ private fun ArticleList(trackId: String, onOpen: (String) -> Unit) {
 
 @Composable
 private fun CategoryChip(label: String, selected: Boolean, onClick: () -> Unit) {
-    val shape = RoundedCornerShape(999.dp)
+    val shape = squircle(999.dp)
     if (selected) {
         Box(
             modifier = Modifier
@@ -351,7 +350,7 @@ private fun ArticleDetail(article: HandbookArticle, onBack: () -> Unit) {
         ) {
             Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .clickable { onBack() }
                     .padding(vertical = 6.dp, horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -402,7 +401,7 @@ private fun ArticleDetail(article: HandbookArticle, onBack: () -> Unit) {
         MonoLabel(article.code)
 
         Spacer(Modifier.height(14.dp))
-        val sumShape = RoundedCornerShape(16.dp)
+        val sumShape = squircle(16.dp)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -432,7 +431,7 @@ private fun ArticleDetail(article: HandbookArticle, onBack: () -> Unit) {
                         modifier = Modifier
                             .padding(top = 7.dp)
                             .size(5.dp)
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(squircle(999.dp))
                             .background(Ascent.Accent)
                     )
                     Spacer(Modifier.width(10.dp))

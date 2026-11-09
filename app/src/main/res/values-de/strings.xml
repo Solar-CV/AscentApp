@@ -467,4 +467,9 @@
     <string name="auth_privacy_view">Ansehen</string>
     <string name="auth_privacy_required">Bitte stimme vor der Registrierung der Datenschutzerklärung zu</string>
     <string name="privacy_in_app_note">Fassung %1$s　·　entspricht ascentroam.com/privacy</string>
+
+    <!-- 天气背景（设置 → 外观） -->
+    <string name="set_weather_title">Wetterhintergrund</string>
+    <string name="set_weather_auto_on">Passt sich dem Wetter vor Ort an</string>
+    <string name="set_weather_auto_off">Fest auf klar</string>
 </resources>

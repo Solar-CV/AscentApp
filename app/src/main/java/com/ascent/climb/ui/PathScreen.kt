@@ -37,7 +37,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -178,7 +177,7 @@ fun PathScreen(
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize().background(Ascent.DuoBg)) {
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
             Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 14.dp)) {
                 StatsRow(altitude = altitude, streak = streak, rope = rope)
@@ -294,9 +293,9 @@ private fun TrackSwitchRow(trackId: String, onOpenSheet: () -> Unit) {
             val active = t.id == trackId
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .background(if (active) Ascent.UGreen else Color.White)
-                    .border(1.5.dp, if (active) Ascent.UGreen else Ascent.DuoBorder, RoundedCornerShape(999.dp))
+                    .border(1.5.dp, if (active) Ascent.UGreen else Ascent.DuoBorder, squircle(999.dp))
                     .clickable { onOpenSheet() }
                     .padding(horizontal = 14.dp, vertical = 7.dp)
             ) {
@@ -349,12 +348,12 @@ private fun TrackSheet(currentTrackId: String, onPick: (String) -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(16.dp))
+                    .clip(squircle(16.dp))
                     .background(if (active) Color(0xFFF3FBE8) else Color.White)
                     .border(
                         if (active) 2.dp else 1.5.dp,
                         if (active) Ascent.UGreen else Ascent.DuoBorder,
-                        RoundedCornerShape(16.dp)
+                        squircle(16.dp)
                     )
                     .clickable { onPick(t.id) }
                     .padding(horizontal = 14.dp, vertical = 12.dp),
@@ -363,7 +362,7 @@ private fun TrackSheet(currentTrackId: String, onPick: (String) -> Unit) {
                 Box(
                     modifier = Modifier
                         .size(44.dp)
-                        .clip(RoundedCornerShape(12.dp))
+                        .clip(squircle(12.dp))
                         .background(if (active) Ascent.UGreen else Color(0xFFF2F2F2)),
                     contentAlignment = Alignment.Center
                 ) {
@@ -388,7 +387,7 @@ private fun TrackSheet(currentTrackId: String, onPick: (String) -> Unit) {
                 if (active) {
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(squircle(999.dp))
                             .background(Ascent.UGreen)
                             .padding(horizontal = 10.dp, vertical = 5.dp)
                     ) {
@@ -419,7 +418,7 @@ private fun PageDots(count: Int, current: Int, onSelect: (Int) -> Unit) {
             val active = i == current
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(999.dp))
+                    .clip(squircle(999.dp))
                     .background(if (active) Ascent.UGreen else Ascent.DuoBorder)
                     .clickable { onSelect(i) }
                     .size(width = if (active) 18.dp else 6.dp, height = 6.dp)
@@ -486,7 +485,7 @@ private fun StatChip(icon: androidx.compose.ui.graphics.vector.ImageVector, valu
 
 @Composable
 private fun UnitBanner(unit: ClimbUnit, done: Int, startAlt: Int, endAlt: Int, hue: Color, lip: Color) {
-    val shape = RoundedCornerShape(16.dp)
+    val shape = squircle(16.dp)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -517,7 +516,7 @@ private fun UnitBanner(unit: ClimbUnit, done: Int, startAlt: Int, endAlt: Int, h
         Box(
             modifier = Modifier
                 .size(48.dp)
-                .clip(RoundedCornerShape(12.dp))
+                .clip(squircle(12.dp))
                 .background(lip),
             contentAlignment = Alignment.Center
         ) {
@@ -716,7 +715,7 @@ private fun LessonPath(
                 ) {
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(squircle(999.dp))
                             .background(face)
                             .padding(horizontal = 16.dp, vertical = 6.dp)
                     ) {
@@ -902,7 +901,7 @@ private fun SummitBlock(toSummit: Int, done: Int, total: Int, pct: Int) {
             modifier = Modifier
                 .width(160.dp)
                 .height(8.dp)
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 .background(Ascent.DuoBorder)
         ) {
             if (pct > 0) {
@@ -910,7 +909,7 @@ private fun SummitBlock(toSummit: Int, done: Int, total: Int, pct: Int) {
                     modifier = Modifier
                         .fillMaxWidth(pct / 100f)
                         .height(8.dp)
-                        .clip(RoundedCornerShape(999.dp))
+                        .clip(squircle(999.dp))
                         .background(Ascent.UGreen)
                 )
             }

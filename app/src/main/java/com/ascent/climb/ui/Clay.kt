@@ -10,13 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -71,9 +70,14 @@ private object ClayShadow {
             color = argb
             maskFilter = BlurMaskFilter(blur, BlurMaskFilter.Blur.NORMAL)
         }
-        canvas.drawRoundRect(
-            pad + dx, pad + dy, pad + dx + w, pad + dy + h, radius, radius, paint
+        val path = squirclePath(
+            width = w.toFloat(),
+            height = h.toFloat(),
+            radius = radius,
+            offsetX = pad + dx,
+            offsetY = pad + dy
         )
+        canvas.drawPath(path.asAndroidPath(), paint)
         val result = ShadowImage(bmp.asImageBitmap(), pad)
         cache[key] = result
         return result
@@ -152,6 +156,7 @@ fun ClaySurface(
             val w = size.width
             val h = size.height
             if (w <= 0f || h <= 0f) return@drawBehind
+            val shapePath = squirclePath(width = w, height = h, radius = r)
 
             // 1) 外投影（右下），两层：
             //    贴边的一层收紧做接触影（卡片"坐"在底色上），远的一层做体积。
@@ -171,13 +176,12 @@ fun ClaySurface(
             )
 
             // 3) 本体
-            drawRoundRect(brush = brush, cornerRadius = CornerRadius(r), size = size)
+            drawPath(shapePath, brush = brush)
             // 描边按 dp 走：原来写死 1f = 1 物理像素，在 2.75 倍屏上只有 0.36dp，
             // 抗锯齿一平均就没了——这正是"边缘不明显"的另一半原因。
-            drawRoundRect(
+            drawPath(
+                path = shapePath,
                 color = rim ?: tone.rim,
-                cornerRadius = CornerRadius(r),
-                size = size,
                 style = Stroke(width = 1.dp.toPx())
             )
 
@@ -185,14 +189,7 @@ fun ClaySurface(
             // 早先是「85% 白铺到 0.45 高度」，彩色卡上半块直接被漂白，看着像半透明。
             val lipTop = minOf(h * 0.4f, 20.dp.toPx())
             val lipBottom = minOf(h * 0.45f, 24.dp.toPx())
-            val path = Path().apply {
-                addRoundRect(
-                    androidx.compose.ui.geometry.RoundRect(
-                        0f, 0f, w, h, CornerRadius(r)
-                    )
-                )
-            }
-            clipPath(path) {
+            clipPath(shapePath) {
                 drawRect(
                     brush = Brush.verticalGradient(
                         0f to Color.White.copy(alpha = tone.innerTop),
@@ -249,10 +246,9 @@ fun ClayChip(
                 // 平涂：一块实色，不做垂直渐变、不做顶部唇光。
                 // 早先是「上亮下暗 + 18% 白唇」，读起来像糖块／塑料件，
                 // 和整页「压实的一片泥」不是一个语言。
-                drawRoundRect(
-                    color = color,
-                    cornerRadius = CornerRadius(r),
-                    size = this.size
+                drawPath(
+                    path = squirclePath(w, h, r),
+                    color = color
                 )
             },
         contentAlignment = Alignment.Center
@@ -281,10 +277,8 @@ fun Modifier.clayInset(radius: Dp = 16.dp): Modifier {
         val w = size.width
         val h = size.height
         if (w <= 0f || h <= 0f) return@drawBehind
-        val path = Path().apply {
-            addRoundRect(androidx.compose.ui.geometry.RoundRect(0f, 0f, w, h, CornerRadius(r)))
-        }
-        clipPath(path) {
+        val shapePath = squirclePath(w, h, r)
+        clipPath(shapePath) {
             // 上沿暗：光从左上来，凹槽的里面那面背光
             drawRect(
                 brush = Brush.verticalGradient(
@@ -307,10 +301,9 @@ fun Modifier.clayInset(radius: Dp = 16.dp): Modifier {
                 size = Size(w, h)
             )
         }
-        drawRoundRect(
+        drawPath(
+            path = shapePath,
             color = if (dark) Color(0xFF111214) else Color(0xFFDCE1E9),
-            cornerRadius = CornerRadius(r),
-            size = size,
             style = Stroke(width = 1.dp.toPx())
         )
     }

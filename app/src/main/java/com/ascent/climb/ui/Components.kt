@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -112,9 +111,9 @@ fun Chip(
 ) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(999.dp))
+            .clip(squircle(999.dp))
             .background(Ascent.Panel)
-            .border(1.dp, Ascent.Line, RoundedCornerShape(999.dp))
+            .border(1.dp, Ascent.Line, squircle(999.dp))
             .padding(horizontal = 11.dp, vertical = 6.dp)
     ) {
         Text(text = text, color = color, fontSize = 12.sp, fontWeight = FontWeight.Medium)
@@ -134,14 +133,14 @@ fun AscentBar(
         modifier = modifier
             .fillMaxWidth()
             .height(height.dp)
-            .clip(RoundedCornerShape(999.dp))
+            .clip(squircle(999.dp))
             .background(Ascent.Track)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth(f)
                 .height(height.dp)
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 .background(fill)
         )
     }
@@ -156,7 +155,7 @@ fun PanelCard(
     onClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
-    val shape = RoundedCornerShape(18.dp)
+    val shape = squircle(18.dp)
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -177,7 +176,7 @@ fun AscentButton(
     gold: Boolean = false,
     onClick: () -> Unit
 ) {
-    val shape = RoundedCornerShape(16.dp)
+    val shape = squircle(16.dp)
     val bg = when {
         !enabled -> Ascent.NodeLock
         gold -> Ascent.Gold
@@ -277,7 +276,7 @@ fun PillButton(
     fontSize: TextUnit = 15.sp,
     onClick: () -> Unit
 ) {
-    val shape = RoundedCornerShape(999.dp)
+    val shape = squircle(999.dp)
     val bg = when (style) {
         BtnStyle.Primary -> Ascent.Accent
         BtnStyle.Secondary -> Ascent.Surface
@@ -332,7 +331,7 @@ fun OutlineCard(
     onClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val shape = RoundedCornerShape(radius.dp)
+    val shape = squircle(radius.dp)
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -358,7 +357,7 @@ fun SoftTag(
 ) {
     Row(
         modifier = modifier
-            .clip(RoundedCornerShape(999.dp))
+            .clip(squircle(999.dp))
             .background(background)
             .padding(horizontal = 10.dp, vertical = 5.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -404,7 +403,7 @@ fun IconBadge(
     Box(
         modifier = modifier
             .size(diameter.dp)
-            .clip(RoundedCornerShape(999.dp))
+            .clip(squircle(999.dp))
             .background(background),
         contentAlignment = Alignment.Center
     ) {
@@ -421,7 +420,7 @@ fun StatTile(
     background: Color = Ascent.Surface,
     borderColor: Color = Ascent.Border
 ) {
-    val shape = RoundedCornerShape(16.dp)
+    val shape = squircle(16.dp)
     Column(
         modifier = modifier
             .clip(shape)
@@ -558,7 +557,7 @@ fun ElevationProfile(
             modifier = Modifier
                 .align(Alignment.TopStart)
                 .offset(x = xDp(ci) - 18.dp, y = yDp(altitudes[ci]) - 30.dp)
-                .clip(RoundedCornerShape(999.dp))
+                .clip(squircle(999.dp))
                 .background(pillBg)
                 .padding(horizontal = 8.dp, vertical = 3.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -632,7 +631,7 @@ fun CapsuleTabBar(
         // 原来外框是 36dp（62dp 高，等于胶囊），内块 16dp、内边距 4dp，
         // 36 > 20 → 选第一项或最后一项时边角被吃掉。
         // 22dp 仍是很圆的圆角块，且与内块同心，任何一项都不会被裁。
-        val shape = RoundedCornerShape(22.dp)
+        val shape = squircle(22.dp)
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxWidth()
@@ -663,7 +662,7 @@ fun CapsuleTabBar(
                             // 54dp 高里几乎是正圆，文字所在的水平高度上弦宽只剩 53dp，
                             // 西语 Entrenamiento（约 61dp）会顶出圆外被形状裁掉。
                             // 16dp 时同一高度弦宽约 62dp，配合下面的自适应字号才放得下。
-                            .clip(RoundedCornerShape(16.dp))
+                            .clip(squircle(16.dp))
                             .background(if (on) Ascent.UGreen else Color.Transparent)
                             .clickable { onSelect(i) },
                         horizontalAlignment = Alignment.CenterHorizontally,
