@@ -8,11 +8,68 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ---
 
-> **写作口径**：这里只写用户能感知的变化——看得见的行为、读得到的文案、会影响使用的限制。
-> 服务端实现、环境变量、健康检查、错误码、排查步骤、内部文件名，一律写进 `HANDOFF.md`。
-> 发布说明是给用户看的，不是交接文档。
+## v0.28.0 要点
+
+学习进度现在有了形状：一路往上爬，沿途会解锁真实的雪峰。
+
+### 山峰里程碑
+
+- 路径页顶部新增一张山峰卡：当前海拔对应的那座山，山名、真实海拔，以及「当前 5,300 m · 还差 120 m」
+- 点开是详情：地形图（部分山峰为等高线图）、英文名、里程碑档位，以及海拔 / 所在山脉 / 八千米排名三列数据
+- 共 88 座，从 3,600 m 的贺兰山到 8,848 m 的珠穆朗玛。越往上越密：8,000 米以上一座一档
+- 「我的 → 当前海拔」卡里新增「历史山峰」入口：全部 88 座一览，已解锁的点进去看卡片，没到的显示还差多少
+
+### 目标海拔改为 8,848.86 米
+
+- 进度条顶端从 8,000 米改为珠峰官方高程 8,848.86 米（2020 年中尼联合测定）
+- 课程一门没加也没减：每课给的海拔本来就按 8,848 米分配，只是目标数字一直写的是整数 8,000。
+  所以之前爬到 8,000 米进度条就满了，后面还有课却不再前进——现在会一直走到峰顶
+
+### 雪
+
+- 雪天背景的六角雪花改成冰蓝色，从 4 朵加到 7 朵，每朵缓慢自转；圆形雪粒不变
+
+### 其他
+
+- 底栏高度由 54 dp 收到 50 dp，圆角和内边距的视觉半径对上了
+- 山峰名、山脉名与相关界面文案补齐十种语言
+
+### 兼容性
+
+- 不涉及账号、权限与数据迁移，升级后进度、成就、设置都不变
+- 文森峰、阿尔金山、团结峰暂无地形图，这三张卡片只有文字信息
 
 ---
+
+## English
+
+Learning progress has a shape now: climb, and real snow peaks unlock along the way.
+
+### Mountain milestones
+
+- A new card at the top of the Path screen shows the peak that matches your current altitude — its name, real elevation, and either "Current 5,300 m · 120 m to go" or "Unlocked".
+- Tap it to expand: terrain map (contour lines for some peaks), English name, milestone tier, and three data columns — elevation, range, and 8000er rank.
+- 88 peaks in all, from Helan Shan at 3,600 m to Everest at 8,848 m. They get denser as you go up: above 8,000 m every peak has its own tier.
+- "Profile → Current altitude" gains a Peak history entry: all 88 at a glance. Unlocked peaks open their card; the rest show how much climbing is left.
+
+### Summit raised to 8,848.86 m
+
+- The top of the progress bar moves from 8,000 m to Everest's official elevation, 8,848.86 m (2020 China–Nepal joint survey).
+- No lessons were added or removed. The altitude each lesson grants was always scaled to 8,848 m; only the target label read 8,000. So the bar used to fill at 8,000 m with courses still ahead — now it keeps moving all the way to the summit.
+
+### Snow
+
+- Snowflake glyphs are now ice blue, seven instead of four, each turning slowly. The round particles are unchanged.
+
+### Also
+
+- Bottom bar height trimmed from 54 dp to 50 dp so its corner radius lines up with the padding.
+- Peak names, range names and all related UI copy are available in all ten languages.
+
+### Compatibility
+
+- No account, permission or data changes — progress, achievements and settings carry over.
+- Vinson, Altyn Tagh and Tuanjie Feng have no terrain image yet; those cards are text only.
 
 ## v0.27.2 要点
 

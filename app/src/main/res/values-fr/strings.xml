@@ -472,4 +472,28 @@
     <string name="set_weather_title">Fond météo</string>
     <string name="set_weather_auto_on">S\'adapte à la météo locale</string>
     <string name="set_weather_auto_off">Fixé sur ciel clair</string>
+    <!-- Jalons de sommets (carte du parcours / Profil → Historique des sommets) -->
+    <string name="mtn_current">Actuel %1$s m</string>
+    <string name="mtn_remaining">encore %1$s m</string>
+    <string name="mtn_summit_reached">Atteint</string>
+    <string name="mtn_unlocked">Débloqué</string>
+    <string name="mtn_row_locked">Non atteint</string>
+    <string name="mtn_jump_count">%1$d débloqués · Historique</string>
+    <string name="mtn_jump_none">Historique · aucun encore</string>
+    <string name="mtn_milestone_rank">Jalon %1$s m · n° %2$d mondial</string>
+    <string name="mtn_milestone_range">Jalon %1$s m · %2$s</string>
+    <string name="mtn_metric_span">Emprise du massif</string>
+    <string name="mtn_metric_snowline">Limite des neiges</string>
+    <string name="mtn_metric_range">Massif</string>
+    <string name="mtn_note_contour">Carte en courbes de niveau · équidistance 200 m · d\'après des données d\'altitude publiques</string>
+    <string name="mtn_note_render">Croquis de terrain · d\'après des données d\'altitude publiques, pas une photo</string>
+    <string name="mtn_entry_title">Historique des sommets</string>
+    <string name="mtn_entry_none">Aucun encore</string>
+    <string name="mtn_entry_progress">%1$d / %2$d débloqués</string>
+    <string name="mtn_history_title">Historique des sommets</string>
+    <string name="mtn_history_summary">%1$d / %2$d débloqués · plus de 8000 m %3$d / %4$d</string>
+    <string name="mtn_row_rank">n° %1$d mondial · %2$s m</string>
+    <string name="mtn_row_milestone">Jalon %1$s m · %2$s m d\'altitude</string>
+    <string name="mtn_detail_progress">Actuel %1$s m · jalon %2$s m</string>
+
 </resources>

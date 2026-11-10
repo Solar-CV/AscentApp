@@ -75,6 +75,30 @@ fun achCategoryName(c: com.ascent.climb.data.AchCategory): String = ctext("acat.
 @Composable
 fun peakName(original: String): String = ctext("peak.$original", original)
 
+/**
+ * 里程碑山峰名。
+ *
+ * 与 [peakName] 分两套键：目标山峰是行程里的山峰（「EBC 珠峰大本营」这种写法），
+ * 里程碑是地理实体，同名的山在两处叫法不一定一样，混用会把行程名套到山上。
+ */
+@Composable
+fun mountainName(m: com.ascent.climb.data.Mountain): String =
+    ctext("mtn.${m.id}.name", m.nameZh)
+
+/** 山脉名。38 条，按中文名做键，多座山共用一条。 */
+@Composable
+fun mountainRange(m: com.ascent.climb.data.Mountain): String =
+    ctext("mtn.range.${m.range}", m.range)
+
+/**
+ * 雪线。多数是「4,700 m」这种数字，不需要翻译；
+ * 只有「无常年积雪」这类文字说明要走内容层。
+ */
+@Composable
+fun mountainSnowline(original: String): String =
+    if (original.firstOrNull()?.isDigit() == true) original
+    else ctext("mtn.snow.none", original)
+
 /** 课程要点（`brief` 列表的第 [index] 条，从 1 开始）。 */
 @Composable
 fun briefText(lessonId: String, index: Int, original: String): String =

@@ -493,4 +493,28 @@
     <string name="set_weather_title">天気の背景</string>
     <string name="set_weather_auto_on">現在地の天気に合わせて切り替え</string>
     <string name="set_weather_auto_off">晴れで固定</string>
+    <!-- 山峰マイルストーン（経路ページのカード / マイ → 山峰履歴） -->
+    <string name="mtn_current">現在 %1$s m</string>
+    <string name="mtn_remaining">あと %1$s m</string>
+    <string name="mtn_summit_reached">登頂済み</string>
+    <string name="mtn_unlocked">到達済み</string>
+    <string name="mtn_row_locked">未到達</string>
+    <string name="mtn_jump_count">%1$d 座到達 · 履歴</string>
+    <string name="mtn_jump_none">履歴 · まだ到達なし</string>
+    <string name="mtn_milestone_rank">マイルストーン %1$s m · 世界第 %2$d 位</string>
+    <string name="mtn_milestone_range">マイルストーン %1$s m · %2$s</string>
+    <string name="mtn_metric_span">山体の広がり</string>
+    <string name="mtn_metric_snowline">雪線</string>
+    <string name="mtn_metric_range">所属山脈</string>
+    <string name="mtn_note_contour">等高線地形図 · 等高間隔 200 m · 公開標高データに基づく作図</string>
+    <string name="mtn_note_render">地形スケッチ · 公開標高データに基づく作図（実写ではありません）</string>
+    <string name="mtn_entry_title">山峰履歴</string>
+    <string name="mtn_entry_none">まだ到達なし</string>
+    <string name="mtn_entry_progress">%1$d / %2$d 座到達</string>
+    <string name="mtn_history_title">山峰履歴</string>
+    <string name="mtn_history_summary">%1$d / %2$d 座到達 · 8000m峰 %3$d / %4$d</string>
+    <string name="mtn_row_rank">世界第 %1$d 位 · 標高 %2$s m</string>
+    <string name="mtn_row_milestone">マイルストーン %1$s m · 標高 %2$s m</string>
+    <string name="mtn_detail_progress">現在 %1$s m · マイルストーン %2$s m</string>
+
 </resources>

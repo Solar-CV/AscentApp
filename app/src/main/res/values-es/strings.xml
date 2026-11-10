@@ -472,4 +472,28 @@
     <string name="set_weather_title">Fondo del tiempo</string>
     <string name="set_weather_auto_on">Se ajusta al tiempo de tu zona</string>
     <string name="set_weather_auto_off">Fijo en despejado</string>
+    <!-- Hitos de cumbres (tarjeta de la ruta / Perfil → Historial de cumbres) -->
+    <string name="mtn_current">Actual %1$s m</string>
+    <string name="mtn_remaining">faltan %1$s m</string>
+    <string name="mtn_summit_reached">Alcanzada</string>
+    <string name="mtn_unlocked">Desbloqueada</string>
+    <string name="mtn_row_locked">Sin alcanzar</string>
+    <string name="mtn_jump_count">%1$d desbloqueadas · Historial</string>
+    <string name="mtn_jump_none">Historial · ninguna aún</string>
+    <string name="mtn_milestone_rank">Hito %1$s m · n.º %2$d del mundo</string>
+    <string name="mtn_milestone_range">Hito %1$s m · %2$s</string>
+    <string name="mtn_metric_span">Anchura del macizo</string>
+    <string name="mtn_metric_snowline">Línea de nieve</string>
+    <string name="mtn_metric_range">Cordillera</string>
+    <string name="mtn_note_contour">Mapa de curvas de nivel · equidistancia 200 m · según datos públicos de altitud</string>
+    <string name="mtn_note_render">Croquis del terreno · según datos públicos de altitud, no es una foto</string>
+    <string name="mtn_entry_title">Historial de cumbres</string>
+    <string name="mtn_entry_none">Ninguna aún</string>
+    <string name="mtn_entry_progress">%1$d / %2$d desbloqueadas</string>
+    <string name="mtn_history_title">Historial de cumbres</string>
+    <string name="mtn_history_summary">%1$d / %2$d desbloqueadas · ochomiles %3$d / %4$d</string>
+    <string name="mtn_row_rank">n.º %1$d del mundo · %2$s m</string>
+    <string name="mtn_row_milestone">Hito %1$s m · %2$s m de altitud</string>
+    <string name="mtn_detail_progress">Actual %1$s m · hito %2$s m</string>
+
 </resources>

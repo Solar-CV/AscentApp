@@ -657,9 +657,12 @@ fun CapsuleTabBar(
                     Column(
                         modifier = Modifier
                             .weight(1f)
-                            .height(54.dp)
+                            // 上下留 6dp，和左右一致；16dp 内圆角 + 6dp 内边距正好
+                            // 对上外框 22dp 的圆心，不会出现上下的 r 角看起来更小。
+                            // 50dp 仍然是足够的触控高度（内容实测约 38dp）。
+                            .height(50.dp)
                             // 圆角 16dp，不是 26dp：槽位只有约 64dp 宽，26dp 圆角在
-                            // 54dp 高里几乎是正圆，文字所在的水平高度上弦宽只剩 53dp，
+                            // 50dp 高里几乎是正圆，文字所在的水平高度上弦宽只剩 53dp，
                             // 西语 Entrenamiento（约 61dp）会顶出圆外被形状裁掉。
                             // 16dp 时同一高度弦宽约 62dp，配合下面的自适应字号才放得下。
                             .clip(squircle(16.dp))

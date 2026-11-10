@@ -73,8 +73,16 @@ fun handbookCategories(trackId: String): List<String> =
 
 // ---------------- 路线参数 ----------------
 
-/** 路线顶端海拔（用于进度可视化）。 */
-const val SUMMIT_ALTITUDE = 8000
+/**
+ * 路线顶端海拔（用于进度可视化）。
+ *
+ * 珠峰官方高程 8,848.86 m（2020 中尼联合测定）。海拔内部一律按整米累加，
+ * 所以这里取 8,848；对外显示时用 [SUMMIT_ALTITUDE_LABEL] 补上小数。
+ */
+const val SUMMIT_ALTITUDE = 8848
+
+/** 峰顶的对外显示值。只在「目标刻度」和「已冲顶」两处用。 */
+const val SUMMIT_ALTITUDE_LABEL = "8,848.86"
 
 /** 规划中的其他课程轨道 —— 数据层已支持，界面会显示为「即将开放」。 */
 data class PlannedTrack(val id: String, val title: String, val subtitle: String, val icon: String)

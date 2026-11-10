@@ -195,6 +195,15 @@ fun PathScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(top = 4.dp, bottom = 20.dp)
                 ) {
+                    // 山峰里程碑：只放第一页。分页是每 2 个单元一页，跟着每页都插会
+                    // 变成三张一模一样的卡；用户滑到后面本来也已经有课程内容可看。
+                    if (pageIndex == 0) {
+                        item(key = "mountain_milestone") {
+                            Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+                                MountainMilestoneBlock(currentAlt = altitude)
+                            }
+                        }
+                    }
                     pageUnits.forEach { unit ->
                         val globalIndex = units.indexOfFirst { it.id == unit.id }
                         val startAlt = altitudeBeforeUnit(trackId, globalIndex)

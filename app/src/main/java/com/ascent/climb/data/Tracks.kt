@@ -65,7 +65,7 @@ fun summitOfTrack(trackId: String): Int = trackCurve(trackId).summit
 /**
  * 档案页展示用的目标刻度。
  *
- * 攀登沿用 8,000 这个对外说的整数目标（教学口径一直是「5000 → 8000」），
+ * 攀登用珠峰官方高程（8,848.86，内部按整米 8,848 计），
  * 徒步没有这个约定，直接用自己路线的最高点（冈仁波齐 5,630 m）。
  */
 fun displaySummitOf(trackId: String): Int =

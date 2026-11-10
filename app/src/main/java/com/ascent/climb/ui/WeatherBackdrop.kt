@@ -116,6 +116,9 @@ private fun skyOf(mood: WeatherMood, night: Boolean): Sky = when (mood) {
     )
 }
 
+/** 雪花专用冰蓝。雪天底色接近白，白色雪花在浅色主题下等于没画。 */
+private val ICE_BLUE = Color(0xFF7FB8DE)
+
 private class Drop(val x: Float, val y0: Float, val len: Float, val spd: Float, val alpha: Float)
 private class Flake(val x: Float, val y0: Float, val r: Float, val spd: Float, val drift: Float, val alpha: Float)
 
@@ -331,23 +334,30 @@ private fun DrawScope.drawSnow(flakes: List<List<Flake>>, sky: Sky, t: Float) {
             )
         }
     }
-    // 近处的六角雪花：画 3 条交叉线，比圆点更像雪
+    // 近处的六角雪花：画 3 条交叉线，比圆点更像雪。
+    // 雪天底色是 #F8FBFE → #E7F0FA，纯白雪花（sky.particle）几乎看不见，这里单独用冰蓝。
+    // 圆形雪粒保持原样，只改这一层。
     val arms = listOf(
         Triple(0.24f, 0.13f, 7f),
         Triple(0.62f, 0.085f, 9f),
         Triple(0.40f, 0.22f, 6f),
-        Triple(0.84f, 0.175f, 8f)
+        Triple(0.84f, 0.175f, 8f),
+        Triple(0.10f, 0.09f, 6f),
+        Triple(0.72f, 0.235f, 5.5f),
+        Triple(0.46f, 0.05f, 6.5f)
     )
     arms.forEachIndexed { i, (fx, fy, len) ->
         val cx = size.width * fx
         val cy = size.height * fy + sin(t * 0.4f + i) * size.height * 0.004f
         val l = len.dp.toPx()
-        val c = sky.particle.copy(alpha = 0.85f)
+        val c = ICE_BLUE.copy(alpha = 0.90f)
+        // 每朵自己慢慢转，七朵才不会像同一个图章盖出来的
+        val spin = t * (0.35f + i * 0.12f)
         for (k in 0 until 3) {
-            val a = (k * 60f) * (Math.PI / 180f).toFloat()
+            val a = spin + (k * 60f) * (Math.PI / 180f).toFloat()
             val dx = cos(a) * l
             val dy = sin(a) * l
-            drawLine(c, Offset(cx - dx, cy - dy), Offset(cx + dx, cy + dy), 1.2.dp.toPx(), StrokeCap.Round)
+            drawLine(c, Offset(cx - dx, cy - dy), Offset(cx + dx, cy + dy), 1.3.dp.toPx(), StrokeCap.Round)
         }
     }
 }

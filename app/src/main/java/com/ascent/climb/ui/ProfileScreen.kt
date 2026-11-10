@@ -84,6 +84,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import com.ascent.climb.data.activeTrackId
+import com.ascent.climb.data.SUMMIT_ALTITUDE_LABEL
 import com.ascent.climb.data.displaySummitOf
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -456,6 +457,7 @@ private fun ProfileBody(
     onOpenFeedback: () -> Unit,
     listState: LazyListState
 ) {
+    var showMountainHistory by remember { mutableStateOf(false) }
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
     // 隐藏入口：连点版本号 7 次。不显示任何提示文案 —— 连点本身就是约定俗成的入口，
     // 提示会把它暴露给所有用户。
@@ -546,8 +548,11 @@ private fun ProfileBody(
 
         // ---------------- 海拔 ----------------
         item(key = "alt") {
-            // 目标刻度跟着当前大类走：攀登 8,000，徒步用自己路线的最高点
+            // 目标刻度跟着当前大类走：攀登用珠峰官方高程 8,848.86，徒步用自己路线的最高点
             val summitAlt = displaySummitOf(activeTrackId())
+            val isClimb = activeTrackId() == CLIMB_TRACK
+            val summitText =
+                if (isClimb) SUMMIT_ALTITUDE_LABEL else formatMeters(summitAlt)
             val frac = if (summitAlt == 0) 0f else (altitude.toFloat() / summitAlt.toFloat()).coerceIn(0f, 1f)
             val a = clayAccents()
             ClayColumn(
@@ -575,7 +580,7 @@ private fun ProfileBody(
                                 fontFamily = MonoNumbers
                             )
                             Text(
-                                text = "M / ${formatMeters(summitAlt)}",
+                                text = "M / $summitText",
                                 color = a.heroText2,
                                 fontSize = 13.sp,
                                 fontFamily = MonoNumbers,
@@ -595,6 +600,14 @@ private fun ProfileBody(
                     color = a.lessons,
                     track = Color(0x33FFFFFF),
                     height = 8.dp
+                )
+                // 历史山峰入口：全量 88 座在这里看，路径页只展示当前那一座。
+                Box(Modifier.fillMaxWidth().height(1.dp).background(Color(0x22FFFFFF)))
+                MountainHistoryEntry(
+                    currentAlt = altitude,
+                    onClick = { showMountainHistory = true },
+                    fg = a.heroText,
+                    sub = a.heroText2
                 )
             }
         }
@@ -713,6 +726,10 @@ private fun ProfileBody(
                 Text(stringResource(R.string.prof_version, BuildConfig.VERSION_NAME), color = clayAccents().sub, fontSize = 11.sp)
             }
         }
+    }
+
+    if (showMountainHistory) {
+        MountainHistorySheet(currentAlt = altitude, onDismiss = { showMountainHistory = false })
     }
 }
 

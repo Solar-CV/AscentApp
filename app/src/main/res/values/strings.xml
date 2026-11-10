@@ -509,4 +509,28 @@
     <string name="set_weather_title">天气背景</string>
     <string name="set_weather_auto_on">跟随所在地天气自动切换</string>
     <string name="set_weather_auto_off">固定为晴天</string>
+    <!-- 山峰里程碑（路径页卡片 / 我的 → 历史山峰） -->
+    <string name="mtn_current">当前 %1$s m</string>
+    <string name="mtn_remaining">还差 %1$s m</string>
+    <string name="mtn_summit_reached">已到达</string>
+    <string name="mtn_unlocked">已解锁</string>
+    <string name="mtn_row_locked">未到达</string>
+    <string name="mtn_jump_count">已解锁 %1$d 座 · 历史记录</string>
+    <string name="mtn_jump_none">历史记录 · 尚未解锁</string>
+    <string name="mtn_milestone_rank">里程碑 %1$s m · 世界第 %2$d 高</string>
+    <string name="mtn_milestone_range">里程碑 %1$s m · %2$s</string>
+    <string name="mtn_metric_span">山体跨度</string>
+    <string name="mtn_metric_snowline">雪线</string>
+    <string name="mtn_metric_range">所在山脉</string>
+    <string name="mtn_note_contour">等高线地形图 · 等高距 200 m · 依据公开高程数据绘制</string>
+    <string name="mtn_note_render">地形示意图 · 依据公开高程数据绘制，非实景照片</string>
+    <string name="mtn_entry_title">历史山峰</string>
+    <string name="mtn_entry_none">尚未解锁</string>
+    <string name="mtn_entry_progress">已解锁 %1$d / %2$d</string>
+    <string name="mtn_history_title">山峰历史</string>
+    <string name="mtn_history_summary">已解锁 %1$d / %2$d 座 · 八千米 %3$d / %4$d</string>
+    <string name="mtn_row_rank">世界第 %1$d 高 · 山高 %2$s m</string>
+    <string name="mtn_row_milestone">里程碑 %1$s m · 山高 %2$s m</string>
+    <string name="mtn_detail_progress">当前 %1$s m · 里程碑 %2$s m</string>
+
 </resources>

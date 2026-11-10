@@ -496,4 +496,28 @@
     <string name="set_weather_title">Погодный фон</string>
     <string name="set_weather_auto_on">Меняется по погоде в вашем городе</string>
     <string name="set_weather_auto_off">Всегда ясно</string>
+    <!-- Вехи вершин (карточка на маршруте / Профиль → История вершин) -->
+    <string name="mtn_current">Сейчас %1$s м</string>
+    <string name="mtn_remaining">осталось %1$s м</string>
+    <string name="mtn_summit_reached">Достигнута</string>
+    <string name="mtn_unlocked">Открыта</string>
+    <string name="mtn_row_locked">Не достигнута</string>
+    <string name="mtn_jump_count">Открыто: %1$d · История</string>
+    <string name="mtn_jump_none">История · пока пусто</string>
+    <string name="mtn_milestone_rank">Веха %1$s м · %2$d-я в мире</string>
+    <string name="mtn_milestone_range">Веха %1$s м · %2$s</string>
+    <string name="mtn_metric_span">Ширина массива</string>
+    <string name="mtn_metric_snowline">Снеговая линия</string>
+    <string name="mtn_metric_range">Горная система</string>
+    <string name="mtn_note_contour">Карта горизонталей · сечение 200 м · по открытым данным о высотах</string>
+    <string name="mtn_note_render">Схема рельефа · по открытым данным о высотах, не фотография</string>
+    <string name="mtn_entry_title">История вершин</string>
+    <string name="mtn_entry_none">Пока пусто</string>
+    <string name="mtn_entry_progress">Открыто %1$d / %2$d</string>
+    <string name="mtn_history_title">История вершин</string>
+    <string name="mtn_history_summary">Открыто %1$d / %2$d · восьмитысячники %3$d / %4$d</string>
+    <string name="mtn_row_rank">%1$d-я в мире · высота %2$s м</string>
+    <string name="mtn_row_milestone">Веха %1$s м · высота %2$s м</string>
+    <string name="mtn_detail_progress">Сейчас %1$s м · веха %2$s м</string>
+
 </resources>

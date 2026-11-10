@@ -472,4 +472,28 @@
     <string name="set_weather_title">Sfondo meteo</string>
     <string name="set_weather_auto_on">Si adatta al meteo locale</string>
     <string name="set_weather_auto_off">Fisso sul sereno</string>
+    <!-- Traguardi delle vette (scheda del percorso / Profilo → Cronologia delle vette) -->
+    <string name="mtn_current">Attuale %1$s m</string>
+    <string name="mtn_remaining">mancano %1$s m</string>
+    <string name="mtn_summit_reached">Raggiunta</string>
+    <string name="mtn_unlocked">Sbloccata</string>
+    <string name="mtn_row_locked">Non raggiunta</string>
+    <string name="mtn_jump_count">%1$d sbloccate · Cronologia</string>
+    <string name="mtn_jump_none">Cronologia · nessuna</string>
+    <string name="mtn_milestone_rank">Traguardo %1$s m · n. %2$d al mondo</string>
+    <string name="mtn_milestone_range">Traguardo %1$s m · %2$s</string>
+    <string name="mtn_metric_span">Ampiezza del massiccio</string>
+    <string name="mtn_metric_snowline">Limite delle nevi</string>
+    <string name="mtn_metric_range">Catena</string>
+    <string name="mtn_note_contour">Carta a curve di livello · equidistanza 200 m · da dati altimetrici pubblici</string>
+    <string name="mtn_note_render">Schizzo del terreno · da dati altimetrici pubblici, non una foto</string>
+    <string name="mtn_entry_title">Cronologia delle vette</string>
+    <string name="mtn_entry_none">Nessuna</string>
+    <string name="mtn_entry_progress">%1$d / %2$d sbloccate</string>
+    <string name="mtn_history_title">Cronologia delle vette</string>
+    <string name="mtn_history_summary">%1$d / %2$d sbloccate · ottomila %3$d / %4$d</string>
+    <string name="mtn_row_rank">n. %1$d al mondo · %2$s m</string>
+    <string name="mtn_row_milestone">Traguardo %1$s m · %2$s m di quota</string>
+    <string name="mtn_detail_progress">Attuale %1$s m · traguardo %2$s m</string>
+
 </resources>

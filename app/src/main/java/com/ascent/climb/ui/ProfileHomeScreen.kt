@@ -35,7 +35,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ascent.climb.data.ACHIEVEMENTS
+import com.ascent.climb.data.CLIMB_TRACK
 import com.ascent.climb.data.ProgressStore
+import com.ascent.climb.data.SUMMIT_ALTITUDE_LABEL
 import com.ascent.climb.data.activeTrackId
 import com.ascent.climb.data.displaySummitOf
 import com.ascent.climb.data.ALL_LESSONS
@@ -79,7 +81,12 @@ fun ProfileHomeScreen(
     val overall = if (ALL_LESSONS.isEmpty()) 0f
     else doneHere.toFloat() / ALL_LESSONS.size.toFloat()
     val summitAlt = displaySummitOf(activeTrackId())
+    val isClimb = activeTrackId() == CLIMB_TRACK
     val altFrac = if (summitAlt == 0) 0f else altitude.toFloat() / summitAlt.toFloat()
+    // 攀登轨道的目标刻度写珠峰官方高程 8,848.86；冲顶后当前值也用小数，两边读起来一致
+    val summitLabel = if (isClimb) SUMMIT_ALTITUDE_LABEL else formatMeters(summitAlt)
+    val altLabel =
+        if (isClimb && altitude >= summitAlt) SUMMIT_ALTITUDE_LABEL else formatMeters(altitude)
 
     // 系统返回 / 全面屏侧滑手势：回到「我的」，而不是退出 App
     BackHandler { onBack() }
@@ -152,7 +159,7 @@ fun ProfileHomeScreen(
                             Text(
                                 text = stringResource(
                                     R.string.home_meta,
-                                    formatMeters(altitude),
+                                    altLabel,
                                     doneHere,
                                     ALL_LESSONS.size
                                 ),
@@ -266,7 +273,7 @@ fun ProfileHomeScreen(
                     )
                     ClayStatRow(
                         label = stringResource(R.string.home_progress_altitude),
-                        value = "${formatMeters(altitude)} / ${formatMeters(summitAlt)}",
+                        value = "$altLabel / $summitLabel",
                         icon = Ic.MountainSnow,
                         tint = a.lessons,
                         ratio = altFrac,
@@ -352,6 +359,7 @@ fun ProfileHomeScreen(
             }
         }
     }
+
 }
 
 /**

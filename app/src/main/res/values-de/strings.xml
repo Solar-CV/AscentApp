@@ -472,4 +472,28 @@
     <string name="set_weather_title">Wetterhintergrund</string>
     <string name="set_weather_auto_on">Passt sich dem Wetter vor Ort an</string>
     <string name="set_weather_auto_off">Fest auf klar</string>
+    <!-- Gipfel-Meilensteine (Karte im Pfad / Profil → Gipfelverlauf) -->
+    <string name="mtn_current">Jetzt %1$s m</string>
+    <string name="mtn_remaining">noch %1$s m</string>
+    <string name="mtn_summit_reached">Erreicht</string>
+    <string name="mtn_unlocked">Freigeschaltet</string>
+    <string name="mtn_row_locked">Nicht erreicht</string>
+    <string name="mtn_jump_count">%1$d freigeschaltet · Verlauf</string>
+    <string name="mtn_jump_none">Verlauf · noch keine</string>
+    <string name="mtn_milestone_rank">Meilenstein %1$s m · Nr. %2$d der Welt</string>
+    <string name="mtn_milestone_range">Meilenstein %1$s m · %2$s</string>
+    <string name="mtn_metric_span">Massivbreite</string>
+    <string name="mtn_metric_snowline">Schneegrenze</string>
+    <string name="mtn_metric_range">Gebirge</string>
+    <string name="mtn_note_contour">Höhenlinienkarte · 200 m Abstand · nach öffentlichen Höhendaten gezeichnet</string>
+    <string name="mtn_note_render">Geländeskizze · nach öffentlichen Höhendaten gezeichnet, keine Fotografie</string>
+    <string name="mtn_entry_title">Gipfelverlauf</string>
+    <string name="mtn_entry_none">Noch keine</string>
+    <string name="mtn_entry_progress">%1$d / %2$d freigeschaltet</string>
+    <string name="mtn_history_title">Gipfelverlauf</string>
+    <string name="mtn_history_summary">%1$d / %2$d freigeschaltet · Achttausender %3$d / %4$d</string>
+    <string name="mtn_row_rank">Nr. %1$d der Welt · %2$s m hoch</string>
+    <string name="mtn_row_milestone">Meilenstein %1$s m · %2$s m hoch</string>
+    <string name="mtn_detail_progress">Jetzt %1$s m · Meilenstein %2$s m</string>
+
 </resources>

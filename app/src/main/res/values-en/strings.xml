@@ -510,4 +510,28 @@
     <string name="set_weather_title">Weather background</string>
     <string name="set_weather_auto_on">Follows the weather where you are</string>
     <string name="set_weather_auto_off">Fixed to clear skies</string>
+    <!-- Peak milestones (path card / Profile → Peak history) -->
+    <string name="mtn_current">Now %1$s m</string>
+    <string name="mtn_remaining">%1$s m to go</string>
+    <string name="mtn_summit_reached">Reached</string>
+    <string name="mtn_unlocked">Unlocked</string>
+    <string name="mtn_row_locked">Not yet</string>
+    <string name="mtn_jump_count">%1$d unlocked · History</string>
+    <string name="mtn_jump_none">History · none yet</string>
+    <string name="mtn_milestone_rank">Milestone %1$s m · #%2$d in the world</string>
+    <string name="mtn_milestone_range">Milestone %1$s m · %2$s</string>
+    <string name="mtn_metric_span">Massif span</string>
+    <string name="mtn_metric_snowline">Snow line</string>
+    <string name="mtn_metric_range">Range</string>
+    <string name="mtn_note_contour">Contour map · 200 m interval · drawn from public elevation data</string>
+    <string name="mtn_note_render">Terrain sketch · drawn from public elevation data, not a photograph</string>
+    <string name="mtn_entry_title">Peak history</string>
+    <string name="mtn_entry_none">None yet</string>
+    <string name="mtn_entry_progress">%1$d / %2$d unlocked</string>
+    <string name="mtn_history_title">Peak history</string>
+    <string name="mtn_history_summary">%1$d / %2$d unlocked · 8000ers %3$d / %4$d</string>
+    <string name="mtn_row_rank">#%1$d in the world · %2$s m high</string>
+    <string name="mtn_row_milestone">Milestone %1$s m · %2$s m high</string>
+    <string name="mtn_detail_progress">Now %1$s m · milestone %2$s m</string>
+
 </resources>

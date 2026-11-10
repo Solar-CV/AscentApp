@@ -472,4 +472,28 @@
     <string name="set_weather_title">Vädertema</string>
     <string name="set_weather_auto_on">Följer vädret där du är</string>
     <string name="set_weather_auto_off">Fast på klart</string>
+    <!-- Toppmilstolpar (kortet i stigen / Profil → Topphistorik) -->
+    <string name="mtn_current">Nu %1$s m</string>
+    <string name="mtn_remaining">%1$s m kvar</string>
+    <string name="mtn_summit_reached">Uppnådd</string>
+    <string name="mtn_unlocked">Upplåst</string>
+    <string name="mtn_row_locked">Inte nådd</string>
+    <string name="mtn_jump_count">%1$d upplåsta · Historik</string>
+    <string name="mtn_jump_none">Historik · inga än</string>
+    <string name="mtn_milestone_rank">Milstolpe %1$s m · nr %2$d i världen</string>
+    <string name="mtn_milestone_range">Milstolpe %1$s m · %2$s</string>
+    <string name="mtn_metric_span">Massivets bredd</string>
+    <string name="mtn_metric_snowline">Snögräns</string>
+    <string name="mtn_metric_range">Bergskedja</string>
+    <string name="mtn_note_contour">Höjdkurvekarta · ekvidistans 200 m · ritad efter öppna höjddata</string>
+    <string name="mtn_note_render">Terrängskiss · ritad efter öppna höjddata, inte ett foto</string>
+    <string name="mtn_entry_title">Topphistorik</string>
+    <string name="mtn_entry_none">Inga än</string>
+    <string name="mtn_entry_progress">%1$d / %2$d upplåsta</string>
+    <string name="mtn_history_title">Topphistorik</string>
+    <string name="mtn_history_summary">%1$d / %2$d upplåsta · åttatusenmetare %3$d / %4$d</string>
+    <string name="mtn_row_rank">nr %1$d i världen · %2$s m hög</string>
+    <string name="mtn_row_milestone">Milstolpe %1$s m · %2$s m hög</string>
+    <string name="mtn_detail_progress">Nu %1$s m · milstolpe %2$s m</string>
+
 </resources>
