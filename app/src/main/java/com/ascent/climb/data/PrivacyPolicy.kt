@@ -63,7 +63,7 @@ object PrivacyPolicy {
             blocks = listOf(
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "AscentRoam 由个人开发者独立开发与维护，不是由某家公司运营的产品。对本政策有疑问，或需要行使下文权利，请使用第 10 节的联系方式。"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "本政策适用于 AscentRoam Android 应用（包名 com.ascentroam.app）以及本站。如果你只使用离线功能、不注册账号，我们不会收到任何可识别你身份的信息。"),
-                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "生效日期：2026 年 11 月 5 日。此前版本不再适用。"),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "生效日期：2026 年 11 月 9 日。此前版本不再适用。"),
             )
         ),
         PrivacySection(
@@ -175,7 +175,7 @@ object PrivacyPolicy {
             blocks = listOf(
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "AscentRoam 由個人開發者獨立開發與維護，不是由某家公司營運的產品。對本政策有疑問，或需要行使下文權利，請使用第 10 節的聯絡方式。"),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "本政策適用於 AscentRoam Android 應用程式（包名 com.ascentroam.app）以及本站。如果你只使用離線功能、不註冊帳號，我們不會收到任何可識別你身份的資訊。"),
-                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "生效日期：2026 年 11 月 5 日。此前版本不再適用。"),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "生效日期：2026 年 11 月 9 日。此前版本不再適用。"),
             )
         ),
         PrivacySection(
@@ -287,7 +287,7 @@ object PrivacyPolicy {
             blocks = listOf(
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "AscentRoam is built and maintained by an individual developer, not operated by a company. For questions about this policy, or to exercise the rights below, use the contact details in section 10."),
                 PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "This policy covers the AscentRoam Android app (package com.ascentroam.app) and this website. If you use only the offline features and never create an account, we receive no information that identifies you."),
-                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "Effective date: 5 November 2026. Earlier versions no longer apply."),
+                PrivacyBlock(PrivacyBlockKind.PARAGRAPH, text = "Effective date: 9 November 2026. Earlier versions no longer apply."),
             )
         ),
         PrivacySection(
