@@ -99,6 +99,51 @@ fun mountainSnowline(original: String): String =
     if (original.firstOrNull()?.isDigit() == true) original
     else ctext("mtn.snow.none", original)
 
+/**
+ * 山峰介绍。
+ *
+ * 中文原文在 `data/MountainIntro.kt`，其余语言走内容层。
+ * 没写过介绍的山返回 null，详情页据此整段不显示 —— 不拿占位文案凑数。
+ */
+@Composable
+fun mountainIntro(m: com.ascent.climb.data.Mountain): String? {
+    val original = com.ascent.climb.data.MountainIntro.zh(m) ?: return null
+    return ctext("mtn.${m.id}.intro", original)
+}
+
+/**
+ * 徒步路线名。
+ *
+ * 与山峰同一套查找链：当前语言 → 英文 → 中文原文。
+ * 目前只落了英文与繁中，其余语言回退英文 —— 路线名多是专有名词，
+ * 回退英文比回退中文可读。
+ */
+@Composable
+fun routeName(r: com.ascent.climb.data.HikingRoute): String =
+    ctext("hike.${r.id}.name", r.nameZh)
+
+/** 路线所在地区（「中国 · 云南」这种展示串）。 */
+@Composable
+fun routeArea(r: com.ascent.climb.data.HikingRoute): String =
+    ctext("hike.${r.id}.area", r.areaZh)
+
+/** 路线简介；没写过时返回空串，详情页整段不显示。 */
+@Composable
+fun routeBrief(r: com.ascent.climb.data.HikingRoute): String =
+    ctext("hike.${r.id}.brief", r.briefZh)
+
+/**
+ * 徒步路线长介绍。
+ *
+ * 中文原文在 `data/HikeIntro.kt`，其余语言走内容层键 `hike.<id>.intro`。
+ * 没写过的线返回 null，详情页回退到 [routeBrief] —— 不拿占位文案凑数。
+ */
+@Composable
+fun routeIntro(r: com.ascent.climb.data.HikingRoute): String? {
+    val original = com.ascent.climb.data.HikeIntro.zh(r.id) ?: return null
+    return ctext("hike.${r.id}.intro", original)
+}
+
 /** 课程要点（`brief` 列表的第 [index] 条，从 1 开始）。 */
 @Composable
 fun briefText(lessonId: String, index: Int, original: String): String =

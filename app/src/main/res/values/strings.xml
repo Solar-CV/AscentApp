@@ -375,6 +375,7 @@
     <string name="path_summit">登顶 · %1$s %2$s M</string>
     <string name="path_unit_clear">单元通关</string>
     <string name="path_to_summit">距顶峰 %1$s M</string>
+    <string name="path_to_top">距最高点 %1$s M</string>
     <string name="path_done_pct">已完成 %1$d / %2$d 课 · %3$d%%</string>
     <string name="path_you_are_here">你在这里</string>
 
@@ -515,8 +516,8 @@
     <string name="mtn_summit_reached">已到达</string>
     <string name="mtn_unlocked">已解锁</string>
     <string name="mtn_row_locked">未到达</string>
-    <string name="mtn_jump_count">已解锁 %1$d 座 · 历史记录</string>
-    <string name="mtn_jump_none">历史记录 · 尚未解锁</string>
+    <string name="mtn_jump_count">已解锁 %1$d 座 · 山峰百科</string>
+    <string name="mtn_jump_none">山峰百科 · 尚未解锁</string>
     <string name="mtn_milestone_rank">里程碑 %1$s m · 世界第 %2$d 高</string>
     <string name="mtn_milestone_range">里程碑 %1$s m · %2$s</string>
     <string name="mtn_metric_span">山体跨度</string>
@@ -524,13 +525,35 @@
     <string name="mtn_metric_range">所在山脉</string>
     <string name="mtn_note_contour">等高线地形图 · 等高距 200 m · 依据公开高程数据绘制</string>
     <string name="mtn_note_render">地形示意图 · 依据公开高程数据绘制，非实景照片</string>
-    <string name="mtn_entry_title">历史山峰</string>
+    <string name="mtn_intro_title">关于这座山</string>
+    <string name="mtn_entry_title">山峰百科</string>
     <string name="mtn_entry_none">尚未解锁</string>
     <string name="mtn_entry_progress">已解锁 %1$d / %2$d</string>
-    <string name="mtn_history_title">山峰历史</string>
+    <string name="mtn_history_title">山峰百科</string>
     <string name="mtn_history_summary">已解锁 %1$d / %2$d 座 · 八千米 %3$d / %4$d</string>
     <string name="mtn_row_rank">世界第 %1$d 高 · 山高 %2$s m</string>
     <string name="mtn_row_milestone">里程碑 %1$s m · 山高 %2$s m</string>
     <string name="mtn_detail_progress">当前 %1$s m · 里程碑 %2$s m</string>
+
+    <!-- 徒步百科 -->
+    <string name="hike_entry_title">徒步百科</string>
+    <string name="hike_entry_none">尚未解锁</string>
+    <string name="hike_entry_progress">已解锁 %1$d / %2$d</string>
+    <string name="hike_history_title">徒步百科</string>
+    <string name="hike_history_summary">已解锁 %1$d / %2$d 条 · 最高 %3$s m</string>
+    <string name="hike_jump_count">已解锁 %1$d 条 · 徒步百科</string>
+    <string name="hike_jump_none">徒步百科 · 尚未解锁</string>
+    <string name="hike_row_milestone">解锁 %1$s m · 最高 %2$s m</string>
+    <string name="hike_detail_progress">当前 %1$s m · 解锁于 %2$s m</string>
+    <string name="hike_metric_distance">距离</string>
+    <string name="hike_metric_gain">累计爬升</string>
+    <string name="hike_metric_days">天数</string>
+    <string name="hike_note_profile">海拔剖面 · 按主要营地与垭口高程绘制，非实景地图</string>
+    <string name="hike_note_map">地形示意 · 公开高程数据 + © OpenStreetMap contributors，非导航用途</string>
+    <string name="hike_intro_title">关于这条线</string>
+    <string name="hike_high_line">最高点 %1$s m · %2$s</string>
+    <plurals name="hike_days">
+        <item quantity="other">%1$d 天</item>
+    </plurals>
 
 </resources>

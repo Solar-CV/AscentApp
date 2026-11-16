@@ -71,6 +71,7 @@ import com.ascent.climb.data.AuthResult
 import com.ascent.climb.data.CLIMB_TRACK
 import com.ascent.climb.data.CodePurpose
 import com.ascent.climb.data.TREK_TRACK
+import com.ascent.climb.data.altitudeForTrack
 import com.ascent.climb.data.MockAuthApi
 import com.ascent.climb.data.AuthApi
 import com.ascent.climb.data.cloud.CloudAuthApi
@@ -458,6 +459,10 @@ private fun ProfileBody(
     listState: LazyListState
 ) {
     var showMountainHistory by remember { mutableStateOf(false) }
+    var showHikeAtlas by remember { mutableStateOf(false) }
+    // 两个百科各按自己轨道的海拔解锁：站在徒步页时，山峰百科的进度不能跟着变成 200 m。
+    val climbAlt = remember(completed) { altitudeForTrack(CLIMB_TRACK, completed) }
+    val trekAlt = remember(completed) { altitudeForTrack(TREK_TRACK, completed) }
     var bankUrlDraft by remember { mutableStateOf(BankRepository.baseUrl) }
     // 隐藏入口：连点版本号 7 次。不显示任何提示文案 —— 连点本身就是约定俗成的入口，
     // 提示会把它暴露给所有用户。
@@ -589,7 +594,10 @@ private fun ProfileBody(
                         }
                     }
                     Text(
-                        text = stringResource(R.string.path_to_summit, formatMeters((summitAlt - altitude).coerceAtLeast(0))),
+                        text = stringResource(
+                            if (isClimb) R.string.path_to_summit else R.string.path_to_top,
+                            formatMeters((summitAlt - altitude).coerceAtLeast(0))
+                        ),
                         color = a.heroText2,
                         fontSize = 12.sp,
                         modifier = Modifier.padding(bottom = 6.dp)
@@ -601,11 +609,19 @@ private fun ProfileBody(
                     track = Color(0x33FFFFFF),
                     height = 8.dp
                 )
-                // 历史山峰入口：全量 88 座在这里看，路径页只展示当前那一座。
+                // 两个百科入口：全量在这里看，路径页只展示当前该看到的那一条。
+                // 海拔各取所属轨道，不跟底部 tab 的当前轨道走。
                 Box(Modifier.fillMaxWidth().height(1.dp).background(Color(0x22FFFFFF)))
                 MountainHistoryEntry(
-                    currentAlt = altitude,
+                    currentAlt = climbAlt,
                     onClick = { showMountainHistory = true },
+                    fg = a.heroText,
+                    sub = a.heroText2
+                )
+                Box(Modifier.fillMaxWidth().height(1.dp).background(Color(0x22FFFFFF)))
+                HikeAtlasEntry(
+                    currentAlt = trekAlt,
+                    onClick = { showHikeAtlas = true },
                     fg = a.heroText,
                     sub = a.heroText2
                 )
@@ -729,7 +745,10 @@ private fun ProfileBody(
     }
 
     if (showMountainHistory) {
-        MountainHistorySheet(currentAlt = altitude, onDismiss = { showMountainHistory = false })
+        MountainHistorySheet(currentAlt = climbAlt, onDismiss = { showMountainHistory = false })
+    }
+    if (showHikeAtlas) {
+        HikeAtlasSheet(currentAlt = trekAlt, onDismiss = { showHikeAtlas = false })
     }
 }
 

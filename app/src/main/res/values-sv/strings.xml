@@ -341,6 +341,7 @@
     <string name="path_summit">Topp · %1$s %2$s m</string>
     <string name="path_unit_clear">Enhet klarad</string>
     <string name="path_to_summit">%1$s m till toppen</string>
+    <string name="path_to_top">%1$s m till högsta punkten</string>
     <string name="path_done_pct">%1$d / %2$d lektioner · %3$d%%</string>
     <string name="path_you_are_here">Du är här</string>
     <string name="dev_back_to">Tillbaka till utvecklarläget</string>
@@ -478,8 +479,8 @@
     <string name="mtn_summit_reached">Uppnådd</string>
     <string name="mtn_unlocked">Upplåst</string>
     <string name="mtn_row_locked">Inte nådd</string>
-    <string name="mtn_jump_count">%1$d upplåsta · Historik</string>
-    <string name="mtn_jump_none">Historik · inga än</string>
+    <string name="mtn_jump_count">%1$d upplåsta · Uppslagsverk</string>
+    <string name="mtn_jump_none">Uppslagsverk · inga än</string>
     <string name="mtn_milestone_rank">Milstolpe %1$s m · nr %2$d i världen</string>
     <string name="mtn_milestone_range">Milstolpe %1$s m · %2$s</string>
     <string name="mtn_metric_span">Massivets bredd</string>
@@ -487,13 +488,36 @@
     <string name="mtn_metric_range">Bergskedja</string>
     <string name="mtn_note_contour">Höjdkurvekarta · ekvidistans 200 m · ritad efter öppna höjddata</string>
     <string name="mtn_note_render">Terrängskiss · ritad efter öppna höjddata, inte ett foto</string>
-    <string name="mtn_entry_title">Topphistorik</string>
+    <string name="mtn_intro_title">Om den här toppen</string>
+    <string name="mtn_entry_title">Toppencyklopedi</string>
     <string name="mtn_entry_none">Inga än</string>
     <string name="mtn_entry_progress">%1$d / %2$d upplåsta</string>
-    <string name="mtn_history_title">Topphistorik</string>
+    <string name="mtn_history_title">Toppencyklopedi</string>
     <string name="mtn_history_summary">%1$d / %2$d upplåsta · åttatusenmetare %3$d / %4$d</string>
     <string name="mtn_row_rank">nr %1$d i världen · %2$s m hög</string>
     <string name="mtn_row_milestone">Milstolpe %1$s m · %2$s m hög</string>
     <string name="mtn_detail_progress">Nu %1$s m · milstolpe %2$s m</string>
+
+    <!-- 徒步百科 -->
+    <string name="hike_entry_title">Vandringsatlas</string>
+    <string name="hike_entry_none">Inga ännu</string>
+    <string name="hike_entry_progress">%1$d / %2$d upplåsta</string>
+    <string name="hike_history_title">Vandringsatlas</string>
+    <string name="hike_history_summary">%1$d / %2$d upplåsta · högsta punkt %3$s m</string>
+    <string name="hike_jump_count">%1$d upplåsta · Vandringsatlas</string>
+    <string name="hike_jump_none">Vandringsatlas · inga ännu</string>
+    <string name="hike_row_milestone">Låses upp vid %1$s m · högsta punkt %2$s m</string>
+    <string name="hike_detail_progress">Nu %1$s m · låses upp vid %2$s m</string>
+    <string name="hike_metric_distance">Distans</string>
+    <string name="hike_metric_gain">Stigning</string>
+    <string name="hike_metric_days">Dagar</string>
+    <string name="hike_note_profile">Höjdprofil · ritad efter läger- och passhöjder, inte en karta</string>
+    <string name="hike_note_map">Terrängskiss · öppna höjddata + © OpenStreetMap contributors, inte för navigering</string>
+    <string name="hike_intro_title">Om leden</string>
+    <string name="hike_high_line">Högsta punkt %1$s m · %2$s</string>
+    <plurals name="hike_days">
+        <item quantity="one">%1$d dag</item>
+        <item quantity="other">%1$d dagar</item>
+    </plurals>
 
 </resources>

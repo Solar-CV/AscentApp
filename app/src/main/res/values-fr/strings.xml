@@ -341,6 +341,7 @@
     <string name="path_summit">Sommet · %1$s %2$s m</string>
     <string name="path_unit_clear">Unité validée</string>
     <string name="path_to_summit">%1$s m jusqu’au sommet</string>
+    <string name="path_to_top">%1$s m jusqu’en haut</string>
     <string name="path_done_pct">%1$d / %2$d leçons · %3$d%%</string>
     <string name="path_you_are_here">Vous êtes ici</string>
     <string name="dev_back_to">Retour au mode développeur</string>
@@ -478,8 +479,8 @@
     <string name="mtn_summit_reached">Atteint</string>
     <string name="mtn_unlocked">Débloqué</string>
     <string name="mtn_row_locked">Non atteint</string>
-    <string name="mtn_jump_count">%1$d débloqués · Historique</string>
-    <string name="mtn_jump_none">Historique · aucun encore</string>
+    <string name="mtn_jump_count">%1$d débloqués · Encyclopédie</string>
+    <string name="mtn_jump_none">Encyclopédie · aucun encore</string>
     <string name="mtn_milestone_rank">Jalon %1$s m · n° %2$d mondial</string>
     <string name="mtn_milestone_range">Jalon %1$s m · %2$s</string>
     <string name="mtn_metric_span">Emprise du massif</string>
@@ -487,13 +488,36 @@
     <string name="mtn_metric_range">Massif</string>
     <string name="mtn_note_contour">Carte en courbes de niveau · équidistance 200 m · d\'après des données d\'altitude publiques</string>
     <string name="mtn_note_render">Croquis de terrain · d\'après des données d\'altitude publiques, pas une photo</string>
-    <string name="mtn_entry_title">Historique des sommets</string>
+    <string name="mtn_intro_title">À propos de ce sommet</string>
+    <string name="mtn_entry_title">Encyclopédie des sommets</string>
     <string name="mtn_entry_none">Aucun encore</string>
     <string name="mtn_entry_progress">%1$d / %2$d débloqués</string>
-    <string name="mtn_history_title">Historique des sommets</string>
+    <string name="mtn_history_title">Encyclopédie des sommets</string>
     <string name="mtn_history_summary">%1$d / %2$d débloqués · plus de 8000 m %3$d / %4$d</string>
     <string name="mtn_row_rank">n° %1$d mondial · %2$s m</string>
     <string name="mtn_row_milestone">Jalon %1$s m · %2$s m d\'altitude</string>
     <string name="mtn_detail_progress">Actuel %1$s m · jalon %2$s m</string>
+
+    <!-- 徒步百科 -->
+    <string name="hike_entry_title">Atlas des randonnées</string>
+    <string name="hike_entry_none">Aucune encore</string>
+    <string name="hike_entry_progress">%1$d / %2$d débloquées</string>
+    <string name="hike_history_title">Atlas des randonnées</string>
+    <string name="hike_history_summary">%1$d / %2$d débloquées · point culminant %3$s m</string>
+    <string name="hike_jump_count">%1$d débloquée · Atlas des randonnées</string>
+    <string name="hike_jump_none">Atlas des randonnées · aucune encore</string>
+    <string name="hike_row_milestone">Débloquée à %1$s m · point culminant %2$s m</string>
+    <string name="hike_detail_progress">Actuel %1$s m · débloquée à %2$s m</string>
+    <string name="hike_metric_distance">Distance</string>
+    <string name="hike_metric_gain">Dénivelé positif</string>
+    <string name="hike_metric_days">Jours</string>
+    <string name="hike_note_profile">Profil altimétrique · tracé d\'après les camps et cols principaux, pas une carte</string>
+    <string name="hike_note_map">Croquis de terrain · données d\'altitude publiques + © OpenStreetMap contributors, pas pour la navigation</string>
+    <string name="hike_intro_title">À propos de cet itinéraire</string>
+    <string name="hike_high_line">Point culminant %1$s m · %2$s</string>
+    <plurals name="hike_days">
+        <item quantity="one">%1$d jour</item>
+        <item quantity="other">%1$d jours</item>
+    </plurals>
 
 </resources>

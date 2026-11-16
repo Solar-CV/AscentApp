@@ -375,6 +375,7 @@
     <string name="path_summit">Summit · %1$s %2$s m</string>
     <string name="path_unit_clear">Unit cleared</string>
     <string name="path_to_summit">%1$s m to the summit</string>
+    <string name="path_to_top">%1$s m to the top</string>
     <string name="path_done_pct">%1$d / %2$d lessons · %3$d%%</string>
     <string name="path_you_are_here">You are here</string>
 
@@ -516,8 +517,8 @@
     <string name="mtn_summit_reached">Reached</string>
     <string name="mtn_unlocked">Unlocked</string>
     <string name="mtn_row_locked">Not yet</string>
-    <string name="mtn_jump_count">%1$d unlocked · History</string>
-    <string name="mtn_jump_none">History · none yet</string>
+    <string name="mtn_jump_count">%1$d unlocked · Atlas</string>
+    <string name="mtn_jump_none">Atlas · none yet</string>
     <string name="mtn_milestone_rank">Milestone %1$s m · #%2$d in the world</string>
     <string name="mtn_milestone_range">Milestone %1$s m · %2$s</string>
     <string name="mtn_metric_span">Massif span</string>
@@ -525,13 +526,36 @@
     <string name="mtn_metric_range">Range</string>
     <string name="mtn_note_contour">Contour map · 200 m interval · drawn from public elevation data</string>
     <string name="mtn_note_render">Terrain sketch · drawn from public elevation data, not a photograph</string>
-    <string name="mtn_entry_title">Peak history</string>
+    <string name="mtn_intro_title">About this peak</string>
+    <string name="mtn_entry_title">Peak atlas</string>
     <string name="mtn_entry_none">None yet</string>
     <string name="mtn_entry_progress">%1$d / %2$d unlocked</string>
-    <string name="mtn_history_title">Peak history</string>
+    <string name="mtn_history_title">Peak atlas</string>
     <string name="mtn_history_summary">%1$d / %2$d unlocked · 8000ers %3$d / %4$d</string>
     <string name="mtn_row_rank">#%1$d in the world · %2$s m high</string>
     <string name="mtn_row_milestone">Milestone %1$s m · %2$s m high</string>
     <string name="mtn_detail_progress">Now %1$s m · milestone %2$s m</string>
+
+    <!-- 徒步百科 -->
+    <string name="hike_entry_title">Trek atlas</string>
+    <string name="hike_entry_none">None yet</string>
+    <string name="hike_entry_progress">%1$d / %2$d unlocked</string>
+    <string name="hike_history_title">Trek atlas</string>
+    <string name="hike_history_summary">%1$d / %2$d unlocked · highest %3$s m</string>
+    <string name="hike_jump_count">%1$d unlocked · Trek atlas</string>
+    <string name="hike_jump_none">Trek atlas · none yet</string>
+    <string name="hike_row_milestone">Unlocks at %1$s m · %2$s m high</string>
+    <string name="hike_detail_progress">Now %1$s m · unlocks at %2$s m</string>
+    <string name="hike_metric_distance">Distance</string>
+    <string name="hike_metric_gain">Total ascent</string>
+    <string name="hike_metric_days">Days</string>
+    <string name="hike_note_profile">Elevation profile · drawn from main camps and passes, not a map</string>
+    <string name="hike_note_map">Terrain sketch · public elevation data + © OpenStreetMap contributors, not for navigation</string>
+    <string name="hike_intro_title">About this route</string>
+    <string name="hike_high_line">High point %1$s m · %2$s</string>
+    <plurals name="hike_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
 
 </resources>

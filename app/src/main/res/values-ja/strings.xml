@@ -361,6 +361,7 @@
     <string name="path_summit">登頂 · %1$s %2$s m</string>
     <string name="path_unit_clear">ユニット制覇</string>
     <string name="path_to_summit">山頂まで %1$s m</string>
+    <string name="path_to_top">最高地点まで %1$s m</string>
     <string name="path_done_pct">%1$d / %2$d レッスン · %3$d%%</string>
     <string name="path_you_are_here">現在地</string>
 
@@ -499,8 +500,8 @@
     <string name="mtn_summit_reached">登頂済み</string>
     <string name="mtn_unlocked">到達済み</string>
     <string name="mtn_row_locked">未到達</string>
-    <string name="mtn_jump_count">%1$d 座到達 · 履歴</string>
-    <string name="mtn_jump_none">履歴 · まだ到達なし</string>
+    <string name="mtn_jump_count">%1$d 座到達 · 山岳図鑑</string>
+    <string name="mtn_jump_none">山岳図鑑 · まだ到達なし</string>
     <string name="mtn_milestone_rank">マイルストーン %1$s m · 世界第 %2$d 位</string>
     <string name="mtn_milestone_range">マイルストーン %1$s m · %2$s</string>
     <string name="mtn_metric_span">山体の広がり</string>
@@ -508,13 +509,35 @@
     <string name="mtn_metric_range">所属山脈</string>
     <string name="mtn_note_contour">等高線地形図 · 等高間隔 200 m · 公開標高データに基づく作図</string>
     <string name="mtn_note_render">地形スケッチ · 公開標高データに基づく作図（実写ではありません）</string>
-    <string name="mtn_entry_title">山峰履歴</string>
+    <string name="mtn_intro_title">この山について</string>
+    <string name="mtn_entry_title">山岳図鑑</string>
     <string name="mtn_entry_none">まだ到達なし</string>
     <string name="mtn_entry_progress">%1$d / %2$d 座到達</string>
-    <string name="mtn_history_title">山峰履歴</string>
+    <string name="mtn_history_title">山岳図鑑</string>
     <string name="mtn_history_summary">%1$d / %2$d 座到達 · 8000m峰 %3$d / %4$d</string>
     <string name="mtn_row_rank">世界第 %1$d 位 · 標高 %2$s m</string>
     <string name="mtn_row_milestone">マイルストーン %1$s m · 標高 %2$s m</string>
     <string name="mtn_detail_progress">現在 %1$s m · マイルストーン %2$s m</string>
+
+    <!-- 徒步百科 -->
+    <string name="hike_entry_title">トレッキング図鑑</string>
+    <string name="hike_entry_none">まだ到達なし</string>
+    <string name="hike_entry_progress">%1$d / %2$d 本到達</string>
+    <string name="hike_history_title">トレッキング図鑑</string>
+    <string name="hike_history_summary">%1$d / %2$d 本到達 · 最高 %3$s m</string>
+    <string name="hike_jump_count">%1$d 本到達 · トレッキング図鑑</string>
+    <string name="hike_jump_none">トレッキング図鑑 · まだ到達なし</string>
+    <string name="hike_row_milestone">%1$s m で到達 · 最高 %2$s m</string>
+    <string name="hike_detail_progress">現在 %1$s m · %2$s m で到達</string>
+    <string name="hike_metric_distance">距離</string>
+    <string name="hike_metric_gain">累計登り</string>
+    <string name="hike_metric_days">日数</string>
+    <string name="hike_note_profile">標高プロファイル · 主なキャンプと峠の標高から作成、実景地図ではありません</string>
+    <string name="hike_note_map">地形スケッチ · 公開標高データ + © OpenStreetMap contributors、ナビ用途ではありません</string>
+    <string name="hike_intro_title">このルートについて</string>
+    <string name="hike_high_line">最高点 %1$s m · %2$s</string>
+    <plurals name="hike_days">
+        <item quantity="other">%1$d 日</item>
+    </plurals>
 
 </resources>

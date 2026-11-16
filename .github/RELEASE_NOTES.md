@@ -8,6 +8,62 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ---
 
+## v0.28.6 要点
+
+徒步路线图上线，八十八座山与四十四条线都有了介绍，全部九种语言。
+
+### 徒步路线图
+
+- 徒步百科里的路线卡片，原来的海拔剖面换成了地形路线图：山脊、河谷、海岸线，以及路线本身的走向
+- 44 条里 39 条有图；勃朗峰环线、珠峰大本营、安纳普尔纳大环线这类长线叠一层淡晕渲，短线保留细等高线
+- 朝圣之路、JMT、GR20、多洛米蒂 Alta Via 1 跨度太大画不下等高线，改用只画走向与关键城镇的示意画法，仍带地形底
+- 图下方注明「地形示意 · 公开高程数据 + © OpenStreetMap contributors，非导航用途」
+- 长白山、贡嘎、卓奥友、希夏邦马、珠峰东坡 5 条暂无路线图，仍显示原来的海拔剖面
+
+### 山峰与路线介绍
+
+- 「历史山峰」里点开任意一座，地形图下方新增「关于这座山」：写它在地理或攀登史上的位置，不是数据罗列
+- 徒步路线的「关于这条线」也换成了完整介绍：哪里起步、难点在路面还是海拔、什么时候去、容易踩什么坑
+- 卡片展开后也会显示一句话简介，不必点进百科
+
+### 九种语言
+
+- 山峰介绍、徒步路线的名称 / 地区 / 简介 / 长介绍，九种界面语言全部覆盖：英、繁中、日、俄、德、法、西、意、瑞典
+- 徒步百科里还没解锁的路线，会按界面语言把你所在大区排在最前（中文 → 中国，日语 → 亚洲，欧洲语言 → 欧洲）；只调顺序，不隐藏任何路线
+
+### 修正
+
+- 路线图详情页的图片之前上下各被裁掉约一成，现在完整显示
+
+---
+
+## English
+
+Terrain maps for hiking routes, plus descriptions for all 88 peaks and 44 routes — in nine languages.
+
+### Hiking route maps
+
+- Route cards in the hiking atlas now show a terrain map instead of the elevation profile: ridges, valleys, coastlines, and where the route itself goes
+- 39 of the 44 have one. Long routes such as the Tour du Mont Blanc, Everest Base Camp and the Annapurna Circuit sit on a soft hillshade; shorter ones keep fine contour lines
+- The Camino, JMT, GR20 and Alta Via 1 span too much ground for contours, so they use a schematic trace with the route and key towns only, still over real terrain
+- Each caption reads: Terrain sketch · public elevation data + © OpenStreetMap contributors, not for navigation
+- Changbai Mountain, Gongga, Cho Oyu, Shishapangma and the Everest East Face have no map yet and still show the elevation profile
+
+### Peak and route descriptions
+
+- Every peak in Peak History now carries an About this mountain section under the map — where it sits in geography or climbing history, not a list of numbers
+- Hiking routes get a full About this route as well: where to start, whether the difficulty is in the ground or the altitude, when to go, and the mistakes people make
+- Expanded cards now show a one-line summary, so you do not have to open the atlas
+
+### Nine languages
+
+- Peak descriptions, and route names, regions, summaries and full descriptions, are complete in all nine interface languages: English, Traditional Chinese, Japanese, Russian, German, French, Spanish, Italian, Swedish
+- Locked routes in the hiking atlas now rank your region first, inferred from your interface language (Chinese to China, Japanese to Asia, European languages to Europe). Order only; nothing is hidden
+
+### Fixes
+
+- Route map images were cropped about a tenth at top and bottom on the detail page; they now display in full
+
 ## v0.28.0 要点
 
 学习进度现在有了形状：一路往上爬，沿途会解锁真实的雪峰。

@@ -127,7 +127,7 @@ object MountainMilestones {
         m("jaya", "查亚峰", "Puncak Jaya", 4884, 4400, MountainRegion.GLOBAL,
             "5 km", "4,400 m", "苏迪曼", R.drawable.mtn_jaya, contour = true),
         m("vinson", "文森峰", "Mount Vinson", 4892, 4400, MountainRegion.GLOBAL,
-            "5 km", "4,200 m", "埃尔斯沃思"),
+            "5 km", "4,200 m", "埃尔斯沃思", R.drawable.mtn_vinson, contour = true),
         m("jiuding", "九顶山", "Jiuding Shan", 4989, 4400, MountainRegion.CN_SW,
             "8 km", "4,000 m", "岷山", R.drawable.mtn_jiuding, contour = true),
 
@@ -175,9 +175,9 @@ object MountainMilestones {
 
         // ================= 5,800 =================
         m("altun", "阿尔金山", "Altun Shan", 5798, 5800, MountainRegion.CN_NW,
-            "12 km", "4,800 m", "阿尔金山"),
+            "12 km", "4,800 m", "阿尔金山", R.drawable.mtn_altun, contour = true),
         m("tuanjie", "团结峰", "Tuanjie Feng", 5827, 5800, MountainRegion.CN_NW,
-            "9 km", "4,700 m", QILIAN),
+            "9 km", "4,700 m", QILIAN, R.drawable.mtn_tuanjie, contour = true),
         m("kilimanjaro", "乞力马扎罗山", "Kilimanjaro", 5895, 5800, MountainRegion.GLOBAL,
             "16 km", "4,800 m", "东非裂谷", R.drawable.mtn_kilimanjaro, contour = true),
         m("yangmaiyong", "央迈勇", "Yangmaiyong", 5958, 5800, MountainRegion.CN_SW,

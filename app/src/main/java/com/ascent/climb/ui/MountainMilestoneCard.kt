@@ -19,7 +19,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -162,7 +164,7 @@ fun MountainMilestoneCard(
                     .height(1.dp)
                     .background(Ascent.Line)
             )
-            // 历史记录：完整列表在个人主页，这里只放跳转
+            // 百科入口：完整列表在个人主页，这里只放跳转
             Row(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
@@ -457,7 +459,7 @@ fun MountainHistoryEntry(
 }
 
 /**
- * 山峰历史面板。路径页卡片和「我的」页共用同一份。
+ * 山峰百科面板。路径页卡片和「我的」页共用同一份。
  *
  * 点开一座已解锁的山，面板内部换成那张山峰卡片（带返回），
  * 不再叠一层 ModalBottomSheet —— 两层 sheet 在返回手势下会互相抢 dismiss。
@@ -466,6 +468,9 @@ fun MountainHistoryEntry(
 @Composable
 fun MountainHistorySheet(currentAlt: Int, onDismiss: () -> Unit) {
     var detail by remember { mutableStateOf<Mountain?>(null) }
+    // 滚动位置必须挂在这一层：详情页打开时列表整个移出组合，
+    // 状态放在列表内部会被一起丢掉，退回来就弹回顶部。
+    val listState = rememberLazyListState()
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -474,7 +479,11 @@ fun MountainHistorySheet(currentAlt: Int, onDismiss: () -> Unit) {
     ) {
         val open = detail
         if (open == null) {
-            MountainHistoryList(currentAlt = currentAlt, onOpen = { detail = it })
+            MountainHistoryList(
+                currentAlt = currentAlt,
+                listState = listState,
+                onOpen = { detail = it }
+            )
         } else {
             MountainHistoryDetail(m = open, currentAlt = currentAlt, onBack = { detail = null })
         }
@@ -482,7 +491,11 @@ fun MountainHistorySheet(currentAlt: Int, onDismiss: () -> Unit) {
 }
 
 @Composable
-private fun MountainHistoryList(currentAlt: Int, onOpen: (Mountain) -> Unit) {
+private fun MountainHistoryList(
+    currentAlt: Int,
+    listState: LazyListState,
+    onOpen: (Mountain) -> Unit
+) {
     val unlocked = remember(currentAlt) { MountainMilestones.unlocked(currentAlt) }
     val history = remember(currentAlt) { MountainMilestones.history(currentAlt) }
     val eightTotal = remember { MountainMilestones.ALL.count { it.elevation >= 8000 } }
@@ -513,37 +526,62 @@ private fun MountainHistoryList(currentAlt: Int, onOpen: (Mountain) -> Unit) {
         // 八十多座，必须懒加载；fill = false 让内容少时面板不会撑满屏
         LazyColumn(
             modifier = Modifier.weight(1f, fill = false),
+            state = listState,
             contentPadding = PaddingValues(bottom = 26.dp)
         ) {
             items(history, key = { it.id }) { m ->
                 val done = m.milestoneAlt <= currentAlt
-                MountainHistoryRow(m = m, done = done, onClick = { if (done) onOpen(m) })
+                MountainHistoryRow(
+                    m = m,
+                    currentAlt = currentAlt,
+                    done = done,
+                    onClick = { onOpen(m) }
+                )
             }
         }
     }
 }
 
 @Composable
-private fun MountainHistoryRow(m: Mountain, done: Boolean, onClick: () -> Unit) {
+private fun MountainHistoryRow(
+    m: Mountain,
+    currentAlt: Int,
+    done: Boolean,
+    onClick: () -> Unit
+) {
     val rank = MountainMilestones.rank8000(m)
+    val remaining = m.milestoneAlt - currentAlt
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clip(squircle(12.dp))
-            // 未解锁的行不给点击：点进去只有一张写着「未到达」的卡片，等于白点
-            .clickable(enabled = done) { onClick() }
+            // 未解锁也放进去看：百科的意义是能查，
+            // 状态靠左侧勾与右侧「还差」区分，不靠能不能点。
+            .clickable { onClick() }
             .padding(vertical = 9.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        PeakGlyph(
-            modifier = Modifier.size(15.dp),
-            color = if (done) Ascent.Fg2 else Ascent.Fg3.copy(alpha = 0.4f)
-        )
-        Spacer(Modifier.width(12.dp))
+        // 已解锁给一个实心勾，未解锁用山形线稿 —— 一行扫过去就能数出进度
+        Box(modifier = Modifier.size(17.dp), contentAlignment = Alignment.Center) {
+            if (done) {
+                Icon(
+                    Ic.CircleCheck,
+                    contentDescription = null,
+                    tint = Ascent.Success,
+                    modifier = Modifier.size(15.dp)
+                )
+            } else {
+                PeakGlyph(
+                    modifier = Modifier.size(14.dp),
+                    color = Ascent.Fg3.copy(alpha = 0.45f)
+                )
+            }
+        }
+        Spacer(Modifier.width(11.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = mountainName(m),
-                color = if (done) Ascent.Fg else Ascent.Fg3.copy(alpha = 0.75f),
+                color = if (done) Ascent.Fg else Ascent.Fg2,
                 fontSize = 14.sp,
                 fontWeight = if (done) FontWeight.SemiBold else FontWeight.Normal
             )
@@ -560,26 +598,28 @@ private fun MountainHistoryRow(m: Mountain, done: Boolean, onClick: () -> Unit) 
             )
         }
         Text(
-            text = stringResource(if (done) R.string.mtn_unlocked else R.string.mtn_row_locked),
-            color = if (done) Ascent.Success else Ascent.Fg3.copy(alpha = 0.7f),
+            text = if (done) stringResource(R.string.mtn_unlocked)
+            else stringResource(R.string.mtn_remaining, formatMeters(remaining)),
+            color = if (done) Ascent.Success else Ascent.Fg3.copy(alpha = 0.85f),
             fontSize = 11.sp
         )
-        if (done) {
-            Spacer(Modifier.width(4.dp))
-            Icon(
-                Ic.ChevronRight,
-                contentDescription = null,
-                tint = Ascent.Fg3,
-                modifier = Modifier.size(14.dp)
-            )
-        }
+        Spacer(Modifier.width(4.dp))
+        Icon(
+            Ic.ChevronRight,
+            contentDescription = null,
+            tint = Ascent.Fg3.copy(alpha = if (done) 1f else 0.6f),
+            modifier = Modifier.size(14.dp)
+        )
     }
 }
 
-/** 面板内的单座山峰卡片（次级页）。 */
+/** 面板内的单座山峰卡片（次级页）。未解锁也能进：百科要能查，不只是进度条。 */
 @Composable
 private fun MountainHistoryDetail(m: Mountain, currentAlt: Int, onBack: () -> Unit) {
     val reached = m.milestoneAlt <= currentAlt
+    val remaining = m.milestoneAlt - currentAlt
+    val intro = mountainIntro(m)
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -608,7 +648,7 @@ private fun MountainHistoryDetail(m: Mountain, currentAlt: Int, onBack: () -> Un
             Spacer(Modifier.weight(1f))
             Text(
                 text = if (reached) stringResource(R.string.mtn_unlocked)
-                else stringResource(R.string.mtn_row_locked),
+                else stringResource(R.string.mtn_remaining, formatMeters(remaining)),
                 color = if (reached) Ascent.Success else Ascent.Fg3,
                 fontSize = 11.5.sp
             )
@@ -629,15 +669,59 @@ private fun MountainHistoryDetail(m: Mountain, currentAlt: Int, onBack: () -> Un
             color = Ascent.Fg3,
             fontSize = 11.5.sp
         )
+        // 未解锁才画进度条：已解锁时一条满格的绿线没有信息量
+        if (!reached) {
+            Spacer(Modifier.height(8.dp))
+            val progress = (currentAlt.toFloat() / m.milestoneAlt).coerceIn(0f, 1f)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(4.dp)
+                    .clip(squircle(2.dp))
+                    .background(Ascent.Line)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(progress)
+                        .height(4.dp)
+                        .background(Ascent.Fg3)
+                )
+            }
+        }
         Spacer(Modifier.height(12.dp))
 
-        // 面板被撑满时要能滚：200dp 的图 + 三列数据 + 标注，小屏正好超一屏
+        // 面板被撑满时要能滚：200dp 的图 + 三列数据 + 标注 + 介绍，小屏正好超一屏
         Column(
             modifier = Modifier
                 .weight(1f, fill = false)
                 .verticalScroll(rememberScrollState())
         ) {
             MountainDetailBody(m = m, imageHeight = 200.dp)
+
+            if (!intro.isNullOrBlank()) {
+                Spacer(Modifier.height(18.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .background(Ascent.Line)
+                )
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    text = stringResource(R.string.mtn_intro_title),
+                    color = Ascent.Fg2,
+                    fontSize = 11.5.sp,
+                    fontWeight = FontWeight.Medium
+                )
+                Spacer(Modifier.height(6.dp))
+                Text(
+                    text = intro,
+                    color = Ascent.Fg2,
+                    fontSize = 12.sp,
+                    lineHeight = 20.sp
+                )
+            }
+
             Spacer(Modifier.height(20.dp))
         }
     }

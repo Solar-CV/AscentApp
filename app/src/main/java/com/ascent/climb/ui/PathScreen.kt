@@ -195,12 +195,17 @@ fun PathScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(top = 4.dp, bottom = 20.dp)
                 ) {
-                    // 山峰里程碑：只放第一页。分页是每 2 个单元一页，跟着每页都插会
+                    // 里程碑只放第一页。分页是每 2 个单元一页，跟着每页都插会
                     // 变成三张一模一样的卡；用户滑到后面本来也已经有课程内容可看。
+                    // 两条轨道各有一套：攀登看山峰，徒步看路线。
                     if (pageIndex == 0) {
-                        item(key = "mountain_milestone") {
+                        item(key = "track_atlas") {
                             Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-                                MountainMilestoneBlock(currentAlt = altitude)
+                                if (trackId == TREK_TRACK) {
+                                    HikeMilestoneBlock(currentAlt = altitude)
+                                } else {
+                                    MountainMilestoneBlock(currentAlt = altitude)
+                                }
                             }
                         }
                     }
@@ -255,7 +260,8 @@ fun PathScreen(
                                     toSummit = (summitOfTrack(trackId) - altitude).coerceAtLeast(0),
                                     done = doneCount,
                                     total = totalLessons,
-                                    pct = pct
+                                    pct = pct,
+                                    isTrek = trackId == TREK_TRACK
                                 )
                             }
                         }
@@ -865,11 +871,11 @@ private fun starPath(x0: Float, y0: Float, w: Float, h: Float, points: Int): Pat
 }
 
 // ============================================================
-// 底部：距顶峰插画块
+// 底部：距顶峰 / 距最高点 插画块
 // ============================================================
 
 @Composable
-private fun SummitBlock(toSummit: Int, done: Int, total: Int, pct: Int) {
+private fun SummitBlock(toSummit: Int, done: Int, total: Int, pct: Int, isTrek: Boolean = false) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -892,7 +898,10 @@ private fun SummitBlock(toSummit: Int, done: Int, total: Int, pct: Int) {
         }
         Spacer(Modifier.height(10.dp))
         Text(
-            text = stringResource(R.string.path_to_summit, formatMeters(toSummit)),
+            text = stringResource(
+                if (isTrek) R.string.path_to_top else R.string.path_to_summit,
+                formatMeters(toSummit)
+            ),
             color = Ascent.DuoFg2,
             fontSize = 13.sp,
             fontWeight = FontWeight.Bold,

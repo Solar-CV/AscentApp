@@ -31,6 +31,12 @@ want = {"mtn.%s.name" % r["id"] for r in rows}
 want |= {"mtn.range.%s" % r["range"] for r in rows}
 want.add("mtn.snow.none")
 
+# 山峰介绍：中文原文在 MountainIntro.kt，译文按同一批 id 出现在各语言包里。
+# 写过介绍的山必须在九种语言里都有译文，不能只补中英。
+INTRO_KT = os.path.join(ROOT, "app/src/main/java/com/ascent/climb/data/MountainIntro.kt")
+intro_ids = re.findall(r'^\s*"(\w+)" to$', open(INTRO_KT, encoding="utf-8").read(), re.M)
+want |= {"mtn.%s.intro" % i for i in intro_ids}
+
 bad = False
 for lang, fname in FILES.items():
     path = os.path.join(PACK_DIR, fname)

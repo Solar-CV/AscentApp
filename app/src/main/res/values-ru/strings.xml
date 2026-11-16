@@ -361,6 +361,7 @@
     <string name="path_summit">Вершина · %1$s %2$s м</string>
     <string name="path_unit_clear">Блок пройден</string>
     <string name="path_to_summit">До вершины %1$s м</string>
+    <string name="path_to_top">До высшей точки %1$s м</string>
     <string name="path_done_pct">%1$d / %2$d уроков · %3$d%%</string>
     <string name="path_you_are_here">Вы здесь</string>
 
@@ -502,8 +503,8 @@
     <string name="mtn_summit_reached">Достигнута</string>
     <string name="mtn_unlocked">Открыта</string>
     <string name="mtn_row_locked">Не достигнута</string>
-    <string name="mtn_jump_count">Открыто: %1$d · История</string>
-    <string name="mtn_jump_none">История · пока пусто</string>
+    <string name="mtn_jump_count">Открыто: %1$d · Энциклопедия</string>
+    <string name="mtn_jump_none">Энциклопедия · пока пусто</string>
     <string name="mtn_milestone_rank">Веха %1$s м · %2$d-я в мире</string>
     <string name="mtn_milestone_range">Веха %1$s м · %2$s</string>
     <string name="mtn_metric_span">Ширина массива</string>
@@ -511,13 +512,38 @@
     <string name="mtn_metric_range">Горная система</string>
     <string name="mtn_note_contour">Карта горизонталей · сечение 200 м · по открытым данным о высотах</string>
     <string name="mtn_note_render">Схема рельефа · по открытым данным о высотах, не фотография</string>
-    <string name="mtn_entry_title">История вершин</string>
+    <string name="mtn_intro_title">Об этой вершине</string>
+    <string name="mtn_entry_title">Энциклопедия вершин</string>
     <string name="mtn_entry_none">Пока пусто</string>
     <string name="mtn_entry_progress">Открыто %1$d / %2$d</string>
-    <string name="mtn_history_title">История вершин</string>
+    <string name="mtn_history_title">Энциклопедия вершин</string>
     <string name="mtn_history_summary">Открыто %1$d / %2$d · восьмитысячники %3$d / %4$d</string>
     <string name="mtn_row_rank">%1$d-я в мире · высота %2$s м</string>
     <string name="mtn_row_milestone">Веха %1$s м · высота %2$s м</string>
     <string name="mtn_detail_progress">Сейчас %1$s м · веха %2$s м</string>
+
+    <!-- 徒步百科 -->
+    <string name="hike_entry_title">Атлас маршрутов</string>
+    <string name="hike_entry_none">Пока нет</string>
+    <string name="hike_entry_progress">Открыто %1$d / %2$d</string>
+    <string name="hike_history_title">Атлас маршрутов</string>
+    <string name="hike_history_summary">Открыто %1$d / %2$d · высшая точка %3$s м</string>
+    <string name="hike_jump_count">Открыто %1$d · Атлас маршрутов</string>
+    <string name="hike_jump_none">Атлас маршрутов · пока нет</string>
+    <string name="hike_row_milestone">Открывается на %1$s м · высшая точка %2$s м</string>
+    <string name="hike_detail_progress">Сейчас %1$s м · открывается на %2$s м</string>
+    <string name="hike_metric_distance">Дистанция</string>
+    <string name="hike_metric_gain">Набор высоты</string>
+    <string name="hike_metric_days">Дней</string>
+    <string name="hike_note_profile">Профиль высот · построен по высотам лагерей и перевалов, не карта</string>
+    <string name="hike_note_map">Схема рельефа · открытые высотные данные + © OpenStreetMap contributors, не для навигации</string>
+    <string name="hike_intro_title">Об этом маршруте</string>
+    <string name="hike_high_line">Высшая точка %1$s м · %2$s</string>
+    <plurals name="hike_days">
+        <item quantity="one">%1$d день</item>
+        <item quantity="few">%1$d дня</item>
+        <item quantity="many">%1$d дней</item>
+        <item quantity="other">%1$d дня</item>
+    </plurals>
 
 </resources>
