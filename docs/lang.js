@@ -17,7 +17,21 @@
   } catch (e) {
     /* 隐私模式禁用存储时按默认语言走，不报错 */
   }
-  apply(saved === "en" ? "en" : "zh");
+
+  /* ?lang=en / ?lang=zh 优先：App 内跳转可以直接带上，省得英文用户先看到中文 */
+  var fromQuery = null;
+  try {
+    var q = new URLSearchParams(location.search).get("lang");
+    if (q === "en" || q === "zh") fromQuery = q;
+  } catch (e) {}
+
+  var start = fromQuery || (saved === "en" ? "en" : "zh");
+  apply(start);
+  if (fromQuery) {
+    try {
+      localStorage.setItem(KEY, fromQuery);
+    } catch (e) {}
+  }
 
   if (btn) {
     btn.addEventListener("click", function () {
