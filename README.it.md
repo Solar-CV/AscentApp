@@ -22,6 +22,17 @@ La via più semplice è l'APK già compilato nelle [Releases](https://github.com
 
 Trasferisci l'APK sul telefono, consenti l'installazione da origini sconosciute, tocca installa. Al primo avvio non serve accedere.
 
+## Sostenere AscentRoam
+
+AscentRoam è un progetto di apprendimento per la montagna sviluppato in modo indipendente e aperto gratuitamente. Non ci sono pubblicità né sblocchi a pagamento. Se lo trovi utile e vuoi che continui a essere sviluppato e mantenuto, puoi sostenerlo volontariamente tramite Afdian.
+
+**Ogni sostegno è una donazione senza contropartita**: non dà funzioni aggiuntive, contenuti digitali, badge esclusivi né altri diritti. Tutti gli utenti hanno sempre la stessa esperienza. Ogni contributo serve a portare avanti il progetto.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Grazie per camminare con noi.
+
 ## Cosa c'è dentro
 
 ### Il percorso

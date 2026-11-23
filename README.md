@@ -22,6 +22,17 @@ The easiest route is the prebuilt APK from [Releases](https://github.com/Solar-C
 
 Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
 
+## Supporting AscentRoam
+
+AscentRoam is an independently built, free and open outdoor learning project. There are no ads and no paid unlocks. If you find it useful and want it to keep being developed and maintained, you can support it voluntarily through Afdian.
+
+**All support is a donation with no reward**: it does not buy extra features, digital content, exclusive badges or any other entitlement. Every user always gets the same app. Each contribution goes toward keeping the project going.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Thank you for walking with us.
+
 ## What's inside
 
 ### The path

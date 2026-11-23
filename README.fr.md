@@ -22,6 +22,17 @@ Le plus simple est l’APK déjà compilé des [Releases](https://github.com/Sol
 
 Transférez l’APK sur le téléphone, autorisez l’installation de sources inconnues, appuyez sur installer. Aucune connexion au premier lancement.
 
+## Soutenir AscentRoam
+
+AscentRoam est un projet d'apprentissage de la montagne développé de façon indépendante et ouvert gratuitement. Il n'y a ni publicité ni déblocage payant. Si tu le trouves utile et souhaites qu'il continue d'être développé et maintenu, tu peux le soutenir volontairement via Afdian.
+
+**Tout soutien est un don sans contrepartie** : il ne donne aucune fonction supplémentaire, aucun contenu numérique, aucun badge exclusif ni aucun autre avantage. Tous les utilisateurs ont toujours la même expérience. Chaque contribution sert à faire vivre le projet.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Merci de marcher avec nous.
+
 ## Ce qu’il y a dedans
 
 ### Le parcours

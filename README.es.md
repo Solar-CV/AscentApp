@@ -22,6 +22,17 @@ Lo más fácil es el APK ya compilado de [Releases](https://github.com/Solar-CV/
 
 Pasa el APK al móvil, permite instalar desde orígenes desconocidos y toca instalar. En el primer arranque no hay que iniciar sesión.
 
+## Apoyar AscentRoam
+
+AscentRoam es un proyecto de aprendizaje de montaña desarrollado de forma independiente y abierto gratis. No hay anuncios ni desbloqueos de pago. Si te resulta útil y quieres que siga desarrollándose y manteniéndose, puedes apoyarlo voluntariamente a través de Afdian.
+
+**Todo apoyo es una donación sin contrapartida**: no da funciones extra, contenido digital, insignias exclusivas ni ningún otro derecho. Todos los usuarios tienen siempre la misma experiencia. Cada aporte se destina a mantener el proyecto en marcha.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Gracias por caminar con nosotros.
+
 ## Qué hay dentro
 
 ### La ruta

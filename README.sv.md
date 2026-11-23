@@ -22,6 +22,17 @@ Enklaste vägen är det färdigbyggda APK:t från [Releases](https://github.com/
 
 Flytta över APK:n till telefonen, tillåt installation från okända källor och tryck på installera. Ingen inloggning vid första starten.
 
+## Stöd AscentRoam
+
+AscentRoam är ett oberoende utvecklat och fritt öppet lärprojekt för friluftsliv. Det finns inga annonser och inga betalda upplåsningar. Om du har nytta av det och vill att det ska fortsätta utvecklas och underhållas kan du stödja det frivilligt via Afdian.
+
+**Allt stöd är en gåva utan motprestation**: det ger inga extra funktioner, inget digitalt innehåll, inga exklusiva märken eller andra rättigheter. Alla användare får alltid samma upplevelse. Varje bidrag går till att hålla projektet igång.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Tack för att du går med oss.
+
 ## Vad som finns inuti
 
 ### Vägen

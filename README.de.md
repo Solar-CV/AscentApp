@@ -22,6 +22,17 @@ Am einfachsten über das fertige APK aus den [Releases](https://github.com/Solar
 
 APK aufs Telefon übertragen, Installation aus unbekannten Quellen erlauben, tippen. Beim ersten Start ist keine Anmeldung nötig.
 
+## AscentRoam unterstützen
+
+AscentRoam ist ein unabhängig entwickeltes, frei zugängliches Lernprojekt für draußen. Es gibt keine Werbung und keine bezahlten Freischaltungen. Wenn dir das Projekt gefällt und du möchtest, dass es weiterentwickelt und gepflegt wird, kannst du es freiwillig über Afdian unterstützen.
+
+**Jede Unterstützung ist eine Spende ohne Gegenleistung**: Sie bringt keine zusätzlichen Funktionen, keine digitalen Inhalte, keine exklusiven Abzeichen und keine sonstigen Ansprüche. Alle Nutzer haben immer dieselbe App. Jeder Beitrag fließt in die Weiterentwicklung des Projekts.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Danke, dass du mitgehst.
+
 ## Was drin ist
 
 ### Die Route
