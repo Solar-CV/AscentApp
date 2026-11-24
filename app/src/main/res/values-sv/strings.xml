@@ -64,8 +64,8 @@
     <string name="set_reset_title">Återställ framstegen?</string>
     <string name="set_reset_action">Återställ</string>
     <string name="set_section_support">Stöd</string>
-    <string name="set_support_desc">AscentRoam är gratis, utan annonser och utan betalda upplåsningar. Stöd är frivilligt och ger inget tillbaka.</string>
-    <string name="set_support_afdian">Afdian</string>
+    <string name="set_support_open">Stöd AscentRoam</string>
+    <string name="set_support_desc">AscentRoam är gratis, utan annonser och utan betalda upplåsningar. Stöd är frivilligt och ger inget tillbaka; sidan öppnas i webbläsaren.</string>
     <string name="set_section_about">Om</string>
     <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Teori för högalpinism och isklättring</string>

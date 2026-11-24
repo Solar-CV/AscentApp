@@ -64,8 +64,8 @@
     <string name="set_reset_title">Réinitialiser la progression ?</string>
     <string name="set_reset_action">Réinitialiser</string>
     <string name="set_section_support">Soutenir</string>
-    <string name="set_support_desc">AscentRoam est gratuit, sans publicité ni déblocage payant. Le soutien est volontaire et ne donne droit à rien en retour.</string>
-    <string name="set_support_afdian">Afdian</string>
+    <string name="set_support_open">Soutenir AscentRoam</string>
+    <string name="set_support_desc">AscentRoam est gratuit, sans publicité ni déblocage payant. Le soutien est volontaire et ne donne droit à rien en retour ; cela ouvre la page de soutien dans le navigateur.</string>
     <string name="set_section_about">À propos</string>
     <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Théorie de l’alpinisme et de la cascade de glace</string>

@@ -74,8 +74,8 @@
     <string name="set_reset_action">Сбросить</string>
 
     <string name="set_section_support">Поддержка</string>
-    <string name="set_support_desc">AscentRoam бесплатен, без рекламы и платных разблокировок. Поддержка добровольна и ничего не даёт взамен.</string>
-    <string name="set_support_afdian">Afdian</string>
+    <string name="set_support_open">Поддержать AscentRoam</string>
+    <string name="set_support_desc">AscentRoam бесплатен, без рекламы и платных разблокировок. Поддержка добровольна и ничего не даёт взамен; страница поддержки откроется в браузере.</string>
     <string name="set_section_about">О приложении</string>
     <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Теория высотного альпинизма и ледолазания</string>

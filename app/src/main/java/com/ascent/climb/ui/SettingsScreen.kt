@@ -541,8 +541,9 @@ fun SettingsScreen(
                         lineHeight = 17.sp
                     )
                     Spacer(Modifier.height(2.dp))
-                    AboutRow(stringResource(R.string.set_support_afdian)) { openLink(AFDIAN_URL) }
-                    AboutRow("Ko-fi") { openLink(KOFI_URL) }
+                    // 只导向官网 /support：渠道、费率、退款口径都在那一页，改渠道不用发版，
+                    // 也避免 App 里直接出现支付平台的名字。
+                    AboutRow(stringResource(R.string.set_support_open)) { openLink(SUPPORT_URL) }
                 }
             }
 
@@ -738,9 +739,8 @@ private fun SettingsToggle(
 /** 评分指向的正式包名。debug 包的 applicationId 带 .debug 后缀，商店里没有那条。 */
 private const val RATE_PACKAGE = "com.ascentroam.app"
 
-/** 赞助渠道。与官网 /support 上的两个渠道保持一致，改一处就要三处一起改。 */
-private const val AFDIAN_URL = "https://afdian.com/a/ascent"
-private const val KOFI_URL = "https://ko-fi.com/ascentroam"
+/** 赞助说明页。渠道、费率与退款口径都在这里，App 内不直接放支付链接。 */
+private const val SUPPORT_URL = "https://www.ascentroam.com/support"
 
 /** 「关于」卡片里的一行：左文字、右箭头，整行可点。 */
 @Composable

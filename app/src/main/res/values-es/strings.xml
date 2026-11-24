@@ -64,8 +64,8 @@
     <string name="set_reset_title">¿Restablecer el progreso?</string>
     <string name="set_reset_action">Restablecer</string>
     <string name="set_section_support">Apoyar</string>
-    <string name="set_support_desc">AscentRoam es gratis, sin anuncios ni desbloqueos de pago. El apoyo es voluntario y no da nada a cambio.</string>
-    <string name="set_support_afdian">Afdian</string>
+    <string name="set_support_open">Apoyar AscentRoam</string>
+    <string name="set_support_desc">AscentRoam es gratis, sin anuncios ni desbloqueos de pago. El apoyo es voluntario y no da nada a cambio; se abre la página de apoyo en el navegador.</string>
     <string name="set_section_about">Acerca de</string>
     <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Teoría de alpinismo y escalada en hielo</string>

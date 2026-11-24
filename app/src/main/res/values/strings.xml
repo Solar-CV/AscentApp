@@ -79,8 +79,8 @@
     <string name="set_reset_action">重置</string>
 
     <string name="set_section_support">支持</string>
-    <string name="set_support_desc">AscentRoam 免费、无广告，也没有付费解锁。赞助是自愿的，不换取任何东西。</string>
-    <string name="set_support_afdian">爱发电</string>
+    <string name="set_support_open">支持 AscentRoam</string>
+    <string name="set_support_desc">AscentRoam 免费、无广告，也没有付费解锁。赞助是自愿的，不换取任何东西；点开会在浏览器中打开官网的赞助说明。</string>
     <string name="set_section_about">关于</string>
     <string name="set_about_name">AscentRoam 登攀之路</string>
     <string name="set_about_desc">高海拔攀登 / 攀冰理论学习</string>

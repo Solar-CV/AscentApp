@@ -64,8 +64,8 @@
     <string name="set_reset_title">Lernfortschritt zurücksetzen?</string>
     <string name="set_reset_action">Zurücksetzen</string>
     <string name="set_section_support">Unterstützen</string>
-    <string name="set_support_desc">AscentRoam ist kostenlos, ohne Werbung und ohne bezahlte Freischaltungen. Unterstützung ist freiwillig und bringt keine Gegenleistung.</string>
-    <string name="set_support_afdian">Afdian</string>
+    <string name="set_support_open">AscentRoam unterstützen</string>
+    <string name="set_support_desc">AscentRoam ist kostenlos, ohne Werbung und ohne bezahlte Freischaltungen. Unterstützung ist freiwillig und bringt keine Gegenleistung; dies öffnet die Unterstützungsseite im Browser.</string>
     <string name="set_section_about">Über</string>
     <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Theorie zu Höhenbergsteigen und Eisklettern</string>

@@ -21,7 +21,7 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 - 设置 → 关于：服务条款（应用内可离线阅读）、给应用评分、复制分享链接
 - 复制分享链接后会有「已复制」提示；打不开应用商店时也会说明，不再点了没反应
-- 设置 → 支持：爱发电与 Ko-fi 两个自愿渠道，写明赞助不换取任何东西
+- 设置 → 支持：一个入口，在浏览器中打开官网的赞助说明——渠道与费率都在那一页，写明赞助不换取任何东西
 
 ---
 
@@ -38,7 +38,7 @@ Two fixes, plus terms, rating, sharing and a support section in Settings.
 
 - Settings → About: Terms of service (readable offline in the app), Rate the app, Copy share link
 - Copying the share link now confirms itself, and a failed store link says so instead of doing nothing
-- Settings → Support: Afdian and Ko-fi, both voluntary, with a line stating that support buys nothing back
+- Settings → Support: a single entry that opens the support page in your browser, where the channels live; the app itself links to no payment platform and states that support buys nothing back
 
 ## v0.28.6 要点
 
