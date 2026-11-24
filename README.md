@@ -1,85 +1,86 @@
-# AscentRoam
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.png">
+    <img src="assets/readme/hero.png" alt="AscentRoam — high-altitude training for Android" width="100%">
+  </picture>
+</p>
 
-**[English](README.md)** · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Русский](README.ru.md) · [Svenska](README.sv.md)
+<br>
+
+<p align="center">
+  <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="Download the APK"></a>&nbsp;
+  <a href="https://ascentroam.com/support"><img src="assets/readme/btn-support.svg" height="46" alt="Support AscentRoam"></a>&nbsp;
+  <a href="https://ascentroam.com"><img src="assets/readme/btn-site.svg" height="46" alt="ascentroam.com"></a>
+</p>
+
+<br>
+
+<p align="center"><sub>
+<a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.ru.md">Русский</a> · <a href="README.sv.md">Svenska</a>
+</sub></p>
 
 An Android app for people starting out in high-altitude mountaineering and ice climbing. The curriculum is organised by altitude: every lesson you pass moves you a little higher.
 
+<p align="center"><sub><b>Current release v0.28.8</b> (versionCode 166) · Android 8.0+ · arm64-v8a · about 30 MB</sub></p>
+
+<p align="center">
+  <img src="assets/readme/screen-path.png" width="186" alt="Path screen: the peak card, unit banner and lesson nodes">&nbsp;
+  <img src="assets/readme/screen-quiz.png" width="186" alt="A single-choice question with four options">&nbsp;
+  <img src="assets/readme/screen-handbook.png" width="186" alt="Handbook: category filters and article cards">&nbsp;
+  <img src="assets/readme/screen-training.png" width="186" alt="Training: today's recommendation and drills">
+</p>
+
+<p align="center"><sub>Path · Quiz · Handbook · Training — English interface, light theme</sub></p>
+
+<br>
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
+
+## The climb
+
 Two course tracks switch freely. **Alpine climbing** runs six units and 69 lessons, from a 5,000 m introduction to 8,000 m — 3,200 m to 8,848 m end to end. **Trekking** runs four units and 22 lessons, from day hikes to long trails — 200 m to 5,630 m. Each track keeps its own progress, badges and review queue.
 
-Current version v0.28.8 (versionCode 166). Settings now has what it was missing: terms of service (readable offline), rate the app, copy share link, and a Support AscentRoam entry that opens the support page in your browser — no payment platform appears inside the app. Two fixes came with it: the keyboard no longer lifts the bottom tab bar, and the weather sun at top right is centred on the streak count instead of overlapping the rope icon. Hiking routes now carry terrain maps: 39 of the 44 show ridges, valleys and coastlines and the line the route takes, in place of the elevation profile. Long routes sit on a soft hillshade; those spanning hundreds of kilometres, like the Camino or the JMT, are drawn as a schematic with the trace and key towns only. All 88 peaks have an About this mountain and all 44 routes an About this route, written for what actually matters on the ground. The copy, along with route names, is complete in nine languages, and the atlas ranks your region first based on your interface language. Learning progress has a shape now: climb, and real snow peaks unlock along the way. A card at the top of the Path screen shows the peak that matches your current altitude — 88 in all, from Helan Shan at 3,600 m to Everest at 8,848 m, each with a terrain map (contour lines where a 3D render would not hold up), its real elevation, range and 8000er rank. Profile → current altitude holds the full list; unlocked peaks open their card. The summit target is now Everest's official 8,848.86 m, so the progress bar keeps moving to the very top instead of filling at 8,000 m. The language work closed with v0.19.24 — all nine translated languages match English key for key (10,727 / 10,727). v0.20 is about the badges: all forty achievements render as real-time 3D relics instead of flat images, and their badge icons are rendered from the same models — the old AI illustrations are gone. The unlock dialog uses the same renderer and bursts confetti from both screen edges. Models ship inside the APK, so the package grew from 21 MB to about 41 MB, and the release build ships at about 30 MB. v0.20.3 fixes one long-standing annoyance: scroll down a list, open a secondary screen, come back, and the list used to jump to the top — it now stays where you left it. v0.20.6–v0.20.7 raise badge rendering to full quality by default: a finer bloom that no longer switches itself off during the first slow frames, a two-step downgrade, and 4x MSAA with a capability check and a silent fallback.
+The home screen is a route from base camp upwards, split into altitude units, two to a page. Lessons unlock linearly: pass one and the next opens. Nodes carry stars, the current lesson carries a "start" hint, and the last lesson of a unit is marked in gold.
 
-v0.20.19 – v0.21.0 restyled the whole interface in clay: soft double shadows drawn offscreen and cached, flat colour chips, category colours in the handbook, and hero blocks that take their depth from a contact shadow instead of a gradient.
+Every lesson runs the same loop: read it, answer the questions, fix what you missed, come back to it later.
 
-## Install
-
-The easiest route is the prebuilt APK from [Releases](https://github.com/Solar-CV/AscentApp/releases). Pushing a `v*` tag makes GitHub Actions build and attach a fresh APK.
-
-- Package: `com.ascentroam.app` (the source package stays `com.ascent.climb`)
-- Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
-- Size: about 30 MB (38 MB of uncompressed badge models, ~10 MB after packaging)
-- Signing: release-signed since v0.21.2. It will not install over an older debug build — uninstall first, and that clears local progress, badges and settings
-- Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
-
-Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
-
-## Supporting AscentRoam
-
-AscentRoam is an independently built, free and open outdoor learning project. There are no ads and no paid unlocks. If you find it useful and want it to keep being developed and maintained, you can support it voluntarily through Afdian.
-
-**All support is a donation with no reward**: it does not buy extra features, digital content, exclusive badges or any other entitlement. Every user always gets the same app. Each contribution goes toward keeping the project going.
-
-- [Afdian](https://afdian.com/a/ascent)
-- [Ko-fi](https://ko-fi.com/ascentroam)
-
-Thank you for walking with us.
-
-## What's inside
-
-### The path
-
-The home screen is a route from base camp upwards, split into altitude units (six for climbing, four for trekking). Swipe horizontally to page through them, two units per page. Lessons unlock linearly — pass one and the next opens. Nodes show stars, the current lesson carries a "start" hint, and the last lesson of a unit is marked in gold.
-
-Two pills at the top switch course tracks; tapping one opens a bottom sheet. Switching returns to the first page and the choice is remembered.
+<img src="assets/readme/loop.svg" width="100%" alt="Five stages on a rising altitude curve: lesson, questions, corrections, spaced review, altitude">
 
 Progress is not a stored number. It is recomputed from the lessons you have completed, so if the altitude curve is adjusted later, old saves recalculate instead of getting stuck.
 
-### Question bank
+## Real mountains
 
-1,563 formal questions plus 158 auto-inserted review copies, 1,721 display items in total. Volume rises with altitude: about 15 questions per lesson in the 5,000 m introduction, 30 in the 7,000 m technical units, and 8 across trekking.
+<img src="assets/readme/peaks.png" width="100%" alt="Four terrain maps: K2 and Matterhorn as shaded relief, Denali and Kilimanjaro as contour lines">
 
-Eight question types: single choice, multiple choice, ordering, matching, fill-in, calculation, hotspot (tap a point on an image), and scenario (one stem answered in several steps).
+Climb, and real snow peaks unlock along the way: 88 of them, from Helan Shan at 3,600 m to Everest at 8,848.86 m. Each one carries its own terrain map drawn from real elevation data, a shaded relief where the model holds up and contour lines where it would not. The card shows the real elevation, the range and the rank among the 8,000ers.
 
-Finishing a lesson drops you straight into redoing the ones you got wrong. Questions you then answer correctly gain credit; the rest go to the review centre. Review uses spaced repetition at 0, 1, 3, 7, 16 and 35 days. Safety-critical questions are weighted, and require confirming you understand before you can move on.
+The card at the top of the Path screen always shows the peak that matches your current altitude, and tells you how many metres are left to it. Profile → Current altitude holds the full atlas; unlocked peaks open their card, and every one has an *About this mountain* written for what actually matters on the ground.
 
-### Handbook
+## Forty badges, real objects
 
-35 long-form articles, 4 to 8 sections each, sorted into gear, technique, medicine, health, weather, meteorology, decisions, judgement, safety, risk and avalanche rescue. The handbook is now filtered by track: snow-and-ice pieces appear only under climbing, while altitude medicine, hypothermia, navigation, camping and leadership are shared by both. Sources are public medical and technical material, three commercial guide documents, and edited transcripts of seven Chinese mountaineering books. Per product agreement, the Chinese books are not cited by title; the guide documents are.
+<img src="assets/readme/badges.png" width="100%" alt="Five 3D badge renders: brass frames with enamel insets">
 
-### Training, review, profile
+Badges are real 3D objects: metal frames, enamel insets, relief, all rendered with Filament. Tap any unlocked badge and it opens full screen: drag to rotate, pinch to zoom to about 5.5×, two fingers to pan across the relief, double-tap to reset, and it sways gently when you stop. Icons on the wall are rendered from the models themselves, so the wall and the 3D view show the same object. Unlocking anywhere shows the same badge on a light pedestal, with ribbons firing in from both edges.
 
-Training recommends the next lesson and runs four drills: a five-minute 4-4 breathing pacer, four 30-second crampon step-cadence sets, a gear-list recall quiz and a cloud-reading quiz. Both quizzes draw single-choice questions from existing lessons, shuffle the choices every round and show the explanation straight after each answer. Review puts today's due questions and safety-critical misses first. Profile holds the header, current altitude, ability overview, badge entry, account area and a feedback entry. The gear icon opens settings, the avatar opens the profile page.
+## What's inside
 
-The profile shows unlocked badges only. All 40 live on the badge wall, locked ones as grey previews, hidden achievements as a "?".
+**Question bank.** 1,563 formal questions plus 158 auto-inserted review copies — 1,721 display items. Volume rises with altitude: about 15 questions per lesson in the 5,000 m introduction, 30 in the 7,000 m technical units, 8 across trekking. Eight question types: single choice, multiple choice, ordering, matching, fill-in, calculation, hotspot (tap a point on an image) and scenario (one stem answered in several steps).
 
-Badges are real 3D objects — metal frames, enamel insets, relief. Tap any unlocked badge on the profile page or on the wall and it opens full screen: drag to rotate, pinch to zoom up to about 5.5×, two fingers to pan across the relief, double-tap to reset, and it sways gently on its own when you stop. Icons are rendered from the models themselves, so the wall and the 3D view show the same object; all forty now have a model, and the still-art fallback stays for any badge added later. Unlocking an achievement anywhere shows the same 3D badge, on a light pedestal, with ribbons firing in from both edges.
+Finishing a lesson drops you straight into redoing the ones you got wrong. Questions you then answer correctly gain credit; the rest go to the review centre, which uses spaced repetition at 0, 1, 3, 7, 16 and 35 days. Safety-critical questions are weighted and require confirming you understand before you can move on.
 
-### Settings
+**Handbook.** 35 long-form articles, 4 to 8 sections each, sorted into gear, technique, medicine, health, weather, meteorology, decisions, judgement, safety, risk and avalanche rescue. Filtered by track: snow-and-ice pieces appear only under climbing, while altitude medicine, hypothermia, navigation, camping and leadership are shared.
 
-Appearance follows the system or can be pinned to light or dark, persisted, with the status bar matching. Language follows the system or can be set manually; interface and content both switch, no restart. The bank section shows the current version, checks for updates and restores the bundled bank. Developer mode hides behind the version number in About — tap it seven times. The About section holds the privacy policy, the terms of service (both readable offline), rate the app and copy share link; Support is a single entry that opens the support page in your browser.
+**Training.** Recommends the next lesson and runs four drills: a five-minute 4-4 breathing pacer, four 30-second crampon step-cadence sets, a gear-list recall quiz and a cloud-reading quiz. Both quizzes draw single-choice questions from existing lessons, shuffle the choices every round and show the explanation straight after each answer.
 
-### Feedback
+**Settings.** Appearance follows the system or is pinned to light or dark; language follows the system or is set manually, interface and content switching without a restart. About holds the privacy policy and the terms of service (both readable offline), rate the app, copy share link, and a Support entry that opens the support page in your browser. Developer mode hides behind the version number — tap it seven times.
 
-Profile → Feedback and suggestions, sitting between the account card and the safety notice. Pick a type — bug, idea, content correction — write the message, optionally leave an address for a reply, and optionally attach diagnostics. Sending posts straight to the maintainer through Formspree; if the network is down the screen offers to send the same text by email instead, and copies it to the clipboard if no mail app exists.
-
-Diagnostics are off by default and cover the app version, Android version, device model, interface language, bank version, current track, progress counts and the last uncaught exception. No lesson text, no answer history, no account, no clipboard.
+**Feedback.** Profile → Feedback and suggestions: pick a type, write the message, optionally leave an address and attach diagnostics. Sending posts straight to the maintainer; if the network is down the screen offers to send the same text by email, and copies it to the clipboard if no mail app exists. Diagnostics are off by default and carry no lesson text, no answer history, no account.
 
 ## Ten languages
 
-Interface strings and course content are available in:
-
 简体中文 (source), 繁體中文, English, 日本語, Deutsch, Français, Español, Italiano, Русский, Svenska
 
-All ten languages are complete. Every language has its own entry layer, lesson briefs, handbook body and question bank, and each key set matches the English one entry for entry — **10,727 / 10,727**, with nothing missing, nothing duplicated and no orphan keys.
+All ten are complete. Every language has its own entry layer, lesson briefs, handbook body and question bank, and each key set matches the English one entry for entry — **10,727 / 10,727**, nothing missing, nothing duplicated, no orphan keys.
 
 | Layer | Items | All 9 translated languages |
 |---|---|---|
@@ -88,15 +89,13 @@ All ten languages are complete. Every language has its own entry layer, lesson b
 | Handbook body | 378 | 100% |
 | Question bank (stem / options / explanation) | 9,602 | 100% |
 
-Terminology follows each language's own mountaineering usage rather than literal translation: Swedish stegjärn / isyxa / standplats, German Steigeisen / Pickel, Russian кошки / ледоруб, Italian corda fissa / bloccante / sosta. Medical doses, avalanche levels, slope angles and temperatures are carried over unchanged — only the number format is adapted, and the three conventions are kept apart on purpose:
+Terminology follows each language's own mountaineering usage rather than literal translation: Swedish stegjärn / isyxa / standplats, German Steigeisen / Pickel, Russian кошки / ледоруб, Italian corda fissa / bloccante / sosta. Medical doses, avalanche levels, slope angles and temperatures are carried over unchanged — only the number format is adapted, and three conventions are kept apart on purpose:
 
 - English, Chinese and Japanese: `6.5 °C`, `5,000 m`
-- German, Spanish and Italian: `6,5 °C`, `1.000 m` (decimal comma, thousands point)
-- French and Swedish: `6,5 °C`, `5 000 m` (decimal comma, thousands space)
+- German, Spanish and Italian: `6,5 °C`, `1.000 m`
+- French and Swedish: `6,5 °C`, `5 000 m`
 
-The learner-facing voice also differs by language: German uses the impersonal *man*-form, Spanish addresses the reader as *tú*, French as *vous*, Swedish and Italian as *du* / *tu*, while lesson briefs stay impersonal in all of them.
-
-If an item ever is missing in the selected language, the fallback order is: selected language → English → Chinese source. That path is now only a safety net.
+The learner-facing voice differs too: German uses the impersonal *man*-form, Spanish addresses the reader as *tú*, French as *vous*, Swedish and Italian as *du* / *tu*. If an item is ever missing, the fallback order is selected language → English → Chinese source; that path is now only a safety net.
 
 ## Curriculum
 
@@ -122,34 +121,59 @@ If an item ever is missing in the selected language, the fallback order is: sele
 
 38 target peaks and routes in total: 30 for climbing, from Aotaina at 5,211 m up to the fourteen 8,000 m peaks; 8 for trekking, from the Huihang Trail to the Three Passes route at Everest.
 
-## Where the content comes from
+## Install
 
-Two main streams feed the questions and the handbook.
+The easiest route is the prebuilt APK from [Releases](https://github.com/Solar-CV/AscentApp/releases). Pushing a `v*` tag makes GitHub Actions build and attach a fresh APK.
 
-Public sources include the Wilderness Medical Society's 2024 update of the clinical practice guidelines for acute altitude illness, the CDC Yellow Book, technical material from the American Alpine Institute and the American Alpine Club, REI Expert Advice, UIAA and CE equipment standards, and avalanche data from avalanche.org.
+- Package: `com.ascentroam.app` (the source package stays `com.ascent.climb`)
+- Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
+- Size: about 30 MB (38 MB of uncompressed badge models, ~10 MB after packaging)
+- Signing: release-signed since v0.21.2. It will not install over an older debug build — uninstall first, and that clears local progress, badges and settings
+- Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 
-The three SEVEN SUMMIT TREKS guide documents — altitude illness, equipment, general expedition practice — are the second stream.
+Transfer the APK to your phone, allow installs from unknown sources, tap install. No login on first launch.
 
-Later, proofed transcripts of seven Chinese mountaineering books were edited into the handbook. Knowledge and cases are rewritten in our own words, with page references; the scanned source text is not kept in the repository.
+## Architecture
 
-| Source | Used for |
-|---|---|
-| WMS / CDC / StatPearls | Altitude medicine questions and handbook |
-| AAI / AAC / REI / BMC | Snow, ice and movement technique |
-| UIAA / CE standards | Equipment questions |
-| avalanche.org | Avalanche judgement |
-| SEVEN SUMMIT TREKS documents | Handbook h17–h22 and related questions |
-| 7 Chinese mountaineering books | Handbook h23–h31 |
+<img src="assets/readme/arch.svg" width="100%" alt="Four layers: interface, learning model, content in ten languages, platform services">
 
-## Safety boundary
+Each layer only talks to the one below it. The interface never reads content directly; the learning model recomputes from content; the platform layer decides whether a newer question bank exists, and otherwise stays out of the way.
 
-The app covers theory and cognitive preparation only. Practical skills — snow and ice, rope work, ice climbing, rescue — must be taught and assessed on site by a certified instructor.
+- **Offline first.** The bundled bank ships inside the APK; an online copy only replaces the cache when it is newer
+- **Content is data.** Lessons, questions, handbook bodies and translations live in `data/`, not in the UI: adding a unit means adding data entries and one line in `Curriculum.kt`
+- **Two optional services.** Bank updates and account sync can both be absent; nothing else depends on them
 
-Nothing here is medical advice. Decisions about medication and first aid belong with a doctor.
+<details>
+<summary><b>Project layout</b></summary>
 
-No summit is promised and no acclimatisation outcome is guaranteed.
+```
+AscentApp/
+├── import/                      Question authoring (Markdown, from print books)
+├── knowledge/                   Print-source knowledge base
+├── tools/
+│   ├── contentcheck/            Content checks + bank export (plain JVM)
+│   ├── i18ncheck.py             Per-language coverage across all four layers
+│   ├── qbank/build.mjs          Markdown → question bank compiler
+│   ├── readme/                  README artwork (banner, diagrams, screenshot framing)
+│   └── poc3d/                   Model sync, icon cut-out, emissive baking
+└── app/src/main/
+    ├── res/values*/             Interface strings for 10 languages
+    ├── assets/
+    │   ├── badges/*.glb         40 badge models
+    │   └── env/studio_ibl.ktx   Procedurally generated IBL environment
+    └── java/com/ascent/climb/
+        ├── data/
+        │   ├── Unit1~5.kt       Main lesson content
+        │   ├── NewLessons.kt    Newer curriculum lessons
+        │   ├── i18n/Pack*.kt    Content translations (entry / brief / handbook / quiz)
+        │   ├── Diagnostics.kt   Crash log + environment snapshot for the feedback form
+        │   ├── FeedbackSender.kt  Formspree POST (HttpURLConnection, no extra deps)
+        │   ├── BundledBank.kt   Lesson pool assembly and review insertion
+        │   └── bank/            Bank config, JSON decoding, network, repository
+        └── ui/                  Screens and components (Badge3D.kt = Filament scene, framing, lights)
+```
 
-Lessons marked as needing an instructor say so explicitly once the theory is done.
+</details>
 
 ## Building it yourself
 
@@ -175,64 +199,55 @@ cd AscentApp
 ./gradlew assembleDebug
 ```
 
-Output lands in `app/build/outputs/apk/debug/app-debug.apk`.
+Output lands in `app/build/outputs/apk/debug/app-debug.apk`. For Google Play, build the App Bundle instead: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. An AAB cannot be installed on a phone; side-loading still uses the APK.
 
-For Google Play, build the App Bundle instead: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. An AAB cannot be installed on a phone; side-loading still uses the APK.
-
-## Project layout
-
-```
-AscentApp/
-├── import/                      Question authoring (Markdown, from print books)
-├── knowledge/                   Print-source knowledge base
-├── tools/
-│   ├── contentcheck/            Content checks + bank export (plain JVM)
-│   ├── i18ncheck.py             Per-language coverage across all four layers
-│   ├── qbank/build.mjs          Markdown → question bank compiler
-│   └── poc3d/                   Model sync, icon cut-out, emissive baking
-└── app/src/main/
-    ├── res/values*/             Interface strings for 10 languages
-    ├── assets/
-    │   ├── badges/*.glb         40 badge models
-    │   └── env/studio_ibl.ktx   Procedurally generated IBL environment
-    └── java/com/ascent/climb/
-        ├── data/
-        │   ├── Unit1~5.kt       Main lesson content
-        │   ├── NewLessons.kt    Newer curriculum lessons
-        │   ├── i18n/Pack*.kt    Content translations (entry / brief / handbook / quiz)
-        │   ├── Diagnostics.kt   Crash log + environment snapshot for the feedback form
-        │   ├── FeedbackSender.kt  Formspree POST (HttpURLConnection, no extra deps)
-        │   ├── BundledBank.kt   Lesson pool assembly and review insertion
-        │   └── bank/            Bank config, JSON decoding, network, repository
-        └── ui/                  Screens and components (Badge3D.kt = Filament scene, framing, lights)
-```
-
-## Changing content
+### Changing content
 
 To add questions to an existing lesson, edit `data/Expansion*.kt`. For a new lesson, write `Lesson(...)` in `data/NewLessons.kt` and add its id to the right unit in `Curriculum.kt`. Ordering and unit membership live only in `Curriculum.kt`.
-
-Then run the checks:
 
 ```bash
 bash tools/contentcheck/run.sh
 python3 tools/i18ncheck.py
 ```
 
-The first script syncs the app's content into a plain JVM project, runs the real assembly logic, and checks question counts, difficulty progression, out-of-range answers, empty questions, unlock logic and achievement definitions, then exports `bank/bank.json` and `bank/manifest.json`. The second reports coverage per language across the four layers and diffs the keys. Neither needs an emulator.
-
-After touching the bank, bump `BUNDLED_VERSION` in `data/bank/BankConfig.kt`, otherwise clients will think nothing has changed.
+The first script syncs the app's content into a plain JVM project, runs the real assembly logic, and checks question counts, difficulty progression, out-of-range answers, empty questions, unlock logic and achievement definitions, then exports `bank/bank.json` and `bank/manifest.json`. The second reports coverage per language across the four layers and diffs the keys. Neither needs an emulator. After touching the bank, bump `BUNDLED_VERSION` in `data/bank/BankConfig.kt`.
 
 ## Online bank updates
 
-The bank has three layers: local cache, bundled, and an online delta. Lookup order is cache → bundled; the online copy only overwrites the cache when it is newer.
-
-So a plane, a valley with no signal, a dead server, malformed JSON, a sha256 mismatch or an older version all leave things as they are. Updates are checked silently after launch, at most every six hours, and only once a URL is configured.
+The bank has three layers: local cache, bundled, and an online delta. Lookup runs cache → bundled, and the online copy only overwrites the cache when it is newer. So a plane, a valley with no signal, a dead server, malformed JSON, a sha256 mismatch or an older version all leave things as they are. Checks happen silently after launch, at most every six hours, and only once a URL is configured.
 
 To publish a new bank: change content → bump `BUNDLED_VERSION` → run `contentcheck` → upload `bank/bank.json` and `bank/manifest.json` to a server or CDN → the app picks it up next launch, no release needed.
 
 Older app versions are not broken by a newer bank. `minAppVersion` in `manifest.json` blocks clients that are too old, unknown fields are ignored, and a malformed question is skipped rather than fatal.
 
+## Where the content comes from
+
+Public sources include the Wilderness Medical Society's 2024 update of the clinical practice guidelines for acute altitude illness, the CDC Yellow Book, technical material from the American Alpine Institute and the American Alpine Club, REI Expert Advice, UIAA and CE equipment standards, and avalanche data from avalanche.org. The three SEVEN SUMMIT TREKS guide documents — altitude illness, equipment, general expedition practice — are the second stream. Later, proofed transcripts of seven Chinese mountaineering books were edited into the handbook: knowledge and cases rewritten in our own words, with page references; the scanned source text is not kept in the repository.
+
+| Source | Used for |
+|---|---|
+| WMS / CDC / StatPearls | Altitude medicine questions and handbook |
+| AAI / AAC / REI / BMC | Snow, ice and movement technique |
+| UIAA / CE standards | Equipment questions |
+| avalanche.org | Avalanche judgement |
+| SEVEN SUMMIT TREKS documents | Handbook h17–h22 and related questions |
+| 7 Chinese mountaineering books | Handbook h23–h31 |
+
+## Safety boundary
+
+The app covers theory and cognitive preparation only. Practical skills — snow and ice, rope work, ice climbing, rescue — must be taught and assessed on site by a certified instructor. Nothing here is medical advice: decisions about medication and first aid belong with a doctor. No summit is promised and no acclimatisation outcome is guaranteed. Lessons marked as needing an instructor say so explicitly once the theory is done.
+
 ## Recent changes
+
+<details>
+<summary><b>Release notes, v0.28.8 back to v0.13</b></summary>
+
+**v0.28.8: settings catch-up, terrain maps for trails, and two fixes**
+
+- Settings gained terms of service (readable offline), rate the app, copy share link, and a Support AscentRoam entry that opens the support page in your browser — no payment platform appears inside the app
+- The keyboard no longer lifts the bottom tab bar, and the weather sun at top right is centred on the streak count instead of overlapping the rope icon
+- Hiking routes now carry terrain maps: 39 of the 44 show ridges, valleys and coastlines plus the line the route takes, replacing the elevation profile. Long routes sit on a soft hillshade; those spanning hundreds of kilometres, like the Camino or the JMT, are drawn as a schematic with the trace and key towns only
+- All 88 peaks have an *About this mountain* and all 44 routes an *About this route*, in nine languages; the atlas ranks your region first based on your interface language
 
 **v0.27.1 – v0.27.2: the interface follows the weather**
 
@@ -422,6 +437,16 @@ Earlier:
 - v0.15.0: nine more handbook articles from Chinese books (h23–h31), new "outdoor leadership" category, 22 → 31 articles
 - v0.14.0: six SEVEN SUMMIT TREKS guide articles
 - v0.13.x: settings, profile page, badge wall; back gesture on secondary screens
+
+</details>
+
+## Supporting AscentRoam
+
+AscentRoam is an independently built, free and open outdoor learning project. There are no ads and no paid unlocks. If you find it useful and want it to keep being developed and maintained, you can support it voluntarily through [Afdian](https://afdian.com/a/ascent) or [Ko-fi](https://ko-fi.com/ascentroam).
+
+**All support is a donation with no reward**: it does not buy extra features, digital content, exclusive badges or any other entitlement. Every user always gets the same app.
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
 
 ## Licence
 

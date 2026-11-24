@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="470" viewBox="0 0 880 470" role="img" aria-label="AscentRoam architecture">
+<title>AscentRoam architecture</title>
+<desc>Four layers: interface, learning model, content in ten languages, and platform services. Content feeds the model, the model feeds the interface.</desc>
+<defs><marker id="up" viewBox="0 0 8 8" refX="4" refY="1.2" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 6.4L4 1.6L7 6.4" fill="none" stroke="#0E7BEA" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect x="130" y="30" width="700" height="78" rx="14" fill="#F8FAFD" stroke="#E1E9F3"/>
+<text x="108" y="73.0" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" letter-spacing="2.2" fill="#8B9CB0">UI</text>
+<rect x="154.0" y="52" width="100" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="204.0" y="73" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12" fill="#0D1622">ルート</text>
+<rect x="264.4" y="52" width="100" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="314.4" y="73" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12" fill="#0D1622">レッスン</text>
+<rect x="374.8" y="52" width="100" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="424.8" y="73" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12" fill="#0D1622">ハンドブック</text>
+<rect x="485.20000000000005" y="52" width="100" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="535.2" y="73" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12" fill="#0D1622">トレーニング</text>
+<rect x="595.6" y="52" width="100" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="645.6" y="73" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12" fill="#0D1622">マイページ</text>
+<rect x="706.0" y="52" width="100" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="756.0" y="73" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12" fill="#0D1622">3D バッジ</text>
+<text x="812" y="46" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9.5" letter-spacing="1.8" fill="#A8B8C9">インターフェース</text>
+<rect x="130" y="134" width="700" height="78" rx="14" fill="#F8FAFD" stroke="#E1E9F3"/>
+<text x="108" y="177.0" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" letter-spacing="2.2" fill="#8B9CB0">モデル</text>
+<rect x="154.0" y="156" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="229.0" y="177" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">カリキュラム</text>
+<rect x="321.3" y="156" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="396.3" y="177" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">進度</text>
+<rect x="488.6" y="156" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="563.6" y="177" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">復習キュー</text>
+<rect x="655.9000000000001" y="156" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="730.9000000000001" y="177" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">実績</text>
+<text x="812" y="150" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9.5" letter-spacing="1.8" fill="#A8B8C9">学習モデル</text>
+<rect x="130" y="238" width="700" height="78" rx="14" fill="#F8FAFD" stroke="#E1E9F3"/>
+<text x="108" y="281.0" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" letter-spacing="2.2" fill="#8B9CB0">内容</text>
+<rect x="154.0" y="260" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="229.0" y="281" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">91 課</text>
+<rect x="321.3" y="260" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="396.3" y="281" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">1,563 問</text>
+<rect x="488.6" y="260" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="563.6" y="281" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">35 本</text>
+<rect x="655.9000000000001" y="260" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="730.9000000000001" y="281" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">88 座</text>
+<text x="812" y="254" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9.5" letter-spacing="1.8" fill="#A8B8C9">コンテンツ · 10 言語</text>
+<rect x="130" y="342" width="700" height="78" rx="14" fill="#F8FAFD" stroke="#E1E9F3"/>
+<text x="108" y="385.0" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" letter-spacing="2.2" fill="#8B9CB0">プラットフォーム</text>
+<rect x="154.0" y="364" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="229.0" y="385" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">ローカル保存</text>
+<rect x="321.3" y="364" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3"/>
+<text x="396.3" y="385" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">同梱問題集</text>
+<rect x="488.6" y="364" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3" stroke-dasharray="4 3"/>
+<text x="563.6" y="385" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">オンライン更新</text>
+<rect x="655.9000000000001" y="364" width="150" height="34" rx="8" fill="#FFFFFF" stroke="#E1E9F3" stroke-dasharray="4 3"/>
+<text x="730.9000000000001" y="385" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#0D1622">アカウント同期</text>
+<text x="812" y="358" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9.5" letter-spacing="1.8" fill="#A8B8C9">プラットフォーム</text>
+<line x1="480" y1="132.0" x2="480" y2="114.0" stroke="#0E7BEA" stroke-width="1.3" opacity="0.55"/><path d="M476.2 117.4L480 112.6L483.8 117.4" fill="none" stroke="#0E7BEA" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="480" y1="236.0" x2="480" y2="218.0" stroke="#0E7BEA" stroke-width="1.3" opacity="0.55"/><path d="M476.2 221.4L480 216.6L483.8 221.4" fill="none" stroke="#0E7BEA" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="480" y1="340.0" x2="480" y2="322.0" stroke="#0E7BEA" stroke-width="1.3" opacity="0.55"/><path d="M476.2 325.4L480 320.6L483.8 325.4" fill="none" stroke="#0E7BEA" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<text x="130" y="452" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="10.5" letter-spacing="1.4" fill="#9BABBD">＊任意 · オフラインでも、アカウントなしでも全部使えます</text>
+</svg>

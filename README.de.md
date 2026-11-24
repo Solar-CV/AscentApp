@@ -1,75 +1,82 @@
-# AscentRoam
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.png">
+    <img src="assets/readme/hero.png" alt="AscentRoam — Höhentraining für Android" width="100%">
+  </picture>
+</p>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · **[Deutsch](README.de.md)** · [Español](README.es.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Русский](README.ru.md) · [Svenska](README.sv.md)
+<br>
+
+<p align="center">
+  <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="APK herunterladen"></a>&nbsp;
+  <a href="https://ascentroam.com/support"><img src="assets/readme/btn-support.svg" height="46" alt="AscentRoam unterstützen"></a>&nbsp;
+  <a href="https://ascentroam.com"><img src="assets/readme/btn-site.svg" height="46" alt="ascentroam.com"></a>
+</p>
+
+<br>
+
+<p align="center"><sub>
+<a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <b><a href="README.de.md">Deutsch</a></b> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.ru.md">Русский</a> · <a href="README.sv.md">Svenska</a>
+</sub></p>
 
 Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist nach Höhe geordnet: mit jeder bestandenen Lektion geht es ein Stück höher.
 
+<p align="center"><sub><b>Aktuelle Version v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · etwa 30 MB</b></sub></p>
+
+<p align="center">
+  <img src="assets/readme/screen-path.png" width="186" alt="Pfad-Bildschirm: Gipfelkarte, Einheitenbanner und Lektionsknoten">&nbsp;
+  <img src="assets/readme/screen-quiz.png" width="186" alt="Einfachauswahlfrage mit vier Antworten">&nbsp;
+  <img src="assets/readme/screen-handbook.png" width="186" alt="Handbuch: Kategoriefilter und Artikelkarten">&nbsp;
+  <img src="assets/readme/screen-training.png" width="186" alt="Training: Empfehlung des Tages und Übungen">&nbsp;
+</p>
+
+<p align="center"><sub>Pfad · Quiz · Handbuch · Training — englische Oberfläche, helles Design</sub></p>
+
+<br>
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
+
+## Der Aufstieg
+
 Zwei Kurslinien lassen sich frei umschalten. **Hochtour** umfasst sechs Einheiten und 69 Lektionen, von der Einführung auf 5.000 m bis 8.000 m — durchgehend 3.200 m bis 8.848 m. **Trekking** umfasst vier Einheiten und 22 Lektionen, vom Tagesausflug bis zur Fernwanderung — 200 m bis 5.630 m. Jede Linie führt Fortschritt, Abzeichen und Wiederholungswarteschlange getrennt.
-
-Aktuelle Version v0.28.8 (versionCode 166). Die Einstellungen haben, was fehlte: Nutzungsbedingungen (offline lesbar), App bewerten, Teilen-Link kopieren und ein Eintrag „AscentRoam unterstützen“, der die Unterstützungsseite im Browser öffnet — in der App selbst taucht keine Zahlungsplattform auf. Dazu zwei Korrekturen: Die Tastatur schiebt die untere Tableiste nicht mehr hoch, und die Wettersonne oben rechts sitzt mittig über der Serie, statt das Seil-Symbol zu überdecken. Wanderrouten haben jetzt Geländekarten: Bei 39 von 44 sieht man Grate, Täler und Küstenlinien und dazu den Verlauf der Route — direkt auf der Karte, wo vorher das Höhenprofil stand. Lange Wege liegen auf einer weichen Schattierung; mehrere hundert Kilometer wie der Jakobsweg oder der JMT werden als Schema mit Verlauf und wichtigen Orten gezeichnet. Alle 88 Gipfel haben ein »Über diesen Berg«, alle 44 Routen ein »Über diese Route« — geschrieben für das, was unterwegs wirklich zählt. Zusammen mit den Routennamen ist das in allen neun Sprachen vorhanden, und der Wanderatlas stellt deine Region nach der Oberflächensprache nach vorn. Der Lernfortschritt hat jetzt eine Form: Wer aufsteigt, schaltet unterwegs echte Schneegipfel frei. Oben auf dem Pfad-Bildschirm zeigt eine neue Gipfelkarte den Berg, der zur aktuellen Höhe passt — insgesamt 88, vom Helan Shan auf 3.600 m bis zum Everest auf 8.848 m, jeder mit Geländekarte (Höhenlinien, wo eine 3D-Darstellung nicht trägt), echter Höhe, Gebirge und Achttausender-Rang. Unter „Profil → Aktuelle Höhe“ liegt die vollständige Liste; freigeschaltete Gipfel öffnen ihre Karte. Das Ziel liegt jetzt bei Everests offizieller Höhe von 8.848,86 m — keine Lektion kam hinzu, und der Fortschrittsbalken füllt sich nicht mehr bei 8.000 m. Die Spracharbeit endete mit v0.19.24 — alle neun übersetzten Sprachen stimmen Eintrag für Eintrag mit dem Englischen überein (10.727 / 10.727). v0.20 dreht sich um die Abzeichen: alle vierzig Erfolge werden jetzt als Echtzeit-3D-Objekte gerendert statt als flache Bilder, und ihre Abzeichen-Icons stammen aus denselben Modellen — die alten KI-Illustrationen sind weg. Der Freischaltdialog nutzt denselben Renderer und schießt Konfetti von beiden Bildschirmrändern ein. Die Modelle liegen im APK, deshalb wuchs das Paket von 21 MB auf etwa 41 MB; der Release-Build liegt bei etwa 30 MB. v0.20.3 behebt ein altes Ärgernis: Liste nach unten scrollen, einen Unterschirm öffnen, zurückkommen — die Liste sprang an den Anfang. Jetzt bleibt sie, wo sie war. v0.20.6–v0.20.7 heben die Abzeichen-Darstellung standardmäßig auf höchste Qualität: feinerer Bloom, der nicht mehr wegen der langsamen ersten Frames abschaltet, eine zweistufige Herabstufung und 4x MSAA mit Fähigkeitsprüfung und stillem Rückfall.
-
-v0.20.19 – v0.21.0 haben die Oberfläche durchgehend auf Ton (Clay) umgestellt: weiche zweilagige Schatten, offscreen gezeichnet und zwischengespeichert, flache Farbchips, Kategoriefarben im Handbuch und große Farbflächen, deren Tiefe aus einem Kontaktschatten statt aus einem Verlauf kommt.
-
-## Installation
-
-Am einfachsten über das fertige APK aus den [Releases](https://github.com/Solar-CV/AscentApp/releases). Ein `v*`-Tag lässt GitHub Actions bauen und das APK anhängen.
-
-- Paket: `com.ascentroam.app` (der Quellcode-Paketname bleibt `com.ascent.climb`)
-- Minimum: Android 8.0 (API 26), **nur arm64-v8a** — reine 32-Bit-Geräte können diese Version nicht installieren
-- Größe: etwa 30 MB (38 MB unkomprimierte Abzeichenmodelle, rund 10 MB nach dem Paketieren)
-- Signatur: seit v0.21.2 mit Release-Zertifikat signiert. Über einen älteren Debug-Build lässt es sich nicht installieren – erst deinstallieren, dabei werden Fortschritt, Abzeichen und Einstellungen gelöscht
-- Berechtigungen: Netzwerk und Netzwerkstatus — für die Prüfung auf Fragenpool-Updates und für Feedback. Alles funktioniert offline, der mitgelieferte Pool ist immer da
-
-APK aufs Telefon übertragen, Installation aus unbekannten Quellen erlauben, tippen. Beim ersten Start ist keine Anmeldung nötig.
-
-## AscentRoam unterstützen
-
-AscentRoam ist ein unabhängig entwickeltes, frei zugängliches Lernprojekt für draußen. Es gibt keine Werbung und keine bezahlten Freischaltungen. Wenn dir das Projekt gefällt und du möchtest, dass es weiterentwickelt und gepflegt wird, kannst du es freiwillig über Afdian unterstützen.
-
-**Jede Unterstützung ist eine Spende ohne Gegenleistung**: Sie bringt keine zusätzlichen Funktionen, keine digitalen Inhalte, keine exklusiven Abzeichen und keine sonstigen Ansprüche. Alle Nutzer haben immer dieselbe App. Jeder Beitrag fließt in die Weiterentwicklung des Projekts.
-
-- [Afdian](https://afdian.com/a/ascent)
-- [Ko-fi](https://ko-fi.com/ascentroam)
-
-Danke, dass du mitgehst.
-
-## Was drin ist
-
-### Die Route
 
 Der Startbildschirm ist eine Route vom Basislager nach oben, geteilt in Höheneinheiten (sechs beim Hochtouren, vier beim Trekking). Horizontal wischen blättert durch sie, zwei Einheiten pro Seite. Lektionen schalten linear frei — eine bestanden, die nächste offen. Knoten zeigen Sterne, die aktuelle Lektion trägt einen „Start"-Hinweis, die letzte Lektion einer Einheit ist gold markiert.
 
-Zwei Pillen oben schalten die Kurslinie um; ein Tipp öffnet ein Bottom-Sheet. Das Umschalten springt auf die erste Seite zurück, die Wahl bleibt gespeichert.
+Jede Lektion läuft nach demselben Ablauf: lesen, Fragen beantworten, Fehler korrigieren, später wiederkommen.
+
+<img src="assets/readme/loop-de.svg" width="100%" alt="">
 
 Fortschritt ist keine gespeicherte Zahl. Er wird aus den abgeschlossenen Lektionen neu berechnet — wird die Höhenkurve später angepasst, rechnen sich alte Spielstände neu, statt hängenzubleiben.
 
-### Fragenpool
+## Echte Berge
 
-1.563 reguläre Fragen plus 158 automatisch eingefügte Wiederholungskopien, zusammen 1.721 Anzeigeposten. Die Menge steigt mit der Höhe: rund 15 Fragen pro Lektion in der Einführung auf 5.000 m, 30 in den technischen Einheiten auf 7.000 m, 8 im Trekking.
+<img src="assets/readme/peaks.png" width="100%" alt="">
+
+Wer aufsteigt, schaltet unterwegs echte Schneegipfel frei: 88 Stück, vom Helan Shan auf 3.600 m bis zum Everest auf 8.848,86 m. Jeder trägt seine eigene Geländekarte, gezeichnet aus echten Höhendaten: ein schattiertes Relief, wo das Modell trägt, Höhenlinien, wo es nicht trägt. Die Karte zeigt die echte Höhe, das Gebirge und den Rang unter den Achttausendern.
+
+Oben auf dem Pfad-Bildschirm zeigt die Karte stets den Berg, der zur aktuellen Höhe passt, und wie viele Meter noch fehlen. Unter „Profil → Aktuelle Höhe“ liegt der volle Atlas; freigeschaltete Gipfel öffnen ihre Karte, und jeder hat ein »Über diesen Berg«, geschrieben für das, was unterwegs wirklich zählt.
+
+## Vierzig Abzeichen, echte Objekte
+
+<img src="assets/readme/badges.png" width="100%" alt="">
+
+Abzeichen sind echte 3D-Objekte — Metallrahmen, Emaille-Einlagen, Relief. Ein entsperrtes Abzeichen im Profil oder an der Wand antippen und es öffnet sich im Vollbild: ziehen zum Drehen, mit zwei Fingern bis etwa 5,5× zoomen, mit zwei Fingern über das Relief schieben, Doppeltipp setzt zurück, und beim Loslassen wiegt es sich leicht. Die Icons stammen aus den Modellen selbst, Wand und 3D-Ansicht zeigen also dasselbe Objekt. Alle vierzig haben jetzt ein Modell; der Rückfall auf die stehende Grafik bleibt für Abzeichen, die später dazukommen. Wird ein Erfolg irgendwo freigeschaltet, zeigt der Dialog dasselbe 3D-Abzeichen, auf einem hellen Sockel, während von beiden Bildschirmrändern Bänder hereinfliegen.
+
+## Was drin ist
+
+**Fragenpool.** 1.563 reguläre Fragen plus 158 automatisch eingefügte Wiederholungskopien, zusammen 1.721 Anzeigeposten. Die Menge steigt mit der Höhe: rund 15 Fragen pro Lektion in der Einführung auf 5.000 m, 30 in den technischen Einheiten auf 7.000 m, 8 im Trekking.
 
 Acht Fragetypen: Einfachwahl, Mehrfachwahl, Reihenfolge, Zuordnung, Lückentext, Rechnung, Hotspot (einen Punkt im Bild antippen) und Szenario (ein Stamm, in mehreren Schritten beantwortet).
 
 Nach einer Lektion geht es direkt in die Wiederholung der falsch beantworteten Fragen. Richtig beantwortete bringen Punkte, der Rest wandert ins Wiederholungszentrum. Die Wiederholung arbeitet mit verteilten Intervallen von 0, 1, 3, 7, 16 und 35 Tagen. Sicherheitskritische Fragen sind gewichtet und verlangen eine Bestätigung des Verständnisses, bevor es weitergeht.
 
-### Handbuch
+**Handbuch.** 35 lange Artikel mit je 4 bis 8 Abschnitten, sortiert nach Ausrüstung, Technik, Medizin, Gesundheit, Wetter, Meteorologie, Entscheidung, Beurteilung, Sicherheit, Risiko und Lawinenrettung. Das Handbuch ist nach Linie gefiltert: Schnee-und-Eis-Stücke erscheinen nur beim Hochtouren, Höhenmedizin, Unterkühlung, Navigation, Lager und Führung teilen beide Linien. Quellen sind öffentliches medizinisches und technisches Material, drei kommerzielle Führer-Dokumente und bearbeitete Transkripte von sieben chinesischen Bergbüchern. Laut Produktvereinbarung werden die chinesischen Bücher nicht mit Titel zitiert, die Führer-Dokumente schon.
 
-35 lange Artikel mit je 4 bis 8 Abschnitten, sortiert nach Ausrüstung, Technik, Medizin, Gesundheit, Wetter, Meteorologie, Entscheidung, Beurteilung, Sicherheit, Risiko und Lawinenrettung. Das Handbuch ist nach Linie gefiltert: Schnee-und-Eis-Stücke erscheinen nur beim Hochtouren, Höhenmedizin, Unterkühlung, Navigation, Lager und Führung teilen beide Linien. Quellen sind öffentliches medizinisches und technisches Material, drei kommerzielle Führer-Dokumente und bearbeitete Transkripte von sieben chinesischen Bergbüchern. Laut Produktvereinbarung werden die chinesischen Bücher nicht mit Titel zitiert, die Führer-Dokumente schon.
+**Training, Wiederholung, Profil.** Das Training empfiehlt die nächste Lektion und bietet vier Übungen: einen fünfminütigen 4-4-Atemtakt, vier 30-Sekunden-Sätze Steigeisen-Schrittrhythmus, ein Ausrüstungsquiz und ein Wolkenquiz. Die beiden Quizze ziehen Einfachauswahlfragen aus vorhandenen Lektionen, mischen die Antworten jede Runde neu und zeigen die Erklärung sofort nach jeder Antwort. Die Wiederholung stellt die heute fälligen Fragen und sicherheitskritische Fehler nach vorn. Das Profil enthält Kopfbereich, aktuelle Höhe, Fähigkeitsübersicht, Abzeichen-Einstieg, Kontobereich und einen Feedback-Einstieg. Das Zahnrad öffnet die Einstellungen, der Avatar die Profilseite.
 
-### Training, Wiederholung, Profil
+**Einstellungen.** Das Erscheinungsbild folgt dem System oder lässt sich auf Hell oder Dunkel festlegen, wird gespeichert, die Statusleiste zieht mit. Die Sprache folgt dem System oder wird manuell gesetzt; Oberfläche und Inhalte wechseln gemeinsam, kein Neustart. Der Pool-Bereich zeigt die aktuelle Version, prüft auf Updates und stellt den mitgelieferten Pool wieder her. Der Entwicklermodus liegt hinter der Versionsnummer unter „Über" — siebenmal tippen. Unter „Über“ stehen Datenschutzerklärung, Nutzungsbedingungen (beide offline lesbar), App bewerten und Teilen-Link kopieren; Unterstützen ist ein einziger Eintrag, der die Unterstützungsseite im Browser öffnet.
 
-Das Training empfiehlt die nächste Lektion und bietet vier Übungen: einen fünfminütigen 4-4-Atemtakt, vier 30-Sekunden-Sätze Steigeisen-Schrittrhythmus, ein Ausrüstungsquiz und ein Wolkenquiz. Die beiden Quizze ziehen Einfachauswahlfragen aus vorhandenen Lektionen, mischen die Antworten jede Runde neu und zeigen die Erklärung sofort nach jeder Antwort. Die Wiederholung stellt die heute fälligen Fragen und sicherheitskritische Fehler nach vorn. Das Profil enthält Kopfbereich, aktuelle Höhe, Fähigkeitsübersicht, Abzeichen-Einstieg, Kontobereich und einen Feedback-Einstieg. Das Zahnrad öffnet die Einstellungen, der Avatar die Profilseite.
-
-Das Profil zeigt nur freigeschaltete Abzeichen. Alle 40 stehen an der Abzeichenwand, gesperrte als graue Vorschau, versteckte Erfolge als „?".
-
-Abzeichen sind echte 3D-Objekte — Metallrahmen, Emaille-Einlagen, Relief. Ein entsperrtes Abzeichen im Profil oder an der Wand antippen und es öffnet sich im Vollbild: ziehen zum Drehen, mit zwei Fingern bis etwa 5,5× zoomen, mit zwei Fingern über das Relief schieben, Doppeltipp setzt zurück, und beim Loslassen wiegt es sich leicht. Die Icons stammen aus den Modellen selbst, Wand und 3D-Ansicht zeigen also dasselbe Objekt. Alle vierzig haben jetzt ein Modell; der Rückfall auf die stehende Grafik bleibt für Abzeichen, die später dazukommen. Wird ein Erfolg irgendwo freigeschaltet, zeigt der Dialog dasselbe 3D-Abzeichen, auf einem hellen Sockel, während von beiden Bildschirmrändern Bänder hereinfliegen.
-
-### Einstellungen
-
-Das Erscheinungsbild folgt dem System oder lässt sich auf Hell oder Dunkel festlegen, wird gespeichert, die Statusleiste zieht mit. Die Sprache folgt dem System oder wird manuell gesetzt; Oberfläche und Inhalte wechseln gemeinsam, kein Neustart. Der Pool-Bereich zeigt die aktuelle Version, prüft auf Updates und stellt den mitgelieferten Pool wieder her. Der Entwicklermodus liegt hinter der Versionsnummer unter „Über" — siebenmal tippen. Unter „Über“ stehen Datenschutzerklärung, Nutzungsbedingungen (beide offline lesbar), App bewerten und Teilen-Link kopieren; Unterstützen ist ein einziger Eintrag, der die Unterstützungsseite im Browser öffnet.
-
-### Feedback
-
-Profil → Feedback und Vorschläge, zwischen Kontokarte und Sicherheitshinweis. Art wählen — Fehler, Idee, Inhaltskorrektur —, Nachricht schreiben, optional eine Adresse für die Antwort hinterlassen und optional Diagnose dazulegen. Das Senden geht über Formspree direkt an den Maintainer; ohne Netz bietet der Bildschirm an, denselben Text per E-Mail zu schicken, und kopiert ihn in die Zwischenablage, wenn keine Mail-App vorhanden ist.
+**Feedback.** Profil → Feedback und Vorschläge, zwischen Kontokarte und Sicherheitshinweis. Art wählen — Fehler, Idee, Inhaltskorrektur —, Nachricht schreiben, optional eine Adresse für die Antwort hinterlassen und optional Diagnose dazulegen. Das Senden geht über Formspree direkt an den Maintainer; ohne Netz bietet der Bildschirm an, denselben Text per E-Mail zu schicken, und kopiert ihn in die Zwischenablage, wenn keine Mail-App vorhanden ist.
 
 Die Diagnose ist standardmäßig aus und umfasst App-Version, Android-Version, Gerätemodell, Sprache, Pool-Version, aktuelle Linie, Fortschrittszahlen und die letzte unbehandelte Ausnahme. Kein Lektionstext, kein Antwortverlauf, kein Konto, keine Zwischenablage.
 
@@ -122,34 +129,58 @@ Fehlt ein Eintrag in der gewählten Sprache, lautet die Reihenfolge: gewählte S
 
 Insgesamt 38 Zielgipfel und Routen: 30 fürs Hochtouren, von der Aotaina auf 5.211 m bis zu den vierzehn Achttausendern; 8 fürs Trekking, vom Huihang-Pfad bis zur Three-Passes-Route am Everest.
 
-## Woher die Inhalte kommen
+## Installation
 
-Zwei Hauptströme speisen Fragen und Handbuch.
+Am einfachsten über das fertige APK aus den [Releases](https://github.com/Solar-CV/AscentApp/releases). Ein `v*`-Tag lässt GitHub Actions bauen und das APK anhängen.
 
-Zu den öffentlichen Quellen gehören die 2024er Aktualisierung der klinischen Leitlinien für akute Höhenkrankheit der Wilderness Medical Society, das CDC Yellow Book, technisches Material des American Alpine Institute und des American Alpine Club, REI Expert Advice, die Ausrüstungsnormen von UIAA und CE sowie Lawinendaten von avalanche.org.
+- Paket: `com.ascentroam.app` (der Quellcode-Paketname bleibt `com.ascent.climb`)
+- Minimum: Android 8.0 (API 26), **nur arm64-v8a** — reine 32-Bit-Geräte können diese Version nicht installieren
+- Größe: etwa 30 MB (38 MB unkomprimierte Abzeichenmodelle, rund 10 MB nach dem Paketieren)
+- Signatur: seit v0.21.2 mit Release-Zertifikat signiert. Über einen älteren Debug-Build lässt es sich nicht installieren – erst deinstallieren, dabei werden Fortschritt, Abzeichen und Einstellungen gelöscht
+- Berechtigungen: Netzwerk und Netzwerkstatus — für die Prüfung auf Fragenpool-Updates und für Feedback. Alles funktioniert offline, der mitgelieferte Pool ist immer da
 
-Die drei Führer-Dokumente von SEVEN SUMMIT TREKS — Höhenkrankheit, Ausrüstung, allgemeine Expeditionspraxis — sind der zweite Strom.
+APK aufs Telefon übertragen, Installation aus unbekannten Quellen erlauben, tippen. Beim ersten Start ist keine Anmeldung nötig.
 
-Später wurden geprüfte Transkripte von sieben chinesischen Bergbüchern zu Handbuchtexten verarbeitet. Wissen und Fälle sind in eigenen Worten wiedergegeben, mit Seitenangaben; der gescannte Quelltext liegt nicht im Repository.
+## Architektur
 
-| Quelle | Verwendet für |
-|---|---|
-| WMS / CDC / StatPearls | Höhenmedizinische Fragen und Handbuch |
-| AAI / AAC / REI / BMC | Schnee-, Eis- und Bewegungstechnik |
-| UIAA / CE-Normen | Ausrüstungsfragen |
-| avalanche.org | Lawinenbeurteilung |
-| SEVEN SUMMIT TREKS | Handbuch h17–h22 und zugehörige Fragen |
-| 7 chinesische Bergbücher | Handbuch h23–h31 |
+<img src="assets/readme/arch-de.svg" width="100%" alt="">
 
-## Sicherheitsgrenze
+Jede Schicht spricht nur mit der darunterliegenden. Die Oberfläche liest Inhalte nie direkt; das Lernmodell rechnet aus den Inhalten neu; die Plattformschicht entscheidet, ob es einen neueren Fragenpool gibt, und hält sich sonst heraus.
 
-Die App deckt nur Theorie und kognitive Vorbereitung ab. Praktische Fertigkeiten — Schnee und Eis, Seiltechnik, Eisklettern, Rettung — müssen von einer zertifizierten Ausbilderin oder einem zertifizierten Ausbilder vor Ort vermittelt und geprüft werden.
+- **Offline zuerst.** Der mitgelieferte Pool liegt in der APK; die Online-Kopie ersetzt den Cache nur, wenn sie neuer ist
+- **Inhalte sind Daten.** Lektionen, Fragen, Handbuchtexte und Übersetzungen liegen in `data/`, nicht in der Oberfläche: eine Einheit dazu heißt Dateneinträge plus eine Zeile in `Curriculum.kt`
+- **Zwei optionale Dienste.** Pool-Updates und Konto-Sync können beide fehlen; nichts anderes hängt an ihnen
 
-Nichts hier ist medizinischer Rat. Entscheidungen zu Medikamenten und Erster Hilfe gehören in ärztliche Hand.
+<details>
+<summary><b>Projektaufbau</b></summary>
 
-Kein Gipfel wird versprochen, kein Akklimatisierungserfolg garantiert.
+```
+AscentApp/
+├── import/                      Fragenerstellung (Markdown, aus gedruckten Büchern)
+├── knowledge/                   Wissensbasis der Druckquellen
+├── tools/
+│   ├── contentcheck/            Inhaltsprüfungen + Pool-Export (reines JVM)
+│   ├── i18ncheck.py             Abdeckung pro Sprache über alle vier Ebenen
+│   ├── qbank/build.mjs          Markdown → Fragenpool-Compiler
+│   └── poc3d/                   Modellabgleich, Icon-Freistellung, Emissive-Backen
+└── app/src/main/
+    ├── res/values*/             Oberflächentexte für 10 Sprachen
+    ├── assets/
+    │   ├── badges/*.glb         40 Abzeichenmodelle
+    │   └── env/studio_ibl.ktx   Prozedural erzeugte IBL-Umgebung
+    └── java/com/ascent/climb/
+        ├── data/
+        │   ├── Unit1~5.kt      Inhalte der Hauptlektionen
+        │   ├── NewLessons.kt    Spätere Lehrplanlektionen
+        │   ├── i18n/Pack*.kt    Inhaltsübersetzungen (Einstieg / Kern / Handbuch / Pool)
+        │   ├── Diagnostics.kt   Absturzprotokoll + Umgebungsaufnahme fürs Feedback
+        │   ├── FeedbackSender.kt  Formspree-POST (HttpURLConnection, keine Extras)
+        │   ├── BundledBank.kt   Zusammenbau des Lektionspools und Einfügen der Wiederholungen
+        │   └── bank/            Pool-Konfiguration, JSON-Dekodierung, Netzwerk, Repository
+        └── ui/                  Bildschirme und Bausteine (Badge3D.kt = Filament-Szene, Bildausschnitt, Licht)
+```
 
-Lektionen, die eine Begleitung erfordern, sagen das ausdrücklich, sobald die Theorie durch ist.
+</details>
 
 ## Selbst bauen
 
@@ -179,35 +210,7 @@ Das Ergebnis liegt in `app/build/outputs/apk/debug/app-debug.apk`.
 
 Für Google Play das App Bundle bauen: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. Ein AAB lässt sich nicht direkt auf ein Telefon installieren; zum Sideloading dient weiterhin das APK.
 
-## Projektaufbau
-
-```
-AscentApp/
-├── import/                      Fragenerstellung (Markdown, aus gedruckten Büchern)
-├── knowledge/                   Wissensbasis der Druckquellen
-├── tools/
-│   ├── contentcheck/            Inhaltsprüfungen + Pool-Export (reines JVM)
-│   ├── i18ncheck.py             Abdeckung pro Sprache über alle vier Ebenen
-│   ├── qbank/build.mjs          Markdown → Fragenpool-Compiler
-│   └── poc3d/                   Modellabgleich, Icon-Freistellung, Emissive-Backen
-└── app/src/main/
-    ├── res/values*/             Oberflächentexte für 10 Sprachen
-    ├── assets/
-    │   ├── badges/*.glb         40 Abzeichenmodelle
-    │   └── env/studio_ibl.ktx   Prozedural erzeugte IBL-Umgebung
-    └── java/com/ascent/climb/
-        ├── data/
-        │   ├── Unit1~5.kt      Inhalte der Hauptlektionen
-        │   ├── NewLessons.kt    Spätere Lehrplanlektionen
-        │   ├── i18n/Pack*.kt    Inhaltsübersetzungen (Einstieg / Kern / Handbuch / Pool)
-        │   ├── Diagnostics.kt   Absturzprotokoll + Umgebungsaufnahme fürs Feedback
-        │   ├── FeedbackSender.kt  Formspree-POST (HttpURLConnection, keine Extras)
-        │   ├── BundledBank.kt   Zusammenbau des Lektionspools und Einfügen der Wiederholungen
-        │   └── bank/            Pool-Konfiguration, JSON-Dekodierung, Netzwerk, Repository
-        └── ui/                  Bildschirme und Bausteine (Badge3D.kt = Filament-Szene, Bildausschnitt, Licht)
-```
-
-## Inhalte ändern
+### Inhalte ändern
 
 Für neue Fragen in einer bestehenden Lektion `data/Expansion*.kt` bearbeiten. Für eine neue Lektion `Lesson(...)` in `data/NewLessons.kt` schreiben und die id in der passenden Einheit in `Curriculum.kt` ergänzen. Reihenfolge und Einheitenzugehörigkeit liegen nur in `Curriculum.kt`.
 
@@ -232,7 +235,49 @@ Neuen Pool veröffentlichen: Inhalte ändern → `BUNDLED_VERSION` erhöhen → 
 
 Ältere App-Versionen gehen an einem neueren Pool nicht kaputt. `minAppVersion` in `manifest.json` blockt zu alte Clients, unbekannte Felder werden ignoriert, eine fehlerhafte Frage wird übersprungen statt tödlich zu sein.
 
+## Woher die Inhalte kommen
+
+Zwei Hauptströme speisen Fragen und Handbuch.
+
+Zu den öffentlichen Quellen gehören die 2024er Aktualisierung der klinischen Leitlinien für akute Höhenkrankheit der Wilderness Medical Society, das CDC Yellow Book, technisches Material des American Alpine Institute und des American Alpine Club, REI Expert Advice, die Ausrüstungsnormen von UIAA und CE sowie Lawinendaten von avalanche.org.
+
+Die drei Führer-Dokumente von SEVEN SUMMIT TREKS — Höhenkrankheit, Ausrüstung, allgemeine Expeditionspraxis — sind der zweite Strom.
+
+Später wurden geprüfte Transkripte von sieben chinesischen Bergbüchern zu Handbuchtexten verarbeitet. Wissen und Fälle sind in eigenen Worten wiedergegeben, mit Seitenangaben; der gescannte Quelltext liegt nicht im Repository.
+
+| Quelle | Verwendet für |
+|---|---|
+| WMS / CDC / StatPearls | Höhenmedizinische Fragen und Handbuch |
+| AAI / AAC / REI / BMC | Schnee-, Eis- und Bewegungstechnik |
+| UIAA / CE-Normen | Ausrüstungsfragen |
+| avalanche.org | Lawinenbeurteilung |
+| SEVEN SUMMIT TREKS | Handbuch h17–h22 und zugehörige Fragen |
+| 7 chinesische Bergbücher | Handbuch h23–h31 |
+
+## Sicherheitsgrenze
+
+Die App deckt nur Theorie und kognitive Vorbereitung ab. Praktische Fertigkeiten — Schnee und Eis, Seiltechnik, Eisklettern, Rettung — müssen von einer zertifizierten Ausbilderin oder einem zertifizierten Ausbilder vor Ort vermittelt und geprüft werden.
+
+Nichts hier ist medizinischer Rat. Entscheidungen zu Medikamenten und Erster Hilfe gehören in ärztliche Hand.
+
+Kein Gipfel wird versprochen, kein Akklimatisierungserfolg garantiert.
+
+Lektionen, die eine Begleitung erfordern, sagen das ausdrücklich, sobald die Theorie durch ist.
+
 ## Letzte Änderungen
+
+<details>
+<summary><b>Versionsnotizen, v0.28.8 zurück bis v0.13</b></summary>
+
+**v0.28.8: Einstellungen vervollständigt, Geländekarten für Wanderungen, zwei Korrekturen**
+
+- Die Einstellungen haben, was fehlte: Nutzungsbedingungen (offline lesbar), App bewerten, Teilen-Link kopieren und ein Eintrag »AscentRoam unterstützen«, der die Unterstützungsseite im Browser öffnet — in der App selbst taucht keine Zahlungsplattform auf
+
+- Die Tastatur schiebt die untere Tableiste nicht mehr hoch, und die Wettersonne oben rechts sitzt mittig über der Serie, statt das Seil-Symbol zu überdecken
+
+- Wanderrouten haben jetzt Geländekarten: 39 von 44 zeigen Grate, Täler und Küstenlinien und den Verlauf der Route, anstelle des Höhenprofils. Lange Wege liegen auf einer weichen Schattierung; mehrere hundert Kilometer wie der Jakobsweg oder der JMT werden als Schema mit Verlauf und wichtigen Orten gezeichnet
+
+- Alle 88 Gipfel haben ein »Über diesen Berg«, alle 44 Routen ein »Über diese Route«, in neun Sprachen; der Wanderatlas stellt deine Region nach der Oberflächensprache nach vorn
 
 **v0.27.1 – v0.27.2: Die Oberfläche folgt dem Wetter**
 
@@ -422,6 +467,21 @@ Früher:
 - v0.15.0: neun weitere Handbuchartikel aus chinesischen Büchern (h23–h31), neue Kategorie „Führung im Gelände", 22 → 31 Artikel
 - v0.14.0: sechs Führer-Artikel von SEVEN SUMMIT TREKS
 - v0.13.x: Einstellungen, Profilseite, Abzeichenwand; Zurück-Geste auf Unterschirmen
+
+</details>
+
+## AscentRoam unterstützen
+
+AscentRoam ist ein unabhängig entwickeltes, frei zugängliches Lernprojekt für draußen. Es gibt keine Werbung und keine bezahlten Freischaltungen. Wenn dir das Projekt gefällt und du möchtest, dass es weiterentwickelt und gepflegt wird, kannst du es freiwillig über Afdian unterstützen.
+
+**Jede Unterstützung ist eine Spende ohne Gegenleistung**: Sie bringt keine zusätzlichen Funktionen, keine digitalen Inhalte, keine exklusiven Abzeichen und keine sonstigen Ansprüche. Alle Nutzer haben immer dieselbe App. Jeder Beitrag fließt in die Weiterentwicklung des Projekts.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Danke, dass du mitgehst.
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
 
 ## Lizenz
 

@@ -1,75 +1,82 @@
-# AscentRoam
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.png">
+    <img src="assets/readme/hero.png" alt="AscentRoam — entrenamiento de altitud para Android" width="100%">
+  </picture>
+</p>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · **[Español](README.es.md)** · [Français](README.fr.md) · [Italiano](README.it.md) · [Русский](README.ru.md) · [Svenska](README.sv.md)
+<br>
+
+<p align="center">
+  <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="Descargar el APK"></a>&nbsp;
+  <a href="https://ascentroam.com/support"><img src="assets/readme/btn-support.svg" height="46" alt="Apoyar AscentRoam"></a>&nbsp;
+  <a href="https://ascentroam.com"><img src="assets/readme/btn-site.svg" height="46" alt="ascentroam.com"></a>
+</p>
+
+<br>
+
+<p align="center"><sub>
+<a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.de.md">Deutsch</a> · <b><a href="README.es.md">Español</a></b> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.ru.md">Русский</a> · <a href="README.sv.md">Svenska</a>
+</sub></p>
 
 Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. El temario está ordenado por altitud: cada lección superada te sube un poco más arriba.
 
+<p align="center"><sub><b>Versión actual v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · unos 30 MB</b></sub></p>
+
+<p align="center">
+  <img src="assets/readme/screen-path.png" width="186" alt="Pantalla de ruta: tarjeta de cumbre, banner de unidad y nodos de lección">&nbsp;
+  <img src="assets/readme/screen-quiz.png" width="186" alt="Pregunta de elección única con cuatro opciones">&nbsp;
+  <img src="assets/readme/screen-handbook.png" width="186" alt="Manual: filtros por categoría y tarjetas de artículo">&nbsp;
+  <img src="assets/readme/screen-training.png" width="186" alt="Entrenamiento: recomendación del día y ejercicios">&nbsp;
+</p>
+
+<p align="center"><sub>Ruta · Pregunta · Manual · Entrenamiento — interfaz en inglés, tema claro</sub></p>
+
+<br>
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
+
+## La subida
+
 Dos itinerarios de curso se cambian libremente. **Alta montaña** tiene seis unidades y 69 lecciones, desde la introducción a 5.000 m hasta 8.000 m — de 3.200 m a 8.848 m de principio a fin. **Senderismo** tiene cuatro unidades y 22 lecciones, desde la caminata de un día hasta las rutas largas — de 200 m a 5.630 m. Cada itinerario lleva su propio progreso, sus insignias y su cola de repaso.
-
-Versión actual v0.28.8 (versionCode 166). Los ajustes ya tienen lo que faltaba: términos del servicio (legibles sin conexión), valorar la aplicación, copiar el enlace para compartir y una entrada «Apoyar AscentRoam» que abre la página de apoyo en el navegador: dentro de la app no aparece ninguna plataforma de pago. Dos correcciones más: el teclado ya no levanta la barra de pestañas y el sol del tiempo arriba a la derecha queda centrado sobre la racha en lugar de tapar el icono de cuerda. Las rutas de senderismo ya llevan mapa de terreno: 39 de las 44 muestran crestas, valles y costas, y el trazado de la ruta, justo donde antes estaba el perfil de altitud. Las rutas largas van sobre un sombreado suave; las de cientos de kilómetros, como el Camino o el JMT, se dibujan como esquema con el trazado y las poblaciones clave. Las 88 cumbres tienen un «Sobre esta montaña» y las 44 rutas un «Sobre esta ruta», escritos para lo que de verdad importa en el camino. Todo ello, con los nombres de ruta, está en los nueve idiomas, y el atlas ordena primero tu región según el idioma de la interfaz. El progreso de aprendizaje ya tiene forma: al subir se van desbloqueando cumbres reales. Una tarjeta nueva en la parte superior de la pantalla de ruta muestra la cumbre que corresponde a la altitud actual: 88 en total, desde el Helan Shan a 3.600 m hasta el Everest a 8.848 m, cada una con mapa del terreno (curvas de nivel donde un render 3D no se sostiene), altitud real, cordillera y puesto entre los ochomiles. En «Perfil → altitud actual» está la lista completa; las cumbres desbloqueadas abren su tarjeta. El objetivo pasa a la altitud oficial del Everest, 8.848,86 m: no se añadió ninguna lección y la barra ya no se llena a los 8.000 m. El trabajo de idiomas cerró con la v0.19.24 — las nueve lenguas traducidas coinciden con el inglés entrada por entrada (10.727 / 10.727). La v0.20 va de insignias: los cuarenta logros se dibujan ahora como objetos 3D en tiempo real en lugar de imágenes planas, y sus iconos salen de los mismos modelos — las ilustraciones antiguas de IA ya no están. El diálogo de desbloqueo usa el mismo motor y lanza confeti desde los dos bordes de la pantalla. Los modelos viajan dentro del APK, así que el paquete pasó de 21 MB a unos 41 MB; la compilación de release ronda los 30 MB. La v0.20.3 arregla una molestia vieja: bajabas por una lista, abrías una pantalla secundaria y al volver la lista saltaba al principio — ahora se queda donde la dejaste. La v0.20.6–v0.20.7 sube el dibujado de las insignias a calidad máxima por defecto: bloom más fino que ya no se apaga por los primeros fotogramas lentos, rebaja en dos pasos y 4x MSAA con comprobación de capacidad y vuelta atrás silenciosa.
-
-v0.20.19 – v0.21.0 renovaron toda la interfaz con acabado de arcilla: sombras dobles suaves dibujadas fuera de pantalla y cacheadas, fichas de color planas, colores por categoría en el manual y bloques de color cuya profundidad viene de una sombra de contacto, no de un degradado.
-
-## Instalación
-
-Lo más fácil es el APK ya compilado de [Releases](https://github.com/Solar-CV/AscentApp/releases). Al empujar una etiqueta `v*`, GitHub Actions compila y adjunta un APK nuevo.
-
-- Paquete: `com.ascentroam.app` (el paquete del código sigue siendo `com.ascent.climb`)
-- Mínimo: Android 8.0 (API 26), **solo arm64-v8a** — los móviles de solo 32 bits no pueden instalarlo
-- Tamaño: unos 30 MB (38 MB de modelos sin comprimir, unos 10 MB tras empaquetar)
-- Firma: firmado con certificado de release desde la v0.21.2. No se instala sobre una compilación debug anterior: hay que desinstalar, y eso borra el progreso, las insignias y los ajustes
-- Permisos: red y estado de red — para comprobar actualizaciones del banco de preguntas y enviar comentarios. Todo funciona sin conexión; el banco incluido siempre está ahí
-
-Pasa el APK al móvil, permite instalar desde orígenes desconocidos y toca instalar. En el primer arranque no hay que iniciar sesión.
-
-## Apoyar AscentRoam
-
-AscentRoam es un proyecto de aprendizaje de montaña desarrollado de forma independiente y abierto gratis. No hay anuncios ni desbloqueos de pago. Si te resulta útil y quieres que siga desarrollándose y manteniéndose, puedes apoyarlo voluntariamente a través de Afdian.
-
-**Todo apoyo es una donación sin contrapartida**: no da funciones extra, contenido digital, insignias exclusivas ni ningún otro derecho. Todos los usuarios tienen siempre la misma experiencia. Cada aporte se destina a mantener el proyecto en marcha.
-
-- [Afdian](https://afdian.com/a/ascent)
-- [Ko-fi](https://ko-fi.com/ascentroam)
-
-Gracias por caminar con nosotros.
-
-## Qué hay dentro
-
-### La ruta
 
 La pantalla de inicio es una ruta desde el campo base hacia arriba, dividida en unidades de altitud (seis en alta montaña, cuatro en senderismo). Se pasa de una a otra deslizando en horizontal, dos unidades por página. Las lecciones se desbloquean en línea: apruebas una y se abre la siguiente. Los nodos muestran estrellas, la lección actual lleva un aviso de «empezar» y la última de cada unidad va marcada en oro.
 
-Dos píldoras arriba cambian de itinerario; al tocarlas se abre una hoja inferior. Al cambiar se vuelve a la primera página y la elección se recuerda.
+Cada lección sigue el mismo ciclo: leer, responder, corregir lo fallado y volver más tarde.
+
+<img src="assets/readme/loop-es.svg" width="100%" alt="">
 
 El progreso no es un número guardado. Se recalcula a partir de las lecciones completadas, así que si más adelante se ajusta la curva de altitud, las partidas antiguas se recalculan en vez de quedarse atascadas.
 
-### Banco de preguntas
+## Montañas reales
 
-1.563 preguntas formales más 158 copias de repaso insertadas automáticamente, 1.721 elementos en pantalla. El volumen sube con la altitud: unas 15 preguntas por lección en la introducción de 5.000 m, 30 en las unidades técnicas de 7.000 m y 8 en senderismo.
+<img src="assets/readme/peaks.png" width="100%" alt="">
+
+El progreso de aprendizaje ya tiene forma: al subir se van desbloqueando cumbres reales, 88 en total, desde el Helan Shan a 3.600 m hasta el Everest a 8.848,86 m. Cada una lleva su propio mapa de terreno dibujado con datos reales de elevación: sombreado donde el modelo se sostiene y curvas de nivel donde no. La tarjeta muestra la altitud real, la cordillera y el puesto entre los ochomiles.
+
+La tarjeta de arriba en la pantalla de ruta muestra siempre la cumbre que corresponde a tu altitud actual, y cuántos metros faltan. En «Perfil → altitud actual» está el atlas completo; las cumbres desbloqueadas abren su tarjeta, y cada una tiene un «Sobre esta montaña» escrito para lo que de verdad importa en el camino.
+
+## Cuarenta insignias, objetos reales
+
+<img src="assets/readme/badges.png" width="100%" alt="">
+
+Las insignias son objetos 3D reales: marcos metálicos, esmalte, relieve. Toca cualquier insignia desbloqueada en el perfil o en el muro y se abre a pantalla completa: arrastra para rotar, pellizca para acercar hasta unas 5,5×, con dos dedos desplazas la vista sobre el relieve, el doble toque restablece, y se mece sola despacio cuando sueltas. Los iconos salen de los propios modelos, así que el muro y la vista 3D muestran el mismo objeto. Las cuarenta tienen ya modelo; el dibujo a mano queda como reserva para insignias que se añadan después. Al desbloquear un logro en cualquier punto, el diálogo muestra la misma insignia 3D, sobre un pedestal claro, con cintas entrando desde los dos bordes.
+
+## Qué hay dentro
+
+**Banco de preguntas.** 1.563 preguntas formales más 158 copias de repaso insertadas automáticamente, 1.721 elementos en pantalla. El volumen sube con la altitud: unas 15 preguntas por lección en la introducción de 5.000 m, 30 en las unidades técnicas de 7.000 m y 8 en senderismo.
 
 Ocho tipos de pregunta: elección única, elección múltiple, ordenación, emparejamiento, rellenar huecos, cálculo, punto caliente (tocar un punto de la imagen) y escenario (un enunciado que se responde en varios pasos).
 
 Al terminar una lección entras directamente a rehacer las que fallaste. Las que aciertas suman; el resto pasa al centro de repaso. El repaso usa repetición espaciada a 0, 1, 3, 7, 16 y 35 días. Las preguntas críticas para la seguridad llevan peso y exigen confirmar que lo has entendido antes de seguir.
 
-### Manual
+**Manual.** 35 artículos largos, de 4 a 8 secciones cada uno, ordenados por material, técnica, medicina, salud, tiempo, meteorología, decisiones, criterio, seguridad, riesgo y rescate en aludes. El manual está filtrado por itinerario: las piezas de nieve y hielo solo aparecen en alta montaña, mientras que medicina de altura, hipotermia, navegación, acampada y liderazgo son comunes a los dos. Las fuentes son material médico y técnico público, tres documentos comerciales de guías y transcripciones editadas de siete libros chinos de montaña. Por acuerdo de producto, los libros chinos no se citan por título; los documentos de guías sí.
 
-35 artículos largos, de 4 a 8 secciones cada uno, ordenados por material, técnica, medicina, salud, tiempo, meteorología, decisiones, criterio, seguridad, riesgo y rescate en aludes. El manual está filtrado por itinerario: las piezas de nieve y hielo solo aparecen en alta montaña, mientras que medicina de altura, hipotermia, navegación, acampada y liderazgo son comunes a los dos. Las fuentes son material médico y técnico público, tres documentos comerciales de guías y transcripciones editadas de siete libros chinos de montaña. Por acuerdo de producto, los libros chinos no se citan por título; los documentos de guías sí.
+**Entrenamiento, repaso, perfil.** Entrenamiento recomienda la lección siguiente y ofrece cuatro ejercicios: un ritmo respiratorio 4-4 de cinco minutos, cuatro series de 30 segundos de cadencia de paso con crampones, un cuestionario de lista de material y otro de lectura de nubes. Los dos cuestionarios sacan preguntas de opción única de lecciones existentes, barajan las opciones en cada ronda y muestran la explicación justo después de responder. Repaso pone delante las preguntas que vencen hoy y los fallos críticos de seguridad. El perfil reúne la cabecera, la altitud actual, el resumen de capacidades, la entrada a las insignias, el área de cuenta y una entrada de comentarios. El engranaje abre los ajustes, el avatar la página de perfil.
 
-### Entrenamiento, repaso, perfil
+**Ajustes.** La apariencia sigue al sistema o se fija en claro u oscuro, se guarda y la barra de estado acompaña. El idioma sigue al sistema o se elige a mano; interfaz y contenido cambian juntos, sin reiniciar. La sección del banco muestra la versión actual, busca actualizaciones y restaura el banco incluido. El modo desarrollador se esconde detrás del número de versión en «Acerca de»: siete toques. El apartado «Acerca de» incluye la política de privacidad, los términos del servicio (ambos legibles sin conexión), valorar la aplicación y copiar el enlace para compartir; Apoyar tiene una sola entrada que abre la página de apoyo en el navegador.
 
-Entrenamiento recomienda la lección siguiente y ofrece cuatro ejercicios: un ritmo respiratorio 4-4 de cinco minutos, cuatro series de 30 segundos de cadencia de paso con crampones, un cuestionario de lista de material y otro de lectura de nubes. Los dos cuestionarios sacan preguntas de opción única de lecciones existentes, barajan las opciones en cada ronda y muestran la explicación justo después de responder. Repaso pone delante las preguntas que vencen hoy y los fallos críticos de seguridad. El perfil reúne la cabecera, la altitud actual, el resumen de capacidades, la entrada a las insignias, el área de cuenta y una entrada de comentarios. El engranaje abre los ajustes, el avatar la página de perfil.
-
-El perfil solo muestra las insignias desbloqueadas. Las 40 están en el muro de insignias, las bloqueadas como vista previa en gris y los logros ocultos como «?».
-
-Las insignias son objetos 3D reales: marcos metálicos, esmalte, relieve. Toca cualquier insignia desbloqueada en el perfil o en el muro y se abre a pantalla completa: arrastra para rotar, pellizca para acercar hasta unas 5,5×, con dos dedos desplazas la vista sobre el relieve, el doble toque restablece, y se mece sola despacio cuando sueltas. Los iconos salen de los propios modelos, así que el muro y la vista 3D muestran el mismo objeto. Las cuarenta tienen ya modelo; el dibujo a mano queda como reserva para insignias que se añadan después. Al desbloquear un logro en cualquier punto, el diálogo muestra la misma insignia 3D, sobre un pedestal claro, con cintas entrando desde los dos bordes.
-
-### Ajustes
-
-La apariencia sigue al sistema o se fija en claro u oscuro, se guarda y la barra de estado acompaña. El idioma sigue al sistema o se elige a mano; interfaz y contenido cambian juntos, sin reiniciar. La sección del banco muestra la versión actual, busca actualizaciones y restaura el banco incluido. El modo desarrollador se esconde detrás del número de versión en «Acerca de»: siete toques. El apartado «Acerca de» incluye la política de privacidad, los términos del servicio (ambos legibles sin conexión), valorar la aplicación y copiar el enlace para compartir; Apoyar tiene una sola entrada que abre la página de apoyo en el navegador.
-
-### Comentarios
-
-Perfil → Comentarios y sugerencias, entre la tarjeta de cuenta y el aviso de seguridad. Elige un tipo — problema, idea, corrección de contenido —, escribe el mensaje, deja opcionalmente un correo para la respuesta y adjunta opcionalmente el diagnóstico. El envío llega directo al mantenedor mediante Formspree; si no hay red, la pantalla ofrece mandar el mismo texto por correo y lo copia al portapapeles si no existe app de correo.
+**Comentarios.** Perfil → Comentarios y sugerencias, entre la tarjeta de cuenta y el aviso de seguridad. Elige un tipo — problema, idea, corrección de contenido —, escribe el mensaje, deja opcionalmente un correo para la respuesta y adjunta opcionalmente el diagnóstico. El envío llega directo al mantenedor mediante Formspree; si no hay red, la pantalla ofrece mandar el mismo texto por correo y lo copia al portapapeles si no existe app de correo.
 
 El diagnóstico está desactivado por defecto y cubre versión de la app, versión de Android, modelo del dispositivo, idioma, versión del banco, itinerario actual, cifras de progreso y la última excepción no capturada. Sin texto de lecciones, sin historial de respuestas, sin cuenta, sin portapapeles.
 
@@ -122,34 +129,58 @@ Si algún elemento falta en el idioma elegido, el orden es: idioma elegido → i
 
 38 picos y rutas objetivo en total: 30 de alta montaña, desde Aotaina a 5.211 m hasta los catorce ochomiles; 8 de senderismo, desde el sendero de Huihang hasta la ruta de los Tres Pasos del Everest.
 
-## De dónde viene el contenido
+## Instalación
 
-Dos corrientes principales alimentan las preguntas y el manual.
+Lo más fácil es el APK ya compilado de [Releases](https://github.com/Solar-CV/AscentApp/releases). Al empujar una etiqueta `v*`, GitHub Actions compila y adjunta un APK nuevo.
 
-Las fuentes públicas incluyen la actualización de 2024 de las guías clínicas de la Wilderness Medical Society para el mal agudo de montaña, el CDC Yellow Book, material técnico del American Alpine Institute y del American Alpine Club, REI Expert Advice, las normas de equipo de UIAA y CE, y datos de aludes de avalanche.org.
+- Paquete: `com.ascentroam.app` (el paquete del código sigue siendo `com.ascent.climb`)
+- Mínimo: Android 8.0 (API 26), **solo arm64-v8a** — los móviles de solo 32 bits no pueden instalarlo
+- Tamaño: unos 30 MB (38 MB de modelos sin comprimir, unos 10 MB tras empaquetar)
+- Firma: firmado con certificado de release desde la v0.21.2. No se instala sobre una compilación debug anterior: hay que desinstalar, y eso borra el progreso, las insignias y los ajustes
+- Permisos: red y estado de red — para comprobar actualizaciones del banco de preguntas y enviar comentarios. Todo funciona sin conexión; el banco incluido siempre está ahí
 
-Los tres documentos de guía de SEVEN SUMMIT TREKS — mal de altura, equipo y práctica general de expedición — son la segunda corriente.
+Pasa el APK al móvil, permite instalar desde orígenes desconocidos y toca instalar. En el primer arranque no hay que iniciar sesión.
 
-Más adelante se editaron transcripciones corregidas de siete libros chinos de montaña para el manual. El conocimiento y los casos están reescritos con palabras propias y referencia de página; el texto escaneado no se guarda en el repositorio.
+## Arquitectura
 
-| Fuente | Se usa para |
-|---|---|
-| WMS / CDC / StatPearls | Preguntas y manual de medicina de altura |
-| AAI / AAC / REI / BMC | Técnica de nieve, hielo y progresión |
-| Normas UIAA / CE | Preguntas de material |
-| avalanche.org | Criterio de aludes |
-| Documentos de SEVEN SUMMIT TREKS | Manual h17–h22 y preguntas relacionadas |
-| 7 libros chinos de montaña | Manual h23–h31 |
+<img src="assets/readme/arch-es.svg" width="100%" alt="">
 
-## Límite de seguridad
+Cada capa solo habla con la de abajo. La interfaz nunca lee el contenido directamente; el modelo de aprendizaje lo recalcula a partir del contenido; la capa de plataforma decide si existe un banco más nuevo y, si no, no interfiere.
 
-La app cubre solo teoría y preparación cognitiva. Las habilidades prácticas — nieve y hielo, cuerdas, escalada en hielo, rescate — deben enseñarse y evaluarse en el terreno por un instructor titulado.
+- **Sin conexión primero.** El banco incluido va dentro del APK; la copia en línea solo sustituye la caché cuando es más nueva
+- **El contenido son datos.** Lecciones, preguntas, manual y traducciones viven en `data/`, no en la interfaz: añadir una unidad es añadir entradas de datos y una línea en `Curriculum.kt`
+- **Dos servicios opcionales.** Las actualizaciones del banco y la sincronización de cuenta pueden faltar; nada más depende de ellos
 
-Nada de esto es consejo médico. Las decisiones sobre medicación y primeros auxilios corresponden a un médico.
+<details>
+<summary><b>Estructura del proyecto</b></summary>
 
-No se promete cumbre ni se garantiza ningún resultado de aclimatación.
+```
+AscentApp/
+├── import/                      Redacción de preguntas (Markdown, de libros impresos)
+├── knowledge/                   Base de conocimiento de las fuentes impresas
+├── tools/
+│   ├── contentcheck/            Comprobaciones de contenido + exportación (JVM pura)
+│   ├── i18ncheck.py             Cobertura por idioma en las cuatro capas
+│   ├── qbank/build.mjs          Compilador Markdown → banco de preguntas
+│   └── poc3d/                   Sincronía de modelos, recorte de iconos, horneado emisivo
+└── app/src/main/
+    ├── res/values*/             Textos de interfaz en 10 idiomas
+    ├── assets/
+    │   ├── badges/*.glb         40 modelos de insignia
+    │   └── env/studio_ibl.ktx   Entorno IBL generado por código
+    └── java/com/ascent/climb/
+        ├── data/
+        │   ├── Unit1~5.kt      Contenido de las lecciones principales
+        │   ├── NewLessons.kt    Lecciones del temario nuevo
+        │   ├── i18n/Pack*.kt    Traducciones de contenido (entrada / resumen / manual / banco)
+        │   ├── Diagnostics.kt   Registro de fallos + instantánea del entorno para comentarios
+        │   ├── FeedbackSender.kt  POST a Formspree (HttpURLConnection, sin dependencias)
+        │   ├── BundledBank.kt   Ensamblado del pool de lecciones e inserción de repasos
+        │   └── bank/            Configuración del banco, decodificación JSON, red, repositorio
+        └── ui/                  Pantallas y componentes (Badge3D.kt = escena Filament, encuadre, luces)
+```
 
-Las lecciones marcadas como que requieren instructor lo dicen con claridad al terminar la teoría.
+</details>
 
 ## Compilarlo tú mismo
 
@@ -179,35 +210,7 @@ El resultado queda en `app/build/outputs/apk/debug/app-debug.apk`.
 
 Para Google Play, compila el App Bundle: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. Un AAB no se puede instalar directamente en el teléfono; para instalar a mano sigue usándose el APK.
 
-## Estructura del proyecto
-
-```
-AscentApp/
-├── import/                      Redacción de preguntas (Markdown, de libros impresos)
-├── knowledge/                   Base de conocimiento de las fuentes impresas
-├── tools/
-│   ├── contentcheck/            Comprobaciones de contenido + exportación (JVM pura)
-│   ├── i18ncheck.py             Cobertura por idioma en las cuatro capas
-│   ├── qbank/build.mjs          Compilador Markdown → banco de preguntas
-│   └── poc3d/                   Sincronía de modelos, recorte de iconos, horneado emisivo
-└── app/src/main/
-    ├── res/values*/             Textos de interfaz en 10 idiomas
-    ├── assets/
-    │   ├── badges/*.glb         40 modelos de insignia
-    │   └── env/studio_ibl.ktx   Entorno IBL generado por código
-    └── java/com/ascent/climb/
-        ├── data/
-        │   ├── Unit1~5.kt      Contenido de las lecciones principales
-        │   ├── NewLessons.kt    Lecciones del temario nuevo
-        │   ├── i18n/Pack*.kt    Traducciones de contenido (entrada / resumen / manual / banco)
-        │   ├── Diagnostics.kt   Registro de fallos + instantánea del entorno para comentarios
-        │   ├── FeedbackSender.kt  POST a Formspree (HttpURLConnection, sin dependencias)
-        │   ├── BundledBank.kt   Ensamblado del pool de lecciones e inserción de repasos
-        │   └── bank/            Configuración del banco, decodificación JSON, red, repositorio
-        └── ui/                  Pantallas y componentes (Badge3D.kt = escena Filament, encuadre, luces)
-```
-
-## Cambiar contenido
+### Cambiar contenido
 
 Para añadir preguntas a una lección existente, edita `data/Expansion*.kt`. Para una lección nueva, escribe `Lesson(...)` en `data/NewLessons.kt` y añade su id a la unidad correspondiente en `Curriculum.kt`. El orden y la pertenencia a unidades viven solo en `Curriculum.kt`.
 
@@ -232,7 +235,49 @@ Para publicar un banco nuevo: cambia el contenido → sube `BUNDLED_VERSION` →
 
 Las versiones antiguas de la app no se rompen con un banco más nuevo. `minAppVersion` en `manifest.json` bloquea clientes demasiado viejos, los campos desconocidos se ignoran y una pregunta mal formada se salta en vez de ser fatal.
 
+## De dónde viene el contenido
+
+Dos corrientes principales alimentan las preguntas y el manual.
+
+Las fuentes públicas incluyen la actualización de 2024 de las guías clínicas de la Wilderness Medical Society para el mal agudo de montaña, el CDC Yellow Book, material técnico del American Alpine Institute y del American Alpine Club, REI Expert Advice, las normas de equipo de UIAA y CE, y datos de aludes de avalanche.org.
+
+Los tres documentos de guía de SEVEN SUMMIT TREKS — mal de altura, equipo y práctica general de expedición — son la segunda corriente.
+
+Más adelante se editaron transcripciones corregidas de siete libros chinos de montaña para el manual. El conocimiento y los casos están reescritos con palabras propias y referencia de página; el texto escaneado no se guarda en el repositorio.
+
+| Fuente | Se usa para |
+|---|---|
+| WMS / CDC / StatPearls | Preguntas y manual de medicina de altura |
+| AAI / AAC / REI / BMC | Técnica de nieve, hielo y progresión |
+| Normas UIAA / CE | Preguntas de material |
+| avalanche.org | Criterio de aludes |
+| Documentos de SEVEN SUMMIT TREKS | Manual h17–h22 y preguntas relacionadas |
+| 7 libros chinos de montaña | Manual h23–h31 |
+
+## Límite de seguridad
+
+La app cubre solo teoría y preparación cognitiva. Las habilidades prácticas — nieve y hielo, cuerdas, escalada en hielo, rescate — deben enseñarse y evaluarse en el terreno por un instructor titulado.
+
+Nada de esto es consejo médico. Las decisiones sobre medicación y primeros auxilios corresponden a un médico.
+
+No se promete cumbre ni se garantiza ningún resultado de aclimatación.
+
+Las lecciones marcadas como que requieren instructor lo dicen con claridad al terminar la teoría.
+
 ## Cambios recientes
+
+<details>
+<summary><b>Notas de versión, de la v0.28.8 a la v0.13</b></summary>
+
+**v0.28.8: ajustes completados, mapas de terreno para senderismo, dos correcciones**
+
+- Los ajustes ya tienen lo que faltaba: términos del servicio (legibles sin conexión), valorar la aplicación, copiar el enlace para compartir y una entrada «Apoyar AscentRoam» que abre la página de apoyo en el navegador: dentro de la app no aparece ninguna plataforma de pago
+
+- El teclado ya no levanta la barra de pestañas y el sol del tiempo arriba a la derecha queda centrado sobre la racha en lugar de tapar el icono de cuerda
+
+- Las rutas de senderismo llevan mapa de terreno: 39 de las 44 muestran crestas, valles y costas, y el trazado de la ruta, en lugar del perfil de altitud. Las rutas largas van sobre un sombreado suave; las de cientos de kilómetros, como el Camino o el JMT, se dibujan como esquema con el trazado y las poblaciones clave
+
+- Las 88 cumbres tienen un «Sobre esta montaña» y las 44 rutas un «Sobre esta ruta», en nueve idiomas; el atlas ordena primero tu región según el idioma de la interfaz
 
 **v0.27.1 – v0.27.2: la interfaz sigue al tiempo**
 
@@ -422,6 +467,21 @@ Antes:
 - v0.15.0: nueve artículos más del manual a partir de libros chinos (h23–h31), nueva categoría «liderazgo en el medio natural», 22 → 31 artículos
 - v0.14.0: seis artículos de guía de SEVEN SUMMIT TREKS
 - v0.13.x: ajustes, página de perfil, muro de insignias; gesto de atrás en pantallas secundarias
+
+</details>
+
+## Apoyar AscentRoam
+
+AscentRoam es un proyecto de aprendizaje de montaña desarrollado de forma independiente y abierto gratis. No hay anuncios ni desbloqueos de pago. Si te resulta útil y quieres que siga desarrollándose y manteniéndose, puedes apoyarlo voluntariamente a través de Afdian.
+
+**Todo apoyo es una donación sin contrapartida**: no da funciones extra, contenido digital, insignias exclusivas ni ningún otro derecho. Todos los usuarios tienen siempre la misma experiencia. Cada aporte se destina a mantener el proyecto en marcha.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Gracias por caminar con nosotros.
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
 
 ## Licencia
 

@@ -1,75 +1,82 @@
-# AscentRoam
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.png">
+    <img src="assets/readme/hero.png" alt="AscentRoam — allenamento in alta quota per Android" width="100%">
+  </picture>
+</p>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [Français](README.fr.md) · **[Italiano](README.it.md)** · [Русский](README.ru.md) · [Svenska](README.sv.md)
+<br>
+
+<p align="center">
+  <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="Scarica l'APK"></a>&nbsp;
+  <a href="https://ascentroam.com/support"><img src="assets/readme/btn-support.svg" height="46" alt="Sostieni AscentRoam"></a>&nbsp;
+  <a href="https://ascentroam.com"><img src="assets/readme/btn-site.svg" height="46" alt="ascentroam.com"></a>
+</p>
+
+<br>
+
+<p align="center"><sub>
+<a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <b><a href="README.it.md">Italiano</a></b> · <a href="README.ru.md">Русский</a> · <a href="README.sv.md">Svenska</a>
+</sub></p>
 
 Un'app Android per chi comincia con l'alpinismo d'alta quota e l'arrampicata su ghiaccio. Il programma è ordinato per quota: ogni lezione superata ti porta un po' più in alto.
 
+<p align="center"><sub><b>Versione attuale v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · circa 30 MB</b></sub></p>
+
+<p align="center">
+  <img src="assets/readme/screen-path.png" width="186" alt="Schermata del percorso: scheda della vetta, banner di unità e nodi delle lezioni">&nbsp;
+  <img src="assets/readme/screen-quiz.png" width="186" alt="Domanda a scelta singola con quattro opzioni">&nbsp;
+  <img src="assets/readme/screen-handbook.png" width="186" alt="Manuale: filtri per categoria e schede degli articoli">&nbsp;
+  <img src="assets/readme/screen-training.png" width="186" alt="Allenamento: consiglio del giorno ed esercizi">&nbsp;
+</p>
+
+<p align="center"><sub>Percorso · Domanda · Manuale · Allenamento — interfaccia in inglese, tema chiaro</sub></p>
+
+<br>
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
+
+## La salita
+
 Due percorsi si cambiano liberamente. **Alta montagna** ha sei unità e 69 lezioni, dall'introduzione a 5.000 m fino a 8.000 m — da 3.200 m a 8.848 m da un capo all'altro. **Escursionismo** ha quattro unità e 22 lezioni, dalla camminata di un giorno ai percorsi lunghi — da 200 m a 5.630 m. Ogni percorso tiene per sé progressi, badge e coda di ripasso.
-
-Versione attuale v0.28.8 (versionCode 166). Le impostazioni hanno ora quello che mancava: termini di servizio (leggibili offline), valuta l’app, copia il link di condivisione e una voce «Sostieni AscentRoam» che apre la pagina di sostegno nel browser — nell’app non compare nessuna piattaforma di pagamento. Due correzioni: la tastiera non solleva più la barra delle schede e il sole del meteo in alto a destra è centrato sulla serie invece di coprire l’icona della corda. I sentieri hanno ora una carta del terreno: 39 su 44 mostrano creste, valli e coste, e il tracciato del percorso, al posto del profilo altimetrico. I percorsi lunghi poggiano su un'ombreggiatura tenue; quelli di centinaia di chilometri, come il Cammino o il JMT, sono disegnati come schema con tracciato e località chiave. Le 88 cime hanno un «Su questa montagna» e i 44 itinerari un «Su questo itinerario», scritti per ciò che conta davvero sul cammino. Il tutto, con i nomi dei percorsi, è disponibile nelle nove lingue, e l'atlante mette la tua regione in cima in base alla lingua dell'interfaccia. Il progresso ora ha una forma: salendo si sbloccano vere cime innevate. Una nuova scheda in cima alla schermata del percorso mostra la vetta corrispondente all’altitudine attuale: 88 in tutto, dal Helan Shan a 3.600 m all’Everest a 8.848 m, ognuna con carta del terreno (curve di livello dove un render 3D non regge), quota reale, catena e posizione tra gli ottomila. In «Profilo → quota attuale» c’è l’elenco completo; le vette sbloccate aprono la loro scheda. L’obiettivo passa alla quota ufficiale dell’Everest, 8.848,86 m: nessuna lezione aggiunta e la barra non si riempie più a 8.000 m. Il lavoro sulle lingue si è chiuso con la v0.19.24 — le nove lingue tradotte corrispondono all'inglese voce per voce (10.727 / 10.727). La v0.20 riguarda i badge: i quaranta obiettivi sono ora resi in 3D in tempo reale invece che come immagini piatte, e le loro icone vengono dagli stessi modelli — le vecchie illustrazioni generate dall'IA non ci sono più. La finestra di sblocco usa lo stesso motore e lancia coriandoli dai due bordi dello schermo. I modelli viaggiano dentro l'APK, quindi il pacchetto è passato da 21 MB a circa 41 MB; la build di release è di circa 30 MB. La v0.20.3 sistema un fastidio vecchio: scorri una lista, apri una schermata secondaria, torni, e la lista saltava in cima — ora resta dove l'hai lasciata. Le v0.20.6–v0.20.7 portano il rendering dei badge alla qualità massima per impostazione predefinita: bloom più fine che non si spegne più per i primi fotogrammi lenti, declassamento in due passi e MSAA 4x con verifica della capacità e ritorno silenzioso.
-
-Le v0.20.19 – v0.21.0 hanno rivestito tutta l'interfaccia di argilla: ombre doppie morbide disegnate fuori schermo e messe in cache, tessere di colore piatte, colori per categoria nel manuale e blocchi di colore la cui profondità viene da un'ombra di contatto invece che da un gradiente.
-
-## Installazione
-
-La via più semplice è l'APK già compilato nelle [Releases](https://github.com/Solar-CV/AscentApp/releases). Un tag `v*` fa compilare a GitHub Actions un APK nuovo e lo allega.
-
-- Pacchetto: `com.ascentroam.app` (il package del codice resta `com.ascent.climb`)
-- Minimo: Android 8.0 (API 26), **solo arm64-v8a** — i telefoni solo a 32 bit non possono installarlo
-- Dimensione: circa 30 MB (38 MB di modelli non compressi, circa 10 MB dopo il confezionamento)
-- Firma: firmato con certificato di release dalla v0.21.2. Non si installa sopra una build debug precedente: va disinstallata, e questo cancella progressi, insegne e impostazioni
-- Permessi: rete e stato della rete — per controllare gli aggiornamenti del questionario e inviare feedback. Tutto funziona offline; il questionario incluso c'è sempre
-
-Trasferisci l'APK sul telefono, consenti l'installazione da origini sconosciute, tocca installa. Al primo avvio non serve accedere.
-
-## Sostenere AscentRoam
-
-AscentRoam è un progetto di apprendimento per la montagna sviluppato in modo indipendente e aperto gratuitamente. Non ci sono pubblicità né sblocchi a pagamento. Se lo trovi utile e vuoi che continui a essere sviluppato e mantenuto, puoi sostenerlo volontariamente tramite Afdian.
-
-**Ogni sostegno è una donazione senza contropartita**: non dà funzioni aggiuntive, contenuti digitali, badge esclusivi né altri diritti. Tutti gli utenti hanno sempre la stessa esperienza. Ogni contributo serve a portare avanti il progetto.
-
-- [Afdian](https://afdian.com/a/ascent)
-- [Ko-fi](https://ko-fi.com/ascentroam)
-
-Grazie per camminare con noi.
-
-## Cosa c'è dentro
-
-### Il percorso
 
 La schermata iniziale è una via che sale dal campo base, divisa in unità di quota (sei per l'alta montagna, quattro per l'escursionismo). Si sfoglia in orizzontale, due unità per pagina. Le lezioni si sbloccano in linea: una superata, la successiva si apre. I nodi mostrano le stelle, la lezione attuale porta un invito ad «iniziare», l'ultima di ogni unità è segnata in oro.
 
-Due pillole in alto cambiano percorso; un tocco apre un foglio inferiore. Cambiando si torna alla prima pagina e la scelta resta memorizzata.
+Ogni lezione segue lo stesso ciclo: leggere, rispondere, correggere gli errori, tornare più avanti.
+
+<img src="assets/readme/loop-it.svg" width="100%" alt="">
 
 Il progresso non è un numero salvato. Si ricalcola dalle lezioni completate, così se la curva di quota viene ritoccata più avanti, i salvataggi vecchi si ricalcolano invece di restare bloccati.
 
-### Questionario
+## Montagne vere
 
-1.563 domande ufficiali più 158 copie di ripasso inserite automaticamente, 1.721 elementi mostrati. Il volume cresce con la quota: circa 15 domande per lezione nell'introduzione a 5.000 m, 30 nelle unità tecniche a 7.000 m, 8 nell'escursionismo.
+<img src="assets/readme/peaks.png" width="100%" alt="">
+
+Il progresso ora ha una forma: salendo si sbloccano vere cime innevate, 88 in tutto, dal Helan Shan a 3.600 m all'Everest a 8.848,86 m. Ognuna porta la sua carta del terreno disegnata da dati di quota reali: ombreggiatura dove il modello regge, curve di livello dove non regge. La scheda mostra la quota reale, la catena e il posto tra gli ottomila.
+
+La scheda in cima alla schermata del percorso mostra sempre la vetta che corrisponde alla tua quota attuale e quanti metri mancano. In «Profilo → quota attuale» c'è l'atlante completo; le vette sbloccate aprono la loro scheda, e ognuna ha un «Su questa montagna» scritto per ciò che conta davvero sul cammino.
+
+## Quaranta badge, oggetti veri
+
+<img src="assets/readme/badges.png" width="100%" alt="">
+
+I badge sono veri oggetti 3D — cornici in metallo, smalti, rilievo. Tocca un badge sbloccato nel profilo o nella parete e si apre a tutto schermo: trascina per ruotare, pizzica per ingrandire fino a circa 5,5×, con due dita sposti la vista sul rilievo, il doppio tocco ripristina, e quando lasci si dondola piano da solo. Le icone vengono dai modelli stessi, quindi parete e vista 3D mostrano lo stesso oggetto. Tutte e quaranta hanno ora un modello; il disegno a mano resta come ripiego per le insegne future. Sbloccare un obiettivo in qualsiasi punto mostra lo stesso badge 3D, su un piedistallo chiaro, con i nastri che entrano dai due bordi.
+
+## Cosa c'è dentro
+
+**Questionario.** 1.563 domande ufficiali più 158 copie di ripasso inserite automaticamente, 1.721 elementi mostrati. Il volume cresce con la quota: circa 15 domande per lezione nell'introduzione a 5.000 m, 30 nelle unità tecniche a 7.000 m, 8 nell'escursionismo.
 
 Otto tipi di domanda: scelta singola, scelta multipla, ordinamento, abbinamento, completamento, calcolo, punto caldo (toccare un punto dell'immagine) e scenario (un testo affrontato in più passaggi).
 
 Finita una lezione si passa subito a rifare quelle sbagliate. Quelle poi corrette danno credito, le altre finiscono nel centro di ripasso. Il ripasso usa la ripetizione diluita a 0, 1, 3, 7, 16 e 35 giorni. Le domande critiche per la sicurezza sono pesate e chiedono di confermare la comprensione prima di proseguire.
 
-### Manuale
+**Manuale.** 35 articoli lunghi, da 4 a 8 sezioni, divisi per attrezzatura, tecnica, medicina, salute, meteo, meteorologia, decisioni, valutazione, sicurezza, rischio e soccorso in valanga. Il manuale è filtrato per percorso: i pezzi su neve e ghiaccio compaiono solo in alta montagna, mentre medicina d'alta quota, ipotermia, navigazione, campo e conduzione del gruppo sono condivisi. Le fonti sono materiale medico e tecnico pubblico, tre documenti commerciali di guide e trascrizioni rielaborate di sette libri alpinistici cinesi. Per accordo di prodotto i libri cinesi non sono citati per titolo; i documenti delle guide sì.
 
-35 articoli lunghi, da 4 a 8 sezioni, divisi per attrezzatura, tecnica, medicina, salute, meteo, meteorologia, decisioni, valutazione, sicurezza, rischio e soccorso in valanga. Il manuale è filtrato per percorso: i pezzi su neve e ghiaccio compaiono solo in alta montagna, mentre medicina d'alta quota, ipotermia, navigazione, campo e conduzione del gruppo sono condivisi. Le fonti sono materiale medico e tecnico pubblico, tre documenti commerciali di guide e trascrizioni rielaborate di sette libri alpinistici cinesi. Per accordo di prodotto i libri cinesi non sono citati per titolo; i documenti delle guide sì.
+**Allenamento, ripasso, profilo.** L'allenamento consiglia la lezione successiva e offre quattro esercizi: un ritmo respiratorio 4-4 di cinque minuti, quattro serie da 30 secondi di cadenza del passo con i ramponi, un quiz sull'elenco dell'attrezzatura e un quiz di lettura delle nuvole. I due quiz prendono domande a scelta singola dalle lezioni esistenti, mescolano le opzioni a ogni serie e mostrano la spiegazione subito dopo la risposta. Il ripasso mette davanti le domande in scadenza oggi e gli errori critici di sicurezza. Il profilo raccoglie l'intestazione, la quota attuale, il quadro delle capacità, l'accesso ai badge, l'area account e una voce di feedback. L'ingranaggio apre le impostazioni, l'avatar la pagina del profilo.
 
-### Allenamento, ripasso, profilo
+**Impostazioni.** L'aspetto segue il sistema o si fissa su chiaro o scuro, viene salvato e la barra di stato lo segue. La lingua segue il sistema o si sceglie a mano; interfaccia e contenuti cambiano insieme, senza riavvio. La sezione questionario mostra la versione attuale, cerca aggiornamenti e ripristina quello incluso. La modalità sviluppatore sta dietro al numero di versione in «Informazioni»: sette tocchi. La sezione «Informazioni» contiene l’informativa sulla privacy, i termini di servizio (entrambi leggibili offline), valuta l’app e copia il link di condivisione; Sostieni ha una sola voce, che apre la pagina di sostegno nel browser.
 
-L'allenamento consiglia la lezione successiva e offre quattro esercizi: un ritmo respiratorio 4-4 di cinque minuti, quattro serie da 30 secondi di cadenza del passo con i ramponi, un quiz sull'elenco dell'attrezzatura e un quiz di lettura delle nuvole. I due quiz prendono domande a scelta singola dalle lezioni esistenti, mescolano le opzioni a ogni serie e mostrano la spiegazione subito dopo la risposta. Il ripasso mette davanti le domande in scadenza oggi e gli errori critici di sicurezza. Il profilo raccoglie l'intestazione, la quota attuale, il quadro delle capacità, l'accesso ai badge, l'area account e una voce di feedback. L'ingranaggio apre le impostazioni, l'avatar la pagina del profilo.
-
-Il profilo mostra solo i badge sbloccati. Tutti e 40 stanno nella parete dei badge, quelli bloccati come anteprima grigia, gli obiettivi nascosti come «?».
-
-I badge sono veri oggetti 3D — cornici in metallo, smalti, rilievo. Tocca un badge sbloccato nel profilo o nella parete e si apre a tutto schermo: trascina per ruotare, pizzica per ingrandire fino a circa 5,5×, con due dita sposti la vista sul rilievo, il doppio tocco ripristina, e quando lasci si dondola piano da solo. Le icone vengono dai modelli stessi, quindi parete e vista 3D mostrano lo stesso oggetto. Tutte e quaranta hanno ora un modello; il disegno a mano resta come ripiego per le insegne future. Sbloccare un obiettivo in qualsiasi punto mostra lo stesso badge 3D, su un piedistallo chiaro, con i nastri che entrano dai due bordi.
-
-### Impostazioni
-
-L'aspetto segue il sistema o si fissa su chiaro o scuro, viene salvato e la barra di stato lo segue. La lingua segue il sistema o si sceglie a mano; interfaccia e contenuti cambiano insieme, senza riavvio. La sezione questionario mostra la versione attuale, cerca aggiornamenti e ripristina quello incluso. La modalità sviluppatore sta dietro al numero di versione in «Informazioni»: sette tocchi. La sezione «Informazioni» contiene l’informativa sulla privacy, i termini di servizio (entrambi leggibili offline), valuta l’app e copia il link di condivisione; Sostieni ha una sola voce, che apre la pagina di sostegno nel browser.
-
-### Feedback
-
-Profilo → Feedback e suggerimenti, tra la scheda account e l'avviso di sicurezza. Scegli un tipo — problema, idea, correzione di contenuto —, scrivi il messaggio, lascia facoltativamente un indirizzo per la risposta e allega facoltativamente la diagnostica. L'invio arriva direttamente al manutentore tramite Formspree; senza rete la schermata propone di mandare lo stesso testo per email e lo copia negli appunti se non esiste un'app di posta.
+**Feedback.** Profilo → Feedback e suggerimenti, tra la scheda account e l'avviso di sicurezza. Scegli un tipo — problema, idea, correzione di contenuto —, scrivi il messaggio, lascia facoltativamente un indirizzo per la risposta e allega facoltativamente la diagnostica. L'invio arriva direttamente al manutentore tramite Formspree; senza rete la schermata propone di mandare lo stesso testo per email e lo copia negli appunti se non esiste un'app di posta.
 
 La diagnostica è spenta per impostazione predefinita e comprende versione dell'app, versione di Android, modello del dispositivo, lingua, versione del questionario, percorso attuale, numeri di progresso e l'ultima eccezione non gestita. Niente testo delle lezioni, niente storico delle risposte, niente account, niente appunti.
 
@@ -122,34 +129,58 @@ Se una voce manca nella lingua scelta, l'ordine è: lingua scelta → inglese �
 
 38 vette e itinerari in tutto: 30 per l'alta montagna, dall'Aotaina a 5.211 m ai quattordici 8.000; 8 per l'escursionismo, dal sentiero di Huihang alla via dei Tre Passi all'Everest.
 
-## Da dove vengono i contenuti
+## Installazione
 
-Due flussi principali alimentano domande e manuale.
+La via più semplice è l'APK già compilato nelle [Releases](https://github.com/Solar-CV/AscentApp/releases). Un tag `v*` fa compilare a GitHub Actions un APK nuovo e lo allega.
 
-Le fonti pubbliche includono l'aggiornamento 2024 delle linee guida cliniche della Wilderness Medical Society sul mal acuto di montagna, il CDC Yellow Book, materiale tecnico dell'American Alpine Institute e dell'American Alpine Club, REI Expert Advice, le norme UIAA e CE per l'attrezzatura e i dati valanghe di avalanche.org.
+- Pacchetto: `com.ascentroam.app` (il package del codice resta `com.ascent.climb`)
+- Minimo: Android 8.0 (API 26), **solo arm64-v8a** — i telefoni solo a 32 bit non possono installarlo
+- Dimensione: circa 30 MB (38 MB di modelli non compressi, circa 10 MB dopo il confezionamento)
+- Firma: firmato con certificato di release dalla v0.21.2. Non si installa sopra una build debug precedente: va disinstallata, e questo cancella progressi, insegne e impostazioni
+- Permessi: rete e stato della rete — per controllare gli aggiornamenti del questionario e inviare feedback. Tutto funziona offline; il questionario incluso c'è sempre
 
-I tre documenti guida di SEVEN SUMMIT TREKS — mal di montagna, attrezzatura, pratica generale di spedizione — sono il secondo flusso.
+Trasferisci l'APK sul telefono, consenti l'installazione da origini sconosciute, tocca installa. Al primo avvio non serve accedere.
 
-Più avanti, trascrizioni corrette di sette libri alpinistici cinesi sono state rielaborate nel manuale. Conoscenze e casi sono riscritti con parole nostre, con riferimenti di pagina; il testo scansionato non è conservato nel repository.
+## Architettura
 
-| Fonte | Usata per |
-|---|---|
-| WMS / CDC / StatPearls | Domande e manuale di medicina d'alta quota |
-| AAI / AAC / REI / BMC | Tecnica su neve, ghiaccio e progressione |
-| Norme UIAA / CE | Domande sull'attrezzatura |
-| avalanche.org | Valutazione delle valanghe |
-| Documenti SEVEN SUMMIT TREKS | Manuale h17–h22 e domande collegate |
-| 7 libri alpinistici cinesi | Manuale h23–h31 |
+<img src="assets/readme/arch-it.svg" width="100%" alt="">
 
-## Limite di sicurezza
+Ogni livello parla solo con quello sotto. L'interfaccia non legge mai i contenuti direttamente; il modello di apprendimento li ricalcola dai contenuti; il livello piattaforma decide se esiste un questionario più recente e, altrimenti, non si intromette.
 
-L'app copre solo la teoria e la preparazione mentale. Le abilità pratiche — neve e ghiaccio, corde, arrampicata su ghiaccio, soccorso — vanno insegnate e valutate sul posto da un istruttore certificato.
+- **Prima l'offline.** Il questionario incluso sta nell'APK; la copia online sostituisce la cache solo se più recente
+- **I contenuti sono dati.** Lezioni, domande, manuale e traduzioni vivono in `data/`, non nell'interfaccia: aggiungere un'unità significa aggiungere voci e una riga in `Curriculum.kt`
+- **Due servizi facoltativi.** Aggiornamenti del questionario e sincronizzazione dell'account possono mancare; nient'altro dipende da loro
 
-Niente di ciò che è scritto qui è consiglio medico. Le decisioni su farmaci e primo soccorso spettano a un medico.
+<details>
+<summary><b>Struttura del progetto</b></summary>
 
-Nessuna vetta è promessa e nessun esito di acclimatazione è garantito.
+```
+AscentApp/
+├── import/                      Scrittura delle domande (Markdown, da libri stampati)
+├── knowledge/                   Base di conoscenza delle fonti stampate
+├── tools/
+│   ├── contentcheck/            Controlli sui contenuti + export del questionario (JVM pura)
+│   ├── i18ncheck.py             Copertura per lingua sui quattro strati
+│   ├── qbank/build.mjs          Compilatore Markdown → questionario
+│   └── poc3d/                   Sincronia dei modelli, scontorno delle icone, cottura dell'emissivo
+└── app/src/main/
+    ├── res/values*/             Testi dell'interfaccia per 10 lingue
+    ├── assets/
+    │   ├── badges/*.glb         40 modelli di badge
+    │   └── env/studio_ibl.ktx   Ambiente IBL generato via codice
+    └── java/com/ascent/climb/
+        ├── data/
+        │   ├── Unit1~5.kt      Contenuti delle lezioni principali
+        │   ├── NewLessons.kt    Lezioni del programma recente
+        │   ├── i18n/Pack*.kt    Traduzioni dei contenuti (ingresso / punti / manuale / questionario)
+        │   ├── Diagnostics.kt   Registro dei crash + istantanea dell'ambiente per il feedback
+        │   ├── FeedbackSender.kt  POST a Formspree (HttpURLConnection, nessuna dipendenza)
+        │   ├── BundledBank.kt   Assemblaggio del pool di lezioni e inserimento dei ripassi
+        │   └── bank/            Configurazione del questionario, decodifica JSON, rete, repository
+        └── ui/                  Schermate e componenti (Badge3D.kt = scena Filament, inquadratura, luci)
+```
 
-Le lezioni segnate come «serve un istruttore» lo dicono apertamente una volta finita la teoria.
+</details>
 
 ## Compilarlo da soli
 
@@ -179,35 +210,7 @@ Il risultato finisce in `app/build/outputs/apk/debug/app-debug.apk`.
 
 Per Google Play si compila l'App Bundle: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. Un AAB non si installa direttamente sul telefono; per il sideload resta l'APK.
 
-## Struttura del progetto
-
-```
-AscentApp/
-├── import/                      Scrittura delle domande (Markdown, da libri stampati)
-├── knowledge/                   Base di conoscenza delle fonti stampate
-├── tools/
-│   ├── contentcheck/            Controlli sui contenuti + export del questionario (JVM pura)
-│   ├── i18ncheck.py             Copertura per lingua sui quattro strati
-│   ├── qbank/build.mjs          Compilatore Markdown → questionario
-│   └── poc3d/                   Sincronia dei modelli, scontorno delle icone, cottura dell'emissivo
-└── app/src/main/
-    ├── res/values*/             Testi dell'interfaccia per 10 lingue
-    ├── assets/
-    │   ├── badges/*.glb         40 modelli di badge
-    │   └── env/studio_ibl.ktx   Ambiente IBL generato via codice
-    └── java/com/ascent/climb/
-        ├── data/
-        │   ├── Unit1~5.kt      Contenuti delle lezioni principali
-        │   ├── NewLessons.kt    Lezioni del programma recente
-        │   ├── i18n/Pack*.kt    Traduzioni dei contenuti (ingresso / punti / manuale / questionario)
-        │   ├── Diagnostics.kt   Registro dei crash + istantanea dell'ambiente per il feedback
-        │   ├── FeedbackSender.kt  POST a Formspree (HttpURLConnection, nessuna dipendenza)
-        │   ├── BundledBank.kt   Assemblaggio del pool di lezioni e inserimento dei ripassi
-        │   └── bank/            Configurazione del questionario, decodifica JSON, rete, repository
-        └── ui/                  Schermate e componenti (Badge3D.kt = scena Filament, inquadratura, luci)
-```
-
-## Modificare i contenuti
+### Modificare i contenuti
 
 Per aggiungere domande a una lezione esistente, modifica `data/Expansion*.kt`. Per una lezione nuova, scrivi `Lesson(...)` in `data/NewLessons.kt` e aggiungi il suo id all'unità giusta in `Curriculum.kt`. Ordine e appartenenza alle unità vivono solo in `Curriculum.kt`.
 
@@ -232,7 +235,49 @@ Per pubblicare un questionario nuovo: cambia i contenuti → alza `BUNDLED_VERSI
 
 Le versioni vecchie dell'app non si rompono con un questionario più nuovo. `minAppVersion` in `manifest.json` blocca i client troppo vecchi, i campi sconosciuti vengono ignorati e una domanda malformata viene saltata invece che essere fatale.
 
+## Da dove vengono i contenuti
+
+Due flussi principali alimentano domande e manuale.
+
+Le fonti pubbliche includono l'aggiornamento 2024 delle linee guida cliniche della Wilderness Medical Society sul mal acuto di montagna, il CDC Yellow Book, materiale tecnico dell'American Alpine Institute e dell'American Alpine Club, REI Expert Advice, le norme UIAA e CE per l'attrezzatura e i dati valanghe di avalanche.org.
+
+I tre documenti guida di SEVEN SUMMIT TREKS — mal di montagna, attrezzatura, pratica generale di spedizione — sono il secondo flusso.
+
+Più avanti, trascrizioni corrette di sette libri alpinistici cinesi sono state rielaborate nel manuale. Conoscenze e casi sono riscritti con parole nostre, con riferimenti di pagina; il testo scansionato non è conservato nel repository.
+
+| Fonte | Usata per |
+|---|---|
+| WMS / CDC / StatPearls | Domande e manuale di medicina d'alta quota |
+| AAI / AAC / REI / BMC | Tecnica su neve, ghiaccio e progressione |
+| Norme UIAA / CE | Domande sull'attrezzatura |
+| avalanche.org | Valutazione delle valanghe |
+| Documenti SEVEN SUMMIT TREKS | Manuale h17–h22 e domande collegate |
+| 7 libri alpinistici cinesi | Manuale h23–h31 |
+
+## Limite di sicurezza
+
+L'app copre solo la teoria e la preparazione mentale. Le abilità pratiche — neve e ghiaccio, corde, arrampicata su ghiaccio, soccorso — vanno insegnate e valutate sul posto da un istruttore certificato.
+
+Niente di ciò che è scritto qui è consiglio medico. Le decisioni su farmaci e primo soccorso spettano a un medico.
+
+Nessuna vetta è promessa e nessun esito di acclimatazione è garantito.
+
+Le lezioni segnate come «serve un istruttore» lo dicono apertamente una volta finita la teoria.
+
 ## Cambi recenti
+
+<details>
+<summary><b>Note di versione, dalla v0.28.8 alla v0.13</b></summary>
+
+**v0.28.8: impostazioni completate, carte del terreno per i sentieri, due correzioni**
+
+- Le impostazioni hanno ora quello che mancava: termini di servizio (leggibili offline), valuta l'app, copia il link di condivisione e una voce «Sostieni AscentRoam» che apre la pagina di sostegno nel browser — nell'app non compare nessuna piattaforma di pagamento
+
+- La tastiera non solleva più la barra delle schede e il sole del meteo in alto a destra è centrato sulla serie invece di coprire l'icona della corda
+
+- I sentieri hanno una carta del terreno: 39 su 44 mostrano creste, valli e coste e il tracciato del percorso, al posto del profilo altimetrico. I percorsi lunghi poggiano su un'ombreggiatura tenue; quelli di centinaia di chilometri, come il Cammino o il JMT, sono disegnati come schema con tracciato e località chiave
+
+- Le 88 cime hanno un «Su questa montagna» e i 44 itinerari un «Su questo itinerario», in nove lingue; l'atlante mette la tua regione in cima in base alla lingua dell'interfaccia
 
 **v0.27.1 – v0.27.2: l'interfaccia segue il meteo**
 
@@ -422,6 +467,21 @@ Prima:
 - v0.15.0: nove articoli di manuale da libri cinesi (h23–h31), nuova categoria «conduzione del gruppo», 22 → 31 articoli
 - v0.14.0: sei articoli guida di SEVEN SUMMIT TREKS
 - v0.13.x: impostazioni, pagina profilo, parete dei badge; gesto indietro sulle schermate secondarie
+
+</details>
+
+## Sostenere AscentRoam
+
+AscentRoam è un progetto di apprendimento per la montagna sviluppato in modo indipendente e aperto gratuitamente. Non ci sono pubblicità né sblocchi a pagamento. Se lo trovi utile e vuoi che continui a essere sviluppato e mantenuto, puoi sostenerlo volontariamente tramite Afdian.
+
+**Ogni sostegno è una donazione senza contropartita**: non dà funzioni aggiuntive, contenuti digitali, badge esclusivi né altri diritti. Tutti gli utenti hanno sempre la stessa esperienza. Ogni contributo serve a portare avanti il progetto.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Grazie per camminare con noi.
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
 
 ## Licenza
 

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="40" viewBox="0 0 880 40" role="img" aria-label="Section divider">
+  <title>Section divider</title>
+  <defs>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0E7BEA" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#0E7BEA" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#0E7BEA" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="trackL"><rect x="0" y="19" width="414" height="2"/></clipPath>
+    <clipPath id="trackR"><rect x="466" y="19" width="414" height="2"/></clipPath>
+  </defs>
+
+  <rect x="0" y="19.5" width="414" height="1" fill="#E2E9F1"/>
+  <rect x="466" y="19.5" width="414" height="1" fill="#E2E9F1"/>
+
+  <g clip-path="url(#trackL)">
+    <rect x="-160" y="19" width="160" height="2" fill="url(#sheen)">
+      <animate attributeName="x" from="-160" to="414" dur="7s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <g clip-path="url(#trackR)">
+    <rect x="-160" y="19" width="160" height="2" fill="url(#sheen)">
+      <animate attributeName="x" from="-160" to="414" dur="7s" begin="0.35s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <path d="M432 19.5 L440 7.5 L448 19.5" fill="none" stroke="#9BAFC4" stroke-width="1.2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="440" cy="4" r="1.8" fill="#0E7BEA"/>
+</svg>

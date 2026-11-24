@@ -1,75 +1,82 @@
-# AscentRoam
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.png">
+    <img src="assets/readme/hero.png" alt="AscentRoam — höghöjdsträning för Android" width="100%">
+  </picture>
+</p>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Español](README.es.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Русский](README.ru.md) · **[Svenska](README.sv.md)**
+<br>
+
+<p align="center">
+  <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="Hämta APK:n"></a>&nbsp;
+  <a href="https://ascentroam.com/support"><img src="assets/readme/btn-support.svg" height="46" alt="Stöd AscentRoam"></a>&nbsp;
+  <a href="https://ascentroam.com"><img src="assets/readme/btn-site.svg" height="46" alt="ascentroam.com"></a>
+</p>
+
+<br>
+
+<p align="center"><sub>
+<a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.ru.md">Русский</a> · <b><a href="README.sv.md">Svenska</a></b>
+</sub></p>
 
 En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kursen är ordnad efter höjd: varje avklarad lektion flyttar dig en bit högre upp.
 
+<p align="center"><sub><b>Aktuell version v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · cirka 30 MB</b></sub></p>
+
+<p align="center">
+  <img src="assets/readme/screen-path.png" width="186" alt=" Ruttskärm: toppkort, enhetsband och lektionsnoder">&nbsp;
+  <img src="assets/readme/screen-quiz.png" width="186" alt="Envalsfråga med fyra svarsalternativ">&nbsp;
+  <img src="assets/readme/screen-handbook.png" width="186" alt="Handbok: kategorifilter och artikelkort">&nbsp;
+  <img src="assets/readme/screen-training.png" width="186" alt="Träning: dagens förslag och övningar">&nbsp;
+</p>
+
+<p align="center"><sub>Rutt · Fråga · Handbok · Träning — engelskt gränssnitt, ljust tema</sub></p>
+
+<br>
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
+
+## Vägen upp
+
 Två kursspår byts fritt. **Högfjällsbestigning** har sex enheter och 69 lektioner, från introduktionen på 5 000 m till 8 000 m — 3 200 m till 8 848 m hela vägen. **Vandring** har fyra enheter och 22 lektioner, från dagsutflykt till långled — 200 m till 5 630 m. Varje spår håller egen progress, egna emblem och egen repetitionskö.
-
-Aktuell version v0.28.8 (versionCode 166). Inställningarna har fått det som saknades: användarvillkor (läsbara offline), betygsätt appen, kopiera delningslänk och en post »Stöd AscentRoam« som öppnar supportsidan i webbläsaren — ingen betalplattform visas i appen. Två rättelser följer med: tangentbordet lyfter inte längre den nedre flikraden, och vädrets sol uppe till höger ligger centrerad över sviten i stället för att täcka repikonen. Vandringslederna har nu terrängkartor: 39 av 44 visar ryggar, dalar och kustlinjer och ledens sträckning, där höjdprofilen låg förut. Långa leder ligger på en mjuk skuggning; de på flera hundra kilometer, som Camino eller JMT, ritas som schema med bara sträckning och viktiga orter. Alla 88 toppar har ett »Om det här berget« och alla 44 leder ett »Om den här leden«, skrivna för det som faktiskt spelar roll på vägen. Allt detta, tillsammans med lednamnen, finns på nio språk, och atlasen placerar din region först utifrån gränssnittsspråket. Framstegen har fått en form: när du klättrar låses riktiga snötoppar upp efter vägen. Ett nytt kort högst upp på Rutt-skärmen visar toppen som hör till den aktuella höjden — 88 totalt, från Helan Shan på 3 600 m till Everest på 8 848 m, alla med terrängkarta (höjdkurvor där en 3D-rendering inte håller), verklig höjd, bergskedja och placering bland åttatusenmetarna. Under ”Profil → aktuell höjd” finns hela listan; upplåsta toppar öppnar sitt kort. Målet är nu Everests officiella höjd 8 848,86 m — inga lektioner lades till, och förloppsindikatorn fylls inte längre vid 8 000 m. Språkarbetet avslutades med v0.19.24 — alla nio översatta språk matchar engelskan post för post (10 727 / 10 727). v0.20 handlar om emblemen: alla fyrtio prestationer renderas nu som 3D-objekt i realtid i stället för platta bilder, och deras ikoner kommer från samma modeller — de gamla AI-illustrationerna är borta. Upplåsningsdialogen använder samma renderare och skjuter konfetti från båda skärmkanterna. Modellerna ligger i APK:n, så paketet växte från 21 MB till cirka 41 MB; release-bygget ligger på cirka 30 MB. v0.20.3 rättar till en gammal irritation: du scrollade ned i en lista, öppnade en underskärm, kom tillbaka — och listan hoppade till början. Nu stannar den där du lämnade den. v0.20.6–v0.20.7 lyfter emblemens rendering till högsta kvalitet som standard: finare bloom som inte längre stängs av på grund av långsamma första bildrutor, nedväxling i två steg och 4x MSAA med kapacitetskontroll och tyst återgång.
-
-v0.20.19 – v0.21.0 klädde om hela gränssnittet i lera: mjuka dubbelskuggor som ritas utanför skärmen och cachas, platta färgrutor, kategorifärger i handboken och stora färgytor vars djup kommer från en kontakt­skugga i stället för en gradient.
-
-## Installation
-
-Enklaste vägen är det färdigbyggda APK:t från [Releases](https://github.com/Solar-CV/AscentApp/releases). En push av en `v*`-tagg låter GitHub Actions bygga och bifoga ett nytt APK.
-
-- Paket: `com.ascentroam.app` (källkodens package förblir `com.ascent.climb`)
-- Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen
-- Storlek: cirka 30 MB (38 MB okomprimerade emblemmodeller, ungefär 10 MB efter paketering)
-- Signatur: release-signerat från v0.21.2. Det går inte att installera över en äldre debug-build — avinstallera först, vilket raderar framsteg, emblem och inställningar
-- Behörigheter: nätverk och nätverksstatus — för att söka efter uppdateringar av frågebanken och skicka feedback. Allt fungerar offline; den medföljande banken finns alltid där
-
-Flytta över APK:n till telefonen, tillåt installation från okända källor och tryck på installera. Ingen inloggning vid första starten.
-
-## Stöd AscentRoam
-
-AscentRoam är ett oberoende utvecklat och fritt öppet lärprojekt för friluftsliv. Det finns inga annonser och inga betalda upplåsningar. Om du har nytta av det och vill att det ska fortsätta utvecklas och underhållas kan du stödja det frivilligt via Afdian.
-
-**Allt stöd är en gåva utan motprestation**: det ger inga extra funktioner, inget digitalt innehåll, inga exklusiva märken eller andra rättigheter. Alla användare får alltid samma upplevelse. Varje bidrag går till att hålla projektet igång.
-
-- [Afdian](https://afdian.com/a/ascent)
-- [Ko-fi](https://ko-fi.com/ascentroam)
-
-Tack för att du går med oss.
-
-## Vad som finns inuti
-
-### Vägen
 
 Startskärmen är en rutt från baslägret och uppåt, delad i höjdenheter (sex för högfjäll, fyra för vandring). Svep i sidled för att bläddra, två enheter per sida. Lektionerna låses upp linjärt: en klar, nästa öppnas. Noderna visar stjärnor, aktuell lektion har en "börja"-hint och sista lektionen i en enhet är markerad i guld.
 
-Två piller högst upp byter kursspår; ett tryck öppnar ett nedre ark. Bytet går tillbaka till första sidan och valet sparas.
+Varje lektion följer samma loop: läs, svara, rätt det du missade, kom tillbaka senare.
+
+<img src="assets/readme/loop-sv.svg" width="100%" alt="">
 
 Progress är inte ett sparat tal. Det räknas om från de lektioner du klarat, så om höjdkurvan justeras senare räknas gamla sparanden om i stället för att fastna.
 
-### Frågebank
+## Verkliga berg
 
-1 563 ordinarie frågor plus 158 automatiskt insatta repetitionskopior, 1 721 poster totalt. Mängden ökar med höjden: omkring 15 frågor per lektion i introduktionen på 5 000 m, 30 i de tekniska enheterna på 7 000 m och 8 i vandringen.
+<img src="assets/readme/peaks.png" width="100%" alt="">
+
+Framstegen har fått en form: när du klättrar låses riktiga snötoppar upp, 88 totalt, från Helan Shan på 3 600 m till Everest på 8 848,86 m. Var och en har en egen terrängkarta ritad från verkliga höjddata: skuggad relief där modellen håller och höjdkurvor där den inte håller. Kortet visar verklig höjd, bergskedja och plats bland åttatusenmetarna.
+
+Kortet högst upp på Ruttskärmen visar alltid toppen som hör till din aktuella höjd, och hur många meter som återstår. Under ”Profil → aktuell höjd” finns hela atlasen; upplåsta toppar öppnar sitt kort, och var och en har ett »Om det här berget«, skrivet för det som faktiskt spelar roll på vägen.
+
+## Fyrtio emblem, riktiga objekt
+
+<img src="assets/readme/badges.png" width="100%" alt="">
+
+Emblemen är riktiga 3D-objekt — metallramar, emalj, relief. Tryck på ett upplåst emblem i profilen eller på väggen så öppnas det i fullskärm: dra för att rotera, nyp för att zooma upp till cirka 5,5×, två fingrar flyttar vyn över reliefen, dubbeltryck återställer, och när du släpper gungar det sakta av sig självt. Ikonerna kommer från modellerna själva, så väggen och 3D-vyn visar samma föremål. Alla fyrtio har nu en modell; den tecknade bilden finns kvar som reserv för emblem som läggs till senare. När en prestation låses upp någonstans visar dialogen samma 3D-emblem, på en ljus piedestal, medan band far in från båda skärmkanterna.
+
+## Vad som finns inuti
+
+**Frågebank.** 1 563 ordinarie frågor plus 158 automatiskt insatta repetitionskopior, 1 721 poster totalt. Mängden ökar med höjden: omkring 15 frågor per lektion i introduktionen på 5 000 m, 30 i de tekniska enheterna på 7 000 m och 8 i vandringen.
 
 Åtta frågetyper: enkelval, flerval, ordningsföljd, matchning, lucktext, beräkning, hotspot (tryck på en punkt i bilden) och scenario (en frågestam som besvaras i flera steg).
 
 När en lektion är klar går du direkt in och gör om dem du missade. Rättade frågor ger poäng, resten går till repetitionscentret. Repetitionen använder utspridda intervall på 0, 1, 3, 7, 16 och 35 dagar. Säkerhetskritiska frågor är viktade och kräver att du bekräftar att du förstått innan du går vidare.
 
-### Handbok
+**Handbok.** 35 långa artiklar med 4 till 8 avsnitt, sorterade på utrustning, teknik, medicin, hälsa, väder, meteorologi, beslut, bedömning, säkerhet, risk och lavinräddning. Handboken filtreras på spår: snö- och isartiklarna visas bara under högfjäll, medan höjdmedicin, nedkylning, navigation, läger och ledarskap delas av båda. Källorna är offentligt medicinskt och tekniskt material, tre kommersiella guidehandlingar och bearbetade utskrifter av sju kinesiska bergsböcker. Enligt produktöverenskommelsen anges de kinesiska böckerna inte med titel; guidehandlingarna anges.
 
-35 långa artiklar med 4 till 8 avsnitt, sorterade på utrustning, teknik, medicin, hälsa, väder, meteorologi, beslut, bedömning, säkerhet, risk och lavinräddning. Handboken filtreras på spår: snö- och isartiklarna visas bara under högfjäll, medan höjdmedicin, nedkylning, navigation, läger och ledarskap delas av båda. Källorna är offentligt medicinskt och tekniskt material, tre kommersiella guidehandlingar och bearbetade utskrifter av sju kinesiska bergsböcker. Enligt produktöverenskommelsen anges de kinesiska böckerna inte med titel; guidehandlingarna anges.
+**Träning, repetition, profil.** Träningen föreslår nästa lektion och erbjuder fyra övningar: en femminuters 4-4-andningstakt, fyra set om 30 sekunder stegrytm med stegjärn, ett utrustningsquiz och ett molnquiz. De två quizzen tar envalsfrågor från befintliga lektioner, blandar svaren varje omgång och visar förklaringen direkt efter varje svar. Repetitionen sätter dagens förfallna frågor och säkerhetskritiska misstag först. Profilen rymmer huvud, aktuell höjd, förmågeöversikt, emblemets ingång, kontoområde och en feedback-ingång. Kugghjulet öppnar inställningarna, avataren profilsidan.
 
-### Träning, repetition, profil
+**Inställningar.** Utseendet följer systemet eller låses till ljust eller mörkt, sparas, och statusfältet hänger med. Språket följer systemet eller väljs manuellt; gränssnitt och innehåll byts samtidigt, ingen omstart. Bankavsnittet visar aktuell version, söker uppdateringar och återställer den medföljande banken. Utvecklarläget ligger bakom versionsnumret under "Om" — sju tryck. Avsnittet Om innehåller integritetspolicyn, användarvillkoren (båda läsbara offline), betygsätt appen och kopiera delningslänk; Stöd har en enda post som öppnar supportsidan i webbläsaren.
 
-Träningen föreslår nästa lektion och erbjuder fyra övningar: en femminuters 4-4-andningstakt, fyra set om 30 sekunder stegrytm med stegjärn, ett utrustningsquiz och ett molnquiz. De två quizzen tar envalsfrågor från befintliga lektioner, blandar svaren varje omgång och visar förklaringen direkt efter varje svar. Repetitionen sätter dagens förfallna frågor och säkerhetskritiska misstag först. Profilen rymmer huvud, aktuell höjd, förmågeöversikt, emblemets ingång, kontoområde och en feedback-ingång. Kugghjulet öppnar inställningarna, avataren profilsidan.
-
-Profilen visar bara upplåsta emblem. Alla 40 finns på emblemväggen, låsta som grå förhandsvisning, dolda prestationer som ett "?".
-
-Emblemen är riktiga 3D-objekt — metallramar, emalj, relief. Tryck på ett upplåst emblem i profilen eller på väggen så öppnas det i fullskärm: dra för att rotera, nyp för att zooma upp till cirka 5,5×, två fingrar flyttar vyn över reliefen, dubbeltryck återställer, och när du släpper gungar det sakta av sig självt. Ikonerna kommer från modellerna själva, så väggen och 3D-vyn visar samma föremål. Alla fyrtio har nu en modell; den tecknade bilden finns kvar som reserv för emblem som läggs till senare. När en prestation låses upp någonstans visar dialogen samma 3D-emblem, på en ljus piedestal, medan band far in från båda skärmkanterna.
-
-### Inställningar
-
-Utseendet följer systemet eller låses till ljust eller mörkt, sparas, och statusfältet hänger med. Språket följer systemet eller väljs manuellt; gränssnitt och innehåll byts samtidigt, ingen omstart. Bankavsnittet visar aktuell version, söker uppdateringar och återställer den medföljande banken. Utvecklarläget ligger bakom versionsnumret under "Om" — sju tryck. Avsnittet Om innehåller integritetspolicyn, användarvillkoren (båda läsbara offline), betygsätt appen och kopiera delningslänk; Stöd har en enda post som öppnar supportsidan i webbläsaren.
-
-### Feedback
-
-Profil → Feedback och förslag, mellan kontokortet och säkerhetsnotisen. Välj typ — fel, idé, innehållsrättelse — skriv meddelandet, lämna valfritt en adress för svar och bifoga valfritt diagnostik. Skickandet går direkt till underhållaren via Formspree; utan nät erbjuder skärmen att skicka samma text med e-post och kopierar den till urklipp om ingen mejlapp finns.
+**Feedback.** Profil → Feedback och förslag, mellan kontokortet och säkerhetsnotisen. Välj typ — fel, idé, innehållsrättelse — skriv meddelandet, lämna valfritt en adress för svar och bifoga valfritt diagnostik. Skickandet går direkt till underhållaren via Formspree; utan nät erbjuder skärmen att skicka samma text med e-post och kopierar den till urklipp om ingen mejlapp finns.
 
 Diagnostiken är avstängd som standard och omfattar appversion, Android-version, enhetsmodell, språk, bankversion, aktuellt spår, progressionssiffror och det senaste ohanterade undantaget. Ingen lektionstext, ingen svarshistorik, inget konto, inget urklipp.
 
@@ -122,34 +129,58 @@ Om en post saknas på det valda språket är ordningen: valt språk → engelska
 
 38 måltoppar och rutter totalt: 30 för högfjäll, från Aotaina på 5 211 m upp till de fjorton 8 000-meterstopparna, och 8 för vandring, från Huihangleden till Three Passes-rutten vid Everest.
 
-## Var innehållet kommer från
+## Installation
 
-Två huvudflöden förser frågorna och handboken.
+Enklaste vägen är det färdigbyggda APK:t från [Releases](https://github.com/Solar-CV/AscentApp/releases). En push av en `v*`-tagg låter GitHub Actions bygga och bifoga ett nytt APK.
 
-Bland de offentliga källorna finns Wilderness Medical Societys uppdatering 2024 av de kliniska riktlinjerna för akut höjdsjuka, CDC Yellow Book, tekniskt material från American Alpine Institute och American Alpine Club, REI Expert Advice, UIAA:s och CE:s utrustningsstandarder samt lavindata från avalanche.org.
+- Paket: `com.ascentroam.app` (källkodens package förblir `com.ascent.climb`)
+- Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen
+- Storlek: cirka 30 MB (38 MB okomprimerade emblemmodeller, ungefär 10 MB efter paketering)
+- Signatur: release-signerat från v0.21.2. Det går inte att installera över en äldre debug-build — avinstallera först, vilket raderar framsteg, emblem och inställningar
+- Behörigheter: nätverk och nätverksstatus — för att söka efter uppdateringar av frågebanken och skicka feedback. Allt fungerar offline; den medföljande banken finns alltid där
 
-De tre guidehandlingarna från SEVEN SUMMIT TREKS — höjdsjuka, utrustning, allmän expedition — är det andra flödet.
+Flytta över APK:n till telefonen, tillåt installation från okända källor och tryck på installera. Ingen inloggning vid första starten.
 
-Senare bearbetades korrekturlästa utskrifter av sju kinesiska bergsböcker in i handboken. Kunskap och fall är omskrivna med egna ord, med sidhänvisningar; den skannade källtexten förvaras inte i repot.
+## Arkitektur
 
-| Källa | Används till |
-|---|---|
-| WMS / CDC / StatPearls | Höjdmedicinska frågor och handbok |
-| AAI / AAC / REI / BMC | Snö-, is- och rörelseteknik |
-| UIAA / CE-standarder | Utrustningsfrågor |
-| avalanche.org | Lavinbedömning |
-| SEVEN SUMMIT TREKS handlingar | Handbok h17–h22 och relaterade frågor |
-| 7 kinesiska bergsböcker | Handbok h23–h31 |
+<img src="assets/readme/arch-sv.svg" width="100%" alt="">
 
-## Säkerhetsgräns
+Varje lager talar bara med lagret under. Gränssnittet läser aldrig innehållet direkt; inlärningsmodellen räknar om det från innehållet; plattformslagret avgör om det finns en nyare frågebank och lägger sig annars inte i.
 
-Appen täcker bara teori och kognitiv förberedelse. Praktiska färdigheter — snö och is, reparbete, isklättring, räddning — måste läras ut och bedömas på plats av en certifierad instruktör.
+- **Offline först.** Den medföljande banken ligger i APK:n; onlinekopian ersätter cachen bara när den är nyare
+- **Innehållet är data.** Lektioner, frågor, handbok och översättningar ligger i `data/`, inte i gränssnittet: en enhet till är dataposter plus en rad i `Curriculum.kt`
+- **Två valfria tjänster.** Bankuppdateringar och kontosynk kan saknas; inget annat beror på dem
 
-Inget här är medicinsk rådgivning. Beslut om läkemedel och första hjälpen hör till en läkare.
+<details>
+<summary><b>Projektstruktur</b></summary>
 
-Ingen topp utlovas och inget acklimatiseringsresultat garanteras.
+```
+AscentApp/
+├── import/                      Frågeförfattande (Markdown, från tryckta böcker)
+├── knowledge/                   Kunskapsbas för de tryckta källorna
+├── tools/
+│   ├── contentcheck/            Innehållskontroller + bankexport (ren JVM)
+│   ├── i18ncheck.py             Täckning per språk över alla fyra lager
+│   ├── qbank/build.mjs          Markdown → frågebank-kompilator
+│   └── poc3d/                   Modellsynk, ikonurklippning, emissive-bakning
+└── app/src/main/
+    ├── res/values*/             Gränssnittstexter för 10 språk
+    ├── assets/
+    │   ├── badges/*.glb         40 emblemmodeller
+    │   └── env/studio_ibl.ktx   Procedurellt genererad IBL-miljö
+    └── java/com/ascent/climb/
+        ├── data/
+        │   ├── Unit1~5.kt      Innehåll för huvudlektionerna
+        │   ├── NewLessons.kt    Lektioner från den nya kursplanen
+        │   ├── i18n/Pack*.kt    Innehållsöversättningar (ingång / punkter / handbok / bank)
+        │   ├── Diagnostics.kt   Kraschlogg + miljöögonblick för feedbackformuläret
+        │   ├── FeedbackSender.kt  Formspree-POST (HttpURLConnection, inga beroenden)
+        │   ├── BundledBank.kt   Sammansättning av lektionspoolen och insättning av repetitioner
+        │   └── bank/            Bankkonfiguration, JSON-avkodning, nätverk, repository
+        └── ui/                  Skärmar och komponenter (Badge3D.kt = Filament-scen, beskärning, ljus)
+```
 
-Lektioner som kräver instruktör säger det uttryckligen när teorin är klar.
+</details>
 
 ## Bygga själv
 
@@ -179,35 +210,7 @@ Resultatet hamnar i `app/build/outputs/apk/debug/app-debug.apk`.
 
 För Google Play bygger du App Bundle: `./gradlew bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. En AAB kan inte installeras direkt på telefonen; för sidoladdning gäller fortfarande APK.
 
-## Projektstruktur
-
-```
-AscentApp/
-├── import/                      Frågeförfattande (Markdown, från tryckta böcker)
-├── knowledge/                   Kunskapsbas för de tryckta källorna
-├── tools/
-│   ├── contentcheck/            Innehållskontroller + bankexport (ren JVM)
-│   ├── i18ncheck.py             Täckning per språk över alla fyra lager
-│   ├── qbank/build.mjs          Markdown → frågebank-kompilator
-│   └── poc3d/                   Modellsynk, ikonurklippning, emissive-bakning
-└── app/src/main/
-    ├── res/values*/             Gränssnittstexter för 10 språk
-    ├── assets/
-    │   ├── badges/*.glb         40 emblemmodeller
-    │   └── env/studio_ibl.ktx   Procedurellt genererad IBL-miljö
-    └── java/com/ascent/climb/
-        ├── data/
-        │   ├── Unit1~5.kt      Innehåll för huvudlektionerna
-        │   ├── NewLessons.kt    Lektioner från den nya kursplanen
-        │   ├── i18n/Pack*.kt    Innehållsöversättningar (ingång / punkter / handbok / bank)
-        │   ├── Diagnostics.kt   Kraschlogg + miljöögonblick för feedbackformuläret
-        │   ├── FeedbackSender.kt  Formspree-POST (HttpURLConnection, inga beroenden)
-        │   ├── BundledBank.kt   Sammansättning av lektionspoolen och insättning av repetitioner
-        │   └── bank/            Bankkonfiguration, JSON-avkodning, nätverk, repository
-        └── ui/                  Skärmar och komponenter (Badge3D.kt = Filament-scen, beskärning, ljus)
-```
-
-## Ändra innehåll
+### Ändra innehåll
 
 För att lägga till frågor i en befintlig lektion, redigera `data/Expansion*.kt`. För en ny lektion, skriv `Lesson(...)` i `data/NewLessons.kt` och lägg till dess id i rätt enhet i `Curriculum.kt`. Ordning och enhetstillhörighet finns bara i `Curriculum.kt`.
 
@@ -232,7 +235,49 @@ Publicera en ny bank: ändra innehållet → höj `BUNDLED_VERSION` → kör `co
 
 Äldre appversioner går inte sönder av en nyare bank. `minAppVersion` i `manifest.json` stoppar för gamla klienter, okända fält ignoreras och en trasig fråga hoppas över i stället för att vara fatal.
 
+## Var innehållet kommer från
+
+Två huvudflöden förser frågorna och handboken.
+
+Bland de offentliga källorna finns Wilderness Medical Societys uppdatering 2024 av de kliniska riktlinjerna för akut höjdsjuka, CDC Yellow Book, tekniskt material från American Alpine Institute och American Alpine Club, REI Expert Advice, UIAA:s och CE:s utrustningsstandarder samt lavindata från avalanche.org.
+
+De tre guidehandlingarna från SEVEN SUMMIT TREKS — höjdsjuka, utrustning, allmän expedition — är det andra flödet.
+
+Senare bearbetades korrekturlästa utskrifter av sju kinesiska bergsböcker in i handboken. Kunskap och fall är omskrivna med egna ord, med sidhänvisningar; den skannade källtexten förvaras inte i repot.
+
+| Källa | Används till |
+|---|---|
+| WMS / CDC / StatPearls | Höjdmedicinska frågor och handbok |
+| AAI / AAC / REI / BMC | Snö-, is- och rörelseteknik |
+| UIAA / CE-standarder | Utrustningsfrågor |
+| avalanche.org | Lavinbedömning |
+| SEVEN SUMMIT TREKS handlingar | Handbok h17–h22 och relaterade frågor |
+| 7 kinesiska bergsböcker | Handbok h23–h31 |
+
+## Säkerhetsgräns
+
+Appen täcker bara teori och kognitiv förberedelse. Praktiska färdigheter — snö och is, reparbete, isklättring, räddning — måste läras ut och bedömas på plats av en certifierad instruktör.
+
+Inget här är medicinsk rådgivning. Beslut om läkemedel och första hjälpen hör till en läkare.
+
+Ingen topp utlovas och inget acklimatiseringsresultat garanteras.
+
+Lektioner som kräver instruktör säger det uttryckligen när teorin är klar.
+
 ## Senaste ändringar
+
+<details>
+<summary><b>Versionsnoteringar, v0.28.8 tillbaka till v0.13</b></summary>
+
+**v0.28.8: inställningarna kompletterade, terrängkartor för vandringsleder, två rättelser**
+
+- Inställningarna har fått det som saknades: användarvillkor (läsbara offline), betygsätt appen, kopiera delningslänk och en post »Stöd AscentRoam« som öppnar supportsidan i webbläsaren — ingen betalplattform visas i appen
+
+- Tangentbordet lyfter inte längre den nedre flikraden, och vädrets sol uppe till höger ligger centrerad över sviten i stället för att täcka repikonen
+
+- Vandringslederna har terrängkartor: 39 av 44 visar ryggar, dalar och kustlinjer och ledens sträckning, i stället för höjdprofilen. Långa leder ligger på en mjuk skuggning; de på flera hundra kilometer, som Camino eller JMT, ritas som schema med bara sträckning och viktiga orter
+
+- Alla 88 toppar har ett »Om det här berget« och alla 44 leder ett »Om den här leden«, på nio språk; atlasen placerar din region först utifrån gränssnittsspråket
 
 **v0.27.1 – v0.27.2: gränssnittet följer vädret**
 
@@ -422,6 +467,21 @@ Tidigare:
 - v0.15.0: nio artiklar till ur kinesiska böcker (h23–h31), ny kategori "ledarskap ute", 22 → 31 artiklar
 - v0.14.0: sex guideartiklar från SEVEN SUMMIT TREKS
 - v0.13.x: inställningar, profilsida, emblemvägg; bakåtgest på underskärmar
+
+</details>
+
+## Stöd AscentRoam
+
+AscentRoam är ett oberoende utvecklat och fritt öppet lärprojekt för friluftsliv. Det finns inga annonser och inga betalda upplåsningar. Om du har nytta av det och vill att det ska fortsätta utvecklas och underhållas kan du stödja det frivilligt via Afdian.
+
+**Allt stöd är en gåva utan motprestation**: det ger inga extra funktioner, inget digitalt innehåll, inga exklusiva märken eller andra rättigheter. Alla användare får alltid samma upplevelse. Varje bidrag går till att hålla projektet igång.
+
+- [Afdian](https://afdian.com/a/ascent)
+- [Ko-fi](https://ko-fi.com/ascentroam)
+
+Tack för att du går med oss.
+
+<img src="assets/readme/divider.svg" width="100%" alt="">
 
 ## Licens
 
