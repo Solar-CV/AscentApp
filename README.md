@@ -21,7 +21,7 @@
 
 An Android app for people starting out in high-altitude mountaineering and ice climbing. The curriculum is organised by altitude: every lesson you pass moves you a little higher.
 
-<p align="center"><sub><b>Current release v0.28.8</b> (versionCode 166) · Android 8.0+ · arm64-v8a · about 30 MB</sub></p>
+<p align="center"><sub><b>Current release v0.28.8</b> (versionCode 166) · Android 8.0+ · arm64-v8a · about 41 MB</sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Path screen: the peak card, unit banner and lesson nodes">&nbsp;
@@ -127,7 +127,7 @@ The easiest route is the prebuilt APK from [Releases](https://github.com/Solar-C
 
 - Package: `com.ascentroam.app` (the source package stays `com.ascent.climb`)
 - Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build
-- Size: about 30 MB (38 MB of uncompressed badge models, ~10 MB after packaging)
+- Size: about 41 MB (badge models are 38 MB uncompressed and ~9 MB packaged; the rest is the question bank, the terrain maps and the native libraries)
 - Signing: release-signed since v0.21.2. It will not install over an older debug build — uninstall first, and that clears local progress, badges and settings
 - Permissions: network and network state — used to check for question-bank updates and to send feedback. Everything works offline; the bundled bank is always there
 

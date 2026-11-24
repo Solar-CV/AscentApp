@@ -21,7 +21,7 @@
 
 Un'app Android per chi comincia con l'alpinismo d'alta quota e l'arrampicata su ghiaccio. Il programma è ordinato per quota: ogni lezione superata ti porta un po' più in alto.
 
-<p align="center"><sub><b>Versione attuale v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · circa 30 MB</b></sub></p>
+<p align="center"><sub><b>Versione attuale v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · circa 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Schermata del percorso: scheda della vetta, banner di unità e nodi delle lezioni">&nbsp;
@@ -135,7 +135,7 @@ La via più semplice è l'APK già compilato nelle [Releases](https://github.com
 
 - Pacchetto: `com.ascentroam.app` (il package del codice resta `com.ascent.climb`)
 - Minimo: Android 8.0 (API 26), **solo arm64-v8a** — i telefoni solo a 32 bit non possono installarlo
-- Dimensione: circa 30 MB (38 MB di modelli non compressi, circa 10 MB dopo il confezionamento)
+- Dimensione: circa 41 MB (i modelli dei badge sono 38 MB non compressi, circa 9 MB dopo il confezionamento; il resto sono domande, mappe del terreno e librerie native)
 - Firma: firmato con certificato di release dalla v0.21.2. Non si installa sopra una build debug precedente: va disinstallata, e questo cancella progressi, insegne e impostazioni
 - Permessi: rete e stato della rete — per controllare gli aggiornamenti del questionario e inviare feedback. Tutto funziona offline; il questionario incluso c'è sempre
 

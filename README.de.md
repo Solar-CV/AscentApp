@@ -21,7 +21,7 @@
 
 Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist nach Höhe geordnet: mit jeder bestandenen Lektion geht es ein Stück höher.
 
-<p align="center"><sub><b>Aktuelle Version v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · etwa 30 MB</b></sub></p>
+<p align="center"><sub><b>Aktuelle Version v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · etwa 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Pfad-Bildschirm: Gipfelkarte, Einheitenbanner und Lektionsknoten">&nbsp;
@@ -135,7 +135,7 @@ Am einfachsten über das fertige APK aus den [Releases](https://github.com/Solar
 
 - Paket: `com.ascentroam.app` (der Quellcode-Paketname bleibt `com.ascent.climb`)
 - Minimum: Android 8.0 (API 26), **nur arm64-v8a** — reine 32-Bit-Geräte können diese Version nicht installieren
-- Größe: etwa 30 MB (38 MB unkomprimierte Abzeichenmodelle, rund 10 MB nach dem Paketieren)
+- Größe: etwa 41 MB (Abzeichenmodelle 38 MB unkomprimiert, rund 9 MB nach dem Paketieren; der Rest sind Fragenpool, Geländekarten und native Bibliotheken)
 - Signatur: seit v0.21.2 mit Release-Zertifikat signiert. Über einen älteren Debug-Build lässt es sich nicht installieren – erst deinstallieren, dabei werden Fortschritt, Abzeichen und Einstellungen gelöscht
 - Berechtigungen: Netzwerk und Netzwerkstatus — für die Prüfung auf Fragenpool-Updates und für Feedback. Alles funktioniert offline, der mitgelieferte Pool ist immer da
 

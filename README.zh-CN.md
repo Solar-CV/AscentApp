@@ -21,7 +21,7 @@
 
 一个给高海拔攀登和攀冰新手做的 Android 应用。课程按海拔组织：每过一课，海拔往上走一段。
 
-<p align="center"><sub><b>当前版本 v0.28.8</b>（versionCode 166）· Android 8.0+ · arm64-v8a · 约 30 MB</sub></p>
+<p align="center"><sub><b>当前版本 v0.28.8</b>（versionCode 166）· Android 8.0+ · arm64-v8a · 约 41 MB</sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="路径页：山峰卡、单元横幅与课程节点">&nbsp;
@@ -127,7 +127,7 @@
 
 - 包名：`com.ascentroam.app`（源码包名仍是 `com.ascent.climb`）
 - 最低：Android 8.0（API 26），**仅 arm64-v8a** —— 只有 32 位的手机装不了
-- 体积：约 30 MB（38 MB 未压缩徽章模型，打包后约 10 MB）
+- 体积：约 41 MB（徽章模型未压缩 38 MB、打包后约 9 MB；其余是题库、地形图与原生库）
 - 签名：v0.21.2 起为正式签名。装不进旧 debug 包，得先卸载——本地进度、徽章与设置会一起清掉
 - 权限：网络与网络状态——用于检查题库更新和发送反馈。其余功能全部离线可用，随包题库一直在
 

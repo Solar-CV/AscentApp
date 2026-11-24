@@ -195,8 +195,8 @@ jobs:
 
           TARGET=$("$BT/aapt2" dump badging "$APK" | sed -n "s/^targetSdkVersion:'\\([0-9]*\\)'.*/\\1/p" | head -1)
           echo "targetSdk=$TARGET"
-          if [ "${TARGET:-0}" -lt 35 ]; then
-            echo "::error::targetSdk $TARGET 低于 35，Play 会拒收（2026-08-31 起要求 36）"
+          if [ "${TARGET:-0}" -lt 36 ]; then
+            echo "::error::targetSdk $TARGET 低于 36，Play 会拒收（2026-08-31 起新应用与更新都要求 API 36）"
             exit 1
           fi
 

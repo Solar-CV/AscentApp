@@ -21,7 +21,7 @@
 
 En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kursen är ordnad efter höjd: varje avklarad lektion flyttar dig en bit högre upp.
 
-<p align="center"><sub><b>Aktuell version v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · cirka 30 MB</b></sub></p>
+<p align="center"><sub><b>Aktuell version v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · cirka 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt=" Ruttskärm: toppkort, enhetsband och lektionsnoder">&nbsp;
@@ -135,7 +135,7 @@ Enklaste vägen är det färdigbyggda APK:t från [Releases](https://github.com/
 
 - Paket: `com.ascentroam.app` (källkodens package förblir `com.ascent.climb`)
 - Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen
-- Storlek: cirka 30 MB (38 MB okomprimerade emblemmodeller, ungefär 10 MB efter paketering)
+- Storlek: cirka 41 MB (emblemmodellerna är 38 MB okomprimerade, ungefär 9 MB efter paketering; resten är frågebanken, terrängkartorna och de inbyggda biblioteken)
 - Signatur: release-signerat från v0.21.2. Det går inte att installera över en äldre debug-build — avinstallera först, vilket raderar framsteg, emblem och inställningar
 - Behörigheter: nätverk och nätverksstatus — för att söka efter uppdateringar av frågebanken och skicka feedback. Allt fungerar offline; den medföljande banken finns alltid där
 

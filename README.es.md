@@ -21,7 +21,7 @@
 
 Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. El temario está ordenado por altitud: cada lección superada te sube un poco más arriba.
 
-<p align="center"><sub><b>Versión actual v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · unos 30 MB</b></sub></p>
+<p align="center"><sub><b>Versión actual v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · unos 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Pantalla de ruta: tarjeta de cumbre, banner de unidad y nodos de lección">&nbsp;
@@ -135,7 +135,7 @@ Lo más fácil es el APK ya compilado de [Releases](https://github.com/Solar-CV/
 
 - Paquete: `com.ascentroam.app` (el paquete del código sigue siendo `com.ascent.climb`)
 - Mínimo: Android 8.0 (API 26), **solo arm64-v8a** — los móviles de solo 32 bits no pueden instalarlo
-- Tamaño: unos 30 MB (38 MB de modelos sin comprimir, unos 10 MB tras empaquetar)
+- Tamaño: unos 41 MB (los modelos de insignias ocupan 38 MB sin comprimir y unos 9 MB empaquetados; el resto son el banco de preguntas, los mapas del terreno y las bibliotecas nativas)
 - Firma: firmado con certificado de release desde la v0.21.2. No se instala sobre una compilación debug anterior: hay que desinstalar, y eso borra el progreso, las insignias y los ajustes
 - Permisos: red y estado de red — para comprobar actualizaciones del banco de preguntas y enviar comentarios. Todo funciona sin conexión; el banco incluido siempre está ahí
 

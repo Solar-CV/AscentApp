@@ -21,7 +21,7 @@
 
 Une application Android pour celles et ceux qui débutent en alpinisme d’altitude et en cascade de glace. Le programme est organisé par altitude : chaque leçon passée fait monter d’un cran.
 
-<p align="center"><sub><b>Version actuelle v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · environ 30 Mo</b></sub></p>
+<p align="center"><sub><b>Version actuelle v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · environ 41 Mo</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Écran Parcours : carte de sommet, bandeau d’unité et nœuds de leçon">&nbsp;
@@ -135,7 +135,7 @@ Le plus simple est l’APK déjà compilé des [Releases](https://github.com/Sol
 
 - Paquet : `com.ascentroam.app` (le package du code reste `com.ascent.climb`)
 - Minimum : Android 8.0 (API 26), **arm64-v8a uniquement** — les téléphones uniquement 32 bits ne peuvent pas installer cette version
-- Taille : environ 30 Mo (38 Mo de modèles non compressés, environ 10 Mo après empaquetage)
+- Taille : environ 41 Mo (modèles de badges 38 Mo non compressés, environ 9 Mo après empaquetage ; le reste, ce sont les questions, les cartes de terrain et les bibliothèques natives)
 - Signature : signé en release depuis la v0.21.2. Impossible de l’installer par-dessus une version debug : il faut désinstaller, ce qui efface la progression, les badges et les réglages
 - Autorisations : réseau et état du réseau — pour vérifier les mises à jour de la banque de questions et envoyer un retour. Tout fonctionne hors ligne ; la banque embarquée est toujours là
 
