@@ -46,7 +46,13 @@ import androidx.compose.ui.res.stringResource
 @Composable
 fun PrivacyScreen(
     doc: PrivacyDoc,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    /** 页面标题。服务条款复用同一套排版，只是换个抬头。 */
+    @androidx.annotation.StringRes titleRes: Int = R.string.set_privacy,
+    /** 文末那行脚注。 */
+    @androidx.annotation.StringRes noteRes: Int = R.string.privacy_in_app_note,
+    /** 脚注里的条款版本号。 */
+    version: String = PrivacyPolicy.VERSION
 ) {
     // 系统返回 / 侧滑：回到上一层，而不是退出 App
     BackHandler { onBack() }
@@ -66,7 +72,7 @@ fun PrivacyScreen(
             Icon(Ic.ChevronLeft, contentDescription = null, tint = Ascent.Fg2, modifier = Modifier.size(20.dp))
             Spacer(Modifier.width(4.dp))
             Text(
-                text = stringResource(R.string.set_privacy),
+                text = stringResource(titleRes),
                 color = Ascent.Fg,
                 fontSize = 17.sp,
                 fontWeight = FontWeight.Bold
@@ -122,7 +128,7 @@ fun PrivacyScreen(
             item(key = "note") {
                 Spacer(Modifier.height(10.dp))
                 Text(
-                    text = stringResource(R.string.privacy_in_app_note, PrivacyPolicy.VERSION),
+                    text = stringResource(noteRes, version),
                     color = Ascent.Fg3,
                     fontSize = 11.5.sp,
                     lineHeight = 18.sp

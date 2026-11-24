@@ -8,6 +8,34 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ---
 
+## v0.28.7 要点
+
+三处小修：键盘不再顶起底部导航栏，右上角的天气图标与连续天数分开，设置里多了服务条款、评分与分享。
+
+### 修正
+
+- 弹出键盘时，底部胶囊导航栏会跟着被顶上去；现在它留在原位、由键盘盖住，输入页自己为键盘让位
+- 右上角的天气日轮压住了「火焰 + 连续天数」，右边缘还碰到旁边的绳索图标；现在日轮对准数值、缩小一圈，两侧都留出空当
+
+### 新增
+
+- 设置 → 关于新增三行：服务条款（应用内可离线阅读）、给应用评分、复制分享链接（复制后弹出「已复制」提示，打不开商店也会说明）
+
+---
+
+## English
+
+Three small fixes: the keyboard no longer lifts the bottom bar, the weather sun and the streak count no longer collide, and Settings gains terms, rating and sharing.
+
+### Fixes
+
+- The capsule tab bar was pushed up along with the keyboard; it now stays put and is covered by the keyboard, while input screens make room for it themselves
+- The weather sun at top right overlapped the flame and streak count and grazed the rope icon; it is now centred on the numbers and slightly smaller
+
+### New
+
+- Settings → About has three more rows: Terms of service (readable offline in the app), Rate the app, and Copy share link — with a confirmation after copying and a message when no store can be opened
+
 ## v0.28.6 要点
 
 徒步路线图上线，八十八座山与四十四条线都有了介绍，全部九种语言。

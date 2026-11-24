@@ -11,7 +11,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
@@ -38,6 +42,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -94,7 +99,7 @@ class MainActivity : ComponentActivity() {
 
         // targetSdk 35+ 起系统强制 edge-to-edge，`android:statusBarColor` 那套全部失效。
         // 与其让老系统和新系统走两条不同的布局路径，不如统一显式开启，
-        // 再由根布局按 `safeDrawing` 留出系统栏高度（否则顶部「3,200 M」会被状态栏压住）。
+        // 再由根布局按系统栏 + 刘海留边（否则顶部「3,200 M」会被状态栏压住）。
         enableEdgeToEdge()
 
         // 题库必须在 setContent 之前完成载入：缓存副本 → 内置题库
@@ -387,7 +392,14 @@ fun AscentRoot(
     // 这一层只负责避让系统栏。缩进故意不跟着加：整块原本就写在一个 Box 里，
     // 外层再套一层是为了让**下面那几个全屏层**（3D 徽章背景、成就遮罩）能画到状态栏
     // 和手势条下面去；若在更外层统一收边，它们的背景会被裁短、上下露出底色。
-    Box(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
+    // 只避让系统栏与刘海，不含 IME。
+    // 用 safeDrawing 的话键盘弹起会把整块外壳（含底部胶囊栏）一起顶上去，
+    // 键盘归属交给各输入页自己 imePadding()。
+    Box(
+        modifier = Modifier.fillMaxSize().windowInsetsPadding(
+            WindowInsets.systemBars.union(WindowInsets.displayCutout)
+        )
+    ) {
     if (openLesson != null) {
         BackHandler { openLessonId = null }
         Box(modifier = Modifier.fillMaxSize().background(Ascent.Bg)) {
@@ -412,20 +424,26 @@ fun AscentRoot(
             )
         }
     } else {
+        // 键盘可见时把胶囊栏收起：它在移动端本来就会被键盘盖住，
+        // 留着还会让 Scaffold 的内容底部多留一条高度。
+        val imeVisible = WindowInsets.ime.getBottom(LocalDensity.current) > 0
         Scaffold(
             containerColor = androidx.compose.ui.graphics.Color.Transparent,
             bottomBar = {
-                CapsuleTabBar(
-                    selected = tab,
-                    onSelect = { tab = it },
-                    modifier = Modifier.navigationBarsPadding()
-                )
+                if (!imeVisible) {
+                    CapsuleTabBar(
+                        selected = tab,
+                        onSelect = { tab = it },
+                        modifier = Modifier.navigationBarsPadding()
+                    )
+                }
             }
         ) { padding ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding)
+                    .imePadding()
             ) {
                 // 题库更新后重建整棵子树，确保各页面读到新数据
                 key(bankRevision) {
@@ -574,7 +592,11 @@ fun AscentRoot(
 
     // 首次启动偏好：整屏盖在最上层，选完才进入主界面
     if (!onboardingDone) {
-        Box(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
+        Box(
+            modifier = Modifier.fillMaxSize().windowInsetsPadding(
+                WindowInsets.systemBars.union(WindowInsets.displayCutout)
+            )
+        ) {
         OnboardingOverlay(
             initialTrack = trackId,
             language = languageMode,

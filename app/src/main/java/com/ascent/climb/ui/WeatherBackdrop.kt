@@ -215,9 +215,11 @@ fun WeatherBackdrop(mood: WeatherMood, modifier: Modifier = Modifier) {
 // ---------------------------------------------------------------- 静态元素
 
 private fun DrawScope.drawSun(sky: Sky) {
-    val cx = size.width * 0.80f
-    val cy = size.height * 0.085f
-    val r = size.width * 0.085f
+    // 圆心对准右上角「火焰 + 连续天数」的中心（0.79W），半径收到 0.070W：
+    // 原来的 0.085 直径 0.17W，左边缘会压到海拔数字、右边缘会碰到绳索图标。
+    val cx = size.width * 0.79f
+    val cy = size.height * 0.090f
+    val r = size.width * 0.070f
     drawCircle(
         brush = Brush.radialGradient(
             colors = listOf(sky.glow.copy(alpha = 0.55f), sky.glow.copy(alpha = 0f)),
@@ -232,9 +234,10 @@ private fun DrawScope.drawSun(sky: Sky) {
 
 /** 月亮用「圆减圆」的布尔运算切出缺口，比叠一个底色圆更干净。 */
 private fun DrawScope.drawMoon(sky: Sky) {
-    val cx = size.width * 0.80f
-    val cy = size.height * 0.085f
-    val r = size.width * 0.075f
+    // 与太阳同一圆心，半径略小一点，日夜两种天气下顶部数值条的落点一致。
+    val cx = size.width * 0.79f
+    val cy = size.height * 0.090f
+    val r = size.width * 0.062f
     val body = Path().apply { addOval(Rect(center = Offset(cx, cy), radius = r)) }
     val bite = Path().apply {
         addOval(Rect(center = Offset(cx + r * 0.62f, cy - r * 0.30f), radius = r * 0.92f))

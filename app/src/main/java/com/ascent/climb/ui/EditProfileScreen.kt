@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -143,9 +142,8 @@ private fun EditProfileBody(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 24.dp)
-                // 键盘弹出时窗口会缩，底部「完成」会被挤出可见区（还被 tab 栏压住）。
-                // imePadding 把整列顶到键盘上方，按钮就一直在屏幕内。
-                .imePadding()
+                // 键盘避让由 MainActivity 的 Scaffold 统一处理（内容容器上那层 imePadding）；
+                // 这里再加一层会把整列顶两次，按钮反而跑出屏幕。
         ) {
             Row(
                 modifier = Modifier

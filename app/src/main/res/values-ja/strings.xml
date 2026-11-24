@@ -484,10 +484,19 @@
     <string name="ob_follow_desc">システム言語に従います</string>
 
     <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_terms">利用規約</string>
+    <string name="set_rate">アプリを評価</string>
+    <string name="set_share">共有リンクをコピー</string>
+    <string name="set_share_copied">リンクをコピーしました</string>
+    <string name="set_share_failed">コピーできませんでした。もう一度お試しください</string>
+    <string name="set_rate_failed">ストアを開けませんでした。後でもう一度お試しください</string>
+    <string name="share_text">AscentRoam — オフラインで使える高所登山とトレッキングのフィールドマニュアル。
+https://www.ascentroam.com</string>
     <string name="set_privacy">プライバシーポリシー</string>
     <string name="auth_privacy_agree">プライバシーポリシーを読み、同意します</string>
     <string name="auth_privacy_view">全文</string>
     <string name="auth_privacy_required">登録の前にプライバシーポリシーへの同意が必要です</string>
+    <string name="terms_in_app_note">規約バージョン %1$s　·　アプリ内でオフライン閲覧できます</string>
     <string name="privacy_in_app_note">規約バージョン %1$s　·　ascentroam.com/privacy と同一</string>
 
     <!-- 天气背景（设置 → 外观） -->

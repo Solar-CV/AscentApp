@@ -61,6 +61,7 @@ import com.ascent.climb.data.AchCategory
 import com.ascent.climb.data.Account
 import com.ascent.climb.data.BANK_VERSION
 import com.ascent.climb.data.PrivacyPolicy
+import com.ascent.climb.data.TermsPolicy
 import com.ascent.climb.data.ProgressStore
 import com.ascent.climb.data.TOTAL_QUESTIONS
 import com.ascent.climb.data.bank.BankRepository
@@ -161,6 +162,7 @@ fun ProfileScreen(
     }
     var showAuth by remember { mutableStateOf(false) }
     var showPrivacy by remember { mutableStateOf(false) }
+    var showTerms by remember { mutableStateOf(false) }
     var showAchievements by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
     var showDevices by remember { mutableStateOf(false) }
@@ -379,6 +381,7 @@ fun ProfileScreen(
                     onReset = onReset,
                     accountEmail = account?.email,
                     onOpenPrivacy = { showPrivacy = true },
+                    onOpenTerms = { showTerms = true },
                     onOpenDevices = { showDevices = true },
                     onDeleteAccount = {
                         // 删账号 = 账号记录 + 本机数据一起清（Play 的账号删除要求：
@@ -428,6 +431,17 @@ fun ProfileScreen(
             PrivacyScreen(
                 doc = PrivacyPolicy.of(AppLocale.resolve(languageMode).toLanguageTag()),
                 onBack = { showPrivacy = false }
+            )
+        }
+
+        // 服务条款：同一套排版，只是换抬头和正文
+        if (showTerms) {
+            PrivacyScreen(
+                doc = TermsPolicy.of(AppLocale.resolve(languageMode).toLanguageTag()),
+                onBack = { showTerms = false },
+                titleRes = R.string.set_terms,
+                noteRes = R.string.terms_in_app_note,
+                version = TermsPolicy.VERSION
             )
         }
     }

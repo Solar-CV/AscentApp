@@ -1,5 +1,11 @@
 package com.ascent.climb.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -36,6 +42,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -83,6 +90,8 @@ fun SettingsScreen(
     accountEmail: String?,
     /** 打开应用内隐私政策。 */
     onOpenPrivacy: () -> Unit,
+    /** 打开应用内服务条款。 */
+    onOpenTerms: () -> Unit,
     /** 打开「已登录设备」页。 */
     onOpenDevices: () -> Unit,
     /** 执行删除账号（含本机数据），返回是否成功。 */
@@ -100,6 +109,34 @@ fun SettingsScreen(
     // 语言选择页（独立二级页面）
     var showLanguage by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+
+    // 评分：优先拉起 Play 商店，没有商店就退回网页详情页；两条都走不通要说话，
+    // 静默吞掉异常会变成「点了没反应」。
+    // 包名写死正式包，debug 包点进去也是同一个商店页面。
+    fun rateApp() {
+        val market = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$RATE_PACKAGE"))
+        val web = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$RATE_PACKAGE"))
+        val opened = runCatching { context.startActivity(market); true }
+            .getOrElse { runCatching { context.startActivity(web); true }.getOrDefault(false) }
+        if (!opened) {
+            Toast.makeText(context, R.string.set_rate_failed, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // 分享：复制「一句话 + 官网地址」到剪贴板。微信里粘贴比分享面板更常用，
+    // 所以这里不走 ACTION_SEND。
+    fun copyShareLink() {
+        val text = context.getString(R.string.share_text)
+        val ok = runCatching {
+            val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            cm.setPrimaryClip(ClipData.newPlainText(context.getString(R.string.app_name), text))
+        }.isSuccess
+        // 自己弹，不依赖系统的剪贴板浮层：Android 13+ 那个浮层在部分 ROM / 设置下
+        // 根本不出现（实测 Android 16 无提示），复制成功却没反馈等于没做成。
+        val msg = if (ok) R.string.set_share_copied else R.string.set_share_failed
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    }
 
     // 必须放在 showLanguage 的提前返回之前：进语言页时这一层列表会离开组合，
     // 状态留在这里才不会跟着丢，返回时还在原位。
@@ -450,27 +487,10 @@ fun SettingsScreen(
                         fontSize = 11.sp
                     )
                     Spacer(Modifier.height(4.dp))
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(squircle(10.dp))
-                            .clickable { onOpenPrivacy() }
-                            .padding(vertical = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = stringResource(R.string.set_privacy),
-                            color = Ascent.Fg2,
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-                        Icon(
-                            Ic.ChevronRight,
-                            contentDescription = null,
-                            tint = Ascent.Fg3,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
+                    AboutRow(stringResource(R.string.set_privacy), onOpenPrivacy)
+                    AboutRow(stringResource(R.string.set_terms), onOpenTerms)
+                    AboutRow(stringResource(R.string.set_rate)) { rateApp() }
+                    AboutRow(stringResource(R.string.set_share)) { copyShareLink() }
                     Text(
                         text = stringResource(R.string.set_version, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE),
                         color = Ascent.Fg2,
@@ -677,5 +697,34 @@ private fun SettingsToggle(
         }
         Spacer(Modifier.width(10.dp))
         Switch(checked = checked, onCheckedChange = onChange)
+    }
+}
+
+/** 评分指向的正式包名。debug 包的 applicationId 带 .debug 后缀，商店里没有那条。 */
+private const val RATE_PACKAGE = "com.ascentroam.app"
+
+/** 「关于」卡片里的一行：左文字、右箭头，整行可点。 */
+@Composable
+private fun AboutRow(text: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(squircle(10.dp))
+            .clickable(onClick = onClick)
+            .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = text,
+            color = Ascent.Fg2,
+            fontSize = 12.sp,
+            modifier = Modifier.weight(1f)
+        )
+        Icon(
+            Ic.ChevronRight,
+            contentDescription = null,
+            tint = Ascent.Fg3,
+            modifier = Modifier.size(16.dp)
+        )
     }
 }

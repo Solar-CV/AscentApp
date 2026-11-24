@@ -500,10 +500,19 @@
     <string name="ob_follow_desc">由系统语言决定</string>
 
     <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_terms">服务条款</string>
+    <string name="set_rate">给应用评分</string>
+    <string name="set_share">复制分享链接</string>
+    <string name="set_share_copied">已复制链接到剪贴板</string>
+    <string name="set_share_failed">复制失败，请稍后再试</string>
+    <string name="set_rate_failed">无法打开应用商店，请稍后再试</string>
+    <string name="share_text">AscentRoam 登攀之路 —— 一份离线可用的高海拔攀登与徒步手册。
+https://www.ascentroam.com</string>
     <string name="set_privacy">隐私政策</string>
     <string name="auth_privacy_agree">我已阅读并同意《隐私政策》</string>
     <string name="auth_privacy_view">查看</string>
     <string name="auth_privacy_required">注册前需要先同意隐私政策</string>
+    <string name="terms_in_app_note">条款版本 %1$s　·　可在应用内离线阅读</string>
     <string name="privacy_in_app_note">条款版本 %1$s　·　与官网 ascentroam.com/privacy 一致</string>
 
     <!-- 天气背景（设置 → 外观） -->

@@ -501,10 +501,19 @@
     <string name="ob_follow_desc">Decided by your system language</string>
 
     <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_terms">Terms of service</string>
+    <string name="set_rate">Rate the app</string>
+    <string name="set_share">Copy share link</string>
+    <string name="set_share_copied">Link copied to clipboard</string>
+    <string name="set_share_failed">Couldn’t copy the link. Try again.</string>
+    <string name="set_rate_failed">Couldn’t open the store. Try again later.</string>
+    <string name="share_text">AscentRoam — an offline field manual for high-altitude climbing and trekking.
+https://www.ascentroam.com</string>
     <string name="set_privacy">Privacy policy</string>
     <string name="auth_privacy_agree">I have read and agree to the Privacy Policy</string>
     <string name="auth_privacy_view">View</string>
     <string name="auth_privacy_required">Please agree to the Privacy Policy before creating an account</string>
+    <string name="terms_in_app_note">Terms version %1$s　·　readable offline in the app</string>
     <string name="privacy_in_app_note">Terms version %1$s　·　matches ascentroam.com/privacy</string>
 
     <!-- 天气背景（设置 → 外观） -->

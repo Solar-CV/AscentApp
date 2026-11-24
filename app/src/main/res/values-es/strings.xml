@@ -463,10 +463,19 @@
     <string name="ob_follow_desc">Según el idioma del sistema</string>
 
     <!-- 隐私政策（注册前置 + 设置入口） -->
+    <string name="set_terms">Términos del servicio</string>
+    <string name="set_rate">Valorar la aplicación</string>
+    <string name="set_share">Copiar enlace para compartir</string>
+    <string name="set_share_copied">Enlace copiado al portapapeles</string>
+    <string name="set_share_failed">No se pudo copiar el enlace. Inténtalo de nuevo.</string>
+    <string name="set_rate_failed">No se pudo abrir la tienda. Inténtalo más tarde.</string>
+    <string name="share_text">AscentRoam — un manual de campo sin conexión para alta montaña y trekking.
+https://www.ascentroam.com</string>
     <string name="set_privacy">Política de privacidad</string>
     <string name="auth_privacy_agree">He leído y acepto la Política de privacidad</string>
     <string name="auth_privacy_view">Ver</string>
     <string name="auth_privacy_required">Debes aceptar la Política de privacidad antes de crear la cuenta</string>
+    <string name="terms_in_app_note">Versión de los términos %1$s　·　disponible sin conexión en la app</string>
     <string name="privacy_in_app_note">Versión %1$s　·　coincide con ascentroam.com/privacy</string>
 
     <!-- 天气背景（设置 → 外观） -->

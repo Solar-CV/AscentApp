@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -213,7 +214,9 @@ fun LessonScreen(
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(Ascent.Bg)) {
+    // 课程页是盖在整棵树之上的全屏页，不在 Scaffold 里，
+    // 键盘得自己避让，否则填空/计算题的输入框和底部按钮会被键盘压住。
+    Column(modifier = Modifier.fillMaxSize().background(Ascent.Bg).imePadding()) {
 
         // ---------- 顶部进度 ----------
         Row(
