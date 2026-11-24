@@ -97,6 +97,11 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          # 不读远端缓存：发版要从干净状态编译。0.28.8 连续两次在 CI 失败、
+          # 本地全新 Gradle 目录却能过，缓存是唯一剩下的变量。
+          # 代价是每次多下载两三分钟依赖，换来结果可复现。
+          cache-disabled: true
 
       - name: Grant execute permission
         run: chmod +x gradlew
