@@ -73,6 +73,9 @@
     <string name="set_reset_title">学習進度をリセットしますか？</string>
     <string name="set_reset_action">リセット</string>
 
+    <string name="set_section_support">サポート</string>
+    <string name="set_support_desc">AscentRoam は無料で、広告も課金解除もありません。支援は任意で、何かと引き換えにはなりません。</string>
+    <string name="set_support_afdian">Afdian</string>
     <string name="set_section_about">このアプリについて</string>
     <string name="set_about_name">AscentRoam 登攀の道</string>
     <string name="set_about_desc">高所登山 / アイスクライミングの理論学習</string>

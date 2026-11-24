@@ -63,6 +63,9 @@
     <string name="set_reset_desc">Cancella lezioni completate, stelle, quota e statistiche; anche gli obiettivi vengono cancellati. Irreversibile.</string>
     <string name="set_reset_title">Azzerare i progressi?</string>
     <string name="set_reset_action">Azzera</string>
+    <string name="set_section_support">Sostieni</string>
+    <string name="set_support_desc">AscentRoam è gratuito, senza pubblicità né sblocchi a pagamento. Il sostegno è volontario e non dà nulla in cambio.</string>
+    <string name="set_support_afdian">Afdian</string>
     <string name="set_section_about">Informazioni</string>
     <string name="set_about_name">AscentRoam</string>
     <string name="set_about_desc">Teoria di alpinismo e arrampicata su ghiaccio</string>

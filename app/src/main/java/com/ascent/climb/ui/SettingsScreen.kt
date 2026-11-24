@@ -115,10 +115,27 @@ fun SettingsScreen(
     // 静默吞掉异常会变成「点了没反应」。
     // 包名写死正式包，debug 包点进去也是同一个商店页面。
     fun rateApp() {
+        // 这里拿到的 context 未必是 Activity（可能被 ContextWrapper 包过），
+        // 不带 NEW_TASK 会抛 AndroidRuntimeException，再被 runCatching 吞掉。
         val market = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$RATE_PACKAGE"))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         val web = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$RATE_PACKAGE"))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         val opened = runCatching { context.startActivity(market); true }
             .getOrElse { runCatching { context.startActivity(web); true }.getOrDefault(false) }
+        if (!opened) {
+            Toast.makeText(context, R.string.set_rate_failed, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // 赞助渠道：站外打开。失败时不静默，复用评分的提示语。
+    fun openLink(url: String) {
+        val opened = runCatching {
+            context.startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+            true
+        }.getOrDefault(false)
         if (!opened) {
             Toast.makeText(context, R.string.set_rate_failed, Toast.LENGTH_SHORT).show()
         }
@@ -511,6 +528,24 @@ fun SettingsScreen(
                 }
             }
 
+            // ---------------- 支持 ----------------
+            // 放「关于」之后：读完应用信息、想回馈的才会往这看。
+            // 只给渠道，不给承诺——这一块跟官网 /support 同一套口径。
+            item(key = "lbSupport") { MonoLabel(stringResource(R.string.set_section_support), modifier = Modifier.padding(top = 6.dp, bottom = 8.dp)) }
+            item(key = "support") {
+                OutlineCard(gap = 8, modifier = Modifier.padding(bottom = 14.dp)) {
+                    Text(
+                        text = stringResource(R.string.set_support_desc),
+                        color = Ascent.Fg3,
+                        fontSize = 11.sp,
+                        lineHeight = 17.sp
+                    )
+                    Spacer(Modifier.height(2.dp))
+                    AboutRow(stringResource(R.string.set_support_afdian)) { openLink(AFDIAN_URL) }
+                    AboutRow("Ko-fi") { openLink(KOFI_URL) }
+                }
+            }
+
             // ---------------- 账号 ----------------
             // 放最底部：破坏性操作不该在进设置的第一屏就能点到。
             // 未登录时整块不渲染 —— 没有账号可删，留着只会让人以为要先登录再删。
@@ -702,6 +737,10 @@ private fun SettingsToggle(
 
 /** 评分指向的正式包名。debug 包的 applicationId 带 .debug 后缀，商店里没有那条。 */
 private const val RATE_PACKAGE = "com.ascentroam.app"
+
+/** 赞助渠道。与官网 /support 上的两个渠道保持一致，改一处就要三处一起改。 */
+private const val AFDIAN_URL = "https://afdian.com/a/ascent"
+private const val KOFI_URL = "https://ko-fi.com/ascentroam"
 
 /** 「关于」卡片里的一行：左文字、右箭头，整行可点。 */
 @Composable

@@ -8,9 +8,9 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ---
 
-## v0.28.7 要点
+## v0.28.8 要点
 
-三处小修：键盘不再顶起底部导航栏，右上角的天气图标与连续天数分开，设置里多了服务条款、评分与分享。
+两处修正，设置里多了条款、评分、分享与赞助入口。
 
 ### 修正
 
@@ -19,13 +19,15 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ### 新增
 
-- 设置 → 关于新增三行：服务条款（应用内可离线阅读）、给应用评分、复制分享链接（复制后弹出「已复制」提示，打不开商店也会说明）
+- 设置 → 关于：服务条款（应用内可离线阅读）、给应用评分、复制分享链接
+- 复制分享链接后会有「已复制」提示；打不开应用商店时也会说明，不再点了没反应
+- 设置 → 支持：爱发电与 Ko-fi 两个自愿渠道，写明赞助不换取任何东西
 
 ---
 
 ## English
 
-Three small fixes: the keyboard no longer lifts the bottom bar, the weather sun and the streak count no longer collide, and Settings gains terms, rating and sharing.
+Two fixes, plus terms, rating, sharing and a support section in Settings.
 
 ### Fixes
 
@@ -34,7 +36,9 @@ Three small fixes: the keyboard no longer lifts the bottom bar, the weather sun 
 
 ### New
 
-- Settings → About has three more rows: Terms of service (readable offline in the app), Rate the app, and Copy share link — with a confirmation after copying and a message when no store can be opened
+- Settings → About: Terms of service (readable offline in the app), Rate the app, Copy share link
+- Copying the share link now confirms itself, and a failed store link says so instead of doing nothing
+- Settings → Support: Afdian and Ko-fi, both voluntary, with a line stating that support buys nothing back
 
 ## v0.28.6 要点
 
