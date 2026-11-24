@@ -471,6 +471,7 @@
     <string name="set_share">Copier le lien de partage</string>
     <string name="set_share_copied">Lien copié dans le presse-papiers</string>
     <string name="set_share_failed">Impossible de copier le lien. Réessayez.</string>
+    <string name="set_link_failed">Impossible d’ouvrir le navigateur. Réessayez plus tard.</string>
     <string name="set_rate_failed">Impossible d’ouvrir la boutique. Réessayez plus tard.</string>
     <string name="share_text">AscentRoam — un manuel de terrain hors ligne pour l’alpinisme et le trekking.
 https://www.ascentroam.com</string>

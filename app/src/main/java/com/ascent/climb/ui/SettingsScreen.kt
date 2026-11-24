@@ -128,7 +128,7 @@ fun SettingsScreen(
         }
     }
 
-    // 赞助渠道：站外打开。失败时不静默，复用评分的提示语。
+    // 站外链接：失败时不静默，也不能沿用评分的「无法打开应用商店」。
     fun openLink(url: String) {
         val opened = runCatching {
             context.startActivity(
@@ -137,7 +137,7 @@ fun SettingsScreen(
             true
         }.getOrDefault(false)
         if (!opened) {
-            Toast.makeText(context, R.string.set_rate_failed, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.set_link_failed, Toast.LENGTH_SHORT).show()
         }
     }
 

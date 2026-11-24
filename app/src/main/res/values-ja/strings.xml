@@ -492,6 +492,7 @@
     <string name="set_share">共有リンクをコピー</string>
     <string name="set_share_copied">リンクをコピーしました</string>
     <string name="set_share_failed">コピーできませんでした。もう一度お試しください</string>
+    <string name="set_link_failed">ブラウザを開けませんでした。後でもう一度お試しください</string>
     <string name="set_rate_failed">ストアを開けませんでした。後でもう一度お試しください</string>
     <string name="share_text">AscentRoam — オフラインで使える高所登山とトレッキングのフィールドマニュアル。
 https://www.ascentroam.com</string>

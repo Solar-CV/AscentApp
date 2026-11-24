@@ -508,6 +508,7 @@
     <string name="set_share">复制分享链接</string>
     <string name="set_share_copied">已复制链接到剪贴板</string>
     <string name="set_share_failed">复制失败，请稍后再试</string>
+    <string name="set_link_failed">无法打开浏览器，请稍后再试</string>
     <string name="set_rate_failed">无法打开应用商店，请稍后再试</string>
     <string name="share_text">AscentRoam 登攀之路 —— 一份离线可用的高海拔攀登与徒步手册。
 https://www.ascentroam.com</string>

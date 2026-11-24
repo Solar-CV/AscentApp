@@ -509,6 +509,7 @@
     <string name="set_share">Copy share link</string>
     <string name="set_share_copied">Link copied to clipboard</string>
     <string name="set_share_failed">Couldn’t copy the link. Try again.</string>
+    <string name="set_link_failed">Couldn’t open the browser. Try again later.</string>
     <string name="set_rate_failed">Couldn’t open the store. Try again later.</string>
     <string name="share_text">AscentRoam — an offline field manual for high-altitude climbing and trekking.
 https://www.ascentroam.com</string>

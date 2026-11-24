@@ -471,6 +471,7 @@
     <string name="set_share">Teilen-Link kopieren</string>
     <string name="set_share_copied">Link in die Zwischenablage kopiert</string>
     <string name="set_share_failed">Link konnte nicht kopiert werden. Bitte erneut versuchen.</string>
+    <string name="set_link_failed">Browser konnte nicht geöffnet werden. Bitte später erneut versuchen.</string>
     <string name="set_rate_failed">Store konnte nicht geöffnet werden. Bitte später erneut versuchen.</string>
     <string name="share_text">AscentRoam — ein Offline-Handbuch für Hochtouren und Trekking.
 https://www.ascentroam.com</string>

@@ -471,6 +471,7 @@
     <string name="set_share">Kopiera delningslänk</string>
     <string name="set_share_copied">Länken kopierades till urklipp</string>
     <string name="set_share_failed">Kunde inte kopiera länken. Försök igen.</string>
+    <string name="set_link_failed">Kunde inte öppna webbläsaren. Försök igen senare.</string>
     <string name="set_rate_failed">Kunde inte öppna butiken. Försök igen senare.</string>
     <string name="share_text">AscentRoam — en offline-fälthandbok för högalpinism och vandring.
 https://www.ascentroam.com</string>
