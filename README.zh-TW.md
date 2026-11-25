@@ -8,6 +8,7 @@
 <br>
 
 <p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.ascentroam.app"><img src="assets/readme/btn-play.svg" height="46" alt="在 Google Play 開啟 AscentRoam"></a>&nbsp;
   <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="下載 APK"></a>&nbsp;
   <a href="https://ascentroam.com/support"><img src="assets/readme/btn-support.svg" height="46" alt="支持 AscentRoam"></a>&nbsp;
   <a href="https://ascentroam.com"><img src="assets/readme/btn-site.svg" height="46" alt="ascentroam.com"></a>

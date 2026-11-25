@@ -8,6 +8,7 @@
 <br>
 
 <p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.ascentroam.app"><img src="assets/readme/btn-play.svg" height="46" alt="Google Play で AscentRoam を開く"></a>&nbsp;
   <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="APK をダウンロード"></a>&nbsp;
   <a href="https://ascentroam.com/support"><img src="assets/readme/btn-support.svg" height="46" alt="AscentRoam を支援"></a>&nbsp;
   <a href="https://ascentroam.com"><img src="assets/readme/btn-site.svg" height="46" alt="ascentroam.com"></a>

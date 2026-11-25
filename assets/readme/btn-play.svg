@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="52" viewBox="0 0 200 52" role="img" aria-label="Get AscentRoam on Google Play">
+  <title>Get AscentRoam on Google Play</title>
+  <rect x="0.5" y="0.5" width="199" height="51" rx="12" fill="#0E7BEA"/>
+  <path d="M31.5 21.2 L40.5 26 L31.5 30.8 Z" fill="#FFFFFF"/>
+  <path d="M31.5 21.2 L40.5 26 L31.5 30.8 Z" fill="none" stroke="#0E7BEA" stroke-width="1.2" stroke-linejoin="round"/>
+  <text x="52" y="32" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+        font-size="15" font-weight="500" fill="#FFFFFF">Google Play</text>
+</svg>

@@ -8,7 +8,8 @@
 <br>
 
 <p align="center">
-  <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="Télécharger l’APK"></a>&nbsp;
+  <a href="https://play.google.com/store/apps/details?id=com.ascentroam.app"><img src="assets/readme/btn-play.svg" height="46" alt="AscentRoam sur Google Play"></a>&nbsp;
+  <a href="https://github.com/Solar-CV/AscentApp/releases"><img src="assets/readme/btn-download.svg" height="46" alt="Télécharger l'APK"></a>&nbsp;
   <a href="https://ascentroam.com/support"><img src="assets/readme/btn-support.svg" height="46" alt="Soutenir AscentRoam"></a>&nbsp;
   <a href="https://ascentroam.com"><img src="assets/readme/btn-site.svg" height="46" alt="ascentroam.com"></a>
 </p>
