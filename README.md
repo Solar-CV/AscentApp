@@ -123,7 +123,7 @@ The learner-facing voice differs too: German uses the impersonal *man*-form, Spa
 
 ## Install
 
-The easiest route is the prebuilt APK from [Releases](https://github.com/Solar-CV/AscentApp/releases). Pushing a `v*` tag makes GitHub Actions build and attach a fresh APK.
+It is on Google Play now — [install from the store](https://play.google.com/store/apps/details?id=com.ascentroam.app) and it keeps itself updated. If you would rather not use the store, take the prebuilt APK from [Releases](https://github.com/Solar-CV/AscentApp/releases); pushing a `v*` tag makes GitHub Actions build and attach a fresh one.
 
 - Package: `com.ascentroam.app` (the source package stays `com.ascent.climb`)
 - Minimum: Android 8.0 (API 26), **arm64-v8a only** — 32-bit-only phones cannot install this build

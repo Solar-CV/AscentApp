@@ -123,7 +123,7 @@
 
 ## 装到手机上
 
-最省事的是直接装 [Releases](https://github.com/Solar-CV/AscentApp/releases) 里的预编译 APK。推一个 `v*` tag，GitHub Actions 会构建并把新 APK 挂上去。
+Google Play 上架了，[从商店装](https://play.google.com/store/apps/details?id=com.ascentroam.app)最省事，装完能自动更新。不想用商店就装 [Releases](https://github.com/Solar-CV/AscentApp/releases) 里的预编译 APK——推一个 `v*` tag，GitHub Actions 会构建并把新 APK 挂上去。
 
 - 包名：`com.ascentroam.app`（源码包名仍是 `com.ascent.climb`）
 - 最低：Android 8.0（API 26），**仅 arm64-v8a** —— 只有 32 位的手机装不了

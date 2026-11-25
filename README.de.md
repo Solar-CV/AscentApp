@@ -131,7 +131,7 @@ Insgesamt 38 Zielgipfel und Routen: 30 fürs Hochtouren, von der Aotaina auf 5.2
 
 ## Installation
 
-Am einfachsten über das fertige APK aus den [Releases](https://github.com/Solar-CV/AscentApp/releases). Ein `v*`-Tag lässt GitHub Actions bauen und das APK anhängen.
+Die App ist jetzt bei Google Play — [aus dem Store installieren](https://play.google.com/store/apps/details?id=com.ascentroam.app) ist der einfachste Weg, und sie hält sich selbst aktuell. Wer den Store nicht nutzen will, nimmt das fertige APK aus den [Releases](https://github.com/Solar-CV/AscentApp/releases); ein `v*`-Tag lässt GitHub Actions bauen und anhängen.
 
 - Paket: `com.ascentroam.app` (der Quellcode-Paketname bleibt `com.ascent.climb`)
 - Minimum: Android 8.0 (API 26), **nur arm64-v8a** — reine 32-Bit-Geräte können diese Version nicht installieren

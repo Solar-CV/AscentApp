@@ -131,7 +131,7 @@ Android-приложение для тех, кто начинает занима
 
 ## Установка
 
-Проще всего взять готовый APK из [Releases](https://github.com/Solar-CV/AscentApp/releases). Пуш тега `v*` заставляет GitHub Actions собрать и приложить свежий APK.
+Приложение вышло в Google Play — [установить из магазина](https://play.google.com/store/apps/details?id=com.ascentroam.app) проще всего, и оно обновляется само. Если магазин не нужен, возьмите готовый APK из [Releases](https://github.com/Solar-CV/AscentApp/releases); пуш тега `v*` заставляет GitHub Actions собрать и приложить свежий.
 
 - Пакет: `com.ascentroam.app` (пакет исходного кода остаётся `com.ascent.climb`)
 - Минимум: Android 8.0 (API 26), **только arm64-v8a** — телефоны исключительно с 32-битным процессором эту сборку не установят

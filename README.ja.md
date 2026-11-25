@@ -131,7 +131,7 @@ UI の文言とコース内容は次の言語で提供しています。
 
 ## インストール
 
-いちばん簡単なのは [Releases](https://github.com/Solar-CV/AscentApp/releases) のビルド済み APK です。`v*` タグを push すると GitHub Actions がビルドして release に添付します。
+Google Play で公開されました。[ストアから入れる](https://play.google.com/store/apps/details?id=com.ascentroam.app)のがいちばん簡単で、更新も自動で入ります。ストアを使いたくない場合は [Releases](https://github.com/Solar-CV/AscentApp/releases) のビルド済み APK をどうぞ。`v*` タグを push すると GitHub Actions がビルドして release に添付します。
 
 - パッケージ名：`com.ascentroam.app`（ソースのパッケージ名は `com.ascent.climb` のまま）
 - 最低要件：Android 8.0（API 26）、**arm64-v8a のみ** —— 32 ビット専用機には入りません

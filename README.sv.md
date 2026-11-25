@@ -131,7 +131,7 @@ Om en post saknas på det valda språket är ordningen: valt språk → engelska
 
 ## Installation
 
-Enklaste vägen är det färdigbyggda APK:t från [Releases](https://github.com/Solar-CV/AscentApp/releases). En push av en `v*`-tagg låter GitHub Actions bygga och bifoga ett nytt APK.
+Appen finns nu på Google Play — [installera från butiken](https://play.google.com/store/apps/details?id=com.ascentroam.app) är enklast, och den uppdaterar sig själv. Vill du inte använda butiken tar du det färdigbyggda APK:t från [Releases](https://github.com/Solar-CV/AscentApp/releases); en push av en `v*`-tagg låter GitHub Actions bygga och bifoga ett nytt.
 
 - Paket: `com.ascentroam.app` (källkodens package förblir `com.ascent.climb`)
 - Minsta krav: Android 8.0 (API 26), **endast arm64-v8a** — telefoner med bara 32 bitar kan inte installera den här versionen

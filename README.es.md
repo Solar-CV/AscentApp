@@ -131,7 +131,7 @@ Si algún elemento falta en el idioma elegido, el orden es: idioma elegido → i
 
 ## Instalación
 
-Lo más fácil es el APK ya compilado de [Releases](https://github.com/Solar-CV/AscentApp/releases). Al empujar una etiqueta `v*`, GitHub Actions compila y adjunta un APK nuevo.
+La aplicación ya está en Google Play: [instalarla desde la tienda](https://play.google.com/store/apps/details?id=com.ascentroam.app) es lo más sencillo y se actualiza sola. Si prefieres no usar la tienda, toma el APK ya compilado de [Releases](https://github.com/Solar-CV/AscentApp/releases); al empujar una etiqueta `v*`, GitHub Actions compila y adjunta uno nuevo.
 
 - Paquete: `com.ascentroam.app` (el paquete del código sigue siendo `com.ascent.climb`)
 - Mínimo: Android 8.0 (API 26), **solo arm64-v8a** — los móviles de solo 32 bits no pueden instalarlo
