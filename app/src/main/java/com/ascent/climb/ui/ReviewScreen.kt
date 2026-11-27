@@ -78,7 +78,7 @@ fun ReviewScreen(
         // ---- 队列 ----
         item(key = "queue") {
             val heroA = clayAccents()
-            ClayColumn(gap = 14.dp, padding = 18.dp, radius = 24.dp, elevation = 9.dp, dark = true) {
+            ClayColumn(gap = 14.dp, padding = 18.dp, radius = 24.dp, elevation = 9.dp, dark = true, flat = true) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,

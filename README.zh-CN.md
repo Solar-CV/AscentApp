@@ -22,7 +22,7 @@
 
 一个给高海拔攀登和攀冰新手做的 Android 应用。课程按海拔组织：每过一课，海拔往上走一段。
 
-<p align="center"><sub><b>当前版本 v0.28.8</b>（versionCode 166）· Android 8.0+ · arm64-v8a · 约 41 MB</sub></p>
+<p align="center"><sub><b>当前版本 v0.29.0</b>（versionCode 168）· Android 8.0+ · arm64-v8a · 约 41 MB</sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="路径页：山峰卡、单元横幅与课程节点">&nbsp;
@@ -241,7 +241,14 @@ python3 tools/i18ncheck.py
 ## 最近改了什么
 
 <details>
-<summary><b>发布说明：v0.28.8 往前到 v0.13</b></summary>
+<summary><b>发布说明：v0.29.0 往前到 v0.13</b></summary>
+
+**v0.29.0：渲染引擎升级，四块顶部改成纯色平涂**
+
+- Compose 与 Material 3 升到新版本（1.7.3 → 1.11.3、1.3.0 → 1.4.0）：长列表滚动与动画过渡更跟手。构建链、Kotlin 与 SDK 都没动
+- 训练页的「今日推荐」、复习页的待复习、路径页顶部的海拔行、我的页的海拔卡，这四块从黏土质感改成纯色平涂——和单元大板块同一形态，不再有投影、描边与顶部高光
+- 其余卡片仍是黏土，只有这几处顶部大块换了形态
+- 体积几乎没变：41.3 → 41.5 MB
 
 **v0.28.8：设置补齐、徒步地形图，两处修正**
 

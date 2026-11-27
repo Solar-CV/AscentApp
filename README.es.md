@@ -22,7 +22,7 @@
 
 Una app Android para quien empieza en alpinismo de altitud y escalada en hielo. El temario está ordenado por altitud: cada lección superada te sube un poco más arriba.
 
-<p align="center"><sub><b>Versión actual v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · unos 41 MB</b></sub></p>
+<p align="center"><sub><b>Versión actual v0.29.0 (versionCode 168) · Android 8.0+ · arm64-v8a · unos 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Pantalla de ruta: tarjeta de cumbre, banner de unidad y nodos de lección">&nbsp;
@@ -268,7 +268,14 @@ Las lecciones marcadas como que requieren instructor lo dicen con claridad al te
 ## Cambios recientes
 
 <details>
-<summary><b>Notas de versión, de la v0.28.8 a la v0.13</b></summary>
+<summary><b>Notas de versión, de la v0.29.0 a la v0.13</b></summary>
+
+**v0.29.0: motor de renderizado actualizado, cuatro bloques planos**
+
+- Compose y Material 3 suben de versión (1.7.3 → 1.11.3, 1.3.0 → 1.4.0): las listas largas se desplazan y las animaciones asientan mejor. La cadena de compilación, Kotlin y el SDK no cambian
+- Cuatro bloques —la recomendación de hoy en Entrenamiento, la cola de Repaso, la fila de altitud en Ruta y la tarjeta de altitud en Perfil— dejan la textura de arcilla por color plano, la misma forma que las bandas de unidad. Sin sombra, borde ni brillo superior
+- El resto de tarjetas sigue en arcilla; solo cambian estos bloques superiores
+- Tamaño casi igual: 41,3 → 41,5 MB
 
 **v0.28.8: ajustes completados, mapas de terreno para senderismo, dos correcciones**
 

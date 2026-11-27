@@ -22,7 +22,7 @@
 
 Une application Android pour celles et ceux qui débutent en alpinisme d’altitude et en cascade de glace. Le programme est organisé par altitude : chaque leçon passée fait monter d’un cran.
 
-<p align="center"><sub><b>Version actuelle v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · environ 41 Mo</b></sub></p>
+<p align="center"><sub><b>Version actuelle v0.29.0 (versionCode 168) · Android 8.0+ · arm64-v8a · environ 41 Mo</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Écran Parcours : carte de sommet, bandeau d’unité et nœuds de leçon">&nbsp;
@@ -268,7 +268,14 @@ Les leçons marquées comme nécessitant un formateur le disent clairement une f
 ## Changements récents
 
 <details>
-<summary><b>Notes de version, de la v0.28.8 à la v0.13</b></summary>
+<summary><b>Notes de version, de la v0.29.0 à la v0.13</b></summary>
+
+**v0.29.0 : moteur de rendu mis à niveau, quatre blocs à plat**
+
+- Compose et Material 3 passent à de nouvelles versions (1.7.3 → 1.11.3, 1.3.0 → 1.4.0) : les longues listes défilent et les animations se posent plus franchement. La chaîne de build, Kotlin et le SDK ne bougent pas
+- Quatre blocs — la recommandation du jour dans Entraînement, la file de révision, la ligne d’altitude du Parcours et la carte d’altitude du Profil — quittent le rendu argile pour un aplat de couleur, la même forme que les bandeaux d’unité. Plus d’ombre, de contour ni de reflet en haut
+- Le reste des cartes reste en argile ; seuls ces blocs du haut changent
+- Taille quasi inchangée : 41,3 → 41,5 Mo
 
 **v0.28.8 : réglages complétés, cartes de terrain pour la randonnée, deux corrections**
 

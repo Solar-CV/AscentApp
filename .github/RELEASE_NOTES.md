@@ -8,6 +8,36 @@ Android 8.0（API 26）及以上，需开启「允许安装未知来源应用」
 
 ---
 
+## v0.29.0 要点
+
+渲染引擎升级，四处顶部大块换成纯色平涂。
+
+### 变化
+
+- 训练页的「今日推荐」、复习页的待复习、路径页顶部的海拔行、我的页的海拔卡，从黏土质感改成纯色平涂——和单元大板块同一形态，不再有投影、描边与顶部高光
+- 其余卡片仍是黏土，只有这几处顶部大块换了形态
+
+### 底层
+
+- Compose 跨到 1.11.3、Material 3 到 1.4.0：长列表滚动与动画过渡更跟手
+- 构建链、Kotlin、SDK 与 Filament 全部没动；体积 41.3 → 41.5 MB
+
+---
+
+## English
+
+A rendering-engine upgrade, and four hero blocks switch to flat colour.
+
+### Changes
+
+- Today's pick in Training, the due queue in Review, the altitude row on Path and the altitude card in Profile drop the clay treatment for flat colour — the same form as the unit banners, with no shadow, stroke or top highlight
+- Everything else stays clay; only these top blocks changed
+
+### Under the hood
+
+- Compose moves to 1.11.3 and Material 3 to 1.4.0: long lists scroll and animations settle more smoothly
+- Build chain, Kotlin, SDK and Filament untouched; size 41.3 → 41.5 MB
+
 ## v0.28.8 要点
 
 两处修正，设置里多了条款、评分、分享与赞助入口。

@@ -115,7 +115,9 @@ fun TrainingScreen(
                 elevation = 9.dp,
                 // 平涂：顶部大块不再做上下渐变，一块实色 + 原色描边
                 fill = SolidColor(Color(0xFF0F86F5)),
-                rim = Color(0xFF0B6FCB)
+                rim = Color(0xFF0B6FCB),
+                // 与路径页单元块同一形态：纯色平涂，不投影不加高光
+                flat = true
             ) {
             Row(
                 modifier = Modifier

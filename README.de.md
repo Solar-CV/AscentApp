@@ -22,7 +22,7 @@
 
 Eine Android-App für Einsteiger in Hochtouren und Eisklettern. Der Lehrplan ist nach Höhe geordnet: mit jeder bestandenen Lektion geht es ein Stück höher.
 
-<p align="center"><sub><b>Aktuelle Version v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · etwa 41 MB</b></sub></p>
+<p align="center"><sub><b>Aktuelle Version v0.29.0 (versionCode 168) · Android 8.0+ · arm64-v8a · etwa 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Pfad-Bildschirm: Gipfelkarte, Einheitenbanner und Lektionsknoten">&nbsp;
@@ -268,7 +268,14 @@ Lektionen, die eine Begleitung erfordern, sagen das ausdrücklich, sobald die Th
 ## Letzte Änderungen
 
 <details>
-<summary><b>Versionsnotizen, v0.28.8 zurück bis v0.13</b></summary>
+<summary><b>Versionsnotizen, v0.29.0 zurück bis v0.13</b></summary>
+
+**v0.29.0: Renderer-Upgrade, vier Hero-Blöcke flach gefärbt**
+
+- Compose und Material 3 steigen auf neue Versionen (1.7.3 → 1.11.3, 1.3.0 → 1.4.0): lange Listen scrollen und Animationen setzen weicher an. Build-Kette, Kotlin und SDK bleiben unverändert
+- Vier Hero-Blöcke — die heutige Empfehlung im Training, die Warteschlange in der Wiederholung, die Höhenzeile im Pfad und die Höhenkarte im Profil — verlieren die Ton-Optik und werden flach gefärbt, in derselben Form wie die Einheitsbanner. Kein Schatten, keine Kontur, kein Glanzlicht oben
+- Alle anderen Karten bleiben aus Ton; nur diese oberen Blöcke haben die Form gewechselt
+- Größe kaum verändert: 41,3 → 41,5 MB
 
 **v0.28.8: Einstellungen vervollständigt, Geländekarten für Wanderungen, zwei Korrekturen**
 

@@ -22,7 +22,7 @@
 
 En Android-app för dig som börjar med höghöjdsalpinism och isklättring. Kursen är ordnad efter höjd: varje avklarad lektion flyttar dig en bit högre upp.
 
-<p align="center"><sub><b>Aktuell version v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · cirka 41 MB</b></sub></p>
+<p align="center"><sub><b>Aktuell version v0.29.0 (versionCode 168) · Android 8.0+ · arm64-v8a · cirka 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt=" Ruttskärm: toppkort, enhetsband och lektionsnoder">&nbsp;
@@ -268,7 +268,14 @@ Lektioner som kräver instruktör säger det uttryckligen när teorin är klar.
 ## Senaste ändringar
 
 <details>
-<summary><b>Versionsnoteringar, v0.28.8 tillbaka till v0.13</b></summary>
+<summary><b>Versionsnoteringar, v0.29.0 tillbaka till v0.13</b></summary>
+
+**v0.29.0: renderingsmotorn uppdaterad, fyra block i platt färg**
+
+- Compose och Material 3 har uppdaterats (1.7.3 → 1.11.3, 1.3.0 → 1.4.0): långa listor rullar och animationer landar mjukare. Byggkedjan, Kotlin och SDK står still
+- Fyra block — dagens rekommendation i Träning, kön i Repetition, höjdraden på Rutt och höjdkortet i Profil — byter från lera till platt färg, samma form som enhetsbanden. Ingen skugga, kant eller glans upptill
+- Övriga kort är kvar i lera; bara dessa övre block har bytt form
+- Storleken nästan oförändrad: 41,3 → 41,5 MB
 
 **v0.28.8: inställningarna kompletterade, terrängkartor för vandringsleder, två rättelser**
 

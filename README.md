@@ -22,7 +22,7 @@
 
 An Android app for people starting out in high-altitude mountaineering and ice climbing. The curriculum is organised by altitude: every lesson you pass moves you a little higher.
 
-<p align="center"><sub><b>Current release v0.28.8</b> (versionCode 166) · Android 8.0+ · arm64-v8a · about 41 MB</sub></p>
+<p align="center"><sub><b>Current release v0.29.0</b> (versionCode 168) · Android 8.0+ · arm64-v8a · about 41 MB</sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Path screen: the peak card, unit banner and lesson nodes">&nbsp;
@@ -241,7 +241,14 @@ The app covers theory and cognitive preparation only. Practical skills — snow 
 ## Recent changes
 
 <details>
-<summary><b>Release notes, v0.28.8 back to v0.13</b></summary>
+<summary><b>Release notes, v0.29.0 back to v0.13</b></summary>
+
+**v0.29.0: renderer upgrade, four hero blocks flattened**
+
+- Compose and Material 3 move up (1.7.3 → 1.11.3, 1.3.0 → 1.4.0): long lists scroll and animations settle more smoothly. The build chain, Kotlin and the SDK stay put
+- Four hero blocks — Today's pick in Training, the due queue in Review, the altitude row on Path and the altitude card in Profile — drop the clay treatment for flat colour, the same form as the unit banners. No shadow, stroke or top highlight
+- Everything else stays clay; only these top blocks changed
+- Size barely moved: 41.3 → 41.5 MB
 
 **v0.28.8: settings catch-up, terrain maps for trails, and two fixes**
 

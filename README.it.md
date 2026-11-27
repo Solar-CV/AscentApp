@@ -22,7 +22,7 @@
 
 Un'app Android per chi comincia con l'alpinismo d'alta quota e l'arrampicata su ghiaccio. Il programma è ordinato per quota: ogni lezione superata ti porta un po' più in alto.
 
-<p align="center"><sub><b>Versione attuale v0.28.8 (versionCode 166) · Android 8.0+ · arm64-v8a · circa 41 MB</b></sub></p>
+<p align="center"><sub><b>Versione attuale v0.29.0 (versionCode 168) · Android 8.0+ · arm64-v8a · circa 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="Schermata del percorso: scheda della vetta, banner di unità e nodi delle lezioni">&nbsp;
@@ -268,7 +268,14 @@ Le lezioni segnate come «serve un istruttore» lo dicono apertamente una volta 
 ## Cambi recenti
 
 <details>
-<summary><b>Note di versione, dalla v0.28.8 alla v0.13</b></summary>
+<summary><b>Note di versione, dalla v0.29.0 alla v0.13</b></summary>
+
+**v0.29.0: motore di rendering aggiornato, quattro blocchi a tinta piatta**
+
+- Compose e Material 3 salgono di versione (1.7.3 → 1.11.3, 1.3.0 → 1.4.0): le liste lunghe scorrono e le animazioni si assestano meglio. La catena di build, Kotlin e l’SDK restano fermi
+- Quattro blocchi — il consiglio di oggi in Allenamento, la coda di Ripasso, la riga di quota in Percorso e la scheda quota in Profilo — lasciano la resa in argilla per il colore pieno, la stessa forma delle fasce di unità. Niente ombra, bordo o lucido in alto
+- Le altre schede restano in argilla; cambiano solo questi blocchi in alto
+- Dimensioni quasi invariate: 41,3 → 41,5 MB
 
 **v0.28.8: impostazioni completate, carte del terreno per i sentieri, due correzioni**
 

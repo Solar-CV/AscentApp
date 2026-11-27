@@ -144,6 +144,12 @@ fun ClaySurface(
     elevation: Dp = 8.dp,
     fill: Brush? = null,
     rim: Color? = null,
+    /**
+     * 纯色平涂：只画一块实色圆角面，不投影、不描边、不加内高光/内压暗。
+     * 对应「路径 · 单元大板块」那种形态（[UnitBanner]）——色块是印在页面上的，
+     * 不是浮起来的黏土。用于几处顶部 hero（训练今日推荐 / 复习待复习 / 海拔）。
+     */
+    flat: Boolean = false,
     content: @Composable BoxScope.() -> Unit
 ) {
     val tone = clayTone(Ascent.IsDark)
@@ -157,6 +163,12 @@ fun ClaySurface(
             val h = size.height
             if (w <= 0f || h <= 0f) return@drawBehind
             val shapePath = squirclePath(width = w, height = h, radius = r)
+
+            if (flat) {
+                // 平涂：一块实色 + 圆角，别的一律不画
+                drawPath(shapePath, brush = brush)
+                return@drawBehind
+            }
 
             // 1) 外投影（右下），两层：
             //    贴边的一层收紧做接触影（卡片"坐"在底色上），远的一层做体积。

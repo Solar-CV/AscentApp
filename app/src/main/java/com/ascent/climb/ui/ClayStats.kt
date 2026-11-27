@@ -121,7 +121,9 @@ fun ClayStatRow(
     unit: String? = null,
     ratio: Float? = null,
     barColor: Color = tint,
-    emphasize: Boolean = false
+    emphasize: Boolean = false,
+    /** 纯色平涂（见 [ClaySurface] 的 flat）：海拔行用这个，跟路径页单元块一致。 */
+    flat: Boolean = false
 ) {
     val a = clayAccents()
     val withBar = ratio != null
@@ -134,7 +136,8 @@ fun ClayStatRow(
         radius = 20.dp,
         elevation = 7.dp,
         fill = if (emphasize) SolidColor(a.heroFlat) else null,
-        rim = if (emphasize) a.heroBottom else null
+        rim = if (emphasize) a.heroBottom else null,
+        flat = flat
     ) {
         Column(
             modifier = Modifier
@@ -234,6 +237,8 @@ fun ClayColumn(
     gap: Dp = 12.dp,
     dark: Boolean = false,
     fill: Brush? = null,
+    /** 纯色平涂：不投影、不描边、不加高光（路径页单元块那种形态）。 */
+    flat: Boolean = false,
     content: @Composable androidx.compose.foundation.layout.ColumnScope.() -> Unit
 ) {
     val a = clayAccents()
@@ -242,7 +247,8 @@ fun ClayColumn(
         radius = radius,
         elevation = elevation,
         fill = fill ?: if (dark) SolidColor(a.heroFlat) else null,
-        rim = if (dark) a.heroBottom else null
+        rim = if (dark) a.heroBottom else null,
+        flat = flat
     ) {
         Column(
             modifier = Modifier

@@ -580,7 +580,9 @@ private fun ProfileBody(
                 elevation = 9.dp,
                 padding = 18.dp,
                 gap = 12.dp,
-                dark = true
+                dark = true,
+                // 平涂：和路径页单元块一致，不再有投影与顶部唇光
+                flat = true
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),

@@ -278,7 +278,8 @@ fun ProfileHomeScreen(
                         tint = a.lessons,
                         ratio = altFrac,
                         barColor = a.lessons,
-                        emphasize = true
+                        emphasize = true,
+                        flat = true
                     )
                 }
                 Spacer(Modifier.height(18.dp))

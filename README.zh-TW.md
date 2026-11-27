@@ -22,7 +22,7 @@
 
 一個給高海拔攀登和攀冰新手做的 Android 應用。課程按海拔組織：每過一課，海拔往上走一段。
 
-<p align="center"><sub><b>當前版本 v0.28.8（versionCode 166）· Android 8.0+ · arm64-v8a · 約 41 MB</b></sub></p>
+<p align="center"><sub><b>當前版本 v0.29.0（versionCode 168）· Android 8.0+ · arm64-v8a · 約 41 MB</b></sub></p>
 
 <p align="center">
   <img src="assets/readme/screen-path.png" width="186" alt="路徑頁：山峰卡、單元橫幅與課程節點">&nbsp;
@@ -268,7 +268,14 @@ SEVEN SUMMIT TREKS 的三份嚮導資料是另一條主線：高原病、裝備�
 ## 最近改了什麼
 
 <details>
-<summary><b>發布說明：v0.28.8 往前到 v0.13</b></summary>
+<summary><b>發布說明：v0.29.0 往前到 v0.13</b></summary>
+
+**v0.29.0：渲染引擎升級，四塊頂部改成純色平塗**
+
+- Compose 與 Material 3 升到新版本（1.7.3 → 1.11.3、1.3.0 → 1.4.0）：長列表滾動與動畫過渡更跟手。建置鏈、Kotlin 與 SDK 都沒動
+- 訓練頁的「今日推薦」、複習頁的待複習、路徑頁頂部的海拔列、我的頁的海拔卡，這四塊從黏土質感改成純色平塗——和單元大板塊同一形態，不再有投影、描邊與頂部高光
+- 其餘卡片仍是黏土，只有這幾處頂部大塊換了形態
+- 體積幾乎沒變：41.3 → 41.5 MB
 
 **v0.28.8：設定補齊、徒步地形圖，兩處修正**
 
