@@ -134,11 +134,14 @@ jobs:
       # Google Play 只收 AAB，所以 release 变体两个一起出：
       # AAB 给商店，APK 继续挂在 Release 上方便直接侧载。
       - name: Build APK and AAB
+        env:
+          # runner 4 核并行 + R8，默认 2 GB 堆在 release 压缩阶段容易吃紧
+          GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8"
         run: |
           if [ "${{ steps.signing.outputs.variant }}" = "release" ]; then
-            ./gradlew assembleRelease bundleRelease --stacktrace
+            ./gradlew assembleRelease bundleRelease --stacktrace --info
           else
-            ./gradlew assembleDebug --stacktrace
+            ./gradlew assembleDebug --stacktrace --info
           fi
 
       - name: Prepare artifact
