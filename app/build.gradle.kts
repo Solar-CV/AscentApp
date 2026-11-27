@@ -45,8 +45,8 @@ android {
         applicationId = "com.ascentroam.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 166
-        versionName = "0.28.8"
+        versionCode = 167
+        versionName = "0.28.9"
         // 支持 10 种语言：简中（values 默认）+ 繁中 + 英日俄法瑞德西意。
         // 只打包这里列出的语言资源，避免把依赖库的其余语言一起带进来。
         resourceConfigurations += listOf(
@@ -125,7 +125,7 @@ android {
 }
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:2024.09.03")
+    val composeBom = platform("androidx.compose:compose-bom:2026.06.00")
     implementation(composeBom)
 
     implementation("androidx.core:core-ktx:1.13.1")
